@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>pacman / yay / paru — Шпаргалки</title>
+<link rel="stylesheet" href="assets/style.css">
+<link rel="stylesheet" href="assets/pygments.css">
+</head>
+<body>
+<div class="layout">
+  <aside class="sidebar">
+    <a href="index.html" class="brand">📌 Шпаргалки</a>
+    <nav class="nav">
+<a href="yazi.html" class="nav-item"><span class="nav-ico">📦</span>Yazi</a>
+<a href="neovim.html" class="nav-item"><span class="nav-ico">📘</span>Neovim (LazyVim)</a>
+<a href="niri.html" class="nav-item"><span class="nav-ico">🪟</span>Niri</a>
+<a href="tmux.html" class="nav-item"><span class="nav-ico">🪟</span>Tmux</a>
+<a href="bash.html" class="nav-item"><span class="nav-ico">🐚</span>Bash</a>
+<a href="git.html" class="nav-item"><span class="nav-ico">🔀</span>Git</a>
+<a href="terminal.html" class="nav-item"><span class="nav-ico">🖥️</span>Терминал Linux</a>
+<a href="powershell.html" class="nav-item"><span class="nav-ico">💻</span>PowerShell</a>
+<a href="cmd.html" class="nav-item"><span class="nav-ico">🪟</span>CMD (cmd.exe)</a>
+<a href="python.html" class="nav-item"><span class="nav-ico">🐍</span>Python</a>
+<a href="systemd.html" class="nav-item"><span class="nav-ico">⚙️</span>systemd</a>
+<a href="ssh.html" class="nav-item"><span class="nav-ico">🔐</span>SSH</a>
+<a href="make-cmake.html" class="nav-item"><span class="nav-ico">🔨</span>Make / CMake</a>
+<a href="docker.html" class="nav-item"><span class="nav-ico">🐳</span>Docker</a>
+<a href="pacman.html" class="nav-item active"><span class="nav-ico">📦</span>pacman / yay / paru</a>
+<a href="spark.html" class="nav-item"><span class="nav-ico">⚡</span>Apache Spark / PySpark</a>
+<a href="markdown.html" class="nav-item"><span class="nav-ico">📝</span>Markdown</a>
+<a href="regex.html" class="nav-item"><span class="nav-ico">🔍</span>Регулярные выражения</a>
+<a href="jq-json.html" class="nav-item"><span class="nav-ico">🔧</span>jq + JSON</a>
+<a href="awk-sed.html" class="nav-item"><span class="nav-ico">✂️</span>awk / sed</a>
+<a href="airflow.html" class="nav-item"><span class="nav-ico">🌪️</span>Apache Airflow</a>
+<a href="http-curl.html" class="nav-item"><span class="nav-ico">🌐</span>HTTP / curl</a>
+<a href="yaml.html" class="nav-item"><span class="nav-ico">📄</span>YAML</a>
+<a href="vscode.html" class="nav-item"><span class="nav-ico">💻</span>VS Code</a>
+<a href="cron.html" class="nav-item"><span class="nav-ico">⏰</span>cron</a>
+<a href="fzf-zoxide.html" class="nav-item"><span class="nav-ico">🔎</span>fzf + zoxide</a>
+<a href="minikube-k8s.html" class="nav-item"><span class="nav-ico">☸️</span>Minikube / Kubernetes</a>
+<a href="cicd.html" class="nav-item"><span class="nav-ico">🦊</span>GitLab CI / GitHub Actions</a>
+<a href="nginx.html" class="nav-item"><span class="nav-ico">🌐</span>nginx</a>
+<a href="dbt.html" class="nav-item"><span class="nav-ico">🔧</span>dbt</a>
+<a href="kafka.html" class="nav-item"><span class="nav-ico">🐘</span>Apache Kafka</a>
+<a href="prometheus-grafana.html" class="nav-item"><span class="nav-ico">📊</span>Prometheus / Grafana</a>
+<a href="iceberg-nessie.html" class="nav-item"><span class="nav-ico">🧊</span>Iceberg / Nessie</a>
+<a href="impala.html" class="nav-item"><span class="nav-ico">🐬</span>Apache Impala</a>
+<a href="terraform.html" class="nav-item"><span class="nav-ico">🏗️</span>Terraform</a>
+<a href="linux-internals.html" class="nav-item"><span class="nav-ico">🐧</span>Linux Internals</a>
+<a href="miscellaneous.html" class="nav-item"><span class="nav-ico">🧰</span>Miscellaneous</a>
+<a href="python-automation-libs.html" class="nav-item"><span class="nav-ico">🐍</span>Python: авт-ция (10 libs)</a>
+<a href="eza.html" class="nav-item"><span class="nav-ico">🌈</span>eza</a>
+<a href="dbeaver.html" class="nav-item"><span class="nav-ico">🗄️</span>DBeaver</a>
+<a href="zcode.html" class="nav-item"><span class="nav-ico">🤖</span>ZCode</a>
+<a href="warp.html" class="nav-item"><span class="nav-ico">🚀</span>Warp</a>
+<a href="agentic-ai-dev.html" class="nav-item"><span class="nav-ico">🤝</span>Агентная разработка с ИИ</a>
+    </nav>
+  </aside>
+
+  <main class="content">
+    <article>
+<h1 id="pacman-yay-paru-шпаргалка-arch-cachyos">📦 pacman / yay / paru — шпаргалка (Arch / CachyOS)<a class="headerlink" href="#pacman-yay-paru-шпаргалка-arch-cachyos" title="Ссылка">#</a></h1>
+<blockquote>
+<p><strong>pacman</strong> — пакетный менеджер Arch Linux.
+<strong>yay</strong> / <strong>paru</strong> — AUR-хелперы (AUR = Arch User Repository).
+Документация: https://wiki.archlinux.org/title/Pacman</p>
+</blockquote>
+<hr />
+<h2 id="pacman-базовые-команды">🚀 pacman — базовые команды<a class="headerlink" href="#pacman-базовые-команды" title="Ссылка">#</a></h2>
+<h3 id="установка">Установка<a class="headerlink" href="#установка" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>pacman<span class="w"> </span>-S<span class="w"> </span>&lt;package&gt;<span class="w">              </span><span class="c1"># установить</span>
+sudo<span class="w"> </span>pacman<span class="w"> </span>-S<span class="w"> </span>nginx<span class="w"> </span>postgresql<span class="w">       </span><span class="c1"># несколько</span>
+sudo<span class="w"> </span>pacman<span class="w"> </span>-S<span class="w"> </span>--needed<span class="w"> </span>&lt;pkg&gt;<span class="w">         </span><span class="c1"># не переустанавливать если есть</span>
+sudo<span class="w"> </span>pacman<span class="w"> </span>-S<span class="w"> </span><span class="s2">&quot;</span><span class="k">$(</span>pacman<span class="w"> </span>-Slq<span class="k">)</span><span class="s2">&quot;</span><span class="w">       </span><span class="c1"># интерактивно выбрать (НЕ делать!)</span>
+sudo<span class="w"> </span>pacman<span class="w"> </span>-U<span class="w"> </span>package.tar.zst<span class="w">        </span><span class="c1"># установить локальный файл</span>
+sudo<span class="w"> </span>pacman<span class="w"> </span>-U<span class="w"> </span>https://example.com/pkg.tar.zst<span class="w">   </span><span class="c1"># по URL</span>
+</code></pre></div>
+
+<h3 id="удаление">Удаление<a class="headerlink" href="#удаление" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>pacman<span class="w"> </span>-R<span class="w"> </span>&lt;package&gt;<span class="w">              </span><span class="c1"># удалить (оставить зависимости)</span>
+sudo<span class="w"> </span>pacman<span class="w"> </span>-Rs<span class="w"> </span>&lt;package&gt;<span class="w">             </span><span class="c1"># + неиспользуемые зависимости</span>
+sudo<span class="w"> </span>pacman<span class="w"> </span>-Rns<span class="w"> </span>&lt;package&gt;<span class="w">            </span><span class="c1"># + конфиги (рекомендуется!)</span>
+sudo<span class="w"> </span>pacman<span class="w"> </span>-Rdd<span class="w"> </span>&lt;package&gt;<span class="w">            </span><span class="c1"># без проверки зависимостей (ОПАСНО)</span>
+sudo<span class="w"> </span>pacman<span class="w"> </span>-Rns<span class="w"> </span><span class="k">$(</span>pacman<span class="w"> </span>-Qdtq<span class="k">)</span><span class="w">      </span><span class="c1"># удалить все пакеты-сироты</span>
+</code></pre></div>
+
+<h3 id="обновление-системы">Обновление системы<a class="headerlink" href="#обновление-системы" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>pacman<span class="w"> </span>-Sy<span class="w">                       </span><span class="c1"># обновить БД пакетов (БЕЗ обновления)</span>
+sudo<span class="w"> </span>pacman<span class="w"> </span>-Su<span class="w">                       </span><span class="c1"># обновить пакеты</span>
+sudo<span class="w"> </span>pacman<span class="w"> </span>-Syu<span class="w">                      </span><span class="c1"># ⭐ обновить БД + пакеты (СТАНДАРТ)</span>
+sudo<span class="w"> </span>pacman<span class="w"> </span>-Syyu<span class="w">                     </span><span class="c1"># принудительно обновить БД (если зеркало устарело)</span>
+sudo<span class="w"> </span>pacman<span class="w"> </span>-Syyu<span class="w"> </span>--needed<span class="w"> </span>base-devel<span class="w"> </span><span class="c1"># ...</span>
+</code></pre></div>
+
+<blockquote>
+<p>⚠️ <strong>НИКОГДА</strong> не делайте <code>pacman -Sy &lt;pkg&gt;</code> (обновить БД без обновления пакетов) —
+это приведёт к partial upgrade и сломает систему.
+Только <code>pacman -Syu</code> для обновления.</p>
+</blockquote>
+<h3 id="поиск">Поиск<a class="headerlink" href="#поиск" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>pacman<span class="w"> </span>-Ss<span class="w"> </span>&lt;name&gt;<span class="w">                     </span><span class="c1"># искать в репозиториях</span>
+pacman<span class="w"> </span>-Ss<span class="w"> </span><span class="s2">&quot;^python-&quot;</span><span class="w">                 </span><span class="c1"># regex</span>
+pacman<span class="w"> </span>-Ss<span class="w"> </span>editor<span class="w">                     </span><span class="c1"># по слову</span>
+pacman<span class="w"> </span>-Qs<span class="w"> </span>&lt;name&gt;<span class="w">                     </span><span class="c1"># искать среди установленных</span>
+pacman<span class="w"> </span>-F<span class="w"> </span>&lt;filename&gt;<span class="w">                  </span><span class="c1"># в каком пакете файл</span>
+pacman<span class="w"> </span>-Fy<span class="w">                            </span><span class="c1"># обновить базу файлов (сначала)</span>
+sudo<span class="w"> </span>pacman<span class="w"> </span>-Fy<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>pacman<span class="w"> </span>-F<span class="w"> </span>nginx.conf
+</code></pre></div>
+
+<h3 id="информация">Информация<a class="headerlink" href="#информация" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>pacman<span class="w"> </span>-Si<span class="w"> </span>&lt;package&gt;<span class="w">                  </span><span class="c1"># инфо о пакете в репозитории</span>
+pacman<span class="w"> </span>-Qi<span class="w"> </span>&lt;package&gt;<span class="w">                  </span><span class="c1"># инфо об установленном</span>
+pacman<span class="w"> </span>-Qil<span class="w"> </span>&lt;package&gt;<span class="w">                 </span><span class="c1"># файлы установленного пакета</span>
+pacman<span class="w"> </span>-Ql<span class="w"> </span>&lt;package&gt;<span class="w">                  </span><span class="c1"># список файлов пакета</span>
+pacman<span class="w"> </span>-Qo<span class="w"> </span>/path/to/file<span class="w">             </span><span class="c1"># какому пакету принадлежит файл</span>
+pacman<span class="w"> </span>-Qo<span class="w"> </span><span class="k">$(</span>which<span class="w"> </span>nginx<span class="k">)</span>
+pacman<span class="w"> </span>-Qdt<span class="w">                           </span><span class="c1"># пакеты-сироты</span>
+pacman<span class="w"> </span>-Qet<span class="w">                           </span><span class="c1"># явно установленные</span>
+pacman<span class="w"> </span>-Qm<span class="w">                            </span><span class="c1"># пакеты не из репозиториев (AUR)</span>
+pacman<span class="w"> </span>-Qn<span class="w">                            </span><span class="c1"># пакеты из официальных репозиториев</span>
+</code></pre></div>
+
+<h3 id="списки">Списки<a class="headerlink" href="#списки" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>pacman<span class="w"> </span>-Q<span class="w">                             </span><span class="c1"># все установленные</span>
+pacman<span class="w"> </span>-Qe<span class="w">                            </span><span class="c1"># явно установленные (не зависимости)</span>
+pacman<span class="w"> </span>-Qeq<span class="w">                           </span><span class="c1"># только имена</span>
+pacman<span class="w"> </span>-Q<span class="w"> </span><span class="p">|</span><span class="w"> </span>wc<span class="w"> </span>-l<span class="w">                     </span><span class="c1"># сколько пакетов</span>
+</code></pre></div>
+
+<hr />
+<h2 id="мнемоника-флагов-pacman">📋 Мнемоника флагов pacman<a class="headerlink" href="#мнемоника-флагов-pacman" title="Ссылка">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Буква</th>
+<th>Что значит</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>S</strong></td>
+<td><strong>S</strong>ync (репозиторий: установить/искать/скачать)</td>
+</tr>
+<tr>
+<td><strong>Q</strong></td>
+<td><strong>Q</strong>uery (локальная база установленных)</td>
+</tr>
+<tr>
+<td><strong>R</strong></td>
+<td><strong>R</strong>emove (удалить)</td>
+</tr>
+<tr>
+<td><strong>U</strong></td>
+<td><strong>U</strong>pgrade/URL (установить из файла)</td>
+</tr>
+<tr>
+<td><strong>F</strong></td>
+<td><strong>F</strong>iles (поиск файлов)</td>
+</tr>
+</tbody>
+</table>
+<p>Дополнительные модификаторы:
+| Флаг | Значение |
+|&mdash;|&mdash;|
+| <code>y</code> | refresh (обновить базу) |
+| <code>u</code> | sysupgrade (обновить пакеты) |
+| <code>s</code> | search (искать) |
+| <code>i</code> | info (информация) |
+| <code>l</code> | list (список файлов) |
+| <code>o</code> | owns (кому принадлежит файл) |
+| <code>e</code> | explicit (явно установленные) |
+| <code>t</code> | orphan (сироты) / deps-tree |
+| <code>n</code> | native (из официальных репо) |
+| <code>m</code> | foreign (AUR/внешние) |
+| <code>d</code> | deps (зависимости) |
+| <code>c</code> | cascade / config |
+| <code>n</code> | nosave (не сохранять конфиги) |</p>
+<hr />
+<h2 id="pacman-conf">🔧 pacman.conf<a class="headerlink" href="#pacman-conf" title="Ссылка">#</a></h2>
+<p>Файл: <code>/etc/pacman.conf</code></p>
+<div class="highlight"><pre><span></span><code><span class="k">[options]</span>
+<span class="na">HoldPkg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">pacman glibc</span>
+<span class="na">Architecture</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">auto</span>
+<span class="na">CheckSpace</span>
+<span class="na">Color                    # цветной вывод</span>
+<span class="na">VerbosePkgLists</span>
+<span class="na">ParallelDownloads</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">5</span><span class="w">    </span><span class="c1"># параллельная загрузка (ускоряет!)</span>
+
+<span class="c1"># Репозитории</span>
+<span class="k">[core]</span>
+<span class="na">Include</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">/etc/pacman.d/mirrorlist</span>
+
+<span class="k">[extra]</span>
+<span class="na">Include</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">/etc/pacman.d/mirrorlist</span>
+
+<span class="na">[multilib]               # 32-бит (для Steam, Wine)</span>
+<span class="na">Include</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">/etc/pacman.d/mirrorlist</span>
+
+<span class="c1"># CachyOS repo (если у вас CachyOS)</span>
+<span class="k">[cachyos]</span>
+<span class="na">Include</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">/etc/pacman.d/cachyos-mirrorlist</span>
+</code></pre></div>
+
+<h3 id="полезные-опции">Полезные опции<a class="headerlink" href="#полезные-опции" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="na">Color</span>
+<span class="na">ILoveCandy              # прогресс-бар в виде Pac-Man (пасхалка)</span>
+<span class="na">ParallelDownloads</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">10</span><span class="w">  </span><span class="c1"># быстрее загрузка</span>
+<span class="na">VerbosePkgLists         # подробный список</span>
+</code></pre></div>
+
+<hr />
+<h2 id="зеркала-mirrorlist">🪞 Зеркала (mirrorlist)<a class="headerlink" href="#зеркала-mirrorlist" title="Ссылка">#</a></h2>
+<div class="highlight"><pre><span></span><code><span class="c1"># Файл: /etc/pacman.d/mirrorlist</span>
+<span class="c1"># Обновить список зеркал:</span>
+sudo<span class="w"> </span>reflector<span class="w"> </span>--latest<span class="w"> </span><span class="m">50</span><span class="w"> </span>--protocol<span class="w"> </span>https<span class="w"> </span>--sort<span class="w"> </span>rate<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--save<span class="w"> </span>/etc/pacman.d/mirrorlist
+
+<span class="c1"># CachyOS:.rate-mirrors</span>
+rate-mirrors<span class="w"> </span>cachyos<span class="w"> </span><span class="p">|</span><span class="w"> </span>sudo<span class="w"> </span>tee<span class="w"> </span>/etc/pacman.d/cachyos-mirrorlist
+
+<span class="c1"># Проверить статус зеркал</span>
+curl<span class="w"> </span>-s<span class="w"> </span><span class="s2">&quot;https://archlinux.org/mirrors/status/&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>head
+
+<span class="c1"># Тест скорости</span>
+rankmirrors<span class="w"> </span>-n<span class="w"> </span><span class="m">6</span><span class="w"> </span>/etc/pacman.d/mirrorlist
+</code></pre></div>
+
+<hr />
+<h2 id="кэш-пакетов-и-чистка">💾 Кэш пакетов и чистка<a class="headerlink" href="#кэш-пакетов-и-чистка" title="Ссылка">#</a></h2>
+<div class="highlight"><pre><span></span><code>ls<span class="w"> </span>/var/cache/pacman/pkg/<span class="w">              </span><span class="c1"># кэш</span>
+du<span class="w"> </span>-sh<span class="w"> </span>/var/cache/pacman/pkg/<span class="w">          </span><span class="c1"># размер кэша</span>
+
+<span class="c1"># paccache (из pacman-contrib) — РЕКОМЕНДУЕТСЯ</span>
+sudo<span class="w"> </span>paccache<span class="w"> </span>-r<span class="w">                       </span><span class="c1"># оставить последние 3 версии</span>
+sudo<span class="w"> </span>paccache<span class="w"> </span>-rk1<span class="w">                     </span><span class="c1"># оставить только 1 (последнюю)</span>
+sudo<span class="w"> </span>paccache<span class="w"> </span>-ruk0<span class="w">                    </span><span class="c1"># удалить кэш удалённых пакетов</span>
+sudo<span class="w"> </span>paccache<span class="w"> </span>-v<span class="w">                       </span><span class="c1"># подробнее</span>
+
+<span class="c1"># Авто-чистка (systemd timer)</span>
+sudo<span class="w"> </span>systemctl<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>--now<span class="w"> </span>paccache.timer
+
+<span class="c1"># Полная очистка кэша (ОСТОРОЖНО!)</span>
+sudo<span class="w"> </span>pacman<span class="w"> </span>-Sc<span class="w">                        </span><span class="c1"># удалить кэш удалённых пакетов</span>
+sudo<span class="w"> </span>pacman<span class="w"> </span>-Scc<span class="w">                       </span><span class="c1"># удалить ВЕСЬ кэш</span>
+</code></pre></div>
+
+<hr />
+<h2 id="восстановление-откат">🆘 Восстановление / откат<a class="headerlink" href="#восстановление-откат" title="Ссылка">#</a></h2>
+<h3 id="откат-пакета-из-кэша">Откат пакета из кэша<a class="headerlink" href="#откат-пакета-из-кэша" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Найти старую версию в кэше</span>
+ls<span class="w"> </span>/var/cache/pacman/pkg/python-3.12*
+
+<span class="c1"># Установить конкретную версию</span>
+sudo<span class="w"> </span>pacman<span class="w"> </span>-U<span class="w"> </span>/var/cache/pacman/pkg/python-3.12.0-1-x86_64.pkg.tar.zst
+</code></pre></div>
+
+<h3 id="архив-пакетов-если-кэша-нет">Архив пакетов (если кэша нет)<a class="headerlink" href="#архив-пакетов-если-кэша-нет" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># https://archive.archlinux.org/packages/</span>
+sudo<span class="w"> </span>pacman<span class="w"> </span>-U<span class="w"> </span>https://archive.archlinux.org/packages/p/python/python-3.12.0-1-x86_64.pkg.tar.zst
+</code></pre></div>
+
+<h3 id="система-не-загружается-после-обновления">Система не загружается после обновления<a class="headerlink" href="#система-не-загружается-после-обновления" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># 1. Загрузиться с Arch ISO (USB)</span>
+<span class="c1"># 2. Примонтировать корень</span>
+sudo<span class="w"> </span>mount<span class="w"> </span>/dev/sda2<span class="w"> </span>/mnt
+
+<span class="c1"># 3. Чрутнуться</span>
+sudo<span class="w"> </span>arch-chroot<span class="w"> </span>/mnt
+
+<span class="c1"># 4. Откатить проблемный пакет из кэша</span>
+sudo<span class="w"> </span>pacman<span class="w"> </span>-U<span class="w"> </span>/var/cache/pacman/pkg/broken-package-1.0-1.pkg.tar.zst
+
+<span class="c1"># 5. Если pacman сломан — временно игнорировать</span>
+sudo<span class="w"> </span>pacman<span class="w"> </span>-Syu<span class="w"> </span>--ignore<span class="w"> </span>broken-package
+</code></pre></div>
+
+<h3 id="игнорировать-пакет-при-обновлении">Игнорировать пакет при обновлении<a class="headerlink" href="#игнорировать-пакет-при-обновлении" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>pacman<span class="w"> </span>-Syu<span class="w"> </span>--ignore<span class="w"> </span>python
+sudo<span class="w"> </span>pacman<span class="w"> </span>-Syu<span class="w"> </span>--ignore<span class="w"> </span>python,linux
+<span class="c1"># Или в pacman.conf:</span>
+<span class="c1"># IgnorePkg = python</span>
+</code></pre></div>
+
+<hr />
+<h2 id="yay-paru-aur-хелперы">🌟 yay / paru — AUR-хелперы<a class="headerlink" href="#yay-paru-aur-хелперы" title="Ссылка">#</a></h2>
+<h3 id="установка-yay-paru">Установка yay/paru<a class="headerlink" href="#установка-yay-paru" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># paru (рекомендуется, на Rust)</span>
+sudo<span class="w"> </span>pacman<span class="w"> </span>-S<span class="w"> </span>--needed<span class="w"> </span>base-devel<span class="w"> </span>git
+git<span class="w"> </span>clone<span class="w"> </span>https://aur.archlinux.org/paru.git
+<span class="nb">cd</span><span class="w"> </span>paru<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>makepkg<span class="w"> </span>-si
+
+<span class="c1"># yay</span>
+git<span class="w"> </span>clone<span class="w"> </span>https://aur.archlinux.org/yay.git
+<span class="nb">cd</span><span class="w"> </span>yay<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>makepkg<span class="w"> </span>-si
+</code></pre></div>
+
+<h3 id="базовое-использование-как-pacman-но-с-aur">Базовое использование (как pacman, но с AUR!)<a class="headerlink" href="#базовое-использование-как-pacman-но-с-aur" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>paru<span class="w"> </span>&lt;name&gt;<span class="w">                           </span><span class="c1"># поиск + установка интерактивно</span>
+paru<span class="w"> </span>-S<span class="w"> </span>&lt;package&gt;<span class="w">                     </span><span class="c1"># установить (из репо или AUR)</span>
+paru<span class="w"> </span>-S<span class="w"> </span>firefox-developer-edition<span class="w">     </span><span class="c1"># AUR-пакет</span>
+yay<span class="w"> </span>-S<span class="w"> </span>visual-studio-code-bin
+
+<span class="c1"># Обновление</span>
+paru<span class="w"> </span>-Syu<span class="w">                             </span><span class="c1"># репо + AUR</span>
+paru<span class="w"> </span>-Sua<span class="w">                             </span><span class="c1"># только AUR</span>
+paru<span class="w"> </span>-Syu<span class="w"> </span>--devel<span class="w">                     </span><span class="c1"># + VCS-пакеты (git/svn)</span>
+paru<span class="w">                                  </span><span class="c1"># = paru -Syu (по умолчанию)</span>
+
+<span class="c1"># Поиск</span>
+paru<span class="w"> </span>&lt;name&gt;<span class="w">                           </span><span class="c1"># интерактивный поиск</span>
+paru<span class="w"> </span>-Ss<span class="w"> </span>&lt;name&gt;<span class="w">                       </span><span class="c1"># найти в репо + AUR</span>
+paru<span class="w"> </span>-Sa<span class="w"> </span>&lt;name&gt;<span class="w">                       </span><span class="c1"># только AUR</span>
+
+<span class="c1"># Информация</span>
+paru<span class="w"> </span>-Si<span class="w"> </span>&lt;package&gt;<span class="w">                    </span><span class="c1"># инфо</span>
+paru<span class="w"> </span>-Ps<span class="w">                              </span><span class="c1"># статистика системы</span>
+
+<span class="c1"># Удаление</span>
+paru<span class="w"> </span>-Rns<span class="w"> </span>&lt;package&gt;<span class="w">                   </span><span class="c1"># с зависимостями и конфигами</span>
+paru<span class="w"> </span>-Rns<span class="w"> </span><span class="k">$(</span>paru<span class="w"> </span>-Qdtq<span class="k">)</span><span class="w">               </span><span class="c1"># удалить сироты</span>
+paru<span class="w"> </span>-c<span class="w">                               </span><span class="c1"># очистить кэш + сироты</span>
+</code></pre></div>
+
+<h3 id="особенности-aur-хелперов">Особенности AUR-хелперов<a class="headerlink" href="#особенности-aur-хелперов" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Редактирование PKGBUILD перед сборкой</span>
+paru<span class="w"> </span>-S<span class="w"> </span>&lt;pkg&gt;<span class="w"> </span>--edit
+yay<span class="w"> </span>-S<span class="w"> </span>&lt;pkg&gt;<span class="w"> </span>--edit
+
+<span class="c1"># Не спрашивать подтверждения</span>
+paru<span class="w"> </span>-S<span class="w"> </span>&lt;pkg&gt;<span class="w"> </span>--noconfirm
+yay<span class="w"> </span>-S<span class="w"> </span>&lt;pkg&gt;<span class="w"> </span>--noconfirm
+
+<span class="c1"># Скачать исходники без установки</span>
+paru<span class="w"> </span>-G<span class="w"> </span>&lt;pkg&gt;<span class="w">                         </span><span class="c1"># в текущий каталог</span>
+paru<span class="w"> </span>-Gcd<span class="w"> </span>&lt;pkg&gt;<span class="w">                       </span><span class="c1"># + показать diff</span>
+yay<span class="w"> </span>-G<span class="w"> </span>&lt;pkg&gt;
+
+<span class="c1"># Показать зависимости</span>
+paru<span class="w"> </span>-Pi<span class="w"> </span>&lt;pkg&gt;
+</code></pre></div>
+
+<h3 id="paru-conf-yay-conf">paru.conf / yay.conf<a class="headerlink" href="#paru-conf-yay-conf" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># ~/.config/paru/paru.conf</span>
+<span class="k">[options]</span>
+<span class="na">RemoveMake</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">yes</span><span class="w">                      </span><span class="c1"># удалять make-зависимости</span>
+<span class="na">SkipReview                            # не показывать PKGBUILD (осторожно!)</span>
+<span class="na">CleanAfter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">yes</span><span class="w">                      </span><span class="c1"># удалять файлы сборки</span>
+<span class="na">Provides</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">yes</span><span class="w">                        </span><span class="c1"># учитывать Provides</span>
+<span class="na">PgpFetch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">yes</span><span class="w">                        </span><span class="c1"># авто-импорт PGP-ключей</span>
+<span class="na">SudoLoop</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">yes</span><span class="w">                        </span><span class="c1"># держать sudo активным</span>
+
+<span class="k">[bin]</span>
+<span class="na">fm</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">nnn</span><span class="w">                              </span><span class="c1"># файловый менеджер для review</span>
+</code></pre></div>
+
+<hr />
+<h2 id="aur-arch-user-repository">🔍 AUR (Arch User Repository)<a class="headerlink" href="#aur-arch-user-repository" title="Ссылка">#</a></h2>
+<p>AUR — пользовательский репозиторий. Пакеты там <strong>НЕ бинарные</strong> — это скрипты <code>PKGBUILD</code>,
+которые собирают пакет из исходников.</p>
+<h3 id="ручная-установка-из-aur-без-хелпера">Ручная установка из AUR (без хелпера)<a class="headerlink" href="#ручная-установка-из-aur-без-хелпера" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># 1. Установить зависимости</span>
+sudo<span class="w"> </span>pacman<span class="w"> </span>-S<span class="w"> </span>--needed<span class="w"> </span>base-devel<span class="w"> </span>git
+
+<span class="c1"># 2. Клонировать</span>
+git<span class="w"> </span>clone<span class="w"> </span>https://aur.archlinux.org/package-name.git
+<span class="nb">cd</span><span class="w"> </span>package-name
+
+<span class="c1"># 3. ПРОЧИТАТЬ PKGBUILD! (безопасность!)</span>
+cat<span class="w"> </span>PKGBUILD
+
+<span class="c1"># 4. Собрать пакет</span>
+makepkg<span class="w"> </span>-si<span class="w">                           </span><span class="c1"># -s установка зависимостей, -i установить</span>
+</code></pre></div>
+
+<h3 id="команды-makepkg">Команды makepkg<a class="headerlink" href="#команды-makepkg" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>makepkg<span class="w">                               </span><span class="c1"># собрать пакет</span>
+makepkg<span class="w"> </span>-s<span class="w">                            </span><span class="c1"># + установить зависимости</span>
+makepkg<span class="w"> </span>-i<span class="w">                            </span><span class="c1"># + установить собранный</span>
+makepkg<span class="w"> </span>-si<span class="w">                           </span><span class="c1"># оба</span>
+makepkg<span class="w"> </span>-o<span class="w">                            </span><span class="c1"># только скачать исходники</span>
+makepkg<span class="w"> </span>-f<span class="w">                            </span><span class="c1"># пересобрать</span>
+makepkg<span class="w"> </span>-c<span class="w">                            </span><span class="c1"># очистить после</span>
+makepkg<span class="w"> </span>-G<span class="w">                            </span><span class="c1"># получить исходники + PKGBUILD</span>
+makepkg<span class="w"> </span>--skipinteg<span class="w">                   </span><span class="c1"># пропустить проверки (ОПАСНО!)</span>
+makepkg<span class="w"> </span>--sign<span class="w">                        </span><span class="c1"># подписать пакет</span>
+</code></pre></div>
+
+<h3 id="безопасность-aur">Безопасность AUR<a class="headerlink" href="#безопасность-aur" title="Ссылка">#</a></h3>
+<ul>
+<li><strong>Всегда читайте PKGBUILD</strong> перед установкой! Внутри может быть что угодно.</li>
+<li>Проверяйте <code>Votes</code> и <code>Popularity</code> — популярные пакеты безопаснее.</li>
+<li><code>Orphaned</code> пакеты (без мейнтейнера) — риск.</li>
+<li><code>Maintainer</code> с хорошей репутацией — доверие выше.</li>
+<li><code>Last Updated</code> — старые пакеты могут не собираться.</li>
+</ul>
+<h3 id="поиск-на-aur-archlinux-org">Поиск на aur.archlinux.org<a class="headerlink" href="#поиск-на-aur-archlinux-org" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Через API</span>
+curl<span class="w"> </span>-s<span class="w"> </span><span class="s2">&quot;https://aur.archlinux.org/rpc/?v=5&amp;type=search&amp;arg=neovim&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>jq
+
+<span class="c1"># Проверить статус пакета</span>
+paru<span class="w"> </span>-Si<span class="w"> </span>&lt;pkg&gt;<span class="w">                        </span><span class="c1"># локально</span>
+</code></pre></div>
+
+<hr />
+<h2 id="pacman-tips-tricks">📊 pacman tips &amp; tricks<a class="headerlink" href="#pacman-tips-tricks" title="Ссылка">#</a></h2>
+<h3 id="что-занимает-место">Что занимает место?<a class="headerlink" href="#что-занимает-место" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>expac<span class="w"> </span>-H<span class="w"> </span>M<span class="w"> </span><span class="s1">&#39;%m\t%n&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sort<span class="w"> </span>-h<span class="w">         </span><span class="c1"># пакеты по размеру</span>
+pacman<span class="w"> </span>-Qi<span class="w"> </span><span class="p">|</span><span class="w"> </span>awk<span class="w"> </span><span class="s1">&#39;/^Name/{n=$3} /^Installed Size/{print $4&quot; &quot;n}&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sort<span class="w"> </span>-h
+</code></pre></div>
+
+<h3 id="самые-новые-установленные">Самые новые установленные<a class="headerlink" href="#самые-новые-установленные" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>expac<span class="w"> </span>--timefmt<span class="o">=</span><span class="s1">&#39;%Y-%m-%d %H:%M&#39;</span><span class="w"> </span><span class="s1">&#39;%l\t%n&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sort<span class="w"> </span><span class="p">|</span><span class="w"> </span>tail<span class="w"> </span>-20
+</code></pre></div>
+
+<h3 id="зависимости-дерево">Зависимости (дерево)<a class="headerlink" href="#зависимости-дерево" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>pactree<span class="w"> </span>&lt;package&gt;<span class="w">                     </span><span class="c1"># дерево зависимостей</span>
+pactree<span class="w"> </span>-r<span class="w"> </span>&lt;package&gt;<span class="w">                  </span><span class="c1"># обратное дерево (кто зависит)</span>
+pacdeps<span class="w"> </span>&lt;package&gt;
+</code></pre></div>
+
+<h3 id="кто-установил-пакет">Кто установил пакет?<a class="headerlink" href="#кто-установил-пакет" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Лог установки</span>
+grep<span class="w"> </span><span class="s2">&quot; installed &lt;package&gt;&quot;</span><span class="w"> </span>/var/log/pacman.log
+</code></pre></div>
+
+<h3 id="экспорт-списка-пакетов">Экспорт списка пакетов<a class="headerlink" href="#экспорт-списка-пакетов" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>pacman<span class="w"> </span>-Qqe<span class="w"> </span>&gt;<span class="w"> </span>pkglist.txt<span class="w">             </span><span class="c1"># явно установленные</span>
+<span class="c1"># Восстановление на новой системе:</span>
+sudo<span class="w"> </span>pacman<span class="w"> </span>-S<span class="w"> </span>--needed<span class="w"> </span>-<span class="w"> </span>&lt;<span class="w"> </span>pkglist.txt
+</code></pre></div>
+
+<h3 id="сравнение-файлов-pacnew">Сравнение файлов (.pacnew)<a class="headerlink" href="#сравнение-файлов-pacnew" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Когда pacman создаёт .pacnew (не перезаписывает ваш конфиг)</span>
+sudo<span class="w"> </span>pacdiff<span class="w">                          </span><span class="c1"># интерактивное слияние</span>
+<span class="c1"># Инструменты: pacdiff, vimdiff, meld</span>
+</code></pre></div>
+
+<hr />
+<h2 id="частые-проблемы">🐛 Частые проблемы<a class="headerlink" href="#частые-проблемы" title="Ссылка">#</a></h2>
+<h3 id="conflicting-files">&ldquo;conflicting files&rdquo;<a class="headerlink" href="#conflicting-files" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Файл принадлежит другому пакету</span>
+sudo<span class="w"> </span>pacman<span class="w"> </span>-S<span class="w"> </span>&lt;pkg&gt;<span class="w"> </span>--overwrite<span class="w"> </span><span class="s1">&#39;path/to/file&#39;</span>
+sudo<span class="w"> </span>pacman<span class="w"> </span>-S<span class="w"> </span>&lt;pkg&gt;<span class="w"> </span>--overwrite<span class="w"> </span><span class="s1">&#39;*&#39;</span>
+</code></pre></div>
+
+<h3 id="invalid-or-corrupted-package">&ldquo;invalid or corrupted package&rdquo;<a class="headerlink" href="#invalid-or-corrupted-package" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>pacman<span class="w"> </span>-Sy<span class="w"> </span>archlinux-keyring<span class="w">     </span><span class="c1"># обновить ключи</span>
+sudo<span class="w"> </span>pacman-key<span class="w"> </span>--init
+sudo<span class="w"> </span>pacman-key<span class="w"> </span>--populate<span class="w"> </span>archlinux<span class="w"> </span>cachyos
+sudo<span class="w"> </span>pacman<span class="w"> </span>-Syyu
+</code></pre></div>
+
+<h3 id="ключи-gpg">Ключи (GPG)<a class="headerlink" href="#ключи-gpg" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>pacman-key<span class="w"> </span>--init
+sudo<span class="w"> </span>pacman-key<span class="w"> </span>--populate<span class="w"> </span>archlinux
+sudo<span class="w"> </span>pacman-key<span class="w"> </span>--refresh-keys
+sudo<span class="w"> </span>pacman-key<span class="w"> </span>--recv-keys<span class="w"> </span>&lt;KEYID&gt;
+sudo<span class="w"> </span>pacman-key<span class="w"> </span>--lsign-key<span class="w"> </span>&lt;KEYID&gt;
+</code></pre></div>
+
+<h3 id="зеркало-устарело">Зеркало устарело<a class="headerlink" href="#зеркало-устарело" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>pacman<span class="w"> </span>-Syy<span class="w">                      </span><span class="c1"># принудительно обновить базу</span>
+sudo<span class="w"> </span>reflector<span class="w"> </span>--latest<span class="w"> </span><span class="m">20</span><span class="w"> </span>--protocol<span class="w"> </span>https<span class="w"> </span>--sort<span class="w"> </span>rate<span class="w"> </span>--save<span class="w"> </span>/etc/pacman.d/mirrorlist
+</code></pre></div>
+
+<h3 id="failed-to-commit-transaction-failed-to-allocate-memory">&ldquo;failed to commit transaction (failed to allocate memory)&rdquo;<a class="headerlink" href="#failed-to-commit-transaction-failed-to-allocate-memory" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Закройте приложения или добавьте swap</span>
+sudo<span class="w"> </span>swapon<span class="w"> </span>/swapfile
+sudo<span class="w"> </span>pacman<span class="w"> </span>-Syu
+</code></pre></div>
+
+<h3 id="база-данных-заблокирована">База данных заблокирована<a class="headerlink" href="#база-данных-заблокирована" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>rm<span class="w"> </span>/var/lib/pacman/db.lck<span class="w">        </span><span class="c1"># удалить lock-файл</span>
+</code></pre></div>
+
+<h3 id="сборка-aur-падает-out-of-memory">Сборка AUR падает (out of memory)<a class="headerlink" href="#сборка-aur-падает-out-of-memory" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># makepkg компилирует в /tmp (в RAM)</span>
+<span class="c1"># Перенесите в диск:</span>
+sudo<span class="w"> </span>vim<span class="w"> </span>/etc/makepkg.conf
+<span class="c1"># BUILDDIR=/tmp/makepkg → BUILDDIR=/var/tmp/makepkg</span>
+
+<span class="c1"># Или добавьте swap</span>
+sudo<span class="w"> </span>fallocate<span class="w"> </span>-l<span class="w"> </span>8G<span class="w"> </span>/swapfile
+sudo<span class="w"> </span>chmod<span class="w"> </span><span class="m">600</span><span class="w"> </span>/swapfile
+sudo<span class="w"> </span>mkswap<span class="w"> </span>/swapfile
+sudo<span class="w"> </span>swapon<span class="w"> </span>/swapfile
+</code></pre></div>
+
+<hr />
+<h2 id="cachyos-особенности">⚙️ CachyOS особенности<a class="headerlink" href="#cachyos-особенности" title="Ссылка">#</a></h2>
+<p>CachyOS использует оптимизированные репозитории:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Репозитории CachyOS (в /etc/pacman.conf)</span>
+<span class="o">[</span>cachyos<span class="o">]</span><span class="w">                             </span><span class="c1"># оптимизированные пакеты</span>
+<span class="o">[</span>cachyos-v3<span class="o">]</span><span class="w">                          </span><span class="c1"># v3 (AVX2, для новых CPU)</span>
+<span class="o">[</span>cachyos-core-v3<span class="o">]</span><span class="w">                     </span><span class="c1"># ядро v3</span>
+</code></pre></div>
+
+<h3 id="специфичные-команды-cachyos">Специфичные команды CachyOS<a class="headerlink" href="#специфичные-команды-cachyos" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Управление ядром</span>
+sudo<span class="w"> </span>cachyos-rate-mirrors<span class="w">             </span><span class="c1"># обновить зеркала</span>
+cachy-bugreport<span class="w">                       </span><span class="c1"># отчёт для баг-репорта</span>
+
+<span class="c1"># Утилиты CachyOS</span>
+chwd<span class="w">                                  </span><span class="c1"># CachyOS Hardware Detection</span>
+sudo<span class="w"> </span>cachyos-kernel-manager<span class="w">           </span><span class="c1"># GUI для управления ядром</span>
+
+<span class="c1"># Оптимизация (CPU governor)</span>
+sudo<span class="w"> </span>cachyos-settings-manager
+
+<span class="c1"># Hello / Welcome app</span>
+cachyhello<span class="w">                            </span><span class="c1"># приветственное приложение</span>
+</code></pre></div>
+
+<h3 id="выбор-ядра">Выбор ядра<a class="headerlink" href="#выбор-ядра" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># CachyOS предлагает несколько ядер:</span>
+<span class="c1"># linux-cachyos          — BORE scheduler (по умолчанию, рекомендуется)</span>
+<span class="c1"># linux-cachyos-bore     — BORE</span>
+<span class="c1"># linux-cachyos-eevdf    — EEVDF</span>
+<span class="c1"># linux-cachyos-lts      — LTS</span>
+<span class="c1"># linux-cachyos-bore-lts — LTS + BORE</span>
+<span class="c1"># linux-zen              — Zen (vanilla)</span>
+<span class="c1"># linux                  — vanilla</span>
+
+sudo<span class="w"> </span>pacman<span class="w"> </span>-S<span class="w"> </span>linux-cachyos<span class="w"> </span>linux-cachyos-headers
+</code></pre></div>
+
+<hr />
+<h2 id="pacman-vs-apt-vs-dnf">🆚 pacman vs apt vs dnf<a class="headerlink" href="#pacman-vs-apt-vs-dnf" title="Ссылка">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Действие</th>
+<th>pacman (Arch)</th>
+<th>apt (Debian/Ubuntu)</th>
+<th>dnf (Fedora)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Установить</td>
+<td><code>pacman -S</code></td>
+<td><code>apt install</code></td>
+<td><code>dnf install</code></td>
+</tr>
+<tr>
+<td>Удалить</td>
+<td><code>pacman -Rns</code></td>
+<td><code>apt remove</code> / <code>purge</code></td>
+<td><code>dnf remove</code></td>
+</tr>
+<tr>
+<td>Обновить список</td>
+<td><code>pacman -Sy</code></td>
+<td><code>apt update</code></td>
+<td><code>dnf check-update</code></td>
+</tr>
+<tr>
+<td>Обновить пакеты</td>
+<td><code>pacman -Su</code></td>
+<td><code>apt upgrade</code></td>
+<td><code>dnf upgrade</code></td>
+</tr>
+<tr>
+<td>Полное обновление</td>
+<td><code>pacman -Syu</code></td>
+<td><code>apt update &amp;&amp; upgrade</code></td>
+<td><code>dnf upgrade</code></td>
+</tr>
+<tr>
+<td>Поиск</td>
+<td><code>pacman -Ss</code></td>
+<td><code>apt search</code></td>
+<td><code>dnf search</code></td>
+</tr>
+<tr>
+<td>Инфо</td>
+<td><code>pacman -Si</code></td>
+<td><code>apt show</code></td>
+<td><code>dnf info</code></td>
+</tr>
+<tr>
+<td>Список файлов пакета</td>
+<td><code>pacman -Ql</code></td>
+<td><code>dpkg -L</code></td>
+<td><code>rpm -ql</code></td>
+</tr>
+<tr>
+<td>Кому принадлежит файл</td>
+<td><code>pacman -Qo</code></td>
+<td><code>dpkg -S</code></td>
+<td><code>rpm -qf</code></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="частые-ошибки-и-грабли">🪤 Частые ошибки и грабли<a class="headerlink" href="#частые-ошибки-и-грабли" title="Ссылка">#</a></h2>
+<ol>
+<li><strong><code>pacman -Sy &lt;pkg&gt;</code></strong> — НЕЛЬЗЯ. Только <code>-Syu</code>. Иначе partial upgrade.</li>
+<li><strong>AUR без проверки</strong> — всегда читайте PKGBUILD.</li>
+<li><strong><code>makepkg</code> от root</strong> — нельзя. Только обычный пользователь.</li>
+<li><strong>Удаление csrf</strong> — <code>pacman -Rdd</code> без проверки может сломать систему.</li>
+<li><strong>Игнорирование <code>linux</code></strong> — ядро надо обновлять вместе с системой.</li>
+<li><strong>Забытый <code>.pacnew</code></strong> — проверяйте после обновлений (<code>pacdiff</code>).</li>
+<li><strong>AUR для критичного софта</strong> — AUR не получает автообновления безопасности.</li>
+<li><strong>Кэш переполнен</strong> — <code>/var/cache/pacman/pkg/</code> разрастается. <code>paccache -r</code>.</li>
+<li><strong>Зеркала не синхронны</strong> — <code>pacman -Syyu</code> если &ldquo;target not found&rdquo;.</li>
+<li><strong>Чистка <code>pacman -Scc</code></strong> — удалит кэш, не сможете откатиться.</li>
+</ol>
+<hr />
+<h2 id="полезные-ссылки">🔗 Полезные ссылки<a class="headerlink" href="#полезные-ссылки" title="Ссылка">#</a></h2>
+<ul>
+<li>Arch Wiki: Pacman: https://wiki.archlinux.org/title/Pacman</li>
+<li>Arch Wiki: AUR: https://wiki.archlinux.org/title/Arch_User_Repository</li>
+<li>Arch Wiki: makepkg: https://wiki.archlinux.org/title/Makepkg</li>
+<li>Arch Package Search: https://archlinux.org/packages</li>
+<li>AUR: https://aur.archlinux.org</li>
+<li>Arch Linux Archive: https://archive.archlinux.org</li>
+<li>CachyOS Wiki: https://wiki.cachyos.org</li>
+<li>pacman rosetta (сравнение): https://wiki.archlinux.org/title/Pacman/Rosetta</li>
+</ul>
+<hr />
+<h2 id="полезные-советы">💡 Полезные советы<a class="headerlink" href="#полезные-советы" title="Ссылка">#</a></h2>
+<ol>
+<li><strong><code>pacman -Syu</code></strong> — единственный правильный способ обновления.</li>
+<li><strong><code>-Rns</code></strong> для удаления — с зависимостями и конфигами.</li>
+<li><strong>paru/yay</strong> — почти как pacman, но с AUR. <code>paru</code> (= без флагов) обновляет всё.</li>
+<li><strong>Чистите кэш</strong>: <code>sudo paccache -r</code> или включите <code>paccache.timer</code>.</li>
+<li><strong>Чистите сироты</strong>: <code>paru -Rns $(paru -Qdtq)</code>.</li>
+<li><strong>Зеркала</strong>: <code>reflector</code> или <code>rate-mirrors</code> регулярно.</li>
+<li><strong>Читайте новости</strong>: https://archlinux.org/news перед крупными обновлениями.</li>
+<li><strong><code>.pacnew</code></strong>: <code>sudo pacdiff</code> после обновлений.</li>
+<li><strong>Резервная копия списка пакетов</strong>: <code>pacman -Qqe &gt; pkglist.txt</code>.</li>
+<li><strong>Не используйте AUR для base-системы</strong> — только для пользовательского софта.</li>
+<li><strong><code>paru -Ps</code></strong> — статистика: сколько пакетов, сколько из AUR и т.д.</li>
+<li><strong><code>pactree</code></strong> — для понимания зависимостей сложных пакетов.</li>
+<li><strong>CachyOS</strong>: используйте <code>linux-cachyos</code> (BORE scheduler) для лучшей отзывчивости.</li>
+<li><strong>HoldPkg</strong> в pacman.conf — критичные пакеты (pacman, glibc) спросят подтверждение.</li>
+<li><strong><code>CheckSpace</code></strong> в pacman.conf — проверяет, есть ли место перед установкой.</li>
+</ol>
+<hr />
+<p><em>Сгенерировано как шпаргалка. pacman прост, но Arch требует понимания —
+углубляйтесь через https://wiki.archlinux.org/ и <code>pacman --help</code></em></p>
+    </article>
+    <nav class="pagination">
+      <a class="pager prev" href="docker.html">← Docker</a>
+      <a class="pager next" href="spark.html">Apache Spark / PySpark →</a>
+    </nav>
+  </main>
+
+  <aside class="toc">
+    <details open>
+      <summary>📑 Оглавление</summary>
+      <div class="toc-list">
+<div class="toc">
+<ul>
+<li><a href="#pacman-yay-paru-шпаргалка-arch-cachyos">📦 pacman / yay / paru — шпаргалка (Arch / CachyOS)</a><ul>
+<li><a href="#pacman-базовые-команды">🚀 pacman — базовые команды</a><ul>
+<li><a href="#установка">Установка</a></li>
+<li><a href="#удаление">Удаление</a></li>
+<li><a href="#обновление-системы">Обновление системы</a></li>
+<li><a href="#поиск">Поиск</a></li>
+<li><a href="#информация">Информация</a></li>
+<li><a href="#списки">Списки</a></li>
+</ul>
+</li>
+<li><a href="#мнемоника-флагов-pacman">📋 Мнемоника флагов pacman</a></li>
+<li><a href="#pacman-conf">🔧 pacman.conf</a><ul>
+<li><a href="#полезные-опции">Полезные опции</a></li>
+</ul>
+</li>
+<li><a href="#зеркала-mirrorlist">🪞 Зеркала (mirrorlist)</a></li>
+<li><a href="#кэш-пакетов-и-чистка">💾 Кэш пакетов и чистка</a></li>
+<li><a href="#восстановление-откат">🆘 Восстановление / откат</a><ul>
+<li><a href="#откат-пакета-из-кэша">Откат пакета из кэша</a></li>
+<li><a href="#архив-пакетов-если-кэша-нет">Архив пакетов (если кэша нет)</a></li>
+<li><a href="#система-не-загружается-после-обновления">Система не загружается после обновления</a></li>
+<li><a href="#игнорировать-пакет-при-обновлении">Игнорировать пакет при обновлении</a></li>
+</ul>
+</li>
+<li><a href="#yay-paru-aur-хелперы">🌟 yay / paru — AUR-хелперы</a><ul>
+<li><a href="#установка-yay-paru">Установка yay/paru</a></li>
+<li><a href="#базовое-использование-как-pacman-но-с-aur">Базовое использование (как pacman, но с AUR!)</a></li>
+<li><a href="#особенности-aur-хелперов">Особенности AUR-хелперов</a></li>
+<li><a href="#paru-conf-yay-conf">paru.conf / yay.conf</a></li>
+</ul>
+</li>
+<li><a href="#aur-arch-user-repository">🔍 AUR (Arch User Repository)</a><ul>
+<li><a href="#ручная-установка-из-aur-без-хелпера">Ручная установка из AUR (без хелпера)</a></li>
+<li><a href="#команды-makepkg">Команды makepkg</a></li>
+<li><a href="#безопасность-aur">Безопасность AUR</a></li>
+<li><a href="#поиск-на-aur-archlinux-org">Поиск на aur.archlinux.org</a></li>
+</ul>
+</li>
+<li><a href="#pacman-tips-tricks">📊 pacman tips &amp; tricks</a><ul>
+<li><a href="#что-занимает-место">Что занимает место?</a></li>
+<li><a href="#самые-новые-установленные">Самые новые установленные</a></li>
+<li><a href="#зависимости-дерево">Зависимости (дерево)</a></li>
+<li><a href="#кто-установил-пакет">Кто установил пакет?</a></li>
+<li><a href="#экспорт-списка-пакетов">Экспорт списка пакетов</a></li>
+<li><a href="#сравнение-файлов-pacnew">Сравнение файлов (.pacnew)</a></li>
+</ul>
+</li>
+<li><a href="#частые-проблемы">🐛 Частые проблемы</a><ul>
+<li><a href="#conflicting-files">&ldquo;conflicting files&rdquo;</a></li>
+<li><a href="#invalid-or-corrupted-package">&ldquo;invalid or corrupted package&rdquo;</a></li>
+<li><a href="#ключи-gpg">Ключи (GPG)</a></li>
+<li><a href="#зеркало-устарело">Зеркало устарело</a></li>
+<li><a href="#failed-to-commit-transaction-failed-to-allocate-memory">&ldquo;failed to commit transaction (failed to allocate memory)&rdquo;</a></li>
+<li><a href="#база-данных-заблокирована">База данных заблокирована</a></li>
+<li><a href="#сборка-aur-падает-out-of-memory">Сборка AUR падает (out of memory)</a></li>
+</ul>
+</li>
+<li><a href="#cachyos-особенности">⚙️ CachyOS особенности</a><ul>
+<li><a href="#специфичные-команды-cachyos">Специфичные команды CachyOS</a></li>
+<li><a href="#выбор-ядра">Выбор ядра</a></li>
+</ul>
+</li>
+<li><a href="#pacman-vs-apt-vs-dnf">🆚 pacman vs apt vs dnf</a></li>
+<li><a href="#частые-ошибки-и-грабли">🪤 Частые ошибки и грабли</a></li>
+<li><a href="#полезные-ссылки">🔗 Полезные ссылки</a></li>
+<li><a href="#полезные-советы">💡 Полезные советы</a></li>
+</ul>
+</li>
+</ul>
+</div>
+
+      </div>
+    </details>
+  </aside>
+</div>
+
+<button class="back-top" id="backTop" aria-label="Наверх">↑</button>
+
+<script src="assets/search.js"></script>
+<script src="assets/page.js"></script>
+</body>
+</html>

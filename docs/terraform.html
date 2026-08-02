@@ -1,0 +1,946 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Terraform — Шпаргалки</title>
+<link rel="stylesheet" href="assets/style.css">
+<link rel="stylesheet" href="assets/pygments.css">
+</head>
+<body>
+<div class="layout">
+  <aside class="sidebar">
+    <a href="index.html" class="brand">📌 Шпаргалки</a>
+    <nav class="nav">
+<a href="yazi.html" class="nav-item"><span class="nav-ico">📦</span>Yazi</a>
+<a href="neovim.html" class="nav-item"><span class="nav-ico">📘</span>Neovim (LazyVim)</a>
+<a href="niri.html" class="nav-item"><span class="nav-ico">🪟</span>Niri</a>
+<a href="tmux.html" class="nav-item"><span class="nav-ico">🪟</span>Tmux</a>
+<a href="bash.html" class="nav-item"><span class="nav-ico">🐚</span>Bash</a>
+<a href="git.html" class="nav-item"><span class="nav-ico">🔀</span>Git</a>
+<a href="terminal.html" class="nav-item"><span class="nav-ico">🖥️</span>Терминал Linux</a>
+<a href="powershell.html" class="nav-item"><span class="nav-ico">💻</span>PowerShell</a>
+<a href="cmd.html" class="nav-item"><span class="nav-ico">🪟</span>CMD (cmd.exe)</a>
+<a href="python.html" class="nav-item"><span class="nav-ico">🐍</span>Python</a>
+<a href="systemd.html" class="nav-item"><span class="nav-ico">⚙️</span>systemd</a>
+<a href="ssh.html" class="nav-item"><span class="nav-ico">🔐</span>SSH</a>
+<a href="make-cmake.html" class="nav-item"><span class="nav-ico">🔨</span>Make / CMake</a>
+<a href="docker.html" class="nav-item"><span class="nav-ico">🐳</span>Docker</a>
+<a href="pacman.html" class="nav-item"><span class="nav-ico">📦</span>pacman / yay / paru</a>
+<a href="spark.html" class="nav-item"><span class="nav-ico">⚡</span>Apache Spark / PySpark</a>
+<a href="markdown.html" class="nav-item"><span class="nav-ico">📝</span>Markdown</a>
+<a href="regex.html" class="nav-item"><span class="nav-ico">🔍</span>Регулярные выражения</a>
+<a href="jq-json.html" class="nav-item"><span class="nav-ico">🔧</span>jq + JSON</a>
+<a href="awk-sed.html" class="nav-item"><span class="nav-ico">✂️</span>awk / sed</a>
+<a href="airflow.html" class="nav-item"><span class="nav-ico">🌪️</span>Apache Airflow</a>
+<a href="http-curl.html" class="nav-item"><span class="nav-ico">🌐</span>HTTP / curl</a>
+<a href="yaml.html" class="nav-item"><span class="nav-ico">📄</span>YAML</a>
+<a href="vscode.html" class="nav-item"><span class="nav-ico">💻</span>VS Code</a>
+<a href="cron.html" class="nav-item"><span class="nav-ico">⏰</span>cron</a>
+<a href="fzf-zoxide.html" class="nav-item"><span class="nav-ico">🔎</span>fzf + zoxide</a>
+<a href="minikube-k8s.html" class="nav-item"><span class="nav-ico">☸️</span>Minikube / Kubernetes</a>
+<a href="cicd.html" class="nav-item"><span class="nav-ico">🦊</span>GitLab CI / GitHub Actions</a>
+<a href="nginx.html" class="nav-item"><span class="nav-ico">🌐</span>nginx</a>
+<a href="dbt.html" class="nav-item"><span class="nav-ico">🔧</span>dbt</a>
+<a href="kafka.html" class="nav-item"><span class="nav-ico">🐘</span>Apache Kafka</a>
+<a href="prometheus-grafana.html" class="nav-item"><span class="nav-ico">📊</span>Prometheus / Grafana</a>
+<a href="iceberg-nessie.html" class="nav-item"><span class="nav-ico">🧊</span>Iceberg / Nessie</a>
+<a href="impala.html" class="nav-item"><span class="nav-ico">🐬</span>Apache Impala</a>
+<a href="terraform.html" class="nav-item active"><span class="nav-ico">🏗️</span>Terraform</a>
+<a href="linux-internals.html" class="nav-item"><span class="nav-ico">🐧</span>Linux Internals</a>
+<a href="miscellaneous.html" class="nav-item"><span class="nav-ico">🧰</span>Miscellaneous</a>
+<a href="python-automation-libs.html" class="nav-item"><span class="nav-ico">🐍</span>Python: авт-ция (10 libs)</a>
+<a href="eza.html" class="nav-item"><span class="nav-ico">🌈</span>eza</a>
+<a href="dbeaver.html" class="nav-item"><span class="nav-ico">🗄️</span>DBeaver</a>
+<a href="zcode.html" class="nav-item"><span class="nav-ico">🤖</span>ZCode</a>
+<a href="warp.html" class="nav-item"><span class="nav-ico">🚀</span>Warp</a>
+<a href="agentic-ai-dev.html" class="nav-item"><span class="nav-ico">🤝</span>Агентная разработка с ИИ</a>
+    </nav>
+  </aside>
+
+  <main class="content">
+    <article>
+<h1 id="terraform-шпаргалка-по-infrastructure-as-code">🏗️ Terraform — шпаргалка по Infrastructure as Code<a class="headerlink" href="#terraform-шпаргалка-по-infrastructure-as-code" title="Ссылка">#</a></h1>
+<blockquote>
+<p><strong>Terraform</strong> — инструмент Infrastructure as Code (IaC) от HashiCorp.
+Декларативное описание инфраструктуры в HCL, деплой в облако.
+Документация: https://developer.hashicorp.com/terraform</p>
+</blockquote>
+<hr />
+<h2 id="главные-понятия">🔑 Главные понятия<a class="headerlink" href="#главные-понятия" title="Ссылка">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Термин</th>
+<th>Что значит</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Provider</strong></td>
+<td>Плагин для облака (AWS, GCP, Azure, K8s)</td>
+</tr>
+<tr>
+<td><strong>Resource</strong></td>
+<td>Единица инфраструктуры (EC2, S3, VPC)</td>
+</tr>
+<tr>
+<td><strong>Data source</strong></td>
+<td>Чтение существующего ресурса</td>
+</tr>
+<tr>
+<td><strong>Variable</strong></td>
+<td>Входная переменная</td>
+</tr>
+<tr>
+<td><strong>Output</strong></td>
+<td>Выходное значение</td>
+</tr>
+<tr>
+<td><strong>State (tfstate)</strong></td>
+<td>Текущее состояние инфраструктуры</td>
+</tr>
+<tr>
+<td><strong>Plan</strong></td>
+<td>Что Terraform собирается сделать</td>
+</tr>
+<tr>
+<td><strong>Apply</strong></td>
+<td>Применить изменения</td>
+</tr>
+<tr>
+<td><strong>Module</strong></td>
+<td>Переиспользуемый набор ресурсов</td>
+</tr>
+<tr>
+<td><strong>Backend</strong></td>
+<td>Где хранится state (local, S3, Consul)</td>
+</tr>
+<tr>
+<td><strong>Workspace</strong></td>
+<td>Изолированный state (dev/prod)</td>
+</tr>
+<tr>
+<td><strong>HCL</strong></td>
+<td>HashiCorp Configuration Language</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="базовый-цикл">🚀 Базовый цикл<a class="headerlink" href="#базовый-цикл" title="Ссылка">#</a></h2>
+<div class="highlight"><pre><span></span><code>terraform<span class="w"> </span>init<span class="w">          </span><span class="c1"># скачать провайдеры, инициализация</span>
+terraform<span class="w"> </span>plan<span class="w">          </span><span class="c1"># показать, что изменится</span>
+terraform<span class="w"> </span>apply<span class="w">         </span><span class="c1"># применить изменения</span>
+terraform<span class="w"> </span>destroy<span class="w">       </span><span class="c1"># удалить всю инфраструктуру</span>
+terraform<span class="w"> </span>fmt<span class="w">           </span><span class="c1"># отформатировать .tf файлы</span>
+terraform<span class="w"> </span>validate<span class="w">      </span><span class="c1"># проверить синтаксис</span>
+terraform<span class="w"> </span>output<span class="w">        </span><span class="c1"># показать outputs</span>
+terraform<span class="w"> </span>show<span class="w">          </span><span class="c1"># текущее state</span>
+terraform<span class="w"> </span>state<span class="w"> </span>list<span class="w">    </span><span class="c1"># список ресурсов в state</span>
+</code></pre></div>
+
+<h3 id="установка">Установка<a class="headerlink" href="#установка" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>pacman<span class="w"> </span>-S<span class="w"> </span>terraform<span class="w">       </span><span class="c1"># Arch / CachyOS</span>
+sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>terraform<span class="w">     </span><span class="c1"># Debian/Ubuntu</span>
+brew<span class="w"> </span>install<span class="w"> </span>terraform<span class="w">         </span><span class="c1"># macOS</span>
+
+<span class="c1"># tfenv (управление версиями)</span>
+git<span class="w"> </span>clone<span class="w"> </span>https://github.com/tfutils/tfenv.git<span class="w"> </span>~/.tfenv
+<span class="nb">export</span><span class="w"> </span><span class="nv">PATH</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$HOME</span><span class="s2">/.tfenv/bin:</span><span class="nv">$PATH</span><span class="s2">&quot;</span>
+tfenv<span class="w"> </span>install<span class="w"> </span><span class="m">1</span>.7.0
+tfenv<span class="w"> </span>use<span class="w"> </span><span class="m">1</span>.7.0
+</code></pre></div>
+
+<hr />
+<h2 id="структура-проекта">📝 Структура проекта<a class="headerlink" href="#структура-проекта" title="Ссылка">#</a></h2>
+<div class="highlight"><pre><span></span><code>project/
+├── main.tf              # ресурсы
+├── variables.tf         # входные переменные
+├── outputs.tf           # выходные значения
+├── providers.tf         # провайдеры
+├── backend.tf           # конфигурация state
+├── terraform.tfvars     # значения переменных
+├── versions.tf          # версии Terraform и провайдеров
+├── locals.tf            # локальные переменные
+└── modules/             # свои модули
+    └── vpc/
+        ├── main.tf
+        ├── variables.tf
+        └── outputs.tf
+</code></pre></div>
+
+<h3 id="минимальный-пример">Минимальный пример<a class="headerlink" href="#минимальный-пример" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># versions.tf</span>
+<span class="nb">terraform</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">required_version</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;&gt;= 1.5&quot;</span>
+<span class="w">  </span><span class="nb">required_providers</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nb">aws</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="na">source</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;hashicorp/aws&quot;</span>
+<span class="w">      </span><span class="na">version</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;~&gt; 5.0&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1"># providers.tf</span>
+<span class="kr">provider</span><span class="w"> </span><span class="nv">&quot;aws&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">region</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;us-east-1&quot;</span>
+<span class="w">  </span><span class="na">profile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;default&quot;</span>
+<span class="p">}</span>
+
+<span class="c1"># main.tf</span>
+<span class="kr">resource</span><span class="w"> </span><span class="nc">&quot;aws_instance&quot;</span><span class="w"> </span><span class="nv">&quot;web&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">ami</span><span class="w">           </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;ami-0c55b159cbfafe1f0&quot;</span>
+<span class="w">  </span><span class="na">instance_type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;t3.micro&quot;</span>
+<span class="w">  </span><span class="nb">tags</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="na">Name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;WebServer&quot;</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1"># outputs.tf</span>
+<span class="kr">output</span><span class="w"> </span><span class="nv">&quot;instance_ip&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">aws_instance.web.public_ip</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<hr />
+<h2 id="синтаксис-hcl">🔤 Синтаксис HCL<a class="headerlink" href="#синтаксис-hcl" title="Ссылка">#</a></h2>
+<h3 id="блоки">Блоки<a class="headerlink" href="#блоки" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="kr">resource</span><span class="w"> </span><span class="nc">&quot;aws_instance&quot;</span><span class="w"> </span><span class="nv">&quot;web&quot;</span><span class="w"> </span><span class="p">{</span><span class="c1">     # тип, имя</span>
+<span class="w">  </span><span class="na">ami</span><span class="w">           </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;ami-123&quot;</span>
+<span class="w">  </span><span class="na">instance_type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;t3.micro&quot;</span>
+
+<span class="w">  </span><span class="nb">tags</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="na">Name</span><span class="w">        </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;web&quot;</span>
+<span class="w">    </span><span class="na">Environment</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;prod&quot;</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<h3 id="переменные-variables-tf">Переменные (variables.tf)<a class="headerlink" href="#переменные-variables-tf" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="kr">variable</span><span class="w"> </span><span class="nv">&quot;region&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">type</span><span class="w">        </span><span class="o">=</span><span class="w"> </span><span class="kt">string</span>
+<span class="w">  </span><span class="na">default</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;us-east-1&quot;</span>
+<span class="w">  </span><span class="na">description</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;AWS region&quot;</span>
+<span class="p">}</span>
+
+<span class="kr">variable</span><span class="w"> </span><span class="nv">&quot;instance_count&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">type</span><span class="w">    </span><span class="o">=</span><span class="w"> </span><span class="kt">number</span>
+<span class="w">  </span><span class="na">default</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span>
+<span class="p">}</span>
+
+<span class="kr">variable</span><span class="w"> </span><span class="nv">&quot;tags&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">type</span><span class="w">    </span><span class="o">=</span><span class="w"> </span><span class="nf">map</span><span class="p">(</span><span class="kt">string</span><span class="p">)</span>
+<span class="w">  </span><span class="nb">default</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="na">Project</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;myapp&quot;</span>
+<span class="w">    </span><span class="na">Owner</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;ops&quot;</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kr">variable</span><span class="w"> </span><span class="nv">&quot;environments&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">type</span><span class="w">    </span><span class="o">=</span><span class="w"> </span><span class="nf">list</span><span class="p">(</span><span class="kt">string</span><span class="p">)</span>
+<span class="w">  </span><span class="na">default</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;dev&quot;, &quot;staging&quot;, &quot;prod&quot;</span><span class="p">]</span>
+<span class="p">}</span>
+
+<span class="kr">variable</span><span class="w"> </span><span class="nv">&quot;instance_type&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">type</span><span class="w">    </span><span class="o">=</span><span class="w"> </span><span class="kt">string</span>
+<span class="w">  </span><span class="nb">validation</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="na">condition</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="nf">contains</span><span class="p">([</span><span class="s2">&quot;t3.micro&quot;, &quot;t3.small&quot;, &quot;t3.medium&quot;</span><span class="p">],</span><span class="w"> </span><span class="nv">var.instance_type</span><span class="p">)</span>
+<span class="w">    </span><span class="na">error_message</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;Must be t3.micro, t3.small, or t3.medium.&quot;</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1"># sensitive (не показывается в plan)</span>
+<span class="kr">variable</span><span class="w"> </span><span class="nv">&quot;db_password&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">type</span><span class="w">      </span><span class="o">=</span><span class="w"> </span><span class="kt">string</span>
+<span class="w">  </span><span class="na">sensitive</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="no">true</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<h3 id="использование-переменных">Использование переменных<a class="headerlink" href="#использование-переменных" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="kr">provider</span><span class="w"> </span><span class="nv">&quot;aws&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">region</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">var.region</span>
+<span class="p">}</span>
+
+<span class="kr">resource</span><span class="w"> </span><span class="nc">&quot;aws_instance&quot;</span><span class="w"> </span><span class="nv">&quot;web&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">count</span><span class="w">         </span><span class="o">=</span><span class="w"> </span><span class="nv">var.instance_count</span><span class="c1">       # создать N</span>
+<span class="w">  </span><span class="na">instance_type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">var.instance_type</span>
+<span class="w">  </span><span class="na">tags</span><span class="w">          </span><span class="o">=</span><span class="w"> </span><span class="nv">var.tags</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<h3 id="terraform-tfvars"><code>terraform.tfvars</code><a class="headerlink" href="#terraform-tfvars" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="na">region</span><span class="w">         </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;eu-west-1&quot;</span>
+<span class="na">instance_count</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">3</span>
+<span class="na">db_password</span><span class="w">    </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;supersecret&quot;</span>
+</code></pre></div>
+
+<h3 id="outputs">Outputs<a class="headerlink" href="#outputs" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="kr">output</span><span class="w"> </span><span class="nv">&quot;instance_ips&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">value</span><span class="w">       </span><span class="o">=</span><span class="w"> </span><span class="nv">aws_instance.web</span><span class="p">[</span><span class="err">*</span><span class="p">].</span><span class="err">public_ip</span>
+<span class="w">  </span><span class="na">description</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;Public IPs of instances&quot;</span>
+<span class="p">}</span>
+
+<span class="kr">output</span><span class="w"> </span><span class="nv">&quot;vpc_id&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">aws_vpc.main.id</span>
+<span class="p">}</span>
+
+<span class="kr">output</span><span class="w"> </span><span class="nv">&quot;db_endpoint&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">value</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="nv">aws_db.main.endpoint</span>
+<span class="w">  </span><span class="na">sensitive</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="no">true</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<h3 id="locals">Locals<a class="headerlink" href="#locals" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="nb">locals</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nb">common_tags</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="na">Project</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;myapp&quot;</span>
+<span class="w">    </span><span class="na">ManagedBy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;terraform&quot;</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="w">  </span><span class="na">instance_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;web-${var.environment}&quot;</span>
+<span class="p">}</span>
+
+<span class="kr">resource</span><span class="w"> </span><span class="nc">&quot;aws_instance&quot;</span><span class="w"> </span><span class="nv">&quot;web&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">tags</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">merge</span><span class="p">(</span><span class="nv">local.common_tags</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="na">Name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">local.instance_name</span><span class="w"> </span><span class="p">})</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<hr />
+<h2 id="resource-и-data-source">🔄 Resource и Data source<a class="headerlink" href="#resource-и-data-source" title="Ссылка">#</a></h2>
+<h3 id="resource-создать">Resource (создать)<a class="headerlink" href="#resource-создать" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="kr">resource</span><span class="w"> </span><span class="nc">&quot;aws_s3_bucket&quot;</span><span class="w"> </span><span class="nv">&quot;data&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">bucket</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;my-unique-bucket-name&quot;</span>
+<span class="w">  </span><span class="nb">tags</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="na">Name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;Data bucket&quot;</span><span class="w"> </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kr">resource</span><span class="w"> </span><span class="nc">&quot;aws_s3_bucket_versioning&quot;</span><span class="w"> </span><span class="nv">&quot;data&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">bucket</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">aws_s3_bucket.data.id</span>
+<span class="w">  </span><span class="nb">versioning_configuration</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="na">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;Enabled&quot;</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<h3 id="data-source-прочитать-существующее">Data source (прочитать существующее)<a class="headerlink" href="#data-source-прочитать-существующее" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="kr">data</span><span class="w"> </span><span class="nc">&quot;aws_ami&quot;</span><span class="w"> </span><span class="nv">&quot;ubuntu&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">most_recent</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="no">true</span>
+<span class="w">  </span><span class="na">owners</span><span class="w">      </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;099720109477&quot;</span><span class="p">]</span><span class="c1">    # Canonical</span>
+<span class="w">  </span><span class="nb">filter</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="na">name</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;name&quot;</span>
+<span class="w">    </span><span class="na">values</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;ubuntu/images/hvm-ssd/ubuntu-focal-20.04-amd64-server-*&quot;</span><span class="p">]</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kr">resource</span><span class="w"> </span><span class="nc">&quot;aws_instance&quot;</span><span class="w"> </span><span class="nv">&quot;web&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">ami</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">data.aws_ami.ubuntu.id</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<h3 id="ссылки-между-ресурсами">Ссылки между ресурсами<a class="headerlink" href="#ссылки-между-ресурсами" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="kr">resource</span><span class="w"> </span><span class="nc">&quot;aws_vpc&quot;</span><span class="w"> </span><span class="nv">&quot;main&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">cidr_block</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;10.0.0.0/16&quot;</span>
+<span class="p">}</span>
+
+<span class="kr">resource</span><span class="w"> </span><span class="nc">&quot;aws_subnet&quot;</span><span class="w"> </span><span class="nv">&quot;web&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">vpc_id</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="nv">aws_vpc.main.id</span><span class="c1">           # ссылка</span>
+<span class="w">  </span><span class="na">cidr_block</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;10.0.1.0/24&quot;</span>
+<span class="p">}</span>
+
+<span class="kr">resource</span><span class="w"> </span><span class="nc">&quot;aws_instance&quot;</span><span class="w"> </span><span class="nv">&quot;web&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">subnet_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">aws_subnet.web.id</span><span class="c1">          # ссылка</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<hr />
+<h2 id="meta-аргументы">🔁 Meta-аргументы<a class="headerlink" href="#meta-аргументы" title="Ссылка">#</a></h2>
+<h3 id="count">count<a class="headerlink" href="#count" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="kr">resource</span><span class="w"> </span><span class="nc">&quot;aws_instance&quot;</span><span class="w"> </span><span class="nv">&quot;web&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">count</span><span class="w">         </span><span class="o">=</span><span class="w"> </span><span class="m">3</span>
+<span class="w">  </span><span class="na">instance_type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;t3.micro&quot;</span>
+<span class="w">  </span><span class="nb">tags</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="na">Name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;web-${count.index}&quot;</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+<span class="c1"># Доступ: aws_instance.web[0], aws_instance.web[1], aws_instance.web[2]</span>
+</code></pre></div>
+
+<h3 id="foreach">for_each<a class="headerlink" href="#foreach" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="kr">resource</span><span class="w"> </span><span class="nc">&quot;aws_instance&quot;</span><span class="w"> </span><span class="nv">&quot;web&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">for_each</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">toset</span><span class="p">([</span><span class="s2">&quot;web-1&quot;, &quot;web-2&quot;, &quot;web-3&quot;</span><span class="p">])</span>
+<span class="w">  </span><span class="nb">tags</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="na">Name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">each.key</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="w">  </span><span class="na">instance_type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;t3.micro&quot;</span>
+<span class="p">}</span>
+
+<span class="c1"># Map для разных конфигов</span>
+<span class="kr">variable</span><span class="w"> </span><span class="nv">&quot;instances&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">map</span><span class="p">(</span><span class="kt">object</span><span class="p">({</span>
+<span class="w">    </span><span class="na">instance_type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">string</span>
+<span class="w">    </span><span class="na">env</span><span class="w">           </span><span class="o">=</span><span class="w"> </span><span class="kt">string</span>
+<span class="w">  </span><span class="p">}))</span>
+<span class="w">  </span><span class="nb">default</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nb">web</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="na">instance_type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;t3.micro&quot;, env = &quot;prod&quot;</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="nb">db</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="na">instance_type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;t3.large&quot;, env = &quot;prod&quot;</span><span class="w"> </span><span class="p">}</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kr">resource</span><span class="w"> </span><span class="nc">&quot;aws_instance&quot;</span><span class="w"> </span><span class="nv">&quot;server&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">for_each</span><span class="w">      </span><span class="o">=</span><span class="w"> </span><span class="nv">var.instances</span>
+<span class="w">  </span><span class="na">instance_type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">each.value.instance_type</span>
+<span class="w">  </span><span class="nb">tags</span><span class="w">          </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="na">Name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">each.key</span><span class="p">,</span><span class="w"> </span><span class="na">Env</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">each.value.env</span><span class="w"> </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<h3 id="dependson">depends_on<a class="headerlink" href="#dependson" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="kr">resource</span><span class="w"> </span><span class="nc">&quot;aws_instance&quot;</span><span class="w"> </span><span class="nv">&quot;app&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="c1">  # ...</span>
+<span class="w">  </span><span class="na">depends_on</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="nv">aws_iam_role_policy.example</span><span class="p">,</span>
+<span class="w">  </span><span class="p">]</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<h3 id="lifecycle">lifecycle<a class="headerlink" href="#lifecycle" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="kr">resource</span><span class="w"> </span><span class="nc">&quot;aws_instance&quot;</span><span class="w"> </span><span class="nv">&quot;web&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="c1">  # ...</span>
+
+<span class="w">  </span><span class="nb">lifecycle</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="na">create_before_destroy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="no">true</span><span class="c1">       # сначала создать, потом удалить</span>
+<span class="w">    </span><span class="na">prevent_destroy</span><span class="w">       </span><span class="o">=</span><span class="w"> </span><span class="no">true</span><span class="c1">       # запретить удаление</span>
+<span class="w">    </span><span class="na">ignore_changes</span><span class="w">        </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="nb">tags</span><span class="p">]</span><span class="c1">     # не управлять этими полями</span>
+<span class="w">    </span><span class="na">replace_triggered_by</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="nv">aws_security_group.web.id</span><span class="p">]</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<h3 id="provisioner-не-рекомендуется">provisioner (не рекомендуется!)<a class="headerlink" href="#provisioner-не-рекомендуется" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="kr">resource</span><span class="w"> </span><span class="nc">&quot;aws_instance&quot;</span><span class="w"> </span><span class="nv">&quot;web&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="c1">  # ...</span>
+
+<span class="w">  </span><span class="kr">provisioner</span><span class="w"> </span><span class="nv">&quot;remote-exec&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="na">inline</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span>
+<span class="w">      </span><span class="s2">&quot;sudo apt update&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="s2">&quot;sudo apt install -y nginx&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="p">]</span>
+<span class="w">    </span><span class="nb">connection</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="na">host</span><span class="w">        </span><span class="o">=</span><span class="w"> </span><span class="nv">self.public_ip</span>
+<span class="w">      </span><span class="na">type</span><span class="w">        </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;ssh&quot;</span>
+<span class="w">      </span><span class="na">user</span><span class="w">        </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;ubuntu&quot;</span>
+<span class="w">      </span><span class="na">private_key</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">file</span><span class="p">(</span><span class="s2">&quot;~/.ssh/id_rsa&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="kr">provisioner</span><span class="w"> </span><span class="nv">&quot;local-exec&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="na">command</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;echo ${self.public_ip} &gt; inventory.txt&quot;</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<blockquote>
+<p>Предпочтительнее: cloud-init, Ansible, scripts в образе (Packer).</p>
+</blockquote>
+<hr />
+<h2 id="dynamic-blocks">🎛️ dynamic blocks<a class="headerlink" href="#dynamic-blocks" title="Ссылка">#</a></h2>
+<div class="highlight"><pre><span></span><code><span class="kr">resource</span><span class="w"> </span><span class="nc">&quot;aws_security_group&quot;</span><span class="w"> </span><span class="nv">&quot;web&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;web-sg&quot;</span>
+
+<span class="w">  </span><span class="err">dynamic</span><span class="w"> </span><span class="s2">&quot;ingress&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="na">for_each</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">var.ingress_rules</span>
+<span class="w">    </span><span class="nb">content</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="na">from_port</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="nv">ingress.value.port</span>
+<span class="w">      </span><span class="na">to_port</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="nv">ingress.value.port</span>
+<span class="w">      </span><span class="na">protocol</span><span class="w">    </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;tcp&quot;</span>
+<span class="w">      </span><span class="na">cidr_blocks</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">ingress.value.cidrs</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<hr />
+<h2 id="modules">📦 Modules<a class="headerlink" href="#modules" title="Ссылка">#</a></h2>
+<h3 id="использование-модуля">Использование модуля<a class="headerlink" href="#использование-модуля" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="kr">module</span><span class="w"> </span><span class="nv">&quot;vpc&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">source</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;terraform-aws-modules/vpc/aws&quot;</span>
+<span class="w">  </span><span class="na">version</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;5.0.0&quot;</span>
+
+<span class="w">  </span><span class="na">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;my-vpc&quot;</span>
+<span class="w">  </span><span class="na">cidr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;10.0.0.0/16&quot;</span>
+
+<span class="w">  </span><span class="na">azs</span><span class="w">             </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;us-east-1a&quot;, &quot;us-east-1b&quot;</span><span class="p">]</span>
+<span class="w">  </span><span class="na">public_subnets</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;10.0.1.0/24&quot;, &quot;10.0.2.0/24&quot;</span><span class="p">]</span>
+<span class="w">  </span><span class="na">private_subnets</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;10.0.101.0/24&quot;, &quot;10.0.102.0/24&quot;</span><span class="p">]</span>
+
+<span class="w">  </span><span class="na">enable_nat_gateway</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="no">true</span>
+<span class="w">  </span><span class="nb">tags</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="na">Environment</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;prod&quot;</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kr">output</span><span class="w"> </span><span class="nv">&quot;vpc_id&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">module.vpc.vpc_id</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<h3 id="свой-модуль">Свой модуль<a class="headerlink" href="#свой-модуль" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>modules/web_server/
+├── main.tf
+├── variables.tf
+└── outputs.tf
+</code></pre></div>
+
+<div class="highlight"><pre><span></span><code><span class="c1"># modules/web_server/variables.tf</span>
+<span class="kr">variable</span><span class="w"> </span><span class="nv">&quot;instance_count&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">type</span><span class="w">    </span><span class="o">=</span><span class="w"> </span><span class="kt">number</span>
+<span class="w">  </span><span class="na">default</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span>
+<span class="p">}</span>
+
+<span class="kr">variable</span><span class="w"> </span><span class="nv">&quot;instance_type&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">type</span><span class="w">    </span><span class="o">=</span><span class="w"> </span><span class="kt">string</span>
+<span class="w">  </span><span class="na">default</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;t3.micro&quot;</span>
+<span class="p">}</span>
+
+<span class="c1"># modules/web_server/main.tf</span>
+<span class="kr">resource</span><span class="w"> </span><span class="nc">&quot;aws_instance&quot;</span><span class="w"> </span><span class="nv">&quot;web&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">count</span><span class="w">         </span><span class="o">=</span><span class="w"> </span><span class="nv">var.instance_count</span>
+<span class="w">  </span><span class="na">instance_type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">var.instance_type</span>
+<span class="w">  </span><span class="na">ami</span><span class="w">           </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;ami-123&quot;</span>
+<span class="p">}</span>
+
+<span class="c1"># modules/web_server/outputs.tf</span>
+<span class="kr">output</span><span class="w"> </span><span class="nv">&quot;instance_ids&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">aws_instance.web</span><span class="p">[</span><span class="err">*</span><span class="p">].</span><span class="err">id</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<p>Использование:</p>
+<div class="highlight"><pre><span></span><code><span class="kr">module</span><span class="w"> </span><span class="nv">&quot;web_servers&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">source</span><span class="w">         </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;./modules/web_server&quot;</span>
+<span class="w">  </span><span class="na">instance_count</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">3</span>
+<span class="w">  </span><span class="na">instance_type</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;t3.small&quot;</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<hr />
+<h2 id="backend-хранение-state">💾 Backend (хранение state)<a class="headerlink" href="#backend-хранение-state" title="Ссылка">#</a></h2>
+<h3 id="локально-по-умолчанию">Локально (по умолчанию)<a class="headerlink" href="#локально-по-умолчанию" title="Ссылка">#</a></h3>
+<p>State в <code>terraform.tfstate</code> (НЕ КОММИТИТЬ В GIT!).</p>
+<h3 id="s3-backend-рекомендуется-для-команд">S3 backend (рекомендуется для команд)<a class="headerlink" href="#s3-backend-рекомендуется-для-команд" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="nb">terraform</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kr">backend</span><span class="w"> </span><span class="nv">&quot;s3&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="na">bucket</span><span class="w">         </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;my-tfstate-bucket&quot;</span>
+<span class="w">    </span><span class="na">key</span><span class="w">            </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;prod/terraform.tfstate&quot;</span>
+<span class="w">    </span><span class="na">region</span><span class="w">         </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;us-east-1&quot;</span>
+<span class="w">    </span><span class="na">dynamodb_table</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;terraform-locks&quot;</span><span class="c1">   # для блокировки</span>
+<span class="w">    </span><span class="na">encrypt</span><span class="w">        </span><span class="o">=</span><span class="w"> </span><span class="no">true</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<h3 id="другие-backend-ы">Другие backend&rsquo;ы<a class="headerlink" href="#другие-backend-ы" title="Ссылка">#</a></h3>
+<ul>
+<li><strong>S3</strong> (+ DynamoDB для lock)</li>
+<li><strong>Azure Blob</strong></li>
+<li><strong>GCS</strong></li>
+<li><strong>Consul</strong></li>
+<li><strong>HTTP</strong> (Terraform Cloud, Atlantis)</li>
+<li><strong>remote</strong> (Terraform Cloud)</li>
+</ul>
+<h3 id="чувствительные-данные-в-state">Чувствительные данные в state<a class="headerlink" href="#чувствительные-данные-в-state" title="Ссылка">#</a></h3>
+<p>State содержит ВСЕ значения, включая секреты!
+- Используйте <code>sensitive = true</code> (скрывает из plan, но не из state).
+- Backend с шифрованием (S3 SSE).
+- Ограниченный доступ к state-файлу.
+- <strong>Vault</strong> для секретов.</p>
+<hr />
+<h2 id="workspaces">🌍 Workspaces<a class="headerlink" href="#workspaces" title="Ссылка">#</a></h2>
+<div class="highlight"><pre><span></span><code>terraform<span class="w"> </span>workspace<span class="w"> </span>new<span class="w"> </span>prod
+terraform<span class="w"> </span>workspace<span class="w"> </span><span class="k">select</span><span class="w"> </span>prod
+terraform<span class="w"> </span>workspace<span class="w"> </span>list
+terraform<span class="w"> </span>workspace<span class="w"> </span>show
+terraform<span class="w"> </span>workspace<span class="w"> </span>delete<span class="w"> </span>dev
+</code></pre></div>
+
+<div class="highlight"><pre><span></span><code><span class="c1"># Использование workspace в конфиге</span>
+<span class="kr">resource</span><span class="w"> </span><span class="nc">&quot;aws_instance&quot;</span><span class="w"> </span><span class="nv">&quot;web&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nb">tags</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="na">Environment</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">terraform.workspace</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1"># Разный размер по workspace</span>
+<span class="nb">locals</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">instance_type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">terraform.workspace</span><span class="w"> </span><span class="p">==</span><span class="w"> </span><span class="s2">&quot;prod&quot; ? &quot;t3.large&quot; : &quot;t3.micro&quot;</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<blockquote>
+<p>Осторожно: workspaces = разные state в одном backend. Не всегда удобно для разных окружений.</p>
+</blockquote>
+<hr />
+<h2 id="state-management">🔧 State management<a class="headerlink" href="#state-management" title="Ссылка">#</a></h2>
+<div class="highlight"><pre><span></span><code>terraform<span class="w"> </span>state<span class="w"> </span>list<span class="w">                         </span><span class="c1"># список ресурсов</span>
+terraform<span class="w"> </span>state<span class="w"> </span>show<span class="w"> </span>aws_instance.web<span class="w">        </span><span class="c1"># детали ресурса</span>
+terraform<span class="w"> </span>state<span class="w"> </span>pull<span class="w">                         </span><span class="c1"># вывести state в JSON</span>
+terraform<span class="w"> </span>state<span class="w"> </span>mv<span class="w"> </span>old.name<span class="w"> </span>new.name<span class="w">         </span><span class="c1"># переименовать</span>
+terraform<span class="w"> </span>state<span class="w"> </span>rm<span class="w"> </span>aws_instance.old<span class="w">          </span><span class="c1"># удалить из state (НЕ ресурс)</span>
+terraform<span class="w"> </span>state<span class="w"> </span>replace-provider<span class="w"> </span>hashicorp/aws<span class="w"> </span>hashicorp/awsnew
+terraform<span class="w"> </span>import<span class="w"> </span>aws_instance.web<span class="w"> </span>i-12345<span class="w">    </span><span class="c1"># импортировать существующее</span>
+terraform<span class="w"> </span>refresh<span class="w">                            </span><span class="c1"># обновить state</span>
+terraform<span class="w"> </span>taint<span class="w"> </span>aws_instance.web<span class="w">             </span><span class="c1"># пометить для пересоздания</span>
+terraform<span class="w"> </span>untaint<span class="w"> </span>aws_instance.web
+</code></pre></div>
+
+<h3 id="import-для-существующей-инфры">import (для существующей инфры)<a class="headerlink" href="#import-для-существующей-инфры" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>terraform<span class="w"> </span>import<span class="w"> </span>aws_s3_bucket.mybucket<span class="w"> </span>my-bucket-name
+terraform<span class="w"> </span>import<span class="w"> </span>aws_instance.web<span class="w"> </span>i-0123456789abcdef
+</code></pre></div>
+
+<p>Затем нужно описать ресурс вручную в <code>.tf</code>, чтобы state совпал с кодом.</p>
+<hr />
+<h2 id="управление-переменными">📋 Управление переменными<a class="headerlink" href="#управление-переменными" title="Ссылка">#</a></h2>
+<div class="highlight"><pre><span></span><code><span class="c1"># Через CLI</span>
+terraform<span class="w"> </span>apply<span class="w"> </span>-var<span class="o">=</span><span class="s2">&quot;region=eu-west-1&quot;</span>
+terraform<span class="w"> </span>apply<span class="w"> </span>-var-file<span class="o">=</span><span class="s2">&quot;prod.tfvars&quot;</span>
+terraform<span class="w"> </span>apply<span class="w"> </span>-var<span class="o">=</span><span class="s2">&quot;instance_count=3&quot;</span>
+
+<span class="c1"># Из env-переменных (TF_VAR_&lt;name&gt;)</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">TF_VAR_db_password</span><span class="o">=</span><span class="s2">&quot;secret&quot;</span>
+terraform<span class="w"> </span>apply
+
+<span class="c1"># auto.tfvars — автоматически подхватывается</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;region = &quot;eu-west-1&quot;&#39;</span><span class="w"> </span>&gt;<span class="w"> </span>prod.auto.tfvars
+
+<span class="c1"># Секреты — через vault, ssm, секреты</span>
+data<span class="w"> </span><span class="s2">&quot;aws_ssm_parameter&quot;</span><span class="w"> </span><span class="s2">&quot;db_password&quot;</span><span class="w"> </span><span class="o">{</span>
+<span class="w">  </span><span class="nv">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;/myapp/db/password&quot;</span>
+<span class="o">}</span>
+</code></pre></div>
+
+<hr />
+<h2 id="провайдеры-популярные">🛠️ Провайдеры (популярные)<a class="headerlink" href="#провайдеры-популярные" title="Ссылка">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Provider</th>
+<th>Что</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>aws</strong></td>
+<td>Amazon Web Services</td>
+</tr>
+<tr>
+<td><strong>azurerm</strong></td>
+<td>Microsoft Azure</td>
+</tr>
+<tr>
+<td><strong>google</strong></td>
+<td>Google Cloud</td>
+</tr>
+<tr>
+<td><strong>kubernetes</strong></td>
+<td>K8s</td>
+</tr>
+<tr>
+<td><strong>helm</strong></td>
+<td>Helm charts</td>
+</tr>
+<tr>
+<td><strong>docker</strong></td>
+<td>Docker</td>
+</tr>
+<tr>
+<td><strong>github</strong></td>
+<td>GitHub</td>
+</tr>
+<tr>
+<td><strong>gitlab</strong></td>
+<td>GitLab</td>
+</tr>
+<tr>
+<td><strong>null</strong></td>
+<td>Локальные команды</td>
+</tr>
+<tr>
+<td><strong>random</strong></td>
+<td>Случайные значения</td>
+</tr>
+<tr>
+<td><strong>local</strong></td>
+<td>Локальные файлы</td>
+</tr>
+<tr>
+<td><strong>tls</strong></td>
+<td>Сертификаты</td>
+</tr>
+<tr>
+<td><strong>vault</strong></td>
+<td>HashiCorp Vault</td>
+</tr>
+<tr>
+<td><strong>consul</strong></td>
+<td>HashiCorp Consul</td>
+</tr>
+<tr>
+<td><strong>datadog</strong></td>
+<td>Datadog</td>
+</tr>
+<tr>
+<td><strong>pagerduty</strong></td>
+<td>PagerDuty</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="полный-пример-vpc-ec2-rds">🚀 Полный пример: VPC + EC2 + RDS<a class="headerlink" href="#полный-пример-vpc-ec2-rds" title="Ссылка">#</a></h2>
+<div class="highlight"><pre><span></span><code><span class="c1"># main.tf</span>
+<span class="kr">resource</span><span class="w"> </span><span class="nc">&quot;aws_vpc&quot;</span><span class="w"> </span><span class="nv">&quot;main&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">cidr_block</span><span class="w">           </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;10.0.0.0/16&quot;</span>
+<span class="w">  </span><span class="na">enable_dns_hostnames</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="no">true</span>
+<span class="p">}</span>
+
+<span class="kr">resource</span><span class="w"> </span><span class="nc">&quot;aws_subnet&quot;</span><span class="w"> </span><span class="nv">&quot;public&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">vpc_id</span><span class="w">                  </span><span class="o">=</span><span class="w"> </span><span class="nv">aws_vpc.main.id</span>
+<span class="w">  </span><span class="na">cidr_block</span><span class="w">              </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;10.0.1.0/24&quot;</span>
+<span class="w">  </span><span class="na">map_public_ip_on_launch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="no">true</span>
+<span class="p">}</span>
+
+<span class="kr">resource</span><span class="w"> </span><span class="nc">&quot;aws_internet_gateway&quot;</span><span class="w"> </span><span class="nv">&quot;igw&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">vpc_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">aws_vpc.main.id</span>
+<span class="p">}</span>
+
+<span class="kr">resource</span><span class="w"> </span><span class="nc">&quot;aws_security_group&quot;</span><span class="w"> </span><span class="nv">&quot;web&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">name</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;web-sg&quot;</span>
+<span class="w">  </span><span class="na">vpc_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">aws_vpc.main.id</span>
+<span class="w">  </span><span class="nb">ingress</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="na">from_port</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="m">80</span>
+<span class="w">    </span><span class="na">to_port</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="m">80</span>
+<span class="w">    </span><span class="na">protocol</span><span class="w">    </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;tcp&quot;</span>
+<span class="w">    </span><span class="na">cidr_blocks</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;0.0.0.0/0&quot;</span><span class="p">]</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="w">  </span><span class="nb">egress</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="na">from_port</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="m">0</span>
+<span class="w">    </span><span class="na">to_port</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="m">0</span>
+<span class="w">    </span><span class="na">protocol</span><span class="w">    </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;-1&quot;</span>
+<span class="w">    </span><span class="na">cidr_blocks</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;0.0.0.0/0&quot;</span><span class="p">]</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kr">resource</span><span class="w"> </span><span class="nc">&quot;aws_instance&quot;</span><span class="w"> </span><span class="nv">&quot;web&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">ami</span><span class="w">                    </span><span class="o">=</span><span class="w"> </span><span class="nv">data.aws_ami.ubuntu.id</span>
+<span class="w">  </span><span class="na">instance_type</span><span class="w">          </span><span class="o">=</span><span class="w"> </span><span class="nv">var.instance_type</span>
+<span class="w">  </span><span class="na">subnet_id</span><span class="w">              </span><span class="o">=</span><span class="w"> </span><span class="nv">aws_subnet.public.id</span>
+<span class="w">  </span><span class="na">vpc_security_group_ids</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="nv">aws_security_group.web.id</span><span class="p">]</span>
+<span class="w">  </span><span class="na">user_data</span><span class="w">              </span><span class="o">=</span><span class="w"> </span><span class="nf">file</span><span class="p">(</span><span class="s2">&quot;user_data.sh&quot;</span><span class="p">)</span>
+<span class="w">  </span><span class="nb">tags</span><span class="w">                   </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="na">Name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;web-server&quot;</span><span class="w"> </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kr">resource</span><span class="w"> </span><span class="nc">&quot;aws_db_instance&quot;</span><span class="w"> </span><span class="nv">&quot;main&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">allocated_storage</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="m">20</span>
+<span class="w">  </span><span class="na">engine</span><span class="w">              </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;postgres&quot;</span>
+<span class="w">  </span><span class="na">engine_version</span><span class="w">      </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;16&quot;</span>
+<span class="w">  </span><span class="na">instance_class</span><span class="w">      </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;db.t3.micro&quot;</span>
+<span class="w">  </span><span class="na">name</span><span class="w">                </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;mydb&quot;</span>
+<span class="w">  </span><span class="na">username</span><span class="w">            </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;postgres&quot;</span>
+<span class="w">  </span><span class="na">password</span><span class="w">            </span><span class="o">=</span><span class="w"> </span><span class="nv">var.db_password</span>
+<span class="w">  </span><span class="na">skip_final_snapshot</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="no">true</span>
+<span class="p">}</span>
+
+<span class="kr">data</span><span class="w"> </span><span class="nc">&quot;aws_ami&quot;</span><span class="w"> </span><span class="nv">&quot;ubuntu&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">most_recent</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="no">true</span>
+<span class="w">  </span><span class="na">owners</span><span class="w">      </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;099720109477&quot;</span><span class="p">]</span>
+<span class="w">  </span><span class="nb">filter</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="na">name</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;name&quot;</span>
+<span class="w">    </span><span class="na">values</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;ubuntu/images/hvm-ssd/ubuntu-focal-20.04-amd64-server-*&quot;</span><span class="p">]</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<hr />
+<h2 id="частые-ошибки">🪤 Частые ошибки<a class="headerlink" href="#частые-ошибки" title="Ссылка">#</a></h2>
+<ol>
+<li><strong>State в git</strong> — утечка секретов, конфликты. Используйте backend.</li>
+<li><strong><code>terraform apply -auto-approve</code> в CI</strong> — без review, опасно.</li>
+<li><strong>Manual changes</strong> — ручные правки ломают state.</li>
+<li><strong><code>force-unlock</code> без причины</strong> — race condition.</li>
+<li><strong>Большие monolithic state</strong> — медленно, конфликты.</li>
+<li><strong>Провайдер не закреплён</strong> в <code>required_providers</code> — ломается совместимость.</li>
+<li><strong><code>count</code> и <code>for_each</code> на пустых коллекциях</strong> — ресурс не создаётся.</li>
+<li><strong><code>depends_on</code> для ресурсов</strong> — чаще всего не нужен (Terraform сам строит граф).</li>
+<li><strong>provisioner для конфигурации</strong> — используйте cloud-init / Ansible.</li>
+<li><strong><code>terraform destroy</code> без plan</strong> — удаляет ВСЁ.</li>
+</ol>
+<hr />
+<h2 id="terraform-vs-alternatives">🆚 Terraform vs Alternatives<a class="headerlink" href="#terraform-vs-alternatives" title="Ссылка">#</a></h2>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Terraform</th>
+<th>Pulumi</th>
+<th>CloudFormation</th>
+<th>Ansible</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Язык</td>
+<td>HCL</td>
+<td>TS/Python/Go</td>
+<td>JSON/YAML</td>
+<td>YAML</td>
+</tr>
+<tr>
+<td>Подход</td>
+<td>Декларативный</td>
+<td>Декларативный</td>
+<td>Декларативный</td>
+<td>Процедурный</td>
+</tr>
+<tr>
+<td>Мульти-cloud</td>
+<td>✅</td>
+<td>✅</td>
+<td>Только AWS</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>State</td>
+<td>Свой</td>
+<td>Свой</td>
+<td>AWS-managed</td>
+<td>Без state</td>
+</tr>
+<tr>
+<td>Open-source</td>
+<td>✅ (с 2023 — BSL)</td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="полезные-ссылки">🔗 Полезные ссылки<a class="headerlink" href="#полезные-ссылки" title="Ссылка">#</a></h2>
+<ul>
+<li>Документация: https://developer.hashicorp.com/terraform</li>
+<li>Learn: https://developer.hashicorp.com/terraform/tutorials</li>
+<li>Registry (провайдеры/модули): https://registry.terraform.io</li>
+<li>Best Practices: https://www.terraform-best-practices.com</li>
+<li>Awesome Terraform: https://github.com/shuaibiyy/awesome-terraform</li>
+<li>Terraform AWS modules: https://github.com/terraform-aws-modules</li>
+<li>tfsec (security scanner): https://github.com/aquasecurity/tfsec</li>
+<li>tflint: https://github.com/terraform-linters/tflint</li>
+<li>Terragrunt (DRY): https://terragrunt.gruntwork.io</li>
+<li>Atlantis (PR automation): https://www.runatlantis.io</li>
+</ul>
+<hr />
+<h2 id="полезные-советы">💡 Полезные советы<a class="headerlink" href="#полезные-советы" title="Ссылка">#</a></h2>
+<ol>
+<li><strong><code>terraform fmt</code> + <code>terraform validate</code></strong> — перед коммитом.</li>
+<li><strong><code>terraform plan</code></strong> — ВСЕГДА смотрите перед apply.</li>
+<li><strong>State в backend</strong> (S3+DynamoDB), НЕ в git.</li>
+<li><strong>Modules</strong> — для переиспользования и стандартов.</li>
+<li><strong>variables.tf + tfvars</strong> — для разных окружений.</li>
+<li><strong><code>required_version</code> + <code>required_providers</code></strong> — фиксируйте версии.</li>
+<li><strong><code>data</code> sources</strong> — для чтения существующих ресурсов.</li>
+<li><strong><code>for_each</code> вместо <code>count</code></strong> — если элементы не числовые.</li>
+<li><strong><code>locals</code></strong> — для вычисляемых значений.</li>
+<li><strong><code>lifecycle.prevent_destroy</code></strong> — для критичных ресурсов.</li>
+<li><strong>Terragrunt</strong> — для DRY (один конфиг, разные окружения).</li>
+<li><strong>Atlantis / Terraform Cloud</strong> — для PR-based деплоя.</li>
+<li><strong>tfsec / tflint / checkov</strong> — статический анализ.</li>
+<li><strong><code>terraform import</code></strong> — для существующей инфры.</li>
+<li><strong>State isolation</strong> — отдельный state на окружение/команду.</li>
+</ol>
+<hr />
+<p><em>Сгенерировано как шпаргалка. Terraform — стандарт IaC —
+углубляйтесь через https://developer.hashicorp.com/terraform</em></p>
+    </article>
+    <nav class="pagination">
+      <a class="pager prev" href="impala.html">← Apache Impala</a>
+      <a class="pager next" href="linux-internals.html">Linux Internals →</a>
+    </nav>
+  </main>
+
+  <aside class="toc">
+    <details open>
+      <summary>📑 Оглавление</summary>
+      <div class="toc-list">
+<div class="toc">
+<ul>
+<li><a href="#terraform-шпаргалка-по-infrastructure-as-code">🏗️ Terraform — шпаргалка по Infrastructure as Code</a><ul>
+<li><a href="#главные-понятия">🔑 Главные понятия</a></li>
+<li><a href="#базовый-цикл">🚀 Базовый цикл</a><ul>
+<li><a href="#установка">Установка</a></li>
+</ul>
+</li>
+<li><a href="#структура-проекта">📝 Структура проекта</a><ul>
+<li><a href="#минимальный-пример">Минимальный пример</a></li>
+</ul>
+</li>
+<li><a href="#синтаксис-hcl">🔤 Синтаксис HCL</a><ul>
+<li><a href="#блоки">Блоки</a></li>
+<li><a href="#переменные-variables-tf">Переменные (variables.tf)</a></li>
+<li><a href="#использование-переменных">Использование переменных</a></li>
+<li><a href="#terraform-tfvars">terraform.tfvars</a></li>
+<li><a href="#outputs">Outputs</a></li>
+<li><a href="#locals">Locals</a></li>
+</ul>
+</li>
+<li><a href="#resource-и-data-source">🔄 Resource и Data source</a><ul>
+<li><a href="#resource-создать">Resource (создать)</a></li>
+<li><a href="#data-source-прочитать-существующее">Data source (прочитать существующее)</a></li>
+<li><a href="#ссылки-между-ресурсами">Ссылки между ресурсами</a></li>
+</ul>
+</li>
+<li><a href="#meta-аргументы">🔁 Meta-аргументы</a><ul>
+<li><a href="#count">count</a></li>
+<li><a href="#foreach">for_each</a></li>
+<li><a href="#dependson">depends_on</a></li>
+<li><a href="#lifecycle">lifecycle</a></li>
+<li><a href="#provisioner-не-рекомендуется">provisioner (не рекомендуется!)</a></li>
+</ul>
+</li>
+<li><a href="#dynamic-blocks">🎛️ dynamic blocks</a></li>
+<li><a href="#modules">📦 Modules</a><ul>
+<li><a href="#использование-модуля">Использование модуля</a></li>
+<li><a href="#свой-модуль">Свой модуль</a></li>
+</ul>
+</li>
+<li><a href="#backend-хранение-state">💾 Backend (хранение state)</a><ul>
+<li><a href="#локально-по-умолчанию">Локально (по умолчанию)</a></li>
+<li><a href="#s3-backend-рекомендуется-для-команд">S3 backend (рекомендуется для команд)</a></li>
+<li><a href="#другие-backend-ы">Другие backend&rsquo;ы</a></li>
+<li><a href="#чувствительные-данные-в-state">Чувствительные данные в state</a></li>
+</ul>
+</li>
+<li><a href="#workspaces">🌍 Workspaces</a></li>
+<li><a href="#state-management">🔧 State management</a><ul>
+<li><a href="#import-для-существующей-инфры">import (для существующей инфры)</a></li>
+</ul>
+</li>
+<li><a href="#управление-переменными">📋 Управление переменными</a></li>
+<li><a href="#провайдеры-популярные">🛠️ Провайдеры (популярные)</a></li>
+<li><a href="#полный-пример-vpc-ec2-rds">🚀 Полный пример: VPC + EC2 + RDS</a></li>
+<li><a href="#частые-ошибки">🪤 Частые ошибки</a></li>
+<li><a href="#terraform-vs-alternatives">🆚 Terraform vs Alternatives</a></li>
+<li><a href="#полезные-ссылки">🔗 Полезные ссылки</a></li>
+<li><a href="#полезные-советы">💡 Полезные советы</a></li>
+</ul>
+</li>
+</ul>
+</div>
+
+      </div>
+    </details>
+  </aside>
+</div>
+
+<button class="back-top" id="backTop" aria-label="Наверх">↑</button>
+
+<script src="assets/search.js"></script>
+<script src="assets/page.js"></script>
+</body>
+</html>

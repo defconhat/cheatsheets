@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Агентная разработка с ИИ — Шпаргалки</title>
+<link rel="stylesheet" href="assets/style.css">
+<link rel="stylesheet" href="assets/pygments.css">
+</head>
+<body>
+<div class="layout">
+  <aside class="sidebar">
+    <a href="index.html" class="brand">📌 Шпаргалки</a>
+    <nav class="nav">
+<a href="yazi.html" class="nav-item"><span class="nav-ico">📦</span>Yazi</a>
+<a href="neovim.html" class="nav-item"><span class="nav-ico">📘</span>Neovim (LazyVim)</a>
+<a href="niri.html" class="nav-item"><span class="nav-ico">🪟</span>Niri</a>
+<a href="tmux.html" class="nav-item"><span class="nav-ico">🪟</span>Tmux</a>
+<a href="bash.html" class="nav-item"><span class="nav-ico">🐚</span>Bash</a>
+<a href="git.html" class="nav-item"><span class="nav-ico">🔀</span>Git</a>
+<a href="terminal.html" class="nav-item"><span class="nav-ico">🖥️</span>Терминал Linux</a>
+<a href="powershell.html" class="nav-item"><span class="nav-ico">💻</span>PowerShell</a>
+<a href="cmd.html" class="nav-item"><span class="nav-ico">🪟</span>CMD (cmd.exe)</a>
+<a href="python.html" class="nav-item"><span class="nav-ico">🐍</span>Python</a>
+<a href="systemd.html" class="nav-item"><span class="nav-ico">⚙️</span>systemd</a>
+<a href="ssh.html" class="nav-item"><span class="nav-ico">🔐</span>SSH</a>
+<a href="make-cmake.html" class="nav-item"><span class="nav-ico">🔨</span>Make / CMake</a>
+<a href="docker.html" class="nav-item"><span class="nav-ico">🐳</span>Docker</a>
+<a href="pacman.html" class="nav-item"><span class="nav-ico">📦</span>pacman / yay / paru</a>
+<a href="spark.html" class="nav-item"><span class="nav-ico">⚡</span>Apache Spark / PySpark</a>
+<a href="markdown.html" class="nav-item"><span class="nav-ico">📝</span>Markdown</a>
+<a href="regex.html" class="nav-item"><span class="nav-ico">🔍</span>Регулярные выражения</a>
+<a href="jq-json.html" class="nav-item"><span class="nav-ico">🔧</span>jq + JSON</a>
+<a href="awk-sed.html" class="nav-item"><span class="nav-ico">✂️</span>awk / sed</a>
+<a href="airflow.html" class="nav-item"><span class="nav-ico">🌪️</span>Apache Airflow</a>
+<a href="http-curl.html" class="nav-item"><span class="nav-ico">🌐</span>HTTP / curl</a>
+<a href="yaml.html" class="nav-item"><span class="nav-ico">📄</span>YAML</a>
+<a href="vscode.html" class="nav-item"><span class="nav-ico">💻</span>VS Code</a>
+<a href="cron.html" class="nav-item"><span class="nav-ico">⏰</span>cron</a>
+<a href="fzf-zoxide.html" class="nav-item"><span class="nav-ico">🔎</span>fzf + zoxide</a>
+<a href="minikube-k8s.html" class="nav-item"><span class="nav-ico">☸️</span>Minikube / Kubernetes</a>
+<a href="cicd.html" class="nav-item"><span class="nav-ico">🦊</span>GitLab CI / GitHub Actions</a>
+<a href="nginx.html" class="nav-item"><span class="nav-ico">🌐</span>nginx</a>
+<a href="dbt.html" class="nav-item"><span class="nav-ico">🔧</span>dbt</a>
+<a href="kafka.html" class="nav-item"><span class="nav-ico">🐘</span>Apache Kafka</a>
+<a href="prometheus-grafana.html" class="nav-item"><span class="nav-ico">📊</span>Prometheus / Grafana</a>
+<a href="iceberg-nessie.html" class="nav-item"><span class="nav-ico">🧊</span>Iceberg / Nessie</a>
+<a href="impala.html" class="nav-item"><span class="nav-ico">🐬</span>Apache Impala</a>
+<a href="terraform.html" class="nav-item"><span class="nav-ico">🏗️</span>Terraform</a>
+<a href="linux-internals.html" class="nav-item"><span class="nav-ico">🐧</span>Linux Internals</a>
+<a href="miscellaneous.html" class="nav-item"><span class="nav-ico">🧰</span>Miscellaneous</a>
+<a href="python-automation-libs.html" class="nav-item"><span class="nav-ico">🐍</span>Python: авт-ция (10 libs)</a>
+<a href="eza.html" class="nav-item"><span class="nav-ico">🌈</span>eza</a>
+<a href="dbeaver.html" class="nav-item"><span class="nav-ico">🗄️</span>DBeaver</a>
+<a href="zcode.html" class="nav-item"><span class="nav-ico">🤖</span>ZCode</a>
+<a href="warp.html" class="nav-item"><span class="nav-ico">🚀</span>Warp</a>
+<a href="agentic-ai-dev.html" class="nav-item active"><span class="nav-ico">🤝</span>Агентная разработка с ИИ</a>
+    </nav>
+  </aside>
+
+  <main class="content">
+    <article>
+<h1 id="агентная-разработка-с-ии-шпаргалка">🤝 Агентная разработка с ИИ — шпаргалка<a class="headerlink" href="#агентная-разработка-с-ии-шпаргалка" title="Ссылка">#</a></h1>
+<blockquote>
+<p><strong>Agentic AI dev</strong> — подход, при котором ИИ-агент (Claude Code, ZCode, Codex, Cursor, Devin) автономно или полу-автономно пишет, рефакторит и тестирует код через инструменты (Read/Write/Edit/Bash/Agent/…).
+Это НЕ чат-бот: агент работает в реальном репозитории, видит файлы и выполняет команды.</p>
+</blockquote>
+<hr />
+<h2 id="ментальная-модель">🧭 Ментальная модель<a class="headerlink" href="#ментальная-модель" title="Ссылка">#</a></h2>
+<div class="highlight"><pre><span></span><code>┌──────────────────────────────────────────────────┐
+│  Ты (человек) — постановщик задач и ревьюер       │
+│                       │                          │
+│                       ▼                          │
+│    ┌─────────────────────────────────────┐        │
+│    │  ИИ-агент (ZCode / Claude Code)     │        │
+│    │  — LLM + контекст + инструменты      │        │
+│    └──────┬──────────────────────────────┘        │
+│           │                                       │
+│      ┌────┴─────┬─────────┬──────────┐            │
+│      ▼          ▼         ▼          ▼            │
+│   Read/Write  Edit     Bash      Agent(субагент)  │
+│   (файлы)    (правки)  (shell)   (подзадача)      │
+│      │          │         │          │            │
+│      ▼          ▼         ▼          ▼            │
+│                  РЕПОЗИТОРИЙ + тесты + CI          │
+└──────────────────────────────────────────────────┘
+</code></pre></div>
+
+<p><strong>Человек</strong>: пишет ТЗ, ревьюит, направляет.
+<strong>Агент</strong>: исследует код, планирует, пишет, тестирует, итерирует.</p>
+<hr />
+<h2 id="анатомия-хорошего-промпта-задачи-агенту">🧩 Анатомия хорошего промпта (задачи агенту)<a class="headerlink" href="#анатомия-хорошего-промпта-задачи-агенту" title="Ссылка">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Часть</th>
+<th>Что</th>
+<th>Пример</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Цель</strong></td>
+<td>Что сделать, зачем</td>
+<td>«Добавить экспорт пользователей в CSV»</td>
+</tr>
+<tr>
+<td><strong>Контекст</strong></td>
+<td>Где, какие файлы</td>
+<td>«В <code>src/api/users.py</code>, использовать существующий <code>User</code> model»</td>
+</tr>
+<tr>
+<td><strong>Ограничения</strong></td>
+<td>Чего НЕ делать</td>
+<td>«Не трогать auth, не добавлять новые зависимости»</td>
+</tr>
+<tr>
+<td><strong>Критерий успеха</strong></td>
+<td>Как проверить</td>
+<td>«<code>pytest tests/test_users.py</code> проходит, эндпойнт <code>/export</code> отдаёт CSV»</td>
+</tr>
+<tr>
+<td><strong>Стиль</strong></td>
+<td>Конвенции</td>
+<td>«PEP8, тайпинги, docstrings на русском»</td>
+</tr>
+</tbody>
+</table>
+<h3 id="плохой-промпт">Плохой промпт ❌<a class="headerlink" href="#плохой-промпт" title="Ссылка">#</a></h3>
+<blockquote>
+<p>«сделай красиво»</p>
+</blockquote>
+<h3 id="хороший-промпт">Хороший промпт ✅<a class="headerlink" href="#хороший-промпт" title="Ссылка">#</a></h3>
+<blockquote>
+<p>«В проекте <code>myapi</code> (FastAPI, см. <code>src/api/</code>) добавь эндпойнт <code>GET /users/export.csv</code>. Должен отдавать CSV со всеми пользователями (<code>User</code> model из <code>src/models.py</code>). Колонки: id, email, created_at. Покрыть тестом в <code>tests/test_users_export.py</code>. Не менять auth-слой. Запусти <code>pytest</code> и убедись, что всё зелёное.»</p>
+</blockquote>
+<hr />
+<h2 id="цикл-работы-с-агентом">🔄 Цикл работы с агентом<a class="headerlink" href="#цикл-работы-с-агентом" title="Ссылка">#</a></h2>
+<div class="highlight"><pre><span></span><code>1. Описание задачи (ты)
+        │
+2. Агент исследует код (Read, Grep, Glob)
+        │
+3. Агент планирует (Plan Mode / ExitPlanMode)
+        │
+4. Ты одобряешь план (или корректируешь)
+        │
+5. Агент реализует (Write, Edit, Bash)
+        │
+6. Агент проверяет (тесты, линтер, сборка)
+        │
+7. Ты ревьюишь diff
+        │
+8. Итерация (если нужно) → шаг 5
+        │
+9. Коммит / PR
+</code></pre></div>
+
+<hr />
+<h2 id="инструменты-агента-как-ими-пользоваться">🛠️ Инструменты агента (как ими пользоваться)<a class="headerlink" href="#инструменты-агента-как-ими-пользоваться" title="Ссылка">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Инструмент</th>
+<th>Когда просить/ожидать</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Read</strong></td>
+<td>Чтение файла перед изменением</td>
+</tr>
+<tr>
+<td><strong>Grep / Glob</strong></td>
+<td>Поиск по кодовой базе</td>
+</tr>
+<tr>
+<td><strong>Edit</strong></td>
+<td>Точечная правка существующего файла</td>
+</tr>
+<tr>
+<td><strong>Write</strong></td>
+<td>Создание нового файла</td>
+</tr>
+<tr>
+<td><strong>Bash</strong></td>
+<td>Запуск тестов, миграций, сборки</td>
+</tr>
+<tr>
+<td><strong>Agent (субагент)</strong></td>
+<td>Делегирование подзадачи (например, «найди все места вызова X»)</td>
+</tr>
+<tr>
+<td><strong>WebSearch / WebFetch</strong></td>
+<td>Поиск в доках библиотеки</td>
+</tr>
+<tr>
+<td><strong>TodoWrite</strong></td>
+<td>Ведение чек-листа сложной задачи</td>
+</tr>
+</tbody>
+</table>
+<h3 id="подсказки-агенту">Подсказки агенту<a class="headerlink" href="#подсказки-агенту" title="Ссылка">#</a></h3>
+<ul>
+<li>«Сначала изучи код, потом предложи план».</li>
+<li>«Используй субагента для поиска всех вызовов этой функции».</li>
+<li>«Не предполагай — прочитай файл перед изменением».</li>
+</ul>
+<hr />
+<h2 id="паттерны-задач-для-агентов">📋 Паттерны задач для агентов<a class="headerlink" href="#паттерны-задач-для-агентов" title="Ссылка">#</a></h2>
+<h3 id="1-feature-новая-функциональность">1. Feature (новая функциональность)<a class="headerlink" href="#1-feature-новая-функциональность" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>Добавь &lt;фичу&gt; в &lt;модуль&gt;.
+Контекст: &lt;как устроено сейчас&gt;.
+Успех: &lt;как проверить&gt;.
+</code></pre></div>
+
+<h3 id="2-bugfix">2. Bugfix<a class="headerlink" href="#2-bugfix" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>Воспроизведи: &lt;шаги&gt;.
+Ожидание: &lt;что должно быть&gt;.
+Реальность: &lt;что происходит&gt;.
+Найди root cause и пофикси. Добавь регрессионный тест.
+</code></pre></div>
+
+<h3 id="3-рефакторинг">3. Рефакторинг<a class="headerlink" href="#3-рефакторинг" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>Вынеси &lt;дублирование&gt; в &lt;общую функцию&gt;.
+Не меняй поведение — все существующие тесты должны оставаться зелёными.
+</code></pre></div>
+
+<h3 id="4-тесты">4. Тесты<a class="headerlink" href="#4-тесты" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>Покрой тестами &lt;модуль&gt;.
+Используй pytest, fixtures из conftest.py.
+Цель — покрыть happy path + 2-3 граничных случая.
+</code></pre></div>
+
+<h3 id="5-документация">5. Документация<a class="headerlink" href="#5-документация" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>Обнови README после последних изменений.
+Допиши docstrings к публичным функциям в &lt;файле&gt;.
+</code></pre></div>
+
+<h3 id="6-миграция-перевод">6. Миграция / перевод<a class="headerlink" href="#6-миграция-перевод" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>Переведи &lt;модуль&gt; с &lt;старая либа&gt; на &lt;новая&gt;.
+Сохрани API. Покрой миграцию тестом.
+</code></pre></div>
+
+<h3 id="7-code-review">7. Code review<a class="headerlink" href="#7-code-review" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>Просмотри diff в ветке feature/X.
+Найди: баги, race conditions, утечки, нарушение конвенций.
+Предложи фиксы, но не применяй.
+</code></pre></div>
+
+<hr />
+<h2 id="управление-контекстом">🧠 Управление контекстом<a class="headerlink" href="#управление-контекстом" title="Ссылка">#</a></h2>
+<p>Контекст агента ограничен (от 100k до 1M токенов). Переполнение = деградация.</p>
+<h3 id="правила">Правила<a class="headerlink" href="#правила" title="Ссылка">#</a></h3>
+<table>
+<thead>
+<tr>
+<th>Приём</th>
+<th>Зачем</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Точечные промпты</strong></td>
+<td>Не «перепиши весь проект», а «исправь функцию X»</td>
+</tr>
+<tr>
+<td><strong>Plan Mode</strong></td>
+<td>План экономит токены — не даёт агенту уйти не туда</td>
+</tr>
+<tr>
+<td><strong>Субагенты (Agent tool)</strong></td>
+<td>Делегируют подзадачи — их контекст не засоряет основной</td>
+</tr>
+<tr>
+<td><strong><code>/compact</code></strong></td>
+<td>Сжатие длинной сессии в summary</td>
+</tr>
+<tr>
+<td><strong><code>/clear</code></strong></td>
+<td>Полный сброс при смене задачи</td>
+</tr>
+<tr>
+<td><strong>AGENTS.md / CLAUDE.md</strong></td>
+<td>Постоянные правила — не повторять каждый раз</td>
+</tr>
+<tr>
+<td><strong>Маленькие коммиты</strong></td>
+<td>Каждый коммит = атомарная задача → легче откатить</td>
+</tr>
+</tbody>
+</table>
+<h3 id="симптомы-переполнения-контекста">Симптомы переполнения контекста<a class="headerlink" href="#симптомы-переполнения-контекста" title="Ссылка">#</a></h3>
+<ul>
+<li>Агент «забывает» ранние инструкции.</li>
+<li>Повторяет уже сделанные шаги.</li>
+<li>Начинает галлюцинировать имена файлов/функций.
+→ <code>/compact</code> или <code>/clear</code> + краткий recap.</li>
+</ul>
+<hr />
+<h2 id="план-мод-plan-mode">📐 План-мод (Plan Mode)<a class="headerlink" href="#план-мод-plan-mode" title="Ссылка">#</a></h2>
+<p>Перед сложной задачей — проси план:</p>
+<div class="highlight"><pre><span></span><code>Изучи кодовую базу и предложи план рефакторинга X.
+Пока не делай изменений — только план.
+</code></pre></div>
+
+<p>Агент использует <strong>EnterPlanMode / ExitPlanMode</strong>: исследует, формирует план, показывает тебе, ты одобряешь → только потом правит.</p>
+<p><strong>Плюсы:</strong>
+- Экономит токены (нет «пробных» правок).
+- Ты видишь направление до того, как код изменён.
+- Легко скорректировать подход.</p>
+<hr />
+<h2 id="agents-md-claude-md-инструкции-проекта">🗂️ AGENTS.md / CLAUDE.md — инструкции проекта<a class="headerlink" href="#agents-md-claude-md-инструкции-проекта" title="Ссылка">#</a></h2>
+<p>Файл с правилами, который агент читает в каждой сессии.</p>
+<h3 id="структура-рекомендация">Структура (рекомендация)<a class="headerlink" href="#структура-рекомендация" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="gh"># Project: myapi</span>
+
+<span class="gu">## Стек</span>
+<span class="k">-</span><span class="w"> </span>Python 3.12, FastAPI, SQLAlchemy 2.0, pytest.
+<span class="k">-</span><span class="w"> </span>БД: PostgreSQL 16.
+<span class="k">-</span><span class="w"> </span>Деплой: Docker + GitHub Actions.
+
+<span class="gu">## Конвенции</span>
+<span class="k">-</span><span class="w"> </span>PEP8, type hints обязательны.
+<span class="k">-</span><span class="w"> </span>Имена функций: snake_case.
+<span class="k">-</span><span class="w"> </span>Имена классов: PascalCase.
+<span class="k">-</span><span class="w"> </span>Коммиты: conventional commits (feat:, fix:, refactor:…).
+
+<span class="gu">## Архитектура</span>
+<span class="k">-</span><span class="w"> </span>Слои: api → service → repository.
+<span class="k">-</span><span class="w"> </span>Не обращаться к БД из api-слоя.
+<span class="k">-</span><span class="w"> </span>Все SQL — через SQLAlchemy, без сырого SQL.
+
+<span class="gu">## Тесты</span>
+<span class="k">-</span><span class="w"> </span>pytest tests/ перед PR.
+<span class="k">-</span><span class="w"> </span>Покрытие новых функций ≥ 80%.
+
+<span class="gu">## Не делать</span>
+<span class="k">-</span><span class="w"> </span>Не добавлять зависимости без обсуждения.
+<span class="k">-</span><span class="w"> </span>Не менять схему БД без миграции Alembic.
+<span class="k">-</span><span class="w"> </span>Не коммитить .env и секреты.
+</code></pre></div>
+
+<h3 id="скоупы-для-zcode">Скоупы (для ZCode)<a class="headerlink" href="#скоупы-для-zcode" title="Ссылка">#</a></h3>
+<ul>
+<li><strong><code>~/.zcode/AGENTS.md</code></strong> — личные дефолты (язык, стиль).</li>
+<li><strong><code>&lt;repo&gt;/AGENTS.md</code></strong> — правила проекта (версионируется).</li>
+<li>Workspace переопределяет user при конфликте.</li>
+</ul>
+<hr />
+<h2 id="расширение-агентов">🔌 Расширение агентов<a class="headerlink" href="#расширение-агентов" title="Ссылка">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Расширение</th>
+<th>Что даёт</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>MCP</strong></td>
+<td>Внешние инструменты (БД, API, браузер, Jira, Slack)</td>
+</tr>
+<tr>
+<td><strong>Skills</strong></td>
+<td>Готовые сценарии (создание PDF, ревью кода)</td>
+</tr>
+<tr>
+<td><strong>Slash commands</strong></td>
+<td>Параметризованные шаблоны промптов</td>
+</tr>
+<tr>
+<td><strong>Hooks</strong></td>
+<td>Перехват событий (PreToolUse → валидация/логирование)</td>
+</tr>
+<tr>
+<td><strong>Subagents</strong></td>
+<td>Изолированные подзадачи с своим контекстом</td>
+</tr>
+</tbody>
+</table>
+<h3 id="пример-mcp-для-бд">Пример: MCP для БД<a class="headerlink" href="#пример-mcp-для-бд" title="Ссылка">#</a></h3>
+<p>Подключив MCP-сервер PostgreSQL, агент может сам выполнять запросы, читать схему, объяснять данные — без копирования в чат.</p>
+<hr />
+<h2 id="чек-лист-перед-pr-от-агента">✅ Чек-лист перед PR от агента<a class="headerlink" href="#чек-лист-перед-pr-от-агента" title="Ссылка">#</a></h2>
+<ul>
+<li>[ ] <strong>Тесты проходят</strong> (агент запускал, ты проверил вывод).</li>
+<li>[ ] <strong>Diff осмысленный</strong> — нет мусора (дебаг-принтов, закомментированного кода).</li>
+<li>[ ] <strong>Нет секретов</strong> в коде/коммитах.</li>
+<li>[ ] <strong>Конвенции соблюдены</strong> (линтер, форматтер).</li>
+<li>[ ] <strong>Документация обновлена</strong> (README, docstrings, если API изменилось).</li>
+<li>[ ] <strong>Нет регрессий</strong> — смежные тесты тоже зелёные.</li>
+<li>[ ] <strong>Коммиты атомарны</strong> и с осмысленными сообщениями.</li>
+</ul>
+<hr />
+<h2 id="типичные-ошибки-антипаттерны">⚠️ Типичные ошибки (антипаттерны)<a class="headerlink" href="#типичные-ошибки-антипаттерны" title="Ссылка">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Антипаттерн</th>
+<th>Почему плохо</th>
+<th>Как надо</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>«Сделай всё»</strong></td>
+<td>Агент растекается, контекст переполняется</td>
+<td>Декомпозируй на маленькие задачи</td>
+</tr>
+<tr>
+<td><strong>Слепое доверие diff</strong></td>
+<td>Агент может «починить» и сломать другое</td>
+<td>Читай diff, гоняй тесты</td>
+</tr>
+<tr>
+<td><strong>Игнорирование plan mode</strong></td>
+<td>Тратишь токены на неверный путь</td>
+<td>Сначала план, потом код</td>
+</tr>
+<tr>
+<td><strong>Хардкод в промпте</strong></td>
+<td>«Поменяй порт на 8080» — магическое число</td>
+<td>«Прочитай конфиг, используй переменную»</td>
+</tr>
+<tr>
+<td><strong>Молчаливое слияние</strong></td>
+<td>PR без ревью = отсутствие человека</td>
+<td>Ревью обязателен, как от коллеги</td>
+</tr>
+<tr>
+<td><strong>Большие задачи в один заход</strong></td>
+<td>Контекст портится, ошибки множатся</td>
+<td>1 задача → 1 коммит → 1 PR</td>
+</tr>
+<tr>
+<td><strong>Не читать историю</strong></td>
+<td>Агент может повторить отвергнутый подход</td>
+<td>Скажи «такое уже пробовали, не сработало»</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="уровни-автономности">🎚️ Уровни автономности<a class="headerlink" href="#уровни-автономности" title="Ссылка">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Уровень</th>
+<th>Поведение</th>
+<th>Когда</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Manual (ask)</strong></td>
+<td>Каждое действие — с разрешения</td>
+<td>Опасные операции (deploy, миграции БД)</td>
+</tr>
+<tr>
+<td><strong>Auto-edit</strong></td>
+<td>Файлы правит сам, shell — спрашивает</td>
+<td>Обычная разработка</td>
+</tr>
+<tr>
+<td><strong>Plan-first</strong></td>
+<td>Сначала план, потом код</td>
+<td>Сложные фичи, рефакторинг</td>
+</tr>
+<tr>
+<td><strong>Yolo / hands-off</strong></td>
+<td>Всё автоматически</td>
+<td>Только в sandbox/throwaway экспериментах</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>Для прода — <strong>Plan-first + ревью diff</strong>. Yolo — только в изолированной VM.</p>
+</blockquote>
+<hr />
+<h2 id="безопасность">🔐 Безопасность<a class="headerlink" href="#безопасность" title="Ссылка">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Риск</th>
+<th>Митигация</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Удаление файлов</strong></td>
+<td>Permission mode, hooks на <code>PreToolUse</code> для rm/mv</td>
+</tr>
+<tr>
+<td><strong>Коммит секретов</strong></td>
+<td><code>.gitignore</code> для <code>.env</code>, pre-commit hook на detect-secrets</td>
+</tr>
+<tr>
+<td><strong>Внешние вызовы</strong> (curl, SSH)</td>
+<td>Явное разрешение, sandbox-сеть</td>
+</tr>
+<tr>
+<td><strong>Выполнение произвольного кода</strong></td>
+<td>Не запускать агента на <code>sudo</code>, контейнер/VM для недоверенного</td>
+</tr>
+<tr>
+<td><strong>Утечка через WebSearch</strong></td>
+<td>Не просить искать внутренние URL/данные</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="метрики-эффективности">📊 Метрики эффективности<a class="headerlink" href="#метрики-эффективности" title="Ссылка">#</a></h2>
+<ul>
+<li><strong>Время до первого теста</strong> — агент должен быстро дать что-то запускаемое.</li>
+<li><strong>Кол-во итераций до зелёных тестов</strong> — если &gt;5, пересмотри ТЗ.</li>
+<li><strong>Доля кода в финальном PR</strong> — если &lt;50% выжило, план был плохой.</li>
+<li><strong>Токены на задачу</strong> — следи за стоимостью через <code>/cost</code>.</li>
+</ul>
+<hr />
+<h2 id="продвинутые-приёмы">🧪 Продвинутые приёмы<a class="headerlink" href="#продвинутые-приёмы" title="Ссылка">#</a></h2>
+<h3 id="1-переведи-код-в-тест-потом-в-реализацию-tdd">1. «Переведи код в тест, потом в реализацию» (TDD)<a class="headerlink" href="#1-переведи-код-в-тест-потом-в-реализацию-tdd" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>Напиши тесты для функции X (пока без реализации).
+Покажи мне тесты.
+Потом реализуй так, чтобы тесты прошли.
+</code></pre></div>
+
+<h3 id="2-много-агентный-подход">2. Много-агентный подход<a class="headerlink" href="#2-много-агентный-подход" title="Ссылка">#</a></h3>
+<ul>
+<li>Один агент — реверс-инженерит существующий код.</li>
+<li>Другой — пишет новую фичу на основе документации первого.</li>
+<li>Третий — ревьюит diff.</li>
+</ul>
+<h3 id="3-покажи-3-варианта">3. «Покажи 3 варианта»<a class="headerlink" href="#3-покажи-3-варианта" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>Предложи 3 архитектурных подхода к задаче.
+Сравни по сложности, поддержке, производительности.
+Я выберу — потом реализуй.
+</code></pre></div>
+
+<h3 id="4-использование-памяти-zcode">4. Использование памяти (ZCode)<a class="headerlink" href="#4-использование-памяти-zcode" title="Ссылка">#</a></h3>
+<ul>
+<li><code>/remember</code> для фактов о проекте («порт — 4000», «используем zsh»).</li>
+<li>Память подгружается автоматически в будущих сессиях.</li>
+</ul>
+<h3 id="5-субагенты-для-параллельных-задач">5. Субагенты для параллельных задач<a class="headerlink" href="#5-субагенты-для-параллельных-задач" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>Запусти 3 субагента параллельно:
+1. Найди все use-cases функции deprecated_api().
+2. Проанализируй логи ошибок в /var/log/app/.
+3. Найди дублирующийся код в src/services/.
+</code></pre></div>
+
+<hr />
+<h2 id="популярные-agentic-инструменты">🆚 Популярные agentic-инструменты<a class="headerlink" href="#популярные-agentic-инструменты" title="Ссылка">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Инструмент</th>
+<th>Форма</th>
+<th>Сильные стороны</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>ZCode</strong></td>
+<td>CLI</td>
+<td><code>.zcode</code> + <code>.agents</code> совместимость, MCP-авто, hooks</td>
+</tr>
+<tr>
+<td><strong>Claude Code</strong></td>
+<td>CLI</td>
+<td>Большой контекст, <code>.claude</code></td>
+</tr>
+<tr>
+<td><strong>Codex (OpenAI)</strong></td>
+<td>CLI</td>
+<td>Интеграция с GPT, <code>.codex</code></td>
+</tr>
+<tr>
+<td><strong>Cursor</strong></td>
+<td>IDE</td>
+<td>Встраивание в редактор, tab-Completion</td>
+</tr>
+<tr>
+<td><strong>Devin</strong></td>
+<td>Cloud</td>
+<td>Полная автономия (удалённая VM)</td>
+</tr>
+<tr>
+<td><strong>Aider</strong></td>
+<td>CLI</td>
+<td>Open-source, git-native</td>
+</tr>
+<tr>
+<td><strong>Continue.dev</strong></td>
+<td>IDE-plugin</td>
+<td>Open-source, любая модель</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="полезные-ссылки">🔗 Полезные ссылки<a class="headerlink" href="#полезные-ссылки" title="Ссылка">#</a></h2>
+<ul>
+<li><strong>MCP (Model Context Protocol)</strong> — стандарт для инструментов: https://modelcontextprotocol.io</li>
+<li><strong>Anthropic: Building effective agents</strong> — https://www.anthropic.com/engineering/building-effective-agents</li>
+<li><strong>Awesome Claude Code</strong> — https://github.com/hesreallyhim/awesome-claude-code</li>
+<li><strong>Aider docs</strong> — https://aider.chat/docs/</li>
+</ul>
+<hr />
+<h2 id="золотые-правила">💡 Золотые правила<a class="headerlink" href="#золотые-правила" title="Ссылка">#</a></h2>
+<ol>
+<li><strong>Маленькие задачи, частые коммиты.</strong> Большой PR от агента = боль.</li>
+<li><strong>Сначала план.</strong> Plan Mode экономит время и токены.</li>
+<li><strong>Ревью как от коллеги.</strong> Не доверяй вслепую — гоняй тесты, читай diff.</li>
+<li><strong>AGENTS.md — твой «.bashrc» для агента.</strong> Пропиши конвенции один раз.</li>
+<li><strong>Контекст — конечный ресурс.</strong> Компакти и чисти сессии, декомпозируй задачи.</li>
+<li><strong>Человек — руль.</strong> Агент — мощный инструмент, но решение за тобой.</li>
+</ol>
+    </article>
+    <nav class="pagination">
+      <a class="pager prev" href="warp.html">← Warp</a>
+      <span></span>
+    </nav>
+  </main>
+
+  <aside class="toc">
+    <details open>
+      <summary>📑 Оглавление</summary>
+      <div class="toc-list">
+<div class="toc">
+<ul>
+<li><a href="#агентная-разработка-с-ии-шпаргалка">🤝 Агентная разработка с ИИ — шпаргалка</a><ul>
+<li><a href="#ментальная-модель">🧭 Ментальная модель</a></li>
+<li><a href="#анатомия-хорошего-промпта-задачи-агенту">🧩 Анатомия хорошего промпта (задачи агенту)</a><ul>
+<li><a href="#плохой-промпт">Плохой промпт ❌</a></li>
+<li><a href="#хороший-промпт">Хороший промпт ✅</a></li>
+</ul>
+</li>
+<li><a href="#цикл-работы-с-агентом">🔄 Цикл работы с агентом</a></li>
+<li><a href="#инструменты-агента-как-ими-пользоваться">🛠️ Инструменты агента (как ими пользоваться)</a><ul>
+<li><a href="#подсказки-агенту">Подсказки агенту</a></li>
+</ul>
+</li>
+<li><a href="#паттерны-задач-для-агентов">📋 Паттерны задач для агентов</a><ul>
+<li><a href="#1-feature-новая-функциональность">1. Feature (новая функциональность)</a></li>
+<li><a href="#2-bugfix">2. Bugfix</a></li>
+<li><a href="#3-рефакторинг">3. Рефакторинг</a></li>
+<li><a href="#4-тесты">4. Тесты</a></li>
+<li><a href="#5-документация">5. Документация</a></li>
+<li><a href="#6-миграция-перевод">6. Миграция / перевод</a></li>
+<li><a href="#7-code-review">7. Code review</a></li>
+</ul>
+</li>
+<li><a href="#управление-контекстом">🧠 Управление контекстом</a><ul>
+<li><a href="#правила">Правила</a></li>
+<li><a href="#симптомы-переполнения-контекста">Симптомы переполнения контекста</a></li>
+</ul>
+</li>
+<li><a href="#план-мод-plan-mode">📐 План-мод (Plan Mode)</a></li>
+<li><a href="#agents-md-claude-md-инструкции-проекта">🗂️ AGENTS.md / CLAUDE.md — инструкции проекта</a><ul>
+<li><a href="#структура-рекомендация">Структура (рекомендация)</a></li>
+<li><a href="#скоупы-для-zcode">Скоупы (для ZCode)</a></li>
+</ul>
+</li>
+<li><a href="#расширение-агентов">🔌 Расширение агентов</a><ul>
+<li><a href="#пример-mcp-для-бд">Пример: MCP для БД</a></li>
+</ul>
+</li>
+<li><a href="#чек-лист-перед-pr-от-агента">✅ Чек-лист перед PR от агента</a></li>
+<li><a href="#типичные-ошибки-антипаттерны">⚠️ Типичные ошибки (антипаттерны)</a></li>
+<li><a href="#уровни-автономности">🎚️ Уровни автономности</a></li>
+<li><a href="#безопасность">🔐 Безопасность</a></li>
+<li><a href="#метрики-эффективности">📊 Метрики эффективности</a></li>
+<li><a href="#продвинутые-приёмы">🧪 Продвинутые приёмы</a><ul>
+<li><a href="#1-переведи-код-в-тест-потом-в-реализацию-tdd">1. «Переведи код в тест, потом в реализацию» (TDD)</a></li>
+<li><a href="#2-много-агентный-подход">2. Много-агентный подход</a></li>
+<li><a href="#3-покажи-3-варианта">3. «Покажи 3 варианта»</a></li>
+<li><a href="#4-использование-памяти-zcode">4. Использование памяти (ZCode)</a></li>
+<li><a href="#5-субагенты-для-параллельных-задач">5. Субагенты для параллельных задач</a></li>
+</ul>
+</li>
+<li><a href="#популярные-agentic-инструменты">🆚 Популярные agentic-инструменты</a></li>
+<li><a href="#полезные-ссылки">🔗 Полезные ссылки</a></li>
+<li><a href="#золотые-правила">💡 Золотые правила</a></li>
+</ul>
+</li>
+</ul>
+</div>
+
+      </div>
+    </details>
+  </aside>
+</div>
+
+<button class="back-top" id="backTop" aria-label="Наверх">↑</button>
+
+<script src="assets/search.js"></script>
+<script src="assets/page.js"></script>
+</body>
+</html>

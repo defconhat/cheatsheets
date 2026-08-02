@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DBeaver — Шпаргалки</title>
+<link rel="stylesheet" href="assets/style.css">
+<link rel="stylesheet" href="assets/pygments.css">
+</head>
+<body>
+<div class="layout">
+  <aside class="sidebar">
+    <a href="index.html" class="brand">📌 Шпаргалки</a>
+    <nav class="nav">
+<a href="yazi.html" class="nav-item"><span class="nav-ico">📦</span>Yazi</a>
+<a href="neovim.html" class="nav-item"><span class="nav-ico">📘</span>Neovim (LazyVim)</a>
+<a href="niri.html" class="nav-item"><span class="nav-ico">🪟</span>Niri</a>
+<a href="tmux.html" class="nav-item"><span class="nav-ico">🪟</span>Tmux</a>
+<a href="bash.html" class="nav-item"><span class="nav-ico">🐚</span>Bash</a>
+<a href="git.html" class="nav-item"><span class="nav-ico">🔀</span>Git</a>
+<a href="terminal.html" class="nav-item"><span class="nav-ico">🖥️</span>Терминал Linux</a>
+<a href="powershell.html" class="nav-item"><span class="nav-ico">💻</span>PowerShell</a>
+<a href="cmd.html" class="nav-item"><span class="nav-ico">🪟</span>CMD (cmd.exe)</a>
+<a href="python.html" class="nav-item"><span class="nav-ico">🐍</span>Python</a>
+<a href="systemd.html" class="nav-item"><span class="nav-ico">⚙️</span>systemd</a>
+<a href="ssh.html" class="nav-item"><span class="nav-ico">🔐</span>SSH</a>
+<a href="make-cmake.html" class="nav-item"><span class="nav-ico">🔨</span>Make / CMake</a>
+<a href="docker.html" class="nav-item"><span class="nav-ico">🐳</span>Docker</a>
+<a href="pacman.html" class="nav-item"><span class="nav-ico">📦</span>pacman / yay / paru</a>
+<a href="spark.html" class="nav-item"><span class="nav-ico">⚡</span>Apache Spark / PySpark</a>
+<a href="markdown.html" class="nav-item"><span class="nav-ico">📝</span>Markdown</a>
+<a href="regex.html" class="nav-item"><span class="nav-ico">🔍</span>Регулярные выражения</a>
+<a href="jq-json.html" class="nav-item"><span class="nav-ico">🔧</span>jq + JSON</a>
+<a href="awk-sed.html" class="nav-item"><span class="nav-ico">✂️</span>awk / sed</a>
+<a href="airflow.html" class="nav-item"><span class="nav-ico">🌪️</span>Apache Airflow</a>
+<a href="http-curl.html" class="nav-item"><span class="nav-ico">🌐</span>HTTP / curl</a>
+<a href="yaml.html" class="nav-item"><span class="nav-ico">📄</span>YAML</a>
+<a href="vscode.html" class="nav-item"><span class="nav-ico">💻</span>VS Code</a>
+<a href="cron.html" class="nav-item"><span class="nav-ico">⏰</span>cron</a>
+<a href="fzf-zoxide.html" class="nav-item"><span class="nav-ico">🔎</span>fzf + zoxide</a>
+<a href="minikube-k8s.html" class="nav-item"><span class="nav-ico">☸️</span>Minikube / Kubernetes</a>
+<a href="cicd.html" class="nav-item"><span class="nav-ico">🦊</span>GitLab CI / GitHub Actions</a>
+<a href="nginx.html" class="nav-item"><span class="nav-ico">🌐</span>nginx</a>
+<a href="dbt.html" class="nav-item"><span class="nav-ico">🔧</span>dbt</a>
+<a href="kafka.html" class="nav-item"><span class="nav-ico">🐘</span>Apache Kafka</a>
+<a href="prometheus-grafana.html" class="nav-item"><span class="nav-ico">📊</span>Prometheus / Grafana</a>
+<a href="iceberg-nessie.html" class="nav-item"><span class="nav-ico">🧊</span>Iceberg / Nessie</a>
+<a href="impala.html" class="nav-item"><span class="nav-ico">🐬</span>Apache Impala</a>
+<a href="terraform.html" class="nav-item"><span class="nav-ico">🏗️</span>Terraform</a>
+<a href="linux-internals.html" class="nav-item"><span class="nav-ico">🐧</span>Linux Internals</a>
+<a href="miscellaneous.html" class="nav-item"><span class="nav-ico">🧰</span>Miscellaneous</a>
+<a href="python-automation-libs.html" class="nav-item"><span class="nav-ico">🐍</span>Python: авт-ция (10 libs)</a>
+<a href="eza.html" class="nav-item"><span class="nav-ico">🌈</span>eza</a>
+<a href="dbeaver.html" class="nav-item active"><span class="nav-ico">🗄️</span>DBeaver</a>
+<a href="zcode.html" class="nav-item"><span class="nav-ico">🤖</span>ZCode</a>
+<a href="warp.html" class="nav-item"><span class="nav-ico">🚀</span>Warp</a>
+<a href="agentic-ai-dev.html" class="nav-item"><span class="nav-ico">🤝</span>Агентная разработка с ИИ</a>
+    </nav>
+  </aside>
+
+  <main class="content">
+    <article>
+<h1 id="dbeaver-шпаргалка">🗄️ DBeaver — шпаргалка<a class="headerlink" href="#dbeaver-шпаргалка" title="Ссылка">#</a></h1>
+<blockquote>
+<p><strong>DBeaver</strong> — бесплатный универсальный GUI-клиент для БД (PostgreSQL, MySQL, SQLite, Oracle, ClickHouse, DuckDB и др.).
+Поддерживает ER-диаграммы, редактор SQL, экспорт/импорт, SSH-туннели.
+Дом: https://dbeaver.io</p>
+</blockquote>
+<hr />
+<h2 id="версии-и-установка">📦 Версии и установка<a class="headerlink" href="#версии-и-установка" title="Ссылка">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Версия</th>
+<th>Назначение</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>DBeaver Community</strong></td>
+<td>Бесплатная (GPL), базы через JDBC-драйверы</td>
+</tr>
+<tr>
+<td><strong>DBeaver Lite/Enterprise</strong></td>
+<td>Платная, доп. NoSQL, облака, AI</td>
+</tr>
+<tr>
+<td><strong>DBeaver Enterprise Team</strong></td>
+<td>Корпоративная</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight"><pre><span></span><code><span class="c1"># Arch / CachyOS</span>
+sudo<span class="w"> </span>pacman<span class="w"> </span>-S<span class="w"> </span>dbeaver
+
+<span class="c1"># macOS</span>
+brew<span class="w"> </span>install<span class="w"> </span>--cask<span class="w"> </span>dbeaver-community
+
+<span class="c1"># Linux (snap)</span>
+sudo<span class="w"> </span>snap<span class="w"> </span>install<span class="w"> </span>dbeaver-ce
+
+<span class="c1"># Flatpak</span>
+flatpak<span class="w"> </span>install<span class="w"> </span>flathub<span class="w"> </span>io.dbeaver.DBeaverCommunity
+</code></pre></div>
+
+<blockquote>
+<p>Используйте <strong>Community Edition</strong> — покрывает 95% задач, бесплатно.</p>
+</blockquote>
+<hr />
+<h2 id="горячие-клавиши">⌨️ Горячие клавиши<a class="headerlink" href="#горячие-клавиши" title="Ссылка">#</a></h2>
+<h3 id="sql-редактор">SQL-редактор<a class="headerlink" href="#sql-редактор" title="Ссылка">#</a></h3>
+<table>
+<thead>
+<tr>
+<th>Клавиша</th>
+<th>Действие</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Ctrl+Enter</code></td>
+<td>Выполнить текущий запрос</td>
+</tr>
+<tr>
+<td><code>Ctrl+Shift+Enter</code></td>
+<td>Выполнить скрипт целиком</td>
+</tr>
+<tr>
+<td><code>Alt+X</code></td>
+<td>Выполнить всё</td>
+</tr>
+<tr>
+<td><code>Ctrl+/</code></td>
+<td>Закомментировать строку</td>
+</tr>
+<tr>
+<td><code>Ctrl+Shift+/</code></td>
+<td>Закомментировать блок (<code>/* */</code>)</td>
+</tr>
+<tr>
+<td><code>Ctrl+Space</code></td>
+<td>Автодополнение (таблицы, колонки)</td>
+</tr>
+<tr>
+<td><code>Ctrl+Click</code> на таблице</td>
+<td>Перейти к объекту</td>
+</tr>
+<tr>
+<td><code>Ctrl+F</code></td>
+<td>Поиск</td>
+</tr>
+<tr>
+<td><code>Ctrl+H</code></td>
+<td>Глобальный поиск</td>
+</tr>
+<tr>
+<td><code>F3</code></td>
+<td>Открыть декларацию объекта</td>
+</tr>
+<tr>
+<td><code>Ctrl+Shift+F</code></td>
+<td>Форматировать SQL</td>
+</tr>
+<tr>
+<td><code>Ctrl+]</code> / <code>Ctrl+[</code></td>
+<td>Следующее / предыдущее выделение</td>
+</tr>
+<tr>
+<td><code>F4</code></td>
+<td>Открыть структуру таблицы</td>
+</tr>
+<tr>
+<td><code>Alt+←</code> / <code>Alt+→</code></td>
+<td>Назад / вперёд по истории переходов</td>
+</tr>
+</tbody>
+</table>
+<h3 id="навигация-и-вкладки">Навигация и вкладки<a class="headerlink" href="#навигация-и-вкладки" title="Ссылка">#</a></h3>
+<table>
+<thead>
+<tr>
+<th>Клавиша</th>
+<th>Действие</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>F3</code></td>
+<td>Новый SQL-редактор</td>
+</tr>
+<tr>
+<td><code>Ctrl+Shift+T</code></td>
+<td>Открыть таблицу (по имени)</td>
+</tr>
+<tr>
+<td><code>Ctrl+Shift+R</code></td>
+<td>Открыть процедуру</td>
+</tr>
+<tr>
+<td><code>Ctrl+Shift+N</code></td>
+<td>Новое соединение</td>
+</tr>
+<tr>
+<td><code>Ctrl+W</code></td>
+<td>Закрыть вкладку</td>
+</tr>
+<tr>
+<td><code>Ctrl+Tab</code></td>
+<td>Следующая вкладка</td>
+</tr>
+<tr>
+<td><code>Ctrl+Shift+Tab</code></td>
+<td>Предыдущая вкладка</td>
+</tr>
+<tr>
+<td><code>F5</code></td>
+<td>Обновить навигатор</td>
+</tr>
+<tr>
+<td><code>F6</code></td>
+<td>Свернуть/развернуть навигатор</td>
+</tr>
+</tbody>
+</table>
+<h3 id="в-таблице-data-view">В таблице (Data view)<a class="headerlink" href="#в-таблице-data-view" title="Ссылка">#</a></h3>
+<table>
+<thead>
+<tr>
+<th>Клавиша</th>
+<th>Действие</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Ins</code></td>
+<td>Новая строка</td>
+</tr>
+<tr>
+<td><code>Del</code></td>
+<td>Удалить строку</td>
+</tr>
+<tr>
+<td><code>Ctrl+S</code></td>
+<td>Сохранить изменения (Post/Edit)</td>
+</tr>
+<tr>
+<td><code>Ctrl+Z</code> / <code>Ctrl+Y</code></td>
+<td>Отменить/вернуть</td>
+</tr>
+<tr>
+<td><code>Alt+PgDn</code> / <code>Alt+PgUp</code></td>
+<td>След./предыдущая страница данных</td>
+</tr>
+<tr>
+<td><code>Ctrl+F</code></td>
+<td>Фильтр по значениям</td>
+</tr>
+<tr>
+<td><code>F7</code></td>
+<td>Сортировка</td>
+</tr>
+<tr>
+<td><code>F8</code></td>
+<td>Фильтр строк (WHERE)</td>
+</tr>
+<tr>
+<td><code>Ctrl+Shift+P</code></td>
+<td>Панель фильтров</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="создание-соединения">🔌 Создание соединения<a class="headerlink" href="#создание-соединения" title="Ссылка">#</a></h2>
+<ol>
+<li><strong>Клик по иконке «розетка»</strong> (или <code>Ctrl+Shift+N</code>) → New Connection.</li>
+<li>Выбрать СУБД (PostgreSQL, MySQL, SQLite, …).</li>
+<li>Ввести хост / порт / БД / пользователя / пароль.</li>
+<li><strong>Test Connection</strong> — DBeaver скачает JDBC-драйвер автоматически.</li>
+<li><strong>Finish</strong> → соединение появится в навигаторе.</li>
+</ol>
+<h3 id="ssh-туннель-частый-случай-для-прод-бд">SSH-туннель (частый случай для прод-БД)<a class="headerlink" href="#ssh-туннель-частый-случай-для-прод-бд" title="Ссылка">#</a></h3>
+<ul>
+<li>В окне настроек → вкладка <strong>SSH</strong>.</li>
+<li>Указать: хост бастиона, порт, пользователь, ключ или пароль.</li>
+<li>Можно пробросить локальный порт на удалённую БД.</li>
+</ul>
+<h3 id="ssl">SSL<a class="headerlink" href="#ssl" title="Ссылка">#</a></h3>
+<ul>
+<li>Вкладка <strong>SSL</strong> → выбрать режим (<code>require</code>, <code>verify-ca</code>, <code>verify-full</code>).</li>
+<li>Указать сертификаты (client, server, CA).</li>
+</ul>
+<hr />
+<h2 id="навигатор-бд">📊 Навигатор БД<a class="headerlink" href="#навигатор-бд" title="Ссылка">#</a></h2>
+<p>Дерево слева: <strong>Соединение → БД → Схема → Tables / Views / Procedures / Functions</strong>.</p>
+<table>
+<thead>
+<tr>
+<th>Действие</th>
+<th>Что</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Двойной клик по таблице</td>
+<td>Открыть вкладку структуры</td>
+</tr>
+<tr>
+<td>Клик по <code>Data</code>-вкладке</td>
+<td>Просмотр данных</td>
+</tr>
+<tr>
+<td>Правый клик → <code>View Data</code></td>
+<td>Расширенный просмотр (с фильтром, лимитом)</td>
+</tr>
+<tr>
+<td>Правый клик → <code>Generate SQL</code></td>
+<td><code>SELECT/INSERT/UPDATE</code> по шаблону</td>
+</tr>
+<tr>
+<td>Правый клик → <code>Export Data</code></td>
+<td>CSV, JSON, SQL, XLSX</td>
+</tr>
+<tr>
+<td>Правый клик → <code>Import Data</code></td>
+<td>Загрузить данные</td>
+</tr>
+<tr>
+<td>Drag таблицы в редактор</td>
+<td>Вставить её имя или <code>SELECT *</code></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="er-диаграммы">🧮 ER-диаграммы<a class="headerlink" href="#er-диаграммы" title="Ссылка">#</a></h2>
+<ul>
+<li>Двойной клик по схеме/БД → вкладка <strong>ER Diagram</strong>.</li>
+<li>DBeaver строит диаграмму по foreign keys.</li>
+<li>Перетаскивайте таблицы мышкой, можно экспортировать в PNG/SVG.</li>
+<li>В Enterprise есть <strong>реверс-инжиниринг</strong> для больших схем.</li>
+</ul>
+<hr />
+<h2 id="экспорт-имппорт">📤 Экспорт / имппорт<a class="headerlink" href="#экспорт-имппорт" title="Ссылка">#</a></h2>
+<h3 id="экспорт">Экспорт<a class="headerlink" href="#экспорт" title="Ссылка">#</a></h3>
+<ol>
+<li>Правый клик по таблице / результату → <strong>Export Data</strong>.</li>
+<li>Форматы: <strong>CSV, JSON, SQL (INSERT), HTML, XLSX, XML, Markdown</strong>.</li>
+<li>Настроить разделители, заголовки, кодировку.</li>
+<li>Можно экспортировать и результат произвольного <code>SELECT</code>.</li>
+</ol>
+<h3 id="импорт">Импорт<a class="headerlink" href="#импорт" title="Ссылка">#</a></h3>
+<ol>
+<li>Правый клик по таблице → <strong>Import Data</strong>.</li>
+<li>Источник: CSV, JSON, XLSX, SQL-скрипт, другая таблица.</li>
+<li>Маппинг колонок, обработка конфликтов (INSERT/UPDATE/IGNORE).</li>
+</ol>
+<h3 id="резервные-копии">Резервные копии<a class="headerlink" href="#резервные-копии" title="Ссылка">#</a></h3>
+<ul>
+<li>Для <strong>PostgreSQL</strong>: правый клик → <code>Backup</code> (<code>pg_dump</code>) / <code>Restore</code> (<code>pg_restore</code>).</li>
+<li>Для <strong>MySQL</strong>: <code>Backup</code> (<code>mysqldump</code>) / <code>Restore</code>.</li>
+<li>DBeaver оборачивает нативные утилиты — нужно, чтобы они стояли в системе.</li>
+</ul>
+<hr />
+<h2 id="sql-редактор-фишки">🔍 SQL-редактор: фишки<a class="headerlink" href="#sql-редактор-фишки" title="Ссылка">#</a></h2>
+<ul>
+<li><strong>Автодополнение</strong>: <code>Ctrl+Space</code> — подсказки по таблицам, колонкам, алиасам, функциям.</li>
+<li><strong>Hyperlink</strong>: <code>Ctrl+Click</code> по имени таблицы → переход в её определение.</li>
+<li><strong>Параметры скрипта</strong>: <code>:var</code> или <code>${var}</code> — DBeaver спросит значение перед запуском.
+  <code>sql
+  SELECT * FROM users WHERE id = :user_id;</code></li>
+<li><strong>Statement delimiter</strong> <code>;</code> — выполняется только текущий стейтмент (<code>Ctrl+Enter</code>).</li>
+<li><strong>Result Set</strong> поддерживает несколько панелей: несколько <code>SELECT</code> в одном скрипте → несколько результатов.</li>
+</ul>
+<h3 id="сохранение-запросов">Сохранение запросов<a class="headerlink" href="#сохранение-запросов" title="Ссылка">#</a></h3>
+<ul>
+<li><code>Snippets</code> (окно слева снизу) — переиспользуемые шаблоны SQL.</li>
+<li>Можно перетаскивать в редактор.</li>
+</ul>
+<hr />
+<h2 id="оформление-и-темы">🎨 Оформление и темы<a class="headerlink" href="#оформление-и-темы" title="Ссылка">#</a></h2>
+<ul>
+<li><strong>Settings → User Interface → Appearance</strong> → Darkest Dark, Light и др.</li>
+<li><strong>Editor → SQL Editor → Formatting</strong> — настроить отступы/регистр.</li>
+<li>Шрифты: <code>Window → Preferences → General → Appearance → Colors and Fonts</code>.</li>
+</ul>
+<hr />
+<h2 id="производительность">⚡ Производительность<a class="headerlink" href="#производительность" title="Ссылка">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Что</th>
+<th>Совет</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Большая таблица</td>
+<td>Не открывайте <code>SELECT *</code> без лимита — используйте фильтр <code>F8</code></td>
+</tr>
+<tr>
+<td>Авто-commit</td>
+<td>Отключите (<code>Auto-commit</code> в тулбаре) для транзакционных правок</td>
+</tr>
+<tr>
+<td>Кэш метаданных</td>
+<td><code>Refresh</code> (<code>F5</code>) после структурных изменений на сервере</td>
+</tr>
+<tr>
+<td>Connection pool</td>
+<td>В Enterprise — пул соединений для тяжёлых нагрузок</td>
+</tr>
+<tr>
+<td>Lazy load</td>
+<td>Включён по умолчанию — данные грузятся страницами</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="частые-проблемы">🐛 Частые проблемы<a class="headerlink" href="#частые-проблемы" title="Ссылка">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Симптом</th>
+<th>Решение</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>No suitable driver</code></td>
+<td><code>Test Connection</code> — драйвер скачается. Или скачать вручную в <strong>Drivers</strong></td>
+</tr>
+<tr>
+<td><code>Public Key Retrieval is not allowed</code> (MySQL 8)</td>
+<td>В свойствах соединения → <code>allowPublicKeyRetrieval=true</code></td>
+</tr>
+<tr>
+<td><code>Connection refused</code></td>
+<td>Проверить хост/порт, фаервол, SSH-туннель</td>
+</tr>
+<tr>
+<td>Долгий первый коннект</td>
+<td>DBeaver качает JDBC — подождать или поставить драйвер заранее</td>
+</tr>
+<tr>
+<td>Не видит таблицы</td>
+<td><code>F5</code> (refresh) или включить <code>Show only user objects</code></td>
+</tr>
+<tr>
+<td>Кириллица знаками <code>?</code></td>
+<td>Настроить кодировку в свойствах соединения (UTF-8)</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="безопасность">🔐 Безопасность<a class="headerlink" href="#безопасность" title="Ссылка">#</a></h2>
+<ul>
+<li><strong>Пароли</strong> хранятся локально (зашифрованы мастер-паролем).</li>
+<li><code>Preferences → Connections → Credentials</code> → включить мастер-пароль.</li>
+<li><strong>Не светите пароли</strong> в скриншотах / экспортах.</li>
+<li>Для прод-БД: соединение <strong>Read-Only</strong> (<code>Mark as read-only</code> в свойствах) — DBeaver не даст править данные.</li>
+<li><strong>SSH-ключи</strong> предпочтительнее паролей для бастионов.</li>
+</ul>
+<hr />
+<h2 id="плагины-eclipse-based">🧩 Плагины (Eclipse-based)<a class="headerlink" href="#плагины-eclipse-based" title="Ссылка">#</a></h2>
+<p>DBeaver построен на Eclipse RCP. Можно ставить плагины в папку <code>dropins</code>:
+- <strong>SQL Editor Pro</strong> — расширенный редактор.
+- <strong>Office Integration</strong> — экспорт в Office-форматы (в Enterprise).
+- <strong>AI Assistant</strong> (Enterprise) — генерация SQL из текста.</p>
+<hr />
+<h2 id="поддерживаемые-субд-неполный-список">📚 Поддерживаемые СУБД (неполный список)<a class="headerlink" href="#поддерживаемые-субд-неполный-список" title="Ссылка">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Категория</th>
+<th>Примеры</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Реляционные</td>
+<td>PostgreSQL, MySQL, MariaDB, Oracle, MS SQL, SQLite, DB2</td>
+</tr>
+<tr>
+<td>Big Data</td>
+<td>ClickHouse, Hive, Presto, Trino, Impala, Spark</td>
+</tr>
+<tr>
+<td>Columnar</td>
+<td>ClickHouse, Vertica, Greenplum, Redshift</td>
+</tr>
+<tr>
+<td>Time-series</td>
+<td>TimescaleDB, InfluxDB (Enterprise)</td>
+</tr>
+<tr>
+<td>Embedded</td>
+<td>H2, HSQLDB, Derby, DuckDB</td>
+</tr>
+<tr>
+<td>Cloud</td>
+<td>Snowflake, BigQuery (Enterprise), AWS Athena</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="dbeaver-vs-альтернативы">🆚 DBeaver vs альтернативы<a class="headerlink" href="#dbeaver-vs-альтернативы" title="Ссылка">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Клиент</th>
+<th>Плюсы</th>
+<th>Минусы</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>DBeaver</strong></td>
+<td>Универсальный, бесплатно, JDBC</td>
+<td>Тяжёлый (Java/Eclipse)</td>
+</tr>
+<tr>
+<td><strong>pgAdmin</strong></td>
+<td>Родной для PostgreSQL</td>
+<td>Только PostgreSQL, устаревший UI</td>
+</tr>
+<tr>
+<td><strong>DataGrip</strong></td>
+<td>Очень мощный, JetBrains-quality</td>
+<td>Платный</td>
+</tr>
+<tr>
+<td><strong>TablePlus</strong></td>
+<td>Лёгкий, быстрый</td>
+<td>Лимиты бесплатной версии</td>
+</tr>
+<tr>
+<td><strong>Beekeeper Studio</strong></td>
+<td>Простой, красивый</td>
+<td>Меньше фич</td>
+</tr>
+<tr>
+<td><strong>HeidiSQL / MySQL Workbench</strong></td>
+<td>Только MySQL/MariaDB</td>
+<td>Узкая специализация</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="источники">🔗 Источники<a class="headerlink" href="#источники" title="Ссылка">#</a></h2>
+<ul>
+<li>Дом: https://dbeaver.io</li>
+<li>GitHub: https://github.com/dbeaver/dbeaver</li>
+<li>Документация: https://github.com/dbeaver/dbeaver/wiki</li>
+<li>Горячие клавиши: https://github.com/dbeaver/dbeaver/wiki/Shortcuts</li>
+</ul>
+    </article>
+    <nav class="pagination">
+      <a class="pager prev" href="eza.html">← eza</a>
+      <a class="pager next" href="zcode.html">ZCode →</a>
+    </nav>
+  </main>
+
+  <aside class="toc">
+    <details open>
+      <summary>📑 Оглавление</summary>
+      <div class="toc-list">
+<div class="toc">
+<ul>
+<li><a href="#dbeaver-шпаргалка">🗄️ DBeaver — шпаргалка</a><ul>
+<li><a href="#версии-и-установка">📦 Версии и установка</a></li>
+<li><a href="#горячие-клавиши">⌨️ Горячие клавиши</a><ul>
+<li><a href="#sql-редактор">SQL-редактор</a></li>
+<li><a href="#навигация-и-вкладки">Навигация и вкладки</a></li>
+<li><a href="#в-таблице-data-view">В таблице (Data view)</a></li>
+</ul>
+</li>
+<li><a href="#создание-соединения">🔌 Создание соединения</a><ul>
+<li><a href="#ssh-туннель-частый-случай-для-прод-бд">SSH-туннель (частый случай для прод-БД)</a></li>
+<li><a href="#ssl">SSL</a></li>
+</ul>
+</li>
+<li><a href="#навигатор-бд">📊 Навигатор БД</a></li>
+<li><a href="#er-диаграммы">🧮 ER-диаграммы</a></li>
+<li><a href="#экспорт-имппорт">📤 Экспорт / имппорт</a><ul>
+<li><a href="#экспорт">Экспорт</a></li>
+<li><a href="#импорт">Импорт</a></li>
+<li><a href="#резервные-копии">Резервные копии</a></li>
+</ul>
+</li>
+<li><a href="#sql-редактор-фишки">🔍 SQL-редактор: фишки</a><ul>
+<li><a href="#сохранение-запросов">Сохранение запросов</a></li>
+</ul>
+</li>
+<li><a href="#оформление-и-темы">🎨 Оформление и темы</a></li>
+<li><a href="#производительность">⚡ Производительность</a></li>
+<li><a href="#частые-проблемы">🐛 Частые проблемы</a></li>
+<li><a href="#безопасность">🔐 Безопасность</a></li>
+<li><a href="#плагины-eclipse-based">🧩 Плагины (Eclipse-based)</a></li>
+<li><a href="#поддерживаемые-субд-неполный-список">📚 Поддерживаемые СУБД (неполный список)</a></li>
+<li><a href="#dbeaver-vs-альтернативы">🆚 DBeaver vs альтернативы</a></li>
+<li><a href="#источники">🔗 Источники</a></li>
+</ul>
+</li>
+</ul>
+</div>
+
+      </div>
+    </details>
+  </aside>
+</div>
+
+<button class="back-top" id="backTop" aria-label="Наверх">↑</button>
+
+<script src="assets/search.js"></script>
+<script src="assets/page.js"></script>
+</body>
+</html>

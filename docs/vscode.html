@@ -1,0 +1,1235 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VS Code — Шпаргалки</title>
+<link rel="stylesheet" href="assets/style.css">
+<link rel="stylesheet" href="assets/pygments.css">
+</head>
+<body>
+<div class="layout">
+  <aside class="sidebar">
+    <a href="index.html" class="brand">📌 Шпаргалки</a>
+    <nav class="nav">
+<a href="yazi.html" class="nav-item"><span class="nav-ico">📦</span>Yazi</a>
+<a href="neovim.html" class="nav-item"><span class="nav-ico">📘</span>Neovim (LazyVim)</a>
+<a href="niri.html" class="nav-item"><span class="nav-ico">🪟</span>Niri</a>
+<a href="tmux.html" class="nav-item"><span class="nav-ico">🪟</span>Tmux</a>
+<a href="bash.html" class="nav-item"><span class="nav-ico">🐚</span>Bash</a>
+<a href="git.html" class="nav-item"><span class="nav-ico">🔀</span>Git</a>
+<a href="terminal.html" class="nav-item"><span class="nav-ico">🖥️</span>Терминал Linux</a>
+<a href="powershell.html" class="nav-item"><span class="nav-ico">💻</span>PowerShell</a>
+<a href="cmd.html" class="nav-item"><span class="nav-ico">🪟</span>CMD (cmd.exe)</a>
+<a href="python.html" class="nav-item"><span class="nav-ico">🐍</span>Python</a>
+<a href="systemd.html" class="nav-item"><span class="nav-ico">⚙️</span>systemd</a>
+<a href="ssh.html" class="nav-item"><span class="nav-ico">🔐</span>SSH</a>
+<a href="make-cmake.html" class="nav-item"><span class="nav-ico">🔨</span>Make / CMake</a>
+<a href="docker.html" class="nav-item"><span class="nav-ico">🐳</span>Docker</a>
+<a href="pacman.html" class="nav-item"><span class="nav-ico">📦</span>pacman / yay / paru</a>
+<a href="spark.html" class="nav-item"><span class="nav-ico">⚡</span>Apache Spark / PySpark</a>
+<a href="markdown.html" class="nav-item"><span class="nav-ico">📝</span>Markdown</a>
+<a href="regex.html" class="nav-item"><span class="nav-ico">🔍</span>Регулярные выражения</a>
+<a href="jq-json.html" class="nav-item"><span class="nav-ico">🔧</span>jq + JSON</a>
+<a href="awk-sed.html" class="nav-item"><span class="nav-ico">✂️</span>awk / sed</a>
+<a href="airflow.html" class="nav-item"><span class="nav-ico">🌪️</span>Apache Airflow</a>
+<a href="http-curl.html" class="nav-item"><span class="nav-ico">🌐</span>HTTP / curl</a>
+<a href="yaml.html" class="nav-item"><span class="nav-ico">📄</span>YAML</a>
+<a href="vscode.html" class="nav-item active"><span class="nav-ico">💻</span>VS Code</a>
+<a href="cron.html" class="nav-item"><span class="nav-ico">⏰</span>cron</a>
+<a href="fzf-zoxide.html" class="nav-item"><span class="nav-ico">🔎</span>fzf + zoxide</a>
+<a href="minikube-k8s.html" class="nav-item"><span class="nav-ico">☸️</span>Minikube / Kubernetes</a>
+<a href="cicd.html" class="nav-item"><span class="nav-ico">🦊</span>GitLab CI / GitHub Actions</a>
+<a href="nginx.html" class="nav-item"><span class="nav-ico">🌐</span>nginx</a>
+<a href="dbt.html" class="nav-item"><span class="nav-ico">🔧</span>dbt</a>
+<a href="kafka.html" class="nav-item"><span class="nav-ico">🐘</span>Apache Kafka</a>
+<a href="prometheus-grafana.html" class="nav-item"><span class="nav-ico">📊</span>Prometheus / Grafana</a>
+<a href="iceberg-nessie.html" class="nav-item"><span class="nav-ico">🧊</span>Iceberg / Nessie</a>
+<a href="impala.html" class="nav-item"><span class="nav-ico">🐬</span>Apache Impala</a>
+<a href="terraform.html" class="nav-item"><span class="nav-ico">🏗️</span>Terraform</a>
+<a href="linux-internals.html" class="nav-item"><span class="nav-ico">🐧</span>Linux Internals</a>
+<a href="miscellaneous.html" class="nav-item"><span class="nav-ico">🧰</span>Miscellaneous</a>
+<a href="python-automation-libs.html" class="nav-item"><span class="nav-ico">🐍</span>Python: авт-ция (10 libs)</a>
+<a href="eza.html" class="nav-item"><span class="nav-ico">🌈</span>eza</a>
+<a href="dbeaver.html" class="nav-item"><span class="nav-ico">🗄️</span>DBeaver</a>
+<a href="zcode.html" class="nav-item"><span class="nav-ico">🤖</span>ZCode</a>
+<a href="warp.html" class="nav-item"><span class="nav-ico">🚀</span>Warp</a>
+<a href="agentic-ai-dev.html" class="nav-item"><span class="nav-ico">🤝</span>Агентная разработка с ИИ</a>
+    </nav>
+  </aside>
+
+  <main class="content">
+    <article>
+<h1 id="vs-code-шпаргалка-по-горячим-клавишам-и-настройке">💻 VS Code — шпаргалка по горячим клавишам и настройке<a class="headerlink" href="#vs-code-шпаргалка-по-горячим-клавишам-и-настройке" title="Ссылка">#</a></h1>
+<blockquote>
+<p><strong>Visual Studio Code</strong> (VS Code) — бесплатный редактор кода от Microsoft.
+Документация: https://code.visualstudio.com/docs</p>
+</blockquote>
+<hr />
+<h2 id="главные-сочетания">🔑 Главные сочетания<a class="headerlink" href="#главные-сочетания" title="Ссылка">#</a></h2>
+<blockquote>
+<p>Обозначение: <code>Ctrl</code> (Windows/Linux), <code>Cmd</code> (macOS).</p>
+</blockquote>
+<h3 id="command-palette-главное">Command Palette (главное!)<a class="headerlink" href="#command-palette-главное" title="Ссылка">#</a></h3>
+<table>
+<thead>
+<tr>
+<th>Клавиша</th>
+<th>Действие</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Ctrl+Shift+P</code> / <code>Cmd+Shift+P</code></td>
+<td><strong>Command Palette</strong> — поиск команд</td>
+</tr>
+<tr>
+<td><code>Ctrl+P</code> / <code>Cmd+P</code></td>
+<td>Быстрый поиск файлов</td>
+</tr>
+<tr>
+<td><code>Ctrl+Shift+O</code></td>
+<td>Перейти к символу в файле</td>
+</tr>
+<tr>
+<td><code>Ctrl+G</code></td>
+<td>Перейти к строке</td>
+</tr>
+<tr>
+<td><code>Ctrl+Tab</code></td>
+<td>Переключение вкладок</td>
+</tr>
+<tr>
+<td><code>Ctrl+,</code></td>
+<td>Открыть настройки</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>💡 Command Palette — ваше всё. Забыли шорткат? Откройте палитру и начните печатать.</p>
+</blockquote>
+<hr />
+<h2 id="файлы-и-редактирование">📁 Файлы и редактирование<a class="headerlink" href="#файлы-и-редактирование" title="Ссылка">#</a></h2>
+<h3 id="базовое-редактирование">Базовое редактирование<a class="headerlink" href="#базовое-редактирование" title="Ссылка">#</a></h3>
+<table>
+<thead>
+<tr>
+<th>Клавиша</th>
+<th>Действие</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Ctrl+S</code></td>
+<td>Сохранить</td>
+</tr>
+<tr>
+<td><code>Ctrl+Shift+S</code></td>
+<td>Сохранить как</td>
+</tr>
+<tr>
+<td><code>Ctrl+N</code></td>
+<td>Новый файл</td>
+</tr>
+<tr>
+<td><code>Ctrl+O</code></td>
+<td>Открыть файл</td>
+</tr>
+<tr>
+<td><code>Ctrl+W</code> / <code>Ctrl+F4</code></td>
+<td>Закрыть вкладку</td>
+</tr>
+<tr>
+<td><code>Ctrl+Shift+T</code></td>
+<td>Восстановить закрытую вкладку</td>
+</tr>
+<tr>
+<td><code>Ctrl+Z</code></td>
+<td>Отменить</td>
+</tr>
+<tr>
+<td><code>Ctrl+Y</code> / <code>Ctrl+Shift+Z</code></td>
+<td>Вернуть (redo)</td>
+</tr>
+<tr>
+<td><code>Ctrl+C</code> (без выделения)</td>
+<td>Копировать строку</td>
+</tr>
+<tr>
+<td><code>Ctrl+X</code> (без выделения)</td>
+<td>Вырезать строку</td>
+</tr>
+<tr>
+<td><code>Ctrl+V</code></td>
+<td>Вставить</td>
+</tr>
+<tr>
+<td><code>Ctrl+Shift+K</code></td>
+<td>Удалить строку</td>
+</tr>
+<tr>
+<td><code>Alt+↑</code> / <code>Alt+↓</code></td>
+<td>Переместить строку вверх/вниз</td>
+</tr>
+<tr>
+<td><code>Shift+Alt+↓</code> / <code>Shift+Alt+↑</code></td>
+<td>Дублировать строку</td>
+</tr>
+<tr>
+<td><code>Ctrl+Enter</code></td>
+<td>Новая строка ниже</td>
+</tr>
+<tr>
+<td><code>Ctrl+Shift+Enter</code></td>
+<td>Новая строка выше</td>
+</tr>
+<tr>
+<td><code>Ctrl+]</code> / <code>Ctrl+[</code></td>
+<td>Отступ вправо/влево</td>
+</tr>
+<tr>
+<td><code>Ctrl+/</code></td>
+<td>Закомментировать/раскомментировать</td>
+</tr>
+<tr>
+<td><code>Shift+Alt+A</code></td>
+<td>Блочный комментарий</td>
+</tr>
+<tr>
+<td><code>Ctrl+K Ctrl+C</code></td>
+<td>Закомментировать строку</td>
+</tr>
+<tr>
+<td><code>Ctrl+K Ctrl+U</code></td>
+<td>Раскомментировать строку</td>
+</tr>
+<tr>
+<td><code>Home</code> / <code>End</code></td>
+<td>В начало/конец строки</td>
+</tr>
+<tr>
+<td><code>Ctrl+Home</code> / <code>Ctrl+End</code></td>
+<td>В начало/конец файла</td>
+</tr>
+</tbody>
+</table>
+<h3 id="мульти-курсор">Мульти-курсор<a class="headerlink" href="#мульти-курсор" title="Ссылка">#</a></h3>
+<table>
+<thead>
+<tr>
+<th>Клавиша</th>
+<th>Действие</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Alt+Click</code></td>
+<td>Добавить курсор</td>
+</tr>
+<tr>
+<td><code>Ctrl+Alt+↑</code> / <code>Ctrl+Alt+↓</code></td>
+<td>Курсор в каждой строке выше/ниже</td>
+</tr>
+<tr>
+<td><code>Ctrl+D</code></td>
+<td>Выделить следующее совпадение</td>
+</tr>
+<tr>
+<td><code>Ctrl+Shift+L</code></td>
+<td>Выделить ВСЕ совпадения</td>
+</tr>
+<tr>
+<td><code>Ctrl+K Ctrl+D</code></td>
+<td>Пропустить текущее (следующее)</td>
+</tr>
+<tr>
+<td><code>Shift+Alt+I</code></td>
+<td>Курсор в конце каждой строки выделения</td>
+</tr>
+<tr>
+<td><code>Ctrl+U</code></td>
+<td>Отменить последний курсор</td>
+</tr>
+<tr>
+<td><code>Alt+→</code> / <code>Alt+←</code></td>
+<td>По словам</td>
+</tr>
+<tr>
+<td><code>Ctrl+Shift+\</code></td>
+<td>К парной скобке</td>
+</tr>
+<tr>
+<td><code>Ctrl+L</code></td>
+<td>Выделить строку</td>
+</tr>
+</tbody>
+</table>
+<h3 id="выделение">Выделение<a class="headerlink" href="#выделение" title="Ссылка">#</a></h3>
+<table>
+<thead>
+<tr>
+<th>Клавиша</th>
+<th>Действие</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Shift+→/←</code></td>
+<td>Посимвольно</td>
+</tr>
+<tr>
+<td><code>Ctrl+Shift+→/←</code></td>
+<td>По словам</td>
+</tr>
+<tr>
+<td><code>Shift+↓/↑</code></td>
+<td>По строкам</td>
+</tr>
+<tr>
+<td><code>Ctrl+A</code></td>
+<td>Выделить всё</td>
+</tr>
+<tr>
+<td><code>Ctrl+Shift+Home/End</code></td>
+<td>До начала/конца файла</td>
+</tr>
+<tr>
+<td><code>Ctrl+K Ctrl+B</code></td>
+<td>Расширить выделение</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="поиск-и-замена">🔍 Поиск и замена<a class="headerlink" href="#поиск-и-замена" title="Ссылка">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Клавиша</th>
+<th>Действие</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Ctrl+F</code></td>
+<td>Поиск в файле</td>
+</tr>
+<tr>
+<td><code>Ctrl+H</code></td>
+<td>Замена</td>
+</tr>
+<tr>
+<td><code>F3</code> / <code>Enter</code></td>
+<td>Следующее совпадение</td>
+</tr>
+<tr>
+<td><code>Shift+F3</code> / <code>Shift+Enter</code></td>
+<td>Предыдущее</td>
+</tr>
+<tr>
+<td><code>Alt+Enter</code></td>
+<td>Выделить все совпадения (мультикурсор)</td>
+</tr>
+<tr>
+<td><code>Ctrl+Shift+F</code></td>
+<td>Поиск по всем файлам</td>
+</tr>
+<tr>
+<td><code>Ctrl+Shift+H</code></td>
+<td>Замена по всем файлам</td>
+</tr>
+<tr>
+<td><code>Ctrl+D</code></td>
+<td>Выделить следующее + мультикурсор</td>
+</tr>
+</tbody>
+</table>
+<h3 id="опции-поиска">Опции поиска<a class="headerlink" href="#опции-поиска" title="Ссылка">#</a></h3>
+<table>
+<thead>
+<tr>
+<th>Опция</th>
+<th>Что</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Aa</code></td>
+<td>Case-sensitive (учитывать регистр)</td>
+</tr>
+<tr>
+<td><code>\b</code></td>
+<td>Whole word (целое слово)</td>
+</tr>
+<tr>
+<td><code>.*</code></td>
+<td>Regex</td>
+</tr>
+<tr>
+<td><code>↕</code></td>
+<td>Preserve case в замене</td>
+</tr>
+<tr>
+<td><code>ab|ac</code></td>
+<td>Заменить в выделении</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="боковая-панель-и-навигация">🗂️ Боковая панель и навигация<a class="headerlink" href="#боковая-панель-и-навигация" title="Ссылка">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Клавиша</th>
+<th>Действие</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Ctrl+B</code></td>
+<td>Скрыть/показать боковую панель</td>
+</tr>
+<tr>
+<td><code>Ctrl+Shift+E</code></td>
+<td>Explorer (файлы)</td>
+</tr>
+<tr>
+<td><code>Ctrl+Shift+F</code></td>
+<td>Поиск</td>
+</tr>
+<tr>
+<td><code>Ctrl+Shift+G</code></td>
+<td>Source Control (Git)</td>
+</tr>
+<tr>
+<td><code>Ctrl+Shift+D</code></td>
+<td>Run and Debug</td>
+</tr>
+<tr>
+<td><code>Ctrl+Shift+X</code></td>
+<td>Extensions</td>
+</tr>
+<tr>
+<td><code>Ctrl+Shift+U</code></td>
+<td>Output panel</td>
+</tr>
+<tr>
+<td><code>Ctrl+Shift+M</code></td>
+<td>Problems (ошибки)</td>
+</tr>
+<tr>
+<td><code>Ctrl+Shift+J</code></td>
+<td>Раскрыть/свернуть поиск</td>
+</tr>
+<tr>
+<td><code>Ctrl+\</code></td>
+<td>Разделить редактор</td>
+</tr>
+<tr>
+<td><code>Ctrl+K Ctrl+→/←</code></td>
+<td>Перейти в соседнюю группу</td>
+</tr>
+<tr>
+<td><code>Ctrl+1/2/3</code></td>
+<td>Фокус на группу 1/2/3</td>
+</tr>
+<tr>
+<td><code>Ctrl+Shift+PageUp</code></td>
+<td>Вкладку влево</td>
+</tr>
+<tr>
+<td><code>Ctrl+Shift+PageDown</code></td>
+<td>Вкладку вправо</td>
+</tr>
+<tr>
+<td><code>Ctrl+K Ctrl+Shift+Enter</code></td>
+<td>Закрепить вкладку</td>
+</tr>
+<tr>
+<td><code>Ctrl+Shift+P</code> → &ldquo;View: Toggle Zen Mode&rdquo;</td>
+<td>Дзен-режим</td>
+</tr>
+<tr>
+<td><code>F11</code></td>
+<td>Полноэкранный режим</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="терминал-и-панель">🖥️ Терминал и панель<a class="headerlink" href="#терминал-и-панель" title="Ссылка">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Клавиша</th>
+<th>Действие</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Ctrl+``</code> `</td>
+<td>Открыть/закрыть терминал</td>
+</tr>
+<tr>
+<td><code>Ctrl+Shift+``</code> `</td>
+<td>Новый терминал</td>
+</tr>
+<tr>
+<td><code>Ctrl+Shift+C</code></td>
+<td>Разделить терминал</td>
+</tr>
+<tr>
+<td><code>Ctrl+Shift+M</code></td>
+<td>Переключить фокус (терминал ↔ редактор)</td>
+</tr>
+<tr>
+<td><code>Ctrl+Shift+Backspace</code></td>
+<td>Удалить терминал</td>
+</tr>
+<tr>
+<td><code>Ctrl+Shift+D</code> (в терминале)</td>
+<td>Закрыть</td>
+</tr>
+<tr>
+<td><code>Alt+Z</code></td>
+<td>Перенос слов в терминале</td>
+</tr>
+</tbody>
+</table>
+<h3 id="встроенный-терминал">Встроенный терминал<a class="headerlink" href="#встроенный-терминал" title="Ссылка">#</a></h3>
+<ul>
+<li>Поддержка bash/zsh/fish/PowerShell/cmd.</li>
+<li>Интеграция с shell: <code>code .</code> открывает VS Code в текущем каталоге.</li>
+<li>Профили терминала: <code>terminal.integrated.profiles.linux</code>.</li>
+<li>Дефолтный: <code>terminal.integrated.defaultProfile.linux</code>.</li>
+</ul>
+<hr />
+<h2 id="git-интеграция">🌐 Git-интеграция<a class="headerlink" href="#git-интеграция" title="Ссылка">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Клавиша / Команда</th>
+<th>Действие</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Ctrl+Shift+G</code></td>
+<td>Source Control view</td>
+</tr>
+<tr>
+<td>В поле сообщения + <code>Ctrl+Enter</code></td>
+<td>Commit</td>
+</tr>
+<tr>
+<td><code>…</code> → Commit All</td>
+<td>Закоммитить всё</td>
+</tr>
+<tr>
+<td><code>…</code> → Discard All Changes</td>
+<td>Отменить изменения</td>
+</tr>
+<tr>
+<td><code>…</code> → Stash Changes</td>
+<td>Спрятать изменения</td>
+</tr>
+<tr>
+<td>Клик на файле в Changes</td>
+<td>Diff view</td>
+</tr>
+<tr>
+<td><code>Stage</code> / <code>Unstage</code></td>
+<td>Добавить/убрать из staging</td>
+</tr>
+<tr>
+<td><code>git blame</code> (встроенный)</td>
+<td>Навести на строку</td>
+</tr>
+<tr>
+<td>Hover → Git lens</td>
+<td>Кто изменил строку</td>
+</tr>
+<tr>
+<td><code>Ctrl+Shift+G G</code></td>
+<td>Откройте Git Graph (если установлен)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="встроенные-git-команды">Встроенные git-команды<a class="headerlink" href="#встроенные-git-команды" title="Ссылка">#</a></h3>
+<ul>
+<li>Command Palette → <code>Git: Clone</code>, <code>Git: Pull</code>, <code>Git: Push</code>.</li>
+<li><code>Git: Checkout To...</code> — сменить ветку.</li>
+<li><code>Git: Commit</code> — закоммитить.</li>
+<li><code>Git: Stash</code>, <code>Git: Pop Stash</code>.</li>
+</ul>
+<hr />
+<h2 id="дебаггер">🐛 Дебаггер<a class="headerlink" href="#дебаггер" title="Ссылка">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Клавиша</th>
+<th>Действие</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>F5</code></td>
+<td>Start debugging</td>
+</tr>
+<tr>
+<td><code>Shift+F5</code></td>
+<td>Stop</td>
+</tr>
+<tr>
+<td><code>Ctrl+Shift+F5</code></td>
+<td>Restart</td>
+</tr>
+<tr>
+<td><code>F9</code></td>
+<td>Toggle breakpoint</td>
+</tr>
+<tr>
+<td><code>F10</code></td>
+<td>Step over</td>
+</tr>
+<tr>
+<td><code>F11</code></td>
+<td>Step into</td>
+</tr>
+<tr>
+<td><code>Shift+F11</code></td>
+<td>Step out</td>
+</tr>
+<tr>
+<td><code>F5</code></td>
+<td>Continue</td>
+</tr>
+<tr>
+<td>Hover по переменной</td>
+<td>Посмотреть значение</td>
+</tr>
+<tr>
+<td><code>Watch</code> panel</td>
+<td>Добавить выражение</td>
+</tr>
+<tr>
+<td><code>Call Stack</code></td>
+<td>Стек вызовов</td>
+</tr>
+</tbody>
+</table>
+<h3 id="launch-json">launch.json<a class="headerlink" href="#launch-json" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0.2.0&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;configurations&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Python: Current File&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;python&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;request&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;launch&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;program&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;${file}&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;console&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;integratedTerminal&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;justMyCode&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Python: Django&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;python&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;request&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;launch&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;program&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;${workspaceFolder}/manage.py&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;args&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;runserver&quot;</span><span class="p">],</span>
+<span class="w">      </span><span class="nt">&quot;django&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">]</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<hr />
+<h2 id="emmet-html-css">🎨 Emmet (HTML/CSS)<a class="headerlink" href="#emmet-html-css" title="Ссылка">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Abbreviation</th>
+<th>Результат</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>!</code></td>
+<td>HTML5 boilerplate</td>
+</tr>
+<tr>
+<td><code>div.class</code></td>
+<td><code>&lt;div class="class"&gt;&lt;/div&gt;</code></td>
+</tr>
+<tr>
+<td><code>div#id</code></td>
+<td><code>&lt;div id="id"&gt;&lt;/div&gt;</code></td>
+</tr>
+<tr>
+<td><code>ul&gt;li*3</code></td>
+<td><code>&lt;ul&gt;</code> с 3 <code>&lt;li&gt;</code></td>
+</tr>
+<tr>
+<td><code>a:link</code></td>
+<td><code>&lt;a href="http://"&gt;&lt;/a&gt;</code></td>
+</tr>
+<tr>
+<td><code>p*2</code></td>
+<td>два <code>&lt;p&gt;</code></td>
+</tr>
+<tr>
+<td><code>nav&gt;ul&gt;li*5&gt;a</code></td>
+<td>Вложенная структура</td>
+</tr>
+<tr>
+<td><code>.wrapper&gt;h1+p*3</code></td>
+<td>div + h1 + 3 p</td>
+</tr>
+<tr>
+<td><code>m10</code></td>
+<td><code>margin: 10px;</code></td>
+</tr>
+<tr>
+<td><code>p10-20</code></td>
+<td><code>padding: 10px 20px;</code></td>
+</tr>
+<tr>
+<td><code>w100p</code></td>
+<td><code>width: 100%;</code></td>
+</tr>
+<tr>
+<td><code>d:f</code></td>
+<td><code>display: flex;</code></td>
+</tr>
+</tbody>
+</table>
+<p>Emmet работает в HTML, CSS, JSX, Vue, Svelte.</p>
+<hr />
+<h2 id="сниппеты">🔤 Сниппеты<a class="headerlink" href="#сниппеты" title="Ссылка">#</a></h2>
+<h3 id="свои-сниппеты">Свои сниппеты<a class="headerlink" href="#свои-сниппеты" title="Ссылка">#</a></h3>
+<p><code>Ctrl+Shift+P</code> → <code>Preferences: Configure User Snippets</code> → выбор языка.</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// python.json</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;Print&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;prefix&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;pp&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;body&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">      </span><span class="s2">&quot;print(f\&quot;${1:var} = {$1}\&quot;)&quot;</span>
+<span class="w">    </span><span class="p">],</span>
+<span class="w">    </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Debug print&quot;</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="nt">&quot;Main&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;prefix&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;main&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;body&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">      </span><span class="s2">&quot;if __name__ == \&quot;__main__\&quot;:&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="s2">&quot;    ${1:main()}&quot;</span>
+<span class="w">    </span><span class="p">]</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<p>Переменные в сниппетах:
+- <code>${1:default}</code> — placeholder с значением по умолчанию.
+- <code>${2:second}</code> — следующий курсор.
+- <code>$0</code> — финальная позиция курсора.
+- <code>${1|opt1,opt2,opt3|}</code> — выбор из списка.
+- <code>$CLIPBOARD</code>, <code>$TM_FILENAME</code>, <code>$CURRENT_YEAR</code> и т.д.</p>
+<hr />
+<h2 id="настройки">⚙️ Настройки<a class="headerlink" href="#настройки" title="Ссылка">#</a></h2>
+<h3 id="settings-json">settings.json<a class="headerlink" href="#settings-json" title="Ссылка">#</a></h3>
+<p><code>Ctrl+,</code> → иконка <code>Open Settings (JSON)</code> в правом верхнем углу.</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="c1">// Общее</span>
+<span class="w">  </span><span class="nt">&quot;editor.fontSize&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">14</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;editor.fontFamily&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&#39;JetBrains Mono&#39;, &#39;Fira Code&#39;, monospace&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;editor.fontLigatures&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;editor.tabSize&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;editor.insertSpaces&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;editor.detectIndentation&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;editor.formatOnSave&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;editor.formatOnPaste&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;editor.minimap.enabled&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;editor.wordWrap&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;on&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;editor.stickyScroll.enabled&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;editor.bracketPairColorization.enabled&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;editor.guides.bracketPairs&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;active&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;editor.inlineSuggest.enabled&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+
+<span class="w">  </span><span class="c1">// Files</span>
+<span class="w">  </span><span class="nt">&quot;files.autoSave&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;afterDelay&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;files.autoSaveDelay&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1000</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;files.exclude&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;**/.git&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;**/.DS_Store&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;**/node_modules&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;**/__pycache__&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="nt">&quot;files.associations&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;*.md&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;markdown&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;*.json&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;jsonc&quot;</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="nt">&quot;files.trimTrailingWhitespace&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;files.insertFinalNewline&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+
+<span class="w">  </span><span class="c1">// Search</span>
+<span class="w">  </span><span class="nt">&quot;search.exclude&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;**/node_modules&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;**/dist&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;**/.git&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span>
+<span class="w">  </span><span class="p">},</span>
+
+<span class="w">  </span><span class="c1">// Terminal</span>
+<span class="w">  </span><span class="nt">&quot;terminal.integrated.fontSize&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">13</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;terminal.integrated.fontFamily&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;JetBrains Mono&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;terminal.integrated.scrollback&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">10000</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;terminal.integrated.defaultProfile.linux&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;zsh&quot;</span><span class="p">,</span>
+
+<span class="w">  </span><span class="c1">// Python</span>
+<span class="w">  </span><span class="nt">&quot;python.defaultInterpreterPath&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;${workspaceFolder}/.venv/bin/python&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;python.analysis.typeCheckingMode&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;basic&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;python.analysis.autoImportCompletions&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;[python]&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;editor.defaultFormatter&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;charliermarsh.ruff&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;editor.codeActionsOnSave&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;source.organizeImports&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;explicit&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">},</span>
+
+<span class="w">  </span><span class="c1">// Тема</span>
+<span class="w">  </span><span class="nt">&quot;workbench.colorTheme&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;One Dark Pro&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;workbench.iconTheme&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;material-icon-theme&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;workbench.startupEditor&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;none&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;workbench.editor.labelFormat&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;short&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;window.title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;${dirty}${activeEditorShort}${separator}${rootName}&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;window.zoomLevel&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+
+<span class="w">  </span><span class="c1">// Git</span>
+<span class="w">  </span><span class="nt">&quot;git.enableSmartCommit&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;git.confirmSync&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;git.autofetch&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;gitlens.currentLine.enabled&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+
+<span class="w">  </span><span class="c1">// Расширения</span>
+<span class="w">  </span><span class="nt">&quot;editor.linkedEditing&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">        </span><span class="c1">// менять парные теги одновременно</span>
+<span class="w">  </span><span class="nt">&quot;liveServer.settings.donotShowInfoMsg&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;errorLens.enabled&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<h3 id="keybindings-json">keybindings.json<a class="headerlink" href="#keybindings-json" title="Ссылка">#</a></h3>
+<p><code>Ctrl+K Ctrl+S</code> → иконка открытия.</p>
+<div class="highlight"><pre><span></span><code><span class="p">[</span>
+<span class="w">  </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;key&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ctrl+shift+up&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;command&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;editor.action.copyLinesUpAction&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;when&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;editorTextFocus &amp;&amp; !editorReadonly&quot;</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;key&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ctrl+shift+down&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;command&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;editor.action.copyLinesDownAction&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;when&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;editorTextFocus &amp;&amp; !editorReadonly&quot;</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;key&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ctrl+e&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;command&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;workbench.action.quickOpen&quot;</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">]</span>
+</code></pre></div>
+
+<hr />
+<h2 id="must-have-расширения">🧩 Must-have расширения<a class="headerlink" href="#must-have-расширения" title="Ссылка">#</a></h2>
+<h3 id="общее">Общее<a class="headerlink" href="#общее" title="Ссылка">#</a></h3>
+<table>
+<thead>
+<tr>
+<th>Расширение</th>
+<th>Назначение</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Prettier</strong></td>
+<td>Форматирование (JS/TS/CSS/HTML/MD/YAML)</td>
+</tr>
+<tr>
+<td><strong>ESLint</strong></td>
+<td>Линтер JS/TS</td>
+</tr>
+<tr>
+<td><strong>EditorConfig</strong></td>
+<td>Уважать <code>.editorconfig</code></td>
+</tr>
+<tr>
+<td><strong>Path Intellisense</strong></td>
+<td>Автодополнение путей</td>
+</tr>
+<tr>
+<td><strong>Error Lens</strong></td>
+<td>Ошибки прямо в строке</td>
+</tr>
+<tr>
+<td><strong>Material Icon Theme</strong></td>
+<td>Иконки файлов</td>
+</tr>
+<tr>
+<td><strong>One Dark Pro</strong> / <strong>Tokyo Night</strong></td>
+<td>Темы</td>
+</tr>
+<tr>
+<td><strong>TODO Highlight</strong></td>
+<td>Подсветка TODO/FIXME</td>
+</tr>
+<tr>
+<td><strong>TODO Tree</strong></td>
+<td>Дерево TODO</td>
+</tr>
+<tr>
+<td><strong>Code Spell Checker</strong></td>
+<td>Проверка орфографии</td>
+</tr>
+</tbody>
+</table>
+<h3 id="python">Python<a class="headerlink" href="#python" title="Ссылка">#</a></h3>
+<table>
+<thead>
+<tr>
+<th>Расширение</th>
+<th>Назначение</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Python</strong></td>
+<td>Официальное (Microsoft)</td>
+</tr>
+<tr>
+<td><strong>Pylance</strong></td>
+<td>Type checker (быстрый)</td>
+</tr>
+<tr>
+<td><strong>Ruff</strong></td>
+<td>Линтер+форматер (рекомендуется!)</td>
+</tr>
+<tr>
+<td><strong>Black Formatter</strong></td>
+<td>Альтернативный форматер</td>
+</tr>
+<tr>
+<td><strong>Jupyter</strong></td>
+<td>Ноутбуки .ipynb</td>
+</tr>
+</tbody>
+</table>
+<h3 id="git">Git<a class="headerlink" href="#git" title="Ссылка">#</a></h3>
+<table>
+<thead>
+<tr>
+<th>Расширение</th>
+<th>Назначение</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>GitLens</strong></td>
+<td>Blame, история, многофункциональный</td>
+</tr>
+<tr>
+<td><strong>Git Graph</strong></td>
+<td>Визуализация графа коммитов</td>
+</tr>
+<tr>
+<td><strong>GitHub Pull Requests</strong></td>
+<td>PR из VS Code</td>
+</tr>
+<tr>
+<td><strong>GitLab Workflow</strong></td>
+<td>GitLab интеграция</td>
+</tr>
+</tbody>
+</table>
+<h3 id="веб">Веб<a class="headerlink" href="#веб" title="Ссылка">#</a></h3>
+<table>
+<thead>
+<tr>
+<th>Расширение</th>
+<th>Назначение</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Live Server</strong></td>
+<td>Локальный сервер с автообновлением</td>
+</tr>
+<tr>
+<td><strong>Tailwind CSS IntelliSense</strong></td>
+<td>Автодополнение Tailwind</td>
+</tr>
+<tr>
+<td><strong>Auto Rename Tag</strong></td>
+<td>Переименование парных тегов</td>
+</tr>
+<tr>
+<td><strong>CSS Peek</strong></td>
+<td>Переход к CSS-определению</td>
+</tr>
+</tbody>
+</table>
+<h3 id="инструменты">Инструменты<a class="headerlink" href="#инструменты" title="Ссылка">#</a></h3>
+<table>
+<thead>
+<tr>
+<th>Расширение</th>
+<th>Назначение</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Docker</strong></td>
+<td>Управление контейнерами</td>
+</tr>
+<tr>
+<td><strong>Remote - SSH</strong></td>
+<td>Разработка на удалённом сервере</td>
+</tr>
+<tr>
+<td><strong>Remote - Containers</strong></td>
+<td>Dev Containers</td>
+</tr>
+<tr>
+<td><strong>Database Client</strong></td>
+<td>JDBC (MySQL/PostgreSQL)</td>
+</tr>
+<tr>
+<td><strong>REST Client</strong></td>
+<td><code>.http</code> файлы</td>
+</tr>
+<tr>
+<td><strong>Thunder Client</strong></td>
+<td>Postman внутри VS Code</td>
+</tr>
+<tr>
+<td><strong>YAML</strong></td>
+<td>Поддержка YAML + схемы</td>
+</tr>
+<tr>
+<td><strong>Markdown All in One</strong></td>
+<td>Markdown-помощники</td>
+</tr>
+<tr>
+<td><strong>Markdown Preview Enhanced</strong></td>
+<td>Расширенное превью</td>
+</tr>
+<tr>
+<td><strong>Draw.io Integration</strong></td>
+<td>Диаграммы</td>
+</tr>
+<tr>
+<td><strong>Ascii Tree Generator</strong></td>
+<td>Деревья каталогов</td>
+</tr>
+</tbody>
+</table>
+<h3 id="remote-development">Remote Development<a class="headerlink" href="#remote-development" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Установить pack</span>
+code<span class="w"> </span>--install-extension<span class="w"> </span>ms-vscode-remote.vscode-remote-extensionpack
+</code></pre></div>
+
+<ul>
+<li><strong>Remote - SSH</strong> — редактировать файлы на сервере.</li>
+<li><strong>Remote - Containers</strong> — dev в Docker-контейнере.</li>
+<li><strong>Remote - WSL</strong> — Windows Subsystem for Linux.</li>
+<li><strong>Remote - Tunnels</strong> — удалённый доступ через туннели.</li>
+</ul>
+<hr />
+<h2 id="tasks-json-и-launch-json">⚙️ tasks.json и launch.json<a class="headerlink" href="#tasks-json-и-launch-json" title="Ссылка">#</a></h2>
+<h3 id="tasks-json-автоматизация">tasks.json — автоматизация<a class="headerlink" href="#tasks-json-автоматизация" title="Ссылка">#</a></h3>
+<p><code>.vscode/tasks.json</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2.0.0&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;tasks&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;label&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Run Python&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;shell&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;command&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;python&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;args&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;${file}&quot;</span><span class="p">],</span>
+<span class="w">      </span><span class="nt">&quot;group&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;kind&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;build&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;isDefault&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;problemMatcher&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;label&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Test&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;shell&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;command&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;pytest&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;group&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;test&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">]</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<p><code>Ctrl+Shift+B</code> — запустить build task.</p>
+<hr />
+<h2 id="пользовательская-синхронизация">🌍 Пользовательская синхронизация<a class="headerlink" href="#пользовательская-синхронизация" title="Ссылка">#</a></h2>
+<p><strong>Settings Sync</strong> — синхронизация настроек между машинами через GitHub/Microsoft.</p>
+<p><code>Ctrl+Shift+P</code> → <code>Settings Sync: Turn On</code>.</p>
+<p>Синхронизирует:
+- Настройки (<code>settings.json</code>)
+- Горячие клавиши (<code>keybindings.json</code>)
+- Расширения
+- Сниппеты
+- UI состояние
+- Профили</p>
+<hr />
+<h2 id="cli-code">🚀 CLI: <code>code</code><a class="headerlink" href="#cli-code" title="Ссылка">#</a></h2>
+<div class="highlight"><pre><span></span><code><span class="c1"># Установить команду `code` в PATH</span>
+<span class="c1"># (Cmd+Shift+P → &quot;Shell Command: Install &#39;code&#39; command in PATH&quot;)</span>
+
+<span class="c1"># Использование</span>
+code<span class="w"> </span>.<span class="w">                              </span><span class="c1"># открыть текущий каталог</span>
+code<span class="w"> </span>file.py<span class="w">                        </span><span class="c1"># открыть файл</span>
+code<span class="w"> </span>-r<span class="w"> </span>file.py<span class="w">                     </span><span class="c1"># открыть в текущем окне</span>
+code<span class="w"> </span>-n<span class="w"> </span>.<span class="w">                           </span><span class="c1"># в новом окне</span>
+code<span class="w"> </span>-d<span class="w"> </span>file1<span class="w"> </span>file2<span class="w">                 </span><span class="c1"># diff</span>
+code<span class="w"> </span>-g<span class="w"> </span>file.py:10:5<span class="w">                </span><span class="c1"># перейти к строке 10, колонке 5</span>
+code<span class="w"> </span>--install-extension<span class="w"> </span>ms-python.python<span class="w">   </span><span class="c1"># установить расширение</span>
+code<span class="w"> </span>--list-extensions<span class="w">              </span><span class="c1"># список расширений</span>
+code<span class="w"> </span>--uninstall-extension<span class="w"> </span>name
+code<span class="w"> </span>--diff<span class="w"> </span>a.txt<span class="w"> </span>b.txt<span class="w">             </span><span class="c1"># сравнить файлы</span>
+code<span class="w"> </span>-w<span class="w"> </span>file.txt<span class="w">                    </span><span class="c1"># ждать закрытия (для git)</span>
+</code></pre></div>
+
+<h3 id="экспорт-расширений">Экспорт расширений<a class="headerlink" href="#экспорт-расширений" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>code<span class="w"> </span>--list-extensions<span class="w"> </span>&gt;<span class="w"> </span>extensions.txt
+<span class="c1"># Установка на новой машине:</span>
+cat<span class="w"> </span>extensions.txt<span class="w"> </span><span class="p">|</span><span class="w"> </span>xargs<span class="w"> </span>-L1<span class="w"> </span>code<span class="w"> </span>--install-extension
+</code></pre></div>
+
+<hr />
+<h2 id="частые-ошибки">🪤 Частые ошибки<a class="headerlink" href="#частые-ошибки" title="Ссылка">#</a></h2>
+<ol>
+<li><strong>Расширения вместо конфигурации</strong> — не ставьте 100 расширений.</li>
+<li><strong>Форматирование</strong> — настройте <code>formatOnSave</code> под каждый язык.</li>
+<li><strong><code>code .</code> не работает</strong> — установите shell-команду.</li>
+<li><strong>Sync включает мусор</strong> — отключите рабочие расширения в Settings Sync.</li>
+<li><strong>Тяжёлые расширения</strong> — Prettier, ESLint замедляют большие проекты.</li>
+<li><strong>Terminal профиль</strong> — задайте правильный shell (zsh, not bash).</li>
+<li><strong><code>.vscode/</code> в репозитории</strong> — некоторые настройки можно шарить, секреты — нельзя.</li>
+<li><strong>Python interpreter</strong> — выберите правильный в Command Palette.</li>
+<li><strong>Забыли <code>gitlens</code></strong> — самая полезная git-интеграция.</li>
+<li><strong>Auto Save</strong> — может мешать автосборке.</li>
+</ol>
+<hr />
+<h2 id="полезные-ссылки">🔗 Полезные ссылки<a class="headerlink" href="#полезные-ссылки" title="Ссылка">#</a></h2>
+<ul>
+<li>Документация: https://code.visualstudio.com/docs</li>
+<li>Hotkeys (Windows): https://code.visualstudio.com/shortcuts/keyboard-shortcuts-windows.pdf</li>
+<li>Hotkeys (macOS): https://code.visualstudio.com/shortcuts/keyboard-shortcuts-macos.pdf</li>
+<li>Hotkeys (Linux): https://code.visualstudio.com/shortcuts/keyboard-shortcuts-linux.pdf</li>
+<li>Marketplace: https://marketplace.visualstudio.com</li>
+<li>Awesome VSCode: https://github.com/viatsko/awesome-vscode</li>
+<li>My top extensions: https://vscode.pro</li>
+</ul>
+<hr />
+<h2 id="полезные-советы">💡 Полезные советы<a class="headerlink" href="#полезные-советы" title="Ссылка">#</a></h2>
+<ol>
+<li><strong>Command Palette</strong> (<code>Ctrl+Shift+P</code>) — узнавайте команды по имени.</li>
+<li><strong>Quick Open</strong> (<code>Ctrl+P</code>) — быстрее, чем навигация по дереву.</li>
+<li><strong>Settings Sync</strong> — один раз настройте, и на всех машинах одинаково.</li>
+<li><strong><code>code .</code></strong> — открывает проект в текущем каталоге.</li>
+<li><strong><code>formatOnSave</code></strong> — настройте, чтобы код всегда был отформатирован.</li>
+<li><strong><code>editor.linkedEditing</code></strong> — менять парные HTML-теги одновременно.</li>
+<li><strong>Snippets</strong> — для часто повторяющегося кода.</li>
+<li><strong>Emmet</strong> — мощно для HTML/CSS (<code>!</code>, <code>div.class</code>).</li>
+<li><strong>Мультикурсор</strong> (<code>Ctrl+D</code>, <code>Alt+Click</code>) — для массовых правок.</li>
+<li><strong>Zen Mode</strong> — для фокусировки (двойной <code>Esc</code> для выхода).</li>
+<li><strong>Terminal + <code>code</code></strong> — интеграция shell.</li>
+<li><strong>Remote - SSH</strong> — редактируйте код на сервере как локально.</li>
+<li><strong><code>.vscode/settings.json</code></strong> в проекте — для командных настроек.</li>
+<li><strong>Profiles</strong> — разные наборы расширений для разных задач.</li>
+<li><strong>Dev Containers</strong> — изолированная среда разработки в Docker.</li>
+</ol>
+<hr />
+<p><em>Сгенерировано как шпаргалка. VS Code огромен —
+углубляйтесь через https://code.visualstudio.com/docs и <code>Ctrl+Shift+P</code></em></p>
+    </article>
+    <nav class="pagination">
+      <a class="pager prev" href="yaml.html">← YAML</a>
+      <a class="pager next" href="cron.html">cron →</a>
+    </nav>
+  </main>
+
+  <aside class="toc">
+    <details open>
+      <summary>📑 Оглавление</summary>
+      <div class="toc-list">
+<div class="toc">
+<ul>
+<li><a href="#vs-code-шпаргалка-по-горячим-клавишам-и-настройке">💻 VS Code — шпаргалка по горячим клавишам и настройке</a><ul>
+<li><a href="#главные-сочетания">🔑 Главные сочетания</a><ul>
+<li><a href="#command-palette-главное">Command Palette (главное!)</a></li>
+</ul>
+</li>
+<li><a href="#файлы-и-редактирование">📁 Файлы и редактирование</a><ul>
+<li><a href="#базовое-редактирование">Базовое редактирование</a></li>
+<li><a href="#мульти-курсор">Мульти-курсор</a></li>
+<li><a href="#выделение">Выделение</a></li>
+</ul>
+</li>
+<li><a href="#поиск-и-замена">🔍 Поиск и замена</a><ul>
+<li><a href="#опции-поиска">Опции поиска</a></li>
+</ul>
+</li>
+<li><a href="#боковая-панель-и-навигация">🗂️ Боковая панель и навигация</a></li>
+<li><a href="#терминал-и-панель">🖥️ Терминал и панель</a><ul>
+<li><a href="#встроенный-терминал">Встроенный терминал</a></li>
+</ul>
+</li>
+<li><a href="#git-интеграция">🌐 Git-интеграция</a><ul>
+<li><a href="#встроенные-git-команды">Встроенные git-команды</a></li>
+</ul>
+</li>
+<li><a href="#дебаггер">🐛 Дебаггер</a><ul>
+<li><a href="#launch-json">launch.json</a></li>
+</ul>
+</li>
+<li><a href="#emmet-html-css">🎨 Emmet (HTML/CSS)</a></li>
+<li><a href="#сниппеты">🔤 Сниппеты</a><ul>
+<li><a href="#свои-сниппеты">Свои сниппеты</a></li>
+</ul>
+</li>
+<li><a href="#настройки">⚙️ Настройки</a><ul>
+<li><a href="#settings-json">settings.json</a></li>
+<li><a href="#keybindings-json">keybindings.json</a></li>
+</ul>
+</li>
+<li><a href="#must-have-расширения">🧩 Must-have расширения</a><ul>
+<li><a href="#общее">Общее</a></li>
+<li><a href="#python">Python</a></li>
+<li><a href="#git">Git</a></li>
+<li><a href="#веб">Веб</a></li>
+<li><a href="#инструменты">Инструменты</a></li>
+<li><a href="#remote-development">Remote Development</a></li>
+</ul>
+</li>
+<li><a href="#tasks-json-и-launch-json">⚙️ tasks.json и launch.json</a><ul>
+<li><a href="#tasks-json-автоматизация">tasks.json — автоматизация</a></li>
+</ul>
+</li>
+<li><a href="#пользовательская-синхронизация">🌍 Пользовательская синхронизация</a></li>
+<li><a href="#cli-code">🚀 CLI: code</a><ul>
+<li><a href="#экспорт-расширений">Экспорт расширений</a></li>
+</ul>
+</li>
+<li><a href="#частые-ошибки">🪤 Частые ошибки</a></li>
+<li><a href="#полезные-ссылки">🔗 Полезные ссылки</a></li>
+<li><a href="#полезные-советы">💡 Полезные советы</a></li>
+</ul>
+</li>
+</ul>
+</div>
+
+      </div>
+    </details>
+  </aside>
+</div>
+
+<button class="back-top" id="backTop" aria-label="Наверх">↑</button>
+
+<script src="assets/search.js"></script>
+<script src="assets/page.js"></script>
+</body>
+</html>

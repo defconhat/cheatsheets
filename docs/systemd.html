@@ -1,0 +1,1233 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>systemd — Шпаргалки</title>
+<link rel="stylesheet" href="assets/style.css">
+<link rel="stylesheet" href="assets/pygments.css">
+</head>
+<body>
+<div class="layout">
+  <aside class="sidebar">
+    <a href="index.html" class="brand">📌 Шпаргалки</a>
+    <nav class="nav">
+<a href="yazi.html" class="nav-item"><span class="nav-ico">📦</span>Yazi</a>
+<a href="neovim.html" class="nav-item"><span class="nav-ico">📘</span>Neovim (LazyVim)</a>
+<a href="niri.html" class="nav-item"><span class="nav-ico">🪟</span>Niri</a>
+<a href="tmux.html" class="nav-item"><span class="nav-ico">🪟</span>Tmux</a>
+<a href="bash.html" class="nav-item"><span class="nav-ico">🐚</span>Bash</a>
+<a href="git.html" class="nav-item"><span class="nav-ico">🔀</span>Git</a>
+<a href="terminal.html" class="nav-item"><span class="nav-ico">🖥️</span>Терминал Linux</a>
+<a href="powershell.html" class="nav-item"><span class="nav-ico">💻</span>PowerShell</a>
+<a href="cmd.html" class="nav-item"><span class="nav-ico">🪟</span>CMD (cmd.exe)</a>
+<a href="python.html" class="nav-item"><span class="nav-ico">🐍</span>Python</a>
+<a href="systemd.html" class="nav-item active"><span class="nav-ico">⚙️</span>systemd</a>
+<a href="ssh.html" class="nav-item"><span class="nav-ico">🔐</span>SSH</a>
+<a href="make-cmake.html" class="nav-item"><span class="nav-ico">🔨</span>Make / CMake</a>
+<a href="docker.html" class="nav-item"><span class="nav-ico">🐳</span>Docker</a>
+<a href="pacman.html" class="nav-item"><span class="nav-ico">📦</span>pacman / yay / paru</a>
+<a href="spark.html" class="nav-item"><span class="nav-ico">⚡</span>Apache Spark / PySpark</a>
+<a href="markdown.html" class="nav-item"><span class="nav-ico">📝</span>Markdown</a>
+<a href="regex.html" class="nav-item"><span class="nav-ico">🔍</span>Регулярные выражения</a>
+<a href="jq-json.html" class="nav-item"><span class="nav-ico">🔧</span>jq + JSON</a>
+<a href="awk-sed.html" class="nav-item"><span class="nav-ico">✂️</span>awk / sed</a>
+<a href="airflow.html" class="nav-item"><span class="nav-ico">🌪️</span>Apache Airflow</a>
+<a href="http-curl.html" class="nav-item"><span class="nav-ico">🌐</span>HTTP / curl</a>
+<a href="yaml.html" class="nav-item"><span class="nav-ico">📄</span>YAML</a>
+<a href="vscode.html" class="nav-item"><span class="nav-ico">💻</span>VS Code</a>
+<a href="cron.html" class="nav-item"><span class="nav-ico">⏰</span>cron</a>
+<a href="fzf-zoxide.html" class="nav-item"><span class="nav-ico">🔎</span>fzf + zoxide</a>
+<a href="minikube-k8s.html" class="nav-item"><span class="nav-ico">☸️</span>Minikube / Kubernetes</a>
+<a href="cicd.html" class="nav-item"><span class="nav-ico">🦊</span>GitLab CI / GitHub Actions</a>
+<a href="nginx.html" class="nav-item"><span class="nav-ico">🌐</span>nginx</a>
+<a href="dbt.html" class="nav-item"><span class="nav-ico">🔧</span>dbt</a>
+<a href="kafka.html" class="nav-item"><span class="nav-ico">🐘</span>Apache Kafka</a>
+<a href="prometheus-grafana.html" class="nav-item"><span class="nav-ico">📊</span>Prometheus / Grafana</a>
+<a href="iceberg-nessie.html" class="nav-item"><span class="nav-ico">🧊</span>Iceberg / Nessie</a>
+<a href="impala.html" class="nav-item"><span class="nav-ico">🐬</span>Apache Impala</a>
+<a href="terraform.html" class="nav-item"><span class="nav-ico">🏗️</span>Terraform</a>
+<a href="linux-internals.html" class="nav-item"><span class="nav-ico">🐧</span>Linux Internals</a>
+<a href="miscellaneous.html" class="nav-item"><span class="nav-ico">🧰</span>Miscellaneous</a>
+<a href="python-automation-libs.html" class="nav-item"><span class="nav-ico">🐍</span>Python: авт-ция (10 libs)</a>
+<a href="eza.html" class="nav-item"><span class="nav-ico">🌈</span>eza</a>
+<a href="dbeaver.html" class="nav-item"><span class="nav-ico">🗄️</span>DBeaver</a>
+<a href="zcode.html" class="nav-item"><span class="nav-ico">🤖</span>ZCode</a>
+<a href="warp.html" class="nav-item"><span class="nav-ico">🚀</span>Warp</a>
+<a href="agentic-ai-dev.html" class="nav-item"><span class="nav-ico">🤝</span>Агентная разработка с ИИ</a>
+    </nav>
+  </aside>
+
+  <main class="content">
+    <article>
+<h1 id="systemd-шпаргалка-по-управлению-службами">⚙️ systemd — шпаргалка по управлению службами<a class="headerlink" href="#systemd-шпаргалка-по-управлению-службами" title="Ссылка">#</a></h1>
+<blockquote>
+<p><strong>systemd</strong> — система инициализации (init) и менеджер служб в современных Linux.
+Заменяет SysV init. Управляет сервисами, таймерами, сокетами, монтированием.
+Документация: https://systemd.io · <code>man systemd</code></p>
+</blockquote>
+<hr />
+<h2 id="главные-понятия">🔑 Главные понятия<a class="headerlink" href="#главные-понятия" title="Ссылка">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Термин</th>
+<th>Что значит</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>unit (юнит)</strong></td>
+<td>Любой ресурс, которым управляет systemd (service, timer, socket&hellip;)</td>
+</tr>
+<tr>
+<td><strong>target</strong></td>
+<td>Группа юнитов (аналог runlevel: <code>multi-user.target</code>, <code>graphical.target</code>)</td>
+</tr>
+<tr>
+<td><strong>service</strong></td>
+<td>Служба/демон (как <code>nginx.service</code>)</td>
+</tr>
+<tr>
+<td><strong>timer</strong></td>
+<td>Запуск по расписанию (замена cronу)</td>
+</tr>
+<tr>
+<td><strong>socket</strong></td>
+<td>Сокет-активация (сокет создаётся до запуска службы)</td>
+</tr>
+<tr>
+<td><strong>journal</strong></td>
+<td>Логи systemd (<code>journalctl</code>)</td>
+</tr>
+<tr>
+<td><strong>machine-id</strong></td>
+<td>Уникальный ID машины</td>
+</tr>
+</tbody>
+</table>
+<p>Команды управления: <strong><code>systemctl</code></strong> (юниты) и <strong><code>journalctl</code></strong> (логи).</p>
+<hr />
+<h2 id="systemctl-управление-службами">🚀 systemctl — управление службами<a class="headerlink" href="#systemctl-управление-службами" title="Ссылка">#</a></h2>
+<h3 id="базовые-операции-с-сервисом">Базовые операции с сервисом<a class="headerlink" href="#базовые-операции-с-сервисом" title="Ссылка">#</a></h3>
+<table>
+<thead>
+<tr>
+<th>Команда</th>
+<th>Действие</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>systemctl status nginx</code></td>
+<td>Статус службы (жива ли, последние логи)</td>
+</tr>
+<tr>
+<td><code>systemctl start nginx</code></td>
+<td>Запустить</td>
+</tr>
+<tr>
+<td><code>systemctl stop nginx</code></td>
+<td>Остановить</td>
+</tr>
+<tr>
+<td><code>systemctl restart nginx</code></td>
+<td>Перезапустить</td>
+</tr>
+<tr>
+<td><code>systemctl reload nginx</code></td>
+<td>Перечитать конфиг (без остановки)</td>
+</tr>
+<tr>
+<td><code>systemctl try-restart nginx</code></td>
+<td>Перезапустить только если была запущена</td>
+</tr>
+<tr>
+<td><code>systemctl reload-or-restart nginx</code></td>
+<td>reload если поддерживает, иначе restart</td>
+</tr>
+</tbody>
+</table>
+<h3 id="управление-автозапуском">Управление автозапуском<a class="headerlink" href="#управление-автозапуском" title="Ссылка">#</a></h3>
+<table>
+<thead>
+<tr>
+<th>Команда</th>
+<th>Действие</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>systemctl enable nginx</code></td>
+<td>Включить автозапуск при загрузке</td>
+</tr>
+<tr>
+<td><code>systemctl disable nginx</code></td>
+<td>Отключить автозапуск</td>
+</tr>
+<tr>
+<td><code>systemctl enable --now nginx</code></td>
+<td>Включить автозапуск + запустить сейчас</td>
+</tr>
+<tr>
+<td><code>systemctl disable --now nginx</code></td>
+<td>Отключить автозапуск + остановить</td>
+</tr>
+<tr>
+<td><code>systemctl is-enabled nginx</code></td>
+<td>Проверить автозапуск (<code>enabled</code>/<code>disabled</code>)</td>
+</tr>
+<tr>
+<td><code>systemctl is-active nginx</code></td>
+<td>Запущена ли сейчас (<code>active</code>/<code>inactive</code>)</td>
+</tr>
+<tr>
+<td><code>systemctl is-failed nginx</code></td>
+<td>В ошибочном состоянии?</td>
+</tr>
+<tr>
+<td><code>systemctl reenable nginx</code></td>
+<td>disable + enable (применить изменения symlink)</td>
+</tr>
+<tr>
+<td><code>systemctl preset nginx</code></td>
+<td>Применить default-политику дистрибутива</td>
+</tr>
+</tbody>
+</table>
+<h3 id="маскировка-запрет">Маскировка (запрет)<a class="headerlink" href="#маскировка-запрет" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>systemctl<span class="w"> </span>mask<span class="w"> </span>nginx<span class="w">         </span><span class="c1"># жёстко запретить (нельзя даже запустить вручную)</span>
+systemctl<span class="w"> </span>unmask<span class="w"> </span>nginx<span class="w">       </span><span class="c1"># снять запрет</span>
+</code></pre></div>
+
+<blockquote>
+<p>Разница: <code>disable</code> убирает только автозапуск, но службу можно запустить
+вручную. <code>mask</code> делает юнит недоступным совсем (ссылка на <code>/dev/null</code>).</p>
+</blockquote>
+<hr />
+<h2 id="просмотр-юнитов">📋 Просмотр юнитов<a class="headerlink" href="#просмотр-юнитов" title="Ссылка">#</a></h2>
+<h3 id="списки">Списки<a class="headerlink" href="#списки" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>systemctl<span class="w"> </span>list-units<span class="w">                      </span><span class="c1"># все активные юниты</span>
+systemctl<span class="w"> </span>list-units<span class="w"> </span>--all<span class="w">                </span><span class="c1"># включая неактивные</span>
+systemctl<span class="w"> </span>list-units<span class="w"> </span>--type<span class="o">=</span>service<span class="w">       </span><span class="c1"># только сервисы</span>
+systemctl<span class="w"> </span>list-units<span class="w"> </span>--type<span class="o">=</span>service<span class="w"> </span>--state<span class="o">=</span>running
+systemctl<span class="w"> </span>list-units<span class="w"> </span>--type<span class="o">=</span>service<span class="w"> </span>--state<span class="o">=</span>failed
+systemctl<span class="w"> </span>list-units<span class="w"> </span>--type<span class="o">=</span>mount<span class="w">         </span><span class="c1"># точки монтирования</span>
+systemctl<span class="w"> </span>list-units<span class="w"> </span>--type<span class="o">=</span>socket<span class="w">        </span><span class="c1"># сокеты</span>
+systemctl<span class="w"> </span>list-units<span class="w"> </span>--type<span class="o">=</span>timer<span class="w">         </span><span class="c1"># таймеры</span>
+systemctl<span class="w"> </span>list-unit-files<span class="w">                 </span><span class="c1"># все установленные (не только активные)</span>
+systemctl<span class="w"> </span>list-unit-files<span class="w"> </span>--type<span class="o">=</span>service<span class="w"> </span>--state<span class="o">=</span>enabled
+systemctl<span class="w"> </span>list-sockets<span class="w">                    </span><span class="c1"># сокеты с активацией</span>
+systemctl<span class="w"> </span>list-timers<span class="w">                     </span><span class="c1"># все таймеры (как cron)</span>
+systemctl<span class="w"> </span>list-dependencies<span class="w"> </span>nginx<span class="w">         </span><span class="c1"># дерево зависимостей</span>
+systemctl<span class="w"> </span>list-jobs<span class="w">                       </span><span class="c1"># текущие jobs</span>
+</code></pre></div>
+
+<h3 id="поиск-и-проверка">Поиск и проверка<a class="headerlink" href="#поиск-и-проверка" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>systemctl<span class="w"> </span>status<span class="w"> </span>nginx<span class="w">                    </span><span class="c1"># статус + последние логи</span>
+systemctl<span class="w"> </span>status<span class="w"> </span>nginx.service<span class="w"> </span>-l<span class="w">         </span><span class="c1"># + полный вывод логов</span>
+systemctl<span class="w"> </span>cat<span class="w"> </span>nginx<span class="w">                       </span><span class="c1"># показать сам файл юнита</span>
+systemctl<span class="w"> </span>show<span class="w"> </span>nginx<span class="w">                      </span><span class="c1"># все свойства (machine-readable)</span>
+systemctl<span class="w"> </span>show<span class="w"> </span>nginx<span class="w"> </span>-p<span class="w"> </span>ExecStart<span class="w">         </span><span class="c1"># конкретное свойство</span>
+systemctl<span class="w"> </span>show<span class="w"> </span>-p<span class="w"> </span>ActiveState<span class="w"> </span>nginx<span class="w">       </span><span class="c1"># только активное состояние</span>
+systemctl<span class="w"> </span>list-dependencies<span class="w"> </span>nginx<span class="w">         </span><span class="c1"># что требует</span>
+systemctl<span class="w"> </span>list-dependencies<span class="w"> </span>--reverse<span class="w"> </span>nginx<span class="w">   </span><span class="c1"># кто требует nginx</span>
+</code></pre></div>
+
+<hr />
+<h2 id="управление-системой-машиной">🖥️ Управление системой (машиной)<a class="headerlink" href="#управление-системой-машиной" title="Ссылка">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Команда</th>
+<th>Действие</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>systemctl reboot</code></td>
+<td>Перезагрузка</td>
+</tr>
+<tr>
+<td><code>systemctl poweroff</code></td>
+<td>Выключение</td>
+</tr>
+<tr>
+<td><code>systemctl halt</code></td>
+<td>Остановить систему</td>
+</tr>
+<tr>
+<td><code>systemctl suspend</code></td>
+<td>Ждущий режим (S3)</td>
+</tr>
+<tr>
+<td><code>systemctl hibernate</code></td>
+<td>Гибернация (на диск)</td>
+</tr>
+<tr>
+<td><code>systemctl hybrid-sleep</code></td>
+<td>Гибридный сон</td>
+</tr>
+<tr>
+<td><code>systemctl suspend-then-hibernate</code></td>
+<td>Сон → потом гибернация</td>
+</tr>
+<tr>
+<td><code>systemctl rescue</code></td>
+<td>Однопользовательский режим (rescue)</td>
+</tr>
+<tr>
+<td><code>systemctl emergency</code></td>
+<td>Аварийный режим (минимум)</td>
+</tr>
+<tr>
+<td><code>systemctl default</code></td>
+<td>Запустить default target</td>
+</tr>
+<tr>
+<td><code>systemctl get-default</code></td>
+<td>Текущий target по умолчанию</td>
+</tr>
+<tr>
+<td><code>systemctl set-default multi-user.target</code></td>
+<td>Загружаться в текстовом режиме</td>
+</tr>
+<tr>
+<td><code>systemctl set-default graphical.target</code></td>
+<td>Загружаться в графическом режиме</td>
+</tr>
+</tbody>
+</table>
+<h3 id="targets-аналоги-runlevel">Targets (аналоги runlevel)<a class="headerlink" href="#targets-аналоги-runlevel" title="Ссылка">#</a></h3>
+<table>
+<thead>
+<tr>
+<th>Target</th>
+<th>Runlevel</th>
+<th>Описание</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>poweroff.target</code></td>
+<td>0</td>
+<td>Выключение</td>
+</tr>
+<tr>
+<td><code>rescue.target</code></td>
+<td>1</td>
+<td>Однопользовательский</td>
+</tr>
+<tr>
+<td><code>multi-user.target</code></td>
+<td>3</td>
+<td>Многопользовательский (текстовый)</td>
+</tr>
+<tr>
+<td><code>graphical.target</code></td>
+<td>5</td>
+<td>Графический</td>
+</tr>
+<tr>
+<td><code>reboot.target</code></td>
+<td>6</td>
+<td>Перезагрузка</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="создание-собственного-сервиса">📝 Создание собственного сервиса<a class="headerlink" href="#создание-собственного-сервиса" title="Ссылка">#</a></h2>
+<h3 id="расположение-файлов-юнитов">Расположение файлов юнитов<a class="headerlink" href="#расположение-файлов-юнитов" title="Ссылка">#</a></h3>
+<table>
+<thead>
+<tr>
+<th>Путь</th>
+<th>Приоритет</th>
+<th>Назначение</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>/etc/systemd/system/</code></td>
+<td>высокий</td>
+<td>Администратор (override&rsquo;ы тут)</td>
+</tr>
+<tr>
+<td><code>/run/systemd/system/</code></td>
+<td>средний</td>
+<td>Runtime</td>
+</tr>
+<tr>
+<td><code>/usr/lib/systemd/system/</code></td>
+<td>низкий</td>
+<td>Пакетный менеджер</td>
+</tr>
+<tr>
+<td><code>~/.config/systemd/user/</code></td>
+<td>—</td>
+<td>Пользовательские сервисы</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>Чтобы изменить пакетный юнит, используйте <code>systemctl edit nginx</code> —
+создаст drop-in файл в <code>/etc/systemd/system/nginx.service.d/</code>.</p>
+</blockquote>
+<h3 id="базовый-пример-service">Базовый пример <code>.service</code><a class="headerlink" href="#базовый-пример-service" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">[Unit]</span>
+<span class="na">Description</span><span class="o">=</span><span class="s">My Python App</span>
+<span class="na">Documentation</span><span class="o">=</span><span class="s">https://myapp.example.com</span>
+<span class="na">After</span><span class="o">=</span><span class="s">network-online.target</span>
+<span class="na">Wants</span><span class="o">=</span><span class="s">network-online.target</span>
+<span class="c1"># After — после чего запускать</span>
+<span class="c1"># Requires — жёсткая зависимость (упадёт — упадёт и этот)</span>
+<span class="c1"># Wants — мягкая зависимость</span>
+<span class="c1"># Conflicts — с чем конфликтует</span>
+
+<span class="k">[Service]</span>
+<span class="na">Type</span><span class="o">=</span><span class="s">simple</span><span class="w">                      </span><span class="c1"># simple/forking/oneshot/notify/dbus</span>
+<span class="na">User</span><span class="o">=</span><span class="s">myapp</span><span class="w">                       </span><span class="c1"># от какого пользователя</span>
+<span class="na">Group</span><span class="o">=</span><span class="s">myapp</span>
+<span class="na">WorkingDirectory</span><span class="o">=</span><span class="s">/opt/myapp</span>
+<span class="na">Environment</span><span class="o">=</span><span class="s">&quot;NODE_ENV=production&quot;</span>
+<span class="na">EnvironmentFile</span><span class="o">=</span><span class="s">-/etc/myapp/env</span><span class="w">  </span><span class="c1"># файл с переменными (- = необязательно)</span>
+<span class="na">ExecStart</span><span class="o">=</span><span class="s">/usr/bin/python3 /opt/myapp/main.py</span>
+<span class="na">ExecStartPre</span><span class="o">=</span><span class="s">/usr/bin/install -d /var/log/myapp</span>
+<span class="na">ExecStartPost</span><span class="o">=</span><span class="s">/usr/bin/touch /var/run/myapp.started</span>
+<span class="na">ExecStop</span><span class="o">=</span><span class="s">/usr/bin/kill -TERM $MAINPID</span>
+<span class="na">ExecReload</span><span class="o">=</span><span class="s">/bin/kill -HUP $MAINPID</span>
+<span class="na">Restart</span><span class="o">=</span><span class="s">on-failure</span><span class="w">               </span><span class="c1"># no/on-failure/always/on-abnormal</span>
+<span class="na">RestartSec</span><span class="o">=</span><span class="s">5s</span>
+<span class="na">TimeoutStartSec</span><span class="o">=</span><span class="s">30</span>
+<span class="na">TimeoutStopSec</span><span class="o">=</span><span class="s">30</span>
+<span class="na">KillMode</span><span class="o">=</span><span class="s">control-group</span>
+<span class="na">KillSignal</span><span class="o">=</span><span class="s">SIGTERM</span>
+
+<span class="c1"># Жёстение/ограничения (sandboxing)</span>
+<span class="na">NoNewPrivileges</span><span class="o">=</span><span class="s">true</span>
+<span class="na">PrivateTmp</span><span class="o">=</span><span class="s">true</span>
+<span class="na">PrivateDevices</span><span class="o">=</span><span class="s">true</span>
+<span class="na">ProtectSystem</span><span class="o">=</span><span class="s">strict</span>
+<span class="na">ProtectHome</span><span class="o">=</span><span class="s">true</span>
+<span class="na">ReadWritePaths</span><span class="o">=</span><span class="s">/var/lib/myapp /var/log/myapp</span>
+<span class="na">ReadOnlyPaths</span><span class="o">=</span><span class="s">/etc/myapp</span>
+<span class="na">CapabilityBoundingSet</span><span class="o">=</span>
+<span class="na">AmbientCapabilities</span><span class="o">=</span>
+<span class="na">ProtectKernelTunables</span><span class="o">=</span><span class="s">true</span>
+<span class="na">ProtectKernelModules</span><span class="o">=</span><span class="s">true</span>
+<span class="na">ProtectControlGroups</span><span class="o">=</span><span class="s">true</span>
+<span class="na">RestrictAddressFamilies</span><span class="o">=</span><span class="s">AF_INET AF_INET6</span>
+<span class="na">RestrictNamespaces</span><span class="o">=</span><span class="s">true</span>
+<span class="na">LockPersonality</span><span class="o">=</span><span class="s">true</span>
+<span class="na">RestrictRealtime</span><span class="o">=</span><span class="s">true</span>
+<span class="na">RestrictSUIDSGID</span><span class="o">=</span><span class="s">true</span>
+<span class="na">SystemCallFilter</span><span class="o">=</span><span class="s">@system-service</span>
+<span class="na">SystemCallArchitectures</span><span class="o">=</span><span class="s">native</span>
+
+<span class="k">[Install]</span>
+<span class="na">WantedBy</span><span class="o">=</span><span class="s">multi-user.target</span><span class="w">       </span><span class="c1"># в каком target&#39;е активировать</span>
+</code></pre></div>
+
+<h3 id="типы-служб-type">Типы служб (Type=)<a class="headerlink" href="#типы-служб-type" title="Ссылка">#</a></h3>
+<table>
+<thead>
+<tr>
+<th>Тип</th>
+<th>Описание</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>simple</code></td>
+<td>Процесс не разветвляется, считается запущенным сразу (по умолчанию)</td>
+</tr>
+<tr>
+<td><code>exec</code></td>
+<td>Как simple, но ждёт <code>execve()</code> (3.0+)</td>
+</tr>
+<tr>
+<td><code>forking</code></td>
+<td>Классический демон: разветвляется, родитель выходит</td>
+</tr>
+<tr>
+<td><code>oneshot</code></td>
+<td>Одноразовая задача, выполняется и завершается</td>
+</tr>
+<tr>
+<td><code>notify</code></td>
+<td>Служба сама сигнализирует о готовности через sd_notify</td>
+</tr>
+<tr>
+<td><code>idle</code></td>
+<td>Запуск когда idle (для терминалов)</td>
+</tr>
+<tr>
+<td><code>dbus</code></td>
+<td>Готова когда имя D-Bus приобретено</td>
+</tr>
+</tbody>
+</table>
+<h3 id="полный-цикл-установки-сервиса">Полный цикл установки сервиса<a class="headerlink" href="#полный-цикл-установки-сервиса" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># 1. Создать файл</span>
+sudo<span class="w"> </span>nano<span class="w"> </span>/etc/systemd/system/myapp.service
+
+<span class="c1"># 2. Перечитать конфигурацию systemd</span>
+sudo<span class="w"> </span>systemctl<span class="w"> </span>daemon-reload
+
+<span class="c1"># 3. Включить автозапуск + запустить</span>
+sudo<span class="w"> </span>systemctl<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>--now<span class="w"> </span>myapp
+
+<span class="c1"># 4. Проверить статус</span>
+sudo<span class="w"> </span>systemctl<span class="w"> </span>status<span class="w"> </span>myapp
+sudo<span class="w"> </span>journalctl<span class="w"> </span>-u<span class="w"> </span>myapp<span class="w"> </span>-f<span class="w">      </span><span class="c1"># смотреть логи</span>
+
+<span class="c1"># 5. Если правки в файле — снова daemon-reload + restart</span>
+sudo<span class="w"> </span>systemctl<span class="w"> </span>daemon-reload
+sudo<span class="w"> </span>systemctl<span class="w"> </span>restart<span class="w"> </span>myapp
+</code></pre></div>
+
+<h3 id="drop-in-переопределение-части-юнита">Drop-in (переопределение части юнита)<a class="headerlink" href="#drop-in-переопределение-части-юнита" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Создаёт override в /etc/systemd/system/nginx.service.d/override.conf</span>
+systemctl<span class="w"> </span>edit<span class="w"> </span>nginx
+
+<span class="c1"># Полный файл (не только override)</span>
+systemctl<span class="w"> </span>edit<span class="w"> </span>--full<span class="w"> </span>nginx
+
+<span class="c1"># После правки:</span>
+systemctl<span class="w"> </span>daemon-reload
+systemctl<span class="w"> </span>restart<span class="w"> </span>nginx
+</code></pre></div>
+
+<p>Пример override (перезапуск при падении + лимит файлов):</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># /etc/systemd/system/nginx.service.d/override.conf</span>
+<span class="k">[Service]</span>
+<span class="na">Restart</span><span class="o">=</span><span class="s">always</span>
+<span class="na">RestartSec</span><span class="o">=</span><span class="s">5s</span>
+<span class="na">LimitNOFILE</span><span class="o">=</span><span class="s">65536</span>
+</code></pre></div>
+
+<hr />
+<h2 id="таймеры-замена-cronу">⏰ Таймеры (замена cronу)<a class="headerlink" href="#таймеры-замена-cronу" title="Ссылка">#</a></h2>
+<p>systemd timers мощнее cron&rsquo;а: зависимости, условия, точность, логи в journal.</p>
+<h3 id="пример-timer">Пример <code>.timer</code><a class="headerlink" href="#пример-timer" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># /etc/systemd/system/backup.timer</span>
+<span class="k">[Unit]</span>
+<span class="na">Description</span><span class="o">=</span><span class="s">Daily backup timer</span>
+
+<span class="k">[Timer]</span>
+<span class="na">OnCalendar</span><span class="o">=</span><span class="s">*-*-* 03:00:00</span><span class="w">          </span><span class="c1"># ежедневно в 3:00</span>
+<span class="na">Persistent</span><span class="o">=</span><span class="s">true</span><span class="w">                    </span><span class="c1"># запустить пропущенное (если ПК был выключен)</span>
+<span class="na">AccuracySec</span><span class="o">=</span><span class="s">1min</span><span class="w">                   </span><span class="c1"># точность</span>
+
+<span class="c1"># Альтернативы OnCalendar:</span>
+<span class="c1"># OnBootSec=5min              # через 5 минут после загрузки</span>
+<span class="c1"># OnUnitActiveSec=1h          # каждый час после активации</span>
+<span class="c1"># OnUnitInactiveSec=30min     # через 30 минут после деактивации</span>
+<span class="c1"># OnCalendar=weekly           # раз в неделю</span>
+<span class="c1"># OnCalendar=Mon *-*-* 03:00:00  # по понедельникам</span>
+<span class="c1"># OnCalendar=*:0/15           # каждые 15 минут</span>
+
+<span class="k">[Install]</span>
+<span class="na">WantedBy</span><span class="o">=</span><span class="s">timers.target</span>
+</code></pre></div>
+
+<h3 id="таймер-сервис">Таймер + сервис<a class="headerlink" href="#таймер-сервис" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># /etc/systemd/system/backup.service</span>
+<span class="k">[Unit]</span>
+<span class="na">Description</span><span class="o">=</span><span class="s">Run backup script</span>
+
+<span class="k">[Service]</span>
+<span class="na">Type</span><span class="o">=</span><span class="s">oneshot</span>
+<span class="na">ExecStart</span><span class="o">=</span><span class="s">/usr/local/bin/backup.sh</span>
+</code></pre></div>
+
+<div class="highlight"><pre><span></span><code><span class="c1"># Установка</span>
+sudo<span class="w"> </span>systemctl<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>--now<span class="w"> </span>backup.timer
+systemctl<span class="w"> </span>list-timers<span class="w">               </span><span class="c1"># проверить</span>
+systemctl<span class="w"> </span>list-timers<span class="w"> </span>backup.timer
+systemctl<span class="w"> </span>start<span class="w"> </span>backup.service<span class="w">      </span><span class="c1"># запустить вручную (без таймера)</span>
+systemctl<span class="w"> </span>status<span class="w"> </span>backup.timer
+</code></pre></div>
+
+<h3 id="сравнение-синтаксиса-oncalendar-с-cron">Сравнение синтаксиса OnCalendar с cron<a class="headerlink" href="#сравнение-синтаксиса-oncalendar-с-cron" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>cron:        */15 * * * *      (каждые 15 мин)
+OnCalendar:  *:0/15            (то же)
+cron:        0 3 * * *         (каждый день в 3:00)
+OnCalendar:  *-*-* 03:00:00
+cron:        0 0 * * 0         (воскресенье в полночь)
+OnCalendar:  Sun *-*-* 00:00:00
+</code></pre></div>
+
+<h3 id="пользовательские-таймеры">Пользовательские таймеры<a class="headerlink" href="#пользовательские-таймеры" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># В ~/.config/systemd/user/mytask.timer и mytask.service</span>
+systemctl<span class="w"> </span>--user<span class="w"> </span>daemon-reload
+systemctl<span class="w"> </span>--user<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>--now<span class="w"> </span>mytask.timer
+systemctl<span class="w"> </span>--user<span class="w"> </span>list-timers
+
+<span class="c1"># Чтобы работали после выхода:</span>
+loginctl<span class="w"> </span>enable-linger<span class="w"> </span><span class="nv">$USER</span>
+</code></pre></div>
+
+<hr />
+<h2 id="journalctl-чтение-логов">📜 journalctl — чтение логов<a class="headerlink" href="#journalctl-чтение-логов" title="Ссылка">#</a></h2>
+<h3 id="базовый-просмотр">Базовый просмотр<a class="headerlink" href="#базовый-просмотр" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>journalctl<span class="w">                          </span><span class="c1"># все логи (с самого начала)</span>
+journalctl<span class="w"> </span>-b<span class="w">                       </span><span class="c1"># с последней загрузки</span>
+journalctl<span class="w"> </span>-b<span class="w"> </span>-1<span class="w">                    </span><span class="c1"># с предпоследней загрузки</span>
+journalctl<span class="w"> </span>--list-boots<span class="w">             </span><span class="c1"># список загрузок</span>
+journalctl<span class="w"> </span>-k<span class="w">                       </span><span class="c1"># только ядро (kernel, =dmesg)</span>
+journalctl<span class="w"> </span>-f<span class="w">                       </span><span class="c1"># следить в реальном времени (tail -f)</span>
+journalctl<span class="w"> </span>-n<span class="w"> </span><span class="m">50</span><span class="w">                    </span><span class="c1"># последние 50 строк</span>
+journalctl<span class="w"> </span>-n<span class="w"> </span><span class="m">50</span><span class="w"> </span>-f<span class="w">                 </span><span class="c1"># последние + следить</span>
+journalctl<span class="w"> </span>--no-pager<span class="w">               </span><span class="c1"># без пейджера (для пайпов)</span>
+journalctl<span class="w"> </span>-r<span class="w">                       </span><span class="c1"># в обратном порядке (новые сверху)</span>
+journalctl<span class="w"> </span>-o<span class="w"> </span>cat<span class="w">                   </span><span class="c1"># только сообщение (без метаданных)</span>
+journalctl<span class="w"> </span>-o<span class="w"> </span>json<span class="w">                  </span><span class="c1"># в JSON</span>
+journalctl<span class="w"> </span>-o<span class="w"> </span>json-pretty
+journalctl<span class="w"> </span>-o<span class="w"> </span>short-iso<span class="w">             </span><span class="c1"># формат ISO-времени</span>
+journalctl<span class="w"> </span>-o<span class="w"> </span>verbose<span class="w">               </span><span class="c1"># подробно</span>
+</code></pre></div>
+
+<h3 id="фильтрация">Фильтрация<a class="headerlink" href="#фильтрация" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># По сервису</span>
+journalctl<span class="w"> </span>-u<span class="w"> </span>nginx<span class="w">                 </span><span class="c1"># только nginx</span>
+journalctl<span class="w"> </span>-u<span class="w"> </span>nginx<span class="w"> </span>-u<span class="w"> </span>php-fpm<span class="w">      </span><span class="c1"># несколько</span>
+journalctl<span class="w"> </span>-u<span class="w"> </span>nginx.service
+journalctl<span class="w"> </span><span class="nv">_COMM</span><span class="o">=</span>nginx<span class="w">              </span><span class="c1"># по имени исполняемого</span>
+
+<span class="c1"># По времени</span>
+journalctl<span class="w"> </span>--since<span class="w"> </span>today
+journalctl<span class="w"> </span>--since<span class="w"> </span><span class="s2">&quot;2024-01-15&quot;</span><span class="w"> </span>--until<span class="w"> </span><span class="s2">&quot;2024-01-16&quot;</span>
+journalctl<span class="w"> </span>--since<span class="w"> </span><span class="s2">&quot;09:00&quot;</span><span class="w"> </span>--until<span class="w"> </span><span class="s2">&quot;10:00&quot;</span>
+journalctl<span class="w"> </span>--since<span class="w"> </span><span class="s2">&quot;1 hour ago&quot;</span>
+journalctl<span class="w"> </span>--since<span class="w"> </span>yesterday
+journalctl<span class="w"> </span>--since<span class="w"> </span><span class="s2">&quot;3 days ago&quot;</span>
+
+<span class="c1"># По приоритету (syslog)</span>
+journalctl<span class="w"> </span>-p<span class="w"> </span>err<span class="w">                   </span><span class="c1"># ошибки и хуже</span>
+journalctl<span class="w"> </span>-p<span class="w"> </span>warning
+journalctl<span class="w"> </span>-p<span class="w"> </span><span class="m">3</span><span class="w">                     </span><span class="c1"># числом: 0-7</span>
+<span class="c1"># 0=emerg 1=alert 2=crit 3=err 4=warning 5=notice 6=info 7=debug</span>
+
+<span class="c1"># По процессу/пользователю</span>
+journalctl<span class="w"> </span><span class="nv">_PID</span><span class="o">=</span><span class="m">1234</span>
+journalctl<span class="w"> </span><span class="nv">_UID</span><span class="o">=</span><span class="m">1000</span>
+journalctl<span class="w"> </span><span class="nv">_GID</span><span class="o">=</span><span class="m">100</span>
+journalctl<span class="w"> </span><span class="nv">_COMM</span><span class="o">=</span>bash
+
+<span class="c1"># Комбинированный фильтр</span>
+journalctl<span class="w"> </span>-u<span class="w"> </span>nginx<span class="w"> </span>-p<span class="w"> </span>err<span class="w"> </span>--since<span class="w"> </span>yesterday
+journalctl<span class="w"> </span>-u<span class="w"> </span>nginx<span class="w"> </span>--since<span class="w"> </span><span class="s2">&quot;2 hours ago&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>ERROR
+</code></pre></div>
+
+<h3 id="очистка-логов">Очистка логов<a class="headerlink" href="#очистка-логов" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>journalctl<span class="w"> </span>--disk-usage<span class="w">             </span><span class="c1"># сколько занимают логи</span>
+journalctl<span class="w"> </span>--vacuum-size<span class="o">=</span>100M<span class="w">       </span><span class="c1"># оставить только 100 МБ</span>
+journalctl<span class="w"> </span>--vacuum-time<span class="o">=</span>2weeks<span class="w">     </span><span class="c1"># удалить логи старше 2 недель</span>
+journalctl<span class="w"> </span>--vacuum-files<span class="o">=</span><span class="m">10</span><span class="w">        </span><span class="c1"># оставить 10 файлов</span>
+
+<span class="c1"># Постоянная настройка в /etc/systemd/journald.conf:</span>
+<span class="c1"># SystemMaxUse=500M</span>
+<span class="c1"># MaxRetentionSec=1month</span>
+sudo<span class="w"> </span>systemctl<span class="w"> </span>restart<span class="w"> </span>systemd-journald
+</code></pre></div>
+
+<h3 id="логирование-в-journal-из-скрипта">Логирование в journal из скрипта<a class="headerlink" href="#логирование-в-journal-из-скрипта" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>logger<span class="w"> </span><span class="s2">&quot;Моё сообщение&quot;</span><span class="w">                       </span><span class="c1"># базово</span>
+logger<span class="w"> </span>-t<span class="w"> </span>myapp<span class="w"> </span><span class="s2">&quot;Запущен&quot;</span><span class="w">                    </span><span class="c1"># с тегом</span>
+logger<span class="w"> </span>-p<span class="w"> </span>user.err<span class="w"> </span><span class="s2">&quot;Ошибка валидации&quot;</span><span class="w">        </span><span class="c1"># с приоритетом</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;текст&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>logger<span class="w"> </span>-t<span class="w"> </span>myscript<span class="w">            </span><span class="c1"># из пайпа</span>
+</code></pre></div>
+
+<div class="highlight"><pre><span></span><code><span class="c1"># Из Python</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">logging.handlers</span>
+<span class="n">handler</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">handlers</span><span class="o">.</span><span class="n">SysLogHandler</span><span class="p">(</span><span class="n">address</span><span class="o">=</span><span class="s2">&quot;/dev/log&quot;</span><span class="p">)</span>
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s2">&quot;myapp&quot;</span><span class="p">)</span>
+<span class="n">logger</span><span class="o">.</span><span class="n">addHandler</span><span class="p">(</span><span class="n">handler</span><span class="p">)</span>
+<span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;Something went wrong&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+<hr />
+<h2 id="сокет-активация">🔌 Сокет-активация<a class="headerlink" href="#сокет-активация" title="Ссылка">#</a></h2>
+<p>Сокет создаётся заранее, служба запускается при первом подключении.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># /etc/systemd/system/myapp.socket</span>
+<span class="k">[Unit]</span>
+<span class="na">Description</span><span class="o">=</span><span class="s">My App Socket</span>
+
+<span class="k">[Socket]</span>
+<span class="na">ListenStream</span><span class="o">=</span><span class="s">8080</span><span class="w">            </span><span class="c1"># порт TCP</span>
+<span class="c1"># ListenDatagram=8080        # UDP</span>
+<span class="c1"># ListenStream=/tmp/myapp.sock   # UNIX-сокет</span>
+
+<span class="k">[Install]</span>
+<span class="na">WantedBy</span><span class="o">=</span><span class="s">sockets.target</span>
+</code></pre></div>
+
+<div class="highlight"><pre><span></span><code><span class="c1"># /etc/systemd/system/myapp.service</span>
+<span class="k">[Service]</span>
+<span class="na">ExecStart</span><span class="o">=</span><span class="s">/usr/bin/myapp</span>
+</code></pre></div>
+
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>systemctl<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>--now<span class="w"> </span>myapp.socket
+<span class="c1"># myapp.service запустится автоматически при подключении к порту 8080</span>
+</code></pre></div>
+
+<p>Примеры: <code>sshd.socket</code>, <code>cups.socket</code>, <code>docker.socket</code>.</p>
+<hr />
+<h2 id="пользовательские-сервисы-user">🏠 Пользовательские сервисы (&ndash;user)<a class="headerlink" href="#пользовательские-сервисы-user" title="Ссылка">#</a></h2>
+<p>systemd может управлять сервисами от обычного пользователя (без sudo).</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Расположение</span>
+~/.config/systemd/user/
+
+<span class="c1"># Команды (с --user)</span>
+systemctl<span class="w"> </span>--user<span class="w"> </span>status<span class="w"> </span>myapp
+systemctl<span class="w"> </span>--user<span class="w"> </span>start<span class="w"> </span>myapp
+systemctl<span class="w"> </span>--user<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>myapp
+systemctl<span class="w"> </span>--user<span class="w"> </span>list-units
+systemctl<span class="w"> </span>--user<span class="w"> </span>list-timers
+systemctl<span class="w"> </span>--user<span class="w"> </span>daemon-reload
+
+<span class="c1"># Логи</span>
+journalctl<span class="w"> </span>--user<span class="w"> </span>-u<span class="w"> </span>myapp
+journalctl<span class="w"> </span>--user<span class="w"> </span>-f
+
+<span class="c1"># Чтобы сервисы работали когда пользователь не залогинен:</span>
+loginctl<span class="w"> </span>enable-linger<span class="w"> </span><span class="nv">$USER</span>
+loginctl<span class="w"> </span>disable-linger<span class="w"> </span><span class="nv">$USER</span>
+loginctl<span class="w"> </span>show-user<span class="w"> </span><span class="nv">$USER</span>
+</code></pre></div>
+
+<p>Пример пользовательского сервиса (например, синхронизация):</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># ~/.config/systemd/user/sync.service</span>
+<span class="k">[Unit]</span>
+<span class="na">Description</span><span class="o">=</span><span class="s">Sync files</span>
+
+<span class="k">[Service]</span>
+<span class="na">Type</span><span class="o">=</span><span class="s">oneshot</span>
+<span class="na">ExecStart</span><span class="o">=</span><span class="s">/home/me/bin/sync.sh</span>
+</code></pre></div>
+
+<div class="highlight"><pre><span></span><code><span class="c1"># ~/.config/systemd/user/sync.timer</span>
+<span class="k">[Unit]</span>
+<span class="na">Description</span><span class="o">=</span><span class="s">Run sync every hour</span>
+
+<span class="k">[Timer]</span>
+<span class="na">OnBootSec</span><span class="o">=</span><span class="s">5min</span>
+<span class="na">OnUnitActiveSec</span><span class="o">=</span><span class="s">1h</span>
+
+<span class="k">[Install]</span>
+<span class="na">WantedBy</span><span class="o">=</span><span class="s">timers.target</span>
+</code></pre></div>
+
+<hr />
+<h2 id="hostnamectl-localectl-timedatectl-loginctl">🌐 hostnamectl, localectl, timedatectl, loginctl<a class="headerlink" href="#hostnamectl-localectl-timedatectl-loginctl" title="Ссылка">#</a></h2>
+<h3 id="hostnamectl-имя-хоста">hostnamectl — имя хоста<a class="headerlink" href="#hostnamectl-имя-хоста" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>hostnamectl<span class="w">                          </span><span class="c1"># информация о системе</span>
+hostnamectl<span class="w"> </span>set-hostname<span class="w"> </span>myserver
+hostnamectl<span class="w"> </span>set-hostname<span class="w"> </span>--pretty<span class="w"> </span><span class="s2">&quot;My Production Server&quot;</span>
+hostnamectl<span class="w"> </span>set-icon-name<span class="w"> </span>computer
+hostnamectl<span class="w"> </span>set-chassis<span class="w"> </span>server<span class="w">       </span><span class="c1"># desktop/laptop/server/vm/container</span>
+</code></pre></div>
+
+<h3 id="localectl-локаль-и-раскладка">localectl — локаль и раскладка<a class="headerlink" href="#localectl-локаль-и-раскладка" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>localectl<span class="w"> </span>status
+localectl<span class="w"> </span>list-locales
+localectl<span class="w"> </span>set-locale<span class="w"> </span><span class="nv">LANG</span><span class="o">=</span>ru_RU.UTF-8
+localectl<span class="w"> </span>set-locale<span class="w"> </span><span class="nv">LC_TIME</span><span class="o">=</span>en_US.UTF-8
+localectl<span class="w"> </span>list-keymaps
+localectl<span class="w"> </span>set-keymap<span class="w"> </span>us<span class="w">              </span><span class="c1"># раскладка в консоли</span>
+localectl<span class="w"> </span>set-x11-keymap<span class="w"> </span>us<span class="w">         </span><span class="c1"># в X11/Wayland</span>
+localectl<span class="w"> </span>set-x11-keymap<span class="w"> </span>us,ru<span class="w"> </span><span class="s2">&quot;&quot;</span><span class="w"> </span><span class="s2">&quot;grp:alt_shift_toggle&quot;</span>
+</code></pre></div>
+
+<h3 id="timedatectl-время-и-часовой-пояс">timedatectl — время и часовой пояс<a class="headerlink" href="#timedatectl-время-и-часовой-пояс" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>timedatectl<span class="w"> </span>status<span class="w">                   </span><span class="c1"># текущее состояние</span>
+timedatectl<span class="w"> </span>list-timezones
+timedatectl<span class="w"> </span>set-timezone<span class="w"> </span>Europe/Moscow
+timedatectl<span class="w"> </span>set-time<span class="w"> </span><span class="s2">&quot;2024-01-15 14:30:00&quot;</span>
+timedatectl<span class="w"> </span>set-ntp<span class="w"> </span><span class="nb">true</span><span class="w">             </span><span class="c1"># включить синхронизацию (chronyd/systemd-timesyncd)</span>
+timedatectl<span class="w"> </span>set-ntp<span class="w"> </span><span class="nb">false</span>
+</code></pre></div>
+
+<h3 id="loginctl-сессии-и-пользователи">loginctl — сессии и пользователи<a class="headerlink" href="#loginctl-сессии-и-пользователи" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>loginctl<span class="w"> </span>list-sessions<span class="w">               </span><span class="c1"># активные сессии</span>
+loginctl<span class="w"> </span>list-users
+loginctl<span class="w"> </span>session-status<span class="w"> </span><span class="nv">$SID</span>
+loginctl<span class="w"> </span>user-status<span class="w"> </span><span class="nv">$USER</span>
+loginctl<span class="w"> </span>lock-session<span class="w">                </span><span class="c1"># заблокировать</span>
+loginctl<span class="w"> </span>terminate-session<span class="w"> </span><span class="nv">$SID</span>
+loginctl<span class="w"> </span>kill-user<span class="w"> </span><span class="nv">$USER</span>
+loginctl<span class="w"> </span>enable-linger<span class="w"> </span><span class="nv">$USER</span><span class="w">         </span><span class="c1"># запускать --user сервисы без логина</span>
+</code></pre></div>
+
+<hr />
+<h2 id="анализ-производительности">🔧 Анализ производительности<a class="headerlink" href="#анализ-производительности" title="Ссылка">#</a></h2>
+<h3 id="systemd-analyze">systemd-analyze<a class="headerlink" href="#systemd-analyze" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>systemd-analyze<span class="w">                       </span><span class="c1"># время загрузки</span>
+systemd-analyze<span class="w"> </span><span class="nb">time</span>
+systemd-analyze<span class="w"> </span>blame<span class="w">                 </span><span class="c1"># топ медленных юнитов</span>
+systemd-analyze<span class="w"> </span>critical-chain<span class="w">        </span><span class="c1"># критический путь загрузки</span>
+systemd-analyze<span class="w"> </span>critical-chain<span class="w"> </span>nginx<span class="w">  </span><span class="c1"># для конкретного сервиса</span>
+systemd-analyze<span class="w"> </span>plot<span class="w"> </span>&gt;<span class="w"> </span>boot.svg<span class="w">       </span><span class="c1"># график загрузки (SVG!)</span>
+systemd-analyze<span class="w"> </span>calendar<span class="w"> </span><span class="s2">&quot;Mon *-*-* 09:00&quot;</span><span class="w">   </span><span class="c1"># проверить выражение timer</span>
+systemd-analyze<span class="w"> </span>calendar<span class="w"> </span><span class="s2">&quot;*:0/15&quot;</span><span class="w">     </span><span class="c1"># расшифровать OnCalendar</span>
+systemd-analyze<span class="w"> </span>log-level<span class="w"> </span>debug<span class="w">       </span><span class="c1"># уровень логирования systemd</span>
+systemd-analyze<span class="w"> </span>cat-config<span class="w">            </span><span class="c1"># показать все конфиги</span>
+systemd-analyze<span class="w"> </span>verify<span class="w"> </span>/etc/systemd/system/myapp.service<span class="w">   </span><span class="c1"># проверить файл</span>
+</code></pre></div>
+
+<h3 id="пример-вывода-blame">Пример вывода blame<a class="headerlink" href="#пример-вывода-blame" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>$ systemd-analyze blame
+3.215s NetworkManager-wait-online.service
+1.890s dev-sda1.device
+ 820ms systemd-journal-flush.service
+ 450ms udisks2.service
+</code></pre></div>
+
+<hr />
+<h2 id="systemd-cgls-systemd-cgtop-cgroups">🛠️ systemd-cgls, systemd-cgtop — cgroups<a class="headerlink" href="#systemd-cgls-systemd-cgtop-cgroups" title="Ссылка">#</a></h2>
+<p>systemd управляет всеми процессами через <strong>cgroups</strong> (control groups).</p>
+<div class="highlight"><pre><span></span><code>systemd-cgls<span class="w">                  </span><span class="c1"># дерево процессов по cgroups</span>
+systemd-cgls<span class="w"> </span>systemd.slice<span class="w">    </span><span class="c1"># конкретная slice</span>
+systemd-cgtop<span class="w">                 </span><span class="c1"># top по cgroups (CPU, память, I/O)</span>
+systemd-cgls<span class="w"> </span>/user.slice<span class="w">      </span><span class="c1"># пользовательские процессы</span>
+
+<span class="c1"># Посмотреть cgroup процесса</span>
+cat<span class="w"> </span>/proc/<span class="nv">$PID</span>/cgroup
+ps<span class="w"> </span>-o<span class="w"> </span>pid,cgroup<span class="w"> </span>-p<span class="w"> </span><span class="nv">$PID</span>
+</code></pre></div>
+
+<h3 id="убить-все-процессы-службы">Убить все процессы службы<a class="headerlink" href="#убить-все-процессы-службы" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>systemctl<span class="w"> </span><span class="nb">kill</span><span class="w"> </span>nginx
+systemctl<span class="w"> </span><span class="nb">kill</span><span class="w"> </span>--signal<span class="o">=</span>SIGKILL<span class="w"> </span>nginx
+systemctl<span class="w"> </span><span class="nb">kill</span><span class="w"> </span>--kill-who<span class="o">=</span>control<span class="w"> </span>nginx
+</code></pre></div>
+
+<hr />
+<h2 id="отладка-и-траблшутинг">🔍 Отладка и траблшутинг<a class="headerlink" href="#отладка-и-траблшутинг" title="Ссылка">#</a></h2>
+<h3 id="сервис-не-запускается">Сервис не запускается<a class="headerlink" href="#сервис-не-запускается" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># 1. Статус + последние логи</span>
+systemctl<span class="w"> </span>status<span class="w"> </span>nginx
+systemctl<span class="w"> </span>status<span class="w"> </span>nginx<span class="w"> </span>-l<span class="w">         </span><span class="c1"># полный вывод</span>
+
+<span class="c1"># 2. Подробные логи</span>
+journalctl<span class="w"> </span>-u<span class="w"> </span>nginx<span class="w"> </span>-n<span class="w"> </span><span class="m">50</span><span class="w"> </span>--no-pager
+journalctl<span class="w"> </span>-u<span class="w"> </span>nginx<span class="w"> </span>-f<span class="w">            </span><span class="c1"># следить</span>
+
+<span class="c1"># 3. Проверить синтаксис файла</span>
+systemd-analyze<span class="w"> </span>verify<span class="w"> </span>/etc/systemd/system/myapp.service
+
+<span class="c1"># 4. Проверить зависимости</span>
+systemctl<span class="w"> </span>list-dependencies<span class="w"> </span>myapp
+systemctl<span class="w"> </span>list-dependencies<span class="w"> </span>--reverse<span class="w"> </span>myapp
+
+<span class="c1"># 5. Запустить вручную (ту же команду, что в ExecStart)</span>
+/usr/bin/python3<span class="w"> </span>/opt/myapp/main.py
+
+<span class="c1"># 6. Включить debug systemd</span>
+systemd-analyze<span class="w"> </span>log-level<span class="w"> </span>debug
+journalctl<span class="w"> </span>-f
+systemd-analyze<span class="w"> </span>log-level<span class="w"> </span>info<span class="w">     </span><span class="c1"># вернуть обратно</span>
+</code></pre></div>
+
+<h3 id="режим-rescue-emergency-если-не-загружается">Режим rescue / emergency (если не загружается)<a class="headerlink" href="#режим-rescue-emergency-если-не-загружается" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># В GRUB нажмите &#39;e&#39;, добавьте в строку linux:</span>
+systemd.unit<span class="o">=</span>rescue.target<span class="w">         </span><span class="c1"># однопользовательский</span>
+systemd.unit<span class="o">=</span>emergency.target<span class="w">      </span><span class="c1"># минимальный (только root)</span>
+<span class="c1"># или</span>
+<span class="nv">init</span><span class="o">=</span>/bin/bash<span class="w">                     </span><span class="c1"># совсем базово</span>
+</code></pre></div>
+
+<h3 id="конфликт-порт-занят">Конфликт/порт занят<a class="headerlink" href="#конфликт-порт-занят" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Кто слушает порт?</span>
+ss<span class="w"> </span>-tlnp<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>:80
+sudo<span class="w"> </span>lsof<span class="w"> </span>-i<span class="w"> </span>:80
+sudo<span class="w"> </span>fuser<span class="w"> </span><span class="m">80</span>/tcp
+
+<span class="c1"># Найти процесс</span>
+ps<span class="w"> </span>aux<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>nginx
+systemctl<span class="w"> </span>status<span class="w"> </span>&lt;pid&gt;
+</code></pre></div>
+
+<h3 id="recovery-после-изменений">Recovery после изменений<a class="headerlink" href="#recovery-после-изменений" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Если сломали загрузку через bad unit:</span>
+<span class="c1"># 1. Загрузиться в rescue mode</span>
+<span class="c1"># 2. Переименовать/удалить проблемный юнит</span>
+<span class="c1"># 3. systemctl daemon-reload</span>
+<span class="c1"># 4. reboot</span>
+</code></pre></div>
+
+<hr />
+<h2 id="логирование-и-лог-уровни">📦 Логирование и лог-уровни<a class="headerlink" href="#логирование-и-лог-уровни" title="Ссылка">#</a></h2>
+<h3 id="syslog-priorities">Syslog priorities<a class="headerlink" href="#syslog-priorities" title="Ссылка">#</a></h3>
+<table>
+<thead>
+<tr>
+<th>Код</th>
+<th>Имя</th>
+<th>Когда использовать</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>emerg</td>
+<td>Система неработоспособна</td>
+</tr>
+<tr>
+<td>1</td>
+<td>alert</td>
+<td>Требует немедленного действия</td>
+</tr>
+<tr>
+<td>2</td>
+<td>crit</td>
+<td>Критическая ошибка</td>
+</tr>
+<tr>
+<td>3</td>
+<td>err</td>
+<td>Ошибка</td>
+</tr>
+<tr>
+<td>4</td>
+<td>warning</td>
+<td>Предупреждение</td>
+</tr>
+<tr>
+<td>5</td>
+<td>notice</td>
+<td>Важное нормальное событие</td>
+</tr>
+<tr>
+<td>6</td>
+<td>info</td>
+<td>Информационное</td>
+</tr>
+<tr>
+<td>7</td>
+<td>debug</td>
+<td>Отладочное</td>
+</tr>
+</tbody>
+</table>
+<h3 id="дебаг-конкретной-службы">Дебаг конкретной службы<a class="headerlink" href="#дебаг-конкретной-службы" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Включить debug через override</span>
+sudo<span class="w"> </span>systemctl<span class="w"> </span>edit<span class="w"> </span>myapp
+</code></pre></div>
+
+<div class="highlight"><pre><span></span><code><span class="k">[Service]</span>
+<span class="na">Environment</span><span class="o">=</span><span class="s">SYSTEMD_LOG_LEVEL=debug</span>
+</code></pre></div>
+
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>systemctl<span class="w"> </span>restart<span class="w"> </span>myapp
+journalctl<span class="w"> </span>-u<span class="w"> </span>myapp<span class="w"> </span>-f
+</code></pre></div>
+
+<hr />
+<h2 id="переменные-окружения-в-сервисах">🌍 Переменные окружения в сервисах<a class="headerlink" href="#переменные-окружения-в-сервисах" title="Ссылка">#</a></h2>
+<div class="highlight"><pre><span></span><code><span class="k">[Service]</span>
+<span class="na">Environment</span><span class="o">=</span><span class="s">&quot;KEY1=value1&quot;</span><span class="w"> </span><span class="na">&quot;KEY2</span><span class="o">=</span><span class="s">value2&quot;</span>
+<span class="na">EnvironmentFile</span><span class="o">=</span><span class="s">/etc/myapp/env.conf</span>
+<span class="c1"># В env.conf:</span>
+<span class="c1"># KEY=value</span>
+<span class="c1"># (без export, построчно)</span>
+</code></pre></div>
+
+<div class="highlight"><pre><span></span><code><span class="c1"># Просмотр переменных запущенного процесса</span>
+systemctl<span class="w"> </span>show<span class="w"> </span>myapp<span class="w"> </span>-p<span class="w"> </span>Environment
+cat<span class="w"> </span>/proc/<span class="k">$(</span>systemctl<span class="w"> </span>show<span class="w"> </span>-p<span class="w"> </span>MainPID<span class="w"> </span>--value<span class="w"> </span>myapp<span class="k">)</span>/environ<span class="w"> </span><span class="p">|</span><span class="w"> </span>tr<span class="w"> </span><span class="s1">&#39;\0&#39;</span><span class="w"> </span><span class="s1">&#39;\n&#39;</span>
+</code></pre></div>
+
+<hr />
+<h2 id="networkd-resolved-timesyncd">🧩 networkd, resolved, timesyncd<a class="headerlink" href="#networkd-resolved-timesyncd" title="Ссылка">#</a></h2>
+<p>systemd включает набор системных демонов:</p>
+<h3 id="systemd-networkd-сеть">systemd-networkd — сеть<a class="headerlink" href="#systemd-networkd-сеть" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>systemctl<span class="w"> </span>status<span class="w"> </span>systemd-networkd
+<span class="c1"># Конфиги в /etc/systemd/network/</span>
+<span class="c1"># *.network — настройки интерфейсов</span>
+<span class="c1"># *.link — параметры устройств</span>
+<span class="c1"># *.netdev — виртуальные устройства</span>
+networkctl<span class="w"> </span>status
+networkctl<span class="w"> </span>list
+networkctl<span class="w"> </span>reload
+</code></pre></div>
+
+<h3 id="systemd-resolved-dns">systemd-resolved — DNS<a class="headerlink" href="#systemd-resolved-dns" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>systemctl<span class="w"> </span>status<span class="w"> </span>systemd-resolved
+resolvectl<span class="w"> </span>status
+resolvectl<span class="w"> </span>query<span class="w"> </span>example.com<span class="w">        </span><span class="c1"># DNS-запрос</span>
+resolvectl<span class="w"> </span>domain<span class="w">                   </span><span class="c1"># домены</span>
+<span class="c1"># /etc/resolv.conf → symlink на /run/systemd/resolve/stub-resolv.conf</span>
+</code></pre></div>
+
+<h3 id="systemd-timesyncd-ntp">systemd-timesyncd — NTP<a class="headerlink" href="#systemd-timesyncd-ntp" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>systemctl<span class="w"> </span>status<span class="w"> </span>systemd-timesyncd
+timedatectl<span class="w"> </span>status<span class="w">                  </span><span class="c1"># показывает NTP service</span>
+timedatectl<span class="w"> </span>timesync-status
+timedatectl<span class="w"> </span>show-timesync
+</code></pre></div>
+
+<hr />
+<h2 id="полезные-команды-одной-строкой">📊 Полезные команды одной строкой<a class="headerlink" href="#полезные-команды-одной-строкой" title="Ссылка">#</a></h2>
+<div class="highlight"><pre><span></span><code><span class="c1"># Все упавшие сервисы</span>
+systemctl<span class="w"> </span>--failed
+systemctl<span class="w"> </span>list-units<span class="w"> </span>--state<span class="o">=</span>failed
+
+<span class="c1"># Перезапустить все включённые сервисы</span>
+systemctl<span class="w"> </span>list-units<span class="w"> </span>--type<span class="o">=</span>service<span class="w"> </span>--state<span class="o">=</span>running<span class="w"> </span>--no-legend<span class="w"> </span><span class="p">|</span><span class="w"> </span>awk<span class="w"> </span><span class="s1">&#39;{print $1}&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>xargs<span class="w"> </span>systemctl<span class="w"> </span>restart
+
+<span class="c1"># Найти самые медленно запускающиеся</span>
+systemd-analyze<span class="w"> </span>blame<span class="w"> </span><span class="p">|</span><span class="w"> </span>head<span class="w"> </span>-20
+
+<span class="c1"># Топ потребления CPU службами</span>
+systemd-cgtop
+
+<span class="c1"># Все таймеры как cron</span>
+systemctl<span class="w"> </span>list-timers<span class="w"> </span>--all
+
+<span class="c1"># Логи за сегодня с ошибками</span>
+journalctl<span class="w"> </span>--since<span class="w"> </span>today<span class="w"> </span>-p<span class="w"> </span>err
+
+<span class="c1"># Список всех юнитов, которые перезапускаются при падении</span>
+systemctl<span class="w"> </span>list-unit-files<span class="w"> </span>--type<span class="o">=</span>service<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>enabled<span class="w"> </span><span class="p">|</span><span class="w"> </span>awk<span class="w"> </span><span class="s1">&#39;{print $1}&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>xargs<span class="w"> </span>-I<span class="o">{}</span><span class="w"> </span>sh<span class="w"> </span>-c<span class="w"> </span><span class="s1">&#39;systemctl show {} -p Restart | grep -q &quot;no&quot; || echo {}&#39;</span>
+</code></pre></div>
+
+<hr />
+<h2 id="сравнение-с-традиционными-командами">🆚 Сравнение с традиционными командами<a class="headerlink" href="#сравнение-с-традиционными-командами" title="Ссылка">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Традиция</th>
+<th>systemd</th>
+<th>Примечание</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>service nginx start</code></td>
+<td><code>systemctl start nginx</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>service nginx status</code></td>
+<td><code>systemctl status nginx</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>chkconfig nginx on</code></td>
+<td><code>systemctl enable nginx</code></td>
+<td>RHEL/CentOS</td>
+</tr>
+<tr>
+<td><code>update-rc.d nginx enable</code></td>
+<td><code>systemctl enable nginx</code></td>
+<td>Debian</td>
+</tr>
+<tr>
+<td><code>/etc/init.d/nginx restart</code></td>
+<td><code>systemctl restart nginx</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>tail -f /var/log/nginx.log</code></td>
+<td><code>journalctl -u nginx -f</code></td>
+<td>централизованно</td>
+</tr>
+<tr>
+<td><code>cron</code></td>
+<td><code>systemctl list-timers</code></td>
+<td>timers мощнее</td>
+</tr>
+<tr>
+<td><code>runlevel</code></td>
+<td><code>systemctl get-default</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>telinit 3</code></td>
+<td><code>systemctl isolate multi-user.target</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>halt</code>/<code>reboot</code>/<code>poweroff</code></td>
+<td><code>systemctl halt/reboot/poweroff</code></td>
+<td>(алиасы работают)</td>
+</tr>
+<tr>
+<td><code>hostname</code></td>
+<td><code>hostnamectl</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>date</code></td>
+<td><code>timedatectl</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>locale</code></td>
+<td><code>localectl</code></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="частые-ошибки-и-грабли">🪤 Частые ошибки и грабли<a class="headerlink" href="#частые-ошибки-и-грабли" title="Ссылка">#</a></h2>
+<ol>
+<li><strong>Забыть <code>daemon-reload</code></strong> после правки <code>.service</code> файла — изменения не применятся.</li>
+<li><strong><code>enable</code> не запускает сервис</strong> — только <code>enable --now</code> или отдельно <code>start</code>.</li>
+<li><strong><code>ExecStart</code> с путями</strong> — всегда полные пути (<code>/usr/bin/python3</code>, не <code>python3</code>).</li>
+<li><strong>Environment в кавычках</strong> — <code>Environment="A=1" "B=2"</code>, не построчно.</li>
+<li><strong>Type=forking без PIDFile</strong> — systemd не узнает главный процесс.</li>
+<li><strong><code>Restart=always</code> для oneshot</strong> — приведёт к зацикливанию.</li>
+<li><strong><code>User=</code> без absolute paths</strong> — относительные пути ломаются.</li>
+<li><strong>Привилегии в user-сервисах</strong> — <code>--user</code> сервисы не могут биндить порты &lt;1024.</li>
+<li><strong><code>systemctl edit</code> vs <code>--full</code></strong> — <code>edit</code> создаёт override (не затирает оригинал).</li>
+<li><strong><code>mask</code> vs <code>disable</code></strong> — <code>mask</code> полностью запрещает юнит.</li>
+<li><strong>Логи в /var/log</strong> — некоторые сервисы пишут сами, не в journal.</li>
+<li><strong><code>After=</code> vs <code>Requires=</code></strong> — After только порядок, Requires — зависимость.</li>
+<li><strong>Сетевые сервисы без <code>After=network.target</code></strong> — могут стартовать до сети.</li>
+</ol>
+<hr />
+<h2 id="полезные-ссылки">🔗 Полезные ссылки<a class="headerlink" href="#полезные-ссылки" title="Ссылка">#</a></h2>
+<ul>
+<li>Официальный сайт: https://systemd.io</li>
+<li>man pages: <code>man systemd</code>, <code>man systemctl</code>, <code>man journalctl</code>, <code>man systemd.service</code></li>
+<li>systemd по-русски: https://wiki.archlinux.org/title/Systemd_(Русский)</li>
+<li>Lennart&rsquo;s blog (автор): https://0pointer.net/blog/</li>
+<li>systemd-by-example: https://systemd-by-example.com</li>
+<li>Песочница юнитов: https://wiki.archlinux.org/title/Systemd#Sandboxing</li>
+</ul>
+<hr />
+<h2 id="полезные-советы">💡 Полезные советы<a class="headerlink" href="#полезные-советы" title="Ссылка">#</a></h2>
+<ol>
+<li><strong><code>systemctl status</code> без аргументов</strong> — обзор системы (топ активных юнитов).</li>
+<li><strong><code>-b</code> в journalctl</strong> — только с этой загрузки, спасает от спама историей.</li>
+<li><strong><code>--since</code>/<code>--until</code></strong> в journalctl — мощнее, чем grep по времени.</li>
+<li><strong><code>journalctl -p err</code></strong> — только ошибки, для быстрого траблшутинга.</li>
+<li><strong><code>systemd-analyze verify file.service</code></strong> — проверяйте новые юниты перед установкой.</li>
+<li><strong><code>systemctl edit</code></strong> — не правьте <code>/usr/lib/systemd/system/</code> напрямую (затрётся обновлением).</li>
+<li><strong><code>enable-linger</code></strong> — для user-сервисов, чтобы работали без активной сессии.</li>
+<li><strong><code>PrivateTmp=true</code></strong> — изолирует <code>/tmp</code> сервиса (безопасность).</li>
+<li><strong><code>ProtectSystem=strict</code></strong> — делает <code>/</code> read-only (только для чтения).</li>
+<li><strong><code>RestrictAddressFamilies</code></strong> — ограничивает сетевые вызовы сервиса.</li>
+<li><strong>Timers вместо cron</strong> — логи в journal, зависимости, условия, точность.</li>
+<li><strong><code>systemd-cgtop</code></strong> — мониторинг ресурсов по cgroups (кто жрёт CPU/RAM).</li>
+<li><strong><code>systemd-analyze blame</code></strong> — для оптимизации времени загрузки.</li>
+<li><strong>Drop-in файлы</strong> — переопределяйте части юнита, не трогая оригинал.</li>
+<li><strong><code>Type=notify</code></strong> — для сервисов, которые должны точно знать о готовности.</li>
+</ol>
+<hr />
+<p><em>Сгенерировано как шпаргалка. systemd огромен —
+углубляйтесь через <code>man systemd</code>, <code>man systemd.service</code> и https://systemd.io</em></p>
+    </article>
+    <nav class="pagination">
+      <a class="pager prev" href="python.html">← Python</a>
+      <a class="pager next" href="ssh.html">SSH →</a>
+    </nav>
+  </main>
+
+  <aside class="toc">
+    <details open>
+      <summary>📑 Оглавление</summary>
+      <div class="toc-list">
+<div class="toc">
+<ul>
+<li><a href="#systemd-шпаргалка-по-управлению-службами">⚙️ systemd — шпаргалка по управлению службами</a><ul>
+<li><a href="#главные-понятия">🔑 Главные понятия</a></li>
+<li><a href="#systemctl-управление-службами">🚀 systemctl — управление службами</a><ul>
+<li><a href="#базовые-операции-с-сервисом">Базовые операции с сервисом</a></li>
+<li><a href="#управление-автозапуском">Управление автозапуском</a></li>
+<li><a href="#маскировка-запрет">Маскировка (запрет)</a></li>
+</ul>
+</li>
+<li><a href="#просмотр-юнитов">📋 Просмотр юнитов</a><ul>
+<li><a href="#списки">Списки</a></li>
+<li><a href="#поиск-и-проверка">Поиск и проверка</a></li>
+</ul>
+</li>
+<li><a href="#управление-системой-машиной">🖥️ Управление системой (машиной)</a><ul>
+<li><a href="#targets-аналоги-runlevel">Targets (аналоги runlevel)</a></li>
+</ul>
+</li>
+<li><a href="#создание-собственного-сервиса">📝 Создание собственного сервиса</a><ul>
+<li><a href="#расположение-файлов-юнитов">Расположение файлов юнитов</a></li>
+<li><a href="#базовый-пример-service">Базовый пример .service</a></li>
+<li><a href="#типы-служб-type">Типы служб (Type=)</a></li>
+<li><a href="#полный-цикл-установки-сервиса">Полный цикл установки сервиса</a></li>
+<li><a href="#drop-in-переопределение-части-юнита">Drop-in (переопределение части юнита)</a></li>
+</ul>
+</li>
+<li><a href="#таймеры-замена-cronу">⏰ Таймеры (замена cronу)</a><ul>
+<li><a href="#пример-timer">Пример .timer</a></li>
+<li><a href="#таймер-сервис">Таймер + сервис</a></li>
+<li><a href="#сравнение-синтаксиса-oncalendar-с-cron">Сравнение синтаксиса OnCalendar с cron</a></li>
+<li><a href="#пользовательские-таймеры">Пользовательские таймеры</a></li>
+</ul>
+</li>
+<li><a href="#journalctl-чтение-логов">📜 journalctl — чтение логов</a><ul>
+<li><a href="#базовый-просмотр">Базовый просмотр</a></li>
+<li><a href="#фильтрация">Фильтрация</a></li>
+<li><a href="#очистка-логов">Очистка логов</a></li>
+<li><a href="#логирование-в-journal-из-скрипта">Логирование в journal из скрипта</a></li>
+</ul>
+</li>
+<li><a href="#сокет-активация">🔌 Сокет-активация</a></li>
+<li><a href="#пользовательские-сервисы-user">🏠 Пользовательские сервисы (&ndash;user)</a></li>
+<li><a href="#hostnamectl-localectl-timedatectl-loginctl">🌐 hostnamectl, localectl, timedatectl, loginctl</a><ul>
+<li><a href="#hostnamectl-имя-хоста">hostnamectl — имя хоста</a></li>
+<li><a href="#localectl-локаль-и-раскладка">localectl — локаль и раскладка</a></li>
+<li><a href="#timedatectl-время-и-часовой-пояс">timedatectl — время и часовой пояс</a></li>
+<li><a href="#loginctl-сессии-и-пользователи">loginctl — сессии и пользователи</a></li>
+</ul>
+</li>
+<li><a href="#анализ-производительности">🔧 Анализ производительности</a><ul>
+<li><a href="#systemd-analyze">systemd-analyze</a></li>
+<li><a href="#пример-вывода-blame">Пример вывода blame</a></li>
+</ul>
+</li>
+<li><a href="#systemd-cgls-systemd-cgtop-cgroups">🛠️ systemd-cgls, systemd-cgtop — cgroups</a><ul>
+<li><a href="#убить-все-процессы-службы">Убить все процессы службы</a></li>
+</ul>
+</li>
+<li><a href="#отладка-и-траблшутинг">🔍 Отладка и траблшутинг</a><ul>
+<li><a href="#сервис-не-запускается">Сервис не запускается</a></li>
+<li><a href="#режим-rescue-emergency-если-не-загружается">Режим rescue / emergency (если не загружается)</a></li>
+<li><a href="#конфликт-порт-занят">Конфликт/порт занят</a></li>
+<li><a href="#recovery-после-изменений">Recovery после изменений</a></li>
+</ul>
+</li>
+<li><a href="#логирование-и-лог-уровни">📦 Логирование и лог-уровни</a><ul>
+<li><a href="#syslog-priorities">Syslog priorities</a></li>
+<li><a href="#дебаг-конкретной-службы">Дебаг конкретной службы</a></li>
+</ul>
+</li>
+<li><a href="#переменные-окружения-в-сервисах">🌍 Переменные окружения в сервисах</a></li>
+<li><a href="#networkd-resolved-timesyncd">🧩 networkd, resolved, timesyncd</a><ul>
+<li><a href="#systemd-networkd-сеть">systemd-networkd — сеть</a></li>
+<li><a href="#systemd-resolved-dns">systemd-resolved — DNS</a></li>
+<li><a href="#systemd-timesyncd-ntp">systemd-timesyncd — NTP</a></li>
+</ul>
+</li>
+<li><a href="#полезные-команды-одной-строкой">📊 Полезные команды одной строкой</a></li>
+<li><a href="#сравнение-с-традиционными-командами">🆚 Сравнение с традиционными командами</a></li>
+<li><a href="#частые-ошибки-и-грабли">🪤 Частые ошибки и грабли</a></li>
+<li><a href="#полезные-ссылки">🔗 Полезные ссылки</a></li>
+<li><a href="#полезные-советы">💡 Полезные советы</a></li>
+</ul>
+</li>
+</ul>
+</div>
+
+      </div>
+    </details>
+  </aside>
+</div>
+
+<button class="back-top" id="backTop" aria-label="Наверх">↑</button>
+
+<script src="assets/search.js"></script>
+<script src="assets/page.js"></script>
+</body>
+</html>

@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Apache Airflow — Шпаргалки</title>
+<link rel="stylesheet" href="assets/style.css">
+<link rel="stylesheet" href="assets/pygments.css">
+</head>
+<body>
+<div class="layout">
+  <aside class="sidebar">
+    <a href="index.html" class="brand">📌 Шпаргалки</a>
+    <nav class="nav">
+<a href="yazi.html" class="nav-item"><span class="nav-ico">📦</span>Yazi</a>
+<a href="neovim.html" class="nav-item"><span class="nav-ico">📘</span>Neovim (LazyVim)</a>
+<a href="niri.html" class="nav-item"><span class="nav-ico">🪟</span>Niri</a>
+<a href="tmux.html" class="nav-item"><span class="nav-ico">🪟</span>Tmux</a>
+<a href="bash.html" class="nav-item"><span class="nav-ico">🐚</span>Bash</a>
+<a href="git.html" class="nav-item"><span class="nav-ico">🔀</span>Git</a>
+<a href="terminal.html" class="nav-item"><span class="nav-ico">🖥️</span>Терминал Linux</a>
+<a href="powershell.html" class="nav-item"><span class="nav-ico">💻</span>PowerShell</a>
+<a href="cmd.html" class="nav-item"><span class="nav-ico">🪟</span>CMD (cmd.exe)</a>
+<a href="python.html" class="nav-item"><span class="nav-ico">🐍</span>Python</a>
+<a href="systemd.html" class="nav-item"><span class="nav-ico">⚙️</span>systemd</a>
+<a href="ssh.html" class="nav-item"><span class="nav-ico">🔐</span>SSH</a>
+<a href="make-cmake.html" class="nav-item"><span class="nav-ico">🔨</span>Make / CMake</a>
+<a href="docker.html" class="nav-item"><span class="nav-ico">🐳</span>Docker</a>
+<a href="pacman.html" class="nav-item"><span class="nav-ico">📦</span>pacman / yay / paru</a>
+<a href="spark.html" class="nav-item"><span class="nav-ico">⚡</span>Apache Spark / PySpark</a>
+<a href="markdown.html" class="nav-item"><span class="nav-ico">📝</span>Markdown</a>
+<a href="regex.html" class="nav-item"><span class="nav-ico">🔍</span>Регулярные выражения</a>
+<a href="jq-json.html" class="nav-item"><span class="nav-ico">🔧</span>jq + JSON</a>
+<a href="awk-sed.html" class="nav-item"><span class="nav-ico">✂️</span>awk / sed</a>
+<a href="airflow.html" class="nav-item active"><span class="nav-ico">🌪️</span>Apache Airflow</a>
+<a href="http-curl.html" class="nav-item"><span class="nav-ico">🌐</span>HTTP / curl</a>
+<a href="yaml.html" class="nav-item"><span class="nav-ico">📄</span>YAML</a>
+<a href="vscode.html" class="nav-item"><span class="nav-ico">💻</span>VS Code</a>
+<a href="cron.html" class="nav-item"><span class="nav-ico">⏰</span>cron</a>
+<a href="fzf-zoxide.html" class="nav-item"><span class="nav-ico">🔎</span>fzf + zoxide</a>
+<a href="minikube-k8s.html" class="nav-item"><span class="nav-ico">☸️</span>Minikube / Kubernetes</a>
+<a href="cicd.html" class="nav-item"><span class="nav-ico">🦊</span>GitLab CI / GitHub Actions</a>
+<a href="nginx.html" class="nav-item"><span class="nav-ico">🌐</span>nginx</a>
+<a href="dbt.html" class="nav-item"><span class="nav-ico">🔧</span>dbt</a>
+<a href="kafka.html" class="nav-item"><span class="nav-ico">🐘</span>Apache Kafka</a>
+<a href="prometheus-grafana.html" class="nav-item"><span class="nav-ico">📊</span>Prometheus / Grafana</a>
+<a href="iceberg-nessie.html" class="nav-item"><span class="nav-ico">🧊</span>Iceberg / Nessie</a>
+<a href="impala.html" class="nav-item"><span class="nav-ico">🐬</span>Apache Impala</a>
+<a href="terraform.html" class="nav-item"><span class="nav-ico">🏗️</span>Terraform</a>
+<a href="linux-internals.html" class="nav-item"><span class="nav-ico">🐧</span>Linux Internals</a>
+<a href="miscellaneous.html" class="nav-item"><span class="nav-ico">🧰</span>Miscellaneous</a>
+<a href="python-automation-libs.html" class="nav-item"><span class="nav-ico">🐍</span>Python: авт-ция (10 libs)</a>
+<a href="eza.html" class="nav-item"><span class="nav-ico">🌈</span>eza</a>
+<a href="dbeaver.html" class="nav-item"><span class="nav-ico">🗄️</span>DBeaver</a>
+<a href="zcode.html" class="nav-item"><span class="nav-ico">🤖</span>ZCode</a>
+<a href="warp.html" class="nav-item"><span class="nav-ico">🚀</span>Warp</a>
+<a href="agentic-ai-dev.html" class="nav-item"><span class="nav-ico">🤝</span>Агентная разработка с ИИ</a>
+    </nav>
+  </aside>
+
+  <main class="content">
+    <article>
+<h1 id="apache-airflow-шпаргалка">🌪️ Apache Airflow — шпаргалка<a class="headerlink" href="#apache-airflow-шпаргалка" title="Ссылка">#</a></h1>
+<blockquote>
+<p><strong>Apache Airflow</strong> — платформа для оркестрации ETL/ELT пайплайнов.
+DAG&rsquo;и (направленные графы) на Python, расписание, мониторинг.
+Документация: https://airflow.apache.org/docs</p>
+</blockquote>
+<hr />
+<h2 id="главные-понятия">🔑 Главные понятия<a class="headerlink" href="#главные-понятия" title="Ссылка">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Термин</th>
+<th>Что значит</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>DAG</strong></td>
+<td>Directed Acyclic Graph — пайплайн (граф задач без циклов)</td>
+</tr>
+<tr>
+<td><strong>Task</strong></td>
+<td>Задача в DAG (узел графа)</td>
+</tr>
+<tr>
+<td><strong>Operator</strong></td>
+<td>Шаблон для создания Task (BashOperator, PythonOperator)</td>
+</tr>
+<tr>
+<td><strong>Task Instance</strong></td>
+<td>Конкретный запуск Task в определённый run</td>
+</tr>
+<tr>
+<td><strong>DAG Run</strong></td>
+<td>Запуск всего DAG в конкретный момент</td>
+</tr>
+<tr>
+<td><strong>Scheduler</strong></td>
+<td>Демон, планирующий запуск DAG&rsquo;ов</td>
+</tr>
+<tr>
+<td><strong>Executor</strong></td>
+<td>Как выполняются задачи (Local, Celery, Kubernetes)</td>
+</tr>
+<tr>
+<td><strong>Worker</strong></td>
+<td>Процесс, выполняющий задачи</td>
+</tr>
+<tr>
+<td><strong>Webserver</strong></td>
+<td>Веб-интерфейс</td>
+</tr>
+<tr>
+<td><strong>Metadata DB</strong></td>
+<td>PostgreSQL/MySQL — состояние</td>
+</tr>
+<tr>
+<td><strong>XCom</strong></td>
+<td>Cross-communication — обмен данными между задачами</td>
+</tr>
+<tr>
+<td><strong>Connection</strong></td>
+<td>Учётные данные для внешнего сервиса</td>
+</tr>
+<tr>
+<td><strong>Variable</strong></td>
+<td>Глобальная переменная в БД</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="запуск">🚀 Запуск<a class="headerlink" href="#запуск" title="Ссылка">#</a></h2>
+<h3 id="через-pypi-локально">Через PyPI (локально)<a class="headerlink" href="#через-pypi-локально" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Установка</span>
+pip<span class="w"> </span>install<span class="w"> </span><span class="s2">&quot;apache-airflow[celery,postgres]==2.9.0&quot;</span>
+<span class="c1"># или с constraints (рекомендуется)</span>
+pip<span class="w"> </span>install<span class="w"> </span><span class="s2">&quot;apache-airflow==2.9.0&quot;</span><span class="w"> </span>--constraint<span class="w"> </span><span class="s2">&quot;https://raw.githubusercontent.com/apache/airflow/constraints-2.9.0/constraints-3.8.txt&quot;</span>
+
+<span class="c1"># Инициализация БД (SQLite для разработки)</span>
+airflow<span class="w"> </span>db<span class="w"> </span>migrate
+airflow<span class="w"> </span>users<span class="w"> </span>create<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--username<span class="w"> </span>admin<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--firstname<span class="w"> </span>Peter<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--lastname<span class="w"> </span>Parker<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--role<span class="w"> </span>Admin<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--email<span class="w"> </span>admin@example.com<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--password<span class="w"> </span>admin
+
+<span class="c1"># Запуск компонентов</span>
+airflow<span class="w"> </span>webserver<span class="w"> </span>--port<span class="w"> </span><span class="m">8080</span>
+airflow<span class="w"> </span>scheduler
+<span class="c1"># Web UI: http://localhost:8080</span>
+</code></pre></div>
+
+<h3 id="через-docker-официальный-compose">Через Docker (официальный compose)<a class="headerlink" href="#через-docker-официальный-compose" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>curl<span class="w"> </span>-LfO<span class="w"> </span><span class="s1">&#39;https://airflow.apache.org/docs/apache-airflow/2.9.0/docker-compose.yaml&#39;</span>
+mkdir<span class="w"> </span>-p<span class="w"> </span>./dags<span class="w"> </span>./logs<span class="w"> </span>./plugins<span class="w"> </span>./config
+<span class="nb">echo</span><span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;AIRFLOW_UID=</span><span class="k">$(</span>id<span class="w"> </span>-u<span class="k">)</span><span class="s2">&quot;</span><span class="w"> </span>&gt;<span class="w"> </span>.env
+docker<span class="w"> </span>compose<span class="w"> </span>up<span class="w"> </span>airflow-init
+docker<span class="w"> </span>compose<span class="w"> </span>up<span class="w"> </span>-d
+<span class="c1"># UI: http://localhost:8080 (airflow/airflow)</span>
+</code></pre></div>
+
+<h3 id="структура-проекта">Структура проекта<a class="headerlink" href="#структура-проекта" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>project/
+├── dags/                    # ← DAG&#39;и (Python-файлы)
+│   ├── my_dag.py
+│   └── ...
+├── plugins/                 # кастомные операторы/хуки
+├── logs/                    # логи задач
+├── config/                  # конфиги
+├── tests/                   # тесты DAG&#39;ов
+├── requirements.txt         # доп. Python-пакеты
+└── docker-compose.yaml
+</code></pre></div>
+
+<hr />
+<h2 id="структура-dag">📝 Структура DAG<a class="headerlink" href="#структура-dag" title="Ссылка">#</a></h2>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">datetime</span><span class="p">,</span> <span class="n">timedelta</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">airflow</span><span class="w"> </span><span class="kn">import</span> <span class="n">DAG</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">airflow.operators.bash</span><span class="w"> </span><span class="kn">import</span> <span class="n">BashOperator</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">airflow.operators.python</span><span class="w"> </span><span class="kn">import</span> <span class="n">PythonOperator</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">airflow.operators.empty</span><span class="w"> </span><span class="kn">import</span> <span class="n">EmptyOperator</span>
+
+<span class="c1"># Определение DAG</span>
+<span class="k">with</span> <span class="n">DAG</span><span class="p">(</span>
+    <span class="n">dag_id</span><span class="o">=</span><span class="s2">&quot;my_pipeline&quot;</span><span class="p">,</span>
+    <span class="n">description</span><span class="o">=</span><span class="s2">&quot;My first pipeline&quot;</span><span class="p">,</span>
+    <span class="n">start_date</span><span class="o">=</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2024</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+    <span class="n">schedule</span><span class="o">=</span><span class="s2">&quot;@daily&quot;</span><span class="p">,</span>                    <span class="c1"># расписание</span>
+    <span class="n">catchup</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>                        <span class="c1"># не запускать пропущенные</span>
+    <span class="n">default_args</span><span class="o">=</span><span class="p">{</span>
+        <span class="s2">&quot;owner&quot;</span><span class="p">:</span> <span class="s2">&quot;data_team&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;retries&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="s2">&quot;retry_delay&quot;</span><span class="p">:</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">minutes</span><span class="o">=</span><span class="mi">5</span><span class="p">),</span>
+        <span class="s2">&quot;email_on_failure&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="s2">&quot;depends_on_past&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="p">},</span>
+    <span class="n">tags</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;etl&quot;</span><span class="p">,</span> <span class="s2">&quot;production&quot;</span><span class="p">],</span>
+    <span class="n">max_active_runs</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+<span class="p">)</span> <span class="k">as</span> <span class="n">dag</span><span class="p">:</span>
+
+    <span class="n">start</span> <span class="o">=</span> <span class="n">EmptyOperator</span><span class="p">(</span><span class="n">task_id</span><span class="o">=</span><span class="s2">&quot;start&quot;</span><span class="p">)</span>
+    <span class="n">end</span> <span class="o">=</span> <span class="n">EmptyOperator</span><span class="p">(</span><span class="n">task_id</span><span class="o">=</span><span class="s2">&quot;end&quot;</span><span class="p">)</span>
+
+    <span class="n">extract</span> <span class="o">=</span> <span class="n">PythonOperator</span><span class="p">(</span>
+        <span class="n">task_id</span><span class="o">=</span><span class="s2">&quot;extract&quot;</span><span class="p">,</span>
+        <span class="n">python_callable</span><span class="o">=</span><span class="n">extract_function</span><span class="p">,</span>
+        <span class="n">op_kwargs</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;source&quot;</span><span class="p">:</span> <span class="s2">&quot;api&quot;</span><span class="p">},</span>
+    <span class="p">)</span>
+
+    <span class="n">transform</span> <span class="o">=</span> <span class="n">BashOperator</span><span class="p">(</span>
+        <span class="n">task_id</span><span class="o">=</span><span class="s2">&quot;transform&quot;</span><span class="p">,</span>
+        <span class="n">bash_command</span><span class="o">=</span><span class="s2">&quot;echo &#39;transforming&#39; &amp;&amp; python transform.py&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="c1"># Зависимости (направление графа)</span>
+    <span class="n">start</span> <span class="o">&gt;&gt;</span> <span class="n">extract</span> <span class="o">&gt;&gt;</span> <span class="n">transform</span> <span class="o">&gt;&gt;</span> <span class="n">end</span>
+    <span class="c1"># или</span>
+    <span class="n">start</span> <span class="o">&gt;&gt;</span> <span class="p">[</span><span class="n">extract</span><span class="p">,</span> <span class="n">parallel_task</span><span class="p">]</span> <span class="o">&gt;&gt;</span> <span class="n">end</span>   <span class="c1"># fan-out / fan-in</span>
+</code></pre></div>
+
+<h3 id="расписание-schedule">Расписание (schedule)<a class="headerlink" href="#расписание-schedule" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="n">schedule</span><span class="o">=</span><span class="s2">&quot;@daily&quot;</span>            <span class="c1"># ежедневно</span>
+<span class="n">schedule</span><span class="o">=</span><span class="s2">&quot;@hourly&quot;</span>
+<span class="n">schedule</span><span class="o">=</span><span class="s2">&quot;@weekly&quot;</span>
+<span class="n">schedule</span><span class="o">=</span><span class="s2">&quot;@monthly&quot;</span>
+<span class="n">schedule</span><span class="o">=</span><span class="s2">&quot;@yearly&quot;</span>
+<span class="n">schedule</span><span class="o">=</span><span class="kc">None</span>                <span class="c1"># только вручную</span>
+<span class="n">schedule</span><span class="o">=</span><span class="s2">&quot;0 2 * * *&quot;</span>         <span class="c1"># cron-выражение (каждый день в 2:00)</span>
+<span class="n">schedule</span><span class="o">=</span><span class="s2">&quot;*/15 * * * *&quot;</span>      <span class="c1"># каждые 15 минут</span>
+<span class="n">schedule</span><span class="o">=</span><span class="n">timedelta</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>   <span class="c1"># timedelta</span>
+<span class="n">schedule</span><span class="o">=</span><span class="s2">&quot;0 0 * * MON&quot;</span>       <span class="c1"># cron с днём недели (quartz-like)</span>
+</code></pre></div>
+
+<h3 id="cron-vs-timetable">cron vs timetable<a class="headerlink" href="#cron-vs-timetable" title="Ссылка">#</a></h3>
+<ul>
+<li><strong>Cron</strong>: классические cron-выражения (<code>0 2 * * *</code>).</li>
+<li><strong>Timetable</strong>: более гибкие, со временной зоной.</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">airflow.timetables.interval</span><span class="w"> </span><span class="kn">import</span> <span class="n">CronDataIntervalTimetable</span>
+
+<span class="n">schedule</span><span class="o">=</span><span class="n">CronDataIntervalTimetable</span><span class="p">(</span>
+    <span class="s2">&quot;0 2 * * *&quot;</span><span class="p">,</span>
+    <span class="n">timezone</span><span class="o">=</span><span class="s2">&quot;Europe/Moscow&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+</code></pre></div>
+
+<hr />
+<h2 id="операторы-operators">🎓 Операторы (Operators)<a class="headerlink" href="#операторы-operators" title="Ссылка">#</a></h2>
+<h3 id="bashoperator">BashOperator<a class="headerlink" href="#bashoperator" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">airflow.operators.bash</span><span class="w"> </span><span class="kn">import</span> <span class="n">BashOperator</span>
+
+<span class="n">task</span> <span class="o">=</span> <span class="n">BashOperator</span><span class="p">(</span>
+    <span class="n">task_id</span><span class="o">=</span><span class="s2">&quot;run_script&quot;</span><span class="p">,</span>
+    <span class="n">bash_command</span><span class="o">=</span><span class="s2">&quot;/opt/scripts/run.sh {{ params.date }}&quot;</span><span class="p">,</span>
+    <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;date&quot;</span><span class="p">:</span> <span class="s2">&quot;2024-01-15&quot;</span><span class="p">},</span>
+    <span class="n">cwd</span><span class="o">=</span><span class="s2">&quot;/opt/scripts&quot;</span><span class="p">,</span>
+    <span class="n">env</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;MY_VAR&quot;</span><span class="p">:</span> <span class="s2">&quot;value&quot;</span><span class="p">},</span>     <span class="c1"># доп. переменные окружения</span>
+<span class="p">)</span>
+</code></pre></div>
+
+<h3 id="pythonoperator">PythonOperator<a class="headerlink" href="#pythonoperator" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">airflow.operators.python</span><span class="w"> </span><span class="kn">import</span> <span class="n">PythonOperator</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">process_data</span><span class="p">(</span><span class="o">**</span><span class="n">context</span><span class="p">):</span>
+    <span class="n">ds</span> <span class="o">=</span> <span class="n">context</span><span class="p">[</span><span class="s2">&quot;ds&quot;</span><span class="p">]</span>               <span class="c1"># дата как YYYY-MM-DD</span>
+    <span class="n">ti</span> <span class="o">=</span> <span class="n">context</span><span class="p">[</span><span class="s2">&quot;ti&quot;</span><span class="p">]</span>               <span class="c1"># task instance</span>
+    <span class="c1"># логика...</span>
+
+<span class="n">task</span> <span class="o">=</span> <span class="n">PythonOperator</span><span class="p">(</span>
+    <span class="n">task_id</span><span class="o">=</span><span class="s2">&quot;process&quot;</span><span class="p">,</span>
+    <span class="n">python_callable</span><span class="o">=</span><span class="n">process_data</span><span class="p">,</span>
+    <span class="n">op_kwargs</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;source&quot;</span><span class="p">:</span> <span class="s2">&quot;api&quot;</span><span class="p">},</span>     <span class="c1"># позиционные/именованные аргументы</span>
+    <span class="n">op_args</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;positional&quot;</span><span class="p">],</span>
+<span class="p">)</span>
+</code></pre></div>
+
+<h3 id="emptyoperator-бывший-dummyoperator">EmptyOperator (бывший DummyOperator)<a class="headerlink" href="#emptyoperator-бывший-dummyoperator" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">airflow.operators.empty</span><span class="w"> </span><span class="kn">import</span> <span class="n">EmptyOperator</span>
+
+<span class="n">start</span> <span class="o">=</span> <span class="n">EmptyOperator</span><span class="p">(</span><span class="n">task_id</span><span class="o">=</span><span class="s2">&quot;start&quot;</span><span class="p">)</span>
+<span class="n">end</span> <span class="o">=</span> <span class="n">EmptyOperator</span><span class="p">(</span><span class="n">task_id</span><span class="o">=</span><span class="s2">&quot;end&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+<h3 id="emailoperator">EmailOperator<a class="headerlink" href="#emailoperator" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">airflow.operators.email</span><span class="w"> </span><span class="kn">import</span> <span class="n">EmailOperator</span>
+
+<span class="n">task</span> <span class="o">=</span> <span class="n">EmailOperator</span><span class="p">(</span>
+    <span class="n">task_id</span><span class="o">=</span><span class="s2">&quot;send_email&quot;</span><span class="p">,</span>
+    <span class="n">to</span><span class="o">=</span><span class="s2">&quot;admin@example.com&quot;</span><span class="p">,</span>
+    <span class="n">subject</span><span class="o">=</span><span class="s2">&quot;Pipeline {{ ds }} done&quot;</span><span class="p">,</span>
+    <span class="n">html_content</span><span class="o">=</span><span class="s2">&quot;Data processed successfully.&quot;</span><span class="p">,</span>
+    <span class="n">files</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;/tmp/report.csv&quot;</span><span class="p">],</span>
+<span class="p">)</span>
+</code></pre></div>
+
+<h3 id="branchpythonoperator-условное-ветвление">BranchPythonOperator (условное ветвление)<a class="headerlink" href="#branchpythonoperator-условное-ветвление" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">airflow.operators.python</span><span class="w"> </span><span class="kn">import</span> <span class="n">BranchPythonOperator</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">decide_branch</span><span class="p">(</span><span class="o">**</span><span class="n">context</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">context</span><span class="p">[</span><span class="s2">&quot;execution_date&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">day</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">&quot;monthly_task&quot;</span>
+    <span class="k">return</span> <span class="s2">&quot;daily_task&quot;</span>
+
+<span class="n">branch</span> <span class="o">=</span> <span class="n">BranchPythonOperator</span><span class="p">(</span>
+    <span class="n">task_id</span><span class="o">=</span><span class="s2">&quot;decide&quot;</span><span class="p">,</span>
+    <span class="n">python_callable</span><span class="o">=</span><span class="n">decide_branch</span><span class="p">,</span>
+<span class="p">)</span>
+</code></pre></div>
+
+<h3 id="shortcircuitoperator-полная-остановка">ShortCircuitOperator (полная остановка)<a class="headerlink" href="#shortcircuitoperator-полная-остановка" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">airflow.operators.python</span><span class="w"> </span><span class="kn">import</span> <span class="n">ShortCircuitOperator</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">is_weekend</span><span class="p">(</span><span class="o">**</span><span class="n">context</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">context</span><span class="p">[</span><span class="s2">&quot;execution_date&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">weekday</span><span class="p">()</span> <span class="o">&gt;=</span> <span class="mi">5</span>   <span class="c1"># False → DAG останавливается</span>
+
+<span class="n">skip_weekend</span> <span class="o">=</span> <span class="n">ShortCircuitOperator</span><span class="p">(</span>
+    <span class="n">task_id</span><span class="o">=</span><span class="s2">&quot;skip_weekend&quot;</span><span class="p">,</span>
+    <span class="n">python_callable</span><span class="o">=</span><span class="n">is_weekend</span><span class="p">,</span>
+<span class="p">)</span>
+</code></pre></div>
+
+<h3 id="sparksubmitoperator">SparkSubmitOperator<a class="headerlink" href="#sparksubmitoperator" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">airflow.providers.apache.spark.operators.spark_submit</span><span class="w"> </span><span class="kn">import</span> <span class="n">SparkSubmitOperator</span>
+
+<span class="n">spark_task</span> <span class="o">=</span> <span class="n">SparkSubmitOperator</span><span class="p">(</span>
+    <span class="n">task_id</span><span class="o">=</span><span class="s2">&quot;spark_job&quot;</span><span class="p">,</span>
+    <span class="n">application</span><span class="o">=</span><span class="s2">&quot;/opt/spark/jobs/my_job.py&quot;</span><span class="p">,</span>
+    <span class="n">conn_id</span><span class="o">=</span><span class="s2">&quot;spark_default&quot;</span><span class="p">,</span>
+    <span class="n">conf</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;spark.master&quot;</span><span class="p">:</span> <span class="s2">&quot;spark://spark-master:7077&quot;</span><span class="p">},</span>
+    <span class="n">application_args</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;{{ ds }}&quot;</span><span class="p">],</span>
+<span class="p">)</span>
+</code></pre></div>
+
+<h3 id="provider-operators">Provider Operators<a class="headerlink" href="#provider-operators" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># PostgreSQL</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">airflow.providers.postgres.operators.postgres</span><span class="w"> </span><span class="kn">import</span> <span class="n">PostgresOperator</span>
+
+<span class="n">sql_task</span> <span class="o">=</span> <span class="n">PostgresOperator</span><span class="p">(</span>
+    <span class="n">task_id</span><span class="o">=</span><span class="s2">&quot;run_sql&quot;</span><span class="p">,</span>
+    <span class="n">postgres_conn_id</span><span class="o">=</span><span class="s2">&quot;postgres_default&quot;</span><span class="p">,</span>
+    <span class="n">sql</span><span class="o">=</span><span class="s2">&quot;SELECT * FROM users WHERE created_at &gt;= &#39;{{ ds }}&#39;&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="c1"># S3</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">airflow.providers.amazon.aws.operators.s3</span><span class="w"> </span><span class="kn">import</span> <span class="n">S3CopyObjectOperator</span>
+
+<span class="c1"># Docker</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">airflow.providers.docker.operators.docker</span><span class="w"> </span><span class="kn">import</span> <span class="n">DockerOperator</span>
+
+<span class="n">docker_task</span> <span class="o">=</span> <span class="n">DockerOperator</span><span class="p">(</span>
+    <span class="n">task_id</span><span class="o">=</span><span class="s2">&quot;docker_pipeline&quot;</span><span class="p">,</span>
+    <span class="n">image</span><span class="o">=</span><span class="s2">&quot;my-app:latest&quot;</span><span class="p">,</span>
+    <span class="n">api_version</span><span class="o">=</span><span class="s2">&quot;auto&quot;</span><span class="p">,</span>
+    <span class="n">auto_remove</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">command</span><span class="o">=</span><span class="s2">&quot;run.sh&quot;</span><span class="p">,</span>
+    <span class="n">docker_url</span><span class="o">=</span><span class="s2">&quot;unix://var/run/docker.sock&quot;</span><span class="p">,</span>
+    <span class="n">network_mode</span><span class="o">=</span><span class="s2">&quot;bridge&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+</code></pre></div>
+
+<h3 id="dag-и-task-taskflow-api-современный-стиль">@dag и @task (TaskFlow API — современный стиль)<a class="headerlink" href="#dag-и-task-taskflow-api-современный-стиль" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">airflow.decorators</span><span class="w"> </span><span class="kn">import</span> <span class="n">dag</span><span class="p">,</span> <span class="n">task</span>
+
+<span class="nd">@dag</span><span class="p">(</span>
+    <span class="n">schedule</span><span class="o">=</span><span class="s2">&quot;@daily&quot;</span><span class="p">,</span>
+    <span class="n">start_date</span><span class="o">=</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2024</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+    <span class="n">catchup</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">tags</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;modern&quot;</span><span class="p">],</span>
+<span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">my_pipeline</span><span class="p">():</span>
+
+    <span class="nd">@task</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">extract</span><span class="p">():</span>
+        <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;data&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]}</span>
+
+    <span class="nd">@task</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">transform</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">x</span> <span class="o">*</span> <span class="mi">2</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;data&quot;</span><span class="p">]]</span>
+
+    <span class="nd">@task</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">load</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Loaded: </span><span class="si">{</span><span class="n">data</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="n">data</span> <span class="o">=</span> <span class="n">extract</span><span class="p">()</span>
+    <span class="n">transformed</span> <span class="o">=</span> <span class="n">transform</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+    <span class="n">load</span><span class="p">(</span><span class="n">transformed</span><span class="p">)</span>
+
+<span class="n">my_pipeline</span><span class="p">()</span>
+</code></pre></div>
+
+<blockquote>
+<p>TaskFlow автоматически передаёт результаты между задачами через XCom!</p>
+</blockquote>
+<hr />
+<h2 id="зависимости-задач">🔗 Зависимости задач<a class="headerlink" href="#зависимости-задач" title="Ссылка">#</a></h2>
+<div class="highlight"><pre><span></span><code><span class="c1"># Линейная</span>
+<span class="n">task1</span> <span class="o">&gt;&gt;</span> <span class="n">task2</span> <span class="o">&gt;&gt;</span> <span class="n">task3</span>
+
+<span class="c1"># Fan-out</span>
+<span class="n">start</span> <span class="o">&gt;&gt;</span> <span class="p">[</span><span class="n">task1</span><span class="p">,</span> <span class="n">task2</span><span class="p">,</span> <span class="n">task3</span><span class="p">]</span> <span class="o">&gt;&gt;</span> <span class="n">end</span>
+
+<span class="c1"># Сложные</span>
+<span class="p">[</span><span class="n">extract1</span><span class="p">,</span> <span class="n">extract2</span><span class="p">]</span> <span class="o">&gt;&gt;</span> <span class="n">transform</span> <span class="o">&gt;&gt;</span> <span class="p">[</span><span class="n">load1</span><span class="p">,</span> <span class="n">load2</span><span class="p">]</span>
+
+<span class="c1"># Chain</span>
+<span class="n">task1</span> <span class="o">&gt;&gt;</span> <span class="n">task2</span> <span class="o">&gt;&gt;</span> <span class="n">task3</span>
+<span class="c1"># эквивалентно</span>
+<span class="n">task1</span><span class="o">.</span><span class="n">set_downstream</span><span class="p">(</span><span class="n">task2</span><span class="p">)</span>
+<span class="n">task2</span><span class="o">.</span><span class="n">set_downstream</span><span class="p">(</span><span class="n">task3</span><span class="p">)</span>
+
+<span class="c1"># Chain (несколько)</span>
+<span class="n">chain</span><span class="p">(</span><span class="n">task1</span><span class="p">,</span> <span class="n">task2</span><span class="p">,</span> <span class="n">task3</span><span class="p">)</span>
+<span class="n">chain</span><span class="p">([</span><span class="n">t1</span><span class="p">,</span> <span class="n">t2</span><span class="p">],</span> <span class="p">[</span><span class="n">t3</span><span class="p">,</span> <span class="n">t4</span><span class="p">])</span>    <span class="c1"># cross-dependencies</span>
+
+<span class="c1"># cross_downstream</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">airflow.models.baseoperator</span><span class="w"> </span><span class="kn">import</span> <span class="n">chain</span><span class="p">,</span> <span class="n">cross_downstream</span>
+<span class="n">cross_downstream</span><span class="p">([</span><span class="n">start1</span><span class="p">,</span> <span class="n">start2</span><span class="p">],</span> <span class="p">[</span><span class="n">end1</span><span class="p">,</span> <span class="n">end2</span><span class="p">])</span>
+</code></pre></div>
+
+<hr />
+<h2 id="xcom-обмен-данными">📨 XCom (обмен данными)<a class="headerlink" href="#xcom-обмен-данными" title="Ссылка">#</a></h2>
+<p>XCom (Cross-Communication) — обмен маленькими данными между задачами.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Push (явный)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">airflow.operators.python</span><span class="w"> </span><span class="kn">import</span> <span class="n">PythonOperator</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">push_data</span><span class="p">(</span><span class="o">**</span><span class="n">context</span><span class="p">):</span>
+    <span class="n">context</span><span class="p">[</span><span class="s2">&quot;ti&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">xcom_push</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="s2">&quot;my_key&quot;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;a&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">})</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">pull_data</span><span class="p">(</span><span class="o">**</span><span class="n">context</span><span class="p">):</span>
+    <span class="n">val</span> <span class="o">=</span> <span class="n">context</span><span class="p">[</span><span class="s2">&quot;ti&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">xcom_pull</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="s2">&quot;my_key&quot;</span><span class="p">,</span> <span class="n">task_ids</span><span class="o">=</span><span class="s2">&quot;push_task&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">val</span><span class="p">)</span>     <span class="c1"># {&#39;a&#39;: 1}</span>
+
+<span class="c1"># Push (неявный через return в TaskFlow / PythonOperator)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">push_implicit</span><span class="p">():</span>
+    <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;data&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">}</span>     <span class="c1"># автоматически пушится в XCom под key=&quot;return_value&quot;</span>
+
+<span class="c1"># Pull</span>
+<span class="n">val</span> <span class="o">=</span> <span class="n">ti</span><span class="o">.</span><span class="n">xcom_pull</span><span class="p">(</span><span class="n">task_ids</span><span class="o">=</span><span class="s2">&quot;task1&quot;</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="s2">&quot;return_value&quot;</span><span class="p">)</span>
+
+<span class="c1"># Из другой DAG (внешний)</span>
+<span class="n">val</span> <span class="o">=</span> <span class="n">ti</span><span class="o">.</span><span class="n">xcom_pull</span><span class="p">(</span><span class="n">task_ids</span><span class="o">=</span><span class="s2">&quot;external_dag.task1&quot;</span><span class="p">,</span> <span class="n">dag_id</span><span class="o">=</span><span class="s2">&quot;other_dag&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+<h3 id="custom-xcom-backend">Custom XCom backend<a class="headerlink" href="#custom-xcom-backend" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># В airflow.cfg:</span>
+<span class="p">[</span><span class="n">core</span><span class="p">]</span>
+<span class="n">xcom_backend</span> <span class="o">=</span> <span class="n">my_package</span><span class="o">.</span><span class="n">CustomXComBackend</span>
+<span class="c1"># По умолчанию XCom хранит в metadata DB.</span>
+<span class="c1"># Для больших данных: S3, GCS, Custom backend.</span>
+</code></pre></div>
+
+<blockquote>
+<p>⚠️ XCom не для больших данных! Используйте внешнее хранилище (S3, БД).</p>
+</blockquote>
+<hr />
+<h2 id="hooks-подключения">🔧 Hooks (подключения)<a class="headerlink" href="#hooks-подключения" title="Ссылка">#</a></h2>
+<p>Hooks — обёртки над внешними API/сервисами.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">airflow.providers.postgres.hooks.postgres</span><span class="w"> </span><span class="kn">import</span> <span class="n">PostgresHook</span>
+
+<span class="c1"># Использование в PythonOperator</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">query_db</span><span class="p">(</span><span class="o">**</span><span class="n">context</span><span class="p">):</span>
+    <span class="n">hook</span> <span class="o">=</span> <span class="n">PostgresHook</span><span class="p">(</span><span class="n">postgres_conn_id</span><span class="o">=</span><span class="s2">&quot;my_db&quot;</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">hook</span><span class="o">.</span><span class="n">get_pandas_df</span><span class="p">(</span><span class="s2">&quot;SELECT * FROM users LIMIT 10&quot;</span><span class="p">)</span>
+    <span class="n">records</span> <span class="o">=</span> <span class="n">hook</span><span class="o">.</span><span class="n">get_records</span><span class="p">(</span><span class="s2">&quot;SELECT count(*) FROM users&quot;</span><span class="p">)</span>
+
+<span class="c1"># Напрямую соединение</span>
+<span class="n">hook</span> <span class="o">=</span> <span class="n">PostgresHook</span><span class="p">(</span><span class="n">postgres_conn_id</span><span class="o">=</span><span class="s2">&quot;my_db&quot;</span><span class="p">)</span>
+<span class="n">conn</span> <span class="o">=</span> <span class="n">hook</span><span class="o">.</span><span class="n">get_conn</span><span class="p">()</span>
+<span class="n">cursor</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+<span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;SELECT 1&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+<h3 id="провайдеры-providers">Провайдеры (Providers)<a class="headerlink" href="#провайдеры-providers" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>pip<span class="w"> </span>install<span class="w"> </span>apache-airflow-providers-postgres
+pip<span class="w"> </span>install<span class="w"> </span>apache-airflow-providers-amazon
+pip<span class="w"> </span>install<span class="w"> </span>apache-airflow-providers-google
+pip<span class="w"> </span>install<span class="w"> </span>apache-airflow-providers-apache-spark
+pip<span class="w"> </span>install<span class="w"> </span>apache-airflow-providers-docker
+</code></pre></div>
+
+<hr />
+<h2 id="connections-и-variables">🔌 Connections и Variables<a class="headerlink" href="#connections-и-variables" title="Ссылка">#</a></h2>
+<h3 id="connections-учётки-для-сервисов">Connections (учётки для сервисов)<a class="headerlink" href="#connections-учётки-для-сервисов" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Через CLI</span>
+airflow<span class="w"> </span>connections<span class="w"> </span>add<span class="w"> </span>my_postgres<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--conn-uri<span class="w"> </span><span class="s2">&quot;postgresql://user:pass@host:5432/db&quot;</span>
+
+airflow<span class="w"> </span>connections<span class="w"> </span>add<span class="w"> </span>my_aws<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--conn-type<span class="w"> </span>aws<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--conn-login<span class="w"> </span>AKIA...<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--conn-password<span class="w"> </span>secret
+
+<span class="c1"># Через UI: Admin → Connections</span>
+</code></pre></div>
+
+<h3 id="variables-глобальные-переменные">Variables (глобальные переменные)<a class="headerlink" href="#variables-глобальные-переменные" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># CLI</span>
+airflow<span class="w"> </span>variables<span class="w"> </span><span class="nb">set</span><span class="w"> </span>my_var<span class="w"> </span><span class="s1">&#39;{&quot;key&quot;:&quot;value&quot;}&#39;</span>
+airflow<span class="w"> </span>variables<span class="w"> </span>get<span class="w"> </span>my_var
+airflow<span class="w"> </span>variables<span class="w"> </span>delete<span class="w"> </span>my_var
+airflow<span class="w"> </span>variables<span class="w"> </span>list
+
+<span class="c1"># UI: Admin → Variables</span>
+</code></pre></div>
+
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">airflow.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">Variable</span>
+
+<span class="c1"># Чтение (кэшируется)</span>
+<span class="n">value</span> <span class="o">=</span> <span class="n">Variable</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;my_var&quot;</span><span class="p">)</span>
+<span class="n">value</span> <span class="o">=</span> <span class="n">Variable</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;my_var&quot;</span><span class="p">,</span> <span class="n">default_var</span><span class="o">=</span><span class="s2">&quot;fallback&quot;</span><span class="p">)</span>
+
+<span class="c1"># Как JSON</span>
+<span class="n">config</span> <span class="o">=</span> <span class="n">Variable</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;config&quot;</span><span class="p">,</span> <span class="n">deserialize_json</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Запись</span>
+<span class="n">Variable</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">&quot;my_var&quot;</span><span class="p">,</span> <span class="s2">&quot;new_value&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+<h3 id="templates-jinja2">Templates (Jinja2)<a class="headerlink" href="#templates-jinja2" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Доступные переменные в шаблонах</span>
+<span class="p">{{</span> <span class="n">ds</span> <span class="p">}}</span>                          <span class="c1"># YYYY-MM-DD</span>
+<span class="p">{{</span> <span class="n">ds_nodash</span> <span class="p">}}</span>                   <span class="c1"># YYYYMMDD</span>
+<span class="p">{{</span> <span class="n">ts</span> <span class="p">}}</span>                          <span class="c1"># 2024-01-15T00:00:00+00:00</span>
+<span class="p">{{</span> <span class="n">ts_nodash</span> <span class="p">}}</span>
+<span class="p">{{</span> <span class="n">dag_run</span><span class="o">.</span><span class="n">id</span> <span class="p">}}</span>
+<span class="p">{{</span> <span class="n">run_id</span> <span class="p">}}</span>
+<span class="p">{{</span> <span class="n">execution_date</span> <span class="p">}}</span>
+<span class="p">{{</span> <span class="n">data_interval_start</span> <span class="p">}}</span>
+<span class="p">{{</span> <span class="n">data_interval_end</span> <span class="p">}}</span>
+<span class="p">{{</span> <span class="n">params</span><span class="o">.</span><span class="n">my_param</span> <span class="p">}}</span>
+<span class="p">{{</span> <span class="n">var</span><span class="o">.</span><span class="n">value</span><span class="o">.</span><span class="n">my_variable</span> <span class="p">}}</span>       <span class="c1"># Variable</span>
+<span class="p">{{</span> <span class="n">var</span><span class="o">.</span><span class="n">json</span><span class="o">.</span><span class="n">my_json_variable</span> <span class="p">}}</span>   <span class="c1"># Variable as JSON</span>
+<span class="p">{{</span> <span class="n">conn</span><span class="o">.</span><span class="n">my_conn_id</span><span class="o">.</span><span class="n">host</span> <span class="p">}}</span>        <span class="c1"># Connection</span>
+
+<span class="c1"># В bash_command</span>
+<span class="n">bash_command</span><span class="o">=</span><span class="s2">&quot;echo {{ ds }}&quot;</span>
+
+<span class="c1"># В SQL</span>
+<span class="n">sql</span><span class="o">=</span><span class="s2">&quot;SELECT * FROM sales WHERE date = &#39;{{ ds }}&#39;&quot;</span>
+</code></pre></div>
+
+<hr />
+<h2 id="trigger-rules">⏰ Trigger Rules<a class="headerlink" href="#trigger-rules" title="Ссылка">#</a></h2>
+<p>Когда выполнять задачу (по умолчанию <code>all_success</code>).</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">airflow.utils.trigger_rule</span><span class="w"> </span><span class="kn">import</span> <span class="n">TriggerRule</span>
+
+<span class="n">task</span> <span class="o">=</span> <span class="n">PythonOperator</span><span class="p">(</span>
+    <span class="n">task_id</span><span class="o">=</span><span class="s2">&quot;cleanup&quot;</span><span class="p">,</span>
+    <span class="n">python_callable</span><span class="o">=</span><span class="n">cleanup</span><span class="p">,</span>
+    <span class="n">trigger_rule</span><span class="o">=</span><span class="n">TriggerRule</span><span class="o">.</span><span class="n">ALL_DONE</span><span class="p">,</span>    <span class="c1"># независимо от успеха/провала</span>
+<span class="p">)</span>
+
+<span class="c1"># Варианты:</span>
+<span class="c1"># ALL_SUCCESS         — все родители успешны (по умолчанию)</span>
+<span class="c1"># ALL_FAILED          — все провалились</span>
+<span class="c1"># ALL_DONE            — все завершены (успех или провал)</span>
+<span class="c1"># ONE_SUCCESS         — хотя бы один успешен</span>
+<span class="c1"># ONE_FAILED          — хотя бы один провалился</span>
+<span class="c1"># NONE_FAILED         — ни один не провалился</span>
+<span class="c1"># NONE_SKIPPED        — ни один не пропущен</span>
+</code></pre></div>
+
+<hr />
+<h2 id="ui-и-мониторинг">📊 UI и мониторинг<a class="headerlink" href="#ui-и-мониторинг" title="Ссылка">#</a></h2>
+<p>Web UI: <code>http://localhost:8080</code></p>
+<h3 id="главные-разделы">Главные разделы<a class="headerlink" href="#главные-разделы" title="Ссылка">#</a></h3>
+<ul>
+<li><strong>DAGs</strong> — список всех DAG&rsquo;ов</li>
+<li><strong>Browse</strong> → Task Instances, Job, Audit Logs</li>
+<li><strong>Admin</strong> → Connections, Variables, Pools, Configuration</li>
+<li><strong>Browse</strong> → XComs (просмотр XCom)</li>
+</ul>
+<h3 id="вкладки-dag-а">Вкладки DAG&rsquo;а<a class="headerlink" href="#вкладки-dag-а" title="Ссылка">#</a></h3>
+<ul>
+<li><strong>Tree View</strong> — дерево запусков</li>
+<li><strong>Graph</strong> — граф выполнения (визуально)</li>
+<li><strong>Calendar</strong> — календарь запусков</li>
+<li><strong>Gantt</strong> — диаграмма Ганта</li>
+<li><strong>Code</strong> — исходный код DAG</li>
+<li><strong>Details</strong> — детали DAG</li>
+</ul>
+<h3 id="статусы-задач">Статусы задач<a class="headerlink" href="#статусы-задач" title="Ссылка">#</a></h3>
+<ul>
+<li>🟩 success</li>
+<li>🟥 failed</li>
+<li>🟨 running</li>
+<li>⬜ no status (planned)</li>
+<li>🟪 upstream_failed</li>
+<li>🔳 skipped (branch)</li>
+</ul>
+<hr />
+<h2 id="cli-команды">🛠️ CLI команды<a class="headerlink" href="#cli-команды" title="Ссылка">#</a></h2>
+<div class="highlight"><pre><span></span><code><span class="c1"># DAG&#39;и</span>
+airflow<span class="w"> </span>dags<span class="w"> </span>list
+airflow<span class="w"> </span>dags<span class="w"> </span>list-runs<span class="w"> </span>-d<span class="w"> </span>my_dag
+airflow<span class="w"> </span>dags<span class="w"> </span>trigger<span class="w"> </span>my_dag<span class="w">                   </span><span class="c1"># ручной запуск</span>
+airflow<span class="w"> </span>dags<span class="w"> </span>trigger<span class="w"> </span>my_dag<span class="w"> </span>-c<span class="w"> </span><span class="s1">&#39;{&quot;key&quot;:&quot;val&quot;}&#39;</span><span class="w">   </span><span class="c1"># с конфигом</span>
+airflow<span class="w"> </span>dags<span class="w"> </span>pause<span class="w"> </span>my_dag
+airflow<span class="w"> </span>dags<span class="w"> </span>unpause<span class="w"> </span>my_dag
+airflow<span class="w"> </span>dags<span class="w"> </span>delete<span class="w"> </span>my_dag
+airflow<span class="w"> </span>dags<span class="w"> </span>show<span class="w"> </span>my_dag<span class="w">                      </span><span class="c1"># граф в Graphviz</span>
+airflow<span class="w"> </span>dags<span class="w"> </span><span class="nb">test</span><span class="w"> </span>my_dag<span class="w"> </span><span class="m">2024</span>-01-15<span class="w">           </span><span class="c1"># тестовый прогон</span>
+airflow<span class="w"> </span>dags<span class="w"> </span>state<span class="w"> </span>my_dag<span class="w"> </span><span class="m">2024</span>-01-15<span class="w">          </span><span class="c1"># статус</span>
+airflow<span class="w"> </span>dags<span class="w"> </span>report
+
+<span class="c1"># Tasks</span>
+airflow<span class="w"> </span>tasks<span class="w"> </span>list<span class="w"> </span>my_dag
+airflow<span class="w"> </span>tasks<span class="w"> </span><span class="nb">test</span><span class="w"> </span>my_dag<span class="w"> </span>extract<span class="w"> </span><span class="m">2024</span>-01-15<span class="w">  </span><span class="c1"># тест одной задачи</span>
+airflow<span class="w"> </span>tasks<span class="w"> </span>clear<span class="w"> </span>my_dag<span class="w"> </span>-s<span class="w"> </span><span class="m">2024</span>-01-01<span class="w"> </span>-e<span class="w"> </span><span class="m">2024</span>-01-15<span class="w">   </span><span class="c1"># очистить</span>
+airflow<span class="w"> </span>tasks<span class="w"> </span>run<span class="w"> </span>my_dag<span class="w"> </span>extract<span class="w"> </span><span class="m">2024</span>-01-15
+airflow<span class="w"> </span>tasks<span class="w"> </span>failed<span class="w"> </span>my_dag
+
+<span class="c1"># БД и миграции</span>
+airflow<span class="w"> </span>db<span class="w"> </span>migrate
+airflow<span class="w"> </span>db<span class="w"> </span>reset
+airflow<span class="w"> </span>db<span class="w"> </span>check
+airflow<span class="w"> </span>db<span class="w"> </span>shell
+
+<span class="c1"># Пользователи</span>
+airflow<span class="w"> </span>users<span class="w"> </span>create
+airflow<span class="w"> </span>users<span class="w"> </span>list
+airflow<span class="w"> </span>users<span class="w"> </span>delete<span class="w"> </span>-e<span class="w"> </span>user@example.com
+airflow<span class="w"> </span>users<span class="w"> </span>reset-password<span class="w"> </span>-u<span class="w"> </span>admin
+
+<span class="c1"># Connections / Variables</span>
+airflow<span class="w"> </span>connections<span class="w"> </span>list
+airflow<span class="w"> </span>variables<span class="w"> </span>list
+
+<span class="c1"># Scheduler</span>
+airflow<span class="w"> </span>scheduler
+airflow<span class="w"> </span>celery<span class="w"> </span>worker
+airflow<span class="w"> </span>celery<span class="w"> </span>flower
+
+<span class="c1"># Info</span>
+airflow<span class="w"> </span>info
+airflow<span class="w"> </span>version
+airflow<span class="w"> </span>config<span class="w"> </span>list
+airflow<span class="w"> </span>kerberos
+</code></pre></div>
+
+<hr />
+<h2 id="тестирование-dag-ов">🐛 Тестирование DAG&rsquo;ов<a class="headerlink" href="#тестирование-dag-ов" title="Ссылка">#</a></h2>
+<h3 id="тест-в-cli">Тест в CLI<a class="headerlink" href="#тест-в-cli" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Тестовый запуск DAG (без состояния)</span>
+airflow<span class="w"> </span>dags<span class="w"> </span><span class="nb">test</span><span class="w"> </span>my_dag<span class="w"> </span><span class="m">2024</span>-01-15
+
+<span class="c1"># Тест одной задачи</span>
+airflow<span class="w"> </span>tasks<span class="w"> </span><span class="nb">test</span><span class="w"> </span>my_dag<span class="w"> </span>extract<span class="w"> </span><span class="m">2024</span>-01-15
+
+<span class="c1"># С режимом (data interval)</span>
+airflow<span class="w"> </span>dags<span class="w"> </span><span class="nb">test</span><span class="w"> </span>my_dag<span class="w"> </span><span class="m">2024</span>-01-01<span class="w"> </span><span class="m">2024</span>-01-15
+</code></pre></div>
+
+<h3 id="unit-тесты-pytest">Unit-тесты pytest<a class="headerlink" href="#unit-тесты-pytest" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">pytest</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">airflow.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">DagBag</span>
+
+<span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span><span class="p">(</span><span class="n">scope</span><span class="o">=</span><span class="s2">&quot;module&quot;</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">dagbag</span><span class="p">():</span>
+    <span class="k">return</span> <span class="n">DagBag</span><span class="p">(</span><span class="n">dag_folder</span><span class="o">=</span><span class="s2">&quot;dags/&quot;</span><span class="p">,</span> <span class="n">include_examples</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">test_dag_loaded</span><span class="p">(</span><span class="n">dagbag</span><span class="p">):</span>
+    <span class="k">assert</span> <span class="s2">&quot;my_dag&quot;</span> <span class="ow">in</span> <span class="n">dagbag</span><span class="o">.</span><span class="n">dags</span>
+    <span class="k">assert</span> <span class="n">dagbag</span><span class="o">.</span><span class="n">import_errors</span> <span class="o">==</span> <span class="p">{}</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">test_dag_structure</span><span class="p">(</span><span class="n">dagbag</span><span class="p">):</span>
+    <span class="n">dag</span> <span class="o">=</span> <span class="n">dagbag</span><span class="o">.</span><span class="n">get_dag</span><span class="p">(</span><span class="s2">&quot;my_dag&quot;</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">dag</span><span class="o">.</span><span class="n">tasks</span><span class="p">)</span> <span class="o">==</span> <span class="mi">4</span>
+    <span class="k">assert</span> <span class="n">dag</span><span class="o">.</span><span class="n">schedule_interval</span> <span class="o">==</span> <span class="s2">&quot;@daily&quot;</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">test_task_dependencies</span><span class="p">(</span><span class="n">dagbag</span><span class="p">):</span>
+    <span class="n">dag</span> <span class="o">=</span> <span class="n">dagbag</span><span class="o">.</span><span class="n">get_dag</span><span class="p">(</span><span class="s2">&quot;my_dag&quot;</span><span class="p">)</span>
+    <span class="n">extract</span> <span class="o">=</span> <span class="n">dag</span><span class="o">.</span><span class="n">get_task</span><span class="p">(</span><span class="s2">&quot;extract&quot;</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="n">extract</span><span class="o">.</span><span class="n">downstream_task_ids</span> <span class="o">==</span> <span class="p">{</span><span class="s2">&quot;transform&quot;</span><span class="p">}</span>
+</code></pre></div>
+
+<hr />
+<h2 id="best-practices">📋 Best practices<a class="headerlink" href="#best-practices" title="Ссылка">#</a></h2>
+<h3 id="структура-dag_1">Структура DAG<a class="headerlink" href="#структура-dag_1" title="Ссылка">#</a></h3>
+<ol>
+<li><strong>Идиоматичные ID</strong>: <code>extract_users</code>, <code>transform_sales</code> (что делает, не что это).</li>
+<li><strong>Атомарные задачи</strong>: одна задача = одно логическое действие.</li>
+<li><strong>Идемпотентность</strong>: повторный запуск с теми же параметрами даёт тот же результат.</li>
+<li><strong>Чистый граф</strong>: не делайте слишком много задач в одном DAG (&gt;50 — повод разделить).</li>
+<li><strong>Top-level код</strong>: код на верхнем уровне должен только определять DAG (без тяжёлых вычислений).</li>
+</ol>
+<h3 id="производительность">Производительность<a class="headerlink" href="#производительность" title="Ссылка">#</a></h3>
+<ol>
+<li><strong>Не делайте тяжёлые операции в top-level коде</strong> — он выполняется при каждом heartbeat scheduler&rsquo;а.</li>
+<li><strong>Параллелизм</strong>: настраивайте <code>parallelism</code>, <code>max_active_runs_per_dag</code>.</li>
+<li><strong>Pools</strong> — ограничивайте параллельные задачи ресурсоёмких типов.</li>
+<li><strong>XCom</strong> — не для больших данных (используйте S3/БД).</li>
+<li><strong>Retries</strong> — настраивайте разумно (1-3).</li>
+<li><strong>timeout</strong> — для каждой задачи.</li>
+</ol>
+<h3 id="безопасность">Безопасность<a class="headerlink" href="#безопасность" title="Ссылка">#</a></h3>
+<ol>
+<li><strong>Connections/Variables</strong> — для секретов, не в коде.</li>
+<li><strong>Secrets backend</strong> — HashiCorp Vault, AWS Secrets Manager.</li>
+<li><strong>Mask sensitive</strong> — Airflow маскирует значения типа <code>password</code> в логах.</li>
+<li><strong>RBAC</strong> — роли и права пользователей.</li>
+</ol>
+<hr />
+<h2 id="частые-ошибки">🪤 Частые ошибки<a class="headerlink" href="#частые-ошибки" title="Ссылка">#</a></h2>
+<ol>
+<li><strong>Тяжёлый top-level код</strong> — Python-импорт должен быть лёгким.</li>
+<li><strong>Динамические DAG&rsquo;и</strong> — генерация DAG&rsquo;ов в цикле может создать тысячи файлов.</li>
+<li><strong>XCom для больших данных</strong> — забивает БД. Используйте S3/БД.</li>
+<li><strong><code>catchup=True</code></strong> — для старого <code>start_date</code> запустит тысячи пропущенных.</li>
+<li><strong><code>schedule</code> без timezone</strong> — может запускаться в непредсказуемое время.</li>
+<li><strong><code>depends_on_past=True</code></strong> — заблокирует DAG при падении.</li>
+<li><strong>Нет <code>retries</code></strong> — падение одной задачи = падение всего DAG.</li>
+<li><strong>Hardcoded credentials</strong> — используйте Connections.</li>
+<li><strong>Сложные шаблоны Jinja</strong> — тестируйте через <code>airflow tasks test</code>.</li>
+<li><strong><code>schedule_interval</code> устарел</strong> — в 2.4+ просто <code>schedule</code>.</li>
+</ol>
+<hr />
+<h2 id="полезные-ссылки">🔗 Полезные ссылки<a class="headerlink" href="#полезные-ссылки" title="Ссылка">#</a></h2>
+<ul>
+<li>Официальная документация: https://airflow.apache.org/docs</li>
+<li>Tutorial: https://airflow.apache.org/docs/apache-airflow/stable/tutorial/index.html</li>
+<li>Best Practices: https://airflow.apache.org/docs/apache-airflow/stable/best-practices.html</li>
+<li>Awesome Airflow: https://github.com/apache/airflow</li>
+<li>Astronomer (managed): https://www.astronomer.io</li>
+<li>Provider packages: https://airflow.apache.org/docs/apache-airflow-providers/index.html</li>
+<li>Executors: https://airflow.apache.org/docs/apache-airflow/stable/executor/index.html</li>
+<li>DAG examples: https://github.com/apache/airflow/tree/main/tests/system</li>
+</ul>
+<hr />
+<h2 id="полезные-советы">💡 Полезные советы<a class="headerlink" href="#полезные-советы" title="Ссылка">#</a></h2>
+<ol>
+<li><strong>TaskFlow API (<code>@dag</code>/<code>@task</code>)</strong> — современный и лаконичный стиль.</li>
+<li><strong><code>catchup=False</code></strong> — для новых DAG&rsquo;ов, чтобы не запускать прошлое.</li>
+<li><strong>Connections/Variables</strong> — для конфигов и секретов.</li>
+<li><strong><code>{{ ds }}</code></strong> — дата выполнения для параметризации.</li>
+<li><strong>Pools</strong> — ограничивают параллелизм ресурсоёмких задач.</li>
+<li><strong>Sensors</strong> — ждут внешнего условия (файл, S3-объект).</li>
+<li><strong><code>airflow dags test</code></strong> — для отладки локально без scheduler.</li>
+<li><strong>DAG-factory</strong> — для генерации DAG&rsquo;ов из YAML.</li>
+<li><strong>astronomer-cosmos</strong> — для dbt + Airflow.</li>
+<li><strong><code>max_active_runs=1</code></strong> — для последовательных пайплайнов.</li>
+<li><strong>Retries + retry_delay</strong> — обязательно для прод-задач.</li>
+<li><strong>Templates (Jinja2)</strong> — мощная параметризация.</li>
+<li><strong>CeleryExecutor + Redis/RabbitMQ</strong> — для прод (распределённые workers).</li>
+<li><strong>KubernetesExecutor</strong> — для масштабируемости (dynamic workers).</li>
+<li><strong>Мониторинг</strong> — экспортер метрик в Prometheus/Grafana.</li>
+</ol>
+<hr />
+<p><em>Сгенерировано как шпаргалка. Airflow огромен —
+углубляйтесь через https://airflow.apache.org/docs/ и tutorial</em></p>
+    </article>
+    <nav class="pagination">
+      <a class="pager prev" href="awk-sed.html">← awk / sed</a>
+      <a class="pager next" href="http-curl.html">HTTP / curl →</a>
+    </nav>
+  </main>
+
+  <aside class="toc">
+    <details open>
+      <summary>📑 Оглавление</summary>
+      <div class="toc-list">
+<div class="toc">
+<ul>
+<li><a href="#apache-airflow-шпаргалка">🌪️ Apache Airflow — шпаргалка</a><ul>
+<li><a href="#главные-понятия">🔑 Главные понятия</a></li>
+<li><a href="#запуск">🚀 Запуск</a><ul>
+<li><a href="#через-pypi-локально">Через PyPI (локально)</a></li>
+<li><a href="#через-docker-официальный-compose">Через Docker (официальный compose)</a></li>
+<li><a href="#структура-проекта">Структура проекта</a></li>
+</ul>
+</li>
+<li><a href="#структура-dag">📝 Структура DAG</a><ul>
+<li><a href="#расписание-schedule">Расписание (schedule)</a></li>
+<li><a href="#cron-vs-timetable">cron vs timetable</a></li>
+</ul>
+</li>
+<li><a href="#операторы-operators">🎓 Операторы (Operators)</a><ul>
+<li><a href="#bashoperator">BashOperator</a></li>
+<li><a href="#pythonoperator">PythonOperator</a></li>
+<li><a href="#emptyoperator-бывший-dummyoperator">EmptyOperator (бывший DummyOperator)</a></li>
+<li><a href="#emailoperator">EmailOperator</a></li>
+<li><a href="#branchpythonoperator-условное-ветвление">BranchPythonOperator (условное ветвление)</a></li>
+<li><a href="#shortcircuitoperator-полная-остановка">ShortCircuitOperator (полная остановка)</a></li>
+<li><a href="#sparksubmitoperator">SparkSubmitOperator</a></li>
+<li><a href="#provider-operators">Provider Operators</a></li>
+<li><a href="#dag-и-task-taskflow-api-современный-стиль">@dag и @task (TaskFlow API — современный стиль)</a></li>
+</ul>
+</li>
+<li><a href="#зависимости-задач">🔗 Зависимости задач</a></li>
+<li><a href="#xcom-обмен-данными">📨 XCom (обмен данными)</a><ul>
+<li><a href="#custom-xcom-backend">Custom XCom backend</a></li>
+</ul>
+</li>
+<li><a href="#hooks-подключения">🔧 Hooks (подключения)</a><ul>
+<li><a href="#провайдеры-providers">Провайдеры (Providers)</a></li>
+</ul>
+</li>
+<li><a href="#connections-и-variables">🔌 Connections и Variables</a><ul>
+<li><a href="#connections-учётки-для-сервисов">Connections (учётки для сервисов)</a></li>
+<li><a href="#variables-глобальные-переменные">Variables (глобальные переменные)</a></li>
+<li><a href="#templates-jinja2">Templates (Jinja2)</a></li>
+</ul>
+</li>
+<li><a href="#trigger-rules">⏰ Trigger Rules</a></li>
+<li><a href="#ui-и-мониторинг">📊 UI и мониторинг</a><ul>
+<li><a href="#главные-разделы">Главные разделы</a></li>
+<li><a href="#вкладки-dag-а">Вкладки DAG&rsquo;а</a></li>
+<li><a href="#статусы-задач">Статусы задач</a></li>
+</ul>
+</li>
+<li><a href="#cli-команды">🛠️ CLI команды</a></li>
+<li><a href="#тестирование-dag-ов">🐛 Тестирование DAG&rsquo;ов</a><ul>
+<li><a href="#тест-в-cli">Тест в CLI</a></li>
+<li><a href="#unit-тесты-pytest">Unit-тесты pytest</a></li>
+</ul>
+</li>
+<li><a href="#best-practices">📋 Best practices</a><ul>
+<li><a href="#структура-dag_1">Структура DAG</a></li>
+<li><a href="#производительность">Производительность</a></li>
+<li><a href="#безопасность">Безопасность</a></li>
+</ul>
+</li>
+<li><a href="#частые-ошибки">🪤 Частые ошибки</a></li>
+<li><a href="#полезные-ссылки">🔗 Полезные ссылки</a></li>
+<li><a href="#полезные-советы">💡 Полезные советы</a></li>
+</ul>
+</li>
+</ul>
+</div>
+
+      </div>
+    </details>
+  </aside>
+</div>
+
+<button class="back-top" id="backTop" aria-label="Наверх">↑</button>
+
+<script src="assets/search.js"></script>
+<script src="assets/page.js"></script>
+</body>
+</html>

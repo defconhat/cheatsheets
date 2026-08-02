@@ -1,0 +1,1242 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Терминал Linux — Шпаргалки</title>
+<link rel="stylesheet" href="assets/style.css">
+<link rel="stylesheet" href="assets/pygments.css">
+</head>
+<body>
+<div class="layout">
+  <aside class="sidebar">
+    <a href="index.html" class="brand">📌 Шпаргалки</a>
+    <nav class="nav">
+<a href="yazi.html" class="nav-item"><span class="nav-ico">📦</span>Yazi</a>
+<a href="neovim.html" class="nav-item"><span class="nav-ico">📘</span>Neovim (LazyVim)</a>
+<a href="niri.html" class="nav-item"><span class="nav-ico">🪟</span>Niri</a>
+<a href="tmux.html" class="nav-item"><span class="nav-ico">🪟</span>Tmux</a>
+<a href="bash.html" class="nav-item"><span class="nav-ico">🐚</span>Bash</a>
+<a href="git.html" class="nav-item"><span class="nav-ico">🔀</span>Git</a>
+<a href="terminal.html" class="nav-item active"><span class="nav-ico">🖥️</span>Терминал Linux</a>
+<a href="powershell.html" class="nav-item"><span class="nav-ico">💻</span>PowerShell</a>
+<a href="cmd.html" class="nav-item"><span class="nav-ico">🪟</span>CMD (cmd.exe)</a>
+<a href="python.html" class="nav-item"><span class="nav-ico">🐍</span>Python</a>
+<a href="systemd.html" class="nav-item"><span class="nav-ico">⚙️</span>systemd</a>
+<a href="ssh.html" class="nav-item"><span class="nav-ico">🔐</span>SSH</a>
+<a href="make-cmake.html" class="nav-item"><span class="nav-ico">🔨</span>Make / CMake</a>
+<a href="docker.html" class="nav-item"><span class="nav-ico">🐳</span>Docker</a>
+<a href="pacman.html" class="nav-item"><span class="nav-ico">📦</span>pacman / yay / paru</a>
+<a href="spark.html" class="nav-item"><span class="nav-ico">⚡</span>Apache Spark / PySpark</a>
+<a href="markdown.html" class="nav-item"><span class="nav-ico">📝</span>Markdown</a>
+<a href="regex.html" class="nav-item"><span class="nav-ico">🔍</span>Регулярные выражения</a>
+<a href="jq-json.html" class="nav-item"><span class="nav-ico">🔧</span>jq + JSON</a>
+<a href="awk-sed.html" class="nav-item"><span class="nav-ico">✂️</span>awk / sed</a>
+<a href="airflow.html" class="nav-item"><span class="nav-ico">🌪️</span>Apache Airflow</a>
+<a href="http-curl.html" class="nav-item"><span class="nav-ico">🌐</span>HTTP / curl</a>
+<a href="yaml.html" class="nav-item"><span class="nav-ico">📄</span>YAML</a>
+<a href="vscode.html" class="nav-item"><span class="nav-ico">💻</span>VS Code</a>
+<a href="cron.html" class="nav-item"><span class="nav-ico">⏰</span>cron</a>
+<a href="fzf-zoxide.html" class="nav-item"><span class="nav-ico">🔎</span>fzf + zoxide</a>
+<a href="minikube-k8s.html" class="nav-item"><span class="nav-ico">☸️</span>Minikube / Kubernetes</a>
+<a href="cicd.html" class="nav-item"><span class="nav-ico">🦊</span>GitLab CI / GitHub Actions</a>
+<a href="nginx.html" class="nav-item"><span class="nav-ico">🌐</span>nginx</a>
+<a href="dbt.html" class="nav-item"><span class="nav-ico">🔧</span>dbt</a>
+<a href="kafka.html" class="nav-item"><span class="nav-ico">🐘</span>Apache Kafka</a>
+<a href="prometheus-grafana.html" class="nav-item"><span class="nav-ico">📊</span>Prometheus / Grafana</a>
+<a href="iceberg-nessie.html" class="nav-item"><span class="nav-ico">🧊</span>Iceberg / Nessie</a>
+<a href="impala.html" class="nav-item"><span class="nav-ico">🐬</span>Apache Impala</a>
+<a href="terraform.html" class="nav-item"><span class="nav-ico">🏗️</span>Terraform</a>
+<a href="linux-internals.html" class="nav-item"><span class="nav-ico">🐧</span>Linux Internals</a>
+<a href="miscellaneous.html" class="nav-item"><span class="nav-ico">🧰</span>Miscellaneous</a>
+<a href="python-automation-libs.html" class="nav-item"><span class="nav-ico">🐍</span>Python: авт-ция (10 libs)</a>
+<a href="eza.html" class="nav-item"><span class="nav-ico">🌈</span>eza</a>
+<a href="dbeaver.html" class="nav-item"><span class="nav-ico">🗄️</span>DBeaver</a>
+<a href="zcode.html" class="nav-item"><span class="nav-ico">🤖</span>ZCode</a>
+<a href="warp.html" class="nav-item"><span class="nav-ico">🚀</span>Warp</a>
+<a href="agentic-ai-dev.html" class="nav-item"><span class="nav-ico">🤝</span>Агентная разработка с ИИ</a>
+    </nav>
+  </aside>
+
+  <main class="content">
+    <article>
+<h1 id="терминал-linux-шпаргалка-по-командам">🖥️ Терминал Linux — шпаргалка по командам<a class="headerlink" href="#терминал-linux-шпаргалка-по-командам" title="Ссылка">#</a></h1>
+<blockquote>
+<p>Универсальная шпаргалка для bash/zsh/fish.
+Обозначения: <code>&lt;file&gt;</code> — обязательный аргумент, <code>[file]</code> — необязательный,
+<code>...</code> — повторяется. Большинство команд поддерживают <code>--help</code> и <code>man &lt;cmd&gt;</code>.</p>
+</blockquote>
+<hr />
+<h2 id="навигация-по-файловой-системе">📁 Навигация по файловой системе<a class="headerlink" href="#навигация-по-файловой-системе" title="Ссылка">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Команда</th>
+<th>Действие</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>pwd</code></td>
+<td>Текущий путь (print working directory)</td>
+</tr>
+<tr>
+<td><code>ls</code></td>
+<td>Список файлов</td>
+</tr>
+<tr>
+<td><code>ls -la</code></td>
+<td>Подробный список + скрытые файлы</td>
+</tr>
+<tr>
+<td><code>ls -lh</code></td>
+<td>Размеры в читаемом виде (KB/MB)</td>
+</tr>
+<tr>
+<td><code>ls -lt</code></td>
+<td>По времени изменения</td>
+</tr>
+<tr>
+<td><code>ls -R</code></td>
+<td>Рекурсивно (с подкаталогами)</td>
+</tr>
+<tr>
+<td><code>cd &lt;dir&gt;</code></td>
+<td>Перейти в каталог</td>
+</tr>
+<tr>
+<td><code>cd ..</code></td>
+<td>На уровень выше</td>
+</tr>
+<tr>
+<td><code>cd ~</code> / <code>cd</code></td>
+<td>Домашний каталог</td>
+</tr>
+<tr>
+<td><code>cd -</code></td>
+<td>Вернуться в предыдущий каталог</td>
+</tr>
+<tr>
+<td><code>pushd &lt;dir&gt;</code> / <code>popd</code></td>
+<td>Перейти с запоминанием / вернуться</td>
+</tr>
+<tr>
+<td><code>tree</code></td>
+<td>Дерево каталогов (<code>tree -L 2</code> — глубина 2)</td>
+</tr>
+<tr>
+<td><code>find &lt;dir&gt; -name "*.py"</code></td>
+<td>Найти файлы по имени</td>
+</tr>
+<tr>
+<td><code>fd "pattern"</code></td>
+<td>Быстрый поиск (нужен <code>fd</code> / <code>fd-find</code>)</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="работа-с-файлами-и-каталогами">📄 Работа с файлами и каталогами<a class="headerlink" href="#работа-с-файлами-и-каталогами" title="Ссылка">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Команда</th>
+<th>Действие</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>touch &lt;file&gt;</code></td>
+<td>Создать пустой файл / обновить время</td>
+</tr>
+<tr>
+<td><code>mkdir &lt;dir&gt;</code></td>
+<td>Создать каталог</td>
+</tr>
+<tr>
+<td><code>mkdir -p a/b/c</code></td>
+<td>Создать с родителями (без ошибок)</td>
+</tr>
+<tr>
+<td><code>cp &lt;src&gt; &lt;dst&gt;</code></td>
+<td>Копировать</td>
+</tr>
+<tr>
+<td><code>cp -r &lt;src&gt; &lt;dst&gt;</code></td>
+<td>Копировать рекурсивно (каталог)</td>
+</tr>
+<tr>
+<td><code>mv &lt;src&gt; &lt;dst&gt;</code></td>
+<td>Переместить / переименовать</td>
+</tr>
+<tr>
+<td><code>rm &lt;file&gt;</code></td>
+<td>Удалить файл</td>
+</tr>
+<tr>
+<td><code>rm -r &lt;dir&gt;</code></td>
+<td>Удалить каталог рекурсивно</td>
+</tr>
+<tr>
+<td><code>rm -rf &lt;dir&gt;</code></td>
+<td>Удалить принудительно (⚠️ безвозвратно)</td>
+</tr>
+<tr>
+<td><code>ln -s &lt;target&gt; &lt;link&gt;</code></td>
+<td>Создать символическую ссылку</td>
+</tr>
+<tr>
+<td><code>stat &lt;file&gt;</code></td>
+<td>Подробная информация о файле</td>
+</tr>
+<tr>
+<td><code>file &lt;file&gt;</code></td>
+<td>Определить тип файла</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="просмотр-содержимого-файлов">📖 Просмотр содержимого файлов<a class="headerlink" href="#просмотр-содержимого-файлов" title="Ссылка">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Команда</th>
+<th>Действие</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>cat &lt;file&gt;</code></td>
+<td>Вывести весь файл</td>
+</tr>
+<tr>
+<td><code>less &lt;file&gt;</code></td>
+<td>Постраничный просмотр (<code>q</code> — выход, <code>/</code> — поиск)</td>
+</tr>
+<tr>
+<td><code>more &lt;file&gt;</code></td>
+<td>Простейший постраничный просмотр</td>
+</tr>
+<tr>
+<td><code>head -n 20 &lt;file&gt;</code></td>
+<td>Первые 20 строк</td>
+</tr>
+<tr>
+<td><code>tail -n 20 &lt;file&gt;</code></td>
+<td>Последние 20 строк</td>
+</tr>
+<tr>
+<td><code>tail -f &lt;file&gt;</code></td>
+<td>Следить за обновлениями (логи)</td>
+</tr>
+<tr>
+<td><code>bat &lt;file&gt;</code></td>
+<td><code>cat</code> с подсветкой синтаксиса (если установлен)</td>
+</tr>
+<tr>
+<td><code>wc -l &lt;file&gt;</code></td>
+<td>Подсчёт строк/слов/байт</td>
+</tr>
+<tr>
+<td><code>grep "text" &lt;file&gt;</code></td>
+<td>Поиск текста в файле</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="поиск">🔍 Поиск<a class="headerlink" href="#поиск" title="Ссылка">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Команда</th>
+<th>Действие</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>grep "pattern" &lt;file&gt;</code></td>
+<td>Поиск строк по шаблону</td>
+</tr>
+<tr>
+<td><code>grep -r "pattern" &lt;dir&gt;</code></td>
+<td>Рекурсивно</td>
+</tr>
+<tr>
+<td><code>grep -i "pattern"</code></td>
+<td>Без учёта регистра</td>
+</tr>
+<tr>
+<td><code>grep -n "pattern"</code></td>
+<td>С номерами строк</td>
+</tr>
+<tr>
+<td><code>grep -v "pattern"</code></td>
+<td>Инверсия (НЕ совпадает)</td>
+</tr>
+<tr>
+<td><code>grep -E "a\|b"</code></td>
+<td>Регулярные выражения (= <code>egrep</code>)</td>
+</tr>
+<tr>
+<td><code>ripgrep "pattern" &lt;dir&gt;</code> / <code>rg "pattern"</code></td>
+<td>Очень быстрый поиск</td>
+</tr>
+<tr>
+<td><code>find &lt;dir&gt; -name "*.py"</code></td>
+<td>Поиск файлов по имени</td>
+</tr>
+<tr>
+<td><code>find &lt;dir&gt; -type f -size +10M</code></td>
+<td>Файлы больше 10 МБ</td>
+</tr>
+<tr>
+<td><code>find &lt;dir&gt; -mtime -1</code></td>
+<td>Изменённые за последние сутки</td>
+</tr>
+<tr>
+<td><code>locate &lt;name&gt;</code></td>
+<td>Поиск по индексу (<code>updatedb</code>)</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="архивы">📦 Архивы<a class="headerlink" href="#архивы" title="Ссылка">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Команда</th>
+<th>Действие</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>tar -cvf archive.tar &lt;dir&gt;</code></td>
+<td>Создать <code>.tar</code></td>
+</tr>
+<tr>
+<td><code>tar -xvf archive.tar</code></td>
+<td>Распаковать <code>.tar</code></td>
+</tr>
+<tr>
+<td><code>tar -czvf archive.tar.gz &lt;dir&gt;</code></td>
+<td>Создать <code>.tar.gz</code> (gzip)</td>
+</tr>
+<tr>
+<td><code>tar -xzvf archive.tar.gz</code></td>
+<td>Распаковать <code>.tar.gz</code></td>
+</tr>
+<tr>
+<td><code>tar -cjvf archive.tar.bz2 &lt;dir&gt;</code></td>
+<td>Создать <code>.tar.bz2</code> (bzip2)</td>
+</tr>
+<tr>
+<td><code>tar -xjvf archive.tar.bz2</code></td>
+<td>Распаковать <code>.tar.bz2</code></td>
+</tr>
+<tr>
+<td><code>gzip &lt;file&gt;</code> / <code>gunzip &lt;file&gt;</code></td>
+<td>Сжать / распаковать <code>.gz</code></td>
+</tr>
+<tr>
+<td><code>zip -r archive.zip &lt;dir&gt;</code></td>
+<td>Создать <code>.zip</code></td>
+</tr>
+<tr>
+<td><code>unzip archive.zip</code></td>
+<td>Распаковать <code>.zip</code></td>
+</tr>
+<tr>
+<td><code>7z a archive.7z &lt;dir&gt;</code></td>
+<td>Создать <code>.7z</code> (нужен <code>p7zip</code>)</td>
+</tr>
+<tr>
+<td><code>7z x archive.7z</code></td>
+<td>Распаковать <code>.7z</code></td>
+</tr>
+<tr>
+<td><code>unrar x archive.rar</code></td>
+<td>Распаковать <code>.rar</code></td>
+</tr>
+</tbody>
+</table>
+<p>Мнемоника для tar-флагов: <strong>c</strong>reate / e<strong>x</strong>tract, <strong>v</strong>erbose, <strong>f</strong>ile,
+<strong>z</strong> = gzip, <strong>j</strong> = bzip2.</p>
+<hr />
+<h2 id="процессы">⚙️ Процессы<a class="headerlink" href="#процессы" title="Ссылка">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Команда</th>
+<th>Действие</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ps aux</code></td>
+<td>Все процессы</td>
+</tr>
+<tr>
+<td><code>ps aux \| grep &lt;name&gt;</code></td>
+<td>Найти процесс по имени</td>
+</tr>
+<tr>
+<td><code>top</code> / <code>htop</code> / <code>btop</code></td>
+<td>Интерактивный мониторинг</td>
+</tr>
+<tr>
+<td><code>kill &lt;pid&gt;</code></td>
+<td>Послать SIGTERM</td>
+</tr>
+<tr>
+<td><code>kill -9 &lt;pid&gt;</code></td>
+<td>Принудительно завершить (SIGKILL)</td>
+</tr>
+<tr>
+<td><code>killall &lt;name&gt;</code></td>
+<td>Завершить все процессы по имени</td>
+</tr>
+<tr>
+<td><code>pkill -f &lt;pattern&gt;</code></td>
+<td>Убить по шаблону командной строки</td>
+</tr>
+<tr>
+<td><code>jobs</code></td>
+<td>Фоновые задачи текущего shell</td>
+</tr>
+<tr>
+<td><code>fg</code> / <code>bg</code></td>
+<td>Перенести на前台 / в фон</td>
+</tr>
+<tr>
+<td><code>Ctrl-Z</code></td>
+<td>Приостановить процесс</td>
+</tr>
+<tr>
+<td><code>nohup &lt;cmd&gt; &amp;</code></td>
+<td>Запустить, не зависящий от hangup</td>
+</tr>
+<tr>
+<td><code>&lt;cmd&gt; &amp;</code></td>
+<td>Запустить в фоне</td>
+</tr>
+<tr>
+<td><code>disown</code></td>
+<td>Отвязать процесс от shell</td>
+</tr>
+<tr>
+<td><code>systemctl status &lt;svc&gt;</code></td>
+<td>Статус сервиса (systemd)</td>
+</tr>
+<tr>
+<td><code>journalctl -u &lt;svc&gt; -f</code></td>
+<td>Логи сервиса в реальном времени</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="диск-и-память">💾 Диск и память<a class="headerlink" href="#диск-и-память" title="Ссылка">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Команда</th>
+<th>Действие</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>df -h</code></td>
+<td>Свободное место на дисках</td>
+</tr>
+<tr>
+<td><code>du -sh &lt;dir&gt;</code></td>
+<td>Размер каталога</td>
+</tr>
+<tr>
+<td><code>du -sh * \| sort -h</code></td>
+<td>Размеры элементов каталога, отсортированные</td>
+</tr>
+<tr>
+<td><code>ncdu &lt;dir&gt;</code></td>
+<td>Интерактивный анализатор размера</td>
+</tr>
+<tr>
+<td><code>free -h</code></td>
+<td>Оперативная память</td>
+</tr>
+<tr>
+<td><code>htop</code> / <code>btop</code></td>
+<td>Память + CPU интерактивно</td>
+</tr>
+<tr>
+<td><code>lsblk</code></td>
+<td>Блочные устройства</td>
+</tr>
+<tr>
+<td><code>mount</code> / <code>umount</code></td>
+<td>Монтирование / отмонтирование</td>
+</tr>
+<tr>
+<td><code>findmnt</code></td>
+<td>Дерево смонтированных ФС</td>
+</tr>
+<tr>
+<td><code>iostat</code> / <code>iotop</code></td>
+<td>Нагрузка на ввод-вывод</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="сеть">🌐 Сеть<a class="headerlink" href="#сеть" title="Ссылка">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Команда</th>
+<th>Действие</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ip a</code> / <code>ip addr</code></td>
+<td>Сетевые интерфейсы и IP</td>
+</tr>
+<tr>
+<td><code>ip r</code> / <code>ip route</code></td>
+<td>Маршруты</td>
+</tr>
+<tr>
+<td><code>ping &lt;host&gt;</code></td>
+<td>Проверка связи</td>
+</tr>
+<tr>
+<td><code>curl &lt;url&gt;</code></td>
+<td>HTTP-запрос</td>
+</tr>
+<tr>
+<td><code>curl -O &lt;url&gt;</code></td>
+<td>Скачать файл</td>
+</tr>
+<tr>
+<td><code>curl -fsSL &lt;url&gt; \| sh</code></td>
+<td>Скачать и запустить скрипт</td>
+</tr>
+<tr>
+<td><code>wget &lt;url&gt;</code></td>
+<td>Скачать файл</td>
+</tr>
+<tr>
+<td><code>wget -c &lt;url&gt;</code></td>
+<td>Continue (докачка)</td>
+</tr>
+<tr>
+<td><code>ss -tlnp</code></td>
+<td>Открытые TCP-порты и процессы</td>
+</tr>
+<tr>
+<td><code>ss -tuln</code></td>
+<td>Все прослушиваемые порты</td>
+</tr>
+<tr>
+<td><code>netstat -tulpn</code></td>
+<td>То же (старый вариант)</td>
+</tr>
+<tr>
+<td><code>dig &lt;domain&gt;</code> / <code>nslookup</code></td>
+<td>DNS-запрос</td>
+</tr>
+<tr>
+<td><code>ssh user@host</code></td>
+<td>Подключение по SSH</td>
+</tr>
+<tr>
+<td><code>scp file user@host:/path</code></td>
+<td>Копирование по SSH</td>
+</tr>
+<tr>
+<td><code>rsync -avz src/ user@host:dst/</code></td>
+<td>Синхронизация по SSH</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="пользователи-и-права">👤 Пользователи и права<a class="headerlink" href="#пользователи-и-права" title="Ссылка">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Команда</th>
+<th>Действие</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>whoami</code></td>
+<td>Текущий пользователь</td>
+</tr>
+<tr>
+<td><code>id</code></td>
+<td>UID/GID и группы</td>
+</tr>
+<tr>
+<td><code>who</code> / <code>w</code></td>
+<td>Кто залогинен</td>
+</tr>
+<tr>
+<td><code>chmod 755 &lt;file&gt;</code></td>
+<td>Изменить права (цифрами)</td>
+</tr>
+<tr>
+<td><code>chmod +x &lt;file&gt;</code></td>
+<td>Сделать исполняемым</td>
+</tr>
+<tr>
+<td><code>chmod u+x,g+w &lt;file&gt;</code></td>
+<td>Точные права</td>
+</tr>
+<tr>
+<td><code>chown user:group &lt;file&gt;</code></td>
+<td>Сменить владельца</td>
+</tr>
+<tr>
+<td><code>chown -R user:group &lt;dir&gt;</code></td>
+<td>Рекурсивно</td>
+</tr>
+<tr>
+<td><code>sudo &lt;cmd&gt;</code></td>
+<td>Выполнить от root</td>
+</tr>
+<tr>
+<td><code>su -</code></td>
+<td>Стать root</td>
+</tr>
+<tr>
+<td><code>passwd</code></td>
+<td>Сменить пароль</td>
+</tr>
+<tr>
+<td><code>useradd</code> / <code>usermod</code> / <code>userdel</code></td>
+<td>Управление пользователями</td>
+</tr>
+<tr>
+<td><code>groupadd</code> / <code>gpasswd</code></td>
+<td>Управление группами</td>
+</tr>
+</tbody>
+</table>
+<h3 id="цифровые-права-chmod">Цифровые права chmod<a class="headerlink" href="#цифровые-права-chmod" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>7 = rwx (read+write+exec)   6 = rw-   5 = r-x   4 = r--   0 = ---
+owner / group / others
+755 = rwxr-xr-x   644 = rw-r--r--   600 = rw-------
+</code></pre></div>
+
+<hr />
+<h2 id="пакетные-менеджеры">📦 Пакетные менеджеры<a class="headerlink" href="#пакетные-менеджеры" title="Ссылка">#</a></h2>
+<h3 id="arch-cachyos-pacman-yay">Arch / CachyOS (pacman + yay)<a class="headerlink" href="#arch-cachyos-pacman-yay" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>pacman<span class="w"> </span>-Syu<span class="w">              </span><span class="c1"># обновить систему</span>
+sudo<span class="w"> </span>pacman<span class="w"> </span>-S<span class="w"> </span>&lt;pkg&gt;<span class="w">          </span><span class="c1"># установить</span>
+sudo<span class="w"> </span>pacman<span class="w"> </span>-R<span class="w"> </span>&lt;pkg&gt;<span class="w">          </span><span class="c1"># удалить</span>
+sudo<span class="w"> </span>pacman<span class="w"> </span>-Rns<span class="w"> </span>&lt;pkg&gt;<span class="w">        </span><span class="c1"># удалить с зависимостями и конфигами</span>
+sudo<span class="w"> </span>pacman<span class="w"> </span>-Ss<span class="w"> </span>&lt;name&gt;<span class="w">        </span><span class="c1"># поиск в репозитории</span>
+sudo<span class="w"> </span>pacman<span class="w"> </span>-Qe<span class="w">               </span><span class="c1"># установленные явно пакеты</span>
+sudo<span class="w"> </span>pacman<span class="w"> </span>-Qdtq<span class="w">             </span><span class="c1"># пакеты-сироты (для удаления)</span>
+yay<span class="w"> </span>-S<span class="w"> </span>&lt;aur-pkg&gt;<span class="w">              </span><span class="c1"># установка из AUR</span>
+yay<span class="w"> </span>-Syu<span class="w">                      </span><span class="c1"># обновить с AUR</span>
+paru<span class="w"> </span>-S<span class="w"> </span>&lt;aur-pkg&gt;<span class="w">             </span><span class="c1"># paru — альтернатива yay</span>
+</code></pre></div>
+
+<h3 id="debian-ubuntu-apt">Debian / Ubuntu (apt)<a class="headerlink" href="#debian-ubuntu-apt" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>apt<span class="w"> </span>update<span class="w">               </span><span class="c1"># обновить список пакетов</span>
+sudo<span class="w"> </span>apt<span class="w"> </span>upgrade<span class="w">              </span><span class="c1"># обновить пакеты</span>
+sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>&lt;pkg&gt;<span class="w">        </span><span class="c1"># установить</span>
+sudo<span class="w"> </span>apt<span class="w"> </span>remove<span class="w"> </span>&lt;pkg&gt;<span class="w">         </span><span class="c1"># удалить</span>
+sudo<span class="w"> </span>apt<span class="w"> </span>autoremove<span class="w">           </span><span class="c1"># удалить неиспользуемые зависимости</span>
+apt<span class="w"> </span>search<span class="w"> </span>&lt;name&gt;<span class="w">             </span><span class="c1"># поиск</span>
+dpkg<span class="w"> </span>-L<span class="w"> </span>&lt;pkg&gt;<span class="w">                 </span><span class="c1"># файлы пакета</span>
+</code></pre></div>
+
+<h3 id="fedora-dnf">Fedora (dnf)<a class="headerlink" href="#fedora-dnf" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>dnf<span class="w"> </span>install<span class="w"> </span>&lt;pkg&gt;
+sudo<span class="w"> </span>dnf<span class="w"> </span>upgrade
+sudo<span class="w"> </span>dnf<span class="w"> </span>remove<span class="w"> </span>&lt;pkg&gt;
+dnf<span class="w"> </span>search<span class="w"> </span>&lt;name&gt;
+</code></pre></div>
+
+<h3 id="универсально-flatpak-snap">Универсально (Flatpak / Snap)<a class="headerlink" href="#универсально-flatpak-snap" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>flatpak<span class="w"> </span>install<span class="w"> </span>flathub<span class="w"> </span>&lt;app&gt;
+flatpak<span class="w"> </span>update
+flatpak<span class="w"> </span>list
+snap<span class="w"> </span>install<span class="w"> </span>&lt;pkg&gt;
+</code></pre></div>
+
+<hr />
+<h2 id="перенаправления-и-пайпы">🔄 Перенаправления и пайпы<a class="headerlink" href="#перенаправления-и-пайпы" title="Ссылка">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Конструкция</th>
+<th>Действие</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>cmd &gt; file</code></td>
+<td>Перенаправить stdout в файл (перезапись)</td>
+</tr>
+<tr>
+<td><code>cmd &gt;&gt; file</code></td>
+<td>Дописать в файл</td>
+</tr>
+<tr>
+<td><code>cmd 2&gt; file</code></td>
+<td>Перенаправить stderr</td>
+</tr>
+<tr>
+<td><code>cmd &gt; file 2&gt;&amp;1</code></td>
+<td>stdout + stderr в файл</td>
+</tr>
+<tr>
+<td><code>cmd &lt; file</code></td>
+<td>Читать stdin из файла</td>
+</tr>
+<tr>
+<td><code>cmd1 \| cmd2</code></td>
+<td>Передать stdout первой во stdin второй</td>
+</tr>
+<tr>
+<td><code>cmd \| tee file</code></td>
+<td>Вывести и сохранить в файл одновременно</td>
+</tr>
+<tr>
+<td><code>cmd \| less</code></td>
+<td>Постраничный просмотр вывода</td>
+</tr>
+<tr>
+<td><code>cmd \| xargs &lt;cmd&gt;</code></td>
+<td>Передать вывод как аргументы</td>
+</tr>
+<tr>
+<td><code>cmd1 &amp;&amp; cmd2</code></td>
+<td>cmd2 только если cmd1 успешна</td>
+</tr>
+<tr>
+<td><code>cmd1 \|\| cmd2</code></td>
+<td>cmd2 только если cmd1 неудачна</td>
+</tr>
+<tr>
+<td><code>`cmd`</code> или <code>$(cmd)</code></td>
+<td>Подстановка вывода команды</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="текстовые-утилиты">✂️ Текстовые утилиты<a class="headerlink" href="#текстовые-утилиты" title="Ссылка">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Команда</th>
+<th>Действие</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>sort &lt;file&gt;</code></td>
+<td>Отсортировать строки</td>
+</tr>
+<tr>
+<td><code>sort -h</code></td>
+<td>Человеко-читаемые числа (1K, 2M)</td>
+</tr>
+<tr>
+<td><code>sort -u</code> / <code>uniq</code></td>
+<td>Уникальные строки (после sort)</td>
+</tr>
+<tr>
+<td><code>uniq -c</code></td>
+<td>Подсчёт повторов</td>
+</tr>
+<tr>
+<td><code>cut -d: -f1 /etc/passwd</code></td>
+<td>Вырезать поле (разделитель <code>:</code>)</td>
+</tr>
+<tr>
+<td><code>tr 'a-z' 'A-Z'</code></td>
+<td>Трансформация символов</td>
+</tr>
+<tr>
+<td><code>sed 's/old/new/g' &lt;file&gt;</code></td>
+<td>Замена текста</td>
+</tr>
+<tr>
+<td><code>sed -i 's/old/new/g' &lt;file&gt;</code></td>
+<td>Замена в файле (in-place)</td>
+</tr>
+<tr>
+<td><code>awk '{print $1}'</code></td>
+<td>Печать первого поля каждой строки</td>
+</tr>
+<tr>
+<td><code>awk -F: '{print $1}' /etc/passwd</code></td>
+<td>С разделителем</td>
+</tr>
+<tr>
+<td><code>paste a b</code></td>
+<td>Объединить файлы по столбцам</td>
+</tr>
+<tr>
+<td><code>column -t &lt;file&gt;</code></td>
+<td>Выровнять в виде таблицы</td>
+</tr>
+<tr>
+<td><code>rev</code></td>
+<td>Развернуть строку задом наперёд</td>
+</tr>
+<tr>
+<td><code>jq '.field'</code></td>
+<td>Парсинг JSON</td>
+</tr>
+<tr>
+<td><code>jq '.[] \| .name'</code></td>
+<td>Извлечь массив имён</td>
+</tr>
+<tr>
+<td><code>yq</code> / <code>dasel</code></td>
+<td>YAML / TOML / XML парсеры</td>
+</tr>
+<tr>
+<td><code>xq</code> / <code>xmlstarlet</code></td>
+<td>XML</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="система-и-железо">🖥️ Система и железо<a class="headerlink" href="#система-и-железо" title="Ссылка">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Команда</th>
+<th>Действие</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>uname -a</code></td>
+<td>Информация о ядре</td>
+</tr>
+<tr>
+<td><code>lsb_release -a</code> / <code>cat /etc/os-release</code></td>
+<td>Дистрибутив</td>
+</tr>
+<tr>
+<td><code>lscpu</code></td>
+<td>Процессор</td>
+</tr>
+<tr>
+<td><code>lspci</code></td>
+<td>PCI-устройства</td>
+</tr>
+<tr>
+<td><code>lsusb</code></td>
+<td>USB-устройства</td>
+</tr>
+<tr>
+<td><code>free -h</code></td>
+<td>Память</td>
+</tr>
+<tr>
+<td><code>df -h</code></td>
+<td>Диски</td>
+</tr>
+<tr>
+<td><code>dmidecode</code></td>
+<td>DMI / SMBIOS (под root)</td>
+</tr>
+<tr>
+<td><code>hwinfo</code> / <code>inxi -F</code></td>
+<td>Подробная сводка железа</td>
+</tr>
+<tr>
+<td><code>neofetch</code> / <code>fastfetch</code></td>
+<td>Красивый вывод о системе</td>
+</tr>
+<tr>
+<td><code>dmesg</code></td>
+<td>Логи ядра</td>
+</tr>
+<tr>
+<td><code>journalctl -k</code></td>
+<td>Логи ядра (systemd)</td>
+</tr>
+<tr>
+<td><code>uptime</code></td>
+<td>Время работы / нагрузка</td>
+</tr>
+<tr>
+<td><code>date</code></td>
+<td>Текущая дата/время</td>
+</tr>
+<tr>
+<td><code>timedatectl</code></td>
+<td>Временная зона / NTP</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="ssh-и-ключи">🔐 SSH и ключи<a class="headerlink" href="#ssh-и-ключи" title="Ссылка">#</a></h2>
+<p>| Команда | Действие |
+|&mdash;|&mdash;~|
+| <code>ssh-keygen -t ed25519 -C "email"</code> | Создать пару ключей |
+| <code>ssh-keygen -t rsa -b 4096</code> | RSA-ключ |
+| <code>cat ~/.ssh/id_ed25519.pub</code> | Показать публичный ключ |
+| <code>ssh-copy-id user@host</code> | Загрузить ключ на сервер |
+| <code>ssh user@host</code> | Подключиться |
+| <code>ssh -p 2222 user@host</code> | Нестандартный порт |
+| <code>ssh -L 8080:localhost:80 user@host</code> | Порт-форвардинг (локальный) |
+| <code>ssh -R 8080:localhost:80 user@host</code> | Обратный туннель |
+| <code>ssh -D 1080 user@host</code> | SOCKS-прокси |
+| <code>scp file user@host:/path</code> | Копирование файлов |
+| <code>rsync -avz src/ user@host:dst/</code> | Синхронизация |</p>
+<hr />
+<h2 id="горячие-клавиши-в-самом-терминале-readline">⌨️ Горячие клавиши в самом терминале (readline)<a class="headerlink" href="#горячие-клавиши-в-самом-терминале-readline" title="Ссылка">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Клавиша</th>
+<th>Действие</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Ctrl-a</code> / <code>Ctrl-e</code></td>
+<td>В начало / конец строки</td>
+</tr>
+<tr>
+<td><code>Ctrl-b</code> / <code>Ctrl-f</code></td>
+<td>Влево / вправо на символ</td>
+</tr>
+<tr>
+<td><code>Alt-b</code> / <code>Alt-f</code></td>
+<td>Влево / вправо на слово</td>
+</tr>
+<tr>
+<td><code>Ctrl-d</code></td>
+<td>Удалить символ справа (= Del)</td>
+</tr>
+<tr>
+<td><code>Ctrl-h</code></td>
+<td>Удалить символ слева (= Backspace)</td>
+</tr>
+<tr>
+<td><code>Ctrl-w</code></td>
+<td>Удалить слово слева</td>
+</tr>
+<tr>
+<td><code>Ctrl-u</code></td>
+<td>Удалить до начала строки</td>
+</tr>
+<tr>
+<td><code>Ctrl-k</code></td>
+<td>Удалить до конца строки</td>
+</tr>
+<tr>
+<td><code>Ctrl-y</code></td>
+<td>Вставить удалённое (yank)</td>
+</tr>
+<tr>
+<td><code>Ctrl-r</code></td>
+<td>Обратный поиск по истории</td>
+</tr>
+<tr>
+<td><code>Ctrl-s</code></td>
+<td>Прямой поиск по истории</td>
+</tr>
+<tr>
+<td><code>Ctrl-l</code></td>
+<td>Очистить экран (= <code>clear</code>)</td>
+</tr>
+<tr>
+<td><code>Ctrl-c</code></td>
+<td>Прервать команду</td>
+</tr>
+<tr>
+<td><code>Ctrl-z</code></td>
+<td>Приостановить процесс</td>
+</tr>
+<tr>
+<td><code>Ctrl-d</code> на пустой строке</td>
+<td>Выйти из shell (= <code>exit</code>)</td>
+</tr>
+<tr>
+<td><code>Tab</code></td>
+<td>Автодополнение</td>
+</tr>
+<tr>
+<td><code>↑</code> / <code>↓</code></td>
+<td>История команд</td>
+</tr>
+<tr>
+<td><code>!!</code></td>
+<td>Повторить последнюю команду</td>
+</tr>
+<tr>
+<td><code>!$</code></td>
+<td>Последний аргумент предыдущей команды</td>
+</tr>
+<tr>
+<td><code>Alt-.</code></td>
+<td>Последний аргумент (повтор — предыдущие)</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="современные-альтернативы-когда-скучно">🚀 Современные альтернативы (когда скучно)<a class="headerlink" href="#современные-альтернативы-когда-скучно" title="Ссылка">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Классика</th>
+<th>Современная замена</th>
+<th>Описание</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ls</code></td>
+<td><code>eza</code> / <code>lsd</code></td>
+<td>с иконками и цветами</td>
+</tr>
+<tr>
+<td><code>cat</code></td>
+<td><code>bat</code></td>
+<td>с подсветкой синтаксиса</td>
+</tr>
+<tr>
+<td><code>find</code></td>
+<td><code>fd</code></td>
+<td>быстрее и удобнее</td>
+</tr>
+<tr>
+<td><code>grep</code></td>
+<td><code>rg</code> (ripgrep)</td>
+<td>быстрее</td>
+</tr>
+<tr>
+<td><code>top</code></td>
+<td><code>htop</code>, <code>btop</code>, <code>glances</code></td>
+<td>красивее</td>
+</tr>
+<tr>
+<td><code>du</code></td>
+<td><code>ncdu</code>, <code>dust</code></td>
+<td>интерактивно</td>
+</tr>
+<tr>
+<td><code>df</code></td>
+<td><code>duf</code></td>
+<td>таблица с цветами</td>
+</tr>
+<tr>
+<td><code>cd</code></td>
+<td><code>zoxide</code> (<code>z</code>)</td>
+<td>переход по частоте</td>
+</tr>
+<tr>
+<td><code>tree</code></td>
+<td><code>eza --tree</code> / <code>tre</code></td>
+<td>с иконками</td>
+</tr>
+<tr>
+<td><code>ps</code></td>
+<td><code>procs</code></td>
+<td>читаемый вывод</td>
+</tr>
+<tr>
+<td><code>rm</code></td>
+<td><code>trash-cli</code></td>
+<td>в корзину вместо удаления</td>
+</tr>
+<tr>
+<td><code>diff</code></td>
+<td><code>delta</code></td>
+<td>красивые diff&rsquo;ы</td>
+</tr>
+<tr>
+<td><code>git</code></td>
+<td><code>lazygit</code>, <code>tig</code></td>
+<td>TUI</td>
+</tr>
+<tr>
+<td><code>man</code></td>
+<td><code>tldr</code>, <code>tealdeer</code></td>
+<td>примеры вместо мануала</td>
+</tr>
+</tbody>
+</table>
+<p>Установить всё сразу (Arch):</p>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>pacman<span class="w"> </span>-S<span class="w"> </span>eza<span class="w"> </span>bat<span class="w"> </span>fd<span class="w"> </span>ripgrep<span class="w"> </span>btop<span class="w"> </span>ncdu<span class="w"> </span>duf<span class="w"> </span>zoxide<span class="w"> </span>dust<span class="w"> </span>procs<span class="w"> </span>trash-cli<span class="w"> </span>git-delta<span class="w"> </span>lazygit<span class="w"> </span>tldr
+</code></pre></div>
+
+<hr />
+<h2 id="полезные-мелочи">🧰 Полезные мелочи<a class="headerlink" href="#полезные-мелочи" title="Ссылка">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Команда</th>
+<th>Действие</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>history \| grep foo</code></td>
+<td>История команд</td>
+</tr>
+<tr>
+<td><code>alias ll='ls -lah'</code></td>
+<td>Создать алиас (до перезагрузки)</td>
+</tr>
+<tr>
+<td><code>echo $SHELL</code></td>
+<td>Текущий shell</td>
+</tr>
+<tr>
+<td><code>chsh -s /usr/bin/zsh</code></td>
+<td>Сменить shell по умолчанию</td>
+</tr>
+<tr>
+<td><code>watch -n 1 &lt;cmd&gt;</code></td>
+<td>Запускать команду каждые 1с</td>
+</tr>
+<tr>
+<td><code>timeout 10 &lt;cmd&gt;</code></td>
+<td>Ограничить время выполнения</td>
+</tr>
+<tr>
+<td><code>yes \| &lt;cmd&gt;</code></td>
+<td>Авто-«yes» на вопросы</td>
+</tr>
+<tr>
+<td><code>command -v &lt;cmd&gt;</code></td>
+<td>Проверить, есть ли команда</td>
+</tr>
+<tr>
+<td><code>type &lt;cmd&gt;</code></td>
+<td>Что такое команда (alias/builtin/file)</td>
+</tr>
+<tr>
+<td><code>env</code> / <code>printenv</code></td>
+<td>Переменные окружения</td>
+</tr>
+<tr>
+<td><code>export VAR=value</code></td>
+<td>Установить переменную</td>
+</tr>
+<tr>
+<td><code>xclip -sel c &lt; file</code></td>
+<td>Скопировать в буфер обмена</td>
+</tr>
+<tr>
+<td><code>wl-copy &lt; file</code></td>
+<td>Буфер обмена Wayland</td>
+</tr>
+<tr>
+<td><code>date +%Y%m%d</code></td>
+<td>Дата в формате</td>
+</tr>
+<tr>
+<td><code>cal</code> / <code>ncal</code></td>
+<td>Календарь</td>
+</tr>
+<tr>
+<td><code>factor 12345</code></td>
+<td>Разложить на множители</td>
+</tr>
+<tr>
+<td><code>bc</code></td>
+<td>Калькулятор в терминале</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="полезные-ссылки">🔗 Полезные ссылки<a class="headerlink" href="#полезные-ссылки" title="Ссылка">#</a></h2>
+<ul>
+<li><strong>tldr-pages:</strong> https://tldr.sh — краткие примеры команд</li>
+<li><strong>explainshell:</strong> https://explainshell.com — разбор сложных команд</li>
+<li><strong>cht.sh:</strong> https://cht.sh — шпаргалки в терминале (<code>curl cht.sh/tar</code>)</li>
+<li><strong>The Art of Command Line:</strong> https://github.com/jlevy/the-art-of-command-line</li>
+<li><strong>Linux Commands Cheat Sheet:</strong> https://linuxcommandlibrary.com</li>
+</ul>
+<hr />
+<h2 id="полезные-советы">💡 Полезные советы<a class="headerlink" href="#полезные-советы" title="Ссылка">#</a></h2>
+<ol>
+<li><strong><code>man &lt;cmd&gt;</code></strong> — всегда под рукой; <code>/</code> для поиска, <code>q</code> — выход.</li>
+<li><strong><code>tldr &lt;cmd&gt;</code></strong> — если <code>man</code> слишком длинный, смотрите примеры.</li>
+<li><strong><code>Ctrl-r</code></strong> — обратный поиск по истории, лучшее, что есть в bash/zsh.</li>
+<li><strong><code>!!</code></strong> — повтор последней команды (например <code>sudo !!</code>).</li>
+<li><strong><code>cd -</code></strong> — прыгнуть туда-обратно между двумя каталогами.</li>
+<li><strong><code>pushd</code> / <code>popd</code></strong> — стек каталогов, удобно в скриптах.</li>
+<li><strong><code>tail -f /var/log/...</code></strong> — следить за логом в реальном времени.</li>
+<li><strong><code>xargs</code></strong> — передать вывод как аргументы, но осторожно с пробелами
+   (используйте <code>-0</code> вместе с <code>find -print0</code>).</li>
+<li><strong>Кавычки:</strong> одинарные <code>'...'</code> — без подстановки, двойные <code>"..."</code> — с
+   раскрытием переменных и команд, обратные <code>\</code>cmd`<code>— то же, что</code>$(cmd)`.</li>
+<li><strong>Не делайте <code>rm -rf /</code></strong> — это не шутка, проверяйте пути дважды.</li>
+<li><strong><code>chmod +x script.sh</code></strong> перед запуском скрипта <code>./script.sh</code>.</li>
+<li><strong>Переменная <code>PATH</code></strong> — где shell ищет команды:
+    <code>echo $PATH</code>, добавить: <code>export PATH="$PATH:/new/dir"</code>.</li>
+</ol>
+<hr />
+<p><em>Сгенерировано как шпаргалка. Команды могут отличаться в зависимости от
+дистрибутива — проверяйте через <code>&lt;cmd&gt; --help</code> или <code>man &lt;cmd&gt;</code>.</em></p>
+    </article>
+    <nav class="pagination">
+      <a class="pager prev" href="git.html">← Git</a>
+      <a class="pager next" href="powershell.html">PowerShell →</a>
+    </nav>
+  </main>
+
+  <aside class="toc">
+    <details open>
+      <summary>📑 Оглавление</summary>
+      <div class="toc-list">
+<div class="toc">
+<ul>
+<li><a href="#терминал-linux-шпаргалка-по-командам">🖥️ Терминал Linux — шпаргалка по командам</a><ul>
+<li><a href="#навигация-по-файловой-системе">📁 Навигация по файловой системе</a></li>
+<li><a href="#работа-с-файлами-и-каталогами">📄 Работа с файлами и каталогами</a></li>
+<li><a href="#просмотр-содержимого-файлов">📖 Просмотр содержимого файлов</a></li>
+<li><a href="#поиск">🔍 Поиск</a></li>
+<li><a href="#архивы">📦 Архивы</a></li>
+<li><a href="#процессы">⚙️ Процессы</a></li>
+<li><a href="#диск-и-память">💾 Диск и память</a></li>
+<li><a href="#сеть">🌐 Сеть</a></li>
+<li><a href="#пользователи-и-права">👤 Пользователи и права</a><ul>
+<li><a href="#цифровые-права-chmod">Цифровые права chmod</a></li>
+</ul>
+</li>
+<li><a href="#пакетные-менеджеры">📦 Пакетные менеджеры</a><ul>
+<li><a href="#arch-cachyos-pacman-yay">Arch / CachyOS (pacman + yay)</a></li>
+<li><a href="#debian-ubuntu-apt">Debian / Ubuntu (apt)</a></li>
+<li><a href="#fedora-dnf">Fedora (dnf)</a></li>
+<li><a href="#универсально-flatpak-snap">Универсально (Flatpak / Snap)</a></li>
+</ul>
+</li>
+<li><a href="#перенаправления-и-пайпы">🔄 Перенаправления и пайпы</a></li>
+<li><a href="#текстовые-утилиты">✂️ Текстовые утилиты</a></li>
+<li><a href="#система-и-железо">🖥️ Система и железо</a></li>
+<li><a href="#ssh-и-ключи">🔐 SSH и ключи</a></li>
+<li><a href="#горячие-клавиши-в-самом-терминале-readline">⌨️ Горячие клавиши в самом терминале (readline)</a></li>
+<li><a href="#современные-альтернативы-когда-скучно">🚀 Современные альтернативы (когда скучно)</a></li>
+<li><a href="#полезные-мелочи">🧰 Полезные мелочи</a></li>
+<li><a href="#полезные-ссылки">🔗 Полезные ссылки</a></li>
+<li><a href="#полезные-советы">💡 Полезные советы</a></li>
+</ul>
+</li>
+</ul>
+</div>
+
+      </div>
+    </details>
+  </aside>
+</div>
+
+<button class="back-top" id="backTop" aria-label="Наверх">↑</button>
+
+<script src="assets/search.js"></script>
+<script src="assets/page.js"></script>
+</body>
+</html>

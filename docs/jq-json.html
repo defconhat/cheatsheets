@@ -1,0 +1,846 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>jq + JSON — Шпаргалки</title>
+<link rel="stylesheet" href="assets/style.css">
+<link rel="stylesheet" href="assets/pygments.css">
+</head>
+<body>
+<div class="layout">
+  <aside class="sidebar">
+    <a href="index.html" class="brand">📌 Шпаргалки</a>
+    <nav class="nav">
+<a href="yazi.html" class="nav-item"><span class="nav-ico">📦</span>Yazi</a>
+<a href="neovim.html" class="nav-item"><span class="nav-ico">📘</span>Neovim (LazyVim)</a>
+<a href="niri.html" class="nav-item"><span class="nav-ico">🪟</span>Niri</a>
+<a href="tmux.html" class="nav-item"><span class="nav-ico">🪟</span>Tmux</a>
+<a href="bash.html" class="nav-item"><span class="nav-ico">🐚</span>Bash</a>
+<a href="git.html" class="nav-item"><span class="nav-ico">🔀</span>Git</a>
+<a href="terminal.html" class="nav-item"><span class="nav-ico">🖥️</span>Терминал Linux</a>
+<a href="powershell.html" class="nav-item"><span class="nav-ico">💻</span>PowerShell</a>
+<a href="cmd.html" class="nav-item"><span class="nav-ico">🪟</span>CMD (cmd.exe)</a>
+<a href="python.html" class="nav-item"><span class="nav-ico">🐍</span>Python</a>
+<a href="systemd.html" class="nav-item"><span class="nav-ico">⚙️</span>systemd</a>
+<a href="ssh.html" class="nav-item"><span class="nav-ico">🔐</span>SSH</a>
+<a href="make-cmake.html" class="nav-item"><span class="nav-ico">🔨</span>Make / CMake</a>
+<a href="docker.html" class="nav-item"><span class="nav-ico">🐳</span>Docker</a>
+<a href="pacman.html" class="nav-item"><span class="nav-ico">📦</span>pacman / yay / paru</a>
+<a href="spark.html" class="nav-item"><span class="nav-ico">⚡</span>Apache Spark / PySpark</a>
+<a href="markdown.html" class="nav-item"><span class="nav-ico">📝</span>Markdown</a>
+<a href="regex.html" class="nav-item"><span class="nav-ico">🔍</span>Регулярные выражения</a>
+<a href="jq-json.html" class="nav-item active"><span class="nav-ico">🔧</span>jq + JSON</a>
+<a href="awk-sed.html" class="nav-item"><span class="nav-ico">✂️</span>awk / sed</a>
+<a href="airflow.html" class="nav-item"><span class="nav-ico">🌪️</span>Apache Airflow</a>
+<a href="http-curl.html" class="nav-item"><span class="nav-ico">🌐</span>HTTP / curl</a>
+<a href="yaml.html" class="nav-item"><span class="nav-ico">📄</span>YAML</a>
+<a href="vscode.html" class="nav-item"><span class="nav-ico">💻</span>VS Code</a>
+<a href="cron.html" class="nav-item"><span class="nav-ico">⏰</span>cron</a>
+<a href="fzf-zoxide.html" class="nav-item"><span class="nav-ico">🔎</span>fzf + zoxide</a>
+<a href="minikube-k8s.html" class="nav-item"><span class="nav-ico">☸️</span>Minikube / Kubernetes</a>
+<a href="cicd.html" class="nav-item"><span class="nav-ico">🦊</span>GitLab CI / GitHub Actions</a>
+<a href="nginx.html" class="nav-item"><span class="nav-ico">🌐</span>nginx</a>
+<a href="dbt.html" class="nav-item"><span class="nav-ico">🔧</span>dbt</a>
+<a href="kafka.html" class="nav-item"><span class="nav-ico">🐘</span>Apache Kafka</a>
+<a href="prometheus-grafana.html" class="nav-item"><span class="nav-ico">📊</span>Prometheus / Grafana</a>
+<a href="iceberg-nessie.html" class="nav-item"><span class="nav-ico">🧊</span>Iceberg / Nessie</a>
+<a href="impala.html" class="nav-item"><span class="nav-ico">🐬</span>Apache Impala</a>
+<a href="terraform.html" class="nav-item"><span class="nav-ico">🏗️</span>Terraform</a>
+<a href="linux-internals.html" class="nav-item"><span class="nav-ico">🐧</span>Linux Internals</a>
+<a href="miscellaneous.html" class="nav-item"><span class="nav-ico">🧰</span>Miscellaneous</a>
+<a href="python-automation-libs.html" class="nav-item"><span class="nav-ico">🐍</span>Python: авт-ция (10 libs)</a>
+<a href="eza.html" class="nav-item"><span class="nav-ico">🌈</span>eza</a>
+<a href="dbeaver.html" class="nav-item"><span class="nav-ico">🗄️</span>DBeaver</a>
+<a href="zcode.html" class="nav-item"><span class="nav-ico">🤖</span>ZCode</a>
+<a href="warp.html" class="nav-item"><span class="nav-ico">🚀</span>Warp</a>
+<a href="agentic-ai-dev.html" class="nav-item"><span class="nav-ico">🤝</span>Агентная разработка с ИИ</a>
+    </nav>
+  </aside>
+
+  <main class="content">
+    <article>
+<h1 id="jq-json-шпаргалка">🔧 jq + JSON — шпаргалка<a class="headerlink" href="#jq-json-шпаргалка" title="Ссылка">#</a></h1>
+<blockquote>
+<p><strong>jq</strong> — командный процессор JSON (как <code>sed</code>/<code>awk</code>/<code>grep</code> для JSON).
+<strong>JSON</strong> — JavaScript Object Notation, формат обмена данными.
+Документация: https://jqlang.github.io/jq/manual</p>
+</blockquote>
+<hr />
+<h2 id="главные-понятия-json">🔑 Главные понятия JSON<a class="headerlink" href="#главные-понятия-json" title="Ссылка">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Тип</th>
+<th>Пример</th>
+<th>Описание</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Object</strong></td>
+<td><code>{"key": "val"}</code></td>
+<td>Объект/словарь</td>
+</tr>
+<tr>
+<td><strong>Array</strong></td>
+<td><code>[1, 2, 3]</code></td>
+<td>Массив/список</td>
+</tr>
+<tr>
+<td><strong>String</strong></td>
+<td><code>"hello"</code></td>
+<td>Строка (всегда в двойных кавычках!)</td>
+</tr>
+<tr>
+<td><strong>Number</strong></td>
+<td><code>42</code>, <code>3.14</code></td>
+<td>Число (int или float)</td>
+</tr>
+<tr>
+<td><strong>Boolean</strong></td>
+<td><code>true</code> / <code>false</code></td>
+<td>Логическое (с маленькой буквы!)</td>
+</tr>
+<tr>
+<td><strong>Null</strong></td>
+<td><code>null</code></td>
+<td>Пустое значение</td>
+</tr>
+<tr>
+<td>Whitespace</td>
+<td>пробелы/таб/перевод</td>
+<td>Не значимы (кроме внутри строк)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="синтаксис">Синтаксис<a class="headerlink" href="#синтаксис" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Alice&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;age&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">30</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;active&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;email&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;tags&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;admin&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;user&quot;</span><span class="p">],</span>
+<span class="w">  </span><span class="nt">&quot;address&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;city&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;NYC&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;zip&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;10001&quot;</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<h3 id="правила">Правила<a class="headerlink" href="#правила" title="Ссылка">#</a></h3>
+<ul>
+<li>Ключи объектов — <strong>всегда в двойных кавычках</strong>.</li>
+<li>Строки — двойные кавычки (одинарные запрещены!).</li>
+<li>Нет trailing comma (запятой после последнего элемента).</li>
+<li>Комментарии <strong>запрещены</strong> (в строгом JSON).</li>
+<li>Числа: <code>1.5e10</code> допускается.</li>
+</ul>
+<hr />
+<h2 id="jq-установка-и-базовое-использование">🚀 jq — установка и базовое использование<a class="headerlink" href="#jq-установка-и-базовое-использование" title="Ссылка">#</a></h2>
+<div class="highlight"><pre><span></span><code><span class="c1"># Установка</span>
+sudo<span class="w"> </span>pacman<span class="w"> </span>-S<span class="w"> </span>jq<span class="w">                  </span><span class="c1"># Arch / CachyOS</span>
+sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>jq<span class="w">                </span><span class="c1"># Debian/Ubuntu</span>
+brew<span class="w"> </span>install<span class="w"> </span>jq<span class="w">                    </span><span class="c1"># macOS</span>
+
+<span class="c1"># Простейший запуск</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;{&quot;name&quot;:&quot;Alice&quot;}&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>jq
+<span class="c1"># {</span>
+<span class="c1">#   &quot;name&quot;: &quot;Alice&quot;</span>
+<span class="c1"># }</span>
+
+<span class="c1"># Файл</span>
+jq<span class="w"> </span>.<span class="w"> </span>file.json<span class="w">                    </span><span class="c1"># pretty-print всего файла</span>
+jq<span class="w"> </span><span class="s1">&#39;.&#39;</span><span class="w"> </span>file.json<span class="w">                  </span><span class="c1"># то же</span>
+cat<span class="w"> </span>file.json<span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w">                </span><span class="c1"># через пайп</span>
+</code></pre></div>
+
+<h3 id="полезные-флаги">Полезные флаги<a class="headerlink" href="#полезные-флаги" title="Ссылка">#</a></h3>
+<table>
+<thead>
+<tr>
+<th>Флаг</th>
+<th>Назначение</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>.</code></td>
+<td>Вывести всё (identity)</td>
+</tr>
+<tr>
+<td><code>-c</code></td>
+<td>Компактный вывод (одна строка)</td>
+</tr>
+<tr>
+<td><code>-r</code></td>
+<td>Raw output (без кавычек у строк)</td>
+</tr>
+<tr>
+<td><code>-R</code></td>
+<td>Читать input как raw строки</td>
+</tr>
+<tr>
+<td><code>-s</code></td>
+<td>Slurp: весь input как один массив</td>
+</tr>
+<tr>
+<td><code>-e</code></td>
+<td>Exit code 1 если последний output null/false</td>
+</tr>
+<tr>
+<td><code>-n</code></td>
+<td>Не читать input (использовать с <code>null</code> или данными)</td>
+</tr>
+<tr>
+<td><code>-a</code></td>
+<td>ASCII output (не UTF-8)</td>
+</tr>
+<tr>
+<td><code>-f file.jq</code></td>
+<td>Читать фильтр из файла</td>
+</tr>
+<tr>
+<td><code>--arg name val</code></td>
+<td>Передать строковую переменную</td>
+</tr>
+<tr>
+<td><code>--argjson name 'json'</code></td>
+<td>Передать JSON-переменную</td>
+</tr>
+<tr>
+<td><code>--slurpfile name f</code></td>
+<td>Прочитать файл в переменную</td>
+</tr>
+<tr>
+<td><code>-S</code></td>
+<td>Отсортировать ключи объектов</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="базовые-фильтры">🎯 Базовые фильтры<a class="headerlink" href="#базовые-фильтры" title="Ссылка">#</a></h2>
+<h3 id="идентичность-и-доступ">Идентичность и доступ<a class="headerlink" href="#идентичность-и-доступ" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;{&quot;name&quot;:&quot;Alice&quot;,&quot;age&quot;:30}&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span><span class="s1">&#39;.&#39;</span>
+<span class="c1"># { &quot;name&quot;: &quot;Alice&quot;, &quot;age&quot;: 30 }</span>
+
+<span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;{&quot;name&quot;:&quot;Alice&quot;}&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span><span class="s1">&#39;.name&#39;</span>
+<span class="c1"># &quot;Alice&quot;</span>
+
+<span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;{&quot;name&quot;:&quot;Alice&quot;}&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span><span class="s1">&#39;.[&quot;name&quot;]&#39;</span><span class="w">    </span><span class="c1"># альтернатива</span>
+<span class="c1"># &quot;Alice&quot;</span>
+
+<span class="c1"># Глубокий путь (dot notation)</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;{&quot;user&quot;:{&quot;name&quot;:&quot;Alice&quot;}}&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span><span class="s1">&#39;.user.name&#39;</span>
+<span class="c1"># &quot;Alice&quot;</span>
+
+<span class="c1"># Bracket для ключей со спецсимволами</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;{&quot;my-key&quot;:&quot;val&quot;}&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span><span class="s1">&#39;.[&quot;my-key&quot;]&#39;</span>
+<span class="c1"># &quot;val&quot;</span>
+
+<span class="c1"># Несуществующий ключ → null</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;{&quot;name&quot;:&quot;Alice&quot;}&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span><span class="s1">&#39;.email&#39;</span>
+<span class="c1"># null</span>
+
+<span class="c1"># Optional chaining (?— не падать если null)</span>
+jq<span class="w"> </span><span class="s1">&#39;.user.name?&#39;</span><span class="w">                      </span><span class="c1"># не упадёт если user === null</span>
+</code></pre></div>
+
+<h3 id="массивы">Массивы<a class="headerlink" href="#массивы" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;[1,2,3]&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span><span class="s1">&#39;.[0]&#39;</span><span class="w">            </span><span class="c1"># 1 (первый)</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;[1,2,3]&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span><span class="s1">&#39;.[-1]&#39;</span><span class="w">           </span><span class="c1"># 3 (последний)</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;[1,2,3]&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span><span class="s1">&#39;.[1:3]&#39;</span><span class="w">          </span><span class="c1"># [2,3] (срез 1..2)</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;[1,2,3]&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span><span class="s1">&#39;.[:2]&#39;</span><span class="w">           </span><span class="c1"># [1,2]</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;[1,2,3]&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span><span class="s1">&#39;.[1:]&#39;</span><span class="w">           </span><span class="c1"># [2,3]</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;[1,2,3]&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span><span class="s1">&#39;.[-2:]&#39;</span><span class="w">          </span><span class="c1"># [2,3]</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;[1,2,3]&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span><span class="s1">&#39;length&#39;</span><span class="w">          </span><span class="c1"># 3</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;[1,2,3]&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span><span class="s1">&#39;first&#39;</span><span class="w">           </span><span class="c1"># 1</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;[1,2,3]&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span><span class="s1">&#39;last&#39;</span><span class="w">            </span><span class="c1"># 3</span>
+</code></pre></div>
+
+<h3 id="итерация-по-массиву">Итерация по массиву<a class="headerlink" href="#итерация-по-массиву" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;[{&quot;name&quot;:&quot;Alice&quot;},{&quot;name&quot;:&quot;Bob&quot;}]&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span><span class="s1">&#39;.[].name&#39;</span>
+<span class="c1"># &quot;Alice&quot;</span>
+<span class="c1"># &quot;Bob&quot;</span>
+
+<span class="c1"># Map (применить к каждому элементу)</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;[1,2,3]&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span><span class="s1">&#39;map(. * 2)&#39;</span><span class="w">      </span><span class="c1"># [2,4,6]</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;[{&quot;age&quot;:30},{&quot;age&quot;:25}]&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span><span class="s1">&#39;map(.age)&#39;</span><span class="w">   </span><span class="c1"># [30,25]</span>
+
+<span class="c1"># Select (фильтр)</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;[1,2,3,4]&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span><span class="s1">&#39;map(select(. &gt; 2))&#39;</span><span class="w">   </span><span class="c1"># [3,4]</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;[1,2,3,4]&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span><span class="s1">&#39;.[] | select(. &gt; 2)&#39;</span><span class="w">  </span><span class="c1"># 3 \n 4</span>
+
+<span class="c1"># Итерация по объекту</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;{&quot;a&quot;:1,&quot;b&quot;:2}&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span><span class="s1">&#39;to_entries&#39;</span>
+<span class="c1"># [{&quot;key&quot;:&quot;a&quot;,&quot;value&quot;:1},{&quot;key&quot;:&quot;b&quot;,&quot;value&quot;:2}]</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;[{&quot;key&quot;:&quot;a&quot;,&quot;value&quot;:1}]&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span><span class="s1">&#39;from_entries&#39;</span><span class="w">   </span><span class="c1"># {&quot;a&quot;:1}</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;{&quot;a&quot;:1,&quot;b&quot;:2}&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span><span class="s1">&#39;keys&#39;</span><span class="w">        </span><span class="c1"># [&quot;a&quot;,&quot;b&quot;]</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;{&quot;a&quot;:1,&quot;b&quot;:2}&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span><span class="s1">&#39;values&#39;</span><span class="w">      </span><span class="c1"># [1,2]</span>
+</code></pre></div>
+
+<hr />
+<h2 id="встроенные-функции">🔧 Встроенные функции<a class="headerlink" href="#встроенные-функции" title="Ссылка">#</a></h2>
+<h3 id="строковые">Строковые<a class="headerlink" href="#строковые" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;&quot;hello&quot;&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span><span class="s1">&#39;length&#39;</span><span class="w">           </span><span class="c1"># 5</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;&quot;hello&quot;&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span><span class="s1">&#39;ascii&#39;</span><span class="w">            </span><span class="c1"># [104,101,...]</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;&quot;Hello&quot;&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span><span class="s1">&#39;ascii_downcase&#39;</span><span class="w">   </span><span class="c1"># &quot;hello&quot;</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;&quot;hello&quot;&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span><span class="s1">&#39;ascii_upcase&#39;</span><span class="w">     </span><span class="c1"># &quot;HELLO&quot;</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;&quot;  hi  &quot;&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span><span class="s1">&#39;ltrimstr(&quot; &quot;)&#39;</span><span class="w">   </span><span class="c1"># обрезать префикс</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;&quot;hello&quot;&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span><span class="s1">&#39;split(&quot;l&quot;)&#39;</span><span class="w">       </span><span class="c1"># [&quot;he&quot;,&quot;&quot;,&quot;o&quot;]</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;[&quot;a&quot;,&quot;b&quot;]&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span><span class="s1">&#39;join(&quot;,&quot;)&#39;</span><span class="w">      </span><span class="c1"># &quot;a,b&quot;</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;&quot;hello world&quot;&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span><span class="s1">&#39;ascii_downcase | split(&quot; &quot;) | .[0]&#39;</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;&quot;abc&quot;&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span><span class="s1">&#39;@base64&#39;</span><span class="w">            </span><span class="c1"># &quot;YWJj&quot;</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;&quot;YWJj&quot;&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span><span class="s1">&#39;@base64d&#39;</span><span class="w">          </span><span class="c1"># &quot;abc&quot;</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;&quot;a&amp;b&quot;&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span><span class="s1">&#39;@uri&#39;</span><span class="w">               </span><span class="c1"># &quot;a%26b&quot;</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;&quot;2024-01-15&quot;&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span><span class="s1">&#39;explode&#39;</span><span class="w">     </span><span class="c1"># [50,48,...]</span>
+</code></pre></div>
+
+<h3 id="математические">Математические<a class="headerlink" href="#математические" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;5&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span><span class="s1">&#39;. + 3&#39;</span><span class="w">                  </span><span class="c1"># 8</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;5&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span><span class="s1">&#39;. * 2&#39;</span><span class="w">                  </span><span class="c1"># 10</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;10&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span><span class="s1">&#39;. / 3&#39;</span><span class="w">                 </span><span class="c1"># 3.333...</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;10&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span><span class="s1">&#39;floor&#39;</span><span class="w">                 </span><span class="c1"># 10</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;10&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span><span class="s1">&#39;ceil&#39;</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;5&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span><span class="s1">&#39;sqrt&#39;</span><span class="w">                   </span><span class="c1"># 2.236...</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;5&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span><span class="s1">&#39;pow(2; 2)&#39;</span><span class="w">              </span><span class="c1"># 25  (5^2 — осторожно, синтаксис)</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;[1,2,3]&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span><span class="s1">&#39;add&#39;</span><span class="w">              </span><span class="c1"># 6</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;[1,2,3]&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span><span class="s1">&#39;min&#39;</span><span class="w">              </span><span class="c1"># 1</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;[1,2,3]&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span><span class="s1">&#39;max&#39;</span><span class="w">              </span><span class="c1"># 3</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;[1,2,3]&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span><span class="s1">&#39;length&#39;</span><span class="w">           </span><span class="c1"># 3</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;5&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span><span class="s1">&#39;tonumber&#39;</span><span class="w">               </span><span class="c1"># 5</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;&quot;42&quot;&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span><span class="s1">&#39;tonumber&#39;</span><span class="w">            </span><span class="c1"># 42</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;42&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span><span class="s1">&#39;tostring&#39;</span><span class="w">              </span><span class="c1"># &quot;42&quot;</span>
+</code></pre></div>
+
+<h3 id="типы">Типы<a class="headerlink" href="#типы" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;&quot;hi&quot;&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span><span class="s1">&#39;type&#39;</span><span class="w">                </span><span class="c1"># &quot;string&quot;</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;42&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span><span class="s1">&#39;type&#39;</span><span class="w">                  </span><span class="c1"># &quot;number&quot;</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;[1,2]&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span><span class="s1">&#39;type&#39;</span><span class="w">               </span><span class="c1"># &quot;array&quot;</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;{&quot;a&quot;:1}&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span><span class="s1">&#39;type&#39;</span><span class="w">             </span><span class="c1"># &quot;object&quot;</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;null&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span><span class="s1">&#39;type&#39;</span><span class="w">                </span><span class="c1"># &quot;null&quot;</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;true&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span><span class="s1">&#39;type&#39;</span><span class="w">                </span><span class="c1"># &quot;boolean&quot;</span>
+
+<span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;&quot;42&quot;&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span><span class="s1">&#39;tonumber&#39;</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;42&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span><span class="s1">&#39;tojson&#39;</span><span class="w">                </span><span class="c1"># сериализовать обратно в строку-JSON</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;&quot;{\&quot;a\&quot;:1}&quot;&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span><span class="s1">&#39;fromjson&#39;</span><span class="w">     </span><span class="c1"># распарсить строку-JSON в объект</span>
+</code></pre></div>
+
+<h3 id="условия">Условия<a class="headerlink" href="#условия" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;5&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span><span class="s1">&#39;if . &gt; 3 then &quot;big&quot; else &quot;small&quot; end&#39;</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;5&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span><span class="s1">&#39;. &gt; 3&#39;</span><span class="w">                  </span><span class="c1"># true</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;5&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span><span class="s1">&#39;. &gt; 3 and . &lt; 10&#39;</span><span class="w">       </span><span class="c1"># true</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;5&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span><span class="s1">&#39;. &gt; 3 or . &gt; 100&#39;</span><span class="w">       </span><span class="c1"># true</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;5&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span><span class="s1">&#39;not&#39;</span><span class="w">                    </span><span class="c1"># false</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;null&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span><span class="s1">&#39;has(&quot;key&quot;)&#39;</span><span class="w">          </span><span class="c1"># false</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;{&quot;a&quot;:1}&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span><span class="s1">&#39;has(&quot;a&quot;)&#39;</span><span class="w">         </span><span class="c1"># true</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;{&quot;a&quot;:1}&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span><span class="s1">&#39;in({&quot;a&quot;:1})&#39;</span><span class="w">      </span><span class="c1"># true</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;&quot;str&quot;&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span><span class="s1">&#39;. == &quot;str&quot;&#39;</span><span class="w">         </span><span class="c1"># true</span>
+</code></pre></div>
+
+<h3 id="альтернативы">Альтернативы (<code>//</code>)<a class="headerlink" href="#альтернативы" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Оператор // — значение по умолчанию</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;{&quot;name&quot;:&quot;Alice&quot;}&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span><span class="s1">&#39;.email // &quot;no email&quot;&#39;</span>
+<span class="c1"># &quot;no email&quot;</span>
+
+<span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;null&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span><span class="s1">&#39;. // &quot;default&quot;&#39;</span>
+<span class="c1"># &quot;default&quot;</span>
+
+<span class="c1"># Цепочка альтернатив</span>
+jq<span class="w"> </span><span class="s1">&#39;.user.email // .user.phone // &quot;no contact&quot;&#39;</span>
+</code></pre></div>
+
+<hr />
+<h2 id="создание-объектов-construction">📦 Создание объектов (construction)<a class="headerlink" href="#создание-объектов-construction" title="Ссылка">#</a></h2>
+<div class="highlight"><pre><span></span><code><span class="c1"># Копировать и добавить поле</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;{&quot;name&quot;:&quot;Alice&quot;}&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span><span class="s1">&#39;. + {&quot;age&quot;:30}&#39;</span>
+<span class="c1"># {&quot;name&quot;:&quot;Alice&quot;,&quot;age&quot;:30}</span>
+
+<span class="c1"># Удалить поле</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;{&quot;a&quot;:1,&quot;b&quot;:2}&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span><span class="s1">&#39;del(.b)&#39;</span>
+<span class="c1"># {&quot;a&quot;:1}</span>
+
+<span class="c1"># Создать новый объект</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;{&quot;name&quot;:&quot;Alice&quot;,&quot;age&quot;:30}&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span><span class="s1">&#39;{name, age}&#39;</span>
+<span class="c1"># {&quot;name&quot;:&quot;Alice&quot;,&quot;age&quot;:30}</span>
+
+<span class="c1"># С переименованием</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;{&quot;name&quot;:&quot;Alice&quot;}&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span><span class="s1">&#39;{username: .name}&#39;</span>
+<span class="c1"># {&quot;username&quot;:&quot;Alice&quot;}</span>
+
+<span class="c1"># С вычислением</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;{&quot;a&quot;:1,&quot;b&quot;:2}&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span><span class="s1">&#39;{sum: (.a + .b)}&#39;</span>
+<span class="c1"># {&quot;sum&quot;:3}</span>
+
+<span class="c1"># Сокращённый синтаксис {a, b} = {a: .a, b: .b}</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;{&quot;a&quot;:1,&quot;b&quot;:2}&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span><span class="s1">&#39;{a, b}&#39;</span>
+</code></pre></div>
+
+<hr />
+<h2 id="pipe-и-продвинутые-фильтры">🔁 Pipe и продвинутые фильтры<a class="headerlink" href="#pipe-и-продвинутые-фильтры" title="Ссылка">#</a></h2>
+<h3 id="pipe">Pipe <code>|</code><a class="headerlink" href="#pipe" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;{&quot;users&quot;:[{&quot;name&quot;:&quot;Alice&quot;}]}&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span><span class="s1">&#39;.users | .[0] | .name&#39;</span>
+<span class="c1"># = .users[0].name</span>
+<span class="c1"># &quot;Alice&quot;</span>
+
+<span class="c1"># С map</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;[{&quot;name&quot;:&quot;Alice&quot;,&quot;age&quot;:30},{&quot;name&quot;:&quot;Bob&quot;,&quot;age&quot;:25}]&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>jq<span class="w"> </span><span class="s1">&#39;. | map(.name)&#39;</span>
+<span class="c1"># [&quot;Alice&quot;,&quot;Bob&quot;]</span>
+</code></pre></div>
+
+<h3 id="select-фильтрация">select (фильтрация)<a class="headerlink" href="#select-фильтрация" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;[1,2,3,4,5]&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span><span class="s1">&#39;.[] | select(. &gt; 3)&#39;</span>
+<span class="c1"># 4</span>
+<span class="c1"># 5</span>
+
+<span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;[{&quot;name&quot;:&quot;Alice&quot;,&quot;age&quot;:30},{&quot;name&quot;:&quot;Bob&quot;,&quot;age&quot;:25}]&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>jq<span class="w"> </span><span class="s1">&#39;.[] | select(.age &gt; 28)&#39;</span>
+<span class="c1"># {&quot;name&quot;:&quot;Alice&quot;,&quot;age&quot;:30}</span>
+
+<span class="c1"># Несколько условий</span>
+jq<span class="w"> </span><span class="s1">&#39;.[] | select(.age &gt; 25 and .city == &quot;NYC&quot;)&#39;</span>
+
+<span class="c1"># Сравнение строк</span>
+jq<span class="w"> </span><span class="s1">&#39;.[] | select(.status == &quot;active&quot;)&#39;</span>
+</code></pre></div>
+
+<h3 id="map-select-recurse">map / select / recurse<a class="headerlink" href="#map-select-recurse" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;[1,2,3]&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span><span class="s1">&#39;map(. * 2)&#39;</span><span class="w">               </span><span class="c1"># [2,4,6]</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;[1,2,3]&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span><span class="s1">&#39;map(select(. &gt; 1))&#39;</span><span class="w">       </span><span class="c1"># [2,3]</span>
+
+<span class="c1"># recurse — рекурсивный обход (для вложенных структур)</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;{&quot;a&quot;:{&quot;b&quot;:{&quot;c&quot;:1}}}&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span><span class="s1">&#39;recurse&#39;</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;{&quot;a&quot;:{&quot;b&quot;:{&quot;c&quot;:1}}}&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span><span class="s1">&#39;recurse | objects&#39;</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;{&quot;a&quot;:{&quot;b&quot;:1}}&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span><span class="s1">&#39;.. | .b? // empty&#39;</span><span class="w">  </span><span class="c1"># найти все .b где есть</span>
+
+<span class="c1"># .. (рекурсивный спуск)</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;{&quot;a&quot;:{&quot;b&quot;:1},&quot;c&quot;:2}&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span><span class="s1">&#39;..&#39;</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;{&quot;a&quot;:{&quot;b&quot;:1}}&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span><span class="s1">&#39;.. | numbers&#39;</span><span class="w">       </span><span class="c1"># все числа (1)</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;{&quot;a&quot;:{&quot;b&quot;:1}}&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span><span class="s1">&#39;.. | scalars&#39;</span><span class="w">       </span><span class="c1"># все скаляры</span>
+</code></pre></div>
+
+<h3 id="groupby-sort-unique">group_by / sort / unique<a class="headerlink" href="#groupby-sort-unique" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;[{&quot;c&quot;:&quot;NYC&quot;,&quot;n&quot;:1},{&quot;c&quot;:&quot;NYC&quot;,&quot;n&quot;:2},{&quot;c&quot;:&quot;LA&quot;,&quot;n&quot;:3}]&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>jq<span class="w"> </span><span class="s1">&#39;group_by(.c)&#39;</span>
+<span class="c1"># [</span>
+<span class="c1">#   [{&quot;c&quot;:&quot;LA&quot;,&quot;n&quot;:3}],</span>
+<span class="c1">#   [{&quot;c&quot;:&quot;NYC&quot;,&quot;n&quot;:1},{&quot;c&quot;:&quot;NYC&quot;,&quot;n&quot;:2}]</span>
+<span class="c1"># ]</span>
+
+<span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;[3,1,2]&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span><span class="s1">&#39;sort&#39;</span><span class="w">                     </span><span class="c1"># [1,2,3]</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;[3,1,2]&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span><span class="s1">&#39;sort | reverse&#39;</span><span class="w">           </span><span class="c1"># [3,2,1]</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;[{&quot;a&quot;:3},{&quot;a&quot;:1}]&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span><span class="s1">&#39;sort_by(.a)&#39;</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;[1,2,2,3,3,3]&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span><span class="s1">&#39;unique&#39;</span><span class="w">             </span><span class="c1"># [1,2,3]</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;[{&quot;id&quot;:1},{&quot;id&quot;:1}]&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span><span class="s1">&#39;unique_by(.id)&#39;</span>
+</code></pre></div>
+
+<h3 id="any-all">any / all<a class="headerlink" href="#any-all" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;[true,false,true]&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span><span class="s1">&#39;any&#39;</span><span class="w">            </span><span class="c1"># true</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;[true,false,true]&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span><span class="s1">&#39;all&#39;</span><span class="w">            </span><span class="c1"># false</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;[1,2,3]&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span><span class="s1">&#39;any(. &gt; 2)&#39;</span><span class="w">               </span><span class="c1"># true</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;[1,2,3]&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span><span class="s1">&#39;all(. &gt; 0)&#39;</span><span class="w">               </span><span class="c1"># true</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;[{&quot;age&quot;:30},{&quot;age&quot;:25}]&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span><span class="s1">&#39;any(.age &gt; 28)&#39;</span><span class="w">   </span><span class="c1"># true</span>
+</code></pre></div>
+
+<h3 id="limit-first-last-nth">limit / first / last / nth<a class="headerlink" href="#limit-first-last-nth" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;[1,2,3,4,5]&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span><span class="s1">&#39;limit(2; .[])&#39;</span><span class="w">        </span><span class="c1"># 1 \n 2</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;[1,2,3]&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span><span class="s1">&#39;first&#39;</span><span class="w">                    </span><span class="c1"># 1</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;[1,2,3]&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span><span class="s1">&#39;last&#39;</span><span class="w">                     </span><span class="c1"># 3</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;[1,2,3]&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span><span class="s1">&#39;nth(1)&#39;</span><span class="w">                   </span><span class="c1"># 2 (индекс 1)</span>
+</code></pre></div>
+
+<hr />
+<h2 id="переменные-и-функции">🌍 Переменные и функции<a class="headerlink" href="#переменные-и-функции" title="Ссылка">#</a></h2>
+<h3 id="переменные-через-arg-argjson">Переменные (через &ndash;arg/&ndash;argjson)<a class="headerlink" href="#переменные-через-arg-argjson" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>jq<span class="w"> </span>--arg<span class="w"> </span>name<span class="w"> </span><span class="s2">&quot;Alice&quot;</span><span class="w"> </span><span class="s1">&#39;.name = $name&#39;</span><span class="w"> </span><span class="o">&lt;&lt;&lt;</span><span class="w"> </span><span class="s1">&#39;{}&#39;</span>
+<span class="c1"># {&quot;name&quot;:&quot;Alice&quot;}</span>
+
+jq<span class="w"> </span>--argjson<span class="w"> </span>age<span class="w"> </span><span class="m">30</span><span class="w"> </span><span class="s1">&#39;.age = $age&#39;</span><span class="w"> </span><span class="o">&lt;&lt;&lt;</span><span class="w"> </span><span class="s1">&#39;{}&#39;</span>
+<span class="c1"># {&quot;age&quot;:30}</span>
+
+<span class="c1"># Из shell-переменной</span>
+<span class="nv">USER_NAME</span><span class="o">=</span><span class="s2">&quot;Bob&quot;</span>
+jq<span class="w"> </span>--arg<span class="w"> </span>u<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$USER_NAME</span><span class="s2">&quot;</span><span class="w"> </span><span class="s1">&#39;.user = $u&#39;</span><span class="w"> </span><span class="o">&lt;&lt;&lt;</span><span class="w"> </span><span class="s1">&#39;{}&#39;</span>
+
+<span class="c1"># Сравнение</span>
+jq<span class="w"> </span>--arg<span class="w"> </span>q<span class="w"> </span><span class="s2">&quot;alice&quot;</span><span class="w"> </span><span class="s1">&#39;.[] | select(.name == $q)&#39;</span><span class="w"> </span>users.json
+</code></pre></div>
+
+<h3 id="внутренние-переменные-with-foreach-reduce">Внутренние переменные (with foreach/reduce)<a class="headerlink" href="#внутренние-переменные-with-foreach-reduce" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># reduce</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;[1,2,3,4]&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span><span class="s1">&#39;reduce .[] as $x (0; . + $x)&#39;</span>
+<span class="c1"># 10  (сумма)</span>
+
+<span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;[1,2,3,4]&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span><span class="s1">&#39;reduce .[] as $x (0; . + $x) / length&#39;</span>
+<span class="c1"># среднее</span>
+
+<span class="c1"># foreach (с сохранением состояния)</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;[1,2,3]&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span><span class="s1">&#39;foreach .[] as $x (0; . + $x; {item: $x, sum: .})&#39;</span>
+</code></pre></div>
+
+<h3 id="пользовательские-функции">Пользовательские функции<a class="headerlink" href="#пользовательские-функции" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Определить функцию</span>
+jq<span class="w"> </span><span class="s1">&#39;def double: . * 2; double&#39;</span><span class="w"> </span><span class="o">&lt;&lt;&lt;</span><span class="w"> </span><span class="m">5</span>
+<span class="c1"># 10</span>
+
+<span class="c1"># С аргументами</span>
+jq<span class="w"> </span><span class="s1">&#39;def addn(n): . + n; addn(10)&#39;</span><span class="w"> </span><span class="o">&lt;&lt;&lt;</span><span class="w"> </span><span class="m">5</span>
+<span class="c1"># 15</span>
+
+<span class="c1"># В файле</span>
+<span class="c1"># ~/.jq или -f filters.jq</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;def greet: &quot;Hello &quot; + .;&#39;</span><span class="w"> </span>&gt;<span class="w"> </span>/tmp/filters.jq
+jq<span class="w"> </span>-f<span class="w"> </span>/tmp/filters.jq<span class="w"> </span><span class="o">&lt;&lt;&lt;</span><span class="w"> </span><span class="s1">&#39;&quot;Alice&quot;&#39;</span>
+<span class="c1"># &quot;Hello Alice&quot;</span>
+</code></pre></div>
+
+<hr />
+<h2 id="практические-примеры">📊 Практические примеры<a class="headerlink" href="#практические-примеры" title="Ссылка">#</a></h2>
+<h3 id="1-извлечь-поле-из-массива-объектов">1. Извлечь поле из массива объектов<a class="headerlink" href="#1-извлечь-поле-из-массива-объектов" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># users.json: [{&quot;name&quot;:&quot;Alice&quot;,&quot;age&quot;:30},...]</span>
+jq<span class="w"> </span><span class="s1">&#39;.[].name&#39;</span><span class="w"> </span>users.json<span class="w">                 </span><span class="c1"># имена (каждый с новой строки)</span>
+jq<span class="w"> </span><span class="s1">&#39;[.[].name]&#39;</span><span class="w"> </span>users.json<span class="w">               </span><span class="c1"># массив имён</span>
+jq<span class="w"> </span>-r<span class="w"> </span><span class="s1">&#39;.[].name&#39;</span><span class="w"> </span>users.json<span class="w">              </span><span class="c1"># без кавычек</span>
+jq<span class="w"> </span><span class="s1">&#39;map(.name)&#39;</span><span class="w"> </span>users.json<span class="w">               </span><span class="c1"># массив имён</span>
+</code></pre></div>
+
+<h3 id="2-фильтрация-извлечение">2. Фильтрация + извлечение<a class="headerlink" href="#2-фильтрация-извлечение" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Все активные пользователи, только имя и email</span>
+jq<span class="w"> </span><span class="s1">&#39;.[] | select(.active == true) | {name, email}&#39;</span><span class="w"> </span>users.json
+
+<span class="c1"># С группировкой</span>
+jq<span class="w"> </span>-r<span class="w"> </span><span class="s1">&#39;.[] | &quot;\(.name)\t\(.age)&quot;&#39;</span><span class="w"> </span>users.json<span class="w">   </span><span class="c1"># TSV</span>
+
+<span class="c1"># Сортировка по возрасту, топ-5</span>
+jq<span class="w"> </span><span class="s1">&#39;[.[] | {name, age}] | sort_by(-.age) | .[0:5]&#39;</span><span class="w"> </span>users.json
+</code></pre></div>
+
+<h3 id="3-группировка-и-агрегация">3. Группировка и агрегация<a class="headerlink" href="#3-группировка-и-агрегация" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Сумма по городу</span>
+jq<span class="w"> </span><span class="s1">&#39;group_by(.city) | map({city: .[0].city, total: map(.amount) | add})&#39;</span><span class="w"> </span>sales.json
+
+<span class="c1"># Среднее по категории</span>
+jq<span class="w"> </span><span class="s1">&#39;group_by(.category) | map({cat: .[0].category, avg: (map(.price) | add / length)})&#39;</span><span class="w"> </span>products.json
+</code></pre></div>
+
+<h3 id="4-обработка-api-ответа">4. Обработка API-ответа<a class="headerlink" href="#4-обработка-api-ответа" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># GitHub API: получить звёзды топовых репозиториев</span>
+curl<span class="w"> </span>-s<span class="w"> </span>https://api.github.com/search/repositories?q<span class="o">=</span>stars:&gt;100000<span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>jq<span class="w"> </span><span class="s1">&#39;.items[] | {name, stars: .stargazers_count}&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>head
+
+<span class="c1"># Только имена</span>
+curl<span class="w"> </span>-s<span class="w"> </span>https://api.github.com/users/torvalds/repos<span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>jq<span class="w"> </span>-r<span class="w"> </span><span class="s1">&#39;.[].full_name&#39;</span>
+
+<span class="c1"># Топ-5 по звёздам</span>
+curl<span class="w"> </span>-s<span class="w"> </span>https://api.github.com/users/torvalds/repos<span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>jq<span class="w"> </span>-r<span class="w"> </span><span class="s1">&#39;sort_by(-.stargazers_count) | .[0:5] | .[].full_name&#39;</span>
+</code></pre></div>
+
+<h3 id="5-docker-inspect">5. docker inspect<a class="headerlink" href="#5-docker-inspect" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># IP-адрес контейнера</span>
+docker<span class="w"> </span>inspect<span class="w"> </span>&lt;container&gt;<span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span><span class="s1">&#39;.[0].NetworkSettings.IPAddress&#39;</span>
+
+<span class="c1"># Все порты</span>
+docker<span class="w"> </span>inspect<span class="w"> </span>&lt;container&gt;<span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span><span class="s1">&#39;.[0].NetworkSettings.Ports&#39;</span>
+
+<span class="c1"># Список всех контейнеров: имя + статус</span>
+docker<span class="w"> </span>ps<span class="w"> </span>-a<span class="w"> </span>--format<span class="w"> </span><span class="s1">&#39;{{json .}}&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span>-r<span class="w"> </span><span class="s1">&#39;.Names + &quot; | &quot; + .Status&#39;</span>
+</code></pre></div>
+
+<h3 id="6-kubectl">6. kubectl<a class="headerlink" href="#6-kubectl" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Все pod&#39;ы: имя + статус</span>
+kubectl<span class="w"> </span>get<span class="w"> </span>pods<span class="w"> </span>-o<span class="w"> </span>json<span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span>-r<span class="w"> </span><span class="s1">&#39;.items[] | .metadata.name + &quot; &quot; + .status.phase&#39;</span>
+
+<span class="c1"># Внешние IP всех сервисов</span>
+kubectl<span class="w"> </span>get<span class="w"> </span>svc<span class="w"> </span>-o<span class="w"> </span>json<span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span>-r<span class="w"> </span><span class="s1">&#39;.items[] | .metadata.name + &quot;: &quot; + (.status.loadBalancer.ingress[0].ip // &quot;pending&quot;)&#39;</span>
+</code></pre></div>
+
+<h3 id="7-логи-в-json-частый-случай-в-микросервисах">7. Логи в JSON (частый случай в микросервисах)<a class="headerlink" href="#7-логи-в-json-частый-случай-в-микросервисах" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># log line: {&quot;level&quot;:&quot;error&quot;,&quot;msg&quot;:&quot;...&quot;,&quot;time&quot;:&quot;...&quot;}</span>
+cat<span class="w"> </span>app.log<span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span><span class="s1">&#39;select(.level == &quot;error&quot;) | .msg&#39;</span>
+cat<span class="w"> </span>app.log<span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span>-c<span class="w"> </span><span class="s1">&#39;select(.level == &quot;error&quot;)&#39;</span>
+cat<span class="w"> </span>app.log<span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span><span class="s1">&#39;select(.status &gt;= 500) | {time, msg, status}&#39;</span>
+</code></pre></div>
+
+<h3 id="8-конвертация-csv-json">8. Конвертация CSV → JSON<a class="headerlink" href="#8-конвертация-csv-json" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># С rq (rust q) или mlr</span>
+mlr<span class="w"> </span>--c2j<span class="w"> </span>cat<span class="w"> </span>data.csv<span class="w"> </span>&gt;<span class="w"> </span>data.json
+
+<span class="c1"># Python</span>
+python<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;import csv,json; print(json.dumps(list(csv.DictReader(open(&#39;data.csv&#39;)))))&quot;</span>
+</code></pre></div>
+
+<h3 id="9-объединение-json-файлов">9. Объединение JSON-файлов<a class="headerlink" href="#9-объединение-json-файлов" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># slurp: считать все объекты в массив</span>
+jq<span class="w"> </span>-s<span class="w"> </span><span class="s1">&#39;.&#39;</span><span class="w"> </span>*.json<span class="w"> </span>&gt;<span class="w"> </span>merged.json
+
+<span class="c1"># Объединить массивы</span>
+jq<span class="w"> </span>-s<span class="w"> </span><span class="s1">&#39;add&#39;</span><span class="w"> </span>file1.json<span class="w"> </span>file2.json
+jq<span class="w"> </span>-s<span class="w"> </span><span class="s1">&#39;map(.users) | add&#39;</span><span class="w"> </span>*.json
+
+<span class="c1"># Map-reduce-style</span>
+jq<span class="w"> </span>-s<span class="w"> </span><span class="s1">&#39;map(.count) | add&#39;</span><span class="w"> </span>*.json<span class="w">   </span><span class="c1"># сумма всех count</span>
+</code></pre></div>
+
+<h3 id="10-найти-все-совпадения-во-вложенной-структуре">10. Найти все совпадения во вложенной структуре<a class="headerlink" href="#10-найти-все-совпадения-во-вложенной-структуре" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Все значения поля &quot;id&quot; на любой глубине</span>
+jq<span class="w"> </span><span class="s1">&#39;[.. | objects | .id? // empty]&#39;</span><span class="w"> </span>data.json
+
+<span class="c1"># Все email&#39;ы</span>
+jq<span class="w"> </span><span class="s1">&#39;[.. | objects | .email? // empty] | unique&#39;</span><span class="w"> </span>users.json
+</code></pre></div>
+
+<hr />
+<h2 id="python-json">🐍 Python + JSON<a class="headerlink" href="#python-json" title="Ссылка">#</a></h2>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+
+<span class="c1"># Чтение</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">json_string</span><span class="p">)</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;file.json&quot;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+
+<span class="c1"># Запись</span>
+<span class="n">json_str</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">ensure_ascii</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;out.json&quot;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">ensure_ascii</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="c1"># Из CLI</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">([</span><span class="s2">&quot;jc&quot;</span><span class="p">,</span> <span class="s2">&quot;ls&quot;</span><span class="p">],</span> <span class="n">capture_output</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">stdout</span><span class="p">)</span>
+</code></pre></div>
+
+<h3 id="modern-python-pydantic-msgspec">Modern Python: pydantic / msgspec<a class="headerlink" href="#modern-python-pydantic-msgspec" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">pydantic</span><span class="w"> </span><span class="kn">import</span> <span class="n">BaseModel</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">User</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">age</span><span class="p">:</span> <span class="nb">int</span>
+
+<span class="n">user</span> <span class="o">=</span> <span class="n">User</span><span class="o">.</span><span class="n">model_validate_json</span><span class="p">(</span><span class="s1">&#39;{&quot;name&quot;:&quot;Alice&quot;,&quot;age&quot;:30}&#39;</span><span class="p">)</span>
+<span class="n">user</span><span class="o">.</span><span class="n">name</span>   <span class="c1"># &#39;Alice&#39;</span>
+
+<span class="c1"># Быстрее: msgspec</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">msgspec</span>
+<span class="n">user</span> <span class="o">=</span> <span class="n">msgspec</span><span class="o">.</span><span class="n">json</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;{&quot;name&quot;:&quot;Alice&quot;,&quot;age&quot;:30}&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="n">User</span><span class="p">)</span>
+</code></pre></div>
+
+<hr />
+<h2 id="javascript-json">🌐 JavaScript + JSON<a class="headerlink" href="#javascript-json" title="Ссылка">#</a></h2>
+<div class="highlight"><pre><span></span><code><span class="c1">// Парсинг</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="s1">&#39;{&quot;name&quot;:&quot;Alice&quot;}&#39;</span><span class="p">);</span>
+<span class="nx">data</span><span class="p">.</span><span class="nx">name</span><span class="p">;</span><span class="w">                            </span><span class="c1">// &quot;Alice&quot;</span>
+
+<span class="c1">// Сериализация</span>
+<span class="nb">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">({</span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Alice&quot;</span><span class="p">});</span><span class="w">      </span><span class="c1">// &#39;{&quot;name&quot;:&quot;Alice&quot;}&#39;</span>
+<span class="nb">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">({</span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Alice&quot;</span><span class="p">},</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w"> </span><span class="mf">2</span><span class="p">);</span><span class="w">  </span><span class="c1">// pretty-print</span>
+
+<span class="c1">// JSON с regex-подобной фильтрацией</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">active</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">data</span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nx">u</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">u</span><span class="p">.</span><span class="nx">active</span><span class="p">);</span>
+</code></pre></div>
+
+<hr />
+<h2 id="альтернативы-jq">🛠️ Альтернативы jq<a class="headerlink" href="#альтернативы-jq" title="Ссылка">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Инструмент</th>
+<th>Особенность</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>jq</strong></td>
+<td>Классика, де-факто стандарт</td>
+</tr>
+<tr>
+<td><strong>yq</strong></td>
+<td>Как jq, но для YAML/XML/TOML</td>
+</tr>
+<tr>
+<td><strong>dasel</strong></td>
+<td>Универсальный: JSON/YAML/TOML/XML</td>
+</tr>
+<tr>
+<td><strong>jaq</strong></td>
+<td>Быстрее jq (на Rust)</td>
+</tr>
+<tr>
+<td><strong>gq</strong></td>
+<td>Go-версия</td>
+</tr>
+<tr>
+<td><strong>rq</strong></td>
+<td>Rust, поддерживает выражения</td>
+</tr>
+<tr>
+<td><strong>jc</strong></td>
+<td>Конвертер вывода команд в JSON</td>
+</tr>
+<tr>
+<td><strong>jid</strong></td>
+<td>Интерактивный jq (с автодополнением)</td>
+</tr>
+<tr>
+<td><strong>fx</strong></td>
+<td>Интерактивный TUI-просмотрщик JSON</td>
+</tr>
+</tbody>
+</table>
+<h3 id="jc-вывод-команд-в-json">jc — вывод команд в JSON<a class="headerlink" href="#jc-вывод-команд-в-json" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>jc<span class="w"> </span>ls<span class="w"> </span>-la<span class="w">                            </span><span class="c1"># список файлов как JSON</span>
+jc<span class="w"> </span>ifconfig<span class="w">                          </span><span class="c1"># сетевые интерфейсы JSON</span>
+jc<span class="w"> </span>ps<span class="w"> </span>aux<span class="w">                            </span><span class="c1"># процессы JSON</span>
+jc<span class="w"> </span>df<span class="w"> </span>-h<span class="w">                             </span><span class="c1"># диски JSON</span>
+</code></pre></div>
+
+<h3 id="fx-tui-для-json">fx — TUI для JSON<a class="headerlink" href="#fx-tui-для-json" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>fx<span class="w"> </span>data.json<span class="w">                         </span><span class="c1"># интерактивный просмотр</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;{&quot;a&quot;:1}&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>fx<span class="w">                  </span><span class="c1"># через пайп</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;{&quot;a&quot;:1}&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>fx<span class="w"> </span><span class="s1">&#39;.a&#39;</span><span class="w">             </span><span class="c1"># фильтр</span>
+</code></pre></div>
+
+<hr />
+<h2 id="частые-ошибки">🪤 Частые ошибки<a class="headerlink" href="#частые-ошибки" title="Ссылка">#</a></h2>
+<ol>
+<li><strong>Одинарные кавычки</strong> — <code>jq '.name'</code> (внешние), внутри JSON — двойные.</li>
+<li><strong>Pipe порядок</strong> — <code>.users[].name</code> ≠ <code>.name</code> после <code>.users[]</code> (хотя результат тот же).</li>
+<li><strong><code>map(select(...))</code></strong> — для фильтрации массива; <code>select</code> без <code>map</code> выводит каждый отдельно.</li>
+<li><strong><code>// "default"</code></strong> — оператор альтернативы, не деление.</li>
+<li><strong>Доступ к полю с дефисом</strong> — <code>.["my-key"]</code>, не <code>.my-key</code> (вычитание!).</li>
+<li><strong>Типизация</strong> — <code>length</code> для строки/массива/объекта считает разное.</li>
+<li><strong><code>--arg</code> vs <code>--argjson</code></strong> — первое строка, второе — JSON-значение.</li>
+<li><strong><code>-r</code> для сырого вывода</strong> — иначе строки в кавычках.</li>
+<li><strong>Файл vs пайп</strong> — <code>jq . file.json</code> или <code>cat file | jq .</code>, оба работают.</li>
+<li><strong>JSON trailing comma</strong> — запрещена, упадёт парсинг.</li>
+</ol>
+<hr />
+<h2 id="полезные-ссылки">🔗 Полезные ссылки<a class="headerlink" href="#полезные-ссылки" title="Ссылка">#</a></h2>
+<ul>
+<li>jq manual: https://jqlang.github.io/jq/manual</li>
+<li>jq playground: https://jqplay.org</li>
+<li>jq tutorial: https://jqplay.org/s/byjY3oZEmbj</li>
+<li>awesome-jq: https://github.com/fiatjaf/awesome-jq</li>
+<li>dasel: https://github.com/TomWright/dasel</li>
+<li>fx: https://github.com/antonmedv/fx</li>
+<li>jc: https://github.com/kellyjonbrazil/jc</li>
+<li>JSON specification: https://www.json.org</li>
+<li>JSON Formatter (Chrome): https://chrome.google.com/webstore/detail/json-formatter</li>
+</ul>
+<hr />
+<h2 id="полезные-советы">💡 Полезные советы<a class="headerlink" href="#полезные-советы" title="Ссылка">#</a></h2>
+<ol>
+<li><strong><code>jq '.'</code></strong> — самое простое: pretty-print (форматирование).</li>
+<li><strong><code>-r</code></strong> — для вывода строк без кавычек (использовать в скриптах).</li>
+<li><strong><code>.[].field</code></strong> — достать поле из каждого элемента массива.</li>
+<li><strong><code>map(select(...))</code></strong> — фильтрация массива.</li>
+<li><strong><code>-s</code> (slurp)</strong> — объединить несколько JSON-документов в массив.</li>
+<li><strong><code>--arg</code>/<code>--argjson</code></strong> — для передачи переменных из shell.</li>
+<li><strong><code>//</code> (альтернатива)</strong> — значения по умолчанию.</li>
+<li><strong><code>to_entries</code> / <code>from_entries</code></strong> — для работы с объектами как с массивами.</li>
+<li><strong><code>..</code></strong> — рекурсивный поиск по всем уровням.</li>
+<li><strong><code>@base64</code>, <code>@uri</code></strong> — кодирование внутри jq.</li>
+<li><strong><code>jq -r '.[] | "@\(.name)"'</code></strong> — генерация строк.</li>
+<li><strong>fx</strong> — интерактивный просмотр JSON (намного удобнее для исследования).</li>
+<li><strong>jc</strong> — превращает вывод команд в JSON.</li>
+<li><strong><code>jq -e</code></strong> — exit code 1 если null/false (для скриптов).</li>
+<li><strong>yq</strong> — для YAML, тот же синтаксис.</li>
+</ol>
+<hr />
+<p><em>Сгенерировано как шпаргалка. jq мощный и неочевидный —
+углубляйтесь через https://jqplay.org и https://jqlang.github.io/jq/manual</em></p>
+    </article>
+    <nav class="pagination">
+      <a class="pager prev" href="regex.html">← Регулярные выражения</a>
+      <a class="pager next" href="awk-sed.html">awk / sed →</a>
+    </nav>
+  </main>
+
+  <aside class="toc">
+    <details open>
+      <summary>📑 Оглавление</summary>
+      <div class="toc-list">
+<div class="toc">
+<ul>
+<li><a href="#jq-json-шпаргалка">🔧 jq + JSON — шпаргалка</a><ul>
+<li><a href="#главные-понятия-json">🔑 Главные понятия JSON</a><ul>
+<li><a href="#синтаксис">Синтаксис</a></li>
+<li><a href="#правила">Правила</a></li>
+</ul>
+</li>
+<li><a href="#jq-установка-и-базовое-использование">🚀 jq — установка и базовое использование</a><ul>
+<li><a href="#полезные-флаги">Полезные флаги</a></li>
+</ul>
+</li>
+<li><a href="#базовые-фильтры">🎯 Базовые фильтры</a><ul>
+<li><a href="#идентичность-и-доступ">Идентичность и доступ</a></li>
+<li><a href="#массивы">Массивы</a></li>
+<li><a href="#итерация-по-массиву">Итерация по массиву</a></li>
+</ul>
+</li>
+<li><a href="#встроенные-функции">🔧 Встроенные функции</a><ul>
+<li><a href="#строковые">Строковые</a></li>
+<li><a href="#математические">Математические</a></li>
+<li><a href="#типы">Типы</a></li>
+<li><a href="#условия">Условия</a></li>
+<li><a href="#альтернативы">Альтернативы (//)</a></li>
+</ul>
+</li>
+<li><a href="#создание-объектов-construction">📦 Создание объектов (construction)</a></li>
+<li><a href="#pipe-и-продвинутые-фильтры">🔁 Pipe и продвинутые фильтры</a><ul>
+<li><a href="#pipe">Pipe |</a></li>
+<li><a href="#select-фильтрация">select (фильтрация)</a></li>
+<li><a href="#map-select-recurse">map / select / recurse</a></li>
+<li><a href="#groupby-sort-unique">group_by / sort / unique</a></li>
+<li><a href="#any-all">any / all</a></li>
+<li><a href="#limit-first-last-nth">limit / first / last / nth</a></li>
+</ul>
+</li>
+<li><a href="#переменные-и-функции">🌍 Переменные и функции</a><ul>
+<li><a href="#переменные-через-arg-argjson">Переменные (через &ndash;arg/&ndash;argjson)</a></li>
+<li><a href="#внутренние-переменные-with-foreach-reduce">Внутренние переменные (with foreach/reduce)</a></li>
+<li><a href="#пользовательские-функции">Пользовательские функции</a></li>
+</ul>
+</li>
+<li><a href="#практические-примеры">📊 Практические примеры</a><ul>
+<li><a href="#1-извлечь-поле-из-массива-объектов">1. Извлечь поле из массива объектов</a></li>
+<li><a href="#2-фильтрация-извлечение">2. Фильтрация + извлечение</a></li>
+<li><a href="#3-группировка-и-агрегация">3. Группировка и агрегация</a></li>
+<li><a href="#4-обработка-api-ответа">4. Обработка API-ответа</a></li>
+<li><a href="#5-docker-inspect">5. docker inspect</a></li>
+<li><a href="#6-kubectl">6. kubectl</a></li>
+<li><a href="#7-логи-в-json-частый-случай-в-микросервисах">7. Логи в JSON (частый случай в микросервисах)</a></li>
+<li><a href="#8-конвертация-csv-json">8. Конвертация CSV → JSON</a></li>
+<li><a href="#9-объединение-json-файлов">9. Объединение JSON-файлов</a></li>
+<li><a href="#10-найти-все-совпадения-во-вложенной-структуре">10. Найти все совпадения во вложенной структуре</a></li>
+</ul>
+</li>
+<li><a href="#python-json">🐍 Python + JSON</a><ul>
+<li><a href="#modern-python-pydantic-msgspec">Modern Python: pydantic / msgspec</a></li>
+</ul>
+</li>
+<li><a href="#javascript-json">🌐 JavaScript + JSON</a></li>
+<li><a href="#альтернативы-jq">🛠️ Альтернативы jq</a><ul>
+<li><a href="#jc-вывод-команд-в-json">jc — вывод команд в JSON</a></li>
+<li><a href="#fx-tui-для-json">fx — TUI для JSON</a></li>
+</ul>
+</li>
+<li><a href="#частые-ошибки">🪤 Частые ошибки</a></li>
+<li><a href="#полезные-ссылки">🔗 Полезные ссылки</a></li>
+<li><a href="#полезные-советы">💡 Полезные советы</a></li>
+</ul>
+</li>
+</ul>
+</div>
+
+      </div>
+    </details>
+  </aside>
+</div>
+
+<button class="back-top" id="backTop" aria-label="Наверх">↑</button>
+
+<script src="assets/search.js"></script>
+<script src="assets/page.js"></script>
+</body>
+</html>

@@ -1,0 +1,1068 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GitLab CI / GitHub Actions — Шпаргалки</title>
+<link rel="stylesheet" href="assets/style.css">
+<link rel="stylesheet" href="assets/pygments.css">
+</head>
+<body>
+<div class="layout">
+  <aside class="sidebar">
+    <a href="index.html" class="brand">📌 Шпаргалки</a>
+    <nav class="nav">
+<a href="yazi.html" class="nav-item"><span class="nav-ico">📦</span>Yazi</a>
+<a href="neovim.html" class="nav-item"><span class="nav-ico">📘</span>Neovim (LazyVim)</a>
+<a href="niri.html" class="nav-item"><span class="nav-ico">🪟</span>Niri</a>
+<a href="tmux.html" class="nav-item"><span class="nav-ico">🪟</span>Tmux</a>
+<a href="bash.html" class="nav-item"><span class="nav-ico">🐚</span>Bash</a>
+<a href="git.html" class="nav-item"><span class="nav-ico">🔀</span>Git</a>
+<a href="terminal.html" class="nav-item"><span class="nav-ico">🖥️</span>Терминал Linux</a>
+<a href="powershell.html" class="nav-item"><span class="nav-ico">💻</span>PowerShell</a>
+<a href="cmd.html" class="nav-item"><span class="nav-ico">🪟</span>CMD (cmd.exe)</a>
+<a href="python.html" class="nav-item"><span class="nav-ico">🐍</span>Python</a>
+<a href="systemd.html" class="nav-item"><span class="nav-ico">⚙️</span>systemd</a>
+<a href="ssh.html" class="nav-item"><span class="nav-ico">🔐</span>SSH</a>
+<a href="make-cmake.html" class="nav-item"><span class="nav-ico">🔨</span>Make / CMake</a>
+<a href="docker.html" class="nav-item"><span class="nav-ico">🐳</span>Docker</a>
+<a href="pacman.html" class="nav-item"><span class="nav-ico">📦</span>pacman / yay / paru</a>
+<a href="spark.html" class="nav-item"><span class="nav-ico">⚡</span>Apache Spark / PySpark</a>
+<a href="markdown.html" class="nav-item"><span class="nav-ico">📝</span>Markdown</a>
+<a href="regex.html" class="nav-item"><span class="nav-ico">🔍</span>Регулярные выражения</a>
+<a href="jq-json.html" class="nav-item"><span class="nav-ico">🔧</span>jq + JSON</a>
+<a href="awk-sed.html" class="nav-item"><span class="nav-ico">✂️</span>awk / sed</a>
+<a href="airflow.html" class="nav-item"><span class="nav-ico">🌪️</span>Apache Airflow</a>
+<a href="http-curl.html" class="nav-item"><span class="nav-ico">🌐</span>HTTP / curl</a>
+<a href="yaml.html" class="nav-item"><span class="nav-ico">📄</span>YAML</a>
+<a href="vscode.html" class="nav-item"><span class="nav-ico">💻</span>VS Code</a>
+<a href="cron.html" class="nav-item"><span class="nav-ico">⏰</span>cron</a>
+<a href="fzf-zoxide.html" class="nav-item"><span class="nav-ico">🔎</span>fzf + zoxide</a>
+<a href="minikube-k8s.html" class="nav-item"><span class="nav-ico">☸️</span>Minikube / Kubernetes</a>
+<a href="cicd.html" class="nav-item active"><span class="nav-ico">🦊</span>GitLab CI / GitHub Actions</a>
+<a href="nginx.html" class="nav-item"><span class="nav-ico">🌐</span>nginx</a>
+<a href="dbt.html" class="nav-item"><span class="nav-ico">🔧</span>dbt</a>
+<a href="kafka.html" class="nav-item"><span class="nav-ico">🐘</span>Apache Kafka</a>
+<a href="prometheus-grafana.html" class="nav-item"><span class="nav-ico">📊</span>Prometheus / Grafana</a>
+<a href="iceberg-nessie.html" class="nav-item"><span class="nav-ico">🧊</span>Iceberg / Nessie</a>
+<a href="impala.html" class="nav-item"><span class="nav-ico">🐬</span>Apache Impala</a>
+<a href="terraform.html" class="nav-item"><span class="nav-ico">🏗️</span>Terraform</a>
+<a href="linux-internals.html" class="nav-item"><span class="nav-ico">🐧</span>Linux Internals</a>
+<a href="miscellaneous.html" class="nav-item"><span class="nav-ico">🧰</span>Miscellaneous</a>
+<a href="python-automation-libs.html" class="nav-item"><span class="nav-ico">🐍</span>Python: авт-ция (10 libs)</a>
+<a href="eza.html" class="nav-item"><span class="nav-ico">🌈</span>eza</a>
+<a href="dbeaver.html" class="nav-item"><span class="nav-ico">🗄️</span>DBeaver</a>
+<a href="zcode.html" class="nav-item"><span class="nav-ico">🤖</span>ZCode</a>
+<a href="warp.html" class="nav-item"><span class="nav-ico">🚀</span>Warp</a>
+<a href="agentic-ai-dev.html" class="nav-item"><span class="nav-ico">🤝</span>Агентная разработка с ИИ</a>
+    </nav>
+  </aside>
+
+  <main class="content">
+    <article>
+<h1 id="gitlab-ci-github-actions-шпаргалка-по-ci-cd">🦊 GitLab CI / GitHub Actions — шпаргалка по CI/CD<a class="headerlink" href="#gitlab-ci-github-actions-шпаргалка-по-ci-cd" title="Ссылка">#</a></h1>
+<blockquote>
+<p><strong>GitLab CI/CD</strong> — встроенный CI/CD в GitLab (файл <code>.gitlab-ci.yml</code>).
+<strong>GitHub Actions</strong> — CI/CD для GitHub (<code>.github/workflows/*.yml</code>).
+Документация: https://docs.gitlab.com/ee/ci · https://docs.github.com/actions</p>
+</blockquote>
+<hr />
+<h1 id="часть-1-gitlab-ci-cd">🦊 ЧАСТЬ 1. GitLab CI/CD<a class="headerlink" href="#часть-1-gitlab-ci-cd" title="Ссылка">#</a></h1>
+<h2 id="главные-понятия">🔑 Главные понятия<a class="headerlink" href="#главные-понятия" title="Ссылка">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Термин</th>
+<th>Что значит</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Pipeline</strong></td>
+<td>Конвейер (набор jobs)</td>
+</tr>
+<tr>
+<td><strong>Stage</strong></td>
+<td>Этап (build → test → deploy)</td>
+</tr>
+<tr>
+<td><strong>Job</strong></td>
+<td>Одна задача (внутри stage)</td>
+</tr>
+<tr>
+<td><strong>Runner</strong></td>
+<td>Машина, выполняющая job&rsquo;ы</td>
+</tr>
+<tr>
+<td><strong>Executor</strong></td>
+<td>Тип runner&rsquo;а (docker, shell, k8s)</td>
+</tr>
+<tr>
+<td><strong>Artifact</strong></td>
+<td>Файлы между jobs (передаются)</td>
+</tr>
+<tr>
+<td><strong>Cache</strong></td>
+<td>Кэш между pipeline&rsquo;ами</td>
+</tr>
+<tr>
+<td><strong>Variable</strong></td>
+<td>Переменная окружения</td>
+</tr>
+<tr>
+<td><strong>Environment</strong></td>
+<td>Среда развертывания (dev/prod)</td>
+</tr>
+<tr>
+<td><strong>Manual</strong></td>
+<td>Ручной запуск job&rsquo;а</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="структура-gitlab-ci-yml">📝 Структура <code>.gitlab-ci.yml</code><a class="headerlink" href="#структура-gitlab-ci-yml" title="Ссылка">#</a></h2>
+<div class="highlight"><pre><span></span><code><span class="c1"># Глобальные настройки</span>
+<span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">python:3.12-slim</span>
+
+<span class="nt">stages</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">build</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">test</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">deploy</span>
+
+<span class="nt">variables</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">PIP_CACHE_DIR</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;$CI_PROJECT_DIR/.cache/pip&quot;</span>
+
+<span class="nt">cache</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">paths</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">.cache/pip</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">venv/</span>
+
+<span class="nt">before_script</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">python -m venv venv</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">source venv/bin/activate</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pip install -r requirements.txt</span>
+
+<span class="c1"># ── Job: сборка ────────────────────────────────────</span>
+<span class="nt">build</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">stage</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">build</span>
+<span class="w">  </span><span class="nt">script</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">python setup.py build</span>
+<span class="w">  </span><span class="nt">artifacts</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">paths</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">build/</span>
+<span class="w">    </span><span class="nt">expire_in</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1 week</span>
+
+<span class="c1"># ── Job: тесты ─────────────────────────────────────</span>
+<span class="nt">test:unit</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">stage</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">test</span>
+<span class="w">  </span><span class="nt">script</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pytest tests/unit -v --junitxml=report.xml</span>
+<span class="w">  </span><span class="nt">artifacts</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">reports</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">junit</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">report.xml</span>
+
+<span class="nt">test:lint</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">stage</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">test</span>
+<span class="w">  </span><span class="nt">script</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ruff check .</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mypy src/</span>
+
+<span class="c1"># ── Job: деплой (только main) ──────────────────────</span>
+<span class="nt">deploy:prod</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">stage</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">deploy</span>
+<span class="w">  </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">alpine:latest</span>
+<span class="w">  </span><span class="nt">before_script</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[]</span><span class="w">      </span><span class="c1"># переопределить глобальный</span>
+<span class="w">  </span><span class="nt">script</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">echo &quot;Deploying...&quot;</span>
+<span class="w">  </span><span class="nt">only</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">main</span>
+<span class="w">  </span><span class="nt">environment</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">production</span>
+<span class="w">    </span><span class="nt">url</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://app.example.com</span>
+</code></pre></div>
+
+<hr />
+<h2 id="ключевые-слова-gitlab-ci">⚙️ Ключевые слова GitLab CI<a class="headerlink" href="#ключевые-слова-gitlab-ci" title="Ссылка">#</a></h2>
+<h3 id="структура-pipeline">Структура pipeline<a class="headerlink" href="#структура-pipeline" title="Ссылка">#</a></h3>
+<table>
+<thead>
+<tr>
+<th>Ключевое слово</th>
+<th>Что</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>stages</code></td>
+<td>Список этапов (по порядку)</td>
+</tr>
+<tr>
+<td><code>stage</code></td>
+<td>К какому этапу относится job</td>
+</tr>
+<tr>
+<td><code>default</code></td>
+<td>Настройки для всех jobs</td>
+</tr>
+<tr>
+<td><code>include</code></td>
+<td>Включить другой YAML</td>
+</tr>
+<tr>
+<td><code>workflow</code></td>
+<td>Правила запуска pipeline</td>
+</tr>
+</tbody>
+</table>
+<h3 id="job">Job<a class="headerlink" href="#job" title="Ссылка">#</a></h3>
+<table>
+<thead>
+<tr>
+<th>Ключевое слово</th>
+<th>Что</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>script</code></td>
+<td>Команды для выполнения</td>
+</tr>
+<tr>
+<td><code>before_script</code></td>
+<td>Перед script</td>
+</tr>
+<tr>
+<td><code>after_script</code></td>
+<td>После script</td>
+</tr>
+<tr>
+<td><code>image</code></td>
+<td>Docker-образ</td>
+</tr>
+<tr>
+<td><code>services</code></td>
+<td>Доп. контейнеры (БД и т.д.)</td>
+</tr>
+<tr>
+<td><code>variables</code></td>
+<td>Переменные</td>
+</tr>
+<tr>
+<td><code>cache</code></td>
+<td>Кэш</td>
+</tr>
+<tr>
+<td><code>artifacts</code></td>
+<td>Артефакты</td>
+</tr>
+<tr>
+<td><code>needs</code></td>
+<td>Запускать не дожидаясь stage</td>
+</tr>
+<tr>
+<td><code>dependencies</code></td>
+<td>Какие артефакты забрать</td>
+</tr>
+<tr>
+<td><code>only</code> / <code>except</code></td>
+<td>Когда запускать</td>
+</tr>
+<tr>
+<td><code>rules</code></td>
+<td>Современная замена only/except</td>
+</tr>
+<tr>
+<td><code>tags</code></td>
+<td>Выбор runner&rsquo;а</td>
+</tr>
+<tr>
+<td><code>when</code></td>
+<td>on_success/on_failure/manual/always/delayed</td>
+</tr>
+<tr>
+<td><code>allow_failure</code></td>
+<td>true = не падает pipeline</td>
+</tr>
+<tr>
+<td><code>environment</code></td>
+<td>Среда (deploy)</td>
+</tr>
+<tr>
+<td><code>coverage</code></td>
+<td>Регэксп для извлечения покрытия</td>
+</tr>
+<tr>
+<td><code>retry</code></td>
+<td>Кол-во повторов</td>
+</tr>
+<tr>
+<td><code>timeout</code></td>
+<td>Таймаут</td>
+</tr>
+<tr>
+<td><code>parallel</code></td>
+<td>N параллельных копий</td>
+</tr>
+<tr>
+<td><code>extends</code></td>
+<td>Наследовать шаблон</td>
+</tr>
+<tr>
+<td><code>trigger</code></td>
+<td>Запустить другой pipeline</td>
+</tr>
+<tr>
+<td><code>resource_group</code></td>
+<td>Сериализация</td>
+</tr>
+<tr>
+<td><code>inherit</code></td>
+<td>Что наследовать от глобального</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="условия-запуска-rules">🌍 Условия запуска (rules)<a class="headerlink" href="#условия-запуска-rules" title="Ссылка">#</a></h2>
+<div class="highlight"><pre><span></span><code><span class="c1"># Современный способ</span>
+<span class="nt">deploy</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">stage</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">deploy</span>
+<span class="w">  </span><span class="nt">script</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./deploy.sh</span>
+<span class="w">  </span><span class="nt">rules</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">if</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;$CI_COMMIT_BRANCH</span><span class="nv"> </span><span class="s">==</span><span class="nv"> </span><span class="s">&quot;main&quot;&#39;</span>
+<span class="w">      </span><span class="nt">when</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">on_success</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">if</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;$CI_PIPELINE_SOURCE</span><span class="nv"> </span><span class="s">==</span><span class="nv"> </span><span class="s">&quot;merge_request_event&quot;&#39;</span>
+<span class="w">      </span><span class="nt">when</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">manual</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">if</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;$CI_COMMIT_TAG&#39;</span>
+<span class="w">      </span><span class="nt">variables</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">ENV</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;release&quot;</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">when</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">never</span>
+
+<span class="c1"># Старый синтаксис (only/except)</span>
+<span class="nt">deploy</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">only</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">main</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tags</span>
+<span class="w">  </span><span class="nt">except</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">branches</span>
+</code></pre></div>
+
+<h3 id="переменные-условий">Переменные условий<a class="headerlink" href="#переменные-условий" title="Ссылка">#</a></h3>
+<table>
+<thead>
+<tr>
+<th>Переменная</th>
+<th>Что</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>$CI_COMMIT_BRANCH</code></td>
+<td>Имя ветки</td>
+</tr>
+<tr>
+<td><code>$CI_COMMIT_TAG</code></td>
+<td>Тег</td>
+</tr>
+<tr>
+<td><code>$CI_PIPELINE_SOURCE</code></td>
+<td>Источник (push, merge_request, schedule)</td>
+</tr>
+<tr>
+<td><code>$CI_MERGE_REQUEST_ID</code></td>
+<td>ID MR</td>
+</tr>
+<tr>
+<td><code>$CI_PROJECT_PATH</code></td>
+<td>group/project</td>
+</tr>
+<tr>
+<td><code>$CI_COMMIT_SHA</code></td>
+<td>Хэш коммита</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="artifacts-и-cache">📦 Artifacts и Cache<a class="headerlink" href="#artifacts-и-cache" title="Ссылка">#</a></h2>
+<h3 id="artifacts-между-jobs">Artifacts (между jobs)<a class="headerlink" href="#artifacts-между-jobs" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="nt">build</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">script</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">make build</span>
+<span class="w">  </span><span class="nt">artifacts</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">paths</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">build/</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">dist/</span>
+<span class="w">    </span><span class="nt">exclude</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">binaries/**/*.tmp</span>
+<span class="w">    </span><span class="nt">expire_in</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1 week</span><span class="w">            </span><span class="c1"># удалить через неделю</span>
+<span class="w">    </span><span class="nt">reports</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">junit</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">test-results.xml</span><span class="w">    </span><span class="c1"># тест-репорты в UI</span>
+<span class="w">      </span><span class="nt">coverage_report</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">coverage_format</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">cobertura</span>
+<span class="w">        </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">coverage.xml</span>
+<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;$CI_COMMIT_REF_NAME&quot;</span><span class="w">  </span><span class="c1"># имя архива</span>
+<span class="w">    </span><span class="nt">untracked</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+<span class="w">    </span><span class="nt">when</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">on_failure</span><span class="w">             </span><span class="c1"># сохранить даже при провале</span>
+</code></pre></div>
+
+<h3 id="cache-между-pipeline-ами">Cache (между pipeline&rsquo;ами)<a class="headerlink" href="#cache-между-pipeline-ами" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="nt">cache</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">key</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${CI_COMMIT_REF_SLUG}</span><span class="w">     </span><span class="c1"># разный кэш для каждой ветки</span>
+<span class="w">  </span><span class="nt">paths</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">.cache/pip</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">node_modules/</span>
+<span class="w">  </span><span class="nt">policy</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pull-push</span><span class="w">              </span><span class="c1"># pull/push/pull-push</span>
+
+<span class="c1"># Несколько кэшей</span>
+<span class="nt">cache</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">key</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">files-v1</span>
+<span class="w">    </span><span class="nt">paths</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">node_modules/</span><span class="p p-Indicator">]</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">key</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">files-v2</span>
+<span class="w">    </span><span class="nt">paths</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">.cache/</span><span class="p p-Indicator">]</span>
+</code></pre></div>
+
+<hr />
+<h2 id="сервисы-бд-и-др">🔌 Сервисы (БД и др.)<a class="headerlink" href="#сервисы-бд-и-др" title="Ссылка">#</a></h2>
+<div class="highlight"><pre><span></span><code><span class="nt">test:integration</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">services</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">postgres:16</span>
+<span class="w">      </span><span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">db</span>
+<span class="w">      </span><span class="nt">variables</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">POSTGRES_DB</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">testdb</span>
+<span class="w">        </span><span class="nt">POSTGRES_USER</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">test</span>
+<span class="w">        </span><span class="nt">POSTGRES_PASSWORD</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">secret</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">redis:7-alpine</span>
+<span class="w">      </span><span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">cache</span>
+<span class="w">  </span><span class="nt">variables</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">DATABASE_URL</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">postgres://test:secret@db:5432/testdb</span>
+<span class="w">  </span><span class="nt">script</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pytest tests/integration</span>
+</code></pre></div>
+
+<hr />
+<h2 id="includes-и-шаблоны">📜 includes и шаблоны<a class="headerlink" href="#includes-и-шаблоны" title="Ссылка">#</a></h2>
+<div class="highlight"><pre><span></span><code><span class="c1"># Включить из другого файла</span>
+<span class="nt">include</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">local</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/templates/build.yml</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">project</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;mygroup/myproject&#39;</span>
+<span class="w">    </span><span class="nt">ref</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">main</span>
+<span class="w">    </span><span class="nt">file</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/templates/.gitlab-ci.yml</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">template</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Jobs/Build.gitlab-ci.yml</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">remote</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://example.com/ci.yml</span>
+
+<span class="c1"># Шаблон (hidden job)</span>
+<span class="nt">.build_template</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">node:20</span>
+<span class="w">  </span><span class="nt">before_script</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">npm ci</span>
+<span class="w">  </span><span class="nt">script</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">npm run build</span>
+
+<span class="nt">build:web</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">extends</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">.build_template</span>
+<span class="w">  </span><span class="nt">variables</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">TARGET</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">web</span>
+</code></pre></div>
+
+<hr />
+<h2 id="runner">🛠️ Runner<a class="headerlink" href="#runner" title="Ссылка">#</a></h2>
+<h3 id="регистрация-своего-runner-а">Регистрация своего runner&rsquo;а<a class="headerlink" href="#регистрация-своего-runner-а" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>gitlab-runner<span class="w"> </span>register
+<span class="c1"># URL: https://gitlab.com/</span>
+<span class="c1"># Token: из Settings → CI/CD → Runners</span>
+<span class="c1"># Tags: linux, docker</span>
+<span class="c1"># Executor: docker</span>
+</code></pre></div>
+
+<h3 id="управление">Управление<a class="headerlink" href="#управление" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>gitlab-runner<span class="w"> </span>status
+gitlab-runner<span class="w"> </span>start
+gitlab-runner<span class="w"> </span>stop
+gitlab-runner<span class="w"> </span>restart
+gitlab-runner<span class="w"> </span>verify
+gitlab-runner<span class="w"> </span>list
+gitlab-runner<span class="w"> </span>run
+</code></pre></div>
+
+<hr />
+<h1 id="часть-2-github-actions">🐙 ЧАСТЬ 2. GitHub Actions<a class="headerlink" href="#часть-2-github-actions" title="Ссылка">#</a></h1>
+<h2 id="структура-workflow">📝 Структура workflow<a class="headerlink" href="#структура-workflow" title="Ссылка">#</a></h2>
+<p><code>.github/workflows/ci.yml</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">CI</span>
+
+<span class="nt">on</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">push</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">branches</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">main</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">develop</span><span class="p p-Indicator">]</span>
+<span class="w">  </span><span class="nt">pull_request</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">branches</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">main</span><span class="p p-Indicator">]</span>
+<span class="w">  </span><span class="nt">workflow_dispatch</span><span class="p">:</span><span class="w">           </span><span class="c1"># ручной запуск</span>
+<span class="w">  </span><span class="nt">schedule</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">cron</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;0</span><span class="nv"> </span><span class="s">2</span><span class="nv"> </span><span class="s">*</span><span class="nv"> </span><span class="s">*</span><span class="nv"> </span><span class="s">*&quot;</span><span class="w">        </span><span class="c1"># каждый день в 2:00</span>
+
+<span class="nt">permissions</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">contents</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">read</span>
+
+<span class="nt">env</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">PYTHON_VERSION</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;3.12&quot;</span>
+
+<span class="nt">jobs</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">test</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">runs-on</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ubuntu-latest</span><span class="w">      </span><span class="c1"># ubuntu-latest/windows/macos</span>
+<span class="w">    </span><span class="nt">timeout-minutes</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">30</span>
+<span class="w">    </span><span class="nt">strategy</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">matrix</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">python</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;3.10&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;3.11&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;3.12&quot;</span><span class="p p-Indicator">]</span>
+<span class="w">    </span><span class="nt">steps</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">actions/checkout@v4</span>
+
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Setup Python</span>
+<span class="w">        </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">actions/setup-python@v5</span>
+<span class="w">        </span><span class="nt">with</span><span class="p">:</span>
+<span class="w">          </span><span class="nt">python-version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${{ matrix.python }}</span>
+
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Cache pip</span>
+<span class="w">        </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">actions/cache@v4</span>
+<span class="w">        </span><span class="nt">with</span><span class="p">:</span>
+<span class="w">          </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">~/.cache/pip</span>
+<span class="w">          </span><span class="nt">key</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${{ runner.os }}-pip-${{ hashFiles(&#39;requirements.txt&#39;) }}</span>
+
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Install</span>
+<span class="w">        </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pip install -r requirements.txt</span>
+
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Test</span>
+<span class="w">        </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pytest --cov --cov-report=xml</span>
+
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Upload coverage</span>
+<span class="w">        </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">codecov/codecov-action@v4</span>
+<span class="w">        </span><span class="nt">if</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">always()</span>
+<span class="w">        </span><span class="nt">with</span><span class="p">:</span>
+<span class="w">          </span><span class="nt">file</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./coverage.xml</span>
+
+<span class="w">  </span><span class="nt">build</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">needs</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">test</span><span class="w">                 </span><span class="c1"># дождаться test</span>
+<span class="w">    </span><span class="nt">runs-on</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ubuntu-latest</span>
+<span class="w">    </span><span class="nt">steps</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">actions/checkout@v4</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Build Docker</span>
+<span class="w">        </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">docker build -t myapp .</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Login to registry</span>
+<span class="w">        </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">docker/login-action@v3</span>
+<span class="w">        </span><span class="nt">with</span><span class="p">:</span>
+<span class="w">          </span><span class="nt">username</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${{ secrets.DOCKER_USER }}</span>
+<span class="w">          </span><span class="nt">password</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${{ secrets.DOCKER_TOKEN }}</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Push</span>
+<span class="w">        </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">docker push myapp:latest</span>
+
+<span class="w">  </span><span class="nt">deploy</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">needs</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">build</span>
+<span class="w">    </span><span class="nt">if</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">github.ref == &#39;refs/heads/main&#39;</span>
+<span class="w">    </span><span class="nt">runs-on</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ubuntu-latest</span>
+<span class="w">    </span><span class="nt">environment</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">production</span>
+<span class="w">    </span><span class="nt">steps</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Deploy</span>
+<span class="w">        </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">echo &quot;Deploying...&quot;</span>
+</code></pre></div>
+
+<hr />
+<h2 id="ключевые-слова-github-actions">🔑 Ключевые слова GitHub Actions<a class="headerlink" href="#ключевые-слова-github-actions" title="Ссылка">#</a></h2>
+<h3 id="workflow">Workflow<a class="headerlink" href="#workflow" title="Ссылка">#</a></h3>
+<table>
+<thead>
+<tr>
+<th>Ключ</th>
+<th>Что</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>name</code></td>
+<td>Имя workflow</td>
+</tr>
+<tr>
+<td><code>on</code></td>
+<td>Триггеры</td>
+</tr>
+<tr>
+<td><code>env</code></td>
+<td>Глобальные переменные</td>
+</tr>
+<tr>
+<td><code>jobs</code></td>
+<td>Задачи</td>
+</tr>
+<tr>
+<td><code>permissions</code></td>
+<td>Права GITHUB_TOKEN</td>
+</tr>
+<tr>
+<td><code>concurrency</code></td>
+<td>Сериализация (отменять старые)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="job_1">Job<a class="headerlink" href="#job_1" title="Ссылка">#</a></h3>
+<table>
+<thead>
+<tr>
+<th>Ключ</th>
+<th>Что</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>runs-on</code></td>
+<td>Машина (ubuntu-latest и т.д.)</td>
+</tr>
+<tr>
+<td><code>steps</code></td>
+<td>Шаги</td>
+</tr>
+<tr>
+<td><code>needs</code></td>
+<td>Зависимости</td>
+</tr>
+<tr>
+<td><code>if</code></td>
+<td>Условие запуска</td>
+</tr>
+<tr>
+<td><code>env</code></td>
+<td>Переменные job</td>
+</tr>
+<tr>
+<td><code>strategy</code></td>
+<td>Матрица / параллелизм</td>
+</tr>
+<tr>
+<td><code>timeout-minutes</code></td>
+<td>Таймаут</td>
+</tr>
+<tr>
+<td><code>environment</code></td>
+<td>Среда</td>
+</tr>
+<tr>
+<td><code>continue-on-error</code></td>
+<td>Не падать с ошибкой</td>
+</tr>
+<tr>
+<td><code>services</code></td>
+<td>Контейнеры (БД)</td>
+</tr>
+<tr>
+<td><code>defaults</code></td>
+<td>Настройки для всех steps</td>
+</tr>
+</tbody>
+</table>
+<h3 id="step">Step<a class="headerlink" href="#step" title="Ссылка">#</a></h3>
+<table>
+<thead>
+<tr>
+<th>Ключ</th>
+<th>Что</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>uses</code></td>
+<td>Использовать action</td>
+</tr>
+<tr>
+<td><code>with</code></td>
+<td>Параметры для action</td>
+</tr>
+<tr>
+<td><code>run</code></td>
+<td>Выполнить команды shell</td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td>Имя шага</td>
+</tr>
+<tr>
+<td><code>if</code></td>
+<td>Условие</td>
+</tr>
+<tr>
+<td><code>env</code></td>
+<td>Переменные</td>
+</tr>
+<tr>
+<td><code>working-directory</code></td>
+<td>Каталог</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="триггеры-on">🚀 Триггеры (on)<a class="headerlink" href="#триггеры-on" title="Ссылка">#</a></h2>
+<div class="highlight"><pre><span></span><code><span class="nt">on</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">push</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">branches</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">main</span><span class="p p-Indicator">]</span>
+<span class="w">    </span><span class="nt">paths</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&#39;src/**&#39;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&#39;tests/**&#39;</span><span class="p p-Indicator">]</span><span class="w">     </span><span class="c1"># только при изменениях в src/tests</span>
+<span class="w">    </span><span class="nt">tags</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&#39;v*&#39;</span><span class="p p-Indicator">]</span>
+<span class="w">  </span><span class="nt">pull_request</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">types</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">opened</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">synchronize</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">reopened</span><span class="p p-Indicator">]</span>
+<span class="w">  </span><span class="nt">workflow_dispatch</span><span class="p">:</span><span class="w">                  </span><span class="c1"># ручной</span>
+<span class="w">    </span><span class="nt">inputs</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">env</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;Environment&#39;</span>
+<span class="w">        </span><span class="nt">default</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;staging&#39;</span>
+<span class="w">  </span><span class="nt">schedule</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">cron</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;0</span><span class="nv"> </span><span class="s">2</span><span class="nv"> </span><span class="s">*</span><span class="nv"> </span><span class="s">*</span><span class="nv"> </span><span class="s">*&quot;</span>
+<span class="w">  </span><span class="nt">release</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">types</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">published</span><span class="p p-Indicator">]</span>
+<span class="w">  </span><span class="nt">workflow_run</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">workflows</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;Build&quot;</span><span class="p p-Indicator">]</span>
+<span class="w">    </span><span class="nt">types</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">completed</span><span class="p p-Indicator">]</span>
+</code></pre></div>
+
+<hr />
+<h2 id="secrets-и-variables">📦 Secrets и Variables<a class="headerlink" href="#secrets-и-variables" title="Ссылка">#</a></h2>
+<h3 id="secrets-зашифрованные">Secrets (зашифрованные)<a class="headerlink" href="#secrets-зашифрованные" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="nt">steps</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Login</span>
+<span class="w">    </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">docker login -u ${{ secrets.DOCKER_USER }} -p ${{ secrets.DOCKER_TOKEN }}</span>
+</code></pre></div>
+
+<h3 id="variables-открытые">Variables (открытые)<a class="headerlink" href="#variables-открытые" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="nt">env</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">IMAGE_NAME</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">myapp</span>
+</code></pre></div>
+
+<p>Через UI: Settings → Secrets and variables → Actions.</p>
+<h3 id="передача-между-jobs">Передача между jobs<a class="headerlink" href="#передача-между-jobs" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="nt">jobs</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">job1</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">outputs</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${{ steps.set.outputs.version }}</span>
+<span class="w">    </span><span class="nt">steps</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">set</span>
+<span class="w">        </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">echo &quot;version=1.0&quot; &gt;&gt; $GITHUB_OUTPUT</span>
+
+<span class="w">  </span><span class="nt">job2</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">needs</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">job1</span>
+<span class="w">    </span><span class="nt">steps</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">echo ${{ needs.job1.outputs.version }}</span>
+</code></pre></div>
+
+<hr />
+<h2 id="контекстные-выражения">🎨 Контекстные выражения<a class="headerlink" href="#контекстные-выражения" title="Ссылка">#</a></h2>
+<div class="highlight"><pre><span></span><code><span class="l l-Scalar l-Scalar-Plain">${{ github.event_name }}</span>
+<span class="l l-Scalar l-Scalar-Plain">${{ github.ref }}</span><span class="w">                    </span><span class="c1"># refs/heads/main</span>
+<span class="l l-Scalar l-Scalar-Plain">${{ github.sha }}</span><span class="w">                    </span><span class="c1"># commit SHA</span>
+<span class="l l-Scalar l-Scalar-Plain">${{ github.actor }}</span><span class="w">                  </span><span class="c1"># кто запустил</span>
+<span class="l l-Scalar l-Scalar-Plain">${{ env.VAR }}</span>
+<span class="l l-Scalar l-Scalar-Plain">${{ secrets.SECRET }}</span>
+<span class="l l-Scalar l-Scalar-Plain">${{ vars.VARIABLE }}</span><span class="w">                 </span><span class="c1"># из Variables (не секрет)</span>
+<span class="l l-Scalar l-Scalar-Plain">${{ job.status }}</span><span class="w">                    </span><span class="c1"># success/failure</span>
+<span class="l l-Scalar l-Scalar-Plain">${{ steps.step1.outputs.value }}</span>
+<span class="l l-Scalar l-Scalar-Plain">${{ runner.os }}</span><span class="w">                     </span><span class="c1"># Linux/macOS/Windows</span>
+
+<span class="c1"># Условия</span>
+<span class="nt">if</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">github.ref == &#39;refs/heads/main&#39;</span>
+<span class="nt">if</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">github.event_name == &#39;pull_request&#39;</span>
+<span class="nt">if</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">success()</span><span class="w">                        </span><span class="c1"># все предыдущие успешны</span>
+<span class="nt">if</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">always()</span><span class="w">                         </span><span class="c1"># всегда (даже при провале)</span>
+<span class="nt">if</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">failure()</span><span class="w">                        </span><span class="c1"># хотя бы один провалился</span>
+<span class="nt">if</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">cancelled()</span>
+</code></pre></div>
+
+<hr />
+<h2 id="полезные-actions">🔌 Полезные Actions<a class="headerlink" href="#полезные-actions" title="Ссылка">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Action</th>
+<th>Что</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>actions/checkout@v4</code></td>
+<td>Клонировать репозиторий</td>
+</tr>
+<tr>
+<td><code>actions/setup-python@v5</code></td>
+<td>Установить Python</td>
+</tr>
+<tr>
+<td><code>actions/setup-node@v4</code></td>
+<td>Установить Node</td>
+</tr>
+<tr>
+<td><code>actions/cache@v4</code></td>
+<td>Кэшировать файлы</td>
+</tr>
+<tr>
+<td><code>actions/upload-artifact@v4</code></td>
+<td>Загрузить артефакт</td>
+</tr>
+<tr>
+<td><code>actions/download-artifact@v4</code></td>
+<td>Скачать артефакт</td>
+</tr>
+<tr>
+<td><code>actions/create-release@v1</code></td>
+<td>Создать GitHub Release</td>
+</tr>
+<tr>
+<td><code>docker/build-push-action@v5</code></td>
+<td>Собрать и запушить образ</td>
+</tr>
+<tr>
+<td><code>docker/login-action@v3</code></td>
+<td>Логин в registry</td>
+</tr>
+<tr>
+<td><code>codecov/codecov-action@v4</code></td>
+<td>Загрузить покрытие</td>
+</tr>
+<tr>
+<td><code>softprops/action-gh-release@v2</code></td>
+<td>Releases с файлами</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="self-hosted-runners">🌍 Self-hosted runners<a class="headerlink" href="#self-hosted-runners" title="Ссылка">#</a></h2>
+<div class="highlight"><pre><span></span><code><span class="c1"># Settings → Actions → Runners → New self-hosted runner</span>
+<span class="c1"># Следуйте инструкции:</span>
+mkdir<span class="w"> </span>actions-runner<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">cd</span><span class="w"> </span>actions-runner
+curl<span class="w"> </span>-o<span class="w"> </span>actions-runner-linux-x64.tar.gz<span class="w"> </span>-L<span class="w"> </span>https://...
+tar<span class="w"> </span>xzf<span class="w"> </span>actions-runner-linux-x64.tar.gz
+./config.sh<span class="w"> </span>--url<span class="w"> </span>https://github.com/owner/repo<span class="w"> </span>--token<span class="w"> </span>TOKEN
+./run.sh
+sudo<span class="w"> </span>./svc.sh<span class="w"> </span>install
+sudo<span class="w"> </span>./svc.sh<span class="w"> </span>start
+</code></pre></div>
+
+<p>В workflow:</p>
+<div class="highlight"><pre><span></span><code><span class="nt">runs-on</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">self-hosted</span>
+<span class="c1"># или с лейблами</span>
+<span class="nt">runs-on</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">self-hosted</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">linux</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">x64</span><span class="p p-Indicator">]</span>
+</code></pre></div>
+
+<hr />
+<h2 id="gitlab-ci-vs-github-actions">🆚 GitLab CI vs GitHub Actions<a class="headerlink" href="#gitlab-ci-vs-github-actions" title="Ссылка">#</a></h2>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>GitLab CI</th>
+<th>GitHub Actions</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Файл</td>
+<td><code>.gitlab-ci.yml</code></td>
+<td><code>.github/workflows/*.yml</code></td>
+</tr>
+<tr>
+<td>Конвейер</td>
+<td>Pipeline</td>
+<td>Workflow</td>
+</tr>
+<tr>
+<td>Задача</td>
+<td>Job</td>
+<td>Job</td>
+</tr>
+<tr>
+<td>Шаги</td>
+<td><code>script</code> (многострочный)</td>
+<td><code>steps</code> (массив)</td>
+</tr>
+<tr>
+<td>Условие</td>
+<td><code>rules</code> / <code>only</code></td>
+<td><code>if</code></td>
+</tr>
+<tr>
+<td>Runner</td>
+<td>Свой / shared</td>
+<td>GitHub-hosted / self-hosted</td>
+</tr>
+<tr>
+<td>Маркетплейс</td>
+<td>Templates</td>
+<td>Actions Marketplace</td>
+</tr>
+<tr>
+<td>Docker</td>
+<td><code>image:</code></td>
+<td><code>container:</code></td>
+</tr>
+<tr>
+<td>Secrets</td>
+<td>Settings → CI/CD</td>
+<td>Settings → Secrets</td>
+</tr>
+<tr>
+<td>Built-in</td>
+<td>Docker-in-Docker</td>
+<td>docker уже работает</td>
+</tr>
+</tbody>
+</table>
+<h3 id="пример-тот-же-pipeline">Пример: тот же pipeline<a class="headerlink" href="#пример-тот-же-pipeline" title="Ссылка">#</a></h3>
+<p><strong>GitLab CI:</strong></p>
+<div class="highlight"><pre><span></span><code><span class="nt">build</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">node:20</span>
+<span class="w">  </span><span class="nt">script</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">npm ci</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">npm run build</span>
+<span class="w">  </span><span class="nt">artifacts</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">paths</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">dist/</span><span class="p p-Indicator">]</span>
+</code></pre></div>
+
+<p><strong>GitHub Actions:</strong></p>
+<div class="highlight"><pre><span></span><code><span class="nt">build</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">runs-on</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ubuntu-latest</span>
+<span class="w">  </span><span class="nt">container</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">node:20</span>
+<span class="w">  </span><span class="nt">steps</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">actions/checkout@v4</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">npm ci</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">npm run build</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">actions/upload-artifact@v4</span>
+<span class="w">      </span><span class="nt">with</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">dist/</span>
+</code></pre></div>
+
+<hr />
+<h2 id="частые-ошибки">🪤 Частые ошибки<a class="headerlink" href="#частые-ошибки" title="Ссылка">#</a></h2>
+<ol>
+<li><strong>Secrets в логах</strong> — случайно вывели. GitLab/GitHub маскируют, но осторожно.</li>
+<li><strong>Долгий pipeline</strong> — параллельте через <code>needs</code> и матрицы.</li>
+<li><strong>Кэш не работает</strong> — ключи (key) неправильные.</li>
+<li><strong>Артефакты удаляются</strong> — <code>expire_in</code> / retention policy.</li>
+<li><strong>Тесты flaky</strong> — <code>retry</code> или изоляция.</li>
+<li><strong>Runner offline</strong> — self-hosted упал, проверьте сервис.</li>
+<li><strong><code>only/except</code> устарели</strong> — используйте <code>rules</code> (GitLab).</li>
+<li><strong><code>needs</code> без зависимостей</strong> — могут идти в любом порядке.</li>
+<li><strong><code>if: always()</code> без нужды</strong> — выполняется даже при отмене.</li>
+<li><strong><code>permissions: write-all</code></strong> — слишком широкие права токена.</li>
+</ol>
+<hr />
+<h2 id="полезные-ссылки">🔗 Полезные ссылки<a class="headerlink" href="#полезные-ссылки" title="Ссылка">#</a></h2>
+<h3 id="gitlab-ci">GitLab CI<a class="headerlink" href="#gitlab-ci" title="Ссылка">#</a></h3>
+<ul>
+<li>Документация: https://docs.gitlab.com/ee/ci</li>
+<li>YAML reference: https://docs.gitlab.com/ee/ci/yaml</li>
+<li>Pipeline editor: в GitLab UI</li>
+<li>Predefined variables: https://docs.gitlab.com/ee/ci/variables/predefined_variables.html</li>
+</ul>
+<h3 id="github-actions">GitHub Actions<a class="headerlink" href="#github-actions" title="Ссылка">#</a></h3>
+<ul>
+<li>Документация: https://docs.github.com/actions</li>
+<li>Marketplace: https://github.com/marketplace/actions</li>
+<li>Workflow syntax: https://docs.github.com/actions/using-workflows/workflow-syntax-for-github-actions</li>
+<li>Contexts: https://docs.github.com/actions/learn-github-actions/contexts</li>
+<li>Awesome Actions: https://github.com/sdras/awesome-actions</li>
+</ul>
+<hr />
+<h2 id="полезные-советы">💡 Полезные советы<a class="headerlink" href="#полезные-советы" title="Ссылка">#</a></h2>
+<ol>
+<li><strong>Минимальный pipeline</strong> — build + test + deploy.</li>
+<li><strong>Матрицы</strong> — тестировать на нескольких версиях (Python, Node, OS).</li>
+<li><strong>Кэширование</strong> — зависимости, экономит минуты.</li>
+<li><strong><code>needs</code></strong> — параллельное выполнение (не ждите всю стадию).</li>
+<li><strong>Secrets</strong> — для чувствительных данных.</li>
+<li><strong>Reusability</strong> — templates (GitLab) / composite actions (GitHub).</li>
+<li><strong>Manual gates</strong> — <code>when: manual</code> / <code>environment</code> для продакшена.</li>
+<li><strong>Docker layer caching</strong> — для быстрых сборок.</li>
+<li><strong>Coverage репорты</strong> — отображаются в MR/PR.</li>
+<li><strong>Self-hosted runner</strong> — для приватных задач или своих инструментов.</li>
+<li><strong><code>workflow_dispatch</code> / ручные job&rsquo;ы</strong> — для запуска по требованию.</li>
+<li><strong>Concurrency</strong> — отменять старые запуски при пуше в PR.</li>
+<li><strong>Деплой только на main/tag</strong> — через <code>if</code>/<code>rules</code>.</li>
+<li><strong>Fail fast</strong> — ранние проверки (lint) перед долгими (tests).</li>
+<li><strong>Мониторинг</strong> — уведомления в Slack/Discord через webhooks.</li>
+</ol>
+<hr />
+<p><em>Сгенерировано как шпаргалка. CI/CD — отдельный мир —
+углубляйтесь через docs.gitlab.com/ee/ci и docs.github.com/actions</em></p>
+    </article>
+    <nav class="pagination">
+      <a class="pager prev" href="minikube-k8s.html">← Minikube / Kubernetes</a>
+      <a class="pager next" href="nginx.html">nginx →</a>
+    </nav>
+  </main>
+
+  <aside class="toc">
+    <details open>
+      <summary>📑 Оглавление</summary>
+      <div class="toc-list">
+<div class="toc">
+<ul>
+<li><a href="#gitlab-ci-github-actions-шпаргалка-по-ci-cd">🦊 GitLab CI / GitHub Actions — шпаргалка по CI/CD</a></li>
+<li><a href="#часть-1-gitlab-ci-cd">🦊 ЧАСТЬ 1. GitLab CI/CD</a><ul>
+<li><a href="#главные-понятия">🔑 Главные понятия</a></li>
+<li><a href="#структура-gitlab-ci-yml">📝 Структура .gitlab-ci.yml</a></li>
+<li><a href="#ключевые-слова-gitlab-ci">⚙️ Ключевые слова GitLab CI</a><ul>
+<li><a href="#структура-pipeline">Структура pipeline</a></li>
+<li><a href="#job">Job</a></li>
+</ul>
+</li>
+<li><a href="#условия-запуска-rules">🌍 Условия запуска (rules)</a><ul>
+<li><a href="#переменные-условий">Переменные условий</a></li>
+</ul>
+</li>
+<li><a href="#artifacts-и-cache">📦 Artifacts и Cache</a><ul>
+<li><a href="#artifacts-между-jobs">Artifacts (между jobs)</a></li>
+<li><a href="#cache-между-pipeline-ами">Cache (между pipeline&rsquo;ами)</a></li>
+</ul>
+</li>
+<li><a href="#сервисы-бд-и-др">🔌 Сервисы (БД и др.)</a></li>
+<li><a href="#includes-и-шаблоны">📜 includes и шаблоны</a></li>
+<li><a href="#runner">🛠️ Runner</a><ul>
+<li><a href="#регистрация-своего-runner-а">Регистрация своего runner&rsquo;а</a></li>
+<li><a href="#управление">Управление</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#часть-2-github-actions">🐙 ЧАСТЬ 2. GitHub Actions</a><ul>
+<li><a href="#структура-workflow">📝 Структура workflow</a></li>
+<li><a href="#ключевые-слова-github-actions">🔑 Ключевые слова GitHub Actions</a><ul>
+<li><a href="#workflow">Workflow</a></li>
+<li><a href="#job_1">Job</a></li>
+<li><a href="#step">Step</a></li>
+</ul>
+</li>
+<li><a href="#триггеры-on">🚀 Триггеры (on)</a></li>
+<li><a href="#secrets-и-variables">📦 Secrets и Variables</a><ul>
+<li><a href="#secrets-зашифрованные">Secrets (зашифрованные)</a></li>
+<li><a href="#variables-открытые">Variables (открытые)</a></li>
+<li><a href="#передача-между-jobs">Передача между jobs</a></li>
+</ul>
+</li>
+<li><a href="#контекстные-выражения">🎨 Контекстные выражения</a></li>
+<li><a href="#полезные-actions">🔌 Полезные Actions</a></li>
+<li><a href="#self-hosted-runners">🌍 Self-hosted runners</a></li>
+<li><a href="#gitlab-ci-vs-github-actions">🆚 GitLab CI vs GitHub Actions</a><ul>
+<li><a href="#пример-тот-же-pipeline">Пример: тот же pipeline</a></li>
+</ul>
+</li>
+<li><a href="#частые-ошибки">🪤 Частые ошибки</a></li>
+<li><a href="#полезные-ссылки">🔗 Полезные ссылки</a><ul>
+<li><a href="#gitlab-ci">GitLab CI</a></li>
+<li><a href="#github-actions">GitHub Actions</a></li>
+</ul>
+</li>
+<li><a href="#полезные-советы">💡 Полезные советы</a></li>
+</ul>
+</li>
+</ul>
+</div>
+
+      </div>
+    </details>
+  </aside>
+</div>
+
+<button class="back-top" id="backTop" aria-label="Наверх">↑</button>
+
+<script src="assets/search.js"></script>
+<script src="assets/page.js"></script>
+</body>
+</html>

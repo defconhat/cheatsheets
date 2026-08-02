@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>eza — Шпаргалки</title>
+<link rel="stylesheet" href="assets/style.css">
+<link rel="stylesheet" href="assets/pygments.css">
+</head>
+<body>
+<div class="layout">
+  <aside class="sidebar">
+    <a href="index.html" class="brand">📌 Шпаргалки</a>
+    <nav class="nav">
+<a href="yazi.html" class="nav-item"><span class="nav-ico">📦</span>Yazi</a>
+<a href="neovim.html" class="nav-item"><span class="nav-ico">📘</span>Neovim (LazyVim)</a>
+<a href="niri.html" class="nav-item"><span class="nav-ico">🪟</span>Niri</a>
+<a href="tmux.html" class="nav-item"><span class="nav-ico">🪟</span>Tmux</a>
+<a href="bash.html" class="nav-item"><span class="nav-ico">🐚</span>Bash</a>
+<a href="git.html" class="nav-item"><span class="nav-ico">🔀</span>Git</a>
+<a href="terminal.html" class="nav-item"><span class="nav-ico">🖥️</span>Терминал Linux</a>
+<a href="powershell.html" class="nav-item"><span class="nav-ico">💻</span>PowerShell</a>
+<a href="cmd.html" class="nav-item"><span class="nav-ico">🪟</span>CMD (cmd.exe)</a>
+<a href="python.html" class="nav-item"><span class="nav-ico">🐍</span>Python</a>
+<a href="systemd.html" class="nav-item"><span class="nav-ico">⚙️</span>systemd</a>
+<a href="ssh.html" class="nav-item"><span class="nav-ico">🔐</span>SSH</a>
+<a href="make-cmake.html" class="nav-item"><span class="nav-ico">🔨</span>Make / CMake</a>
+<a href="docker.html" class="nav-item"><span class="nav-ico">🐳</span>Docker</a>
+<a href="pacman.html" class="nav-item"><span class="nav-ico">📦</span>pacman / yay / paru</a>
+<a href="spark.html" class="nav-item"><span class="nav-ico">⚡</span>Apache Spark / PySpark</a>
+<a href="markdown.html" class="nav-item"><span class="nav-ico">📝</span>Markdown</a>
+<a href="regex.html" class="nav-item"><span class="nav-ico">🔍</span>Регулярные выражения</a>
+<a href="jq-json.html" class="nav-item"><span class="nav-ico">🔧</span>jq + JSON</a>
+<a href="awk-sed.html" class="nav-item"><span class="nav-ico">✂️</span>awk / sed</a>
+<a href="airflow.html" class="nav-item"><span class="nav-ico">🌪️</span>Apache Airflow</a>
+<a href="http-curl.html" class="nav-item"><span class="nav-ico">🌐</span>HTTP / curl</a>
+<a href="yaml.html" class="nav-item"><span class="nav-ico">📄</span>YAML</a>
+<a href="vscode.html" class="nav-item"><span class="nav-ico">💻</span>VS Code</a>
+<a href="cron.html" class="nav-item"><span class="nav-ico">⏰</span>cron</a>
+<a href="fzf-zoxide.html" class="nav-item"><span class="nav-ico">🔎</span>fzf + zoxide</a>
+<a href="minikube-k8s.html" class="nav-item"><span class="nav-ico">☸️</span>Minikube / Kubernetes</a>
+<a href="cicd.html" class="nav-item"><span class="nav-ico">🦊</span>GitLab CI / GitHub Actions</a>
+<a href="nginx.html" class="nav-item"><span class="nav-ico">🌐</span>nginx</a>
+<a href="dbt.html" class="nav-item"><span class="nav-ico">🔧</span>dbt</a>
+<a href="kafka.html" class="nav-item"><span class="nav-ico">🐘</span>Apache Kafka</a>
+<a href="prometheus-grafana.html" class="nav-item"><span class="nav-ico">📊</span>Prometheus / Grafana</a>
+<a href="iceberg-nessie.html" class="nav-item"><span class="nav-ico">🧊</span>Iceberg / Nessie</a>
+<a href="impala.html" class="nav-item"><span class="nav-ico">🐬</span>Apache Impala</a>
+<a href="terraform.html" class="nav-item"><span class="nav-ico">🏗️</span>Terraform</a>
+<a href="linux-internals.html" class="nav-item"><span class="nav-ico">🐧</span>Linux Internals</a>
+<a href="miscellaneous.html" class="nav-item"><span class="nav-ico">🧰</span>Miscellaneous</a>
+<a href="python-automation-libs.html" class="nav-item"><span class="nav-ico">🐍</span>Python: авт-ция (10 libs)</a>
+<a href="eza.html" class="nav-item active"><span class="nav-ico">🌈</span>eza</a>
+<a href="dbeaver.html" class="nav-item"><span class="nav-ico">🗄️</span>DBeaver</a>
+<a href="zcode.html" class="nav-item"><span class="nav-ico">🤖</span>ZCode</a>
+<a href="warp.html" class="nav-item"><span class="nav-ico">🚀</span>Warp</a>
+<a href="agentic-ai-dev.html" class="nav-item"><span class="nav-ico">🤝</span>Агентная разработка с ИИ</a>
+    </nav>
+  </aside>
+
+  <main class="content">
+    <article>
+<h1 id="eza-шпаргалка-замена-ls">🌈 eza — шпаргалка (замена ls)<a class="headerlink" href="#eza-шпаргалка-замена-ls" title="Ссылка">#</a></h1>
+<blockquote>
+<p><strong>eza</strong> — современная замена <code>ls</code> на Rust (форк <code>exa</code>, который больше не развивается).
+Цветной вывод, git-статус, древовидный режим, иконки. Дом: https://github.com/eza-community/eza</p>
+</blockquote>
+<hr />
+<h2 id="установка">📦 Установка<a class="headerlink" href="#установка" title="Ссылка">#</a></h2>
+<div class="highlight"><pre><span></span><code><span class="c1"># Arch / CachyOS</span>
+sudo<span class="w"> </span>pacman<span class="w"> </span>-S<span class="w"> </span>eza
+
+<span class="c1"># macOS</span>
+brew<span class="w"> </span>install<span class="w"> </span>eza
+
+<span class="c1"># Debian/Ubuntu (новые версии — через cargo или eza-форум)</span>
+sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>eza<span class="w">           </span><span class="c1"># может быть старая</span>
+cargo<span class="w"> </span>install<span class="w"> </span>eza<span class="w">              </span><span class="c1"># самая свежая</span>
+
+<span class="c1"># Через Rust</span>
+cargo<span class="w"> </span>install<span class="w"> </span>eza
+</code></pre></div>
+
+<h3 id="алиас-вместо-ls-рекомендуется-в-zshrc-bashrc">Алиас вместо <code>ls</code> (рекомендуется в <code>~/.zshrc</code> / <code>~/.bashrc</code>)<a class="headerlink" href="#алиас-вместо-ls-рекомендуется-в-zshrc-bashrc" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="nb">alias</span><span class="w"> </span><span class="nv">ls</span><span class="o">=</span><span class="s2">&quot;eza --group-directories-first --icons&quot;</span>
+<span class="nb">alias</span><span class="w"> </span><span class="nv">ll</span><span class="o">=</span><span class="s2">&quot;eza -l --group-directories-first --icons --git&quot;</span>
+<span class="nb">alias</span><span class="w"> </span><span class="nv">la</span><span class="o">=</span><span class="s2">&quot;eza -la --group-directories-first --icons --git&quot;</span>
+<span class="nb">alias</span><span class="w"> </span><span class="nv">lt</span><span class="o">=</span><span class="s2">&quot;eza --tree --level=2 --icons&quot;</span>
+<span class="nb">alias</span><span class="w"> </span><span class="nv">lh</span><span class="o">=</span><span class="s2">&quot;eza -la --icons | grep &#39;^-&#39;&quot;</span>
+</code></pre></div>
+
+<hr />
+<h2 id="базовый-вывод">🔑 Базовый вывод<a class="headerlink" href="#базовый-вывод" title="Ссылка">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Флаг</th>
+<th>Что делает</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>eza</code></td>
+<td>Листинг текущей папки (как <code>ls</code>)</td>
+</tr>
+<tr>
+<td><code>eza &lt;dir&gt;</code></td>
+<td>Листинг указанной папки</td>
+</tr>
+<tr>
+<td><code>eza -1</code></td>
+<td>Один файл на строку</td>
+</tr>
+<tr>
+<td><code>eza -a</code></td>
+<td>Показать скрытые (точкой)</td>
+</tr>
+<tr>
+<td><code>eza -A</code></td>
+<td>Все, кроме <code>.</code> и <code>..</code></td>
+</tr>
+<tr>
+<td><code>eza -d</code></td>
+<td>Показать сами директории, а не их содержимое</td>
+</tr>
+<tr>
+<td><code>eza -D</code></td>
+<td>Только директории</td>
+</tr>
+<tr>
+<td><code>eza -f</code></td>
+<td>Только файлы</td>
+</tr>
+</tbody>
+</table>
+<h3 id="длинный-формат-l">Длинный формат (<code>-l</code>)<a class="headerlink" href="#длинный-формат-l" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>eza<span class="w"> </span>-l<span class="w">                </span><span class="c1"># подробный листинг</span>
+eza<span class="w"> </span>-l<span class="w"> </span>--header<span class="w">       </span><span class="c1"># с заголовками колонок</span>
+eza<span class="w"> </span>-l<span class="w"> </span>--number<span class="w">       </span><span class="c1"># с числовыми UID/GID</span>
+eza<span class="w"> </span>-l<span class="w"> </span>--links<span class="w">        </span><span class="c1"># число хардлинков</span>
+eza<span class="w"> </span>-l<span class="w"> </span>--blocks<span class="w">       </span><span class="c1"># добавить колонку блоков</span>
+</code></pre></div>
+
+<table>
+<thead>
+<tr>
+<th>Колонка</th>
+<th>Что значит</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>mode</td>
+<td>права доступа</td>
+</tr>
+<tr>
+<td>links</td>
+<td>кол-во хардлинков</td>
+</tr>
+<tr>
+<td>user / group</td>
+<td>владелец</td>
+</tr>
+<tr>
+<td>size</td>
+<td>размер (<code>--smart-size</code> или <code>-h</code>)</td>
+</tr>
+<tr>
+<td>modified</td>
+<td>дата изменения</td>
+</tr>
+<tr>
+<td>name</td>
+<td>имя (с иконкой если <code>--icons</code>)</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="дерево-tree">🌳 Дерево (tree)<a class="headerlink" href="#дерево-tree" title="Ссылка">#</a></h2>
+<div class="highlight"><pre><span></span><code>eza<span class="w"> </span>--tree<span class="w">                    </span><span class="c1"># дерево текущей папки</span>
+eza<span class="w"> </span>--tree<span class="w"> </span>--level<span class="o">=</span><span class="m">2</span><span class="w">          </span><span class="c1"># глубина 2</span>
+eza<span class="w"> </span>--tree<span class="w"> </span>--level<span class="o">=</span><span class="m">3</span><span class="w"> </span>-a<span class="w">       </span><span class="c1"># со скрытыми</span>
+eza<span class="w"> </span>-T<span class="w"> </span>--level<span class="o">=</span><span class="m">1</span><span class="w"> </span>-D<span class="w">           </span><span class="c1"># только директории, 1 уровень</span>
+eza<span class="w"> </span>--tree<span class="w"> </span>-I<span class="w"> </span><span class="s2">&quot;node_modules|.git&quot;</span><span class="w">   </span><span class="c1"># игнорить папки</span>
+</code></pre></div>
+
+<table>
+<thead>
+<tr>
+<th>Флаг</th>
+<th>Действие</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--tree</code> / <code>-T</code></td>
+<td>Включить древовидный режим</td>
+</tr>
+<tr>
+<td><code>--level=N</code></td>
+<td>Макс. глубина</td>
+</tr>
+<tr>
+<td><code>--ignore-glob</code></td>
+<td>Игнорировать по glob</td>
+</tr>
+<tr>
+<td><code>--recurse</code></td>
+<td>Рекурсивный листинг (списком, не деревом)</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="иконки-и-цвета">🎨 Иконки и цвета<a class="headerlink" href="#иконки-и-цвета" title="Ссылка">#</a></h2>
+<div class="highlight"><pre><span></span><code>eza<span class="w"> </span>--icons<span class="w">                    </span><span class="c1"># добавить иконки файлов</span>
+eza<span class="w"> </span>--icons<span class="o">=</span>auto<span class="w">               </span><span class="c1"># только если терминал поддерживает</span>
+eza<span class="w"> </span>--color<span class="o">=</span>always<span class="w">             </span><span class="c1"># форсировать цвет</span>
+eza<span class="w"> </span>--color<span class="o">=</span>never<span class="w">              </span><span class="c1"># без цвета (для pipe)</span>
+eza<span class="w"> </span>--color-scale<span class="w"> </span>all<span class="w">          </span><span class="c1"># шкала цвета по размеру</span>
+eza<span class="w"> </span>--colour-scale-mode<span class="w"> </span>fixed<span class="w">  </span><span class="c1"># фикс. шкала</span>
+</code></pre></div>
+
+<blockquote>
+<p>⚠️ Для иконок нужен Nerd Font в терминале (например JetBrainsMono Nerd Font).</p>
+</blockquote>
+<hr />
+<h2 id="git-интеграция">🔀 Git-интеграция<a class="headerlink" href="#git-интеграция" title="Ссылка">#</a></h2>
+<div class="highlight"><pre><span></span><code>eza<span class="w"> </span>-l<span class="w"> </span>--git<span class="w">                   </span><span class="c1"># колонка git-статуса</span>
+eza<span class="w"> </span>-l<span class="w"> </span>--git-repos<span class="w">             </span><span class="c1"># статус репозитория целиком</span>
+eza<span class="w"> </span>-l<span class="w"> </span>--git-repos<span class="w"> </span>--git-repos-no-status<span class="w">  </span><span class="c1"># без детального статуса</span>
+</code></pre></div>
+
+<table>
+<thead>
+<tr>
+<th>Символ</th>
+<th>Значение</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>-</code></td>
+<td>не изменён</td>
+</tr>
+<tr>
+<td><code>N</code></td>
+<td>новый (untracked)</td>
+</tr>
+<tr>
+<td><code>M</code></td>
+<td>модифицированный</td>
+</tr>
+<tr>
+<td><code>U</code></td>
+<td>обновлённый/неразрешённый</td>
+</tr>
+<tr>
+<td><code>C</code></td>
+<td>скопированный</td>
+</tr>
+<tr>
+<td><code>D</code></td>
+<td>удалённый</td>
+</tr>
+<tr>
+<td><code>?</code></td>
+<td>игнорируемый</td>
+</tr>
+</tbody>
+</table>
+<p>Также <code>eza</code> показывает у репозитория: текущую ветку, сколько коммитов вперед/назад от <code>origin</code>.</p>
+<hr />
+<h2 id="сортировка">📊 Сортировка<a class="headerlink" href="#сортировка" title="Ссылка">#</a></h2>
+<div class="highlight"><pre><span></span><code>eza<span class="w"> </span>-l<span class="w"> </span>--sort<span class="o">=</span>size<span class="w">             </span><span class="c1"># по размеру</span>
+eza<span class="w"> </span>-l<span class="w"> </span>--sort<span class="o">=</span>size<span class="w"> </span>--reverse<span class="w">   </span><span class="c1"># крупные внизу</span>
+eza<span class="w"> </span>-l<span class="w"> </span>--sort<span class="o">=</span>modified<span class="w">         </span><span class="c1"># по дате изменения</span>
+eza<span class="w"> </span>-l<span class="w"> </span>--sort<span class="o">=</span>accessed<span class="w">         </span><span class="c1"># по дате доступа</span>
+eza<span class="w"> </span>-l<span class="w"> </span>--sort<span class="o">=</span>created<span class="w">          </span><span class="c1"># по дате создания</span>
+eza<span class="w"> </span>-l<span class="w"> </span>--sort<span class="o">=</span>extension<span class="w">        </span><span class="c1"># по расширению</span>
+eza<span class="w"> </span>-l<span class="w"> </span>--sort<span class="o">=</span>name<span class="w">             </span><span class="c1"># по имени (дефолт)</span>
+eza<span class="w"> </span>-l<span class="w"> </span>--sort<span class="o">=</span>none<span class="w">             </span><span class="c1"># без сортировки</span>
+eza<span class="w"> </span>-l<span class="w"> </span>--sort<span class="o">=</span>inode<span class="w">            </span><span class="c1"># по inode</span>
+eza<span class="w"> </span>-l<span class="w"> </span>--sort<span class="o">=</span>version<span class="w">          </span><span class="c1"># по версии (v1, v2, v10)</span>
+</code></pre></div>
+
+<h3 id="группировка">Группировка<a class="headerlink" href="#группировка" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>eza<span class="w"> </span>-l<span class="w"> </span>--group-directories-first<span class="w">   </span><span class="c1"># папки сверху</span>
+eza<span class="w"> </span>-l<span class="w"> </span>--group-directories-last<span class="w">    </span><span class="c1"># папки снизу</span>
+eza<span class="w"> </span>-l<span class="w"> </span>--reverse<span class="w">                   </span><span class="c1"># обратный порядок</span>
+</code></pre></div>
+
+<hr />
+<h2 id="размер-и-время">📐 Размер и время<a class="headerlink" href="#размер-и-время" title="Ссылка">#</a></h2>
+<div class="highlight"><pre><span></span><code>eza<span class="w"> </span>-l<span class="w"> </span>--bytes<span class="w">                </span><span class="c1"># размер в байтах (без суффиксов)</span>
+eza<span class="w"> </span>-l<span class="w"> </span>--binary<span class="w">               </span><span class="p">|</span><span class="w"> </span>размер<span class="w"> </span>в<span class="w"> </span>KiB/MiB<span class="w"> </span><span class="o">(</span><span class="m">1024</span><span class="o">)</span>
+eza<span class="w"> </span>-l<span class="w"> </span>-h<span class="w">                     </span><span class="c1"># human-readable (KB, MB)</span>
+eza<span class="w"> </span>-l<span class="w"> </span>--smart-size<span class="w">           </span><span class="c1"># авто: байты/KB/MB по ситуации</span>
+eza<span class="w"> </span>-l<span class="w"> </span>--time-style<span class="o">=</span>long-iso<span class="w">  </span><span class="c1"># формат времени</span>
+eza<span class="w"> </span>-l<span class="w"> </span>--time-style<span class="o">=</span>full-iso<span class="w">  </span><span class="c1"># полный ISO</span>
+eza<span class="w"> </span>-l<span class="w"> </span>--time-style<span class="o">=</span>custom<span class="w"> </span><span class="s2">&quot;%Y-%m-%d %H:%M&quot;</span><span class="w">  </span><span class="c1"># свой формат</span>
+</code></pre></div>
+
+<table>
+<thead>
+<tr>
+<th>Флаг времени</th>
+<th>какую дату показывать</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>-m</code> / <code>--modified</code></td>
+<td>дата изменения (по умолчанию)</td>
+</tr>
+<tr>
+<td><code>-u</code> / <code>--accessed</code></td>
+<td>дата доступа</td>
+</tr>
+<tr>
+<td><code>-U</code> / <code>--created</code></td>
+<td>дата создания</td>
+</tr>
+<tr>
+<td><code>--changed</code></td>
+<td>когда менялись метаданные</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="доп-метаданные">🔗 Доп. метаданные<a class="headerlink" href="#доп-метаданные" title="Ссылка">#</a></h2>
+<div class="highlight"><pre><span></span><code>eza<span class="w"> </span>-l<span class="w"> </span>--extended<span class="w">              </span><span class="c1"># расширенные атрибуты (xattr)</span>
+eza<span class="w"> </span>-l<span class="w"> </span>--security-context<span class="w">      </span><span class="p">|</span><span class="w"> </span>SELinux<span class="w"> </span>context
+eza<span class="w"> </span>-l<span class="w"> </span>--context<span class="w">               </span><span class="p">|</span><span class="w"> </span>колонка<span class="w"> </span>контекста<span class="w"> </span><span class="o">(</span>безопасность<span class="o">)</span>
+eza<span class="w"> </span>-l<span class="w"> </span>--mounts<span class="w">                </span><span class="p">|</span><span class="w"> </span>точка<span class="w"> </span>монтирования
+</code></pre></div>
+
+<hr />
+<h2 id="частые-комбинации-one-liners">🧰 Частые комбинации (one-liners)<a class="headerlink" href="#частые-комбинации-one-liners" title="Ссылка">#</a></h2>
+<div class="highlight"><pre><span></span><code><span class="c1"># Быстрый обзор проекта</span>
+eza<span class="w"> </span>-l<span class="w"> </span>--git<span class="w"> </span>--icons<span class="w"> </span>--group-directories-first
+
+<span class="c1"># Только что изменилось (как watch)</span>
+eza<span class="w"> </span>-l<span class="w"> </span>--sort<span class="o">=</span>modified<span class="w"> </span>--reverse<span class="w"> </span><span class="p">|</span><span class="w"> </span>head
+
+<span class="c1"># Показать самый большой файл в директории</span>
+eza<span class="w"> </span>-l<span class="w"> </span>--sort<span class="o">=</span>size<span class="w"> </span>--reverse<span class="w"> </span>--oneline<span class="w"> </span><span class="p">|</span><span class="w"> </span>tail<span class="w"> </span>-1
+
+<span class="c1"># Дерево без мусора (для разработки)</span>
+eza<span class="w"> </span>--tree<span class="w"> </span>--level<span class="o">=</span><span class="m">2</span><span class="w"> </span>-I<span class="w"> </span><span class="s2">&quot;node_modules|.git|target|dist|build&quot;</span>
+
+<span class="c1"># Список недавно изменённых файлов (рекурсивно)</span>
+eza<span class="w"> </span>-l<span class="w"> </span>--sort<span class="o">=</span>modified<span class="w"> </span>--reverse<span class="w"> </span>-R<span class="w"> </span><span class="p">|</span><span class="w"> </span>head<span class="w"> </span>-50
+</code></pre></div>
+
+<hr />
+<h2 id="конфиг-по-умолчанию">⚙️ Конфиг по умолчанию<a class="headerlink" href="#конфиг-по-умолчанию" title="Ссылка">#</a></h2>
+<p>eza читает переменные окружения для дефолтных флагов:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># ~/.zshrc или ~/.bashrc</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">EZA_STANDARD_OPTIONS</span><span class="o">=</span><span class="s2">&quot;--group-directories-first --icons&quot;</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">EZA_LONG_OPTIONS</span><span class="o">=</span><span class="s2">&quot;--git --header --smart-size&quot;</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">EZA_TREE_OPTIONS</span><span class="o">=</span><span class="s2">&quot;--level=2&quot;</span>
+</code></pre></div>
+
+<hr />
+<h2 id="eza-vs-exa-vs-ls">🆚 eza vs exa vs ls<a class="headerlink" href="#eza-vs-exa-vs-ls" title="Ссылка">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Что</th>
+<th><code>ls</code></th>
+<th><code>exa</code></th>
+<th><code>eza</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Цвет</td>
+<td>базовый</td>
+<td>✅ детальный</td>
+<td>✅ детальный + шкала</td>
+</tr>
+<tr>
+<td>Git-статус</td>
+<td>❌</td>
+<td>✅</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>Иконки (Nerd)</td>
+<td>❌</td>
+<td>⚠️ патч</td>
+<td>✅ нативно</td>
+</tr>
+<tr>
+<td>Дерево</td>
+<td>❌ (<code>tree</code> отдельно)</td>
+<td>✅</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>Сортировка</td>
+<td>базовая</td>
+<td>✅ расшир.</td>
+<td>✅ расшир.</td>
+</tr>
+<tr>
+<td>Поддержка</td>
+<td>активная</td>
+<td>❌ заброшен</td>
+<td>✅ активная (форк exa)</td>
+</tr>
+<tr>
+<td>Скорость (Rust)</td>
+<td>C</td>
+<td>Rust</td>
+<td>Rust</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><code>eza</code> — прямой преемник <code>exa</code>. Если стоит <code>exa</code>, переходите на <code>eza</code>.</p>
+</blockquote>
+<hr />
+<h2 id="сравнение-выводов">💡 Сравнение выводов<a class="headerlink" href="#сравнение-выводов" title="Ссылка">#</a></h2>
+<div class="highlight"><pre><span></span><code>$ ls -l
+-rw-r--r-- 1 user user 1234 Jan 6 10:30 file.txt
+
+$ eza -l --icons --git
+.rw-r--r-- 1.2k user  6 Jan 10:30 📄 file.txt  -M
+</code></pre></div>
+
+<p>Цвета: директории — синий, исполняемые — зелёный, ссылки — голубой, <code>*.md</code> — особый, скрытые — серый.</p>
+<hr />
+<h2 id="источники">🔗 Источники<a class="headerlink" href="#источники" title="Ссылка">#</a></h2>
+<ul>
+<li>GitHub: https://github.com/eza-community/eza</li>
+<li>Документация: https://github.com/eza-community/eza/blob/main/man/eza.1.md</li>
+<li>Сравнение с exa: https://github.com/eza-community/eza#features</li>
+</ul>
+    </article>
+    <nav class="pagination">
+      <a class="pager prev" href="python-automation-libs.html">← Python: авт-ция (10 libs)</a>
+      <a class="pager next" href="dbeaver.html">DBeaver →</a>
+    </nav>
+  </main>
+
+  <aside class="toc">
+    <details open>
+      <summary>📑 Оглавление</summary>
+      <div class="toc-list">
+<div class="toc">
+<ul>
+<li><a href="#eza-шпаргалка-замена-ls">🌈 eza — шпаргалка (замена ls)</a><ul>
+<li><a href="#установка">📦 Установка</a><ul>
+<li><a href="#алиас-вместо-ls-рекомендуется-в-zshrc-bashrc">Алиас вместо ls (рекомендуется в ~/.zshrc / ~/.bashrc)</a></li>
+</ul>
+</li>
+<li><a href="#базовый-вывод">🔑 Базовый вывод</a><ul>
+<li><a href="#длинный-формат-l">Длинный формат (-l)</a></li>
+</ul>
+</li>
+<li><a href="#дерево-tree">🌳 Дерево (tree)</a></li>
+<li><a href="#иконки-и-цвета">🎨 Иконки и цвета</a></li>
+<li><a href="#git-интеграция">🔀 Git-интеграция</a></li>
+<li><a href="#сортировка">📊 Сортировка</a><ul>
+<li><a href="#группировка">Группировка</a></li>
+</ul>
+</li>
+<li><a href="#размер-и-время">📐 Размер и время</a></li>
+<li><a href="#доп-метаданные">🔗 Доп. метаданные</a></li>
+<li><a href="#частые-комбинации-one-liners">🧰 Частые комбинации (one-liners)</a></li>
+<li><a href="#конфиг-по-умолчанию">⚙️ Конфиг по умолчанию</a></li>
+<li><a href="#eza-vs-exa-vs-ls">🆚 eza vs exa vs ls</a></li>
+<li><a href="#сравнение-выводов">💡 Сравнение выводов</a></li>
+<li><a href="#источники">🔗 Источники</a></li>
+</ul>
+</li>
+</ul>
+</div>
+
+      </div>
+    </details>
+  </aside>
+</div>
+
+<button class="back-top" id="backTop" aria-label="Наверх">↑</button>
+
+<script src="assets/search.js"></script>
+<script src="assets/page.js"></script>
+</body>
+</html>

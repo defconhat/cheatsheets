@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Markdown — Шпаргалки</title>
+<link rel="stylesheet" href="assets/style.css">
+<link rel="stylesheet" href="assets/pygments.css">
+</head>
+<body>
+<div class="layout">
+  <aside class="sidebar">
+    <a href="index.html" class="brand">📌 Шпаргалки</a>
+    <nav class="nav">
+<a href="yazi.html" class="nav-item"><span class="nav-ico">📦</span>Yazi</a>
+<a href="neovim.html" class="nav-item"><span class="nav-ico">📘</span>Neovim (LazyVim)</a>
+<a href="niri.html" class="nav-item"><span class="nav-ico">🪟</span>Niri</a>
+<a href="tmux.html" class="nav-item"><span class="nav-ico">🪟</span>Tmux</a>
+<a href="bash.html" class="nav-item"><span class="nav-ico">🐚</span>Bash</a>
+<a href="git.html" class="nav-item"><span class="nav-ico">🔀</span>Git</a>
+<a href="terminal.html" class="nav-item"><span class="nav-ico">🖥️</span>Терминал Linux</a>
+<a href="powershell.html" class="nav-item"><span class="nav-ico">💻</span>PowerShell</a>
+<a href="cmd.html" class="nav-item"><span class="nav-ico">🪟</span>CMD (cmd.exe)</a>
+<a href="python.html" class="nav-item"><span class="nav-ico">🐍</span>Python</a>
+<a href="systemd.html" class="nav-item"><span class="nav-ico">⚙️</span>systemd</a>
+<a href="ssh.html" class="nav-item"><span class="nav-ico">🔐</span>SSH</a>
+<a href="make-cmake.html" class="nav-item"><span class="nav-ico">🔨</span>Make / CMake</a>
+<a href="docker.html" class="nav-item"><span class="nav-ico">🐳</span>Docker</a>
+<a href="pacman.html" class="nav-item"><span class="nav-ico">📦</span>pacman / yay / paru</a>
+<a href="spark.html" class="nav-item"><span class="nav-ico">⚡</span>Apache Spark / PySpark</a>
+<a href="markdown.html" class="nav-item active"><span class="nav-ico">📝</span>Markdown</a>
+<a href="regex.html" class="nav-item"><span class="nav-ico">🔍</span>Регулярные выражения</a>
+<a href="jq-json.html" class="nav-item"><span class="nav-ico">🔧</span>jq + JSON</a>
+<a href="awk-sed.html" class="nav-item"><span class="nav-ico">✂️</span>awk / sed</a>
+<a href="airflow.html" class="nav-item"><span class="nav-ico">🌪️</span>Apache Airflow</a>
+<a href="http-curl.html" class="nav-item"><span class="nav-ico">🌐</span>HTTP / curl</a>
+<a href="yaml.html" class="nav-item"><span class="nav-ico">📄</span>YAML</a>
+<a href="vscode.html" class="nav-item"><span class="nav-ico">💻</span>VS Code</a>
+<a href="cron.html" class="nav-item"><span class="nav-ico">⏰</span>cron</a>
+<a href="fzf-zoxide.html" class="nav-item"><span class="nav-ico">🔎</span>fzf + zoxide</a>
+<a href="minikube-k8s.html" class="nav-item"><span class="nav-ico">☸️</span>Minikube / Kubernetes</a>
+<a href="cicd.html" class="nav-item"><span class="nav-ico">🦊</span>GitLab CI / GitHub Actions</a>
+<a href="nginx.html" class="nav-item"><span class="nav-ico">🌐</span>nginx</a>
+<a href="dbt.html" class="nav-item"><span class="nav-ico">🔧</span>dbt</a>
+<a href="kafka.html" class="nav-item"><span class="nav-ico">🐘</span>Apache Kafka</a>
+<a href="prometheus-grafana.html" class="nav-item"><span class="nav-ico">📊</span>Prometheus / Grafana</a>
+<a href="iceberg-nessie.html" class="nav-item"><span class="nav-ico">🧊</span>Iceberg / Nessie</a>
+<a href="impala.html" class="nav-item"><span class="nav-ico">🐬</span>Apache Impala</a>
+<a href="terraform.html" class="nav-item"><span class="nav-ico">🏗️</span>Terraform</a>
+<a href="linux-internals.html" class="nav-item"><span class="nav-ico">🐧</span>Linux Internals</a>
+<a href="miscellaneous.html" class="nav-item"><span class="nav-ico">🧰</span>Miscellaneous</a>
+<a href="python-automation-libs.html" class="nav-item"><span class="nav-ico">🐍</span>Python: авт-ция (10 libs)</a>
+<a href="eza.html" class="nav-item"><span class="nav-ico">🌈</span>eza</a>
+<a href="dbeaver.html" class="nav-item"><span class="nav-ico">🗄️</span>DBeaver</a>
+<a href="zcode.html" class="nav-item"><span class="nav-ico">🤖</span>ZCode</a>
+<a href="warp.html" class="nav-item"><span class="nav-ico">🚀</span>Warp</a>
+<a href="agentic-ai-dev.html" class="nav-item"><span class="nav-ico">🤝</span>Агентная разработка с ИИ</a>
+    </nav>
+  </aside>
+
+  <main class="content">
+    <article>
+<h1 id="markdown-шпаргалка-по-синтаксису">📝 Markdown — шпаргалка по синтаксису<a class="headerlink" href="#markdown-шпаргалка-по-синтаксису" title="Ссылка">#</a></h1>
+<blockquote>
+<p><strong>Markdown</strong> — простой текстовый формат разметки (с 2004 г., John Gruber).
+Читается как обычный текст, конвертируется в HTML.
+Используется в README, документации, GitHub, Reddit, Notion, Obsidian.</p>
+</blockquote>
+<hr />
+<h2 id="заголовки">🚀 Заголовки<a class="headerlink" href="#заголовки" title="Ссылка">#</a></h2>
+<div class="highlight"><pre><span></span><code><span class="gh"># Заголовок 1 уровня (&lt;h1&gt;)</span>
+<span class="gu">## Заголовок 2 уровня (&lt;h2&gt;)</span>
+<span class="gu">### Заголовок 3 уровня (&lt;h3&gt;)</span>
+<span class="gu">#### Заголовок 4 уровня (&lt;h4&gt;)</span>
+<span class="gu">##### Заголовок 5 уровня (&lt;h5&gt;)</span>
+<span class="gu">###### Заголовок 6 уровня (&lt;h6)</span>
+</code></pre></div>
+
+<blockquote>
+<p>Заголовок 1 можно и так:
+```markdown
+Заголовок 1
+============</p>
+<h2 id="заголовок-2">Заголовок 2<a class="headerlink" href="#заголовок-2" title="Ссылка">#</a></h2>
+<p>```</p>
+</blockquote>
+<h3 id="автоматические-якоря">Автоматические якоря<a class="headerlink" href="#автоматические-якоря" title="Ссылка">#</a></h3>
+<p>Большинство процессоров генерируют id для заголовков:</p>
+<div class="highlight"><pre><span></span><code><span class="gu">## Мой заголовок</span>
+</code></pre></div>
+
+<p>→ <code>&lt;h2 id="мой-заголовок"&gt;</code> → ссылка <code>[перейти](#мой-заголовок)</code></p>
+<hr />
+<h2 id="форматирование-текста">✍️ Форматирование текста<a class="headerlink" href="#форматирование-текста" title="Ссылка">#</a></h2>
+<div class="highlight"><pre><span></span><code><span class="ge">*курсив*</span>  или  <span class="ge">_курсив_</span>
+<span class="gs">**жирный**</span>  или  <span class="gs">__жирный__</span>
+***жирный курсив***  или  ___жирный курсив___
+<span class="gd">~~зачёркнутый~~</span>
+<span class="sb">`код внутри строки`</span>
+под~индекс~  над^индекс^   (не везде поддерживается)
+</code></pre></div>
+
+<p>Результат:
+<em>курсив</em> · <strong>жирный</strong> · <strong><em>жирный курсив</em></strong> · ~~зачёркнутый~~ · <code>код</code></p>
+<h3 id="цитаты">Цитаты<a class="headerlink" href="#цитаты" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">&gt; </span><span class="ge">Это цитата</span>
+<span class="k">&gt; </span><span class="ge">продолжается на следующей строке.</span>
+<span class="k">&gt;</span>
+<span class="ge">&gt; &gt; Вложенная цитата</span>
+</code></pre></div>
+
+<blockquote>
+<p>Цитата, продолжается.</p>
+<blockquote>
+<p>Вложенная.</p>
+</blockquote>
+</blockquote>
+<h3 id="перенос-строки">Перенос строки<a class="headerlink" href="#перенос-строки" title="Ссылка">#</a></h3>
+<ul>
+<li>Один перенос строки = пробел (в большинстве flavour&rsquo;ов).</li>
+<li>Два пробела в конце строки или <code>\</code> = явный <code>&lt;br&gt;</code>.</li>
+<li>Пустая строка = новый абзац.</li>
+</ul>
+<div class="highlight"><pre><span></span><code>Первая строка\
+Вторая строка (явный перенос)
+
+Новый абзац.
+</code></pre></div>
+
+<hr />
+<h2 id="списки">📋 Списки<a class="headerlink" href="#списки" title="Ссылка">#</a></h2>
+<h3 id="маркированные-unordered">Маркированные (unordered)<a class="headerlink" href="#маркированные-unordered" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">-</span><span class="w"> </span>Пункт 1
+<span class="k">-</span><span class="w"> </span>Пункт 2
+<span class="w">  </span><span class="k">-</span><span class="w"> </span>Вложенный 2.1
+<span class="w">  </span><span class="k">-</span><span class="w"> </span>Вложенный 2.2
+<span class="w">    </span><span class="k">-</span><span class="w"> </span>Глубже
+<span class="k">-</span><span class="w"> </span>Пункт 3
+
+<span class="k">*</span><span class="w"> </span>Можно звёздочкой
++ Или плюсом
+</code></pre></div>
+
+<ul>
+<li>Пункт 1</li>
+<li>Пункт 2</li>
+<li>Вложенный</li>
+</ul>
+<h3 id="нумерованные-ordered">Нумерованные (ordered)<a class="headerlink" href="#нумерованные-ordered" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">1.</span> Первый
+<span class="k">2.</span> Второй
+<span class="k">3.</span> Третий
+
+<span class="k">1.</span> Первый (нумерация авто-исправится)
+<span class="k">1.</span> Второй
+<span class="k">1.</span> Третий
+</code></pre></div>
+
+<ol>
+<li>Первый</li>
+<li>Второй</li>
+</ol>
+<h3 id="чек-листы-task-lists">Чек-листы (task lists)<a class="headerlink" href="#чек-листы-task-lists" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">- [x]</span> Выполнено
+<span class="k">- [ ]</span> Не выполнено
+<span class="k">- [ ]</span> Ещё одно
+</code></pre></div>
+
+<ul>
+<li>[x] Выполнено</li>
+<li>[ ] Не выполнено</li>
+</ul>
+<h3 id="список-определений-некоторые-flavour-ы">Список определений (некоторые flavour&rsquo;ы)<a class="headerlink" href="#список-определений-некоторые-flavour-ы" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>Термин 1
+: Определение 1
+
+Термин 2
+: Определение 2
+</code></pre></div>
+
+<hr />
+<h2 id="ссылки">🔗 Ссылки<a class="headerlink" href="#ссылки" title="Ссылка">#</a></h2>
+<div class="highlight"><pre><span></span><code>[<span class="nt">текст ссылки</span>](<span class="na">https://example.com</span>)
+[<span class="nt">с подсказкой</span>](<span class="na">https://example.com &quot;Заголовок при наведении&quot;</span>)
+[<span class="nt">относительная</span>](<span class="na">../docs/file.md</span>)
+[<span class="nt">на заголовок</span>](<span class="na">#раздел-1</span>)
+
+&lt;https://example.com&gt;             → автоссылка
+&lt;email@example.com&gt;               → mailto
+
+[<span class="nt">Ссылка по ID</span>][<span class="nl">ref</span>]               → определение отдельно
+[<span class="nl">ref</span>]: <span class="na">https://example.com &quot;Подсказка&quot;</span>
+
+[<span class="nt">Сама ссылка</span>][]
+[<span class="nl">Сама ссылка</span>]: <span class="na">https://example.com</span>
+</code></pre></div>
+
+<h3 id="изображения">Изображения<a class="headerlink" href="#изображения" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>![<span class="nt">alt text</span>](<span class="na">image.png</span>)
+![<span class="nt">alt text</span>](<span class="na">image.png &quot;Заголовок&quot;</span>)
+![<span class="nt">alt text</span>](<span class="na">https://example.com/img.png</span>)
+![<span class="nt">alt text</span>](<span class="na">./images/diagram.png</span>)
+
+Со ссылкой:
+[<span class="nt">![alt</span>](<span class="na">image.png</span>)](https://example.com)
+
+Размер (HTML, если нужен):
+&lt;img src=&quot;image.png&quot; width=&quot;300&quot; height=&quot;200&quot;&gt;
+</code></pre></div>
+
+<hr />
+<h2 id="код">💻 Код<a class="headerlink" href="#код" title="Ссылка">#</a></h2>
+<h3 id="инлайн-код">Инлайн-код<a class="headerlink" href="#инлайн-код" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>Используйте <span class="sb">`git status`</span> для проверки.
+</code></pre></div>
+
+<h3 id="блок-кода-fenced">Блок кода (fenced)<a class="headerlink" href="#блок-кода-fenced" title="Ссылка">#</a></h3>
+<p><code>`</code>python
+def hello():
+    print(&ldquo;Hello&rdquo;)
+<code></code></p>
+<p>→ Подсветка синтаксиса по указанному языку.</p>
+<h3 id="блок-кода-без-подсветки">Блок кода без подсветки<a class="headerlink" href="#блок-кода-без-подсветки" title="Ссылка">#</a></h3>
+<p><code>`</code>
+plain text
+<code>тут не выполняется</code>
+<code></code></p>
+<h3 id="отступы-4-пробела">Отступы (4 пробела)<a class="headerlink" href="#отступы-4-пробела" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>    это код
+    тоже код
+</code></pre></div>
+
+<h3 id="длинные-блоки-с-внутри">Длинные блоки с <code></code> ``` <code></code> внутри<a class="headerlink" href="#длинные-блоки-с-внутри" title="Ссылка">#</a></h3>
+<p>Если внутри кода есть тройные обратные кавычки — оберните в 4:</p>
+<p><code></code>
+<code>```python</code>
+<code></code></p>
+<h3 id="номера-строк-подсветка-github-flavored">Номера строк, подсветка (GitHub Flavored)<a class="headerlink" href="#номера-строк-подсветка-github-flavored" title="Ссылка">#</a></h3>
+<p><code>`</code>python showLineNumbers
+def f():
+    pass
+<code></code></p>
+<hr />
+<h2 id="таблицы-gfm">📊 Таблицы (GFM)<a class="headerlink" href="#таблицы-gfm" title="Ссылка">#</a></h2>
+<div class="highlight"><pre><span></span><code>| Колонка 1 | Колонка 2 | Колонка 3 |
+|-----------|:---------:|----------:|
+| ячейка    | ячейка    | ячейка    |
+| <span class="gs">**жирно**</span> | <span class="sb">`код`</span>     | [ссылка]  |
+</code></pre></div>
+
+<table>
+<thead>
+<tr>
+<th>Колонка 1</th>
+<th style="text-align: center;">Колонка 2</th>
+<th style="text-align: right;">Колонка 3</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ячейка</td>
+<td style="text-align: center;">ячейка</td>
+<td style="text-align: right;">ячейка</td>
+</tr>
+<tr>
+<td><strong>жирно</strong></td>
+<td style="text-align: center;"><code>код</code></td>
+<td style="text-align: right;">[ссылка]</td>
+</tr>
+</tbody>
+</table>
+<p>Выравнивание:
+| <code>:---</code> | <code>:---:</code> | <code>---:</code> |
+| влево | центр | вправо |</p>
+<h3 id="html-таблица-для-тонкой-настройки">HTML-таблица для тонкой настройки<a class="headerlink" href="#html-таблица-для-тонкой-настройки" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>&lt;table&gt;
+  &lt;tr&gt;&lt;th&gt;A&lt;/th&gt;&lt;th&gt;B&lt;/th&gt;&lt;/tr&gt;
+  &lt;tr&gt;&lt;td&gt;1&lt;/td&gt;&lt;td colspan=&quot;2&quot;&gt;объединение&lt;/td&gt;&lt;/tr&gt;
+&lt;/table&gt;
+</code></pre></div>
+
+<hr />
+<h2 id="горизонтальная-линия">📏 Горизонтальная линия<a class="headerlink" href="#горизонтальная-линия" title="Ссылка">#</a></h2>
+<div class="highlight"><pre><span></span><code>---
+или
+***
+или
+___
+</code></pre></div>
+
+<hr />
+<h2 id="встроенный-html">🔀 Встроенный HTML<a class="headerlink" href="#встроенный-html" title="Ссылка">#</a></h2>
+<p>Markdown разрешает HTML внутри:</p>
+<div class="highlight"><pre><span></span><code>&lt;details&gt;
+&lt;summary&gt;Нажмите, чтобы развернуть&lt;/summary&gt;
+
+Скрытое содержимое.
+
+&lt;/details&gt;
+
+&lt;kbd&gt;Ctrl&lt;/kbd&gt; + &lt;kbd&gt;C&lt;/kbd&gt;
+
+&lt;mark&gt;подсвеченный текст&lt;/mark&gt;
+
+&lt;sub&gt;под-индекс&lt;/sub&gt; &lt;sup&gt;над-индекс&lt;/sup&gt;
+
+&lt;!-- HTML комментарий --&gt;
+
+&lt;abbr title=&quot;HyperText Markup Language&quot;&gt;HTML&lt;/abbr&gt;
+</code></pre></div>
+
+<p>Результат:</p>
+<details>
+<summary>Нажмите</summary>
+Скрытое.
+</details>
+
+<p><kbd>Ctrl</kbd>+<kbd>C</kbd> · <mark>подсветка</mark></p>
+<hr />
+<h2 id="расширенный-синтаксис">🎓 Расширенный синтаксис<a class="headerlink" href="#расширенный-синтаксис" title="Ссылка">#</a></h2>
+<h3 id="mermaid-диаграммы-github-gitlab-obsidian">Mermaid диаграммы (GitHub, GitLab, Obsidian)<a class="headerlink" href="#mermaid-диаграммы-github-gitlab-obsidian" title="Ссылка">#</a></h3>
+<p><code>```mermaid
+graph LR
+    A[Старт] --&gt; B{Решение}
+    B --&gt;|Да| C[Действие]
+    B --&gt;|Нет| D[Конец]
+    C --&gt; D
+```</code></p>
+<h3 id="математика-latex-github-notion-obsidian">Математика (LaTeX, GitHub/Notion/Obsidian)<a class="headerlink" href="#математика-latex-github-notion-obsidian" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>Inline: $E = mc^2$
+
+Блок:
+$$
+\int_0^\infty e^{-x^2} dx = \frac{\sqrt{\pi}}{2}
+$$
+</code></pre></div>
+
+<h3 id="footnotes-сноски">Footnotes (сноски)<a class="headerlink" href="#footnotes-сноски" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>Текст со сноской[^1] и ещё одной[^longnote].
+
+[<span class="nl">^1</span>]: <span class="na">Это первая сноска.</span>
+[<span class="nl">^longnote</span>]: <span class="na">Многострочная сноска.</span>
+
+    Можно писать с отступом.
+</code></pre></div>
+
+<h3 id="emojis-github">Emojis (GitHub)<a class="headerlink" href="#emojis-github" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>:smile: :rocket: :thumbsup: :+1:
+:heart: :fire: :tada: :checkered_flag:
+</code></pre></div>
+
+<p>→ 😄 🚀 👍 ❤️ 🔥 🎉</p>
+<h3 id="mentions-github">Mentions (GitHub)<a class="headerlink" href="#mentions-github" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="ni">@username</span>              → ссылка на пользователя
+<span class="ni">@org/team</span>              → на команду
+<span class="gh">#123                   → issue/PR</span>
+</code></pre></div>
+
+<h3 id="alerts-github-2023">Alerts (GitHub 2023+)<a class="headerlink" href="#alerts-github-2023" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">&gt; </span><span class="ge">[!NOTE]</span>
+<span class="k">&gt; </span><span class="ge">Полезная информация.</span>
+
+<span class="k">&gt; </span><span class="ge">[!TIP]</span>
+<span class="k">&gt; </span><span class="ge">Совет.</span>
+
+<span class="k">&gt; </span><span class="ge">[!IMPORTANT]</span>
+<span class="k">&gt; </span><span class="ge">Важно!</span>
+
+<span class="k">&gt; </span><span class="ge">[!WARNING]</span>
+<span class="k">&gt; </span><span class="ge">Внимание.</span>
+
+<span class="k">&gt; </span><span class="ge">[!CAUTION]</span>
+<span class="k">&gt; </span><span class="ge">Осторожно.</span>
+</code></pre></div>
+
+<hr />
+<h2 id="экранирование">🎨 Экранирование<a class="headerlink" href="#экранирование" title="Ссылка">#</a></h2>
+<p>Чтобы спецсимволы не интерпретировались — экранируйте <code>\</code>:</p>
+<div class="highlight"><pre><span></span><code>\*не курсив\*
+\# не заголовок
+\` не код
+\[не ссылка\](не URL)
+\\ обратный слэш
+\| в таблицах
+</code></pre></div>
+
+<p>Экранировать нужно: <code>\</code> * <code>_</code> # <code>+</code> - <code>.</code> ! <code>{ }</code> [ ] <code>( )</code> |</p>
+<hr />
+<h2 id="flavours-диалекты">🌍 Flavours (диалекты)<a class="headerlink" href="#flavours-диалекты" title="Ссылка">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Flavour</th>
+<th>Где</th>
+<th>Особенности</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>CommonMark</strong></td>
+<td>Стандарт</td>
+<td>Базовый, строгий</td>
+</tr>
+<tr>
+<td><strong>GFM</strong> (GitHub Flavored)</td>
+<td>GitHub</td>
+<td>таблицы, чек-листы, автоссылки</td>
+</tr>
+<tr>
+<td><strong>Pandoc</strong></td>
+<td>Универсальный</td>
+<td>самый мощный, для PDF/Word</td>
+</tr>
+<tr>
+<td><strong>MultiMarkdown</strong></td>
+<td>Расширенный</td>
+<td>сноски, citation</td>
+</tr>
+<tr>
+<td><strong>Notion Markdown</strong></td>
+<td>Notion</td>
+<td>упрощённый</td>
+</tr>
+<tr>
+<td><strong>Obsidian</strong></td>
+<td>PKM</td>
+<td>wiki-links <code>[[ ]]</code>, callouts</td>
+</tr>
+<tr>
+<td><strong>Reddit</strong></td>
+<td>Reddit</td>
+<td>подмножество</td>
+</tr>
+<tr>
+<td><strong>MkDocs Material</strong></td>
+<td>Документация</td>
+<td>admonitions, tabs</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="инструменты">🛠️ Инструменты<a class="headerlink" href="#инструменты" title="Ссылка">#</a></h2>
+<h3 id="cli-конвертеры">CLI-конвертеры<a class="headerlink" href="#cli-конвертеры" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Pandoc — универсальный конвертер</span>
+pandoc<span class="w"> </span>input.md<span class="w"> </span>-o<span class="w"> </span>output.html
+pandoc<span class="w"> </span>input.md<span class="w"> </span>-o<span class="w"> </span>output.pdf
+pandoc<span class="w"> </span>input.md<span class="w"> </span>-o<span class="w"> </span>output.docx
+pandoc<span class="w"> </span>input.md<span class="w"> </span>-o<span class="w"> </span>output.epub
+pandoc<span class="w"> </span>input.md<span class="w"> </span>--pdf-engine<span class="o">=</span>xelatex<span class="w"> </span>-V<span class="w"> </span><span class="nv">mainfont</span><span class="o">=</span><span class="s2">&quot;Arial&quot;</span><span class="w"> </span>-o<span class="w"> </span>out.pdf
+
+<span class="c1"># glow — превью в терминале</span>
+glow<span class="w"> </span>README.md
+glow<span class="w"> </span>-w<span class="w"> </span><span class="m">80</span><span class="w"> </span>file.md<span class="w">                  </span><span class="c1"># ширина 80</span>
+
+<span class="c1"># mdcat — как glow, но с изображениями</span>
+mdcat<span class="w"> </span>README.md
+
+<span class="c1"># markdownlint — линтер</span>
+markdownlint-cli2<span class="w"> </span>**/*.md
+markdownlint<span class="w"> </span>README.md<span class="w"> </span>--fix
+
+<span class="c1"># markdownlint-cli2 configure</span>
+<span class="c1"># .markdownlint.json</span>
+</code></pre></div>
+
+<h3 id="редакторы">Редакторы<a class="headerlink" href="#редакторы" title="Ссылка">#</a></h3>
+<table>
+<thead>
+<tr>
+<th>Редактор</th>
+<th>Плюсы</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Obsidian</strong></td>
+<td>PKM, графи связей, плагины</td>
+</tr>
+<tr>
+<td><strong>Typora</strong></td>
+<td>WYSIWYG, платный</td>
+</tr>
+<tr>
+<td><strong>MarkText</strong></td>
+<td>WYSIWYG, бесплатный</td>
+</tr>
+<tr>
+<td><strong>VS Code</strong></td>
+<td>+ расширения (Markdown All in One, Preview)</td>
+</tr>
+<tr>
+<td><strong>Neovim</strong></td>
+<td>+ markdown-preview.nvim</td>
+</tr>
+<tr>
+<td><strong>Zettlr</strong></td>
+<td>Для научной работы</td>
+</tr>
+<tr>
+<td><strong>HackMD / HedgeDoc</strong></td>
+<td>Коллаборативный</td>
+</tr>
+</tbody>
+</table>
+<h3 id="vs-code-расширения">VS Code расширения<a class="headerlink" href="#vs-code-расширения" title="Ссылка">#</a></h3>
+<ul>
+<li><strong>Markdown All in One</strong> — горячие клавиши, TOC</li>
+<li><strong>Markdown Preview Enhanced</strong> — расширенное превью, диаграммы</li>
+<li><strong>markdownlint</strong> — линтер</li>
+<li><strong>Paste Image</strong> — вставка скриншотов</li>
+<li><strong>Markdown Table</strong> — редактор таблиц</li>
+</ul>
+<hr />
+<h2 id="лучшие-практики">📐 Лучшие практики<a class="headerlink" href="#лучшие-практики" title="Ссылка">#</a></h2>
+<h3 id="структура-readme-md">Структура README.md<a class="headerlink" href="#структура-readme-md" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="gh"># Название проекта</span>
+
+<span class="k">&gt; </span><span class="ge">Краткое описание в одну строку.</span>
+
+![<span class="nt">Demo</span>](<span class="na">demo.gif</span>)
+
+<span class="gu">## Особенности</span>
+<span class="k">-</span><span class="w"> </span>✨ Фича 1
+<span class="k">-</span><span class="w"> </span>🚀 Фича 2
+
+<span class="gu">## Установка</span>
+```bash
+npm install my-package
+</code></pre></div>
+
+<h2 id="использование">Использование<a class="headerlink" href="#использование" title="Ссылка">#</a></h2>
+<div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">foo</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;my-package&#39;</span><span class="p">;</span>
+<span class="nx">foo</span><span class="p">();</span>
+</code></pre></div>
+
+<h2 id="документация">Документация<a class="headerlink" href="#документация" title="Ссылка">#</a></h2>
+<p>Подробнее в <a href="docs/">docs/</a>.</p>
+<h2 id="лицензия">Лицензия<a class="headerlink" href="#лицензия" title="Ссылка">#</a></h2>
+<p>MIT © [Ваше имя]
+```</p>
+<h3 id="правила-хорошего-тона">Правила хорошего тона<a class="headerlink" href="#правила-хорошего-тона" title="Ссылка">#</a></h3>
+<ol>
+<li><strong>Заголовок 1 — один</strong> на документ.</li>
+<li><strong>Пустые строки</strong> вокруг блоков кода, списков, таблиц.</li>
+<li><strong>Без более 6 уровней</strong> заголовков.</li>
+<li><strong>Таблицы</strong> — не слишком широкие (для мобильных).</li>
+<li><strong>Изображения</strong> — с alt-текстом (для доступности).</li>
+<li><strong>Ссылки</strong> — осмысленный текст, не «тут»/«здесь».</li>
+<li><strong>Списки</strong> — согласованный маркер (либо <code>-</code>, либо <code>*</code>).</li>
+<li><strong>Код</strong> — указывайте язык для подсветки.</li>
+<li><strong>Длинные строки</strong> — некоторые предпочитают 80 символов, другие — одно предложение на строку.</li>
+<li><strong>Line ending</strong> — LF (Unix), не CRLF.</li>
+</ol>
+<hr />
+<h2 id="частые-ошибки">🪤 Частые ошибки<a class="headerlink" href="#частые-ошибки" title="Ссылка">#</a></h2>
+<ol>
+<li><strong>Вложенные списки</strong> — отступ должен быть 2 или 4 пробела (зависит от flavour).</li>
+<li><strong>Список внутри списка</strong> — пустая строка перед вложенным не всегда нужна.</li>
+<li><strong>Таблицы</strong> — требуют заголовок и разделитель <code>|---|</code>.</li>
+<li><strong>Код в списке</strong> — отступ 8 пробелов (или 4, если список с <code>-</code>).</li>
+<li><strong><code>#</code> без пробела</strong> — <code>#заголовок</code> не сработает, нужно <code># заголовок</code>.</li>
+<li><strong>Ссылки с пробелами</strong> — <code>[текст](url с пробелом)</code> сломается.</li>
+<li><strong>HTML-блоки</strong> — должны быть отделены пустыми строками.</li>
+<li><strong>Underline <code>_</code> в словах</strong> — <code>my_var_name</code> может стать курсивом.</li>
+<li><strong>End-of-line 2 пробела</strong> — для переноса часто забывают.</li>
+<li><strong>Emojis</strong> — не везде поддерживаются (терминал, PDF).</li>
+</ol>
+<hr />
+<h2 id="полезные-ссылки">🔗 Полезные ссылки<a class="headerlink" href="#полезные-ссылки" title="Ссылка">#</a></h2>
+<ul>
+<li>CommonMark спецификация: https://spec.commonmark.org</li>
+<li>GitHub Markdown: https://docs.github.com/en/get-started/writing-with-on-github</li>
+<li>Markdown Guide: https://www.markdownguide.org</li>
+<li>Pandoc: https://pandoc.org</li>
+<li>Markdown Cheat Sheet: https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet</li>
+<li>Mermaid: https://mermaid.js.org</li>
+<li>Obsidian: https://help.obsidian.md</li>
+<li>emoji list: https://github.com/ikatyang/emoji-cheat-sheet</li>
+</ul>
+<hr />
+<h2 id="полезные-советы">💡 Полезные советы<a class="headerlink" href="#полезные-советы" title="Ссылка">#</a></h2>
+<ol>
+<li><strong>README.md</strong> в корне проекта — первое, что видят на GitHub.</li>
+<li><strong>Изображения</strong> — в отдельную папку <code>docs/</code> или <code>assets/</code>.</li>
+<li><strong>Оглавление (TOC)</strong> — для длинных документов.</li>
+<li><strong>Badges</strong> (shields.io) — для статусов CI, версий, лицензий.</li>
+<li><strong><code>&lt;details&gt;</code></strong> — для сворачивания длинных логов/конфигов.</li>
+<li><strong>Mermaid</strong> — для диаграмм прямо в markdown.</li>
+<li><strong>Pandoc</strong> — для конвертации в PDF/DOCX/HTML.</li>
+<li><strong>markdownlint</strong> — для единообразия в команде.</li>
+<li><strong>Alt-текст</strong> у изображений — для доступности.</li>
+<li><strong>Один h1</strong> — для SEO и структуры.</li>
+</ol>
+<hr />
+<p><em>Сгенерировано как шпаргалка. Markdown простой, но имеет много flavour&rsquo;ов —
+углубляйтесь через https://www.markdownguide.org</em></p>
+    </article>
+    <nav class="pagination">
+      <a class="pager prev" href="spark.html">← Apache Spark / PySpark</a>
+      <a class="pager next" href="regex.html">Регулярные выражения →</a>
+    </nav>
+  </main>
+
+  <aside class="toc">
+    <details open>
+      <summary>📑 Оглавление</summary>
+      <div class="toc-list">
+<div class="toc">
+<ul>
+<li><a href="#markdown-шпаргалка-по-синтаксису">📝 Markdown — шпаргалка по синтаксису</a><ul>
+<li><a href="#заголовки">🚀 Заголовки</a></li>
+<li><a href="#заголовок-2">Заголовок 2</a><ul>
+<li><a href="#автоматические-якоря">Автоматические якоря</a></li>
+</ul>
+</li>
+<li><a href="#форматирование-текста">✍️ Форматирование текста</a><ul>
+<li><a href="#цитаты">Цитаты</a></li>
+<li><a href="#перенос-строки">Перенос строки</a></li>
+</ul>
+</li>
+<li><a href="#списки">📋 Списки</a><ul>
+<li><a href="#маркированные-unordered">Маркированные (unordered)</a></li>
+<li><a href="#нумерованные-ordered">Нумерованные (ordered)</a></li>
+<li><a href="#чек-листы-task-lists">Чек-листы (task lists)</a></li>
+<li><a href="#список-определений-некоторые-flavour-ы">Список определений (некоторые flavour&rsquo;ы)</a></li>
+</ul>
+</li>
+<li><a href="#ссылки">🔗 Ссылки</a><ul>
+<li><a href="#изображения">Изображения</a></li>
+</ul>
+</li>
+<li><a href="#код">💻 Код</a><ul>
+<li><a href="#инлайн-код">Инлайн-код</a></li>
+<li><a href="#блок-кода-fenced">Блок кода (fenced)</a></li>
+<li><a href="#блок-кода-без-подсветки">Блок кода без подсветки</a></li>
+<li><a href="#отступы-4-пробела">Отступы (4 пробела)</a></li>
+<li><a href="#длинные-блоки-с-внутри">Длинные блоки с ``` внутри</a></li>
+<li><a href="#номера-строк-подсветка-github-flavored">Номера строк, подсветка (GitHub Flavored)</a></li>
+</ul>
+</li>
+<li><a href="#таблицы-gfm">📊 Таблицы (GFM)</a><ul>
+<li><a href="#html-таблица-для-тонкой-настройки">HTML-таблица для тонкой настройки</a></li>
+</ul>
+</li>
+<li><a href="#горизонтальная-линия">📏 Горизонтальная линия</a></li>
+<li><a href="#встроенный-html">🔀 Встроенный HTML</a></li>
+<li><a href="#расширенный-синтаксис">🎓 Расширенный синтаксис</a><ul>
+<li><a href="#mermaid-диаграммы-github-gitlab-obsidian">Mermaid диаграммы (GitHub, GitLab, Obsidian)</a></li>
+<li><a href="#математика-latex-github-notion-obsidian">Математика (LaTeX, GitHub/Notion/Obsidian)</a></li>
+<li><a href="#footnotes-сноски">Footnotes (сноски)</a></li>
+<li><a href="#emojis-github">Emojis (GitHub)</a></li>
+<li><a href="#mentions-github">Mentions (GitHub)</a></li>
+<li><a href="#alerts-github-2023">Alerts (GitHub 2023+)</a></li>
+</ul>
+</li>
+<li><a href="#экранирование">🎨 Экранирование</a></li>
+<li><a href="#flavours-диалекты">🌍 Flavours (диалекты)</a></li>
+<li><a href="#инструменты">🛠️ Инструменты</a><ul>
+<li><a href="#cli-конвертеры">CLI-конвертеры</a></li>
+<li><a href="#редакторы">Редакторы</a></li>
+<li><a href="#vs-code-расширения">VS Code расширения</a></li>
+</ul>
+</li>
+<li><a href="#лучшие-практики">📐 Лучшие практики</a><ul>
+<li><a href="#структура-readme-md">Структура README.md</a></li>
+</ul>
+</li>
+<li><a href="#использование">Использование</a></li>
+<li><a href="#документация">Документация</a></li>
+<li><a href="#лицензия">Лицензия</a><ul>
+<li><a href="#правила-хорошего-тона">Правила хорошего тона</a></li>
+</ul>
+</li>
+<li><a href="#частые-ошибки">🪤 Частые ошибки</a></li>
+<li><a href="#полезные-ссылки">🔗 Полезные ссылки</a></li>
+<li><a href="#полезные-советы">💡 Полезные советы</a></li>
+</ul>
+</li>
+</ul>
+</div>
+
+      </div>
+    </details>
+  </aside>
+</div>
+
+<button class="back-top" id="backTop" aria-label="Наверх">↑</button>
+
+<script src="assets/search.js"></script>
+<script src="assets/page.js"></script>
+</body>
+</html>

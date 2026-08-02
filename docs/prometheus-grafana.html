@@ -1,0 +1,922 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prometheus / Grafana — Шпаргалки</title>
+<link rel="stylesheet" href="assets/style.css">
+<link rel="stylesheet" href="assets/pygments.css">
+</head>
+<body>
+<div class="layout">
+  <aside class="sidebar">
+    <a href="index.html" class="brand">📌 Шпаргалки</a>
+    <nav class="nav">
+<a href="yazi.html" class="nav-item"><span class="nav-ico">📦</span>Yazi</a>
+<a href="neovim.html" class="nav-item"><span class="nav-ico">📘</span>Neovim (LazyVim)</a>
+<a href="niri.html" class="nav-item"><span class="nav-ico">🪟</span>Niri</a>
+<a href="tmux.html" class="nav-item"><span class="nav-ico">🪟</span>Tmux</a>
+<a href="bash.html" class="nav-item"><span class="nav-ico">🐚</span>Bash</a>
+<a href="git.html" class="nav-item"><span class="nav-ico">🔀</span>Git</a>
+<a href="terminal.html" class="nav-item"><span class="nav-ico">🖥️</span>Терминал Linux</a>
+<a href="powershell.html" class="nav-item"><span class="nav-ico">💻</span>PowerShell</a>
+<a href="cmd.html" class="nav-item"><span class="nav-ico">🪟</span>CMD (cmd.exe)</a>
+<a href="python.html" class="nav-item"><span class="nav-ico">🐍</span>Python</a>
+<a href="systemd.html" class="nav-item"><span class="nav-ico">⚙️</span>systemd</a>
+<a href="ssh.html" class="nav-item"><span class="nav-ico">🔐</span>SSH</a>
+<a href="make-cmake.html" class="nav-item"><span class="nav-ico">🔨</span>Make / CMake</a>
+<a href="docker.html" class="nav-item"><span class="nav-ico">🐳</span>Docker</a>
+<a href="pacman.html" class="nav-item"><span class="nav-ico">📦</span>pacman / yay / paru</a>
+<a href="spark.html" class="nav-item"><span class="nav-ico">⚡</span>Apache Spark / PySpark</a>
+<a href="markdown.html" class="nav-item"><span class="nav-ico">📝</span>Markdown</a>
+<a href="regex.html" class="nav-item"><span class="nav-ico">🔍</span>Регулярные выражения</a>
+<a href="jq-json.html" class="nav-item"><span class="nav-ico">🔧</span>jq + JSON</a>
+<a href="awk-sed.html" class="nav-item"><span class="nav-ico">✂️</span>awk / sed</a>
+<a href="airflow.html" class="nav-item"><span class="nav-ico">🌪️</span>Apache Airflow</a>
+<a href="http-curl.html" class="nav-item"><span class="nav-ico">🌐</span>HTTP / curl</a>
+<a href="yaml.html" class="nav-item"><span class="nav-ico">📄</span>YAML</a>
+<a href="vscode.html" class="nav-item"><span class="nav-ico">💻</span>VS Code</a>
+<a href="cron.html" class="nav-item"><span class="nav-ico">⏰</span>cron</a>
+<a href="fzf-zoxide.html" class="nav-item"><span class="nav-ico">🔎</span>fzf + zoxide</a>
+<a href="minikube-k8s.html" class="nav-item"><span class="nav-ico">☸️</span>Minikube / Kubernetes</a>
+<a href="cicd.html" class="nav-item"><span class="nav-ico">🦊</span>GitLab CI / GitHub Actions</a>
+<a href="nginx.html" class="nav-item"><span class="nav-ico">🌐</span>nginx</a>
+<a href="dbt.html" class="nav-item"><span class="nav-ico">🔧</span>dbt</a>
+<a href="kafka.html" class="nav-item"><span class="nav-ico">🐘</span>Apache Kafka</a>
+<a href="prometheus-grafana.html" class="nav-item active"><span class="nav-ico">📊</span>Prometheus / Grafana</a>
+<a href="iceberg-nessie.html" class="nav-item"><span class="nav-ico">🧊</span>Iceberg / Nessie</a>
+<a href="impala.html" class="nav-item"><span class="nav-ico">🐬</span>Apache Impala</a>
+<a href="terraform.html" class="nav-item"><span class="nav-ico">🏗️</span>Terraform</a>
+<a href="linux-internals.html" class="nav-item"><span class="nav-ico">🐧</span>Linux Internals</a>
+<a href="miscellaneous.html" class="nav-item"><span class="nav-ico">🧰</span>Miscellaneous</a>
+<a href="python-automation-libs.html" class="nav-item"><span class="nav-ico">🐍</span>Python: авт-ция (10 libs)</a>
+<a href="eza.html" class="nav-item"><span class="nav-ico">🌈</span>eza</a>
+<a href="dbeaver.html" class="nav-item"><span class="nav-ico">🗄️</span>DBeaver</a>
+<a href="zcode.html" class="nav-item"><span class="nav-ico">🤖</span>ZCode</a>
+<a href="warp.html" class="nav-item"><span class="nav-ico">🚀</span>Warp</a>
+<a href="agentic-ai-dev.html" class="nav-item"><span class="nav-ico">🤝</span>Агентная разработка с ИИ</a>
+    </nav>
+  </aside>
+
+  <main class="content">
+    <article>
+<h1 id="prometheus-grafana-шпаргалка">📊 Prometheus / Grafana — шпаргалка<a class="headerlink" href="#prometheus-grafana-шпаргалка" title="Ссылка">#</a></h1>
+<blockquote>
+<p><strong>Prometheus</strong> — база данных временных рядов (time-series DB) + сбор метрик.
+<strong>Grafana</strong> — визуализация метрик из множества источников (dashboards).
+Документация: https://prometheus.io/docs · https://grafana.com/docs</p>
+</blockquote>
+<hr />
+<h2 id="главные-понятия">🔑 Главные понятия<a class="headerlink" href="#главные-понятия" title="Ссылка">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Термин</th>
+<th>Что значит</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Metric</strong></td>
+<td>Метрика (число во времени)</td>
+</tr>
+<tr>
+<td><strong>Time series</strong></td>
+<td>Ряд значений (timestamp + value + labels)</td>
+</tr>
+<tr>
+<td><strong>Label</strong></td>
+<td>Метка метрики (<code>method="GET"</code>, <code>status="200"</code>)</td>
+</tr>
+<tr>
+<td><strong>Target</strong></td>
+<td>Источник метрик (host:port)</td>
+</tr>
+<tr>
+<td><strong>Exporter</strong></td>
+<td>Программа, отдающая метрики (node_exporter, mysql_exporter)</td>
+</tr>
+<tr>
+<td><strong>Scrape</strong></td>
+<td>Опрос таргетов Prometheus&rsquo;ом (pull-модель)</td>
+</tr>
+<tr>
+<td><strong>Alertmanager</strong></td>
+<td>Компонент для алертов (email, Slack,PagerDuty)</td>
+</tr>
+<tr>
+<td><strong>Recording Rule</strong></td>
+<td>Предвычисленная метрика</td>
+</tr>
+<tr>
+<td><strong>Alerting Rule</strong></td>
+<td>Правило для срабатывания алерта</td>
+</tr>
+<tr>
+<td><strong>Pushgateway</strong></td>
+<td>Для push-метрик (cron jobs)</td>
+</tr>
+<tr>
+<td><strong>PromQL</strong></td>
+<td>Язык запросов Prometheus</td>
+</tr>
+</tbody>
+</table>
+<h3 id="типы-метрик">Типы метрик<a class="headerlink" href="#типы-метрик" title="Ссылка">#</a></h3>
+<table>
+<thead>
+<tr>
+<th>Тип</th>
+<th>Что</th>
+<th>Пример</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Counter</strong></td>
+<td>Только растёт</td>
+<td><code>http_requests_total</code></td>
+</tr>
+<tr>
+<td><strong>Gauge</strong></td>
+<td>Любое значение (вверх/вниз)</td>
+<td><code>temperature</code>, <code>memory_usage</code></td>
+</tr>
+<tr>
+<td><strong>Histogram</strong></td>
+<td>Распределение (бакеты)</td>
+<td><code>request_duration_seconds</code></td>
+</tr>
+<tr>
+<td><strong>Summary</strong></td>
+<td>Квантили</td>
+<td><code>request_duration_seconds{quantile="0.95"}</code></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="запуск-docker-compose">🚀 Запуск (Docker Compose)<a class="headerlink" href="#запуск-docker-compose" title="Ссылка">#</a></h2>
+<div class="highlight"><pre><span></span><code><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;3.9&quot;</span>
+<span class="nt">services</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">prometheus</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">prom/prometheus:latest</span>
+<span class="w">    </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">prometheus</span>
+<span class="w">    </span><span class="nt">ports</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;127.0.0.1:9090:9090&quot;</span>
+<span class="w">    </span><span class="nt">volumes</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./prometheus.yml:/etc/prometheus/prometheus.yml:ro</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">prometheus_data:/prometheus</span>
+<span class="w">    </span><span class="nt">command</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&#39;--config.file=/etc/prometheus/prometheus.yml&#39;</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&#39;--storage.tsdb.retention.time=30d&#39;</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&#39;--web.enable-lifecycle&#39;</span><span class="w">    </span><span class="c1"># для reload через API</span>
+
+<span class="w">  </span><span class="nt">grafana</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">grafana/grafana:latest</span>
+<span class="w">    </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">grafana</span>
+<span class="w">    </span><span class="nt">ports</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;127.0.0.1:3000:3000&quot;</span>
+<span class="w">    </span><span class="nt">environment</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">GF_SECURITY_ADMIN_USER=admin</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">GF_SECURITY_ADMIN_PASSWORD=admin</span>
+<span class="w">    </span><span class="nt">volumes</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">grafana_data:/var/lib/grafana</span>
+
+<span class="w">  </span><span class="nt">node-exporter</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">prom/node-exporter:latest</span>
+<span class="w">    </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">node-exporter</span>
+<span class="w">    </span><span class="nt">ports</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;127.0.0.1:9100:9100&quot;</span>
+
+<span class="w">  </span><span class="nt">alertmanager</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">prom/alertmanager:latest</span>
+<span class="w">    </span><span class="nt">ports</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;127.0.0.1:9093:9093&quot;</span>
+<span class="w">    </span><span class="nt">volumes</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./alertmanager.yml:/etc/alertmanager/alertmanager.yml:ro</span>
+
+<span class="nt">volumes</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">prometheus_data</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">grafana_data</span><span class="p">:</span>
+</code></pre></div>
+
+<h3 id="минимальный-prometheus-yml">Минимальный <code>prometheus.yml</code><a class="headerlink" href="#минимальный-prometheus-yml" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="nt">global</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">scrape_interval</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">15s</span><span class="w">          </span><span class="c1"># как часто опрашивать</span>
+<span class="w">  </span><span class="nt">evaluation_interval</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">15s</span><span class="w">      </span><span class="c1"># как часто выполнять rules</span>
+
+<span class="nt">alerting</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">alertmanagers</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">static_configs</span><span class="p">:</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">targets</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&#39;alertmanager:9093&#39;</span><span class="p p-Indicator">]</span>
+
+<span class="nt">rule_files</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;rules/*.yml&quot;</span>
+
+<span class="nt">scrape_configs</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">job_name</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;prometheus&#39;</span>
+<span class="w">    </span><span class="nt">static_configs</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">targets</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&#39;localhost:9090&#39;</span><span class="p p-Indicator">]</span>
+
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">job_name</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;node&#39;</span>
+<span class="w">    </span><span class="nt">static_configs</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">targets</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&#39;node-exporter:9100&#39;</span><span class="p p-Indicator">]</span>
+
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">job_name</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;docker&#39;</span>
+<span class="w">    </span><span class="nt">docker_sd_configs</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">host</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">unix:///var/run/docker.sock</span>
+</code></pre></div>
+
+<hr />
+<h2 id="targets-и-service-discovery">🎯 Targets и Service Discovery<a class="headerlink" href="#targets-и-service-discovery" title="Ссылка">#</a></h2>
+<h3 id="static-статические">Static (статические)<a class="headerlink" href="#static-статические" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="nt">scrape_configs</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">job_name</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;myapp&#39;</span>
+<span class="w">    </span><span class="nt">static_configs</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">targets</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&#39;app1:8080&#39;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&#39;app2:8080&#39;</span><span class="p p-Indicator">]</span>
+<span class="w">        </span><span class="nt">labels</span><span class="p">:</span>
+<span class="w">          </span><span class="nt">env</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;prod&#39;</span>
+<span class="w">          </span><span class="nt">region</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;us-east&#39;</span>
+</code></pre></div>
+
+<h3 id="file-based">File-based<a class="headerlink" href="#file-based" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="nt">scrape_configs</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">job_name</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;myapp&#39;</span>
+<span class="w">    </span><span class="nt">file_sd_configs</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">files</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&#39;/etc/prometheus/targets/*.yml&#39;</span><span class="p p-Indicator">]</span>
+<span class="w">        </span><span class="nt">refresh_interval</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">30s</span>
+</code></pre></div>
+
+<p><code>targets/app.yml</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">targets</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&#39;app1:8080&#39;</span><span class="p p-Indicator">]</span>
+<span class="w">  </span><span class="nt">labels</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">env</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">prod</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">targets</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&#39;app2:8080&#39;</span><span class="p p-Indicator">]</span>
+</code></pre></div>
+
+<h3 id="service-discovery-динамические">Service Discovery (динамические)<a class="headerlink" href="#service-discovery-динамические" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="nt">scrape_configs</span><span class="p">:</span>
+<span class="w">  </span><span class="c1"># Consul</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">job_name</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;consul&#39;</span>
+<span class="w">    </span><span class="nt">consul_sd_configs</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">server</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;consul:8500&#39;</span>
+
+<span class="w">  </span><span class="c1"># Kubernetes</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">job_name</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;kubernetes-pods&#39;</span>
+<span class="w">    </span><span class="nt">kubernetes_sd_configs</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">role</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pod</span>
+
+<span class="w">  </span><span class="c1"># Docker</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">job_name</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;docker&#39;</span>
+<span class="w">    </span><span class="nt">docker_sd_configs</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">host</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">unix:///var/run/docker.sock</span>
+<span class="w">    </span><span class="nt">relabel_configs</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">source_labels</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">__meta_docker_container_name</span><span class="p p-Indicator">]</span>
+<span class="w">        </span><span class="nt">regex</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;/(.*)&#39;</span>
+<span class="w">        </span><span class="nt">target_label</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">container</span>
+
+<span class="w">  </span><span class="c1"># AWS EC2</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">job_name</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;ec2&#39;</span>
+<span class="w">    </span><span class="nt">ec2_sd_configs</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">region</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">us-east-1</span>
+<span class="w">        </span><span class="nt">access_key</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">XXX</span>
+<span class="w">        </span><span class="nt">secret_key</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">YYY</span>
+</code></pre></div>
+
+<h3 id="аннотации-k8s-для-автообнаружения">Аннотации K8s (для автообнаружения)<a class="headerlink" href="#аннотации-k8s-для-автообнаружения" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Pod с метриками</span>
+<span class="nt">metadata</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">annotations</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">prometheus.io/scrape</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;true&quot;</span>
+<span class="w">    </span><span class="nt">prometheus.io/port</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;9090&quot;</span>
+<span class="w">    </span><span class="nt">prometheus.io/path</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/metrics&quot;</span>
+</code></pre></div>
+
+<hr />
+<h2 id="promql-язык-запросов">📜 PromQL — язык запросов<a class="headerlink" href="#promql-язык-запросов" title="Ссылка">#</a></h2>
+<h3 id="базовые">Базовые<a class="headerlink" href="#базовые" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Текущее значение метрики</span>
+<span class="nv">http_requests_total</span>
+
+<span class="c1"># С лейблом</span>
+<span class="nv">http_requests_total</span><span class="p">{</span><span class="nl">method</span><span class="o">=</span><span class="p">&quot;</span><span class="s">GET</span><span class="p">&quot;}</span>
+<span class="nv">http_requests_total</span><span class="p">{</span><span class="nl">method</span><span class="o">=</span><span class="p">&quot;</span><span class="s">GET</span><span class="p">&quot;,</span><span class="w"> </span><span class="nl">status</span><span class="o">=</span><span class="p">&quot;</span><span class="s">200</span><span class="p">&quot;}</span>
+<span class="nv">http_requests_total</span><span class="p">{</span><span class="nl">status</span><span class="o">=~</span><span class="p">&quot;</span><span class="s">5..</span><span class="p">&quot;}</span><span class="w">        </span><span class="c1"># regex: 500-599</span>
+<span class="nv">http_requests_total</span><span class="p">{</span><span class="nl">status</span><span class="o">!~</span><span class="p">&quot;</span><span class="s">4..|5..</span><span class="p">&quot;}</span><span class="w">    </span><span class="c1"># НЕ 4xx/5xx</span>
+
+<span class="c1"># Несколько значений</span>
+<span class="nv">up</span><span class="w">                                      </span><span class="c1"># 1 если таргет жив</span>
+<span class="nv">up</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="w">                                 </span><span class="c1"># упавшие таргеты</span>
+</code></pre></div>
+
+<h3 id="фильтры-и-агрегации">Фильтры и агрегации<a class="headerlink" href="#фильтры-и-агрегации" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Filter</span>
+<span class="nv">node_cpu_seconds_total</span><span class="p">{</span><span class="nl">mode</span><span class="o">=</span><span class="p">&quot;</span><span class="s">idle</span><span class="p">&quot;}</span>
+
+<span class="c1"># Aggregation</span>
+<span class="k">sum</span><span class="o">(</span><span class="nv">http_requests_total</span><span class="o">)</span><span class="w">               </span><span class="c1"># сумма всех лейблов</span>
+<span class="k">sum</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="o">(</span><span class="nv">method</span><span class="o">)</span><span class="w"> </span><span class="o">(</span><span class="nv">http_requests_total</span><span class="o">)</span><span class="w">  </span><span class="c1"># группировка</span>
+<span class="k">sum</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="o">(</span><span class="nv">method</span><span class="p">,</span><span class="w"> </span><span class="nv">status</span><span class="o">)</span><span class="w"> </span><span class="o">(</span><span class="nv">http_requests_total</span><span class="o">)</span>
+<span class="k">avg</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="o">(</span><span class="nv">instance</span><span class="o">)</span><span class="w"> </span><span class="o">(</span><span class="kr">rate</span><span class="o">(</span><span class="nv">http_requests_total</span><span class="p">[</span><span class="s">5m</span><span class="p">]</span><span class="o">))</span>
+<span class="k">count</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="o">(</span><span class="nv">job</span><span class="o">)</span><span class="w"> </span><span class="o">(</span><span class="nv">up</span><span class="o">)</span>
+<span class="k">topk</span><span class="o">(</span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="nv">http_requests_total</span><span class="o">)</span><span class="w">           </span><span class="c1"># топ-5</span>
+<span class="k">bottomk</span><span class="o">(</span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="err">...</span><span class="o">)</span>
+<span class="k">quantile</span><span class="o">(</span><span class="mf">0.95</span><span class="p">,</span><span class="w"> </span><span class="err">...</span><span class="o">)</span><span class="w">                    </span><span class="c1"># 95-й перцентиль</span>
+</code></pre></div>
+
+<h3 id="rate-increase-для-counter">Rate / Increase (для Counter)<a class="headerlink" href="#rate-increase-для-counter" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Скорость (запросов в секунду за последние 5 минут)</span>
+<span class="kr">rate</span><span class="o">(</span><span class="nv">http_requests_total</span><span class="p">[</span><span class="s">5m</span><span class="p">]</span><span class="o">)</span>
+
+<span class="c1"># Увеличение за час</span>
+<span class="kr">increase</span><span class="o">(</span><span class="nv">http_requests_total</span><span class="p">[</span><span class="s">1h</span><span class="p">]</span><span class="o">)</span>
+
+<span class="c1"># Средняя скорость за 10 минут</span>
+<span class="kr">avg_over_time</span><span class="o">(</span><span class="nv">memory_usage</span><span class="p">[</span><span class="s">10m</span><span class="p">]</span><span class="o">)</span>
+<span class="kr">min_over_time</span><span class="o">(</span><span class="err">...</span><span class="o">)</span>
+<span class="kr">max_over_time</span><span class="o">(</span><span class="err">...</span><span class="o">)</span>
+
+<span class="c1"># Instant rate (последние 2 семпла)</span>
+<span class="kr">irate</span><span class="o">(</span><span class="nv">http_requests_total</span><span class="p">[</span><span class="s">1m</span><span class="p">]</span><span class="o">)</span>
+</code></pre></div>
+
+<h3 id="арифметика">Арифметика<a class="headerlink" href="#арифметика" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># CPU utilization (%)</span>
+<span class="mi">100</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="o">(</span><span class="k">avg</span><span class="o">(</span><span class="kr">rate</span><span class="o">(</span><span class="nv">node_cpu_seconds_total</span><span class="p">{</span><span class="nl">mode</span><span class="o">=</span><span class="p">&quot;</span><span class="s">idle</span><span class="p">&quot;}[</span><span class="s">5m</span><span class="p">]</span><span class="o">))</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">100</span><span class="o">)</span>
+
+<span class="c1"># Memory usage</span>
+<span class="nv">node_memory_MemTotal_bytes</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nv">node_memory_MemAvailable_bytes</span>
+
+<span class="c1"># Сложение/вычитание метрик</span>
+<span class="k">sum</span><span class="o">(</span><span class="nv">metric_a</span><span class="o">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="k">sum</span><span class="o">(</span><span class="nv">metric_b</span><span class="o">)</span>
+
+<span class="c1"># Bytes → MB / GB</span>
+<span class="nv">memory_bytes</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">1024</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">1024</span>
+</code></pre></div>
+
+<h3 id="histogram-перцентили">Histogram (перцентили)<a class="headerlink" href="#histogram-перцентили" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># 95-й перцентиль длительности запроса за 5 минут</span>
+<span class="kr">histogram_quantile</span><span class="o">(</span><span class="mf">0.95</span><span class="p">,</span><span class="w"> </span><span class="kr">rate</span><span class="o">(</span><span class="nv">http_request_duration_seconds_bucket</span><span class="p">[</span><span class="s">5m</span><span class="p">]</span><span class="o">))</span>
+
+<span class="c1"># По лейблу</span>
+<span class="kr">histogram_quantile</span><span class="o">(</span><span class="mf">0.99</span><span class="p">,</span><span class="w"> </span><span class="k">sum</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="o">(</span><span class="nv">le</span><span class="p">,</span><span class="w"> </span><span class="nv">method</span><span class="o">)</span><span class="w"> </span><span class="o">(</span><span class="kr">rate</span><span class="o">(</span><span class="err">...</span><span class="p">[</span><span class="s">5m</span><span class="p">]</span><span class="o">)))</span>
+</code></pre></div>
+
+<h3 id="временные-окна">Временные окна<a class="headerlink" href="#временные-окна" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="s">5m</span><span class="p">]</span><span class="w">      </span><span class="c1"># 5 минут</span>
+<span class="p">[</span><span class="s">1h</span><span class="p">]</span><span class="w">      </span><span class="c1"># 1 час</span>
+<span class="p">[</span><span class="s">7d</span><span class="p">]</span><span class="w">      </span><span class="c1"># 7 дней</span>
+<span class="kr">rate</span><span class="o">(</span><span class="nv">metric</span><span class="p">[</span><span class="s">5m</span><span class="p">]</span><span class="o">)</span>
+<span class="kr">avg_over_time</span><span class="o">(</span><span class="nv">metric</span><span class="p">[</span><span class="s">1h</span><span class="p">]</span><span class="o">)</span>
+</code></pre></div>
+
+<h3 id="offset-сдвиг-по-времени">offset (сдвиг по времени)<a class="headerlink" href="#offset-сдвиг-по-времени" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># То же, но неделю назад</span>
+<span class="nv">metric</span><span class="w"> </span><span class="k">offset</span><span class="w"> </span><span class="s">7d</span>
+
+<span class="c1"># Сравнение с прошлой неделей</span>
+<span class="kr">rate</span><span class="o">(</span><span class="nv">http_requests_total</span><span class="p">[</span><span class="s">1h</span><span class="p">]</span><span class="o">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="kr">rate</span><span class="o">(</span><span class="nv">http_requests_total</span><span class="p">[</span><span class="s">1h</span><span class="p">]</span><span class="w"> </span><span class="k">offset</span><span class="w"> </span><span class="s">7d</span><span class="o">)</span>
+</code></pre></div>
+
+<h3 id="подзапросы">Подзапросы<a class="headerlink" href="#подзапросы" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Максимум из 5-минутных rate за последний час</span>
+<span class="kr">max_over_time</span><span class="o">(</span><span class="kr">rate</span><span class="o">(</span><span class="nv">http_requests_total</span><span class="p">[</span><span class="s">5m</span><span class="p">]</span><span class="o">)</span><span class="p">[</span><span class="s">1h</span><span class="err">:</span><span class="s">1m</span><span class="p">]</span><span class="o">)</span>
+</code></pre></div>
+
+<hr />
+<h2 id="частые-запросы">🛠️ Частые запросы<a class="headerlink" href="#частые-запросы" title="Ссылка">#</a></h2>
+<div class="highlight"><pre><span></span><code><span class="c1"># Все упавшие таргеты</span>
+<span class="nv">up</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span>
+
+<span class="c1"># CPU busy % (по инстансам)</span>
+<span class="mi">100</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="o">(</span><span class="mi">1</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="k">avg</span><span class="o">(</span><span class="kr">rate</span><span class="o">(</span><span class="nv">node_cpu_seconds_total</span><span class="p">{</span><span class="nl">mode</span><span class="o">=</span><span class="p">&quot;</span><span class="s">idle</span><span class="p">&quot;}[</span><span class="s">5m</span><span class="p">]</span><span class="o">))</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="o">(</span><span class="nv">instance</span><span class="o">))</span>
+
+<span class="c1"># Memory used %</span>
+<span class="mi">100</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="o">(</span><span class="mi">1</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nv">node_memory_MemAvailable_bytes</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="nv">node_memory_MemTotal_bytes</span><span class="o">)</span>
+
+<span class="c1"># Disk usage %</span>
+<span class="mi">100</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="o">(</span><span class="mi">1</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nv">node_filesystem_avail_bytes</span><span class="p">{</span><span class="nl">mountpoint</span><span class="o">=</span><span class="p">&quot;</span><span class="s">/</span><span class="p">&quot;}</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="nv">node_filesystem_size_bytes</span><span class="p">{</span><span class="nl">mountpoint</span><span class="o">=</span><span class="p">&quot;</span><span class="s">/</span><span class="p">&quot;}</span><span class="o">)</span>
+
+<span class="c1"># Network RX bytes</span>
+<span class="kr">rate</span><span class="o">(</span><span class="nv">node_network_receive_bytes_total</span><span class="p">[</span><span class="s">5m</span><span class="p">]</span><span class="o">)</span>
+
+<span class="c1"># HTTP error rate</span>
+<span class="k">sum</span><span class="o">(</span><span class="kr">rate</span><span class="o">(</span><span class="nv">http_requests_total</span><span class="p">{</span><span class="nl">status</span><span class="o">=~</span><span class="p">&quot;</span><span class="s">5..</span><span class="p">&quot;}[</span><span class="s">5m</span><span class="p">]</span><span class="o">))</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="k">sum</span><span class="o">(</span><span class="kr">rate</span><span class="o">(</span><span class="nv">http_requests_total</span><span class="p">[</span><span class="s">5m</span><span class="p">]</span><span class="o">))</span>
+
+<span class="c1"># Top instances by request rate</span>
+<span class="k">topk</span><span class="o">(</span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="k">sum</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="o">(</span><span class="nv">instance</span><span class="o">)</span><span class="w"> </span><span class="o">(</span><span class="kr">rate</span><span class="o">(</span><span class="nv">http_requests_total</span><span class="p">[</span><span class="s">5m</span><span class="p">]</span><span class="o">)))</span>
+
+<span class="c1"># p99 latency</span>
+<span class="kr">histogram_quantile</span><span class="o">(</span><span class="mf">0.99</span><span class="p">,</span><span class="w"> </span><span class="k">sum</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="o">(</span><span class="nv">le</span><span class="o">)</span><span class="w"> </span><span class="o">(</span><span class="kr">rate</span><span class="o">(</span><span class="nv">http_request_duration_seconds_bucket</span><span class="p">[</span><span class="s">5m</span><span class="p">]</span><span class="o">)))</span>
+</code></pre></div>
+
+<hr />
+<h2 id="rules-recording-alerting">📋 Rules (recording &amp; alerting)<a class="headerlink" href="#rules-recording-alerting" title="Ссылка">#</a></h2>
+<h3 id="recording-rules-кэш-сложных-запросов">Recording rules (кэш сложных запросов)<a class="headerlink" href="#recording-rules-кэш-сложных-запросов" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># rules/recording.yml</span>
+<span class="nt">groups</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">example</span>
+<span class="w">    </span><span class="nt">interval</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">30s</span>
+<span class="w">    </span><span class="nt">rules</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">record</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">job:http_requests:rate5m</span>
+<span class="w">        </span><span class="nt">expr</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">sum by (job)(rate(http_requests_total[5m]))</span>
+
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">record</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">job:http_request_duration_seconds:p99</span>
+<span class="w">        </span><span class="nt">expr</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">histogram_quantile(0.99, sum by (le, job)(rate(http_request_duration_seconds_bucket[5m])))</span>
+</code></pre></div>
+
+<h3 id="alerting-rules">Alerting rules<a class="headerlink" href="#alerting-rules" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># rules/alerts.yml</span>
+<span class="nt">groups</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">alerts</span>
+<span class="w">    </span><span class="nt">rules</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">alert</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">HighRequestLatency</span>
+<span class="w">        </span><span class="nt">expr</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">histogram_quantile(0.99, rate(http_request_duration_seconds_bucket[5m])) &gt; 0.5</span>
+<span class="w">        </span><span class="nt">for</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10m</span><span class="w">                       </span><span class="c1"># ждать 10 минут</span>
+<span class="w">        </span><span class="nt">labels</span><span class="p">:</span>
+<span class="w">          </span><span class="nt">severity</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">warning</span>
+<span class="w">        </span><span class="nt">annotations</span><span class="p">:</span>
+<span class="w">          </span><span class="nt">summary</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;High</span><span class="nv"> </span><span class="s">latency</span><span class="nv"> </span><span class="s">on</span><span class="nv"> </span><span class="s">{{</span><span class="nv"> </span><span class="s">$labels.instance</span><span class="nv"> </span><span class="s">}}&quot;</span>
+<span class="w">          </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;p99</span><span class="nv"> </span><span class="s">latency</span><span class="nv"> </span><span class="s">is</span><span class="nv"> </span><span class="s">{{</span><span class="nv"> </span><span class="s">$value</span><span class="nv"> </span><span class="s">}}s&quot;</span>
+
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">alert</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ServiceDown</span>
+<span class="w">        </span><span class="nt">expr</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">up == 0</span>
+<span class="w">        </span><span class="nt">for</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2m</span>
+<span class="w">        </span><span class="nt">labels</span><span class="p">:</span>
+<span class="w">          </span><span class="nt">severity</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">critical</span>
+<span class="w">        </span><span class="nt">annotations</span><span class="p">:</span>
+<span class="w">          </span><span class="nt">summary</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Service</span><span class="nv"> </span><span class="s">{{</span><span class="nv"> </span><span class="s">$labels.job</span><span class="nv"> </span><span class="s">}}</span><span class="nv"> </span><span class="s">down&quot;</span>
+
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">alert</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">HighCPU</span>
+<span class="w">        </span><span class="nt">expr</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">100 - avg(rate(node_cpu_seconds_total{mode=&quot;idle&quot;}[5m])) * 100 &gt; 80</span>
+<span class="w">        </span><span class="nt">for</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5m</span>
+<span class="w">        </span><span class="nt">labels</span><span class="p">:</span>
+<span class="w">          </span><span class="nt">severity</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">warning</span>
+
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">alert</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DiskFull</span>
+<span class="w">        </span><span class="nt">expr</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">100 - 100 * node_filesystem_avail_bytes / node_filesystem_size_bytes &gt; 90</span>
+<span class="w">        </span><span class="nt">for</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10m</span>
+<span class="w">        </span><span class="nt">labels</span><span class="p">:</span>
+<span class="w">          </span><span class="nt">severity</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">critical</span>
+</code></pre></div>
+
+<hr />
+<h2 id="alertmanager">🔔 Alertmanager<a class="headerlink" href="#alertmanager" title="Ссылка">#</a></h2>
+<h3 id="alertmanager-yml"><code>alertmanager.yml</code><a class="headerlink" href="#alertmanager-yml" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="nt">global</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">resolve_timeout</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5m</span>
+<span class="w">  </span><span class="nt">slack_api_url</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;https://hooks.slack.com/services/...&#39;</span>
+
+<span class="nt">route</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">receiver</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;default&#39;</span>
+<span class="w">  </span><span class="nt">group_by</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&#39;alertname&#39;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&#39;severity&#39;</span><span class="p p-Indicator">]</span>
+<span class="w">  </span><span class="nt">group_wait</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">30s</span>
+<span class="w">  </span><span class="nt">group_interval</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5m</span>
+<span class="w">  </span><span class="nt">repeat_interval</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">4h</span>
+<span class="w">  </span><span class="nt">routes</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">matchers</span><span class="p">:</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">severity=&quot;critical&quot;</span>
+<span class="w">      </span><span class="nt">receiver</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;pagerduty&#39;</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">matchers</span><span class="p">:</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">severity=&quot;warning&quot;</span>
+<span class="w">      </span><span class="nt">receiver</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;slack&#39;</span>
+
+<span class="nt">receivers</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;default&#39;</span>
+<span class="w">    </span><span class="nt">email_configs</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">to</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;ops@example.com&#39;</span>
+<span class="w">        </span><span class="nt">from</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;alertmanager@example.com&#39;</span>
+<span class="w">        </span><span class="nt">smarthost</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;smtp.example.com:587&#39;</span>
+
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;slack&#39;</span>
+<span class="w">    </span><span class="nt">slack_configs</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">channel</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;#alerts&#39;</span>
+<span class="w">        </span><span class="nt">send_resolved</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">        </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;[{{</span><span class="nv"> </span><span class="s">.Status</span><span class="nv"> </span><span class="s">}}]</span><span class="nv"> </span><span class="s">{{</span><span class="nv"> </span><span class="s">.CommonLabels.alertname</span><span class="nv"> </span><span class="s">}}&#39;</span>
+<span class="w">        </span><span class="nt">text</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;{{</span><span class="nv"> </span><span class="s">.CommonAnnotations.summary</span><span class="nv"> </span><span class="s">}}&#39;</span>
+
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;pagerduty&#39;</span>
+<span class="w">    </span><span class="nt">pagerduty_configs</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">service_key</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;YOUR_KEY&#39;</span>
+
+<span class="nt">inhibit_rules</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">source_matchers</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">severity=&quot;critical&quot;</span><span class="p p-Indicator">]</span>
+<span class="w">    </span><span class="nt">target_matchers</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">severity=&quot;warning&quot;</span><span class="p p-Indicator">]</span>
+<span class="w">    </span><span class="nt">equal</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&#39;instance&#39;</span><span class="p p-Indicator">]</span>
+</code></pre></div>
+
+<hr />
+<h2 id="grafana">📈 Grafana<a class="headerlink" href="#grafana" title="Ссылка">#</a></h2>
+<h3 id="подключение-prometheus">Подключение Prometheus<a class="headerlink" href="#подключение-prometheus" title="Ссылка">#</a></h3>
+<ol>
+<li><strong>Configuration → Data Sources → Add data source</strong></li>
+<li>Выбрать <strong>Prometheus</strong></li>
+<li>URL: <code>http://prometheus:9090</code></li>
+<li>Save &amp; Test</li>
+</ol>
+<h3 id="полезные-datasource-ы">Полезные datasource&rsquo;ы<a class="headerlink" href="#полезные-datasource-ы" title="Ссылка">#</a></h3>
+<table>
+<thead>
+<tr>
+<th>Источник</th>
+<th>Назначение</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Prometheus</td>
+<td>Метрики</td>
+</tr>
+<tr>
+<td>Loki</td>
+<td>Логи</td>
+</tr>
+<tr>
+<td>Tempo / Jaeger</td>
+<td>Tracing</td>
+</tr>
+<tr>
+<td>InfluxDB</td>
+<td>Time-series</td>
+</tr>
+<tr>
+<td>PostgreSQL / MySQL</td>
+<td>SQL</td>
+</tr>
+<tr>
+<td>Elasticsearch</td>
+<td>Логи/документы</td>
+</tr>
+<tr>
+<td>CloudWatch</td>
+<td>AWS</td>
+</tr>
+<tr>
+<td>Zabbix</td>
+<td>Мониторинг</td>
+</tr>
+</tbody>
+</table>
+<h3 id="создание-dashboard">Создание dashboard<a class="headerlink" href="#создание-dashboard" title="Ссылка">#</a></h3>
+<ul>
+<li><strong>New Dashboard → Add panel</strong></li>
+<li>Запрос: PromQL</li>
+<li>Визуализация: Time series, Stat, Gauge, Bar gauge, Table, Heatmap, Geomap.</li>
+<li>Variables: <code>${variable}</code> для интерактивных фильтров.</li>
+</ul>
+<h3 id="variables-для-фильтрации">Variables (для фильтрации)<a class="headerlink" href="#variables-для-фильтрации" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Query variable</span>
+<span class="nv">label_values</span><span class="o">(</span><span class="nv">up</span><span class="p">,</span><span class="w"> </span><span class="nv">job</span><span class="o">)</span>
+
+<span class="c1"># Использование в панелях</span>
+<span class="kr">rate</span><span class="o">(</span><span class="nv">http_requests_total</span><span class="p">{</span><span class="nl">job</span><span class="o">=</span><span class="p">&quot;</span><span class="s">$job</span><span class="p">&quot;}[</span><span class="s">5m</span><span class="p">]</span><span class="o">)</span>
+</code></pre></div>
+
+<h3 id="templates-переменные">Templates: переменные<a class="headerlink" href="#templates-переменные" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>$server                # выбранное значение
+$server:regex          # для regex
+[[server]]             # в тексте/title
+$__interval            # текущий интервал (для rate)
+$__rate_interval       # оптимальный интервал для rate
+</code></pre></div>
+
+<h3 id="dashboard-json">Dashboard JSON<a class="headerlink" href="#dashboard-json" title="Ссылка">#</a></h3>
+<ul>
+<li>Export/Import через JSON (share dashboards).
+-社区: https://grafana.com/grafana/dashboards.</li>
+</ul>
+<h3 id="id-популярных-dashboards">ID популярных dashboards<a class="headerlink" href="#id-популярных-dashboards" title="Ссылка">#</a></h3>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Что</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>1860</strong></td>
+<td>Node Exporter Full</td>
+</tr>
+<tr>
+<td><strong>193</strong></td>
+<td>Docker monitor</td>
+</tr>
+<tr>
+<td><strong>3662</strong></td>
+<td>Prometheus 2.0</td>
+</tr>
+<tr>
+<td><strong>9628</strong></td>
+<td>cAdvisor</td>
+</tr>
+<tr>
+<td><strong>1516</strong></td>
+<td>Redis</td>
+</tr>
+<tr>
+<td><strong>7362</strong></td>
+<td>PostgreSQL</td>
+</tr>
+<tr>
+<td><strong>11074</strong></td>
+<td>Nginx</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="экспорт-метрик-из-python">🐍 Экспорт метрик из Python<a class="headerlink" href="#экспорт-метрик-из-python" title="Ссылка">#</a></h2>
+<h3 id="prometheusclient-простой">prometheus_client (простой)<a class="headerlink" href="#prometheusclient-простой" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">prometheus_client</span><span class="w"> </span><span class="kn">import</span> <span class="n">Counter</span><span class="p">,</span> <span class="n">Gauge</span><span class="p">,</span> <span class="n">Histogram</span><span class="p">,</span> <span class="n">start_server</span>
+
+<span class="c1"># Определить метрики</span>
+<span class="n">REQUESTS</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">(</span><span class="s1">&#39;http_requests_total&#39;</span><span class="p">,</span> <span class="s1">&#39;Total HTTP requests&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;method&#39;</span><span class="p">,</span> <span class="s1">&#39;status&#39;</span><span class="p">])</span>
+<span class="n">IN_PROGRESS</span> <span class="o">=</span> <span class="n">Gauge</span><span class="p">(</span><span class="s1">&#39;http_requests_in_progress&#39;</span><span class="p">,</span> <span class="s1">&#39;Requests in progress&#39;</span><span class="p">)</span>
+<span class="n">LATENCY</span> <span class="o">=</span> <span class="n">Histogram</span><span class="p">(</span><span class="s1">&#39;http_request_duration_seconds&#39;</span><span class="p">,</span> <span class="s1">&#39;Request latency&#39;</span><span class="p">,</span> <span class="n">buckets</span><span class="o">=</span><span class="p">(</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+
+<span class="c1"># Использовать</span>
+<span class="n">REQUESTS</span><span class="o">.</span><span class="n">labels</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s1">&#39;GET&#39;</span><span class="p">,</span> <span class="n">status</span><span class="o">=</span><span class="s1">&#39;200&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">inc</span><span class="p">()</span>
+<span class="n">IN_PROGRESS</span><span class="o">.</span><span class="n">inc</span><span class="p">()</span>
+<span class="k">with</span> <span class="n">LATENCY</span><span class="o">.</span><span class="n">time</span><span class="p">():</span>
+    <span class="n">do_work</span><span class="p">()</span>
+<span class="n">IN_PROGRESS</span><span class="o">.</span><span class="n">dec</span><span class="p">()</span>
+
+<span class="c1"># Запустить сервер метрик на :8000</span>
+<span class="n">start_server</span><span class="p">(</span><span class="n">addr</span><span class="o">=</span><span class="s1">&#39;0.0.0.0&#39;</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="mi">8000</span><span class="p">)</span>
+</code></pre></div>
+
+<h3 id="fastapi-prometheus">FastAPI + Prometheus<a class="headerlink" href="#fastapi-prometheus" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">prometheus_fastapi_instrumentator</span><span class="w"> </span><span class="kn">import</span> <span class="n">Instrumentator</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">fastapi</span><span class="w"> </span><span class="kn">import</span> <span class="n">FastAPI</span>
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">FastAPI</span><span class="p">()</span>
+<span class="n">Instrumentator</span><span class="p">()</span><span class="o">.</span><span class="n">instrument</span><span class="p">(</span><span class="n">app</span><span class="p">)</span><span class="o">.</span><span class="n">expose</span><span class="p">(</span><span class="n">app</span><span class="p">)</span>
+</code></pre></div>
+
+<h3 id="flask-prometheus">Flask + Prometheus<a class="headerlink" href="#flask-prometheus" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">prometheus_client</span><span class="w"> </span><span class="kn">import</span> <span class="n">generate_latest</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">flask</span><span class="w"> </span><span class="kn">import</span> <span class="n">Flask</span><span class="p">,</span> <span class="n">Response</span>
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/metrics&#39;</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">metrics</span><span class="p">():</span>
+    <span class="k">return</span> <span class="n">Response</span><span class="p">(</span><span class="n">generate_latest</span><span class="p">(),</span> <span class="n">mimetype</span><span class="o">=</span><span class="s1">&#39;text/plain&#39;</span><span class="p">)</span>
+</code></pre></div>
+
+<hr />
+<h2 id="cli-и-api">🛠️ CLI и API<a class="headerlink" href="#cli-и-api" title="Ссылка">#</a></h2>
+<h3 id="promtool">Promtool<a class="headerlink" href="#promtool" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>promtool<span class="w"> </span>check<span class="w"> </span>config<span class="w"> </span>prometheus.yml<span class="w">      </span><span class="c1"># проверить конфиг</span>
+promtool<span class="w"> </span>check<span class="w"> </span>rules<span class="w"> </span>rules.yml<span class="w">            </span><span class="c1"># проверить rules</span>
+promtool<span class="w"> </span>query<span class="w"> </span>instant<span class="w"> </span>http://prom:9090<span class="w"> </span><span class="s1">&#39;up&#39;</span><span class="w">   </span><span class="c1"># запрос</span>
+promtool<span class="w"> </span>tsdb<span class="w"> </span>create<span class="w"> </span>block<span class="w"> </span>...<span class="w">            </span><span class="c1"># управление TSDB</span>
+</code></pre></div>
+
+<h3 id="http-api">HTTP API<a class="headerlink" href="#http-api" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Запрос</span>
+curl<span class="w"> </span>-s<span class="w"> </span><span class="s1">&#39;http://localhost:9090/api/v1/query?query=up&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>jq
+
+<span class="c1"># Range запрос</span>
+curl<span class="w"> </span>-G<span class="w"> </span><span class="s1">&#39;http://localhost:9090/api/v1/query_range&#39;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--data-urlencode<span class="w"> </span><span class="s1">&#39;query=rate(http_requests_total[5m])&#39;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--data-urlencode<span class="w"> </span><span class="s1">&#39;start=2024-01-01T00:00:00Z&#39;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--data-urlencode<span class="w"> </span><span class="s1">&#39;end=2024-01-01T01:00:00Z&#39;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--data-urlencode<span class="w"> </span><span class="s1">&#39;step=15s&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>jq
+
+<span class="c1"># Targets</span>
+curl<span class="w"> </span>-s<span class="w"> </span>http://localhost:9090/api/v1/targets<span class="w"> </span><span class="p">|</span><span class="w"> </span>jq
+
+<span class="c1"># Alerts</span>
+curl<span class="w"> </span>-s<span class="w"> </span>http://localhost:9090/api/v1/alerts<span class="w"> </span><span class="p">|</span><span class="w"> </span>jq
+
+<span class="c1"># Reload конфигурации</span>
+curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span>http://localhost:9090/-/reload
+</code></pre></div>
+
+<h3 id="management-api">Management API<a class="headerlink" href="#management-api" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span>http://localhost:9090/-/reload<span class="w">      </span><span class="c1"># reload</span>
+curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span>http://localhost:9090/-/quit<span class="w">        </span><span class="c1"># выйти</span>
+curl<span class="w"> </span>http://localhost:9090/-/healthy<span class="w">             </span><span class="c1"># healthcheck</span>
+curl<span class="w"> </span>http://localhost:9090/-/ready<span class="w">               </span><span class="c1"># readiness</span>
+</code></pre></div>
+
+<hr />
+<h2 id="экспортёры-полезные">📦 Экспортёры (полезные)<a class="headerlink" href="#экспортёры-полезные" title="Ссылка">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Exporter</th>
+<th>Что собирает</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>node_exporter</strong></td>
+<td>CPU, RAM, disk, network (Linux)</td>
+</tr>
+<tr>
+<td><strong>windows_exporter</strong></td>
+<td>Для Windows</td>
+</tr>
+<tr>
+<td><strong>mysqld_exporter</strong></td>
+<td>MySQL</td>
+</tr>
+<tr>
+<td><strong>postgres_exporter</strong></td>
+<td>PostgreSQL</td>
+</tr>
+<tr>
+<td><strong>redis_exporter</strong></td>
+<td>Redis</td>
+</tr>
+<tr>
+<td><strong>nginx_exporter</strong></td>
+<td>nginx</td>
+</tr>
+<tr>
+<td><strong>blackbox_exporter</strong></td>
+<td>HTTP/TCP/ICMP пробы</td>
+</tr>
+<tr>
+<td><strong>cadvisor</strong></td>
+<td>Docker-контейнеры</td>
+</tr>
+<tr>
+<td><strong>kafka_exporter</strong></td>
+<td>Kafka</td>
+</tr>
+<tr>
+<td><strong>mongodb_exporter</strong></td>
+<td>MongoDB</td>
+</tr>
+<tr>
+<td><strong>elasticsearch_exporter</strong></td>
+<td>ES</td>
+</tr>
+<tr>
+<td><strong>jmx_exporter</strong></td>
+<td>Java/JMX</td>
+</tr>
+<tr>
+<td><strong>snmp_exporter</strong></td>
+<td>Сетевое оборудование</td>
+</tr>
+<tr>
+<td><strong>pushgateway</strong></td>
+<td>Push-метрики (для cron)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="pushgateway-для-коротких-задач">Pushgateway (для коротких задач)<a class="headerlink" href="#pushgateway-для-коротких-задач" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">prometheus_client</span><span class="w"> </span><span class="kn">import</span> <span class="n">CollectorRegistry</span><span class="p">,</span> <span class="n">Gauge</span><span class="p">,</span> <span class="n">push_to_gateway</span>
+
+<span class="n">registry</span> <span class="o">=</span> <span class="n">CollectorRegistry</span><span class="p">()</span>
+<span class="n">g</span> <span class="o">=</span> <span class="n">Gauge</span><span class="p">(</span><span class="s1">&#39;job_last_success_seconds&#39;</span><span class="p">,</span> <span class="s1">&#39;Last job success&#39;</span><span class="p">,</span> <span class="n">registry</span><span class="o">=</span><span class="n">registry</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">set_to_current_time</span><span class="p">()</span>
+<span class="n">push_to_gateway</span><span class="p">(</span><span class="s1">&#39;pushgateway:9091&#39;</span><span class="p">,</span> <span class="n">job</span><span class="o">=</span><span class="s1">&#39;my_batch&#39;</span><span class="p">,</span> <span class="n">registry</span><span class="o">=</span><span class="n">registry</span><span class="p">)</span>
+</code></pre></div>
+
+<hr />
+<h2 id="частые-ошибки">🪤 Частые ошибки<a class="headerlink" href="#частые-ошибки" title="Ссылка">#</a></h2>
+<ol>
+<li><strong>Counter без <code>rate</code></strong> — значение всегда растёт, смотрят скорость.</li>
+<li><strong><code>rate()</code> на gauge</strong> — для gauge используйте <code>avg_over_time</code> и т.п.</li>
+<li><strong>Слишком короткие <code>[5s]</code> окна</strong> — шумно.</li>
+<li><strong>Слишком длинные <code>[7d]</code></strong> — дорого вычислять.</li>
+<li><strong>Большой cardinality</strong> — много уникальных label&rsquo;ов убивает производительность.</li>
+<li><strong>Не настроен retention</strong> — диск забьётся.</li>
+<li><strong>Alerts без <code>for</code></strong> — срабатывают на «мгновенные» скачки.</li>
+<li><strong>Нет inhibit_rules</strong> — спам дублирующих алертов.</li>
+<li><strong>Pushgateway для долгоживущих</strong> — только для batch jobs.</li>
+<li><strong>Сбор в <code>0.0.0.0</code></strong> — Prometheus стучится к таргету, не наоборот.</li>
+</ol>
+<hr />
+<h2 id="полезные-ссылки">🔗 Полезные ссылки<a class="headerlink" href="#полезные-ссылки" title="Ссылка">#</a></h2>
+<ul>
+<li>Prometheus: https://prometheus.io/docs</li>
+<li>PromQL: https://prometheus.io/docs/prometheus/latest/querying/basics</li>
+<li>Grafana: https://grafana.com/docs</li>
+<li>Dashboards: https://grafana.com/grafana/dashboards</li>
+<li>Awesome Prometheus: https://github.com/roaldnefs/awesome-prometheus</li>
+<li>prometheus-client (Python): https://github.com/prometheus/client_python</li>
+<li>Robust Perception blog: https://www.robustperception.io/blog</li>
+</ul>
+<hr />
+<h2 id="полезные-советы">💡 Полезные советы<a class="headerlink" href="#полезные-советы" title="Ссылка">#</a></h2>
+<ol>
+<li><strong>Counter + <code>rate()</code></strong> — основной паттерн для событий.</li>
+<li><strong>Histogram + <code>histogram_quantile</code></strong> — для перцентилей.</li>
+<li><strong>Recording rules</strong> — для сложных запросов, что часто используются.</li>
+<li><strong>Service Discovery</strong> — для динамических сред (K8s, EC2).</li>
+<li><strong>Variables в Grafana</strong> — для интерактивных дашбордов.</li>
+<li><strong>Alerts с <code>for:</code></strong> — ждать, чтобы не ловить короткие скачки.</li>
+<li><strong><code>up == 0</code></strong> — главный health-check таргета.</li>
+<li><strong>Loki + Grafana</strong> — логи рядом с метриками.</li>
+<li><strong>Alert routing</strong> — критичное в PagerDuty, остальное в Slack.</li>
+<li><strong>Retention</strong> — настраивайте <code>--storage.tsdb.retention.time</code>.</li>
+<li><strong>Federation</strong> — для масштабирования (один P читает из других).</li>
+<li><strong>Thanos / Cortex / Mimir</strong> — для долгого хранения и HA.</li>
+<li><strong><code>$__rate_interval</code></strong> в Grafana — автоматический выбор окна.</li>
+<li><strong>Dashboard JSON</strong> — храните в Git.</li>
+<li><strong>Базовые дашборды</strong> — Node Exporter (1860), cAdvisor (193).</li>
+</ol>
+<hr />
+<p><em>Сгенерировано как шпаргалка. Prometheus + Grafana — стандарт мониторинга —
+углубляйтесь через https://prometheus.io/docs и https://grafana.com/docs</em></p>
+    </article>
+    <nav class="pagination">
+      <a class="pager prev" href="kafka.html">← Apache Kafka</a>
+      <a class="pager next" href="iceberg-nessie.html">Iceberg / Nessie →</a>
+    </nav>
+  </main>
+
+  <aside class="toc">
+    <details open>
+      <summary>📑 Оглавление</summary>
+      <div class="toc-list">
+<div class="toc">
+<ul>
+<li><a href="#prometheus-grafana-шпаргалка">📊 Prometheus / Grafana — шпаргалка</a><ul>
+<li><a href="#главные-понятия">🔑 Главные понятия</a><ul>
+<li><a href="#типы-метрик">Типы метрик</a></li>
+</ul>
+</li>
+<li><a href="#запуск-docker-compose">🚀 Запуск (Docker Compose)</a><ul>
+<li><a href="#минимальный-prometheus-yml">Минимальный prometheus.yml</a></li>
+</ul>
+</li>
+<li><a href="#targets-и-service-discovery">🎯 Targets и Service Discovery</a><ul>
+<li><a href="#static-статические">Static (статические)</a></li>
+<li><a href="#file-based">File-based</a></li>
+<li><a href="#service-discovery-динамические">Service Discovery (динамические)</a></li>
+<li><a href="#аннотации-k8s-для-автообнаружения">Аннотации K8s (для автообнаружения)</a></li>
+</ul>
+</li>
+<li><a href="#promql-язык-запросов">📜 PromQL — язык запросов</a><ul>
+<li><a href="#базовые">Базовые</a></li>
+<li><a href="#фильтры-и-агрегации">Фильтры и агрегации</a></li>
+<li><a href="#rate-increase-для-counter">Rate / Increase (для Counter)</a></li>
+<li><a href="#арифметика">Арифметика</a></li>
+<li><a href="#histogram-перцентили">Histogram (перцентили)</a></li>
+<li><a href="#временные-окна">Временные окна</a></li>
+<li><a href="#offset-сдвиг-по-времени">offset (сдвиг по времени)</a></li>
+<li><a href="#подзапросы">Подзапросы</a></li>
+</ul>
+</li>
+<li><a href="#частые-запросы">🛠️ Частые запросы</a></li>
+<li><a href="#rules-recording-alerting">📋 Rules (recording &amp; alerting)</a><ul>
+<li><a href="#recording-rules-кэш-сложных-запросов">Recording rules (кэш сложных запросов)</a></li>
+<li><a href="#alerting-rules">Alerting rules</a></li>
+</ul>
+</li>
+<li><a href="#alertmanager">🔔 Alertmanager</a><ul>
+<li><a href="#alertmanager-yml">alertmanager.yml</a></li>
+</ul>
+</li>
+<li><a href="#grafana">📈 Grafana</a><ul>
+<li><a href="#подключение-prometheus">Подключение Prometheus</a></li>
+<li><a href="#полезные-datasource-ы">Полезные datasource&rsquo;ы</a></li>
+<li><a href="#создание-dashboard">Создание dashboard</a></li>
+<li><a href="#variables-для-фильтрации">Variables (для фильтрации)</a></li>
+<li><a href="#templates-переменные">Templates: переменные</a></li>
+<li><a href="#dashboard-json">Dashboard JSON</a></li>
+<li><a href="#id-популярных-dashboards">ID популярных dashboards</a></li>
+</ul>
+</li>
+<li><a href="#экспорт-метрик-из-python">🐍 Экспорт метрик из Python</a><ul>
+<li><a href="#prometheusclient-простой">prometheus_client (простой)</a></li>
+<li><a href="#fastapi-prometheus">FastAPI + Prometheus</a></li>
+<li><a href="#flask-prometheus">Flask + Prometheus</a></li>
+</ul>
+</li>
+<li><a href="#cli-и-api">🛠️ CLI и API</a><ul>
+<li><a href="#promtool">Promtool</a></li>
+<li><a href="#http-api">HTTP API</a></li>
+<li><a href="#management-api">Management API</a></li>
+</ul>
+</li>
+<li><a href="#экспортёры-полезные">📦 Экспортёры (полезные)</a><ul>
+<li><a href="#pushgateway-для-коротких-задач">Pushgateway (для коротких задач)</a></li>
+</ul>
+</li>
+<li><a href="#частые-ошибки">🪤 Частые ошибки</a></li>
+<li><a href="#полезные-ссылки">🔗 Полезные ссылки</a></li>
+<li><a href="#полезные-советы">💡 Полезные советы</a></li>
+</ul>
+</li>
+</ul>
+</div>
+
+      </div>
+    </details>
+  </aside>
+</div>
+
+<button class="back-top" id="backTop" aria-label="Наверх">↑</button>
+
+<script src="assets/search.js"></script>
+<script src="assets/page.js"></script>
+</body>
+</html>

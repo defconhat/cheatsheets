@@ -1,0 +1,823 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Docker — Шпаргалки</title>
+<link rel="stylesheet" href="assets/style.css">
+<link rel="stylesheet" href="assets/pygments.css">
+</head>
+<body>
+<div class="layout">
+  <aside class="sidebar">
+    <a href="index.html" class="brand">📌 Шпаргалки</a>
+    <nav class="nav">
+<a href="yazi.html" class="nav-item"><span class="nav-ico">📦</span>Yazi</a>
+<a href="neovim.html" class="nav-item"><span class="nav-ico">📘</span>Neovim (LazyVim)</a>
+<a href="niri.html" class="nav-item"><span class="nav-ico">🪟</span>Niri</a>
+<a href="tmux.html" class="nav-item"><span class="nav-ico">🪟</span>Tmux</a>
+<a href="bash.html" class="nav-item"><span class="nav-ico">🐚</span>Bash</a>
+<a href="git.html" class="nav-item"><span class="nav-ico">🔀</span>Git</a>
+<a href="terminal.html" class="nav-item"><span class="nav-ico">🖥️</span>Терминал Linux</a>
+<a href="powershell.html" class="nav-item"><span class="nav-ico">💻</span>PowerShell</a>
+<a href="cmd.html" class="nav-item"><span class="nav-ico">🪟</span>CMD (cmd.exe)</a>
+<a href="python.html" class="nav-item"><span class="nav-ico">🐍</span>Python</a>
+<a href="systemd.html" class="nav-item"><span class="nav-ico">⚙️</span>systemd</a>
+<a href="ssh.html" class="nav-item"><span class="nav-ico">🔐</span>SSH</a>
+<a href="make-cmake.html" class="nav-item"><span class="nav-ico">🔨</span>Make / CMake</a>
+<a href="docker.html" class="nav-item active"><span class="nav-ico">🐳</span>Docker</a>
+<a href="pacman.html" class="nav-item"><span class="nav-ico">📦</span>pacman / yay / paru</a>
+<a href="spark.html" class="nav-item"><span class="nav-ico">⚡</span>Apache Spark / PySpark</a>
+<a href="markdown.html" class="nav-item"><span class="nav-ico">📝</span>Markdown</a>
+<a href="regex.html" class="nav-item"><span class="nav-ico">🔍</span>Регулярные выражения</a>
+<a href="jq-json.html" class="nav-item"><span class="nav-ico">🔧</span>jq + JSON</a>
+<a href="awk-sed.html" class="nav-item"><span class="nav-ico">✂️</span>awk / sed</a>
+<a href="airflow.html" class="nav-item"><span class="nav-ico">🌪️</span>Apache Airflow</a>
+<a href="http-curl.html" class="nav-item"><span class="nav-ico">🌐</span>HTTP / curl</a>
+<a href="yaml.html" class="nav-item"><span class="nav-ico">📄</span>YAML</a>
+<a href="vscode.html" class="nav-item"><span class="nav-ico">💻</span>VS Code</a>
+<a href="cron.html" class="nav-item"><span class="nav-ico">⏰</span>cron</a>
+<a href="fzf-zoxide.html" class="nav-item"><span class="nav-ico">🔎</span>fzf + zoxide</a>
+<a href="minikube-k8s.html" class="nav-item"><span class="nav-ico">☸️</span>Minikube / Kubernetes</a>
+<a href="cicd.html" class="nav-item"><span class="nav-ico">🦊</span>GitLab CI / GitHub Actions</a>
+<a href="nginx.html" class="nav-item"><span class="nav-ico">🌐</span>nginx</a>
+<a href="dbt.html" class="nav-item"><span class="nav-ico">🔧</span>dbt</a>
+<a href="kafka.html" class="nav-item"><span class="nav-ico">🐘</span>Apache Kafka</a>
+<a href="prometheus-grafana.html" class="nav-item"><span class="nav-ico">📊</span>Prometheus / Grafana</a>
+<a href="iceberg-nessie.html" class="nav-item"><span class="nav-ico">🧊</span>Iceberg / Nessie</a>
+<a href="impala.html" class="nav-item"><span class="nav-ico">🐬</span>Apache Impala</a>
+<a href="terraform.html" class="nav-item"><span class="nav-ico">🏗️</span>Terraform</a>
+<a href="linux-internals.html" class="nav-item"><span class="nav-ico">🐧</span>Linux Internals</a>
+<a href="miscellaneous.html" class="nav-item"><span class="nav-ico">🧰</span>Miscellaneous</a>
+<a href="python-automation-libs.html" class="nav-item"><span class="nav-ico">🐍</span>Python: авт-ция (10 libs)</a>
+<a href="eza.html" class="nav-item"><span class="nav-ico">🌈</span>eza</a>
+<a href="dbeaver.html" class="nav-item"><span class="nav-ico">🗄️</span>DBeaver</a>
+<a href="zcode.html" class="nav-item"><span class="nav-ico">🤖</span>ZCode</a>
+<a href="warp.html" class="nav-item"><span class="nav-ico">🚀</span>Warp</a>
+<a href="agentic-ai-dev.html" class="nav-item"><span class="nav-ico">🤝</span>Агентная разработка с ИИ</a>
+    </nav>
+  </aside>
+
+  <main class="content">
+    <article>
+<h1 id="docker-docker-compose-шпаргалка">🐳 Docker &amp; docker-compose — шпаргалка<a class="headerlink" href="#docker-docker-compose-шпаргалка" title="Ссылка">#</a></h1>
+<blockquote>
+<p><strong>Docker</strong> — контейнеризация приложений. Изолированная среда с приложением и зависимостями.
+Документация: https://docs.docker.com · Compose: https://docs.docker.com/compose</p>
+</blockquote>
+<hr />
+<h2 id="главные-понятия">🔑 Главные понятия<a class="headerlink" href="#главные-понятия" title="Ссылка">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Термин</th>
+<th>Что значит</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Image (образ)</strong></td>
+<td>Шаблон только для чтения (с приложением и зависимостями)</td>
+</tr>
+<tr>
+<td><strong>Container (контейнер)</strong></td>
+<td>Запущенный экземпляр образа</td>
+</tr>
+<tr>
+<td><strong>Dockerfile</strong></td>
+<td>Инструкция по сборке образа</td>
+</tr>
+<tr>
+<td><strong>Volume (том)</strong></td>
+<td>Постоянное хранилище данных (переживает контейнер)</td>
+</tr>
+<tr>
+<td><strong>Bind mount</strong></td>
+<td>Монтирование каталога хоста в контейнер</td>
+</tr>
+<tr>
+<td><strong>Network</strong></td>
+<td>Виртуальная сеть для связи контейнеров</td>
+</tr>
+<tr>
+<td><strong>Registry</strong></td>
+<td>Хранилище образов (Docker Hub, GitLab, private)</td>
+</tr>
+<tr>
+<td><strong>Tag</strong></td>
+<td>Версия образа (<code>nginx:1.25</code>, <code>node:20-alpine</code>)</td>
+</tr>
+<tr>
+<td><strong>Compose</strong></td>
+<td>Описание multi-container приложения в YAML</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="базовый-цикл">🚀 Базовый цикл<a class="headerlink" href="#базовый-цикл" title="Ссылка">#</a></h2>
+<div class="highlight"><pre><span></span><code><span class="c1"># Образы</span>
+docker<span class="w"> </span>pull<span class="w"> </span>nginx<span class="w">                    </span><span class="c1"># скачать</span>
+docker<span class="w"> </span>images<span class="w">                        </span><span class="c1"># список локальных</span>
+docker<span class="w"> </span>rmi<span class="w"> </span>nginx<span class="w">                     </span><span class="c1"># удалить образ</span>
+docker<span class="w"> </span>image<span class="w"> </span>prune<span class="w"> </span>-a<span class="w">                </span><span class="c1"># удалить все неиспользуемые</span>
+docker<span class="w"> </span>tag<span class="w"> </span>nginx:latest<span class="w"> </span>myrepo/nginx:v1<span class="w">   </span><span class="c1"># тегировать</span>
+
+<span class="c1"># Контейнеры (старый синтаксис)</span>
+docker<span class="w"> </span>run<span class="w"> </span>nginx<span class="w">                     </span><span class="c1"># запустить (foreground)</span>
+docker<span class="w"> </span>run<span class="w"> </span>-d<span class="w"> </span>nginx<span class="w">                  </span><span class="c1"># в фоне (detached)</span>
+docker<span class="w"> </span>run<span class="w"> </span>--name<span class="w"> </span>web<span class="w"> </span>nginx<span class="w">          </span><span class="c1"># с именем</span>
+docker<span class="w"> </span>run<span class="w"> </span>-p<span class="w"> </span><span class="m">8080</span>:80<span class="w"> </span>nginx<span class="w">          </span><span class="c1"># проброс порта хост:контейнер</span>
+docker<span class="w"> </span>run<span class="w"> </span>-p<span class="w"> </span><span class="m">127</span>.0.0.1:8080:80<span class="w"> </span>nginx<span class="w">   </span><span class="c1"># ⚠️ ТОЛЬКО localhost!</span>
+docker<span class="w"> </span>run<span class="w"> </span>-v<span class="w"> </span><span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>:/app<span class="w"> </span>nginx<span class="w">      </span><span class="c1"># монтирование каталога</span>
+docker<span class="w"> </span>run<span class="w"> </span>-e<span class="w"> </span><span class="nv">KEY</span><span class="o">=</span>value<span class="w"> </span>nginx<span class="w">        </span><span class="c1"># переменная окружения</span>
+docker<span class="w"> </span>run<span class="w"> </span>-it<span class="w"> </span>ubuntu<span class="w"> </span>bash<span class="w">           </span><span class="c1"># интерактивно + TTY</span>
+docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>ubuntu<span class="w"> </span><span class="nb">echo</span><span class="w"> </span>hi<span class="w">       </span><span class="c1"># удалить после завершения</span>
+
+<span class="c1"># Списки</span>
+docker<span class="w"> </span>ps<span class="w">                            </span><span class="c1"># запущенные</span>
+docker<span class="w"> </span>ps<span class="w"> </span>-a<span class="w">                         </span><span class="c1"># все (включая остановленные)</span>
+docker<span class="w"> </span>container<span class="w"> </span>ls<span class="w"> </span>-a<span class="w">               </span><span class="c1"># новый синтаксис</span>
+
+<span class="c1"># Управление контейнером</span>
+docker<span class="w"> </span>start<span class="w"> </span>&lt;name&gt;<span class="w">                  </span><span class="c1"># запустить остановленный</span>
+docker<span class="w"> </span>stop<span class="w"> </span>&lt;name&gt;<span class="w">                   </span><span class="c1"># остановить (SIGTERM, потом SIGKILL)</span>
+docker<span class="w"> </span>restart<span class="w"> </span>&lt;name&gt;
+docker<span class="w"> </span><span class="nb">kill</span><span class="w"> </span>&lt;name&gt;<span class="w">                   </span><span class="c1"># SIGKILL немедленно</span>
+docker<span class="w"> </span>rm<span class="w"> </span>&lt;name&gt;<span class="w">                     </span><span class="c1"># удалить</span>
+docker<span class="w"> </span>rm<span class="w"> </span>-f<span class="w"> </span>&lt;name&gt;<span class="w">                  </span><span class="c1"># принудительно (если запущен)</span>
+
+<span class="c1"># Внутри контейнера</span>
+docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>&lt;name&gt;<span class="w"> </span>bash<span class="w">          </span><span class="c1"># войти в запущенный контейнер</span>
+docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>&lt;name&gt;<span class="w"> </span>ls<span class="w"> </span>/app<span class="w">           </span><span class="c1"># выполнить команду</span>
+docker<span class="w"> </span>logs<span class="w"> </span>&lt;name&gt;<span class="w">                   </span><span class="c1"># логи</span>
+docker<span class="w"> </span>logs<span class="w"> </span>-f<span class="w"> </span>&lt;name&gt;<span class="w">                </span><span class="c1"># следить (tail -f)</span>
+docker<span class="w"> </span>logs<span class="w"> </span>--tail<span class="w"> </span><span class="m">50</span><span class="w"> </span>&lt;name&gt;<span class="w">         </span><span class="c1"># последние 50</span>
+docker<span class="w"> </span>logs<span class="w"> </span>-t<span class="w"> </span>&lt;name&gt;<span class="w">                </span><span class="c1"># с timestamp</span>
+docker<span class="w"> </span>top<span class="w"> </span>&lt;name&gt;<span class="w">                    </span><span class="c1"># процессы в контейнере</span>
+docker<span class="w"> </span>stats<span class="w">                         </span><span class="c1"># статистика ресурсов (top)</span>
+docker<span class="w"> </span>inspect<span class="w"> </span>&lt;name&gt;<span class="w">                </span><span class="c1"># подробная информация (JSON)</span>
+docker<span class="w"> </span>cp<span class="w"> </span>file<span class="w"> </span>&lt;name&gt;:/path<span class="w">          </span><span class="c1"># копировать в контейнер</span>
+docker<span class="w"> </span>cp<span class="w"> </span>&lt;name&gt;:/path/file<span class="w"> </span>.<span class="w">        </span><span class="c1"># из контейнера</span>
+</code></pre></div>
+
+<h3 id="безопасность-портов-важно">⚠️ Безопасность портов (важно!)<a class="headerlink" href="#безопасность-портов-важно" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>docker<span class="w"> </span>run<span class="w"> </span>-p<span class="w"> </span><span class="m">8080</span>:80<span class="w"> </span>nginx<span class="w">          </span><span class="c1"># ❌ торчит на 0.0.0.0 (весь LAN!)</span>
+docker<span class="w"> </span>run<span class="w"> </span>-p<span class="w"> </span><span class="m">127</span>.0.0.1:8080:80<span class="w"> </span>nginx<span class="w">   </span><span class="c1"># ✅ только localhost</span>
+</code></pre></div>
+
+<p>В <code>docker-compose.yml</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="nt">ports</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;8080:80&quot;</span><span class="w">               </span><span class="c1"># ❌ 0.0.0.0:8080 (открыт в сеть)</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;127.0.0.1:8080:80&quot;</span><span class="w">     </span><span class="c1"># ✅ только localhost</span>
+</code></pre></div>
+
+<hr />
+<h2 id="dockerfile">📝 Dockerfile<a class="headerlink" href="#dockerfile" title="Ссылка">#</a></h2>
+<div class="highlight"><pre><span></span><code><span class="c"># Базовый образ</span>
+<span class="k">FROM</span><span class="w"> </span><span class="s">python:3.12-slim</span>
+
+<span class="c"># Метаданные</span>
+<span class="k">LABEL</span><span class="w"> </span><span class="nv">maintainer</span><span class="o">=</span><span class="s2">&quot;you@example.com&quot;</span>
+<span class="k">LABEL</span><span class="w"> </span><span class="nv">version</span><span class="o">=</span><span class="s2">&quot;1.0&quot;</span>
+
+<span class="c"># Рабочая директория</span>
+<span class="k">WORKDIR</span><span class="w"> </span><span class="s">/app</span>
+
+<span class="c"># Переменные окружения</span>
+<span class="k">ENV</span><span class="w"> </span><span class="nv">PYTHONUNBUFFERED</span><span class="o">=</span><span class="m">1</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="nv">PYTHONDONTWRITEBYTECODE</span><span class="o">=</span><span class="m">1</span>
+
+<span class="c"># Установка системных зависимостей (сначала — для кэша слоёв)</span>
+<span class="k">RUN</span><span class="w"> </span>apt-get<span class="w"> </span>update<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>--no-install-recommends<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>build-essential<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>curl<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="o">&amp;&amp;</span><span class="w"> </span>rm<span class="w"> </span>-rf<span class="w"> </span>/var/lib/apt/lists/*
+
+<span class="c"># Копирование только зависимостей (кэш слоёв!)</span>
+<span class="k">COPY</span><span class="w"> </span>requirements.txt<span class="w"> </span>.
+<span class="k">RUN</span><span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>--no-cache-dir<span class="w"> </span>-r<span class="w"> </span>requirements.txt
+
+<span class="c"># Копирование приложения</span>
+<span class="k">COPY</span><span class="w"> </span>.<span class="w"> </span>.
+
+<span class="c"># Создать непривилегированного пользователя</span>
+<span class="k">RUN</span><span class="w"> </span>useradd<span class="w"> </span>-m<span class="w"> </span>appuser
+<span class="k">USER</span><span class="w"> </span><span class="s">appuser</span>
+
+<span class="c"># Открыть порт (документация, не открывает на самом деле)</span>
+<span class="k">EXPOSE</span><span class="w"> </span><span class="s">8000</span>
+
+<span class="c"># Проверка здоровья</span>
+<span class="k">HEALTHCHECK</span><span class="w"> </span>--interval<span class="o">=</span>30s<span class="w"> </span>--timeout<span class="o">=</span>3s<span class="w"> </span>--retries<span class="o">=</span><span class="m">3</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="k">CMD</span><span class="w"> </span>curl<span class="w"> </span>-f<span class="w"> </span>http://localhost:8000/health<span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nb">exit</span><span class="w"> </span><span class="m">1</span>
+
+<span class="c"># Запуск</span>
+<span class="k">CMD</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;python&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;manage.py&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;runserver&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;0.0.0.0:8000&quot;</span><span class="p">]</span>
+<span class="k">ENTRYPOINT</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;python&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;manage.py&quot;</span><span class="p">]</span>
+<span class="k">CMD</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;runserver&quot;</span><span class="p">]</span>
+</code></pre></div>
+
+<h3 id="команды-dockerfile">Команды Dockerfile<a class="headerlink" href="#команды-dockerfile" title="Ссылка">#</a></h3>
+<table>
+<thead>
+<tr>
+<th>Команда</th>
+<th>Назначение</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>FROM</code></td>
+<td>Базовый образ</td>
+</tr>
+<tr>
+<td><code>RUN</code></td>
+<td>Выполнить команду при сборке</td>
+</tr>
+<tr>
+<td><code>COPY</code></td>
+<td>Копировать файлы с хоста</td>
+</tr>
+<tr>
+<td><code>ADD</code></td>
+<td>Как COPY + URL + авто-распаковка (избегайте!)</td>
+</tr>
+<tr>
+<td><code>WORKDIR</code></td>
+<td>Рабочий каталог</td>
+</tr>
+<tr>
+<td><code>ENV</code></td>
+<td>Переменная окружения</td>
+</tr>
+<tr>
+<td><code>ARG</code></td>
+<td>Переменная только на время сборки</td>
+</tr>
+<tr>
+<td><code>EXPOSE</code></td>
+<td>Документация порта</td>
+</tr>
+<tr>
+<td><code>VOLUME</code></td>
+<td>Объявить точку монтирования</td>
+</tr>
+<tr>
+<td><code>USER</code></td>
+<td>От какого пользователя выполнять</td>
+</tr>
+<tr>
+<td><code>CMD</code></td>
+<td>Команда по умолчанию (можно переопределить)</td>
+</tr>
+<tr>
+<td><code>ENTRYPOINT</code></td>
+<td>Исполняемый файл (фиксированный)</td>
+</tr>
+<tr>
+<td><code>HEALTHCHECK</code></td>
+<td>Проверка здоровья</td>
+</tr>
+<tr>
+<td><code>LABEL</code></td>
+<td>Метаданные</td>
+</tr>
+<tr>
+<td><code>STOPSIGNAL</code></td>
+<td>Сигнал остановки</td>
+</tr>
+<tr>
+<td><code>SHELL</code></td>
+<td>Оболочка по умолчанию</td>
+</tr>
+<tr>
+<td><code>ONBUILD</code></td>
+<td>Инструкция для образов-наследников</td>
+</tr>
+</tbody>
+</table>
+<h3 id="сборка-образа">Сборка образа<a class="headerlink" href="#сборка-образа" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>docker<span class="w"> </span>build<span class="w"> </span>-t<span class="w"> </span>myapp:1.0<span class="w"> </span>.<span class="w">               </span><span class="c1"># из текущего каталога</span>
+docker<span class="w"> </span>build<span class="w"> </span>-t<span class="w"> </span>myapp<span class="w"> </span>-f<span class="w"> </span>Dockerfile.prod<span class="w"> </span>.<span class="w"> </span><span class="c1"># другой Dockerfile</span>
+docker<span class="w"> </span>build<span class="w"> </span>--no-cache<span class="w"> </span>-t<span class="w"> </span>myapp<span class="w"> </span>.<span class="w">         </span><span class="c1"># без кэша</span>
+docker<span class="w"> </span>build<span class="w"> </span>--build-arg<span class="w"> </span><span class="nv">VERSION</span><span class="o">=</span><span class="m">1</span>.0<span class="w"> </span>.<span class="w">     </span><span class="c1"># передать ARG</span>
+docker<span class="w"> </span>build<span class="w"> </span>--target<span class="w"> </span>builder<span class="w"> </span>-t<span class="w"> </span>myapp<span class="w"> </span>.<span class="w">   </span><span class="c1"># multi-stage конкретная стадия</span>
+</code></pre></div>
+
+<h3 id="multi-stage-build-маленькие-образы">Multi-stage build (маленькие образы)<a class="headerlink" href="#multi-stage-build-маленькие-образы" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c"># Стадия 1: сборка</span>
+<span class="k">FROM</span><span class="w"> </span><span class="s">node:20</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="s">builder</span>
+<span class="k">WORKDIR</span><span class="w"> </span><span class="s">/app</span>
+<span class="k">COPY</span><span class="w"> </span>package*.json<span class="w"> </span>./
+<span class="k">RUN</span><span class="w"> </span>npm<span class="w"> </span>ci
+<span class="k">COPY</span><span class="w"> </span>.<span class="w"> </span>.
+<span class="k">RUN</span><span class="w"> </span>npm<span class="w"> </span>run<span class="w"> </span>build
+
+<span class="c"># Стадия 2: runtime (только результат)</span>
+<span class="k">FROM</span><span class="w"> </span><span class="s">nginx:alpine</span>
+<span class="k">COPY</span><span class="w"> </span>--from<span class="o">=</span>builder<span class="w"> </span>/app/dist<span class="w"> </span>/usr/share/nginx/html
+</code></pre></div>
+
+<hr />
+<h2 id="управление-образами-и-чистка">📦 Управление образами и чистка<a class="headerlink" href="#управление-образами-и-чистка" title="Ссылка">#</a></h2>
+<div class="highlight"><pre><span></span><code><span class="c1"># Список</span>
+docker<span class="w"> </span>images
+docker<span class="w"> </span>image<span class="w"> </span>ls
+docker<span class="w"> </span>images<span class="w"> </span>--filter<span class="w"> </span><span class="s2">&quot;dangling=true&quot;</span><span class="w">   </span><span class="c1"># висячие образы</span>
+
+<span class="c1"># Удаление</span>
+docker<span class="w"> </span>rmi<span class="w"> </span>&lt;image&gt;
+docker<span class="w"> </span>rmi<span class="w"> </span><span class="k">$(</span>docker<span class="w"> </span>images<span class="w"> </span>-q<span class="k">)</span><span class="w">            </span><span class="c1"># удалить все</span>
+docker<span class="w"> </span>image<span class="w"> </span>prune<span class="w">                         </span><span class="c1"># висячие</span>
+docker<span class="w"> </span>image<span class="w"> </span>prune<span class="w"> </span>-a<span class="w">                      </span><span class="c1"># все неиспользуемые</span>
+
+<span class="c1"># История образа (слои)</span>
+docker<span class="w"> </span><span class="nb">history</span><span class="w"> </span>myapp
+docker<span class="w"> </span><span class="nb">history</span><span class="w"> </span>--no-trunc<span class="w"> </span>myapp
+
+<span class="c1"># Сохранить/загрузить</span>
+docker<span class="w"> </span>save<span class="w"> </span>myapp<span class="w"> </span>&gt;<span class="w"> </span>myapp.tar
+docker<span class="w"> </span>load<span class="w"> </span>&lt;<span class="w"> </span>myapp.tar
+docker<span class="w"> </span>save<span class="w"> </span>myapp<span class="w"> </span><span class="p">|</span><span class="w"> </span>gzip<span class="w"> </span>&gt;<span class="w"> </span>myapp.tar.gz
+
+<span class="c1"># Импорт/экспорт (контейнер, не образ)</span>
+docker<span class="w"> </span><span class="nb">export</span><span class="w"> </span>&lt;container&gt;<span class="w"> </span>&gt;<span class="w"> </span>fs.tar<span class="w">         </span><span class="c1"># файловая система</span>
+docker<span class="w"> </span>import<span class="w"> </span>fs.tar<span class="w"> </span>myimage
+
+<span class="c1"># Реестр</span>
+docker<span class="w"> </span>login<span class="w"> </span>registry.example.com
+docker<span class="w"> </span>push<span class="w"> </span>myrepo/myapp:1.0
+docker<span class="w"> </span>pull<span class="w"> </span>myrepo/myapp:1.0
+docker<span class="w"> </span>search<span class="w"> </span>nginx
+</code></pre></div>
+
+<h3 id="полная-очистка-осторожно">Полная очистка (осторожно!)<a class="headerlink" href="#полная-очистка-осторожно" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>docker<span class="w"> </span>system<span class="w"> </span>prune<span class="w">              </span><span class="c1"># неиспользуемые контейнеры, сети, висячие образы</span>
+docker<span class="w"> </span>system<span class="w"> </span>prune<span class="w"> </span>-a<span class="w">           </span><span class="c1"># + все образы без контейнера</span>
+docker<span class="w"> </span>system<span class="w"> </span>prune<span class="w"> </span>--volumes<span class="w">    </span><span class="c1"># + тома (УДАЛИТ ДАННЫЕ!)</span>
+docker<span class="w"> </span>system<span class="w"> </span>df<span class="w">                 </span><span class="c1"># занятое место</span>
+docker<span class="w"> </span>system<span class="w"> </span>events<span class="w">             </span><span class="c1"># поток событий</span>
+</code></pre></div>
+
+<hr />
+<h2 id="сети">🌐 Сети<a class="headerlink" href="#сети" title="Ссылка">#</a></h2>
+<div class="highlight"><pre><span></span><code>docker<span class="w"> </span>network<span class="w"> </span>ls
+docker<span class="w"> </span>network<span class="w"> </span>create<span class="w"> </span>mynet
+docker<span class="w"> </span>network<span class="w"> </span>inspect<span class="w"> </span>mynet
+docker<span class="w"> </span>network<span class="w"> </span>connect<span class="w"> </span>mynet<span class="w"> </span>&lt;container&gt;
+docker<span class="w"> </span>network<span class="w"> </span>disconnect<span class="w"> </span>mynet<span class="w"> </span>&lt;container&gt;
+docker<span class="w"> </span>network<span class="w"> </span>rm<span class="w"> </span>mynet
+docker<span class="w"> </span>network<span class="w"> </span>prune
+</code></pre></div>
+
+<h3 id="типы-сетей">Типы сетей<a class="headerlink" href="#типы-сетей" title="Ссылка">#</a></h3>
+<table>
+<thead>
+<tr>
+<th>Тип</th>
+<th>Описание</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>bridge</code></td>
+<td>По умолчанию. Изолированная сеть на хосте</td>
+</tr>
+<tr>
+<td><code>host</code></td>
+<td>Сеть хоста (нет изоляции)</td>
+</tr>
+<tr>
+<td><code>none</code></td>
+<td>Нет сети</td>
+</tr>
+<tr>
+<td><code>overlay</code></td>
+<td>Кластер Swarm</td>
+</tr>
+<tr>
+<td><code>macvlan</code></td>
+<td>Контейнер с MAC-адресом в физической сети</td>
+</tr>
+</tbody>
+</table>
+<h3 id="dns-между-контейнерами">DNS между контейнерами<a class="headerlink" href="#dns-между-контейнерами" title="Ссылка">#</a></h3>
+<p>Контейнеры в <strong>одной сети</strong> могут обращаться друг к другу <strong>по имени контейнера</strong>:</p>
+<div class="highlight"><pre><span></span><code>docker<span class="w"> </span>network<span class="w"> </span>create<span class="w"> </span>appnet
+docker<span class="w"> </span>run<span class="w"> </span>-d<span class="w"> </span>--name<span class="w"> </span>db<span class="w"> </span>--network<span class="w"> </span>appnet<span class="w"> </span>postgres
+docker<span class="w"> </span>run<span class="w"> </span>-d<span class="w"> </span>--name<span class="w"> </span>web<span class="w"> </span>--network<span class="w"> </span>appnet<span class="w"> </span>nginx
+<span class="c1"># Внутри web: curl http://db:5432 (DNS по имени!)</span>
+</code></pre></div>
+
+<hr />
+<h2 id="тома-и-монтирование">💾 Тома и монтирование<a class="headerlink" href="#тома-и-монтирование" title="Ссылка">#</a></h2>
+<div class="highlight"><pre><span></span><code><span class="c1"># Тома (рекомендуется)</span>
+docker<span class="w"> </span>volume<span class="w"> </span>create<span class="w"> </span>mydata
+docker<span class="w"> </span>volume<span class="w"> </span>ls
+docker<span class="w"> </span>volume<span class="w"> </span>inspect<span class="w"> </span>mydata
+docker<span class="w"> </span>volume<span class="w"> </span>rm<span class="w"> </span>mydata
+docker<span class="w"> </span>volume<span class="w"> </span>prune
+
+<span class="c1"># Использование</span>
+docker<span class="w"> </span>run<span class="w"> </span>-v<span class="w"> </span>mydata:/var/lib/postgresql/data<span class="w"> </span>postgres
+docker<span class="w"> </span>run<span class="w"> </span>--mount<span class="w"> </span><span class="nv">source</span><span class="o">=</span>mydata,target<span class="o">=</span>/var/lib/postgresql/data<span class="w"> </span>postgres
+
+<span class="c1"># Bind mount (каталог хоста)</span>
+docker<span class="w"> </span>run<span class="w"> </span>-v<span class="w"> </span>/host/path:/container/path<span class="w"> </span>nginx
+docker<span class="w"> </span>run<span class="w"> </span>-v<span class="w"> </span><span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>:/app<span class="w"> </span>-w<span class="w"> </span>/app<span class="w"> </span>node<span class="w"> </span>npm<span class="w"> </span>install
+docker<span class="w"> </span>run<span class="w"> </span>--mount<span class="w"> </span><span class="nv">type</span><span class="o">=</span>bind,source<span class="o">=</span><span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>,target<span class="o">=</span>/app<span class="w"> </span>nginx
+
+<span class="c1"># tmpfs (в RAM)</span>
+docker<span class="w"> </span>run<span class="w"> </span>--tmpfs<span class="w"> </span>/cache<span class="w"> </span>nginx
+docker<span class="w"> </span>run<span class="w"> </span>--mount<span class="w"> </span><span class="nv">type</span><span class="o">=</span>tmpfs,target<span class="o">=</span>/cache<span class="w"> </span>nginx
+</code></pre></div>
+
+<h3 id="разница-v-vs-mount">Разница -v vs &ndash;mount<a class="headerlink" href="#разница-v-vs-mount" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>docker<span class="w"> </span>run<span class="w"> </span>-v<span class="w"> </span>myvol:/data<span class="w"> </span>nginx<span class="w">             </span><span class="c1"># если myvol нет — создаст том</span>
+docker<span class="w"> </span>run<span class="w"> </span>--mount<span class="w"> </span><span class="nv">source</span><span class="o">=</span>myvol,target<span class="o">=</span>/data<span class="w"> </span>nginx<span class="w">   </span><span class="c1"># ошибка если нет</span>
+docker<span class="w"> </span>run<span class="w"> </span>-v<span class="w"> </span>/opt/data:/data<span class="w"> </span>nginx<span class="w">         </span><span class="c1"># абсолютный путь → bind mount</span>
+</code></pre></div>
+
+<hr />
+<h2 id="docker-compose">🐙 docker-compose<a class="headerlink" href="#docker-compose" title="Ссылка">#</a></h2>
+<h3 id="docker-compose-yml-пример">docker-compose.yml (пример)<a class="headerlink" href="#docker-compose-yml-пример" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;3.9&quot;</span><span class="w">   </span><span class="c1"># устаревает, но часто встречается</span>
+
+<span class="nt">services</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">web</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nginx:alpine</span>
+<span class="w">    </span><span class="nt">ports</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;127.0.0.1:8080:80&quot;</span><span class="w">     </span><span class="c1"># ✅ только localhost</span>
+<span class="w">    </span><span class="nt">volumes</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./html:/usr/share/nginx/html:ro</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./nginx.conf:/etc/nginx/nginx.conf:ro</span>
+<span class="w">    </span><span class="nt">depends_on</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">app</span>
+<span class="w">    </span><span class="nt">restart</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">unless-stopped</span>
+<span class="w">    </span><span class="nt">networks</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">frontend</span>
+
+<span class="w">  </span><span class="nt">app</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">build</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">context</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./app</span>
+<span class="w">      </span><span class="nt">dockerfile</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Dockerfile</span>
+<span class="w">      </span><span class="nt">args</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">VERSION</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.0</span>
+<span class="w">      </span><span class="nt">target</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">production</span>
+<span class="w">    </span><span class="nt">environment</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DEBUG=false</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DB_HOST=db</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DB_PASSWORD=${DB_PASSWORD}</span><span class="w">   </span><span class="c1"># из .env</span>
+<span class="w">    </span><span class="nt">env_file</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">.env</span>
+<span class="w">    </span><span class="nt">volumes</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">app-data:/app/data</span>
+<span class="w">    </span><span class="nt">depends_on</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">db</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">condition</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">service_healthy</span>
+<span class="w">    </span><span class="nt">restart</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">always</span>
+<span class="w">    </span><span class="nt">networks</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">frontend</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">backend</span>
+
+<span class="w">  </span><span class="nt">db</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">postgres:16</span>
+<span class="w">    </span><span class="nt">environment</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">POSTGRES_DB</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mydb</span>
+<span class="w">      </span><span class="nt">POSTGRES_USER</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">postgres</span>
+<span class="w">      </span><span class="nt">POSTGRES_PASSWORD</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${DB_PASSWORD}</span>
+<span class="w">    </span><span class="nt">volumes</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">db-data:/var/lib/postgresql/data</span>
+<span class="w">    </span><span class="nt">ports</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;127.0.0.1:5432:5432&quot;</span>
+<span class="w">    </span><span class="nt">healthcheck</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">test</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;CMD-SHELL&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;pg_isready</span><span class="nv"> </span><span class="s">-U</span><span class="nv"> </span><span class="s">postgres&quot;</span><span class="p p-Indicator">]</span>
+<span class="w">      </span><span class="nt">interval</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10s</span>
+<span class="w">      </span><span class="nt">timeout</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5s</span>
+<span class="w">      </span><span class="nt">retries</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5</span>
+<span class="w">    </span><span class="nt">networks</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">backend</span>
+
+<span class="nt">volumes</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">app-data</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">db-data</span><span class="p">:</span>
+
+<span class="nt">networks</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">frontend</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">backend</span><span class="p">:</span>
+</code></pre></div>
+
+<h3 id="env-файл">.env файл<a class="headerlink" href="#env-файл" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>DB_PASSWORD=secretpassword
+VERSION=1.0
+</code></pre></div>
+
+<h3 id="команды-docker-compose">Команды docker-compose<a class="headerlink" href="#команды-docker-compose" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>docker<span class="w"> </span>compose<span class="w"> </span>up<span class="w"> </span>-d<span class="w">                 </span><span class="c1"># запустить всё в фоне</span>
+docker<span class="w"> </span>compose<span class="w"> </span>up<span class="w"> </span>-d<span class="w"> </span>web<span class="w"> </span>db<span class="w">          </span><span class="c1"># только некоторые</span>
+docker<span class="w"> </span>compose<span class="w"> </span>up<span class="w"> </span>--build<span class="w">            </span><span class="c1"># пересобрать образы</span>
+docker<span class="w"> </span>compose<span class="w"> </span>up<span class="w"> </span>--force-recreate<span class="w">   </span><span class="c1"># пересоздать контейнеры</span>
+docker<span class="w"> </span>compose<span class="w"> </span>down<span class="w">                  </span><span class="c1"># остановить + удалить</span>
+docker<span class="w"> </span>compose<span class="w"> </span>down<span class="w"> </span>-v<span class="w">               </span><span class="c1"># + удалить тома (ДАННЫЕ!)</span>
+docker<span class="w"> </span>compose<span class="w"> </span>down<span class="w"> </span>--rmi<span class="w"> </span>all<span class="w">        </span><span class="c1"># + удалить образы</span>
+docker<span class="w"> </span>compose<span class="w"> </span>start<span class="w"> </span>/<span class="w"> </span>stop<span class="w">          </span><span class="c1"># без удаления</span>
+docker<span class="w"> </span>compose<span class="w"> </span>restart<span class="w"> </span>web
+docker<span class="w"> </span>compose<span class="w"> </span>pause<span class="w"> </span>/<span class="w"> </span>unpause
+docker<span class="w"> </span>compose<span class="w"> </span>ps<span class="w">                    </span><span class="c1"># статус</span>
+docker<span class="w"> </span>compose<span class="w"> </span>logs<span class="w"> </span>-f<span class="w"> </span>web
+docker<span class="w"> </span>compose<span class="w"> </span>logs<span class="w"> </span>-f<span class="w"> </span>--tail<span class="o">=</span><span class="m">50</span>
+docker<span class="w"> </span>compose<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>web<span class="w"> </span>bash<span class="w">         </span><span class="c1"># войти</span>
+docker<span class="w"> </span>compose<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>web<span class="w"> </span>npm<span class="w"> </span><span class="nb">test</span><span class="w"> </span><span class="c1"># одноразовый</span>
+docker<span class="w"> </span>compose<span class="w"> </span>build<span class="w">                 </span><span class="c1"># собрать образы</span>
+docker<span class="w"> </span>compose<span class="w"> </span>pull<span class="w">                  </span><span class="c1"># обновить образы</span>
+docker<span class="w"> </span>compose<span class="w"> </span>config<span class="w">                </span><span class="c1"># результирующий конфиг (с подстановкой .env)</span>
+docker<span class="w"> </span>compose<span class="w"> </span>top<span class="w">                   </span><span class="c1"># процессы</span>
+</code></pre></div>
+
+<blockquote>
+<p><code>docker-compose</code> (с дефисом) — старая версия V1 (Python).
+<code>docker compose</code> (через пробел) — современная V2 (Go, встроена в Docker).</p>
+</blockquote>
+<h3 id="profiles-запуск-части-сервисов">profiles (запуск части сервисов)<a class="headerlink" href="#profiles-запуск-части-сервисов" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="nt">services</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">app</span><span class="p">:</span>
+<span class="w">    </span><span class="c1"># ...</span>
+<span class="w">  </span><span class="nt">debug-tools</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">profiles</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;debug&quot;</span><span class="p p-Indicator">]</span>
+<span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nicolaka/netshoot</span>
+</code></pre></div>
+
+<div class="highlight"><pre><span></span><code>docker<span class="w"> </span>compose<span class="w"> </span>--profile<span class="w"> </span>debug<span class="w"> </span>up<span class="w">    </span><span class="c1"># запустить с профилем</span>
+docker<span class="w"> </span>compose<span class="w"> </span>up<span class="w">                    </span><span class="c1"># без debug-tools</span>
+</code></pre></div>
+
+<hr />
+<h2 id="конфигурация-docker">⚙️ Конфигурация Docker<a class="headerlink" href="#конфигурация-docker" title="Ссылка">#</a></h2>
+<p>Файл: <code>/etc/docker/daemon.json</code> (Linux), <code>~/.docker/daemon.json</code></p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;data-root&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/var/lib/docker&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;log-driver&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;json-file&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;log-opts&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;max-size&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;10m&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;max-file&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;3&quot;</span><span class="w"> </span><span class="p">},</span>
+<span class="w">  </span><span class="nt">&quot;userland-proxy&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;storage-driver&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;overlay2&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;live-restore&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;registry-mirrors&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;https://mirror.example.com&quot;</span><span class="p">],</span>
+<span class="w">  </span><span class="nt">&quot;insecure-registries&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;192.168.1.100:5000&quot;</span><span class="p">]</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>systemctl<span class="w"> </span>restart<span class="w"> </span>docker
+</code></pre></div>
+
+<h3 id="логи-контейнеров">Логи контейнеров<a class="headerlink" href="#логи-контейнеров" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>docker<span class="w"> </span>logs<span class="w"> </span>-f<span class="w"> </span>--tail<span class="w"> </span><span class="m">100</span><span class="w"> </span>&lt;container&gt;
+docker<span class="w"> </span>logs<span class="w"> </span>--since<span class="w"> </span>2h<span class="w"> </span>&lt;container&gt;
+docker<span class="w"> </span>logs<span class="w"> </span>--since<span class="w"> </span><span class="m">2024</span>-01-15T10:00:00<span class="w"> </span>&lt;container&gt;
+docker<span class="w"> </span>logs<span class="w"> </span>--until<span class="w"> </span>1h<span class="w"> </span>&lt;container&gt;
+</code></pre></div>
+
+<p>Лимит размера логов (в daemon.json):</p>
+<div class="highlight"><pre><span></span><code><span class="nt">&quot;log-opts&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;max-size&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;10m&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;max-file&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;5&quot;</span><span class="w"> </span><span class="p">}</span>
+</code></pre></div>
+
+<hr />
+<h2 id="полезные-образы">🛠️ Полезные образы<a class="headerlink" href="#полезные-образы" title="Ссылка">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Образ</th>
+<th>Назначение</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>alpine</code></td>
+<td>Минимальный Linux (5 МБ)</td>
+</tr>
+<tr>
+<td><code>busybox</code></td>
+<td>Unix-утилиты (1 МБ)</td>
+</tr>
+<tr>
+<td><code>nicolaka/netshoot</code></td>
+<td>Сетевая отладка</td>
+</tr>
+<tr>
+<td><code>traefik</code></td>
+<td>Reverse proxy</td>
+</tr>
+<tr>
+<td><code>portainer/portainer-ce</code></td>
+<td>Web-UI для Docker</td>
+</tr>
+<tr>
+<td><code>docker:24-dind</code></td>
+<td>Docker in Docker (CI/CD)</td>
+</tr>
+<tr>
+<td><code>postgres:16</code></td>
+<td>PostgreSQL</td>
+</tr>
+<tr>
+<td><code>redis:7</code></td>
+<td>Redis</td>
+</tr>
+<tr>
+<td><code>nginx:alpine</code></td>
+<td>Веб-сервер</td>
+</tr>
+<tr>
+<td><code>node:20-slim</code></td>
+<td>Node.js</td>
+</tr>
+<tr>
+<td><code>python:3.12-slim</code></td>
+<td>Python</td>
+</tr>
+<tr>
+<td><code>ubuntu:24.04</code></td>
+<td>Ubuntu</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="практические-примеры">🧩 Практические примеры<a class="headerlink" href="#практические-примеры" title="Ссылка">#</a></h2>
+<h3 id="1-быстрый-бд-для-разработки">1. Быстрый БД для разработки<a class="headerlink" href="#1-быстрый-бд-для-разработки" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>docker<span class="w"> </span>run<span class="w"> </span>-d<span class="w"> </span>--name<span class="w"> </span>dev-pg<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-e<span class="w"> </span><span class="nv">POSTGRES_PASSWORD</span><span class="o">=</span>secret<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-e<span class="w"> </span><span class="nv">POSTGRES_DB</span><span class="o">=</span>mydb<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-p<span class="w"> </span><span class="m">127</span>.0.0.1:5432:5432<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-v<span class="w"> </span>pgdata:/var/lib/postgresql/data<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>postgres:16
+</code></pre></div>
+
+<h3 id="2-запустить-postgresql-pgadmin">2. Запустить PostgreSQL + pgAdmin<a class="headerlink" href="#2-запустить-postgresql-pgadmin" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># docker-compose.yml</span>
+<span class="nt">services</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">db</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">postgres:16</span>
+<span class="w">    </span><span class="nt">environment</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">POSTGRES_PASSWORD</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">secret</span>
+<span class="w">    </span><span class="nt">volumes</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pgdata:/var/lib/postgresql/data</span>
+<span class="w">  </span><span class="nt">admin</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">dpage/pgadmin4</span>
+<span class="w">    </span><span class="nt">environment</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">PGADMIN_DEFAULT_EMAIL</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">admin@admin.com</span>
+<span class="w">      </span><span class="nt">PGADMIN_DEFAULT_PASSWORD</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">admin</span>
+<span class="w">    </span><span class="nt">ports</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;127.0.0.1:5050:80&quot;</span>
+<span class="nt">volumes</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">pgdata</span><span class="p">:</span>
+</code></pre></div>
+
+<h3 id="3-собрать-и-запустить-python-приложение">3. Собрать и запустить Python-приложение<a class="headerlink" href="#3-собрать-и-запустить-python-приложение" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">FROM</span><span class="w"> </span><span class="s">python:3.12-slim</span>
+<span class="k">WORKDIR</span><span class="w"> </span><span class="s">/app</span>
+<span class="k">COPY</span><span class="w"> </span>requirements.txt<span class="w"> </span>.
+<span class="k">RUN</span><span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>requirements.txt
+<span class="k">COPY</span><span class="w"> </span>.<span class="w"> </span>.
+<span class="k">CMD</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;python&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;app.py&quot;</span><span class="p">]</span>
+</code></pre></div>
+
+<div class="highlight"><pre><span></span><code>docker<span class="w"> </span>build<span class="w"> </span>-t<span class="w"> </span>myapp<span class="w"> </span>.
+docker<span class="w"> </span>run<span class="w"> </span>-p<span class="w"> </span><span class="m">127</span>.0.0.1:8000:8000<span class="w"> </span>myapp
+</code></pre></div>
+
+<h3 id="4-временная-среда-для-тестирования">4. Временная среда для тестирования<a class="headerlink" href="#4-временная-среда-для-тестирования" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>docker<span class="w"> </span>run<span class="w"> </span>-it<span class="w"> </span>--rm<span class="w"> </span>-v<span class="w"> </span><span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>:/app<span class="w"> </span>-w<span class="w"> </span>/app<span class="w"> </span>python:3.12<span class="w"> </span>bash
+<span class="c1"># внутри: pip install pytest &amp;&amp; pytest</span>
+</code></pre></div>
+
+<h3 id="5-чистка-системы">5. Чистка системы<a class="headerlink" href="#5-чистка-системы" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>docker<span class="w"> </span>system<span class="w"> </span>df<span class="w">                      </span><span class="c1"># что занимает место</span>
+docker<span class="w"> </span>system<span class="w"> </span>prune<span class="w"> </span>-a<span class="w"> </span>--volumes<span class="w">      </span><span class="c1"># удалить всё (ОСТОРОЖНО!)</span>
+docker<span class="w"> </span>image<span class="w"> </span>prune<span class="w"> </span>-a<span class="w">                 </span><span class="c1"># только образы</span>
+docker<span class="w"> </span>volume<span class="w"> </span>prune<span class="w">                   </span><span class="c1"># только тома</span>
+</code></pre></div>
+
+<hr />
+<h2 id="частые-ошибки">🪤 Частые ошибки<a class="headerlink" href="#частые-ошибки" title="Ссылка">#</a></h2>
+<ol>
+<li><strong><code>-p 8080:80</code></strong> — пробрасывает на <code>0.0.0.0</code> (весь LAN!). Используйте <code>127.0.0.1:8080:80</code>.</li>
+<li><strong>Данные в контейнере</strong> — после <code>docker rm</code> исчезнут. Используйте volumes.</li>
+<li><strong>Запуск от root</strong> — по умолчанию процессы в контейнере root. Создавайте USER.</li>
+<li><strong><code>.env</code> в образе</strong> — не копируйте секреты в образ. Передавайте через env/volume/secrets.</li>
+<li><strong>Слои и кэш</strong> — <code>COPY . .</code> перед <code>RUN pip install</code> инвалидирует кэш при любом изменении. Копируйте <code>requirements.txt</code> отдельно.</li>
+<li><strong>BuildKit</strong> — включите <code>DOCKER_BUILDKIT=1</code> (или <code>buildx</code>) для современных сборок.</li>
+<li><strong><code>depends_on</code> не ждёт готовности</strong> — только запускает. Используйте <code>healthcheck</code> + <code>condition: service_healthy</code>.</li>
+<li><strong>Имена контейнеров</strong> — без <code>--name</code> Docker генерирует случайные (mystifying-фамилии).</li>
+<li><strong>Один образ = один процесс</strong> — не запускайте nginx+postgres+app в одном контейнере.</li>
+<li><strong>alpine + Python</strong> — musl libc, некоторые пакеты не собираются. Используйте <code>-slim</code>.</li>
+</ol>
+<hr />
+<h2 id="полезные-ссылки">🔗 Полезные ссылки<a class="headerlink" href="#полезные-ссылки" title="Ссылка">#</a></h2>
+<ul>
+<li>Документация: https://docs.docker.com</li>
+<li>Compose reference: https://docs.docker.com/compose/compose-file</li>
+<li>Docker Hub: https://hub.docker.com</li>
+<li>Play with Docker: https://labs.play-with-docker.com</li>
+<li>Awesome Compose: https://github.com/docker/awesome-compose</li>
+<li>Hadolint (линтер Dockerfile): https://github.com/hadolint/hadolint</li>
+<li>Dive (анализ слоёв): https://github.com/wagoodman/dive</li>
+<li>Lazydocker (TUI): https://github.com/jesseduffield/lazydocker</li>
+</ul>
+<hr />
+<h2 id="полезные-советы">💡 Полезные советы<a class="headerlink" href="#полезные-советы" title="Ссылка">#</a></h2>
+<ol>
+<li><strong><code>docker compose</code></strong> (V2) быстрее и современнее, чем <code>docker-compose</code> (V1).</li>
+<li><strong><code>-p 127.0.0.1:PORT:PORT</code></strong> — всегда для локальной разработки, не торчите в LAN.</li>
+<li><strong>Multi-stage builds</strong> — радикально уменьшают размер образа.</li>
+<li><strong><code>.dockerignore</code></strong> — как <code>.gitignore</code>, не копируйте мусор в образ.</li>
+<li><strong>Layer caching</strong> — тяжёлые и редкоменяющиеся операции (установка пакетов) — в начале Dockerfile.</li>
+<li><strong><code>healthcheck</code></strong> — критично для <code>depends_on: condition: service_healthy</code>.</li>
+<li><strong><code>.env</code> файл</strong> — для секретов (не коммитьте его!).</li>
+<li><strong><code>docker compose config</code></strong> — проверяет результирующий YAML с подстановкой переменных.</li>
+<li><strong><code>docker exec -it</code></strong> — войти в работающий контейнер (как ssh).</li>
+<li><strong><code>docker system df</code></strong> — следите за занятым местом, Docker разрастается.</li>
+<li><strong>Имена сервисов как DNS</strong> — внутри compose-сети контейнеры доступны по имени сервиса.</li>
+<li><strong><code>restart: unless-stopped</code></strong> — для dev-окружения (не перезапускается после ручной остановки).</li>
+<li><strong>BuildKit secrets</strong> — <code>--secret</code> для безопасной передачи секретов при сборке.</li>
+<li><strong><code>docker scan</code></strong> — проверка образа на уязвимости.</li>
+<li><strong>Lazydocker</strong> — TUI-клиент для Docker (как lazygit для git).</li>
+</ol>
+<hr />
+<p><em>Сгенерировано как шпаргалка. Docker огромен — углубляйтесь через
+https://docs.docker.com/reference/ и <code>docker &lt;cmd&gt; --help</code></em></p>
+    </article>
+    <nav class="pagination">
+      <a class="pager prev" href="make-cmake.html">← Make / CMake</a>
+      <a class="pager next" href="pacman.html">pacman / yay / paru →</a>
+    </nav>
+  </main>
+
+  <aside class="toc">
+    <details open>
+      <summary>📑 Оглавление</summary>
+      <div class="toc-list">
+<div class="toc">
+<ul>
+<li><a href="#docker-docker-compose-шпаргалка">🐳 Docker &amp; docker-compose — шпаргалка</a><ul>
+<li><a href="#главные-понятия">🔑 Главные понятия</a></li>
+<li><a href="#базовый-цикл">🚀 Базовый цикл</a><ul>
+<li><a href="#безопасность-портов-важно">⚠️ Безопасность портов (важно!)</a></li>
+</ul>
+</li>
+<li><a href="#dockerfile">📝 Dockerfile</a><ul>
+<li><a href="#команды-dockerfile">Команды Dockerfile</a></li>
+<li><a href="#сборка-образа">Сборка образа</a></li>
+<li><a href="#multi-stage-build-маленькие-образы">Multi-stage build (маленькие образы)</a></li>
+</ul>
+</li>
+<li><a href="#управление-образами-и-чистка">📦 Управление образами и чистка</a><ul>
+<li><a href="#полная-очистка-осторожно">Полная очистка (осторожно!)</a></li>
+</ul>
+</li>
+<li><a href="#сети">🌐 Сети</a><ul>
+<li><a href="#типы-сетей">Типы сетей</a></li>
+<li><a href="#dns-между-контейнерами">DNS между контейнерами</a></li>
+</ul>
+</li>
+<li><a href="#тома-и-монтирование">💾 Тома и монтирование</a><ul>
+<li><a href="#разница-v-vs-mount">Разница -v vs &ndash;mount</a></li>
+</ul>
+</li>
+<li><a href="#docker-compose">🐙 docker-compose</a><ul>
+<li><a href="#docker-compose-yml-пример">docker-compose.yml (пример)</a></li>
+<li><a href="#env-файл">.env файл</a></li>
+<li><a href="#команды-docker-compose">Команды docker-compose</a></li>
+<li><a href="#profiles-запуск-части-сервисов">profiles (запуск части сервисов)</a></li>
+</ul>
+</li>
+<li><a href="#конфигурация-docker">⚙️ Конфигурация Docker</a><ul>
+<li><a href="#логи-контейнеров">Логи контейнеров</a></li>
+</ul>
+</li>
+<li><a href="#полезные-образы">🛠️ Полезные образы</a></li>
+<li><a href="#практические-примеры">🧩 Практические примеры</a><ul>
+<li><a href="#1-быстрый-бд-для-разработки">1. Быстрый БД для разработки</a></li>
+<li><a href="#2-запустить-postgresql-pgadmin">2. Запустить PostgreSQL + pgAdmin</a></li>
+<li><a href="#3-собрать-и-запустить-python-приложение">3. Собрать и запустить Python-приложение</a></li>
+<li><a href="#4-временная-среда-для-тестирования">4. Временная среда для тестирования</a></li>
+<li><a href="#5-чистка-системы">5. Чистка системы</a></li>
+</ul>
+</li>
+<li><a href="#частые-ошибки">🪤 Частые ошибки</a></li>
+<li><a href="#полезные-ссылки">🔗 Полезные ссылки</a></li>
+<li><a href="#полезные-советы">💡 Полезные советы</a></li>
+</ul>
+</li>
+</ul>
+</div>
+
+      </div>
+    </details>
+  </aside>
+</div>
+
+<button class="back-top" id="backTop" aria-label="Наверх">↑</button>
+
+<script src="assets/search.js"></script>
+<script src="assets/page.js"></script>
+</body>
+</html>

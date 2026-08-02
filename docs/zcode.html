@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ZCode — Шпаргалки</title>
+<link rel="stylesheet" href="assets/style.css">
+<link rel="stylesheet" href="assets/pygments.css">
+</head>
+<body>
+<div class="layout">
+  <aside class="sidebar">
+    <a href="index.html" class="brand">📌 Шпаргалки</a>
+    <nav class="nav">
+<a href="yazi.html" class="nav-item"><span class="nav-ico">📦</span>Yazi</a>
+<a href="neovim.html" class="nav-item"><span class="nav-ico">📘</span>Neovim (LazyVim)</a>
+<a href="niri.html" class="nav-item"><span class="nav-ico">🪟</span>Niri</a>
+<a href="tmux.html" class="nav-item"><span class="nav-ico">🪟</span>Tmux</a>
+<a href="bash.html" class="nav-item"><span class="nav-ico">🐚</span>Bash</a>
+<a href="git.html" class="nav-item"><span class="nav-ico">🔀</span>Git</a>
+<a href="terminal.html" class="nav-item"><span class="nav-ico">🖥️</span>Терминал Linux</a>
+<a href="powershell.html" class="nav-item"><span class="nav-ico">💻</span>PowerShell</a>
+<a href="cmd.html" class="nav-item"><span class="nav-ico">🪟</span>CMD (cmd.exe)</a>
+<a href="python.html" class="nav-item"><span class="nav-ico">🐍</span>Python</a>
+<a href="systemd.html" class="nav-item"><span class="nav-ico">⚙️</span>systemd</a>
+<a href="ssh.html" class="nav-item"><span class="nav-ico">🔐</span>SSH</a>
+<a href="make-cmake.html" class="nav-item"><span class="nav-ico">🔨</span>Make / CMake</a>
+<a href="docker.html" class="nav-item"><span class="nav-ico">🐳</span>Docker</a>
+<a href="pacman.html" class="nav-item"><span class="nav-ico">📦</span>pacman / yay / paru</a>
+<a href="spark.html" class="nav-item"><span class="nav-ico">⚡</span>Apache Spark / PySpark</a>
+<a href="markdown.html" class="nav-item"><span class="nav-ico">📝</span>Markdown</a>
+<a href="regex.html" class="nav-item"><span class="nav-ico">🔍</span>Регулярные выражения</a>
+<a href="jq-json.html" class="nav-item"><span class="nav-ico">🔧</span>jq + JSON</a>
+<a href="awk-sed.html" class="nav-item"><span class="nav-ico">✂️</span>awk / sed</a>
+<a href="airflow.html" class="nav-item"><span class="nav-ico">🌪️</span>Apache Airflow</a>
+<a href="http-curl.html" class="nav-item"><span class="nav-ico">🌐</span>HTTP / curl</a>
+<a href="yaml.html" class="nav-item"><span class="nav-ico">📄</span>YAML</a>
+<a href="vscode.html" class="nav-item"><span class="nav-ico">💻</span>VS Code</a>
+<a href="cron.html" class="nav-item"><span class="nav-ico">⏰</span>cron</a>
+<a href="fzf-zoxide.html" class="nav-item"><span class="nav-ico">🔎</span>fzf + zoxide</a>
+<a href="minikube-k8s.html" class="nav-item"><span class="nav-ico">☸️</span>Minikube / Kubernetes</a>
+<a href="cicd.html" class="nav-item"><span class="nav-ico">🦊</span>GitLab CI / GitHub Actions</a>
+<a href="nginx.html" class="nav-item"><span class="nav-ico">🌐</span>nginx</a>
+<a href="dbt.html" class="nav-item"><span class="nav-ico">🔧</span>dbt</a>
+<a href="kafka.html" class="nav-item"><span class="nav-ico">🐘</span>Apache Kafka</a>
+<a href="prometheus-grafana.html" class="nav-item"><span class="nav-ico">📊</span>Prometheus / Grafana</a>
+<a href="iceberg-nessie.html" class="nav-item"><span class="nav-ico">🧊</span>Iceberg / Nessie</a>
+<a href="impala.html" class="nav-item"><span class="nav-ico">🐬</span>Apache Impala</a>
+<a href="terraform.html" class="nav-item"><span class="nav-ico">🏗️</span>Terraform</a>
+<a href="linux-internals.html" class="nav-item"><span class="nav-ico">🐧</span>Linux Internals</a>
+<a href="miscellaneous.html" class="nav-item"><span class="nav-ico">🧰</span>Miscellaneous</a>
+<a href="python-automation-libs.html" class="nav-item"><span class="nav-ico">🐍</span>Python: авт-ция (10 libs)</a>
+<a href="eza.html" class="nav-item"><span class="nav-ico">🌈</span>eza</a>
+<a href="dbeaver.html" class="nav-item"><span class="nav-ico">🗄️</span>DBeaver</a>
+<a href="zcode.html" class="nav-item active"><span class="nav-ico">🤖</span>ZCode</a>
+<a href="warp.html" class="nav-item"><span class="nav-ico">🚀</span>Warp</a>
+<a href="agentic-ai-dev.html" class="nav-item"><span class="nav-ico">🤝</span>Агентная разработка с ИИ</a>
+    </nav>
+  </aside>
+
+  <main class="content">
+    <article>
+<h1 id="zcode-шпаргалка">🤖 ZCode — шпаргалка<a class="headerlink" href="#zcode-шпаргалка" title="Ссылка">#</a></h1>
+<blockquote>
+<p><strong>ZCode</strong> — интерактивный AI-агент для кодинга в терминале. Работает с кодом через инструменты (Read/Write/Edit/Bash/Agent/…), поддерживает слэш-команды, скиллы, плагины, MCP, хуки и память сессий.
+Бинарник: <code>/usr/sbin/zcode</code>. Конфиг: <code>~/.zcode/</code>.</p>
+</blockquote>
+<hr />
+<h2 id="запуск">🚀 Запуск<a class="headerlink" href="#запуск" title="Ссылка">#</a></h2>
+<div class="highlight"><pre><span></span><code>zcode<span class="w">                       </span><span class="c1"># запустить в текущей директории</span>
+zcode<span class="w"> </span>/path/to/project<span class="w">      </span><span class="c1"># открыть конкретный проект</span>
+zcode<span class="w"> </span>--help<span class="w">                </span><span class="c1"># справка CLI</span>
+</code></pre></div>
+
+<p>При старте ZCode:
+1. Загружает пользовательские настройки из <code>~/.zcode/AGENTS.md</code>.
+2. Ищет <code>AGENTS.md</code> в проекте (от текущей директории вверх до корня репозитория).
+3. Подключает MCP-серверы (user + workspace scope — авто-коннект).
+4. Активирует скиллы/команды/хуки из <code>~/.zcode</code> и плагинов.</p>
+<hr />
+<h2 id="слэш-команды-вводятся-в-чат-начинаются-с">⌨️ Слэш-команды (вводятся в чат, начинаются с <code>/</code>)<a class="headerlink" href="#слэш-команды-вводятся-в-чат-начинаются-с" title="Ссылка">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Команда</th>
+<th>Назначение</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>/help</code></td>
+<td>Справка по доступным командам</td>
+</tr>
+<tr>
+<td><code>/init</code></td>
+<td>Создать/обновить <code>AGENTS.md</code> для текущего проекта</td>
+</tr>
+<tr>
+<td><code>/clear</code></td>
+<td>Очистить контекст текущей сессии (начать заново)</td>
+</tr>
+<tr>
+<td><code>/compact</code></td>
+<td><strong>Сжать</strong> длинную сессию в summary (контекст сохраняется, но сокращается)</td>
+</tr>
+<tr>
+<td><code>/memory</code></td>
+<td>Показать/редактировать сохранённую память проекта</td>
+</tr>
+<tr>
+<td><code>/remember &lt;fact&gt;</code></td>
+<td>Сохранить факт в память проекта</td>
+</tr>
+<tr>
+<td><code>/resume</code></td>
+<td>Продолжить прошлую сессию (<code>sess_*</code> ID)</td>
+</tr>
+<tr>
+<td><code>/agents</code></td>
+<td>Управление субагентами</td>
+</tr>
+<tr>
+<td><code>/mcp</code></td>
+<td>Статус MCP-серверов (подключённые/упавшие)</td>
+</tr>
+<tr>
+<td><code>/permissions</code></td>
+<td>Настройки разрешений инструментов</td>
+</tr>
+<tr>
+<td><code>/model</code></td>
+<td>Сменить модель (если подключено несколько провайдеров)</td>
+</tr>
+<tr>
+<td><code>/config</code></td>
+<td>Открыть конфигурацию</td>
+</tr>
+<tr>
+<td><code>/cost</code></td>
+<td>Потраченные токены/деньги за сессию</td>
+</tr>
+<tr>
+<td><code>/export</code></td>
+<td>Экспорт сессии</td>
+</tr>
+<tr>
+<td><code>/review</code></td>
+<td>Ревью изменений (часто из плагина)</td>
+</tr>
+<tr>
+<td><code>/&lt;skill-name&gt;</code></td>
+<td>Запустить конкретный скилл напрямую</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>Точный список зависит от версии и установленных плагинов. Ввод <code>/</code> показывает автодополнение.</p>
+</blockquote>
+<hr />
+<h2 id="структура-конфигурации">📁 Структура конфигурации<a class="headerlink" href="#структура-конфигурации" title="Ссылка">#</a></h2>
+<div class="highlight"><pre><span></span><code>~/.zcode/
+├── AGENTS.md              # пользовательские инструкции (для всех проектов)
+├── cli/
+│   ├── config.json        # MCP, hooks, plugins enable/disable
+│   ├── agents/            # сессии (sess_&lt;uuid&gt;/)
+│   ├── commands/          # пользовательские слэш-команды (.md)
+│   ├── skills/            # пользовательские скиллы
+│   ├── plugins/
+│   │   ├── cache/         # установленные плагины (из marketplace)
+│   │   ├── marketplaces/  # добавленные маркетплейсы
+│   │   └── known_marketplaces.json
+│   ├── memories/          # память по проектам
+│   ├── rollout/           # логи выполнения
+│   ├── log/               # системные логи
+│   └── exec/              # runtime
+└── v2/
+    ├── config.json        # провайдеры моделей
+    ├── setting.json       # UI/поведение (locale, zoom, indexing…)
+    ├── credentials.json   # API-ключи (зашифрованы)
+    └── tasks-index.sqlite # индекс задач
+</code></pre></div>
+
+<h3 id="workspace-scope-в-репозитории">Workspace scope (в репозитории)<a class="headerlink" href="#workspace-scope-в-репозитории" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>&lt;repo&gt;/
+├── AGENTS.md              # инструкции проекта (версионируются с командой)
+├── .zcode/
+│   ├── config.json        # MCP/hooks для проекта
+│   ├── commands/          # команды проекта
+│   └── skills/            # скиллы проекта
+└── .agents/               # совместимость с Claude/Codex/Cursor
+    ├── mcp.json           # MCP-серверы (fallback)
+    ├── commands/
+    └── skills/
+</code></pre></div>
+
+<hr />
+<h2 id="пять-типов-расширений">🎯 Пять типов расширений<a class="headerlink" href="#пять-типов-расширений" title="Ссылка">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Ресурс</th>
+<th>Форма</th>
+<th>Где (user)</th>
+<th>Где (workspace)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Skills</strong></td>
+<td>папка + <code>SKILL.md</code></td>
+<td><code>~/.zcode/skills/</code></td>
+<td><code>&lt;repo&gt;/.zcode/skills/</code></td>
+</tr>
+<tr>
+<td><strong>Commands</strong></td>
+<td><code>.md</code> файл</td>
+<td><code>~/.zcode/commands/</code></td>
+<td><code>&lt;repo&gt;/.zcode/commands/</code></td>
+</tr>
+<tr>
+<td><strong>MCP</strong></td>
+<td>JSON-объект</td>
+<td><code>~/.zcode/cli/config.json</code> → <code>mcp.servers</code></td>
+<td><code>&lt;repo&gt;/.zcode/config.json</code> → <code>mcp.servers</code></td>
+</tr>
+<tr>
+<td><strong>Hooks</strong></td>
+<td>объект в config</td>
+<td><code>~/.zcode/cli/config.json</code> → <code>hooks</code></td>
+<td><code>&lt;repo&gt;/.zcode/config.json</code> → <code>hooks</code></td>
+</tr>
+<tr>
+<td><strong>Plugins</strong></td>
+<td>папка + <code>plugin.json</code></td>
+<td>из marketplace</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<h3 id="совместимость-с-agents">Совместимость с <code>.agents/</code><a class="headerlink" href="#совместимость-с-agents" title="Ссылка">#</a></h3>
+<p>ZCode читает <code>.agents/</code> как fallback — полезно для общих скиллов с Claude/Codex/Cursor.
+Порядок в каждом scope: <code>.zcode</code> → <code>.agents</code>.</p>
+<hr />
+<h2 id="mcp-model-context-protocol">🔌 MCP (Model Context Protocol)<a class="headerlink" href="#mcp-model-context-protocol" title="Ссылка">#</a></h2>
+<p>MCP-серверы дают агенту внешние инструменты (БД, API, браузер, файлы и т.д.).</p>
+<h3 id="добавление-в-zcode-cli-config-json">Добавление в <code>~/.zcode/cli/config.json</code><a class="headerlink" href="#добавление-в-zcode-cli-config-json" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;mcp&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;servers&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;filesystem&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;command&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;npx&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;args&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;-y&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;@modelcontextprotocol/server-filesystem&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;/path&quot;</span><span class="p">]</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;postgres&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;command&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;npx&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;args&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;-y&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;@modelcontextprotocol/server-postgres&quot;</span><span class="p">,</span>
+<span class="w">                 </span><span class="s2">&quot;postgresql://user:pass@localhost/db&quot;</span><span class="p">]</span>
+<span class="w">      </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<h3 id="поведение">Поведение<a class="headerlink" href="#поведение" title="Ссылка">#</a></h3>
+<ul>
+<li><strong>Все scope авто-подключаются</strong> при старте сессии (user, workspace, plugin).</li>
+<li>User переопределяет workspace при конфликте имён.</li>
+<li>Инструменты MCP появляются как <code>mcp__&lt;server&gt;__&lt;tool&gt;</code>.</li>
+<li>Статус: <strong>Settings → MCP</strong> или команда <code>/mcp</code>.</li>
+<li>⚠️ Открывайте только доверенные проекты — workspace MCP подключается автоматически.</li>
+</ul>
+<h3 id="не-подключается">Не подключается?<a class="headerlink" href="#не-подключается" title="Ссылка">#</a></h3>
+<p>Использовать скилл <strong><code>/diagnosing-mcp</code></strong> — он ищет причину (bad command, timeout, untrusted).</p>
+<hr />
+<h2 id="hooks">🪝 Hooks<a class="headerlink" href="#hooks" title="Ссылка">#</a></h2>
+<p>7 событий:
+| Событие | Когда срабатывает |
+|&mdash;|&mdash;|
+| <code>SessionStart</code> | Старт сессии |
+| <code>UserPromptSubmit</code> | Пользователь отправил промпт |
+| <code>PreToolUse</code> | Перед вызовом инструмента |
+| <code>PermissionRequest</code> | Запрос разрешения |
+| <code>PostToolUse</code> | После успешного вызова |
+| <code>PostToolUseFailure</code> | После ошибки инструмента |
+| <code>Stop</code> | Агент завершил ответ |</p>
+<h3 id="конфигурация">Конфигурация<a class="headerlink" href="#конфигурация" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;hooks&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;enabled&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;SessionStart&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">      </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;matcher&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;*&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;command&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;echo &#39;session started&#39; &gt;&gt; /tmp/zcode.log&quot;</span>
+<span class="w">      </span><span class="p">}</span>
+<span class="w">    </span><span class="p">],</span>
+<span class="w">    </span><span class="nt">&quot;PreToolUse&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">      </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;matcher&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Bash&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;command&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;echo &#39;Bash call: $TOOL_INPUT&#39; &gt;&gt; /tmp/zcode.log&quot;</span>
+<span class="w">      </span><span class="p">}</span>
+<span class="w">    </span><span class="p">]</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<blockquote>
+<p>⚠️ <strong>Важно:</strong> хуки из config требуют <code>hooks.enabled: true</code>. Хуки из плагинов включают runner автоматически.</p>
+</blockquote>
+<h3 id="не-срабатывает-хук">Не срабатывает хук?<a class="headerlink" href="#не-срабатывает-хук" title="Ссылка">#</a></h3>
+<p>Скилл <strong><code>/diagnosing-hooks</code></strong> — проверит matcher, executable, расширение файла.</p>
+<hr />
+<h2 id="plugins">🧩 Plugins<a class="headerlink" href="#plugins" title="Ссылка">#</a></h2>
+<p>Плагин = папка с <code>.zcode-plugin/plugin.json</code>. Может содержать skills, commands, hooks, MCP, agents.</p>
+<h3 id="минимальный-plugin-json">Минимальный <code>plugin.json</code><a class="headerlink" href="#минимальный-plugin-json" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;my-plugin&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0.1.0&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;skills&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;skills/my-skill&quot;</span><span class="p">],</span>
+<span class="w">  </span><span class="nt">&quot;commands&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;commands/my-command.md&quot;</span><span class="p">]</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<h3 id="управление">Управление<a class="headerlink" href="#управление" title="Ссылка">#</a></h3>
+<ul>
+<li><strong>Settings → Plugin Management</strong> → вкладки <strong>Installed</strong> / <strong>Discover</strong>.</li>
+<li>Добавить marketplace: кнопка <strong><code>+</code></strong> на Discover (GitHub repo / Git URL / локальная папка / файл).</li>
+<li>Built-in плагин можно отключить, но не удалить.</li>
+<li>Состояние вкл/выкл хранится в <code>~/.zcode/cli/config.json</code> → <code>plugins</code>.</li>
+</ul>
+<h3 id="built-in-плагины-поставляются-с-zcode">Built-in плагины (поставляются с ZCode)<a class="headerlink" href="#built-in-плагины-поставляются-с-zcode" title="Ссылка">#</a></h3>
+<table>
+<thead>
+<tr>
+<th>Плагин</th>
+<th>Что даёт</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>zcode-guide</strong></td>
+<td>Скиллы самодиагностики конфигурации</td>
+</tr>
+<tr>
+<td><strong>document-skills</strong></td>
+<td>Создание/правка DOCX и PDF</td>
+</tr>
+<tr>
+<td><strong>skill-creator</strong></td>
+<td>Создание новых скиллов</td>
+</tr>
+<tr>
+<td><strong>android-emulator</strong></td>
+<td>Разработка под Android</td>
+</tr>
+<tr>
+<td><strong>ios-simulator</strong></td>
+<td>Разработка под iOS</td>
+</tr>
+<tr>
+<td><strong>restore-legacy-sessions</strong></td>
+<td>Восстановление старых сессий</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="agents-md-инструкции">📝 AGENTS.md — инструкции<a class="headerlink" href="#agents-md-инструкции" title="Ссылка">#</a></h2>
+<p>Текстовый файл с правилами поведения агента в проекте. Загружается в контекст.</p>
+<h3 id="когда-использовать">Когда использовать<a class="headerlink" href="#когда-использовать" title="Ссылка">#</a></h3>
+<ul>
+<li><strong>User scope</strong> (<code>~/.zcode/AGENTS.md</code>): личные дефолты (язык ответов, стиль ревью).</li>
+<li><strong>Workspace scope</strong> (<code>&lt;repo&gt;/AGENTS.md</code>): архитектура, конвенции коммитов, тесты — версионируется с кодом.</li>
+</ul>
+<h3 id="порядок-загрузки">Порядок загрузки<a class="headerlink" href="#порядок-загрузки" title="Ссылка">#</a></h3>
+<ol>
+<li>Сначала <code>~/.zcode/AGENTS.md</code> (базовые правила).</li>
+<li>Затем <code>&lt;repo&gt;/AGENTS.md</code> (может сужать/переопределять).</li>
+</ol>
+<h3 id="пример-agents-md-для-проекта">Пример <code>AGENTS.md</code> для проекта<a class="headerlink" href="#пример-agents-md-для-проекта" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="gh"># Правила проекта</span>
+
+<span class="gu">## Язык</span>
+<span class="k">-</span><span class="w"> </span>Отвечать на русском.
+
+<span class="gu">## Коммиты</span>
+<span class="k">-</span><span class="w"> </span>Формат: <span class="sb">`feat:`</span>, <span class="sb">`fix:`</span>, <span class="sb">`docs:`</span>, <span class="sb">`refactor:`</span>.
+<span class="k">-</span><span class="w"> </span>Не больше 50 символов в заголовке.
+
+<span class="gu">## Тесты</span>
+<span class="k">-</span><span class="w"> </span>Перед PR обязательно запустить <span class="sb">`pytest tests/`</span>.
+<span class="k">-</span><span class="w"> </span>Покрытие новых функций — не ниже 80%.
+
+<span class="gu">## Архитектура</span>
+<span class="k">-</span><span class="w"> </span>Слои: api → service → repository.
+<span class="k">-</span><span class="w"> </span>Не обращаться к БД из api-слоя напрямую.
+</code></pre></div>
+
+<hr />
+<h2 id="память-memory">🧠 Память (Memory)<a class="headerlink" href="#память-memory" title="Ссылка">#</a></h2>
+<p>ZCode хранит сводку по проекту между сессиями.</p>
+<div class="highlight"><pre><span></span><code>~/.zcode/cli/memories/projects/&lt;project-id&gt;/
+├── memory_summary.md      # краткая сводка (загружается всегда)
+├── MEMORY.md              # индекс тем
+├── topics/*.md            # типизированные памяти
+└── rollout_summaries/*.md # детальные саммари
+</code></pre></div>
+
+<h3 id="команды">Команды<a class="headerlink" href="#команды" title="Ссылка">#</a></h3>
+<ul>
+<li><code>/memory</code> — посмотреть текущую память.</li>
+<li><code>/remember &lt;fact&gt;</code> — сохранить факт.</li>
+<li>В сессии: «запомни, что мы используем порт 4000» → агент добавит в память.</li>
+</ul>
+<h3 id="принципы-как-агент-использует-память">Принципы (как агент использует память)<a class="headerlink" href="#принципы-как-агент-использует-память" title="Ссылка">#</a></h3>
+<ul>
+<li>Опциональна — не истина, а контекст.</li>
+<li>Секреты не раскрывать.</li>
+<li>Широкие сканы избегать — лучше продолжить без неё.</li>
+</ul>
+<hr />
+<h2 id="инструменты-агента">🛠️ Инструменты агента<a class="headerlink" href="#инструменты-агента" title="Ссылка">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Инструмент</th>
+<th>Назначение</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Read</strong></td>
+<td>Чтение файла (или картинки)</td>
+</tr>
+<tr>
+<td><strong>Write</strong></td>
+<td>Создание/перезапись файла</td>
+</tr>
+<tr>
+<td><strong>Edit</strong></td>
+<td>Точная замена строк в файле</td>
+</tr>
+<tr>
+<td><strong>Bash</strong></td>
+<td>Выполнение команды в шелле</td>
+</tr>
+<tr>
+<td><strong>Agent</strong></td>
+<td>Запуск субагента для подзадачи</td>
+</tr>
+<tr>
+<td><strong>TodoWrite</strong></td>
+<td>Управление списком задач сессии</td>
+</tr>
+<tr>
+<td><strong>WebFetch</strong></td>
+<td>Загрузка URL + ответ на промпт</td>
+</tr>
+<tr>
+<td><strong>WebSearch</strong></td>
+<td>Поиск в интернете</td>
+</tr>
+<tr>
+<td><strong>EnterPlanMode</strong></td>
+<td>Переход в режим планирования</td>
+</tr>
+<tr>
+<td><strong>ExitPlanMode</strong></td>
+<td>Показ плана пользователю для одобрения</td>
+</tr>
+<tr>
+<td><strong>AskUserQuestion</strong></td>
+<td>Вопрос к пользователю при развилке</td>
+</tr>
+<tr>
+<td><strong>TaskStop</strong></td>
+<td>Остановка фоновой задачи</td>
+</tr>
+<tr>
+<td><strong>SendMessage</strong></td>
+<td>Сообщение другому локальному агенту</td>
+</tr>
+<tr>
+<td><strong>ReadSessionContext</strong></td>
+<td>Чтение контекста другой сессии</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="режимы-разрешений">🎭 Режимы разрешений<a class="headerlink" href="#режимы-разрешений" title="Ссылка">#</a></h2>
+<p>ZCode работает за permission-модом, выбранным пользователем:
+- <strong>Ask</strong> — спрашивать перед каждым действием.
+- <strong>Auto-edit</strong> — авто-редактирование файлов, спрашивать внешние действия.
+- <strong>Plan</strong> — только планирование, без изменений.
+- <strong>Yolo</strong> — всё автоматически (опасно ⚠️).</p>
+<p>Хуки могут перехватывать вызовы инструментов (<code>PreToolUse</code>).</p>
+<hr />
+<h2 id="самодиагностика-встроенные-скиллы">🩺 Самодиагностика (встроенные скиллы)<a class="headerlink" href="#самодиагностика-встроенные-скиллы" title="Ссылка">#</a></h2>
+<p>Если что-то не работает — вызови соответствующий скилл:</p>
+<table>
+<thead>
+<tr>
+<th>Симптом</th>
+<th>Скилл</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MCP не подключается, инструменты пропали</td>
+<td><code>/diagnosing-mcp</code></td>
+</tr>
+<tr>
+<td>Скилл не находится/не триггерится</td>
+<td><code>/diagnosing-skills</code></td>
+</tr>
+<tr>
+<td>Слэш-команда пропала/не подставляет аргументы</td>
+<td><code>/diagnosing-commands</code></td>
+</tr>
+<tr>
+<td>Хук не срабатывает</td>
+<td><code>/diagnosing-hooks</code></td>
+</tr>
+<tr>
+<td>Плагин не виден/не ставится</td>
+<td><code>/diagnosing-plugins</code></td>
+</tr>
+</tbody>
+</table>
+<p>Каждый скилл ведёт по сценарию: симптом → причина → проверка → фикс (и для пользователя через UI, и для агента через файлы).</p>
+<hr />
+<h2 id="частые-сценарии">⚡ Частые сценарии<a class="headerlink" href="#частые-сценарии" title="Ссылка">#</a></h2>
+<h3 id="добавить-свой-скилл">Добавить свой скилл<a class="headerlink" href="#добавить-свой-скилл" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>mkdir<span class="w"> </span>-p<span class="w"> </span>~/.zcode/skills/my-skill
+cat<span class="w"> </span>&gt;<span class="w"> </span>~/.zcode/skills/my-skill/SKILL.md<span class="w"> </span><span class="s">&lt;&lt;&#39;EOF&#39;</span>
+<span class="s">---</span>
+<span class="s">name: my-skill</span>
+<span class="s">description: Запускать, когда пользователь просит сделать X</span>
+<span class="s">---</span>
+
+<span class="s"># My Skill</span>
+
+<span class="s">Инструкции агенту, что делать при срабатывании.</span>
+<span class="s">EOF</span>
+</code></pre></div>
+
+<h3 id="добавить-свою-слэш-команду">Добавить свою слэш-команду<a class="headerlink" href="#добавить-свою-слэш-команду" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>mkdir<span class="w"> </span>-p<span class="w"> </span>~/.zcode/commands
+cat<span class="w"> </span>&gt;<span class="w"> </span>~/.zcode/commands/deploy.md<span class="w"> </span><span class="s">&lt;&lt;&#39;EOF&#39;</span>
+<span class="s">---</span>
+<span class="s">description: Задеплоить текущий проект</span>
+<span class="s">---</span>
+
+<span class="s">Запусти `make build &amp;&amp; make deploy` и проверь логи на ошибки.</span>
+<span class="s">EOF</span>
+</code></pre></div>
+
+<p>Теперь доступна как <code>/deploy</code>.</p>
+<h3 id="подключить-postgresql-через-mcp">Подключить PostgreSQL через MCP<a class="headerlink" href="#подключить-postgresql-через-mcp" title="Ссылка">#</a></h3>
+<p>Добавить в <code>~/.zcode/cli/config.json</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;mcp&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;servers&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;postgres&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;command&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;npx&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;args&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;-y&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;@modelcontextprotocol/server-postgres&quot;</span><span class="p">,</span>
+<span class="w">                 </span><span class="s2">&quot;postgresql://user:pass@localhost:5432/mydb&quot;</span><span class="p">]</span>
+<span class="w">      </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<p>Перезапустить ZCode → <code>/mcp</code> проверить статус.</p>
+<h3 id="продолжить-прерванную-сессию">Продолжить прерванную сессию<a class="headerlink" href="#продолжить-прерванную-сессию" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>ls<span class="w"> </span>~/.zcode/cli/agents/<span class="w">    </span><span class="c1"># найти sess_&lt;uuid&gt;</span>
+</code></pre></div>
+
+<p>В чате: <code>/resume</code> → выбрать нужную.</p>
+<hr />
+<h2 id="zcode-vs-claude-code-vs-codex-vs-cursor">🆚 ZCode vs Claude Code vs Codex vs Cursor<a class="headerlink" href="#zcode-vs-claude-code-vs-codex-vs-cursor" title="Ссылка">#</a></h2>
+<p>| Что | ZCode | Claude Code | Codex | Cursor |
+|&mdash;|&mdash;|&mdash;|&mdash;| standalone |
+| Формат | standalone CLI | CLI | CLI | IDE |
+| Скиллы/команды | <code>.zcode</code> + <code>.agents</code> | <code>.claude</code> | <code>.codex</code> | встроенные |
+| MCP | ✅ авто-коннект | ✅ | ✅ | ⚠️ |
+| Хуки (7 событий) | ✅ | ✅ | ⚠️ | ❌ |
+| Память сессий | ✅ (<code>sess_*</code>) | ✅ | ⚠️ | ⚠️ |
+| Совместимость | <code>.agents/</code> fallback | родной <code>.claude</code> | родной <code>.codex</code> | свой формат |</p>
+<blockquote>
+<p>ZCode читает <code>.agents/</code> для совместимости — скиллы из <code>~/.agents/skills/</code> работают одновременно в Claude Code, Codex и ZCode.</p>
+</blockquote>
+<hr />
+<h2 id="источники">🔗 Источники<a class="headerlink" href="#источники" title="Ссылка">#</a></h2>
+<ul>
+<li>Установленные плагины: <code>~/.zcode/cli/plugins/cache/zcode-plugins-official/</code></li>
+<li>Гайд по конфигурации: скилл <code>zcode-configuration-guide</code></li>
+<li>Диагностика: скиллы <code>diagnosing-*</code> (mcp, skills, commands, hooks, plugins)</li>
+<li>Бинарник: <code>/usr/sbin/zcode</code> (<code>zcode --help</code>)</li>
+</ul>
+    </article>
+    <nav class="pagination">
+      <a class="pager prev" href="dbeaver.html">← DBeaver</a>
+      <a class="pager next" href="warp.html">Warp →</a>
+    </nav>
+  </main>
+
+  <aside class="toc">
+    <details open>
+      <summary>📑 Оглавление</summary>
+      <div class="toc-list">
+<div class="toc">
+<ul>
+<li><a href="#zcode-шпаргалка">🤖 ZCode — шпаргалка</a><ul>
+<li><a href="#запуск">🚀 Запуск</a></li>
+<li><a href="#слэш-команды-вводятся-в-чат-начинаются-с">⌨️ Слэш-команды (вводятся в чат, начинаются с /)</a></li>
+<li><a href="#структура-конфигурации">📁 Структура конфигурации</a><ul>
+<li><a href="#workspace-scope-в-репозитории">Workspace scope (в репозитории)</a></li>
+</ul>
+</li>
+<li><a href="#пять-типов-расширений">🎯 Пять типов расширений</a><ul>
+<li><a href="#совместимость-с-agents">Совместимость с .agents/</a></li>
+</ul>
+</li>
+<li><a href="#mcp-model-context-protocol">🔌 MCP (Model Context Protocol)</a><ul>
+<li><a href="#добавление-в-zcode-cli-config-json">Добавление в ~/.zcode/cli/config.json</a></li>
+<li><a href="#поведение">Поведение</a></li>
+<li><a href="#не-подключается">Не подключается?</a></li>
+</ul>
+</li>
+<li><a href="#hooks">🪝 Hooks</a><ul>
+<li><a href="#конфигурация">Конфигурация</a></li>
+<li><a href="#не-срабатывает-хук">Не срабатывает хук?</a></li>
+</ul>
+</li>
+<li><a href="#plugins">🧩 Plugins</a><ul>
+<li><a href="#минимальный-plugin-json">Минимальный plugin.json</a></li>
+<li><a href="#управление">Управление</a></li>
+<li><a href="#built-in-плагины-поставляются-с-zcode">Built-in плагины (поставляются с ZCode)</a></li>
+</ul>
+</li>
+<li><a href="#agents-md-инструкции">📝 AGENTS.md — инструкции</a><ul>
+<li><a href="#когда-использовать">Когда использовать</a></li>
+<li><a href="#порядок-загрузки">Порядок загрузки</a></li>
+<li><a href="#пример-agents-md-для-проекта">Пример AGENTS.md для проекта</a></li>
+</ul>
+</li>
+<li><a href="#память-memory">🧠 Память (Memory)</a><ul>
+<li><a href="#команды">Команды</a></li>
+<li><a href="#принципы-как-агент-использует-память">Принципы (как агент использует память)</a></li>
+</ul>
+</li>
+<li><a href="#инструменты-агента">🛠️ Инструменты агента</a></li>
+<li><a href="#режимы-разрешений">🎭 Режимы разрешений</a></li>
+<li><a href="#самодиагностика-встроенные-скиллы">🩺 Самодиагностика (встроенные скиллы)</a></li>
+<li><a href="#частые-сценарии">⚡ Частые сценарии</a><ul>
+<li><a href="#добавить-свой-скилл">Добавить свой скилл</a></li>
+<li><a href="#добавить-свою-слэш-команду">Добавить свою слэш-команду</a></li>
+<li><a href="#подключить-postgresql-через-mcp">Подключить PostgreSQL через MCP</a></li>
+<li><a href="#продолжить-прерванную-сессию">Продолжить прерванную сессию</a></li>
+</ul>
+</li>
+<li><a href="#zcode-vs-claude-code-vs-codex-vs-cursor">🆚 ZCode vs Claude Code vs Codex vs Cursor</a></li>
+<li><a href="#источники">🔗 Источники</a></li>
+</ul>
+</li>
+</ul>
+</div>
+
+      </div>
+    </details>
+  </aside>
+</div>
+
+<button class="back-top" id="backTop" aria-label="Наверх">↑</button>
+
+<script src="assets/search.js"></script>
+<script src="assets/page.js"></script>
+</body>
+</html>

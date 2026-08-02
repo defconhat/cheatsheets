@@ -1,0 +1,10 @@
+# Python
+__pycache__/
+*.py[oc]
+.venv/
+venv/
+
+# Локальные сборки (генерируется из исходников, но docs/ коммитим намеренно
+# для GitHub Pages — поэтому _site/ и _site_single/ здесь игнорируем)
+_site/
+_site_single/

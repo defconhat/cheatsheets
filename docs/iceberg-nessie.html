@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Iceberg / Nessie — Шпаргалки</title>
+<link rel="stylesheet" href="assets/style.css">
+<link rel="stylesheet" href="assets/pygments.css">
+</head>
+<body>
+<div class="layout">
+  <aside class="sidebar">
+    <a href="index.html" class="brand">📌 Шпаргалки</a>
+    <nav class="nav">
+<a href="yazi.html" class="nav-item"><span class="nav-ico">📦</span>Yazi</a>
+<a href="neovim.html" class="nav-item"><span class="nav-ico">📘</span>Neovim (LazyVim)</a>
+<a href="niri.html" class="nav-item"><span class="nav-ico">🪟</span>Niri</a>
+<a href="tmux.html" class="nav-item"><span class="nav-ico">🪟</span>Tmux</a>
+<a href="bash.html" class="nav-item"><span class="nav-ico">🐚</span>Bash</a>
+<a href="git.html" class="nav-item"><span class="nav-ico">🔀</span>Git</a>
+<a href="terminal.html" class="nav-item"><span class="nav-ico">🖥️</span>Терминал Linux</a>
+<a href="powershell.html" class="nav-item"><span class="nav-ico">💻</span>PowerShell</a>
+<a href="cmd.html" class="nav-item"><span class="nav-ico">🪟</span>CMD (cmd.exe)</a>
+<a href="python.html" class="nav-item"><span class="nav-ico">🐍</span>Python</a>
+<a href="systemd.html" class="nav-item"><span class="nav-ico">⚙️</span>systemd</a>
+<a href="ssh.html" class="nav-item"><span class="nav-ico">🔐</span>SSH</a>
+<a href="make-cmake.html" class="nav-item"><span class="nav-ico">🔨</span>Make / CMake</a>
+<a href="docker.html" class="nav-item"><span class="nav-ico">🐳</span>Docker</a>
+<a href="pacman.html" class="nav-item"><span class="nav-ico">📦</span>pacman / yay / paru</a>
+<a href="spark.html" class="nav-item"><span class="nav-ico">⚡</span>Apache Spark / PySpark</a>
+<a href="markdown.html" class="nav-item"><span class="nav-ico">📝</span>Markdown</a>
+<a href="regex.html" class="nav-item"><span class="nav-ico">🔍</span>Регулярные выражения</a>
+<a href="jq-json.html" class="nav-item"><span class="nav-ico">🔧</span>jq + JSON</a>
+<a href="awk-sed.html" class="nav-item"><span class="nav-ico">✂️</span>awk / sed</a>
+<a href="airflow.html" class="nav-item"><span class="nav-ico">🌪️</span>Apache Airflow</a>
+<a href="http-curl.html" class="nav-item"><span class="nav-ico">🌐</span>HTTP / curl</a>
+<a href="yaml.html" class="nav-item"><span class="nav-ico">📄</span>YAML</a>
+<a href="vscode.html" class="nav-item"><span class="nav-ico">💻</span>VS Code</a>
+<a href="cron.html" class="nav-item"><span class="nav-ico">⏰</span>cron</a>
+<a href="fzf-zoxide.html" class="nav-item"><span class="nav-ico">🔎</span>fzf + zoxide</a>
+<a href="minikube-k8s.html" class="nav-item"><span class="nav-ico">☸️</span>Minikube / Kubernetes</a>
+<a href="cicd.html" class="nav-item"><span class="nav-ico">🦊</span>GitLab CI / GitHub Actions</a>
+<a href="nginx.html" class="nav-item"><span class="nav-ico">🌐</span>nginx</a>
+<a href="dbt.html" class="nav-item"><span class="nav-ico">🔧</span>dbt</a>
+<a href="kafka.html" class="nav-item"><span class="nav-ico">🐘</span>Apache Kafka</a>
+<a href="prometheus-grafana.html" class="nav-item"><span class="nav-ico">📊</span>Prometheus / Grafana</a>
+<a href="iceberg-nessie.html" class="nav-item active"><span class="nav-ico">🧊</span>Iceberg / Nessie</a>
+<a href="impala.html" class="nav-item"><span class="nav-ico">🐬</span>Apache Impala</a>
+<a href="terraform.html" class="nav-item"><span class="nav-ico">🏗️</span>Terraform</a>
+<a href="linux-internals.html" class="nav-item"><span class="nav-ico">🐧</span>Linux Internals</a>
+<a href="miscellaneous.html" class="nav-item"><span class="nav-ico">🧰</span>Miscellaneous</a>
+<a href="python-automation-libs.html" class="nav-item"><span class="nav-ico">🐍</span>Python: авт-ция (10 libs)</a>
+<a href="eza.html" class="nav-item"><span class="nav-ico">🌈</span>eza</a>
+<a href="dbeaver.html" class="nav-item"><span class="nav-ico">🗄️</span>DBeaver</a>
+<a href="zcode.html" class="nav-item"><span class="nav-ico">🤖</span>ZCode</a>
+<a href="warp.html" class="nav-item"><span class="nav-ico">🚀</span>Warp</a>
+<a href="agentic-ai-dev.html" class="nav-item"><span class="nav-ico">🤝</span>Агентная разработка с ИИ</a>
+    </nav>
+  </aside>
+
+  <main class="content">
+    <article>
+<h1 id="apache-iceberg-nessie-шпаргалка">🧊 Apache Iceberg + Nessie — шпаргалка<a class="headerlink" href="#apache-iceberg-nessie-шпаргалка" title="Ссылка">#</a></h1>
+<blockquote>
+<p><strong>Apache Iceberg</strong> — открытый формат таблиц для огромных аналитических датасетов.
+<strong>Nessie</strong> — Git-подобный каталог таблиц (с.branches, commits, merges).
+Документация: https://iceberg.apache.org · https://projectnessie.org</p>
+</blockquote>
+<hr />
+<h2 id="главные-понятия">🔑 Главные понятия<a class="headerlink" href="#главные-понятия" title="Ссылка">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Термин</th>
+<th>Что значит</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Table format</strong></td>
+<td>Формат хранения табличных данных в файловой системе</td>
+</tr>
+<tr>
+<td><strong>Catalog</strong></td>
+<td>Где хранятся метаданные таблиц (Hive, Glue, REST, Nessie)</td>
+</tr>
+<tr>
+<td><strong>Snapshot</strong></td>
+<td>Версия таблицы (иммутабельный набор файлов)</td>
+</tr>
+<tr>
+<td><strong>Manifest</strong></td>
+<td>Список файлов данных (для snapshot)</td>
+</tr>
+<tr>
+<td><strong>Manifest list</strong></td>
+<td>Список manifest&rsquo;ов</td>
+</tr>
+<tr>
+<td><strong>Partition spec</strong></td>
+<td>Правила партиционирования</td>
+</tr>
+<tr>
+<td><strong>Time travel</strong></td>
+<td>Чтение данных на прошлый момент времени</td>
+</tr>
+<tr>
+<td><strong>Schema evolution</strong></td>
+<td>Изменение схемы без переписывания данных</td>
+</tr>
+<tr>
+<td><strong>Hidden partitioning</strong></td>
+<td>Автоматическое партиционирование</td>
+</tr>
+<tr>
+<td><strong>Merge-on-read / Copy-on-write</strong></td>
+<td>Стратегии UPDATE/DELETE</td>
+</tr>
+</tbody>
+</table>
+<h3 id="зачем-iceberg">Зачем Iceberg?<a class="headerlink" href="#зачем-iceberg" title="Ссылка">#</a></h3>
+<ul>
+<li>Замена форматов Hive/Parquet с метаданными.</li>
+<li>ACID-транзакции на файловом хранилище (S3, HDFS).</li>
+<li>Schema evolution без переписывания данных.</li>
+<li>Time travel (читать данные на момент времени).</li>
+<li>Hidden partitioning (автопартиции).</li>
+<li>Совместимость: Spark, Flink, Trino, Impala, Presto, Athena.</li>
+</ul>
+<hr />
+<h2 id="архитектура-iceberg">🚀 Архитектура Iceberg<a class="headerlink" href="#архитектура-iceberg" title="Ссылка">#</a></h2>
+<div class="highlight"><pre><span></span><code>┌────────────────────────────────────────────┐
+│   SQL Engine (Spark/Flink/Trino/Impala)    │
+└────────────────────────────────────────────┘
+                  ↓
+┌────────────────────────────────────────────┐
+│                Catalog                     │
+│  (Hive Metastore, AWS Glue, REST, Nessie)  │
+└────────────────────────────────────────────┘
+                  ↓
+┌────────────────────────────────────────────┐
+│              Metadata Layer                │
+│   metadata.json → manifest list → manifest │
+└────────────────────────────────────────────┘
+                  ↓
+┌────────────────────────────────────────────┐
+│     Data Layer (S3, HDFS, ADLS, GCS)       │
+│           Parquet / ORC / Avro             │
+└────────────────────────────────────────────┘
+</code></pre></div>
+
+<h3 id="слои">Слои<a class="headerlink" href="#слои" title="Ссылка">#</a></h3>
+<ol>
+<li><strong>Catalog</strong> — где найти <code>metadata.json</code> таблицы.</li>
+<li><strong>Metadata</strong> — <code>metadata.json</code> → указывает на manifest list.</li>
+<li><strong>Manifest list</strong> — список manifest&rsquo;ов (snapshot).</li>
+<li><strong>Manifest</strong> — список data-файлов + статистика.</li>
+<li><strong>Data files</strong> — Parquet/ORC/Avro.</li>
+</ol>
+<hr />
+<h2 id="pyspark-iceberg">🐍 PySpark + Iceberg<a class="headerlink" href="#pyspark-iceberg" title="Ссылка">#</a></h2>
+<h3 id="установка">Установка<a class="headerlink" href="#установка" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>pip<span class="w"> </span>install<span class="w"> </span>pyspark
+<span class="c1"># Нужен jar: iceberg-spark-runtime-&lt;version&gt;.jar</span>
+</code></pre></div>
+
+<h3 id="spark-session-с-iceberg">Spark Session с Iceberg<a class="headerlink" href="#spark-session-с-iceberg" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">pyspark.sql</span><span class="w"> </span><span class="kn">import</span> <span class="n">SparkSession</span>
+
+<span class="n">spark</span> <span class="o">=</span> <span class="n">SparkSession</span><span class="o">.</span><span class="n">builder</span> \
+    <span class="o">.</span><span class="n">appName</span><span class="p">(</span><span class="s2">&quot;iceberg&quot;</span><span class="p">)</span> \
+    <span class="o">.</span><span class="n">config</span><span class="p">(</span><span class="s2">&quot;spark.sql.extensions&quot;</span><span class="p">,</span> <span class="s2">&quot;org.apache.iceberg.spark.extensions.IcebergSparkSessionExtensions&quot;</span><span class="p">)</span> \
+    <span class="o">.</span><span class="n">config</span><span class="p">(</span><span class="s2">&quot;spark.sql.catalog.local&quot;</span><span class="p">,</span> <span class="s2">&quot;org.apache.iceberg.spark.SparkCatalog&quot;</span><span class="p">)</span> \
+    <span class="o">.</span><span class="n">config</span><span class="p">(</span><span class="s2">&quot;spark.sql.catalog.local.type&quot;</span><span class="p">,</span> <span class="s2">&quot;hadoop&quot;</span><span class="p">)</span> \
+    <span class="o">.</span><span class="n">config</span><span class="p">(</span><span class="s2">&quot;spark.sql.catalog.local.warehouse&quot;</span><span class="p">,</span> <span class="s2">&quot;/tmp/warehouse&quot;</span><span class="p">)</span> \
+    <span class="o">.</span><span class="n">config</span><span class="p">(</span><span class="s2">&quot;spark.sql.catalog.local.io-impl&quot;</span><span class="p">,</span> <span class="s2">&quot;org.apache.iceberg.aws.s3.S3FileIO&quot;</span><span class="p">)</span> \
+    <span class="o">.</span><span class="n">getOrCreate</span><span class="p">()</span>
+</code></pre></div>
+
+<h3 id="создание-таблицы">Создание таблицы<a class="headerlink" href="#создание-таблицы" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="k">local</span><span class="p">.</span><span class="n">db</span><span class="p">.</span><span class="n">events</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="n">id</span><span class="w"> </span><span class="nb">BIGINT</span><span class="p">,</span>
+<span class="w">    </span><span class="n">event_time</span><span class="w"> </span><span class="k">TIMESTAMP</span><span class="p">,</span>
+<span class="w">    </span><span class="n">user_id</span><span class="w"> </span><span class="n">STRING</span><span class="p">,</span>
+<span class="w">    </span><span class="n">event_type</span><span class="w"> </span><span class="n">STRING</span><span class="p">,</span>
+<span class="w">    </span><span class="n">properties</span><span class="w"> </span><span class="k">MAP</span><span class="o">&lt;</span><span class="n">STRING</span><span class="p">,</span><span class="w"> </span><span class="n">STRING</span><span class="o">&gt;</span>
+<span class="p">)</span>
+<span class="k">USING</span><span class="w"> </span><span class="n">iceberg</span>
+<span class="n">PARTITIONED</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="p">(</span><span class="n">days</span><span class="p">(</span><span class="n">event_time</span><span class="p">))</span>
+<span class="n">TBLPROPERTIES</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="s1">&#39;format-version&#39;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;2&#39;</span><span class="p">,</span>
+<span class="w">    </span><span class="s1">&#39;write.format.default&#39;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;parquet&#39;</span>
+<span class="p">);</span>
+</code></pre></div>
+
+<h3 id="запись">Запись<a class="headerlink" href="#запись" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="n">df</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">createDataFrame</span><span class="p">([(</span><span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;click&quot;</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;view&quot;</span><span class="p">)],</span> <span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">,</span> <span class="s2">&quot;event_type&quot;</span><span class="p">])</span>
+<span class="n">df</span><span class="o">.</span><span class="n">writeTo</span><span class="p">(</span><span class="s2">&quot;local.db.events&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">create</span><span class="p">()</span>
+<span class="n">df</span><span class="o">.</span><span class="n">writeTo</span><span class="p">(</span><span class="s2">&quot;local.db.events&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">append</span><span class="p">()</span>
+<span class="n">df</span><span class="o">.</span><span class="n">writeTo</span><span class="p">(</span><span class="s2">&quot;local.db.events&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">overwritePartitions</span><span class="p">()</span>
+</code></pre></div>
+
+<h3 id="чтение">Чтение<a class="headerlink" href="#чтение" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="k">local</span><span class="p">.</span><span class="n">db</span><span class="p">.</span><span class="n">events</span><span class="p">;</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="k">local</span><span class="p">.</span><span class="n">db</span><span class="p">.</span><span class="n">events</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">event_time</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="s1">&#39;2024-01-01&#39;</span><span class="p">;</span>
+
+<span class="c1">-- Time travel</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="k">local</span><span class="p">.</span><span class="n">db</span><span class="p">.</span><span class="n">events</span><span class="w"> </span><span class="k">VERSION</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="k">OF</span><span class="w"> </span><span class="mi">12345</span><span class="p">;</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="k">local</span><span class="p">.</span><span class="n">db</span><span class="p">.</span><span class="n">events</span><span class="w"> </span><span class="k">TIMESTAMP</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="k">OF</span><span class="w"> </span><span class="s1">&#39;2024-01-15 10:00:00&#39;</span><span class="p">;</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="k">local</span><span class="p">.</span><span class="n">db</span><span class="p">.</span><span class="n">events</span><span class="w"> </span><span class="k">FOR</span><span class="w"> </span><span class="n">SYSTEM_VERSION</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="k">OF</span><span class="w"> </span><span class="s1">&#39;2024-01-15&#39;</span><span class="p">;</span>
+</code></pre></div>
+
+<h3 id="iceberg-table-procedures">Iceberg table procedures<a class="headerlink" href="#iceberg-table-procedures" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1">-- История snapshot&#39;ов</span>
+<span class="k">CALL</span><span class="w"> </span><span class="k">local</span><span class="p">.</span><span class="k">system</span><span class="p">.</span><span class="n">snapshot_history</span><span class="p">(</span><span class="s1">&#39;db.events&#39;</span><span class="p">);</span>
+
+<span class="c1">-- Метаданные файлов</span>
+<span class="k">CALL</span><span class="w"> </span><span class="k">local</span><span class="p">.</span><span class="k">system</span><span class="p">.</span><span class="n">files</span><span class="p">(</span><span class="s1">&#39;db.events&#39;</span><span class="p">);</span>
+
+<span class="c1">-- Сжатие мелких файлов</span>
+<span class="k">CALL</span><span class="w"> </span><span class="k">local</span><span class="p">.</span><span class="k">system</span><span class="p">.</span><span class="n">rewrite_data_files</span><span class="p">(</span><span class="s1">&#39;db.events&#39;</span><span class="p">);</span>
+
+<span class="c1">-- Удаление старых snapshot&#39;ов</span>
+<span class="k">CALL</span><span class="w"> </span><span class="k">local</span><span class="p">.</span><span class="k">system</span><span class="p">.</span><span class="n">expire_snapshots</span><span class="p">(</span><span class="s1">&#39;db.events&#39;</span><span class="p">,</span><span class="w"> </span><span class="k">TIMESTAMP</span><span class="w"> </span><span class="s1">&#39;2024-01-01&#39;</span><span class="p">);</span>
+
+<span class="c1">-- Удаление orphan-файлов</span>
+<span class="k">CALL</span><span class="w"> </span><span class="k">local</span><span class="p">.</span><span class="k">system</span><span class="p">.</span><span class="n">remove_orphan_files</span><span class="p">(</span><span class="s1">&#39;db.events&#39;</span><span class="p">);</span>
+</code></pre></div>
+
+<hr />
+<h2 id="nessie-каталог-с-ветвями">🌳 Nessie — каталог с ветвями<a class="headerlink" href="#nessie-каталог-с-ветвями" title="Ссылка">#</a></h2>
+<p>Nessie — отдельный сервис (Docker). Предоставляет REST API.</p>
+<h3 id="запуск-nessie">Запуск Nessie<a class="headerlink" href="#запуск-nessie" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># docker-compose.yml</span>
+<span class="nt">services</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">nessie</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ghcr.io/projectnessie/nessie:latest</span>
+<span class="w">    </span><span class="nt">ports</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;127.0.0.1:19120:19120&quot;</span>
+<span class="w">    </span><span class="nt">environment</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">QUARKUS_PROFILE=prod</span>
+</code></pre></div>
+
+<h3 id="подключение-из-spark">Подключение из Spark<a class="headerlink" href="#подключение-из-spark" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="n">spark</span> <span class="o">=</span> <span class="n">SparkSession</span><span class="o">.</span><span class="n">builder</span> \
+    <span class="o">.</span><span class="n">config</span><span class="p">(</span><span class="s2">&quot;spark.sql.extensions&quot;</span><span class="p">,</span> <span class="s2">&quot;org.apache.iceberg.spark.extensions.IcebergSparkSessionExtensions&quot;</span><span class="p">)</span> \
+    <span class="o">.</span><span class="n">config</span><span class="p">(</span><span class="s2">&quot;spark.sql.catalog.nessie&quot;</span><span class="p">,</span> <span class="s2">&quot;org.apache.iceberg.spark.SparkCatalog&quot;</span><span class="p">)</span> \
+    <span class="o">.</span><span class="n">config</span><span class="p">(</span><span class="s2">&quot;spark.sql.catalog.nessie.catalog-impl&quot;</span><span class="p">,</span> <span class="s2">&quot;org.apache.iceberg.nessie.NessieCatalog&quot;</span><span class="p">)</span> \
+    <span class="o">.</span><span class="n">config</span><span class="p">(</span><span class="s2">&quot;spark.sql.catalog.nessie.uri&quot;</span><span class="p">,</span> <span class="s2">&quot;http://nessie:19120/api/v1&quot;</span><span class="p">)</span> \
+    <span class="o">.</span><span class="n">config</span><span class="p">(</span><span class="s2">&quot;spark.sql.catalog.nessie.ref&quot;</span><span class="p">,</span> <span class="s2">&quot;main&quot;</span><span class="p">)</span> \
+    <span class="o">.</span><span class="n">config</span><span class="p">(</span><span class="s2">&quot;spark.sql.catalog.nessie.warehouse&quot;</span><span class="p">,</span> <span class="s2">&quot;s3://my-bucket/warehouse&quot;</span><span class="p">)</span> \
+    <span class="o">.</span><span class="n">getOrCreate</span><span class="p">()</span>
+</code></pre></div>
+
+<h3 id="создание-таблицы-в-nessie">Создание таблицы в Nessie<a class="headerlink" href="#создание-таблицы-в-nessie" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1">-- Создать namespace</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="n">NAMESPACE</span><span class="w"> </span><span class="k">IF</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">EXISTS</span><span class="w"> </span><span class="n">nessie</span><span class="p">.</span><span class="n">db</span><span class="p">;</span>
+
+<span class="c1">-- Создать таблицу</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">nessie</span><span class="p">.</span><span class="n">db</span><span class="p">.</span><span class="n">events</span><span class="w"> </span><span class="p">(</span><span class="n">id</span><span class="w"> </span><span class="nb">BIGINT</span><span class="p">,</span><span class="w"> </span><span class="p">...);</span>
+
+<span class="c1">-- Switch на ветку</span>
+<span class="n">USE</span><span class="w"> </span><span class="k">REF</span><span class="w"> </span><span class="n">dev</span><span class="w"> </span><span class="k">IN</span><span class="w"> </span><span class="n">nessie</span><span class="p">;</span>
+
+<span class="c1">-- Снова создать (в dev-ветке)</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">nessie</span><span class="p">.</span><span class="n">db</span><span class="p">.</span><span class="n">events</span><span class="w"> </span><span class="p">(</span><span class="n">id</span><span class="w"> </span><span class="nb">BIGINT</span><span class="p">,</span><span class="w"> </span><span class="p">...);</span>
+</code></pre></div>
+
+<h3 id="управление-ветками-через-sql">Управление ветками через SQL<a class="headerlink" href="#управление-ветками-через-sql" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1">-- Создать ветку от main</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="n">BRANCH</span><span class="w"> </span><span class="n">dev</span><span class="w"> </span><span class="k">IN</span><span class="w"> </span><span class="n">nessie</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">main</span><span class="p">;</span>
+
+<span class="c1">-- Переключиться</span>
+<span class="n">USE</span><span class="w"> </span><span class="k">REF</span><span class="w"> </span><span class="n">dev</span><span class="w"> </span><span class="k">IN</span><span class="w"> </span><span class="n">nessie</span><span class="p">;</span>
+
+<span class="c1">-- Список веток</span>
+<span class="k">SHOW</span><span class="w"> </span><span class="k">REFERENCES</span><span class="w"> </span><span class="k">IN</span><span class="w"> </span><span class="n">nessie</span><span class="p">;</span>
+
+<span class="c1">-- Merge dev в main</span>
+<span class="n">MERGE</span><span class="w"> </span><span class="n">BRANCH</span><span class="w"> </span><span class="n">dev</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">main</span><span class="w"> </span><span class="k">IN</span><span class="w"> </span><span class="n">nessie</span><span class="p">;</span>
+</code></pre></div>
+
+<h3 id="cli-nessie-cli">CLI: nessie-cli<a class="headerlink" href="#cli-nessie-cli" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Установить через pip</span>
+pip<span class="w"> </span>install<span class="w"> </span>pynessie
+
+<span class="c1"># Команды (как git!)</span>
+nessie<span class="w"> </span>branch<span class="w"> </span>list
+nessie<span class="w"> </span>branch<span class="w"> </span>create<span class="w"> </span>dev
+nessie<span class="w"> </span>branch<span class="w"> </span>delete<span class="w"> </span>dev
+nessie<span class="w"> </span>branch<span class="w"> </span>list
+
+nessie<span class="w"> </span>log<span class="w">                          </span><span class="c1"># история коммитов</span>
+nessie<span class="w"> </span>merge<span class="w"> </span>dev<span class="w"> </span>-b<span class="w"> </span>main<span class="w">            </span><span class="c1"># слить dev в main</span>
+nessie<span class="w"> </span>contents<span class="w"> </span>list
+nessie<span class="w"> </span>contents<span class="w"> </span>show<span class="w"> </span>db.events
+</code></pre></div>
+
+<hr />
+<h2 id="ключевые-особенности-iceberg">⚙️ Ключевые особенности Iceberg<a class="headerlink" href="#ключевые-особенности-iceberg" title="Ссылка">#</a></h2>
+<h3 id="hidden-partitioning">Hidden partitioning<a class="headerlink" href="#hidden-partitioning" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">events</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="n">event_time</span><span class="w"> </span><span class="k">TIMESTAMP</span><span class="p">,</span>
+<span class="w">    </span><span class="p">...</span>
+<span class="p">)</span><span class="w"> </span><span class="n">PARTITIONED</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="p">(</span><span class="n">days</span><span class="p">(</span><span class="n">event_time</span><span class="p">));</span><span class="w">   </span><span class="c1">-- по дням, без колонки-партиции</span>
+
+<span class="c1">-- Автопартиционирование: WHERE event_time &gt; &#39;2024-01-15&#39; использует partition pruning</span>
+</code></pre></div>
+
+<h3 id="schema-evolution">Schema evolution<a class="headerlink" href="#schema-evolution" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">ALTER</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">db</span><span class="p">.</span><span class="n">events</span><span class="w"> </span><span class="k">ADD</span><span class="w"> </span><span class="n">COLUMNS</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="n">new_col</span><span class="w"> </span><span class="n">STRING</span><span class="p">,</span>
+<span class="w">    </span><span class="n">cost</span><span class="w"> </span><span class="nb">DECIMAL</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span>
+<span class="p">);</span>
+<span class="k">ALTER</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">db</span><span class="p">.</span><span class="n">events</span><span class="w"> </span><span class="k">DROP</span><span class="w"> </span><span class="k">COLUMN</span><span class="w"> </span><span class="n">old_col</span><span class="p">;</span>
+<span class="k">ALTER</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">db</span><span class="p">.</span><span class="n">events</span><span class="w"> </span><span class="k">RENAME</span><span class="w"> </span><span class="k">COLUMN</span><span class="w"> </span><span class="k">old</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="k">new</span><span class="p">;</span>
+<span class="k">ALTER</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">db</span><span class="p">.</span><span class="n">events</span><span class="w"> </span><span class="k">ALTER</span><span class="w"> </span><span class="k">COLUMN</span><span class="w"> </span><span class="n">id</span><span class="w"> </span><span class="k">TYPE</span><span class="w"> </span><span class="nb">BIGINT</span><span class="p">;</span>
+</code></pre></div>
+
+<blockquote>
+<p>Не требует переписывания данных!</p>
+</blockquote>
+<h3 id="partition-evolution">Partition evolution<a class="headerlink" href="#partition-evolution" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">ALTER</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">db</span><span class="p">.</span><span class="n">events</span><span class="w"> </span><span class="k">ADD</span><span class="w"> </span><span class="n">PARTITION</span><span class="w"> </span><span class="n">FIELD</span><span class="w"> </span><span class="n">weeks</span><span class="p">(</span><span class="n">event_time</span><span class="p">);</span>
+<span class="k">ALTER</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">db</span><span class="p">.</span><span class="n">events</span><span class="w"> </span><span class="k">DROP</span><span class="w"> </span><span class="n">PARTITION</span><span class="w"> </span><span class="n">FIELD</span><span class="w"> </span><span class="n">days</span><span class="p">(</span><span class="n">event_time</span><span class="p">);</span>
+</code></pre></div>
+
+<h3 id="time-travel">Time travel<a class="headerlink" href="#time-travel" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1">-- Через snapshot ID</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">db</span><span class="p">.</span><span class="n">events</span><span class="w"> </span><span class="k">VERSION</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="k">OF</span><span class="w"> </span><span class="mi">123456789</span><span class="p">;</span>
+
+<span class="c1">-- Через timestamp</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">db</span><span class="p">.</span><span class="n">events</span><span class="w"> </span><span class="k">TIMESTAMP</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="k">OF</span><span class="w"> </span><span class="k">TIMESTAMP</span><span class="w"> </span><span class="s1">&#39;2024-01-01 00:00:00&#39;</span><span class="p">;</span>
+
+<span class="c1">-- Через &quot;5 дней назад&quot;</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">db</span><span class="p">.</span><span class="n">events</span><span class="w"> </span><span class="k">TIMESTAMP</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="k">OF</span><span class="w"> </span><span class="k">current_timestamp</span><span class="p">()</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nb">INTERVAL</span><span class="w"> </span><span class="mi">5</span><span class="w"> </span><span class="n">DAYS</span><span class="p">;</span>
+</code></pre></div>
+
+<h3 id="maintenance">Maintenance<a class="headerlink" href="#maintenance" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1">-- Compaction (объединить мелкие файлы)</span>
+<span class="k">CALL</span><span class="w"> </span><span class="k">system</span><span class="p">.</span><span class="n">rewrite_data_files</span><span class="p">(</span><span class="s1">&#39;db.events&#39;</span><span class="p">,</span><span class="w"> </span><span class="k">map</span><span class="p">(</span><span class="s1">&#39;min_input_files&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">));</span>
+
+<span class="c1">-- Expire old snapshots</span>
+<span class="k">CALL</span><span class="w"> </span><span class="k">system</span><span class="p">.</span><span class="n">expire_snapshots</span><span class="p">(</span><span class="s1">&#39;db.events&#39;</span><span class="p">,</span><span class="w"> </span><span class="k">TIMESTAMP</span><span class="w"> </span><span class="s1">&#39;2024-01-01&#39;</span><span class="p">);</span>
+
+<span class="c1">-- Remove orphan files</span>
+<span class="k">CALL</span><span class="w"> </span><span class="k">system</span><span class="p">.</span><span class="n">remove_orphan_files</span><span class="p">(</span><span class="s1">&#39;db.events&#39;</span><span class="p">);</span>
+
+<span class="c1">-- Rewrite manifests</span>
+<span class="k">CALL</span><span class="w"> </span><span class="k">system</span><span class="p">.</span><span class="n">rewrite_manifests</span><span class="p">(</span><span class="s1">&#39;db.events&#39;</span><span class="p">);</span>
+</code></pre></div>
+
+<hr />
+<h2 id="catalogs-выбор">📊 Catalogs — выбор<a class="headerlink" href="#catalogs-выбор" title="Ссылка">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Catalog</th>
+<th>Описание</th>
+<th>Когда</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Hive Metastore</strong></td>
+<td>Классика</td>
+<td>Существующий Hive</td>
+</tr>
+<tr>
+<td><strong>AWS Glue</strong></td>
+<td>Менеджер AWS</td>
+<td>В AWS</td>
+</tr>
+<tr>
+<td><strong>REST Catalog</strong></td>
+<td>HTTP API</td>
+<td>Свой/облачный (Nessie)</td>
+</tr>
+<tr>
+<td><strong>Nessie</strong></td>
+<td>Git-подобный, ветки</td>
+<td>Multi-branch dev</td>
+</tr>
+<tr>
+<td><strong>Hadoop / Filesystem</strong></td>
+<td>Файл <code>metadata.json</code></td>
+<td>Локально/тесты</td>
+</tr>
+<tr>
+<td><strong>JDBC</strong></td>
+<td>В SQL-БД</td>
+<td>Простая интеграция</td>
+</tr>
+<tr>
+<td><strong>Polaris / Unity / Snowflake</strong></td>
+<td>Managed</td>
+<td>Cloud-нативно</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="iceberg-vs-delta-lake-vs-hudi">🆚 Iceberg vs Delta Lake vs Hudi<a class="headerlink" href="#iceberg-vs-delta-lake-vs-hudi" title="Ссылка">#</a></h2>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Iceberg</th>
+<th>Delta Lake</th>
+<th>Hudi</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Создатель</td>
+<td>Netflix → Apache</td>
+<td>Databricks</td>
+<td>Uber → Apache</td>
+</tr>
+<tr>
+<td>Catalog</td>
+<td>Любой</td>
+<td>_delta_log в S3</td>
+<td>.hoodie в S3</td>
+</tr>
+<tr>
+<td>Branches</td>
+<td>✅ (через Nessie)</td>
+<td>✅ (Unity)</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>Time travel</td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>Schema evolution</td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>Engines</td>
+<td>Spark/Flink/Trino/Impala</td>
+<td>Spark/Databricks</td>
+<td>Spark/Flink</td>
+</tr>
+<tr>
+<td>UPDATE/DELETE</td>
+<td>Merge-on-read, CoW</td>
+<td>CoW</td>
+<td>MoR/CoW</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="частые-ошибки">🪤 Частые ошибки<a class="headerlink" href="#частые-ошибки" title="Ссылка">#</a></h2>
+<ol>
+<li><strong>Мелкие файлы</strong> — много маленьких Parquet → медленно. Регулярный compaction.</li>
+<li><strong>Слишком много партиций</strong> — overhead.</li>
+<li><strong>Snapshot expire забыт</strong> — данные растут бесконечно.</li>
+<li><strong>Orphan files</strong> — файлы без ссылки. <code>remove_orphan_files</code>.</li>
+<li><strong>Не настроен compaction</strong> — <code>rewrite_data_files</code> нужен регулярно.</li>
+<li><strong>Branches без merge</strong> — в Nessie копятся расходящиеся ветки.</li>
+<li><strong>S3 eventual consistency</strong> — Iceberg обходит, но осторожно.</li>
+<li><strong>Catalog down</strong> — таблица недоступна (data есть, metadata нет).</li>
+<li><strong>Разные engines, разные snapshot&rsquo;ы</strong> — конкурентная запись.</li>
+<li><strong>Partition evolution без rewrite</strong> — старые данные в старых партициях.</li>
+</ol>
+<hr />
+<h2 id="полезные-ссылки">🔗 Полезные ссылки<a class="headerlink" href="#полезные-ссылки" title="Ссылка">#</a></h2>
+<ul>
+<li>Iceberg: https://iceberg.apache.org</li>
+<li>Iceberg docs: https://iceberg.apache.org/docs/latest</li>
+<li>Nessie: https://projectnessie.org</li>
+<li>Nessie docs: https://projectnessie.org/docs</li>
+<li>PyIceberg: https://py.iceberg.apache.org</li>
+<li>Iceberg Spark: https://iceberg.apache.org/docs/latest/spark-getting-started</li>
+<li>Таблицы форматов: https://www.dremio.com/blog/introduction-to-apache-iceberg</li>
+</ul>
+<hr />
+<h2 id="полезные-советы">💡 Полезные советы<a class="headerlink" href="#полезные-советы" title="Ссылка">#</a></h2>
+<ol>
+<li><strong>Iceberg + Parquet</strong> — де-факто стандарт для lakehouse.</li>
+<li><strong>Hidden partitioning</strong> — не дублируйте колонку партиции.</li>
+<li><strong>Nessie</strong> — для dev-веток (как git для данных).</li>
+<li><strong><code>rewrite_data_files</code></strong> — регулярно для compaction.</li>
+<li><strong><code>expire_snapshots</code></strong> — для очистки старых версий.</li>
+<li><strong>Time travel</strong> — для отладки и аудита.</li>
+<li><strong>Schema evolution</strong> — безболезненно меняйте структуру.</li>
+<li><strong>REST Catalog / Nessie</strong> — для multi-engine.</li>
+<li><strong>Format v2</strong> — для row-level deletes (UPDATE/DELETE).</li>
+<li><strong><code>CALL system.*</code></strong> — встроенные maintenance-процедуры.</li>
+<li><strong>Merge-on-read</strong> — для частых UPDATE, медленнее чтение.</li>
+<li><strong>Copy-on-write</strong> — быстрое чтение, медленная запись.</li>
+<li><strong>Statistical metadata</strong> — в manifest&rsquo;ах, для file pruning.</li>
+<li><strong>Trino + Iceberg</strong> — для ad-hoc SQL.</li>
+<li><strong>Flink + Iceberg</strong> — для streaming ingest.</li>
+</ol>
+<hr />
+<p><em>Сгенерировано как шпаргалка. Iceberg/Nessie — современный lakehouse —
+углубляйтесь через https://iceberg.apache.org/docs и https://projectnessie.org</em></p>
+    </article>
+    <nav class="pagination">
+      <a class="pager prev" href="prometheus-grafana.html">← Prometheus / Grafana</a>
+      <a class="pager next" href="impala.html">Apache Impala →</a>
+    </nav>
+  </main>
+
+  <aside class="toc">
+    <details open>
+      <summary>📑 Оглавление</summary>
+      <div class="toc-list">
+<div class="toc">
+<ul>
+<li><a href="#apache-iceberg-nessie-шпаргалка">🧊 Apache Iceberg + Nessie — шпаргалка</a><ul>
+<li><a href="#главные-понятия">🔑 Главные понятия</a><ul>
+<li><a href="#зачем-iceberg">Зачем Iceberg?</a></li>
+</ul>
+</li>
+<li><a href="#архитектура-iceberg">🚀 Архитектура Iceberg</a><ul>
+<li><a href="#слои">Слои</a></li>
+</ul>
+</li>
+<li><a href="#pyspark-iceberg">🐍 PySpark + Iceberg</a><ul>
+<li><a href="#установка">Установка</a></li>
+<li><a href="#spark-session-с-iceberg">Spark Session с Iceberg</a></li>
+<li><a href="#создание-таблицы">Создание таблицы</a></li>
+<li><a href="#запись">Запись</a></li>
+<li><a href="#чтение">Чтение</a></li>
+<li><a href="#iceberg-table-procedures">Iceberg table procedures</a></li>
+</ul>
+</li>
+<li><a href="#nessie-каталог-с-ветвями">🌳 Nessie — каталог с ветвями</a><ul>
+<li><a href="#запуск-nessie">Запуск Nessie</a></li>
+<li><a href="#подключение-из-spark">Подключение из Spark</a></li>
+<li><a href="#создание-таблицы-в-nessie">Создание таблицы в Nessie</a></li>
+<li><a href="#управление-ветками-через-sql">Управление ветками через SQL</a></li>
+<li><a href="#cli-nessie-cli">CLI: nessie-cli</a></li>
+</ul>
+</li>
+<li><a href="#ключевые-особенности-iceberg">⚙️ Ключевые особенности Iceberg</a><ul>
+<li><a href="#hidden-partitioning">Hidden partitioning</a></li>
+<li><a href="#schema-evolution">Schema evolution</a></li>
+<li><a href="#partition-evolution">Partition evolution</a></li>
+<li><a href="#time-travel">Time travel</a></li>
+<li><a href="#maintenance">Maintenance</a></li>
+</ul>
+</li>
+<li><a href="#catalogs-выбор">📊 Catalogs — выбор</a></li>
+<li><a href="#iceberg-vs-delta-lake-vs-hudi">🆚 Iceberg vs Delta Lake vs Hudi</a></li>
+<li><a href="#частые-ошибки">🪤 Частые ошибки</a></li>
+<li><a href="#полезные-ссылки">🔗 Полезные ссылки</a></li>
+<li><a href="#полезные-советы">💡 Полезные советы</a></li>
+</ul>
+</li>
+</ul>
+</div>
+
+      </div>
+    </details>
+  </aside>
+</div>
+
+<button class="back-top" id="backTop" aria-label="Наверх">↑</button>
+
+<script src="assets/search.js"></script>
+<script src="assets/page.js"></script>
+</body>
+</html>

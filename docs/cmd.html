@@ -1,0 +1,1741 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CMD (cmd.exe) — Шпаргалки</title>
+<link rel="stylesheet" href="assets/style.css">
+<link rel="stylesheet" href="assets/pygments.css">
+</head>
+<body>
+<div class="layout">
+  <aside class="sidebar">
+    <a href="index.html" class="brand">📌 Шпаргалки</a>
+    <nav class="nav">
+<a href="yazi.html" class="nav-item"><span class="nav-ico">📦</span>Yazi</a>
+<a href="neovim.html" class="nav-item"><span class="nav-ico">📘</span>Neovim (LazyVim)</a>
+<a href="niri.html" class="nav-item"><span class="nav-ico">🪟</span>Niri</a>
+<a href="tmux.html" class="nav-item"><span class="nav-ico">🪟</span>Tmux</a>
+<a href="bash.html" class="nav-item"><span class="nav-ico">🐚</span>Bash</a>
+<a href="git.html" class="nav-item"><span class="nav-ico">🔀</span>Git</a>
+<a href="terminal.html" class="nav-item"><span class="nav-ico">🖥️</span>Терминал Linux</a>
+<a href="powershell.html" class="nav-item"><span class="nav-ico">💻</span>PowerShell</a>
+<a href="cmd.html" class="nav-item active"><span class="nav-ico">🪟</span>CMD (cmd.exe)</a>
+<a href="python.html" class="nav-item"><span class="nav-ico">🐍</span>Python</a>
+<a href="systemd.html" class="nav-item"><span class="nav-ico">⚙️</span>systemd</a>
+<a href="ssh.html" class="nav-item"><span class="nav-ico">🔐</span>SSH</a>
+<a href="make-cmake.html" class="nav-item"><span class="nav-ico">🔨</span>Make / CMake</a>
+<a href="docker.html" class="nav-item"><span class="nav-ico">🐳</span>Docker</a>
+<a href="pacman.html" class="nav-item"><span class="nav-ico">📦</span>pacman / yay / paru</a>
+<a href="spark.html" class="nav-item"><span class="nav-ico">⚡</span>Apache Spark / PySpark</a>
+<a href="markdown.html" class="nav-item"><span class="nav-ico">📝</span>Markdown</a>
+<a href="regex.html" class="nav-item"><span class="nav-ico">🔍</span>Регулярные выражения</a>
+<a href="jq-json.html" class="nav-item"><span class="nav-ico">🔧</span>jq + JSON</a>
+<a href="awk-sed.html" class="nav-item"><span class="nav-ico">✂️</span>awk / sed</a>
+<a href="airflow.html" class="nav-item"><span class="nav-ico">🌪️</span>Apache Airflow</a>
+<a href="http-curl.html" class="nav-item"><span class="nav-ico">🌐</span>HTTP / curl</a>
+<a href="yaml.html" class="nav-item"><span class="nav-ico">📄</span>YAML</a>
+<a href="vscode.html" class="nav-item"><span class="nav-ico">💻</span>VS Code</a>
+<a href="cron.html" class="nav-item"><span class="nav-ico">⏰</span>cron</a>
+<a href="fzf-zoxide.html" class="nav-item"><span class="nav-ico">🔎</span>fzf + zoxide</a>
+<a href="minikube-k8s.html" class="nav-item"><span class="nav-ico">☸️</span>Minikube / Kubernetes</a>
+<a href="cicd.html" class="nav-item"><span class="nav-ico">🦊</span>GitLab CI / GitHub Actions</a>
+<a href="nginx.html" class="nav-item"><span class="nav-ico">🌐</span>nginx</a>
+<a href="dbt.html" class="nav-item"><span class="nav-ico">🔧</span>dbt</a>
+<a href="kafka.html" class="nav-item"><span class="nav-ico">🐘</span>Apache Kafka</a>
+<a href="prometheus-grafana.html" class="nav-item"><span class="nav-ico">📊</span>Prometheus / Grafana</a>
+<a href="iceberg-nessie.html" class="nav-item"><span class="nav-ico">🧊</span>Iceberg / Nessie</a>
+<a href="impala.html" class="nav-item"><span class="nav-ico">🐬</span>Apache Impala</a>
+<a href="terraform.html" class="nav-item"><span class="nav-ico">🏗️</span>Terraform</a>
+<a href="linux-internals.html" class="nav-item"><span class="nav-ico">🐧</span>Linux Internals</a>
+<a href="miscellaneous.html" class="nav-item"><span class="nav-ico">🧰</span>Miscellaneous</a>
+<a href="python-automation-libs.html" class="nav-item"><span class="nav-ico">🐍</span>Python: авт-ция (10 libs)</a>
+<a href="eza.html" class="nav-item"><span class="nav-ico">🌈</span>eza</a>
+<a href="dbeaver.html" class="nav-item"><span class="nav-ico">🗄️</span>DBeaver</a>
+<a href="zcode.html" class="nav-item"><span class="nav-ico">🤖</span>ZCode</a>
+<a href="warp.html" class="nav-item"><span class="nav-ico">🚀</span>Warp</a>
+<a href="agentic-ai-dev.html" class="nav-item"><span class="nav-ico">🤝</span>Агентная разработка с ИИ</a>
+    </nav>
+  </aside>
+
+  <main class="content">
+    <article>
+<h1 id="cmd-cmd-exe-шпаргалка-по-командам">🪟 CMD (cmd.exe) — шпаргалка по командам<a class="headerlink" href="#cmd-cmd-exe-шпаргалка-по-командам" title="Ссылка">#</a></h1>
+<blockquote>
+<p><strong>cmd.exe</strong> — классическая командная строка Windows (Command Prompt).
+Наследник <code>command.com</code> из MS-DOS. До сих пор встроен в Windows 10/11.</p>
+<p>Для современного использования Microsoft рекомендует <strong>PowerShell</strong>, но CMD
+остаётся быстрым и незаменимым для: <code>.bat</code>/<code>.cmd</code> скриптов, системных задач,
+совместимости со старым софтом, низкоуровневых команд.</p>
+</blockquote>
+<hr />
+<h2 id="запуск">🚀 Запуск<a class="headerlink" href="#запуск" title="Ссылка">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Способ</th>
+<th>Описание</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Win+R</code> → <code>cmd</code> → Enter</td>
+<td>Быстрый запуск</td>
+</tr>
+<tr>
+<td>Пуск → «Командная строка»</td>
+<td>Через меню</td>
+</tr>
+<tr>
+<td>В адресной строке проводника: <code>cmd</code></td>
+<td>В текущей папке</td>
+</tr>
+<tr>
+<td><code>cmd</code> в терминале Windows</td>
+<td>Вкладка CMD</td>
+</tr>
+<tr>
+<td><strong>От администратора:</strong> Пуск → cmd → <code>Ctrl+Shift+Enter</code></td>
+<td>С правами admin</td>
+</tr>
+<tr>
+<td><code>cmd /c "команда"</code></td>
+<td>Выполнить и закрыть</td>
+</tr>
+<tr>
+<td><code>cmd /k "команда"</code></td>
+<td>Выполнить и остаться</td>
+</tr>
+<tr>
+<td><code>cmd /?</code></td>
+<td>Справка по ключам запуска</td>
+</tr>
+<tr>
+<td><code>exit</code></td>
+<td>Выйти</td>
+</tr>
+</tbody>
+</table>
+<h3 id="ключи-запуска">Ключи запуска<a class="headerlink" href="#ключи-запуска" title="Ссылка">#</a></h3>
+<table>
+<thead>
+<tr>
+<th>Ключ</th>
+<th>Действие</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>/c command</code></td>
+<td>Выполнить команду и завершиться</td>
+</tr>
+<tr>
+<td><code>/k command</code></td>
+<td>Выполнить и остаться открытым</td>
+</tr>
+<tr>
+<td><code>/s /c "complex"</code></td>
+<td>Корректно обработать кавычки</td>
+</tr>
+<tr>
+<td><code>/q</code></td>
+<td>Отключить echo</td>
+</tr>
+<tr>
+<td><code>/e:on</code></td>
+<td>Включить расширения команд</td>
+</tr>
+<tr>
+<td><code>/v:on</code></td>
+<td>Отложенное расширение переменных (<code>!var!</code>)</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="навигация-по-каталогам">🧭 Навигация по каталогам<a class="headerlink" href="#навигация-по-каталогам" title="Ссылка">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Команда</th>
+<th>Действие</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>cd</code></td>
+<td>Показать текущий каталог</td>
+</tr>
+<tr>
+<td><code>cd ..</code></td>
+<td>На уровень вверх</td>
+</tr>
+<tr>
+<td><code>cd \</code></td>
+<td>В корень диска</td>
+</tr>
+<tr>
+<td><code>cd Users\Admin</code></td>
+<td>Перейти в подкаталог</td>
+</tr>
+<tr>
+<td><code>cd "C:\Program Files"</code></td>
+<td>С пробелами — в кавычках</td>
+</tr>
+<tr>
+<td><code>chdir</code></td>
+<td>То же что <code>cd</code></td>
+</tr>
+<tr>
+<td><code>D:</code></td>
+<td>Перейти на диск D:</td>
+</tr>
+<tr>
+<td><code>pushd \\server\share</code></td>
+<td>Перейти + запомнить (вкл. сетевой путь)</td>
+</tr>
+<tr>
+<td><code>popd</code></td>
+<td>Вернуться к запомненному</td>
+</tr>
+<tr>
+<td><code>dir</code></td>
+<td>Список файлов</td>
+</tr>
+<tr>
+<td><code>dir /a</code></td>
+<td>Со скрытыми</td>
+</tr>
+<tr>
+<td><code>dir /a:d</code></td>
+<td>Только каталоги</td>
+</tr>
+<tr>
+<td><code>dir /a:-d</code></td>
+<td>Только файлы</td>
+</tr>
+<tr>
+<td><code>dir /b</code></td>
+<td>Только имена (без шапки)</td>
+</tr>
+<tr>
+<td><code>dir /s</code></td>
+<td>Рекурсивно (по подкаталогам)</td>
+</tr>
+<tr>
+<td><code>dir /o:n</code></td>
+<td>Отсортировать по имени</td>
+</tr>
+<tr>
+<td><code>dir /o:-n</code></td>
+<td>По имени в обратном порядке</td>
+</tr>
+<tr>
+<td><code>dir /o:s</code></td>
+<td>По размеру</td>
+</tr>
+<tr>
+<td><code>dir /o:d</code></td>
+<td>По дате</td>
+</tr>
+<tr>
+<td><code>dir /p</code></td>
+<td>Постранично</td>
+</tr>
+<tr>
+<td><code>dir /w</code></td>
+<td>В несколько колонок</td>
+</tr>
+<tr>
+<td><code>dir *.txt</code></td>
+<td>По шаблону</td>
+</tr>
+<tr>
+<td><code>tree</code></td>
+<td>Дерево каталогов</td>
+</tr>
+<tr>
+<td><code>tree /f</code></td>
+<td>Дерево + файлы</td>
+</tr>
+<tr>
+<td><code>tree /a</code></td>
+<td>ASCII-символами</td>
+</tr>
+<tr>
+<td><code>cls</code></td>
+<td>Очистить экран</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>Шаблоны (wildcards): <code>*</code> — любое число символов, <code>?</code> — один символ.
+<code>dir *.txt</code> — все .txt, <code>dir file?.txt</code> — file1.txt, fileA.txt.</p>
+</blockquote>
+<hr />
+<h2 id="работа-с-файлами-и-каталогами">📄 Работа с файлами и каталогами<a class="headerlink" href="#работа-с-файлами-и-каталогами" title="Ссылка">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Команда</th>
+<th>Действие</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>mkdir folder</code> / <code>md folder</code></td>
+<td>Создать каталог</td>
+</tr>
+<tr>
+<td><code>mkdir a\b\c</code></td>
+<td>Создать вложенные (сразу)</td>
+</tr>
+<tr>
+<td><code>rmdir folder</code> / <code>rd folder</code></td>
+<td>Удалить пустой каталог</td>
+</tr>
+<tr>
+<td><code>rmdir /s folder</code></td>
+<td>Удалить со всем содержимым</td>
+</tr>
+<tr>
+<td><code>rmdir /s /q folder</code></td>
+<td>Тихо, без подтверждения</td>
+</tr>
+<tr>
+<td><code>del file.txt</code></td>
+<td>Удалить файл</td>
+</tr>
+<tr>
+<td><code>del *.tmp</code></td>
+<td>По шаблону</td>
+</tr>
+<tr>
+<td><code>del /s *.log</code></td>
+<td>Рекурсивно</td>
+</tr>
+<tr>
+<td><code>del /q *.tmp</code></td>
+<td>Без подтверждения</td>
+</tr>
+<tr>
+<td><code>erase</code></td>
+<td>То же что <code>del</code></td>
+</tr>
+<tr>
+<td><code>copy src dst</code></td>
+<td>Копировать файл</td>
+</tr>
+<tr>
+<td><code>copy a.txt + b.txt c.txt</code></td>
+<td>Склеить файлы</td>
+</tr>
+<tr>
+<td><code>copy /y src dst</code></td>
+<td>Без подтверждения перезаписи</td>
+</tr>
+<tr>
+<td><code>xcopy src dst /s /e</code></td>
+<td>Копировать дерево каталогов</td>
+</tr>
+<tr>
+<td><code>xcopy src dst /s /e /h /y</code></td>
+<td>+ скрытые, без вопросов</td>
+</tr>
+<tr>
+<td><code>robocopy src dst /mir</code></td>
+<td>Надёжное копирование + синхронизация (рекомендуется!)</td>
+</tr>
+<tr>
+<td><code>move file.txt ..\</code></td>
+<td>Переместить</td>
+</tr>
+<tr>
+<td><code>move old.txt new.txt</code></td>
+<td>Переименовать</td>
+</tr>
+<tr>
+<td><code>ren file.txt file.bak</code></td>
+<td>Переименовать</td>
+</tr>
+<tr>
+<td><code>rename</code></td>
+<td>То же что <code>ren</code></td>
+</tr>
+<tr>
+<td><code>type file.txt</code></td>
+<td>Вывести содержимое (как <code>cat</code>)</td>
+</tr>
+<tr>
+<td><code>type file.txt \| more</code></td>
+<td>Постранично</td>
+</tr>
+<tr>
+<td><code>more file.txt</code></td>
+<td>Постраничный просмотр</td>
+</tr>
+<tr>
+<td><code>find "text" file.txt</code></td>
+<td>Поиск текста (без регулярок)</td>
+</tr>
+<tr>
+<td><code>find /i "text" file.txt</code></td>
+<td>Без учёта регистра</td>
+</tr>
+<tr>
+<td><code>find /n "text" file.txt</code></td>
+<td>С номерами строк</td>
+</tr>
+<tr>
+<td><code>find /c "text" *.txt</code></td>
+<td>Подсчёт совпадений</td>
+</tr>
+<tr>
+<td><code>findstr "pattern" *.txt</code></td>
+<td>Поиск с regex</td>
+</tr>
+<tr>
+<td><code>findstr /i /s /n "TODO" *.py</code></td>
+<td>Рекурсивно, с номерами</td>
+</tr>
+<tr>
+<td><code>findstr /r "^Error" log.txt</code></td>
+<td>Регулярка</td>
+</tr>
+<tr>
+<td><code>fc file1 file2</code></td>
+<td>Сравнить файлы</td>
+</tr>
+<tr>
+<td><code>comp a.txt b.txt</code></td>
+<td>Посимвольное сравнение</td>
+</tr>
+<tr>
+<td><code>attrib +h file.txt</code></td>
+<td>Установить атрибут «скрытый»</td>
+</tr>
+<tr>
+<td><code>attrib +r file.txt</code></td>
+<td>«Только чтение»</td>
+</tr>
+<tr>
+<td><code>attrib -h -r file.txt</code></td>
+<td>Снять атрибуты</td>
+</tr>
+<tr>
+<td><code>attrib</code></td>
+<td>Показать атрибуты</td>
+</tr>
+<tr>
+<td><code>assoc .txt</code></td>
+<td>Узнать ассоциацию расширения</td>
+</tr>
+<tr>
+<td><code>ftype txtfile</code></td>
+<td>Узнать программу для типа</td>
+</tr>
+<tr>
+<td><code>where notepad</code></td>
+<td>Найти путь к программе (как <code>which</code>)</td>
+</tr>
+<tr>
+<td><code>touch</code></td>
+<td>❌ Нет в CMD; используйте <code>type nul &gt; file</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="robocopy-мощный-инструмент-копирования">robocopy — мощный инструмент копирования<a class="headerlink" href="#robocopy-мощный-инструмент-копирования" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>:: Базовое копирование
+robocopy C:\src D:\backup /e
+
+:: Зеркало (источник → приёмник, удалять лишнее в приёмнике)
+robocopy C:\src D:\backup /mir
+
+:: С重启овое копирование, многопоточное, с логом
+robocopy C:\src D:\backup /e /z /mt:16 /log:copy.log /tee
+
+:: Только файлы изменённые за последние 7 дней
+robocopy C:\src D:\backup /maxage:7
+
+:: Исключить папки/файлы
+robocopy C:\src D:\backup /e /xd node_modules .git /xf *.tmp
+</code></pre></div>
+
+<hr />
+<h2 id="сеть">🔊 Сеть<a class="headerlink" href="#сеть" title="Ссылка">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Команда</th>
+<th>Действие</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ipconfig</code></td>
+<td>IP-конфигурация</td>
+</tr>
+<tr>
+<td><code>ipconfig /all</code></td>
+<td>Подробно</td>
+</tr>
+<tr>
+<td><code>ipconfig /release</code></td>
+<td>Освободить IP (DHCP)</td>
+</tr>
+<tr>
+<td><code>ipconfig /renew</code></td>
+<td>Получить новый IP</td>
+</tr>
+<tr>
+<td><code>ipconfig /flushdns</code></td>
+<td>Очистить кэш DNS</td>
+</tr>
+<tr>
+<td><code>ipconfig /displaydns</code></td>
+<td>Показать кэш DNS</td>
+</tr>
+<tr>
+<td><code>ping google.com</code></td>
+<td>Проверка связи</td>
+</tr>
+<tr>
+<td><code>ping -t google.com</code></td>
+<td>Бесконечно (до Ctrl-C)</td>
+</tr>
+<tr>
+<td><code>ping -n 10 google.com</code></td>
+<td>10 пакетов</td>
+</tr>
+<tr>
+<td><code>tracert google.com</code></td>
+<td>Маршрут (traceroute)</td>
+</tr>
+<tr>
+<td><code>tracert -d google.com</code></td>
+<td>Без разрешения имён</td>
+</tr>
+<tr>
+<td><code>pathping google.com</code></td>
+<td>tracert + статистика потерь</td>
+</tr>
+<tr>
+<td><code>netstat</code></td>
+<td>Активные соединения</td>
+</tr>
+<tr>
+<td><code>netstat -ano</code></td>
+<td>+ PID процессов</td>
+</tr>
+<tr>
+<td><code>netstat -ano \| findstr :80</code></td>
+<td>Кто слушает 80-й порт</td>
+</tr>
+<tr>
+<td><code>netstat -r</code></td>
+<td>Таблица маршрутизации</td>
+</tr>
+<tr>
+<td><code>route print</code></td>
+<td>Таблица маршрутов</td>
+</tr>
+<tr>
+<td><code>route add 0.0.0.0 mask 0.0.0.0 192.168.1.1</code></td>
+<td>Добавить маршрут</td>
+</tr>
+<tr>
+<td><code>arp -a</code></td>
+<td>Таблица ARP (MAC-адреса)</td>
+</tr>
+<tr>
+<td><code>nslookup example.com</code></td>
+<td>DNS-запрос</td>
+</tr>
+<tr>
+<td><code>ftp server.com</code></td>
+<td>FTP-клиент</td>
+</tr>
+<tr>
+<td><code>curl http://example.com</code></td>
+<td>HTTP-запрос (Win10+)</td>
+</tr>
+<tr>
+<td><code>curl -O https://site.com/file.zip</code></td>
+<td>Скачать файл</td>
+</tr>
+<tr>
+<td><code>wget</code></td>
+<td>❌ Нет; используйте <code>curl</code> или PowerShell <code>iwr</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="netsh-настройка-сети">netsh — настройка сети<a class="headerlink" href="#netsh-настройка-сети" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>netsh interface ip show config
+netsh interface ip set address &quot;Ethernet&quot; static 192.168.1.100 255.255.255.0 192.168.1.1
+netsh wlan show profiles
+netsh wlan show profile name=&quot;WiFiName&quot; key=clear    :: показать пароль WiFi
+netsh advfirewall set allprofiles state off           :: отключить файрвол
+</code></pre></div>
+
+<hr />
+<h2 id="система-и-процессы">⚙️ Система и процессы<a class="headerlink" href="#система-и-процессы" title="Ссылка">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Команда</th>
+<th>Действие</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>systeminfo</code></td>
+<td>Информация о системе</td>
+</tr>
+<tr>
+<td><code>systeminfo \| findstr /B /C:"OS"</code></td>
+<td>Только ОС</td>
+</tr>
+<tr>
+<td><code>ver</code></td>
+<td>Версия Windows</td>
+</tr>
+<tr>
+<td><code>hostname</code></td>
+<td>Имя компьютера</td>
+</tr>
+<tr>
+<td><code>whoami</code></td>
+<td>Текущий пользователь</td>
+</tr>
+<tr>
+<td><code>whoami /groups</code></td>
+<td>Группы пользователя</td>
+</tr>
+<tr>
+<td><code>set</code></td>
+<td>Все переменные окружения</td>
+</tr>
+<tr>
+<td><code>set USER</code></td>
+<td>Переменные на USER</td>
+</tr>
+<tr>
+<td><code>echo %USERNAME%</code></td>
+<td>Имя пользователя</td>
+</tr>
+<tr>
+<td><code>echo %COMPUTERNAME%</code></td>
+<td>Имя ПК</td>
+</tr>
+<tr>
+<td><code>echo %USERPROFILE%</code></td>
+<td>Домашний каталог</td>
+</tr>
+<tr>
+<td><code>echo %DATE%</code> / <code>%TIME%</code></td>
+<td>Текущие дата/время</td>
+</tr>
+<tr>
+<td><code>tasklist</code></td>
+<td>Список процессов</td>
+</tr>
+<tr>
+<td><code>tasklist \| findstr chrome</code></td>
+<td>Фильтр</td>
+</tr>
+<tr>
+<td><code>tasklist /svc</code></td>
+<td>Процессы + службы</td>
+</tr>
+<tr>
+<td><code>tasklist /m</code></td>
+<td>Загруженные DLL</td>
+</tr>
+<tr>
+<td><code>taskkill /im chrome.exe</code></td>
+<td>Убить по имени</td>
+</tr>
+<tr>
+<td><code>taskkill /im chrome.exe /f</code></td>
+<td>Принудительно</td>
+</tr>
+<tr>
+<td><code>taskkill /pid 1234 /f</code></td>
+<td>По PID</td>
+</tr>
+<tr>
+<td><code>taskkill /f /im node.exe /t</code></td>
+<td>+ дочерние</td>
+</tr>
+<tr>
+<td><code>start notepad</code></td>
+<td>Запустить в новом окне</td>
+</tr>
+<tr>
+<td><code>start "" "https://google.com"</code></td>
+<td>Открыть URL в браузере</td>
+</tr>
+<tr>
+<td><code>start file.txt</code></td>
+<td>Открыть приложением по умолчанию</td>
+</tr>
+<tr>
+<td><code>wmic product get name,version</code></td>
+<td>Установленные программы</td>
+</tr>
+<tr>
+<td><code>wmic cpu get name</code></td>
+<td>Процессор</td>
+</tr>
+<tr>
+<td><code>wmic bios get serialnumber</code></td>
+<td>Серийный номер</td>
+</tr>
+<tr>
+<td><code>shutdown /s /t 0</code></td>
+<td>Выключить сейчас</td>
+</tr>
+<tr>
+<td><code>shutdown /r /t 0</code></td>
+<td>Перезагрузить</td>
+</tr>
+<tr>
+<td><code>shutdown /l</code></td>
+<td>Выйти из системы</td>
+</tr>
+<tr>
+<td><code>shutdown /a</code></td>
+<td>Отменить запланированное</td>
+</tr>
+<tr>
+<td><code>shutdown /s /t 3600</code></td>
+<td>Через час</td>
+</tr>
+<tr>
+<td><code>powercfg /batteryreport</code></td>
+<td>Отчёт о батарее</td>
+</tr>
+<tr>
+<td><code>chkdsk C: /f</code></td>
+<td>Проверка и修复 диска</td>
+</tr>
+<tr>
+<td><code>sfc /scannow</code></td>
+<td>Проверка целостности системных файлов</td>
+</tr>
+<tr>
+<td><code>DISM /Online /Cleanup-Image /RestoreHealth</code></td>
+<td>Восстановление образа</td>
+</tr>
+<tr>
+<td><code>diskpart</code></td>
+<td>Управление дисками (интерактивно)</td>
+</tr>
+<tr>
+<td><code>driverquery</code></td>
+<td>Список драйверов</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="службы-и-реестр">🧰 Службы и реестр<a class="headerlink" href="#службы-и-реестр" title="Ссылка">#</a></h2>
+<h3 id="службы">Службы<a class="headerlink" href="#службы" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>sc query                        :: все службы
+sc query type=service state=all
+sc start &quot;Spooler&quot;              :: запустить
+sc stop &quot;Spooler&quot;               :: остановить
+sc config &quot;Spooler&quot; start=auto  :: тип запуска (auto/demand/disabled)
+sc qc &quot;Spooler&quot;                 :: конфигурация службы
+sc delete &quot;MyService&quot;           :: удалить
+
+:: Альтернатива через net
+net start                       :: список запущенных
+net start &quot;Spooler&quot;             :: запустить
+net stop &quot;Spooler&quot;              :: остановить
+</code></pre></div>
+
+<h3 id="реестр-reg">Реестр (reg)<a class="headerlink" href="#реестр-reg" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>:: Чтение
+reg query &quot;HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion&quot; /v ProgramFilesDir
+
+:: Чтение всего раздела
+reg query &quot;HKCU\Software\MyApp&quot;
+
+:: Запись
+reg add &quot;HKCU\Software\MyApp&quot; /v Version /t REG_SZ /d &quot;1.0&quot; /f
+
+:: Удаление значения
+reg delete &quot;HKCU\Software\MyApp&quot; /v Version /f
+
+:: Удаление раздела
+reg delete &quot;HKCU\Software\MyApp&quot; /f
+
+:: Экспорт/импорт
+reg export &quot;HKCU\Software\MyApp&quot; backup.reg
+reg import backup.reg
+</code></pre></div>
+
+<p>Сокращения корневых ключей:
+- <code>HKCR</code> = HKEY_CLASSES_ROOT
+- <code>HKCU</code> = HKEY_CURRENT_USER
+- <code>HKLM</code> = HKEY_LOCAL_MACHINE
+- <code>HKU</code>  = HKEY_USERS
+- <code>HKCC</code> = HKEY_CURRENT_CONFIG</p>
+<hr />
+<h2 id="пользователи">👤 Пользователи<a class="headerlink" href="#пользователи" title="Ссылка">#</a></h2>
+<div class="highlight"><pre><span></span><code>net user                        :: список пользователей
+net user username               :: инфо о пользователе
+net user newuser password /add  :: создать
+net user username /delete       :: удалить
+net localgroup                  :: список групп
+net localgroup administrators newuser /add   :: добавить в админы
+runas /user:Administrator &quot;cmd&quot;  :: запустить от имени
+whoami /priv                    :: привилегии
+whoami /groups                  :: группы
+</code></pre></div>
+
+<hr />
+<h2 id="управление-пакетами">📦 Управление пакетами<a class="headerlink" href="#управление-пакетами" title="Ссылка">#</a></h2>
+<h3 id="winget-windows-10-11-встроен">winget (Windows 10/11, встроен)<a class="headerlink" href="#winget-windows-10-11-встроен" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>winget install Microsoft.VisualStudioCode
+winget install --id Git.Git -e
+winget uninstall Mozilla.Firefox
+winget upgrade --all
+winget list
+winget search python
+winget show Microsoft.VisualStudioCode
+winget export packages.json
+</code></pre></div>
+
+<h3 id="chocolatey-нужно-установить-отдельно">chocolatey (нужно установить отдельно)<a class="headerlink" href="#chocolatey-нужно-установить-отдельно" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>choco install firefox googlechrome -y
+choco upgrade all -y
+choco uninstall nodejs -y
+choco list --local-only
+</code></pre></div>
+
+<h3 id="scoop-альтернатива-для-dev-инструментов">scoop (альтернатива, для dev-инструментов)<a class="headerlink" href="#scoop-альтернатива-для-dev-инструментов" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>scoop install git curl ripgrep fd fzf bat neovim
+scoop update *
+scoop list
+</code></pre></div>
+
+<hr />
+<h2 id="переменные-окружения">🔤 Переменные окружения<a class="headerlink" href="#переменные-окружения" title="Ссылка">#</a></h2>
+<div class="highlight"><pre><span></span><code>:: Просмотр
+set                          :: все переменные
+echo %PATH%                  :: конкретная
+echo %USERPROFILE%           :: домашний каталог
+
+:: Установка (только в текущей сессии)
+set MYVAR=hello
+set /A NUM=5+3               :: арифметика → NUM=8
+set &quot;MYVAR=hello world&quot;      :: безопасно (с пробелами)
+
+:: Удаление
+set MYVAR=
+
+:: Ввод от пользователя
+set /p NAME=Enter your name:
+
+:: Постоянные переменные (для системы)
+setx MYVAR &quot;hello&quot;           :: пользовательская (только будущие сессии)
+setx MYVAR &quot;hello&quot; /M        :: системная (нужен admin)
+
+:: Вставить переменную в команду
+echo %PATH%;C:\new\path
+</code></pre></div>
+
+<h3 id="часто-используемые-переменные">Часто используемые переменные<a class="headerlink" href="#часто-используемые-переменные" title="Ссылка">#</a></h3>
+<table>
+<thead>
+<tr>
+<th>Переменная</th>
+<th>Что содержит</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>%CD%</code></td>
+<td>Текущий каталог</td>
+</tr>
+<tr>
+<td><code>%DATE%</code> / <code>%TIME%</code></td>
+<td>Дата / время</td>
+</tr>
+<tr>
+<td><code>%RANDOM%</code></td>
+<td>Случайное число 0–32767</td>
+</tr>
+<tr>
+<td><code>%ERRORLEVEL%</code></td>
+<td>Код возврата последней команды</td>
+</tr>
+<tr>
+<td><code>%USERNAME%</code></td>
+<td>Имя пользователя</td>
+</tr>
+<tr>
+<td><code>%USERPROFILE%</code></td>
+<td><code>C:\Users\имя</code></td>
+</tr>
+<tr>
+<td><code>%APPDATA%</code></td>
+<td><code>C:\Users\имя\AppData\Roaming</code></td>
+</tr>
+<tr>
+<td><code>%LOCALAPPDATA%</code></td>
+<td><code>C:\Users\имя\AppData\Local</code></td>
+</tr>
+<tr>
+<td><code>%TEMP%</code> / <code>%TMP%</code></td>
+<td>Временная папка</td>
+</tr>
+<tr>
+<td><code>%PROGRAMFILES%</code></td>
+<td><code>C:\Program Files</code></td>
+</tr>
+<tr>
+<td><code>%PROGRAMFILES(X86)%</code></td>
+<td><code>C:\Program Files (x86)</code></td>
+</tr>
+<tr>
+<td><code>%WINDIR%</code></td>
+<td><code>C:\Windows</code></td>
+</tr>
+<tr>
+<td><code>%COMPUTERNAME%</code></td>
+<td>Имя ПК</td>
+</tr>
+<tr>
+<td><code>%NUMBER_OF_PROCESSORS%</code></td>
+<td>Число ядер</td>
+</tr>
+<tr>
+<td><code>%OS%</code></td>
+<td><code>Windows_NT</code></td>
+</tr>
+<tr>
+<td><code>%PATH%</code></td>
+<td>Пути поиска программ</td>
+</tr>
+<tr>
+<td><code>%CMDCMDLINE%</code></td>
+<td>Строка запуска CMD</td>
+</tr>
+<tr>
+<td><code>%0</code> <code>%1</code> … <code>%9</code></td>
+<td>Аргументы батника</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="перенаправления-и-конвейеры">🔄 Перенаправления и конвейеры<a class="headerlink" href="#перенаправления-и-конвейеры" title="Ссылка">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Оператор</th>
+<th>Действие</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>command &gt; file</code></td>
+<td>stdout в файл (перезапись)</td>
+</tr>
+<tr>
+<td><code>command &gt;&gt; file</code></td>
+<td>stdout дописать</td>
+</tr>
+<tr>
+<td><code>command 2&gt; file</code></td>
+<td>stderr в файл</td>
+</tr>
+<tr>
+<td><code>command 2&gt;&amp;1</code></td>
+<td>stderr туда же, куда stdout</td>
+</tr>
+<tr>
+<td><code>command &gt; nul</code></td>
+<td>Выкинуть stdout (как <code>/dev/null</code>)</td>
+</tr>
+<tr>
+<td><code>command 2&gt; nul</code></td>
+<td>Выкинуть stderr</td>
+</tr>
+<tr>
+<td><code>command &gt; file 2&gt;&amp;1</code></td>
+<td>stdout + stderr в файл</td>
+</tr>
+<tr>
+<td><code>command &lt; file</code></td>
+<td>Читать stdin из файла</td>
+</tr>
+<tr>
+<td><code>command1 \| command2</code></td>
+<td>Конвейер (pipe)</td>
+</tr>
+<tr>
+<td><code>command1 &amp; command2</code></td>
+<td>Выполнить вторую после первой (всегда)</td>
+</tr>
+<tr>
+<td><code>command1 &amp;&amp; command2</code></td>
+<td>Вторую ТОЛЬКО если первая успешна</td>
+</tr>
+<tr>
+<td><code>command1 \|\| command2</code></td>
+<td>Вторую ТОЛЬКО если первая упала</td>
+</tr>
+<tr>
+<td><code>command1 \|\| command2 &amp;&amp; command3</code></td>
+<td>Цепочки</td>
+</tr>
+</tbody>
+</table>
+<p>Примеры:</p>
+<div class="highlight"><pre><span></span><code>:: Сохранить вывод в файл
+ipconfig /all &gt; network.txt
+
+:: Дописать
+echo done &gt;&gt; log.txt
+
+:: Только ошибки в файл
+build.exe 2&gt; errors.log
+
+:: И stdout и stderr в файл
+build.exe &gt; all.log 2&gt;&amp;1
+
+:: Конвейер с фильтром
+dir | findstr &quot;.txt&quot;
+tasklist | find &quot;chrome&quot;
+
+:: Условные операторы
+mkdir newfolder &amp;&amp; cd newfolder
+copy file.txt backup.txt || echo &quot;Ошибка копирования&quot;
+</code></pre></div>
+
+<hr />
+<h2 id="планировщик-задач-schtasks">⏰ Планировщик задач (schtasks)<a class="headerlink" href="#планировщик-задач-schtasks" title="Ссылка">#</a></h2>
+<div class="highlight"><pre><span></span><code>:: Создать задачу — запускать каждый день в 9:00
+schtasks /create /tn &quot;MyBackup&quot; /tr &quot;C:\scripts\backup.bat&quot; /sc daily /st 09:00
+
+:: Запускать при входе в систему
+schtasks /create /tn &quot;Startup&quot; /tr &quot;prog.exe&quot; /sc onlogon
+
+:: Запускать каждые 30 минут
+schtasks /create /tn &quot;Sync&quot; /tr &quot;sync.bat&quot; /sc minute /mo 30
+
+:: С правами админа
+schtasks /create /tn &quot;Task&quot; /tr &quot;prog.exe&quot; /sc onstart /ru &quot;SYSTEM&quot; /rl HIGHEST
+
+:: Просмотр
+schtasks /query /fo LIST
+schtasks /query /tn &quot;MyBackup&quot;
+
+:: Запустить немедленно
+schtasks /run /tn &quot;MyBackup&quot;
+
+:: Удалить
+schtasks /delete /tn &quot;MyBackup&quot; /f
+</code></pre></div>
+
+<hr />
+<h2 id="пакетные-файлы-bat-cmd">📝 Пакетные файлы (<code>.bat</code> / <code>.cmd</code>)<a class="headerlink" href="#пакетные-файлы-bat-cmd" title="Ссылка">#</a></h2>
+<h3 id="структура">Структура<a class="headerlink" href="#структура" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="p">@</span><span class="k">echo</span> off
+<span class="c1">REM Это комментарий</span>
+<span class="p">:</span><span class="c1">: Тоже комментарий (но не в некоторых местах)</span>
+<span class="k">echo</span> Hello, <span class="nv">%1</span>
+
+<span class="k">setlocal</span> enabledelayedexpansion
+<span class="k">set</span> <span class="k">/a</span> <span class="nv">counter</span><span class="o">=</span><span class="mi">0</span>
+
+<span class="p">:</span><span class="nl">loop</span>
+<span class="k">set</span> <span class="k">/a</span> <span class="nv">counter</span><span class="o">+=</span><span class="mi">1</span>
+<span class="k">echo</span> Counter: <span class="nv">!counter!</span>
+<span class="k">if</span> <span class="nv">!counter!</span> <span class="ow">lss</span> 5 <span class="k">goto</span> <span class="nl">loop</span>
+
+<span class="k">endlocal</span>
+<span class="k">pause</span>
+</code></pre></div>
+
+<h3 id="команды-для-скриптов">Команды для скриптов<a class="headerlink" href="#команды-для-скриптов" title="Ссылка">#</a></h3>
+<table>
+<thead>
+<tr>
+<th>Команда</th>
+<th>Действие</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>@echo off</code></td>
+<td>Не выводить сами команды (вверху скрипта)</td>
+</tr>
+<tr>
+<td><code>echo Текст</code></td>
+<td>Вывести текст</td>
+</tr>
+<tr>
+<td><code>echo.</code></td>
+<td>Пустая строка</td>
+</tr>
+<tr>
+<td><code>rem комментарий</code></td>
+<td>Комментарий</td>
+</tr>
+<tr>
+<td><code>:: комментарий</code></td>
+<td>Комментарий (короче)</td>
+</tr>
+<tr>
+<td><code>pause</code></td>
+<td>Ждать нажатия клавиши</td>
+</tr>
+<tr>
+<td><code>title Заголовок</code></td>
+<td>Заголовок окна</td>
+</tr>
+<tr>
+<td><code>color 0A</code></td>
+<td>Цвет фона и текста (0=чёрный, A=зелёный)</td>
+</tr>
+<tr>
+<td><code>prompt $P$G</code></td>
+<td>Вид приглашения</td>
+</tr>
+<tr>
+<td><code>cls</code></td>
+<td>Очистить экран</td>
+</tr>
+<tr>
+<td><code>goto label</code></td>
+<td>Переход к метке <code>:label</code></td>
+</tr>
+<tr>
+<td><code>:label</code></td>
+<td>Объявление метки</td>
+</tr>
+<tr>
+<td><code>call script.bat</code></td>
+<td>Вызвать другой батник</td>
+</tr>
+<tr>
+<td><code>call :function arg1</code></td>
+<td>Вызвать функцию в этом же файле</td>
+</tr>
+<tr>
+<td><code>exit /b 0</code></td>
+<td>Выйти из скрипта с кодом</td>
+</tr>
+<tr>
+<td><code>exit 0</code></td>
+<td>Закрыть cmd с кодом</td>
+</tr>
+<tr>
+<td><code>setlocal</code></td>
+<td>Начало локальной области переменных</td>
+</tr>
+<tr>
+<td><code>endlocal</code></td>
+<td>Конец</td>
+</tr>
+<tr>
+<td><code>shift</code></td>
+<td>Сдвинуть аргументы (%1→%0, %2→%1)</td>
+</tr>
+<tr>
+<td><code>start "" prog.exe</code></td>
+<td>Запустить в новом окне</td>
+</tr>
+<tr>
+<td><code>timeout /t 5</code></td>
+<td>Пауза 5 секунд</td>
+</tr>
+<tr>
+<td><code>timeout /t 5 /nobreak</code></td>
+<td>Без возможности прервать</td>
+</tr>
+<tr>
+<td><code>choice /c YN /m "Да или нет"</code></td>
+<td>Выбор пользователя</td>
+</tr>
+</tbody>
+</table>
+<h3 id="коды-возврата-errorlevel">Коды возврата (<code>%errorlevel%</code>)<a class="headerlink" href="#коды-возврата-errorlevel" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="p">@</span><span class="k">echo</span> off
+ping google.com <span class="p">&gt;</span>nul
+
+<span class="k">if</span> <span class="nv">%errorlevel%</span> <span class="ow">equ</span> 0 <span class="p">(</span>
+    <span class="k">echo</span> Интернет работает
+<span class="p">)</span> <span class="k">else</span> <span class="p">(</span>
+    <span class="k">echo</span> Нет связи
+<span class="p">)</span>
+
+<span class="p">:</span><span class="c1">: Альтернативный синтаксис</span>
+ping google.com <span class="p">&gt;</span>nul <span class="p">&amp;&amp;</span> <span class="k">echo</span> OK <span class="p">||</span> <span class="k">echo</span> FAIL
+</code></pre></div>
+
+<hr />
+<h2 id="управляющие-конструкции">🔀 Управляющие конструкции<a class="headerlink" href="#управляющие-конструкции" title="Ссылка">#</a></h2>
+<h3 id="if">if<a class="headerlink" href="#if" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="p">:</span><span class="c1">: Сравнение строк</span>
+<span class="k">if</span> <span class="s2">&quot;</span><span class="nv">%var%</span><span class="s2">&quot;</span><span class="o">==</span><span class="s2">&quot;hello&quot;</span> <span class="k">echo</span> Совпадает
+<span class="k">if</span> <span class="k">not</span> <span class="s2">&quot;</span><span class="nv">%var%</span><span class="s2">&quot;</span><span class="o">==</span><span class="s2">&quot;hello&quot;</span> <span class="k">echo</span> Не совпадает
+<span class="k">if</span> <span class="k">/i</span> <span class="s2">&quot;</span><span class="nv">%var%</span><span class="s2">&quot;</span><span class="o">==</span><span class="s2">&quot;HELLO&quot;</span> <span class="k">echo</span> Без учёта регистра
+
+<span class="p">:</span><span class="c1">: Сравнение чисел</span>
+<span class="k">if</span> <span class="nv">%num%</span> <span class="ow">equ</span> 5 <span class="k">echo</span> Равно
+<span class="k">if</span> <span class="nv">%num%</span> <span class="ow">neq</span> 5 <span class="k">echo</span> Не равно
+<span class="k">if</span> <span class="nv">%num%</span> <span class="ow">gtr</span> 5 <span class="k">echo</span> Больше
+<span class="k">if</span> <span class="nv">%num%</span> <span class="ow">geq</span> 5 <span class="k">echo</span> Больше или равно
+<span class="k">if</span> <span class="nv">%num%</span> <span class="ow">lss</span> 5 <span class="k">echo</span> Меньше
+<span class="k">if</span> <span class="nv">%num%</span> <span class="ow">leq</span> 5 <span class="k">echo</span> Меньше или равно
+
+<span class="p">:</span><span class="c1">: Существование файла</span>
+<span class="k">if</span> <span class="k">exist</span> file.txt <span class="k">echo</span> Есть
+<span class="k">if</span> <span class="k">not</span> <span class="k">exist</span> file.txt <span class="k">echo</span> Нет
+
+<span class="p">:</span><span class="c1">: Существование переменной</span>
+<span class="k">if</span> <span class="k">defined</span> <span class="nv">MYVAR</span> <span class="k">echo</span> Задана
+
+<span class="p">:</span><span class="c1">: Блочный if (со скобками)</span>
+<span class="k">if</span> <span class="nv">%num%</span> <span class="ow">gtr</span> 10 <span class="p">(</span>
+    <span class="k">echo</span> Большое
+    <span class="k">set</span> <span class="nv">result</span><span class="p">=</span>high
+<span class="p">)</span> <span class="k">else</span> <span class="p">(</span>
+    <span class="k">echo</span> Малое
+    <span class="k">set</span> <span class="nv">result</span><span class="p">=</span>low
+<span class="p">)</span>
+</code></pre></div>
+
+<h3 id="for-циклы">for — циклы<a class="headerlink" href="#for-циклы" title="Ссылка">#</a></h3>
+<p>Цикл <code>for</code> в CMD <strong>очень</strong> отличается от bash и имеет много вариантов:</p>
+<div class="highlight"><pre><span></span><code><span class="p">:</span><span class="c1">: Простой перебор списка</span>
+<span class="k">for</span> <span class="se">%%</span>i <span class="k">in</span> <span class="p">(</span>1 2 3<span class="p">)</span> <span class="k">do</span> <span class="k">echo</span> <span class="se">%%</span>i
+<span class="k">for</span> <span class="se">%%</span>f <span class="k">in</span> <span class="p">(</span>*.txt<span class="p">)</span> <span class="k">do</span> <span class="k">echo</span> <span class="se">%%</span>f
+<span class="k">for</span> <span class="se">%%</span>f <span class="k">in</span> <span class="p">(</span>*.txt<span class="p">)</span> <span class="k">do</span> <span class="k">copy</span> <span class="s2">&quot;</span><span class="se">%%</span><span class="s2">f&quot;</span> <span class="s2">&quot;backup\</span><span class="se">%%</span><span class="s2">f&quot;</span>
+
+<span class="p">:</span><span class="c1">: Цикл по числам (range /L)</span>
+<span class="k">for</span> <span class="k">/l</span> <span class="se">%%</span>i <span class="k">in</span> <span class="p">(</span><span class="mi">0</span>,<span class="mi">1</span>,<span class="mi">9</span><span class="p">)</span> <span class="k">do</span> <span class="k">echo</span> <span class="se">%%</span>i          :: 0..9, шаг 1
+<span class="k">for</span> <span class="k">/l</span> <span class="se">%%</span>i <span class="k">in</span> <span class="p">(</span><span class="mi">10</span>,<span class="mi">-2</span>,<span class="mi">0</span><span class="p">)</span> <span class="k">do</span> <span class="k">echo</span> <span class="se">%%</span>i         :: 10,8,6,4,2,0
+
+<span class="p">:</span><span class="c1">: Перебор файлов рекурсивно (/r)</span>
+<span class="k">for</span> /r <span class="se">%%</span>f <span class="k">in</span> <span class="p">(</span>*.log<span class="p">)</span> <span class="k">do</span> <span class="k">del</span> <span class="s2">&quot;</span><span class="se">%%</span><span class="s2">f&quot;</span>
+
+<span class="p">:</span><span class="c1">: Перебор строк файла (/f)</span>
+<span class="k">for</span> <span class="k">/f</span> <span class="s2">&quot;tokens=1,2&quot;</span> <span class="se">%%</span>a <span class="k">in</span> <span class="p">(</span>data.txt<span class="p">)</span> <span class="k">do</span> <span class="k">echo</span> <span class="se">%%</span>a - <span class="se">%%</span>b
+
+<span class="p">:</span><span class="c1">: Парсинг вывода команды</span>
+<span class="k">for</span> <span class="k">/f</span> <span class="s2">&quot;tokens=2 delims=:&quot;</span> <span class="se">%%</span>a <span class="k">in</span> <span class="p">(</span><span class="s1">&#39;ipconfig ^| findstr &quot;IPv4&quot;&#39;</span><span class="p">)</span> <span class="k">do</span> <span class="k">echo</span> IP:<span class="se">%%</span>a
+
+<span class="p">:</span><span class="c1">: Модификаторы переменной цикла</span>
+<span class="k">for</span> <span class="se">%%</span>f <span class="k">in</span> <span class="p">(</span>file.txt<span class="p">)</span> <span class="k">do</span> <span class="p">(</span>
+    <span class="k">echo</span> Полный путь: <span class="se">%%</span>~ff      :: полный путь
+    <span class="k">echo</span> Имя:        <span class="se">%%</span>~nf       :: только имя
+    <span class="k">echo</span> Расширение: <span class="se">%%</span>~xf       :: только расширение
+    <span class="k">echo</span> Диск:       <span class="se">%%</span>~df       :: диск
+    <span class="k">echo</span> Путь:       <span class="se">%%</span>~pf       :: путь без имени
+<span class="p">)</span>
+</code></pre></div>
+
+<blockquote>
+<p>⚠️ В командной строке используйте <code>%i</code>, в <code>.bat</code> — <code>%%i</code> (двойной процент).</p>
+</blockquote>
+<h3 id="модификаторы-for-f">Модификаторы for /f<a class="headerlink" href="#модификаторы-for-f" title="Ссылка">#</a></h3>
+<table>
+<thead>
+<tr>
+<th>Опция</th>
+<th>Действие</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>eol=#</code></td>
+<td>Символ комментария (до конца строки)</td>
+</tr>
+<tr>
+<td><code>skip=n</code></td>
+<td>Пропустить n строк в начале</td>
+</tr>
+<tr>
+<td><code>delims=xyz</code></td>
+<td>Разделители (по умолчанию пробел и таб)</td>
+</tr>
+<tr>
+<td><code>tokens=1,2,3</code></td>
+<td>Какие столбцы брать (в <code>%%a</code>, <code>%%b</code>, <code>%%c</code>)</td>
+</tr>
+<tr>
+<td><code>tokens=2*</code></td>
+<td>2-й столбец + весь остаток</td>
+</tr>
+<tr>
+<td><code>usebackq</code></td>
+<td>Использовать обратные кавычки для команд</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="цвета-и-форматирование">🎨 Цвета и форматирование<a class="headerlink" href="#цвета-и-форматирование" title="Ссылка">#</a></h2>
+<h3 id="команда-color">Команда color<a class="headerlink" href="#команда-color" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>color 0A    :: чёрный фон (0), зелёный текст (A)
+color 07    :: стандартные цвета
+color       :: сброс к значению по умолчанию
+</code></pre></div>
+
+<p>Коды цветов:
+| Код | Цвет | Код | Цвет |
+|&mdash;|&mdash;|&mdash;|&mdash;|
+| 0 | Чёрный | 8 | Серый |
+| 1 | Синий | 9 | Светло-синий |
+| 2 | Зелёный | A | Светло-зелёный |
+| 3 | Голубой | B | Светло-голубой |
+| 4 | Красный | C | Светло-красный |
+| 5 | Лиловый | D | Светло-лиловый |
+| 6 | Жёлтый | E | Светло-жёлтый |
+| 7 | Белый | F | Ярко-белый |</p>
+<blockquote>
+<p>Первая цифра — фон, вторая — текст. <code>color FC</code> — красный фон, белый текст.</p>
+</blockquote>
+<h3 id="ansi-цвета-windows-10">ANSI-цвета (Windows 10+)<a class="headerlink" href="#ansi-цвета-windows-10" title="Ссылка">#</a></h3>
+<p>В батниках можно использовать ANSI-коды через escape-символ:</p>
+<div class="highlight"><pre><span></span><code><span class="p">:</span><span class="c1">: Создание ESC-символа (ASCII 27)</span>
+<span class="k">for</span> <span class="k">/f</span> <span class="se">%%</span>a <span class="k">in</span> <span class="p">(</span><span class="s1">&#39;echo prompt $E ^| cmd&#39;</span><span class="p">)</span> <span class="k">do</span> <span class="k">set</span> <span class="s2">&quot;ESC=</span><span class="se">%%</span><span class="s2">a&quot;</span>
+
+<span class="k">echo</span> <span class="nv">%ESC%</span>[32mЗелёный текст<span class="nv">%ESC%</span>[0m
+<span class="k">echo</span> <span class="nv">%ESC%</span>[31m<span class="nv">%ESC%</span>[47mКрасный на белом<span class="nv">%ESC%</span>[0m
+<span class="k">echo</span> <span class="nv">%ESC%</span>[1mЖирный<span class="nv">%ESC%</span>[22m <span class="nv">%ESC%</span>[4mПодчёркнутый<span class="nv">%ESC%</span>[24m
+</code></pre></div>
+
+<hr />
+<h2 id="полезные-команды">🧰 Полезные команды<a class="headerlink" href="#полезные-команды" title="Ссылка">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Команда</th>
+<th>Действие</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>help</code></td>
+<td>Список всех команд</td>
+</tr>
+<tr>
+<td><code>help command</code> / <code>command /?</code></td>
+<td>Справка по команде</td>
+</tr>
+<tr>
+<td><code>doskey /history</code></td>
+<td>История команд</td>
+</tr>
+<tr>
+<td><code>doskey alias=full command $*</code></td>
+<td>Создать алиас (макрос)</td>
+</tr>
+<tr>
+<td><code>clip</code></td>
+<td>Копировать вывод в буфер обмена (<code>dir \| clip</code>)</td>
+</tr>
+<tr>
+<td><code>clip &lt; file.txt</code></td>
+<td>Скопировать файл в буфер</td>
+</tr>
+<tr>
+<td><code>powershell -c "Get-Clipboard"</code></td>
+<td>Вставить из буфера</td>
+</tr>
+<tr>
+<td><code>sort file.txt</code></td>
+<td>Отсортировать строки</td>
+</tr>
+<tr>
+<td><code>sort file.txt /r</code></td>
+<td>В обратном порядке</td>
+</tr>
+<tr>
+<td><code>sort file.txt /unique</code></td>
+<td>Уникальные строки</td>
+</tr>
+<tr>
+<td><code>find /c /v "" file.txt</code></td>
+<td>Подсчёт строк</td>
+</tr>
+<tr>
+<td><code>mode con cols=120 lines=40</code></td>
+<td>Размер окна</td>
+</tr>
+<tr>
+<td><code>title My Script</code></td>
+<td>Заголовок окна</td>
+</tr>
+<tr>
+<td><code>subst Z: C:\path</code></td>
+<td>Назначить букву диска</td>
+</tr>
+<tr>
+<td><code>subst Z: /d</code></td>
+<td>Отменить</td>
+</tr>
+<tr>
+<td><code>powershell -c "command"</code></td>
+<td>Вызвать PowerShell из CMD</td>
+</tr>
+<tr>
+<td><code>start wt</code></td>
+<td>Открыть Windows Terminal</td>
+</tr>
+</tbody>
+</table>
+<h3 id="doskey-макросы-алиасы">doskey — макросы (алиасы)<a class="headerlink" href="#doskey-макросы-алиасы" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>:: Создать макрос
+doskey ls=dir /b $*
+doskey ll=dir $*
+doskey cat=type $*
+doskey grep=findstr $*
+doskey ..=cd ..
+doskey h=doskey /history
+
+:: Сохранить макросы
+doskey /macros &gt; %USERPROFILE%\cmd_macros.txt
+
+:: Применить при старте (через ярлык cmd /k doskey /macrofile=...)
+</code></pre></div>
+
+<blockquote>
+<p>Макросы doskey действуют только в текущей сессии. Чтобы сохранить —
+настройте автозагрузку через ярлык <code>cmd /k doskey /macrofile=path</code>.</p>
+</blockquote>
+<hr />
+<h2 id="горячие-клавиши-cmd">⌨️ Горячие клавиши CMD<a class="headerlink" href="#горячие-клавиши-cmd" title="Ссылка">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Клавиша</th>
+<th>Действие</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Ctrl+C</code></td>
+<td>Прервать текущую команду</td>
+</tr>
+<tr>
+<td><code>Ctrl+Break</code></td>
+<td>Принудительно прервать</td>
+</tr>
+<tr>
+<td><code>Ctrl+Home</code> / <code>Ctrl+End</code></td>
+<td>Удалить до начала/конца строки</td>
+</tr>
+<tr>
+<td><code>Home</code> / <code>End</code></td>
+<td>В начало / конец строки</td>
+</tr>
+<tr>
+<td><code>↑</code> / <code>↓</code></td>
+<td>История команд</td>
+</tr>
+<tr>
+<td><code>F1</code></td>
+<td>Вставить символ из последней команды</td>
+</tr>
+<tr>
+<td><code>F2</code></td>
+<td>Вставить до указанного символа</td>
+</tr>
+<tr>
+<td><code>F3</code></td>
+<td>Повторить последнюю команду</td>
+</tr>
+<tr>
+<td><code>F4</code></td>
+<td>Удалить до указанного символа</td>
+</tr>
+<tr>
+<td><code>F5</code></td>
+<td>Предыдущая команда (как ↑)</td>
+</tr>
+<tr>
+<td><code>F7</code></td>
+<td>Список истории (выбор цифрой)</td>
+</tr>
+<tr>
+<td><code>F8</code></td>
+<td>История по префиксу</td>
+</tr>
+<tr>
+<td><code>F9</code></td>
+<td>Команда по номеру из истории</td>
+</tr>
+<tr>
+<td><code>Esc</code></td>
+<td>Очистить строку</td>
+</tr>
+<tr>
+<td><code>Tab</code></td>
+<td>Автодополнение файла/каталога</td>
+</tr>
+<tr>
+<td><code>Shift+←/→</code></td>
+<td>Выделение текста</td>
+</tr>
+<tr>
+<td><code>Ctrl+Shift+C/V</code></td>
+<td>Копировать/вставить (Win10+)</td>
+</tr>
+<tr>
+<td><code>Enter</code></td>
+<td>Копировать выделение (в режиме QuickEdit)</td>
+</tr>
+<tr>
+<td><code>Right-click</code></td>
+<td>Вставить (в режиме QuickEdit)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="полезные-настройки-окна">Полезные настройки окна<a class="headerlink" href="#полезные-настройки-окна" title="Ссылка">#</a></h3>
+<ul>
+<li><strong>QuickEdit mode</strong> — позволяет выделять и копировать мышью
+  (Свойства → Experimental → Enable Ctrl+Shift+C/V).</li>
+<li><strong>Insert mode</strong> — вставка вместо замены.</li>
+</ul>
+<hr />
+<h2 id="дебаг-и-диагностика">🐛 Дебаг и диагностика<a class="headerlink" href="#дебаг-и-диагностика" title="Ссылка">#</a></h2>
+<div class="highlight"><pre><span></span><code>:: Эхо команд для отладки (временно)
+@echo on
+
+:: Вывести значение переменной
+echo var=[%MYVAR%]
+
+:: Показать код ошибки
+command
+echo Error level: %errorlevel%
+
+:: Проверить синтаксис без выполнения (просто читая)
+type script.bat
+
+:: Где лежит команда?
+where python
+where /r C:\ python.exe
+
+:: Проверить ассоциации файлов
+assoc .py
+ftype Python.File
+</code></pre></div>
+
+<hr />
+<h2 id="примеры-скриптов">🌐 Примеры скриптов<a class="headerlink" href="#примеры-скриптов" title="Ссылка">#</a></h2>
+<h3 id="1-backup-с-датой">1. Backup с датой<a class="headerlink" href="#1-backup-с-датой" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="p">@</span><span class="k">echo</span> off
+<span class="k">set</span> <span class="nv">BACKUP_DIR</span><span class="p">=</span>D:\backups
+<span class="k">set</span> <span class="nv">SRC</span><span class="p">=</span><span class="nv">%USERPROFILE%</span>\Documents
+<span class="k">set</span> <span class="nv">STAMP</span><span class="p">=</span><span class="nv">%date:~-4%%date:~3,2%%date:~0,2%</span>_<span class="nv">%time:~0,2%%time:~3,2%</span>
+<span class="k">set</span> <span class="nv">STAMP</span><span class="p">=</span><span class="nv">%STAMP: =0%</span>
+<span class="k">set</span> <span class="nv">STAMP</span><span class="p">=</span><span class="nv">%STAMP::=%</span>
+
+robocopy <span class="s2">&quot;</span><span class="nv">%SRC%</span><span class="s2">&quot;</span> <span class="s2">&quot;</span><span class="nv">%BACKUP_DIR%</span><span class="s2">\docs_</span><span class="nv">%STAMP%</span><span class="s2">&quot;</span> /mir /xd temp
+<span class="k">echo</span> Backup completed: <span class="nv">%BACKUP_DIR%</span>\docs_<span class="nv">%STAMP%</span>
+<span class="k">pause</span>
+</code></pre></div>
+
+<h3 id="2-меню-выбора">2. Меню выбора<a class="headerlink" href="#2-меню-выбора" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="p">@</span><span class="k">echo</span> off
+<span class="p">:</span><span class="nl">menu</span>
+<span class="k">cls</span>
+<span class="k">echo</span> 1. Запустить сервис
+<span class="k">echo</span> 2. Остановить сервис
+<span class="k">echo</span> 3. Статус
+<span class="k">echo</span> 4. Выход
+<span class="k">set</span> <span class="k">/p</span> <span class="nv">choice</span><span class="p">=</span>Выбор:
+
+<span class="k">if</span> <span class="s2">&quot;</span><span class="nv">%choice%</span><span class="s2">&quot;</span><span class="o">==</span><span class="s2">&quot;1&quot;</span> net start <span class="s2">&quot;MyService&quot;</span>
+<span class="k">if</span> <span class="s2">&quot;</span><span class="nv">%choice%</span><span class="s2">&quot;</span><span class="o">==</span><span class="s2">&quot;2&quot;</span> net stop <span class="s2">&quot;MyService&quot;</span>
+<span class="k">if</span> <span class="s2">&quot;</span><span class="nv">%choice%</span><span class="s2">&quot;</span><span class="o">==</span><span class="s2">&quot;3&quot;</span> sc query <span class="s2">&quot;MyService&quot;</span>
+<span class="k">if</span> <span class="s2">&quot;</span><span class="nv">%choice%</span><span class="s2">&quot;</span><span class="o">==</span><span class="s2">&quot;4&quot;</span> <span class="k">exit</span>
+<span class="k">goto</span> <span class="nl">menu</span>
+</code></pre></div>
+
+<h3 id="3-массовое-переименование">3. Массовое переименование<a class="headerlink" href="#3-массовое-переименование" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="p">@</span><span class="k">echo</span> off
+<span class="k">setlocal</span> enabledelayedexpansion
+<span class="k">for</span> <span class="se">%%</span>f <span class="k">in</span> <span class="p">(</span>*.jpg<span class="p">)</span> <span class="k">do</span> <span class="p">(</span>
+    <span class="k">set</span> <span class="nv">name</span><span class="p">=</span><span class="se">%%</span>~nf
+    <span class="k">ren</span> <span class="s2">&quot;</span><span class="se">%%</span><span class="s2">f&quot;</span> <span class="s2">&quot;vacation_!name:~0,4!</span><span class="se">%%</span><span class="s2">~xf&quot;</span>
+<span class="p">)</span>
+</code></pre></div>
+
+<h3 id="4-пинг-нескольких-хостов">4. Пинг нескольких хостов<a class="headerlink" href="#4-пинг-нескольких-хостов" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="p">@</span><span class="k">echo</span> off
+<span class="k">for</span> <span class="se">%%</span>h <span class="k">in</span> <span class="p">(</span>google.com github.com stackoverflow.com<span class="p">)</span> <span class="k">do</span> <span class="p">(</span>
+    ping -n 1 <span class="se">%%</span>h <span class="p">&gt;</span>nul <span class="p">&amp;&amp;</span> <span class="k">echo</span> <span class="se">%%</span>h: OK <span class="p">||</span> <span class="k">echo</span> <span class="se">%%</span>h: FAIL
+<span class="p">)</span>
+</code></pre></div>
+
+<h3 id="5-установка-программ-через-winget">5. Установка программ через winget<a class="headerlink" href="#5-установка-программ-через-winget" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="p">@</span><span class="k">echo</span> off
+<span class="k">echo</span> Установка софта...
+winget install --id Git.Git -e --accept-source-agreements --accept-package-agreements
+winget install --id Microsoft.VisualStudioCode -e --accept-source-agreements --accept-package-agreements
+winget install --id Python.Python.3.12 -e --accept-source-agreements --accept-package-agreements
+<span class="k">echo</span> Готово!
+<span class="k">pause</span>
+</code></pre></div>
+
+<hr />
+<h2 id="частые-ошибки-и-грабли">🪤 Частые ошибки и грабли<a class="headerlink" href="#частые-ошибки-и-грабли" title="Ссылка">#</a></h2>
+<ol>
+<li><strong>Пробелы в путях</strong> — <code>cd C:\Program Files</code> упадёт; используйте кавычки:
+   <code>cd "C:\Program Files"</code>.</li>
+<li><strong><code>%var%</code> в блоках <code>if</code>/<code>for</code></strong> — раскрывается <strong>один раз</strong> при парсинге блока.
+   Для обновления внутри блока включайте <code>setlocal enabledelayedexpansion</code>
+   и используйте <code>!var!</code>.</li>
+<li><strong><code>&amp;</code> vs <code>&amp;&amp;</code></strong> — <code>&amp;</code> выполняет обе команды, <code>&amp;&amp;</code> только если первая успешна.</li>
+<li><strong><code>&gt;</code> в строке</strong> — <code>echo a &gt; b</code> запишет в файл; экранируйте <code>^&gt;</code>: <code>echo a ^&gt; b</code>.</li>
+<li><strong><code>%</code> в батнике</strong> — удваивайте: <code>echo 50%%</code> выведет <code>50%</code>.</li>
+<li><strong>Цикл <code>for</code></strong> — <code>%i</code> в командной строке, <code>%%i</code> в батнике.</li>
+<li><strong>Чувствительность к регистру</strong> — команды нечувствительны, но переменные
+   и пути в CMD тоже (по умолчанию).</li>
+<li><strong><code>del</code> без подтверждения</strong> — добавляйте <code>/q</code> для пакетов.</li>
+<li><strong><code>set VAR = value</code></strong> — создаст переменную с пробелом в имени и значении!
+   Делайте <code>set "VAR=value"</code> (кавычки защищают).</li>
+<li><strong><code>rmdir /s</code></strong> без проверки пути — может удалить всё. Всегда проверяйте.</li>
+<li><strong>Кодировка</strong> — <code>chcp 65001</code> для UTF-8 (по умолчанию cp866/cp1251).</li>
+<li><strong><code>::</code> внутри скобок</strong> — может ломать блоки; используйте <code>rem</code> внутри <code>()</code>.</li>
+</ol>
+<hr />
+<h2 id="полезные-ссылки">🔗 Полезные ссылки<a class="headerlink" href="#полезные-ссылки" title="Ссылка">#</a></h2>
+<ul>
+<li>Справочник команд SS64: https://ss64.com/nt</li>
+<li>Microsoft Learn CMD: https://learn.microsoft.com/windows-server/administration/windows-commands/windows-commands</li>
+<li>Robocopy reference: https://learn.microsoft.com/windows-server/administration/windows-commands/robocopy</li>
+<li>Bat-файлы учебник: https://www.tutorialspoint.com/batch_script</li>
+<li>Doskey reference: https://ss64.com/nt/doskey.html</li>
+<li>CMD на Wikipedia: https://ru.wikipedia.org/wiki/Cmd.exe</li>
+</ul>
+<hr />
+<h2 id="полезные-советы">💡 Полезные советы<a class="headerlink" href="#полезные-советы" title="Ссылка">#</a></h2>
+<ol>
+<li><strong>Используйте <code>robocopy</code></strong> вместо <code>copy</code>/<code>xcopy</code> для резервного копирования —
+   он надёжнее, умеет докачку, многопоточность, логи.</li>
+<li><strong><code>tab</code></strong> автодополняет имена файлов/каталогов (как в bash).</li>
+<li><strong><code>F7</code></strong> открывает список истории с выбором.</li>
+<li><strong><code>where</code></strong> — это аналог <code>which</code> в Linux.</li>
+<li><strong><code>findstr</code></strong> — это <code>grep</code> (с ограниченной поддержкой regex).</li>
+<li><strong><code>winget</code></strong> (Win10/11) — современный пакетный менеджер от Microsoft.</li>
+<li><strong><code>start</code></strong> — открывает файлы приложением по умолчанию, URLs в браузере.</li>
+<li><strong>Для сложных задач — переходите на PowerShell.</strong> CMD хорош для простого,
+   но PS мощнее (объекты, функции, модули).</li>
+<li><strong><code>chcp 65001</code></strong> в начале батника — для корректного UTF-8.</li>
+<li><strong><code>setlocal enabledelayedexpansion</code></strong> — обязательно для счётчиков в циклах.</li>
+<li><strong><code>@echo off</code></strong> в начале — стандарт, чтобы не выводить команды.</li>
+<li><strong><code>2&gt;nul</code></strong> — скрыть ошибки (но осторожно — упускаете важное).</li>
+<li><strong>Windows Terminal</strong> (<code>wt</code>) — современная обёртка с вкладками, намного
+    удобнее классического <code>cmd.exe</code>.</li>
+<li><strong><code>timeout /t N</code></strong> лучше старого <code>ping -n N 127.0.0.1 &gt; nul</code>.</li>
+<li><strong>Тестируйте <code>rmdir /s /q</code> и <code>del /s</code></strong> на тестовых данных — они опасны.</li>
+</ol>
+<hr />
+<p><em>Сгенерировано как шпаргалка. CMD стар, но живуч —
+углубляйтесь через <code>command /?</code> и https://ss64.com/nt</em></p>
+    </article>
+    <nav class="pagination">
+      <a class="pager prev" href="powershell.html">← PowerShell</a>
+      <a class="pager next" href="python.html">Python →</a>
+    </nav>
+  </main>
+
+  <aside class="toc">
+    <details open>
+      <summary>📑 Оглавление</summary>
+      <div class="toc-list">
+<div class="toc">
+<ul>
+<li><a href="#cmd-cmd-exe-шпаргалка-по-командам">🪟 CMD (cmd.exe) — шпаргалка по командам</a><ul>
+<li><a href="#запуск">🚀 Запуск</a><ul>
+<li><a href="#ключи-запуска">Ключи запуска</a></li>
+</ul>
+</li>
+<li><a href="#навигация-по-каталогам">🧭 Навигация по каталогам</a></li>
+<li><a href="#работа-с-файлами-и-каталогами">📄 Работа с файлами и каталогами</a><ul>
+<li><a href="#robocopy-мощный-инструмент-копирования">robocopy — мощный инструмент копирования</a></li>
+</ul>
+</li>
+<li><a href="#сеть">🔊 Сеть</a><ul>
+<li><a href="#netsh-настройка-сети">netsh — настройка сети</a></li>
+</ul>
+</li>
+<li><a href="#система-и-процессы">⚙️ Система и процессы</a></li>
+<li><a href="#службы-и-реестр">🧰 Службы и реестр</a><ul>
+<li><a href="#службы">Службы</a></li>
+<li><a href="#реестр-reg">Реестр (reg)</a></li>
+</ul>
+</li>
+<li><a href="#пользователи">👤 Пользователи</a></li>
+<li><a href="#управление-пакетами">📦 Управление пакетами</a><ul>
+<li><a href="#winget-windows-10-11-встроен">winget (Windows 10/11, встроен)</a></li>
+<li><a href="#chocolatey-нужно-установить-отдельно">chocolatey (нужно установить отдельно)</a></li>
+<li><a href="#scoop-альтернатива-для-dev-инструментов">scoop (альтернатива, для dev-инструментов)</a></li>
+</ul>
+</li>
+<li><a href="#переменные-окружения">🔤 Переменные окружения</a><ul>
+<li><a href="#часто-используемые-переменные">Часто используемые переменные</a></li>
+</ul>
+</li>
+<li><a href="#перенаправления-и-конвейеры">🔄 Перенаправления и конвейеры</a></li>
+<li><a href="#планировщик-задач-schtasks">⏰ Планировщик задач (schtasks)</a></li>
+<li><a href="#пакетные-файлы-bat-cmd">📝 Пакетные файлы (.bat / .cmd)</a><ul>
+<li><a href="#структура">Структура</a></li>
+<li><a href="#команды-для-скриптов">Команды для скриптов</a></li>
+<li><a href="#коды-возврата-errorlevel">Коды возврата (%errorlevel%)</a></li>
+</ul>
+</li>
+<li><a href="#управляющие-конструкции">🔀 Управляющие конструкции</a><ul>
+<li><a href="#if">if</a></li>
+<li><a href="#for-циклы">for — циклы</a></li>
+<li><a href="#модификаторы-for-f">Модификаторы for /f</a></li>
+</ul>
+</li>
+<li><a href="#цвета-и-форматирование">🎨 Цвета и форматирование</a><ul>
+<li><a href="#команда-color">Команда color</a></li>
+<li><a href="#ansi-цвета-windows-10">ANSI-цвета (Windows 10+)</a></li>
+</ul>
+</li>
+<li><a href="#полезные-команды">🧰 Полезные команды</a><ul>
+<li><a href="#doskey-макросы-алиасы">doskey — макросы (алиасы)</a></li>
+</ul>
+</li>
+<li><a href="#горячие-клавиши-cmd">⌨️ Горячие клавиши CMD</a><ul>
+<li><a href="#полезные-настройки-окна">Полезные настройки окна</a></li>
+</ul>
+</li>
+<li><a href="#дебаг-и-диагностика">🐛 Дебаг и диагностика</a></li>
+<li><a href="#примеры-скриптов">🌐 Примеры скриптов</a><ul>
+<li><a href="#1-backup-с-датой">1. Backup с датой</a></li>
+<li><a href="#2-меню-выбора">2. Меню выбора</a></li>
+<li><a href="#3-массовое-переименование">3. Массовое переименование</a></li>
+<li><a href="#4-пинг-нескольких-хостов">4. Пинг нескольких хостов</a></li>
+<li><a href="#5-установка-программ-через-winget">5. Установка программ через winget</a></li>
+</ul>
+</li>
+<li><a href="#частые-ошибки-и-грабли">🪤 Частые ошибки и грабли</a></li>
+<li><a href="#полезные-ссылки">🔗 Полезные ссылки</a></li>
+<li><a href="#полезные-советы">💡 Полезные советы</a></li>
+</ul>
+</li>
+</ul>
+</div>
+
+      </div>
+    </details>
+  </aside>
+</div>
+
+<button class="back-top" id="backTop" aria-label="Наверх">↑</button>
+
+<script src="assets/search.js"></script>
+<script src="assets/page.js"></script>
+</body>
+</html>

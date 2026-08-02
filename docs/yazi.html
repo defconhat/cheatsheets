@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Yazi — Шпаргалки</title>
+<link rel="stylesheet" href="assets/style.css">
+<link rel="stylesheet" href="assets/pygments.css">
+</head>
+<body>
+<div class="layout">
+  <aside class="sidebar">
+    <a href="index.html" class="brand">📌 Шпаргалки</a>
+    <nav class="nav">
+<a href="yazi.html" class="nav-item active"><span class="nav-ico">📦</span>Yazi</a>
+<a href="neovim.html" class="nav-item"><span class="nav-ico">📘</span>Neovim (LazyVim)</a>
+<a href="niri.html" class="nav-item"><span class="nav-ico">🪟</span>Niri</a>
+<a href="tmux.html" class="nav-item"><span class="nav-ico">🪟</span>Tmux</a>
+<a href="bash.html" class="nav-item"><span class="nav-ico">🐚</span>Bash</a>
+<a href="git.html" class="nav-item"><span class="nav-ico">🔀</span>Git</a>
+<a href="terminal.html" class="nav-item"><span class="nav-ico">🖥️</span>Терминал Linux</a>
+<a href="powershell.html" class="nav-item"><span class="nav-ico">💻</span>PowerShell</a>
+<a href="cmd.html" class="nav-item"><span class="nav-ico">🪟</span>CMD (cmd.exe)</a>
+<a href="python.html" class="nav-item"><span class="nav-ico">🐍</span>Python</a>
+<a href="systemd.html" class="nav-item"><span class="nav-ico">⚙️</span>systemd</a>
+<a href="ssh.html" class="nav-item"><span class="nav-ico">🔐</span>SSH</a>
+<a href="make-cmake.html" class="nav-item"><span class="nav-ico">🔨</span>Make / CMake</a>
+<a href="docker.html" class="nav-item"><span class="nav-ico">🐳</span>Docker</a>
+<a href="pacman.html" class="nav-item"><span class="nav-ico">📦</span>pacman / yay / paru</a>
+<a href="spark.html" class="nav-item"><span class="nav-ico">⚡</span>Apache Spark / PySpark</a>
+<a href="markdown.html" class="nav-item"><span class="nav-ico">📝</span>Markdown</a>
+<a href="regex.html" class="nav-item"><span class="nav-ico">🔍</span>Регулярные выражения</a>
+<a href="jq-json.html" class="nav-item"><span class="nav-ico">🔧</span>jq + JSON</a>
+<a href="awk-sed.html" class="nav-item"><span class="nav-ico">✂️</span>awk / sed</a>
+<a href="airflow.html" class="nav-item"><span class="nav-ico">🌪️</span>Apache Airflow</a>
+<a href="http-curl.html" class="nav-item"><span class="nav-ico">🌐</span>HTTP / curl</a>
+<a href="yaml.html" class="nav-item"><span class="nav-ico">📄</span>YAML</a>
+<a href="vscode.html" class="nav-item"><span class="nav-ico">💻</span>VS Code</a>
+<a href="cron.html" class="nav-item"><span class="nav-ico">⏰</span>cron</a>
+<a href="fzf-zoxide.html" class="nav-item"><span class="nav-ico">🔎</span>fzf + zoxide</a>
+<a href="minikube-k8s.html" class="nav-item"><span class="nav-ico">☸️</span>Minikube / Kubernetes</a>
+<a href="cicd.html" class="nav-item"><span class="nav-ico">🦊</span>GitLab CI / GitHub Actions</a>
+<a href="nginx.html" class="nav-item"><span class="nav-ico">🌐</span>nginx</a>
+<a href="dbt.html" class="nav-item"><span class="nav-ico">🔧</span>dbt</a>
+<a href="kafka.html" class="nav-item"><span class="nav-ico">🐘</span>Apache Kafka</a>
+<a href="prometheus-grafana.html" class="nav-item"><span class="nav-ico">📊</span>Prometheus / Grafana</a>
+<a href="iceberg-nessie.html" class="nav-item"><span class="nav-ico">🧊</span>Iceberg / Nessie</a>
+<a href="impala.html" class="nav-item"><span class="nav-ico">🐬</span>Apache Impala</a>
+<a href="terraform.html" class="nav-item"><span class="nav-ico">🏗️</span>Terraform</a>
+<a href="linux-internals.html" class="nav-item"><span class="nav-ico">🐧</span>Linux Internals</a>
+<a href="miscellaneous.html" class="nav-item"><span class="nav-ico">🧰</span>Miscellaneous</a>
+<a href="python-automation-libs.html" class="nav-item"><span class="nav-ico">🐍</span>Python: авт-ция (10 libs)</a>
+<a href="eza.html" class="nav-item"><span class="nav-ico">🌈</span>eza</a>
+<a href="dbeaver.html" class="nav-item"><span class="nav-ico">🗄️</span>DBeaver</a>
+<a href="zcode.html" class="nav-item"><span class="nav-ico">🤖</span>ZCode</a>
+<a href="warp.html" class="nav-item"><span class="nav-ico">🚀</span>Warp</a>
+<a href="agentic-ai-dev.html" class="nav-item"><span class="nav-ico">🤝</span>Агентная разработка с ИИ</a>
+    </nav>
+  </aside>
+
+  <main class="content">
+    <article>
+<h1 id="yazi-шпаргалка-по-горячим-клавишам">📦 Yazi — шпаргалка по горячим клавишам<a class="headerlink" href="#yazi-шпаргалка-по-горячим-клавишам" title="Ссылка">#</a></h1>
+<blockquote>
+<p>Yazi — быстрый терминальный файловый менеджер на Rust.
+Полная справка внутри программы: <code>?</code>
+Дом: https://yazi-rs.github.io</p>
+</blockquote>
+<hr />
+<h2 id="навигация">📂 Навигация<a class="headerlink" href="#навигация" title="Ссылка">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Клавиша</th>
+<th>Действие</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>k</code> / <code>↑</code></td>
+<td>Вверх</td>
+</tr>
+<tr>
+<td><code>j</code> / <code>↓</code></td>
+<td>Вниз</td>
+</tr>
+<tr>
+<td><code>K</code></td>
+<td>Вверх на 5 строк</td>
+</tr>
+<tr>
+<td><code>J</code></td>
+<td>Вниз на 5 строк</td>
+</tr>
+<tr>
+<td><code>g g</code></td>
+<td>В начало списка</td>
+</tr>
+<tr>
+<td><code>G</code></td>
+<td>В конец списка</td>
+</tr>
+<tr>
+<td><code>Ctrl-u</code></td>
+<td>На пол-страницы вверх</td>
+</tr>
+<tr>
+<td><code>Ctrl-d</code></td>
+<td>На пол-страницы вниз</td>
+</tr>
+<tr>
+<td><code>Ctrl-b</code></td>
+<td>На страницу вверх</td>
+</tr>
+<tr>
+<td><code>Ctrl-f</code></td>
+<td>На страницу вниз</td>
+</tr>
+<tr>
+<td><code>h</code></td>
+<td>Вверх по каталогу (в родительский)</td>
+</tr>
+<tr>
+<td><code>l</code></td>
+<td>Войти в каталог</td>
+</tr>
+<tr>
+<td><code>Enter</code></td>
+<td>Открыть файл / каталог</td>
+</tr>
+<tr>
+<td><code>o</code></td>
+<td>Открыть выбранным приложением</td>
+</tr>
+<tr>
+<td><code>~</code></td>
+<td>Перейти в домашний каталог</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="действия-с-файлами">✏️ Действия с файлами<a class="headerlink" href="#действия-с-файлами" title="Ссылка">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Клавиша</th>
+<th>Действие</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Space</code></td>
+<td>Выделить / снять выделение</td>
+</tr>
+<tr>
+<td><code>v</code></td>
+<td>Визуальный режим (выделение)</td>
+</tr>
+<tr>
+<td><code>V</code></td>
+<td>Выйти из визуального режима</td>
+</tr>
+<tr>
+<td><code>y</code></td>
+<td>Копировать (yank)</td>
+</tr>
+<tr>
+<td><code>x</code></td>
+<td>Вырезать (cut)</td>
+</tr>
+<tr>
+<td><code>p</code></td>
+<td>Вставить</td>
+</tr>
+<tr>
+<td><code>P</code></td>
+<td>Вставить с перезаписью</td>
+</tr>
+<tr>
+<td><code>d</code></td>
+<td>Удалить в корзину (trash)</td>
+</tr>
+<tr>
+<td><code>D</code></td>
+<td>Удалить навсегда (без корзины)</td>
+</tr>
+<tr>
+<td><code>a</code></td>
+<td>Создать файл/папку</td>
+</tr>
+<tr>
+<td><code>r</code></td>
+<td>Переименовать</td>
+</tr>
+<tr>
+<td><code>o</code></td>
+<td>Открыть приложением по умолчанию</td>
+</tr>
+<tr>
+<td><code>O</code></td>
+<td>Открыть через… (выбор приложения)</td>
+</tr>
+<tr>
+<td><code>.</code></td>
+<td>Показать / скрыть скрытые файлы</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="поиск-и-фильтр">🔍 Поиск и фильтр<a class="headerlink" href="#поиск-и-фильтр" title="Ссылка">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Клавиша</th>
+<th>Действие</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>/</code></td>
+<td>Поиск по именам</td>
+</tr>
+<tr>
+<td><code>f</code></td>
+<td>Фильтр в текущем каталоге</td>
+</tr>
+<tr>
+<td><code>s</code></td>
+<td>Найти (fzf)</td>
+</tr>
+<tr>
+<td><code>S</code></td>
+<td>Найти (zoxide)</td>
+</tr>
+<tr>
+<td><code>z</code></td>
+<td>Сменить каталог через zoxide</td>
+</tr>
+<tr>
+<td><code>Z</code></td>
+<td>Сменить каталог (fzf)</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="вкладки">🗂️ Вкладки<a class="headerlink" href="#вкладки" title="Ссылка">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Клавиша</th>
+<th>Действие</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>t</code></td>
+<td>Новая вкладка</td>
+</tr>
+<tr>
+<td><code>1</code>–<code>9</code></td>
+<td>Перейти на вкладку №1–9</td>
+</tr>
+<tr>
+<td><code>[</code></td>
+<td>Предыдущая вкладка</td>
+</tr>
+<tr>
+<td><code>]</code></td>
+<td>Следующая вкладка</td>
+</tr>
+<tr>
+<td><code>{</code></td>
+<td>Поменять местами с предыдущей</td>
+</tr>
+<tr>
+<td><code>}</code></td>
+<td>Поменять местами со следующей</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="сортировка-префикс">🔧 Сортировка (префикс <code>,</code>)<a class="headerlink" href="#сортировка-префикс" title="Ссылка">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Клавиша</th>
+<th>Действие</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>,m</code></td>
+<td>По дате изменения</td>
+</tr>
+<tr>
+<td><code>,b</code></td>
+<td>По дате создания</td>
+</tr>
+<tr>
+<td><code>,s</code></td>
+<td>По размеру</td>
+</tr>
+<tr>
+<td><code>,n</code></td>
+<td>По имени</td>
+</tr>
+<tr>
+<td><code>,c</code></td>
+<td>Случайно</td>
+</tr>
+<tr>
+<td><code>,d</code></td>
+<td>По каталогу</td>
+</tr>
+<tr>
+<td><code>,dir</code></td>
+<td>Каталоги сначала</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="превью-и-режимы">🖼️ Превью и режимы<a class="headerlink" href="#превью-и-режимы" title="Ссылка">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Клавиша</th>
+<th>Действие</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>;</code></td>
+<td>Включить / выключить превью</td>
+</tr>
+<tr>
+<td><code>Tab</code></td>
+<td>Переключить фокус между панелями</td>
+</tr>
+<tr>
+<td><code>M</code></td>
+<td>Открыть mount-менеджер</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="прочее">🛠️ Прочее<a class="headerlink" href="#прочее" title="Ссылка">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Клавиша</th>
+<th>Действие</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>:</code></td>
+<td>Командная строка</td>
+</tr>
+<tr>
+<td><code>?</code></td>
+<td>Справка (полный список биндингов для текущего контекста)</td>
+</tr>
+<tr>
+<td><code>q</code></td>
+<td>Выйти (с записью cwd в оболочку при наличии wrapper&rsquo;а)</td>
+</tr>
+<tr>
+<td><code>Q</code></td>
+<td>Выйти без смены cwd</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="интеграция-с-оболочкой-shell-wrapper-yy">🐚 Интеграция с оболочкой (shell wrapper <code>yy</code>)<a class="headerlink" href="#интеграция-с-оболочкой-shell-wrapper-yy" title="Ссылка">#</a></h2>
+<p>Yazi умеет менять текущий каталог оболочки при выходе. Для этого нужно
+добавить функцию-обёртку.</p>
+<h3 id="bash-bashrc">Bash (<code>~/.bashrc</code>)<a class="headerlink" href="#bash-bashrc" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">function</span><span class="w"> </span>yy<span class="o">()</span><span class="w"> </span><span class="o">{</span>
+<span class="w">    </span><span class="nb">local</span><span class="w"> </span><span class="nv">tmp</span><span class="o">=</span><span class="s2">&quot;</span><span class="k">$(</span>mktemp<span class="w"> </span>-t<span class="w"> </span><span class="s2">&quot;yazi-cwd.XXXXXX&quot;</span><span class="k">)</span><span class="s2">&quot;</span><span class="w"> </span>cwd
+<span class="w">    </span>yazi<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$@</span><span class="s2">&quot;</span><span class="w"> </span>--cwd-file<span class="o">=</span><span class="s2">&quot;</span><span class="nv">$tmp</span><span class="s2">&quot;</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nv">cwd</span><span class="o">=</span><span class="s2">&quot;</span><span class="k">$(</span><span class="nb">command</span><span class="w"> </span>cat<span class="w"> </span>--<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$tmp</span><span class="s2">&quot;</span><span class="k">)</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="o">[</span><span class="w"> </span>-n<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$cwd</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="o">[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$cwd</span><span class="s2">&quot;</span><span class="w"> </span>!<span class="o">=</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$PWD</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">        </span><span class="nb">builtin</span><span class="w"> </span><span class="nb">cd</span><span class="w"> </span>--<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$cwd</span><span class="s2">&quot;</span>
+<span class="w">    </span><span class="k">fi</span>
+<span class="w">    </span>rm<span class="w"> </span>-f<span class="w"> </span>--<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$tmp</span><span class="s2">&quot;</span>
+<span class="o">}</span>
+</code></pre></div>
+
+<h3 id="zsh-zshrc">Zsh (<code>~/.zshrc</code>)<a class="headerlink" href="#zsh-zshrc" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">function</span><span class="w"> </span>yy<span class="o">()</span><span class="w"> </span><span class="o">{</span>
+<span class="w">    </span><span class="nb">local</span><span class="w"> </span><span class="nv">tmp</span><span class="o">=</span><span class="s2">&quot;</span><span class="k">$(</span>mktemp<span class="w"> </span>-t<span class="w"> </span><span class="s2">&quot;yazi-cwd.XXXXXX&quot;</span><span class="k">)</span><span class="s2">&quot;</span><span class="w"> </span>cwd
+<span class="w">    </span>yazi<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$@</span><span class="s2">&quot;</span><span class="w"> </span>--cwd-file<span class="o">=</span><span class="s2">&quot;</span><span class="nv">$tmp</span><span class="s2">&quot;</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nv">cwd</span><span class="o">=</span><span class="s2">&quot;</span><span class="k">$(</span><span class="nb">command</span><span class="w"> </span>cat<span class="w"> </span>--<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$tmp</span><span class="s2">&quot;</span><span class="k">)</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="o">[</span><span class="w"> </span>-n<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$cwd</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="o">[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$cwd</span><span class="s2">&quot;</span><span class="w"> </span>!<span class="o">=</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$PWD</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">        </span><span class="nb">builtin</span><span class="w"> </span><span class="nb">cd</span><span class="w"> </span>--<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$cwd</span><span class="s2">&quot;</span>
+<span class="w">    </span><span class="k">fi</span>
+<span class="w">    </span>rm<span class="w"> </span>-f<span class="w"> </span>--<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$tmp</span><span class="s2">&quot;</span>
+<span class="o">}</span>
+</code></pre></div>
+
+<h3 id="fish-config-fish-functions-y-fish">Fish (<code>~/.config/fish/functions/y.fish</code>)<a class="headerlink" href="#fish-config-fish-functions-y-fish" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">function</span> y
+    <span class="k">set</span> tmp <span class="o">(</span>mktemp -t <span class="s2">&quot;yazi-cwd.XXXXXX&quot;</span><span class="o">)</span>
+    yazi <span class="nv">$argv</span> --cwd-file<span class="o">=</span><span class="s2">&quot;</span><span class="nv">$tmp</span><span class="s2">&quot;</span>
+    <span class="nb">read</span> -z cwd <span class="o">&lt;</span> <span class="s2">&quot;</span><span class="nv">$tmp</span><span class="s2">&quot;</span>
+    <span class="k">if</span> <span class="k">test</span> -n <span class="s2">&quot;</span><span class="nv">$cwd</span><span class="s2">&quot;</span> -a <span class="s2">&quot;</span><span class="nv">$cwd</span><span class="s2">&quot;</span> !<span class="o">=</span> <span class="s2">&quot;</span><span class="nv">$PWD</span><span class="s2">&quot;</span>
+        <span class="nb">builtin </span><span class="k">cd</span> <span class="s2">&quot;</span><span class="nv">$cwd</span><span class="s2">&quot;</span>
+    <span class="k">end</span>
+    rm -f <span class="s2">&quot;</span><span class="nv">$tmp</span><span class="s2">&quot;</span>
+<span class="k">end</span>
+</code></pre></div>
+
+<h3 id="nushell-config-nushell-config-nu-или-env-nu">Nushell (<code>~/.config/nushell/config.nu</code> или env.nu)<a class="headerlink" href="#nushell-config-nushell-config-nu-или-env-nu" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>def --env yy [...args] {
+    let tmp = (mktemp -t &quot;yazi-cwd.XXXXXX&quot;)
+    yazi ...$args --cwd-file $tmp
+    let cwd = (open $tmp)
+    if $cwd != &quot;&quot; and $cwd != $env.PWD {
+        cd $cwd
+    }
+    rm -fp $tmp
+}
+</code></pre></div>
+
+<p>После запускаете <code>yy</code> вместо <code>yazi</code> — и при выходе shell перейдёт в каталог,
+где вы закончили.</p>
+<hr />
+<h2 id="конфигурация">⚙️ Конфигурация<a class="headerlink" href="#конфигурация" title="Ссылка">#</a></h2>
+<p>Расположение файлов конфигурации: <code>~/.config/yazi/</code></p>
+<table>
+<thead>
+<tr>
+<th>Файл</th>
+<th>Назначение</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>yazi.toml</code></td>
+<td>Основные настройки (поведение, плагины, opener&rsquo;ы)</td>
+</tr>
+<tr>
+<td><code>keymap.toml</code></td>
+<td>Горячие клавиши (переопределение биндингов)</td>
+</tr>
+<tr>
+<td><code>theme.toml</code></td>
+<td>Тема оформления / цвета</td>
+</tr>
+<tr>
+<td><code>init.lua</code></td>
+<td>Lua-инициализация (хуки, кастомные команды)</td>
+</tr>
+</tbody>
+</table>
+<p>Пример своего биндинга в <code>keymap.toml</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="k">[manager]</span>
+<span class="n">prepend_keymap</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="c1"># открыть выделенное в Neovim</span>
+<span class="w">    </span><span class="p">{</span><span class="w"> </span><span class="n">on</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="s2">&quot;T&quot;</span><span class="w"> </span><span class="p">],</span><span class="w"> </span><span class="n">run</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">&quot;shell &#39;nvim </span><span class="se">\&quot;</span><span class="s2">$@</span><span class="se">\&quot;</span><span class="s2">&#39; --confirm&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">desc</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">&quot;Open in nvim&quot;</span><span class="w"> </span><span class="p">},</span>
+<span class="w">    </span><span class="c1"># открыть выделенное в VS Code</span>
+<span class="w">    </span><span class="p">{</span><span class="w"> </span><span class="n">on</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="s2">&quot;C&quot;</span><span class="w"> </span><span class="p">],</span><span class="w"> </span><span class="n">run</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">&quot;shell &#39;code </span><span class="se">\&quot;</span><span class="s2">$@</span><span class="se">\&quot;</span><span class="s2">&#39; --confirm&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">desc</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">&quot;Open in VS Code&quot;</span><span class="w"> </span><span class="p">},</span>
+<span class="p">]</span>
+</code></pre></div>
+
+<hr />
+<h2 id="полезные-советы">💡 Полезные советы<a class="headerlink" href="#полезные-советы" title="Ссылка">#</a></h2>
+<ol>
+<li><strong><code>?</code></strong> — ваш главный помощник: показывает биндинги для текущего контекста
+   (manager, tasks, select, input, help).</li>
+<li><strong>Массовые действия</strong>: выделите файлы через <code>Space</code>, затем <code>y</code>/<code>x</code>/<code>d</code>/<code>p</code>.</li>
+<li><strong>Быстрый переход</strong>: <code>z</code> (zoxide) по частотным каталогам.</li>
+<li><strong>Превью</strong>: yazi умеет показывать изображения, PDF, видео-кадры, исходники
+   с подсветкой. Нужны <code>chafa</code>/<code>ueberzugpp</code> для картинок, <code>ffmpeg</code> для видео.</li>
+<li><strong>Плагины</strong>: см. https://yazi-rs.github.io/docs/plugins</li>
+<li><strong>Обновление темы/конфига на лету</strong>: внутри yazi <code>:ya sync</code> (или просто
+   перезапустите).</li>
+<li><strong>Открыть терминал в текущем каталоге</strong>: добавьте в <code>keymap.toml</code>
+   биндинг <code>shell '$SHELL' --block --confirm</code>.</li>
+</ol>
+<hr />
+<p><em>Сгенерировано как шпаргалка. Версия может отличаться — проверяйте через <code>?</code> в yazi.</em></p>
+    </article>
+    <nav class="pagination">
+      <span></span>
+      <a class="pager next" href="neovim.html">Neovim (LazyVim) →</a>
+    </nav>
+  </main>
+
+  <aside class="toc">
+    <details open>
+      <summary>📑 Оглавление</summary>
+      <div class="toc-list">
+<div class="toc">
+<ul>
+<li><a href="#yazi-шпаргалка-по-горячим-клавишам">📦 Yazi — шпаргалка по горячим клавишам</a><ul>
+<li><a href="#навигация">📂 Навигация</a></li>
+<li><a href="#действия-с-файлами">✏️ Действия с файлами</a></li>
+<li><a href="#поиск-и-фильтр">🔍 Поиск и фильтр</a></li>
+<li><a href="#вкладки">🗂️ Вкладки</a></li>
+<li><a href="#сортировка-префикс">🔧 Сортировка (префикс ,)</a></li>
+<li><a href="#превью-и-режимы">🖼️ Превью и режимы</a></li>
+<li><a href="#прочее">🛠️ Прочее</a></li>
+<li><a href="#интеграция-с-оболочкой-shell-wrapper-yy">🐚 Интеграция с оболочкой (shell wrapper yy)</a><ul>
+<li><a href="#bash-bashrc">Bash (~/.bashrc)</a></li>
+<li><a href="#zsh-zshrc">Zsh (~/.zshrc)</a></li>
+<li><a href="#fish-config-fish-functions-y-fish">Fish (~/.config/fish/functions/y.fish)</a></li>
+<li><a href="#nushell-config-nushell-config-nu-или-env-nu">Nushell (~/.config/nushell/config.nu или env.nu)</a></li>
+</ul>
+</li>
+<li><a href="#конфигурация">⚙️ Конфигурация</a></li>
+<li><a href="#полезные-советы">💡 Полезные советы</a></li>
+</ul>
+</li>
+</ul>
+</div>
+
+      </div>
+    </details>
+  </aside>
+</div>
+
+<button class="back-top" id="backTop" aria-label="Наверх">↑</button>
+
+<script src="assets/search.js"></script>
+<script src="assets/page.js"></script>
+</body>
+</html>

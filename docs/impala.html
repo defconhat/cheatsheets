@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Apache Impala — Шпаргалки</title>
+<link rel="stylesheet" href="assets/style.css">
+<link rel="stylesheet" href="assets/pygments.css">
+</head>
+<body>
+<div class="layout">
+  <aside class="sidebar">
+    <a href="index.html" class="brand">📌 Шпаргалки</a>
+    <nav class="nav">
+<a href="yazi.html" class="nav-item"><span class="nav-ico">📦</span>Yazi</a>
+<a href="neovim.html" class="nav-item"><span class="nav-ico">📘</span>Neovim (LazyVim)</a>
+<a href="niri.html" class="nav-item"><span class="nav-ico">🪟</span>Niri</a>
+<a href="tmux.html" class="nav-item"><span class="nav-ico">🪟</span>Tmux</a>
+<a href="bash.html" class="nav-item"><span class="nav-ico">🐚</span>Bash</a>
+<a href="git.html" class="nav-item"><span class="nav-ico">🔀</span>Git</a>
+<a href="terminal.html" class="nav-item"><span class="nav-ico">🖥️</span>Терминал Linux</a>
+<a href="powershell.html" class="nav-item"><span class="nav-ico">💻</span>PowerShell</a>
+<a href="cmd.html" class="nav-item"><span class="nav-ico">🪟</span>CMD (cmd.exe)</a>
+<a href="python.html" class="nav-item"><span class="nav-ico">🐍</span>Python</a>
+<a href="systemd.html" class="nav-item"><span class="nav-ico">⚙️</span>systemd</a>
+<a href="ssh.html" class="nav-item"><span class="nav-ico">🔐</span>SSH</a>
+<a href="make-cmake.html" class="nav-item"><span class="nav-ico">🔨</span>Make / CMake</a>
+<a href="docker.html" class="nav-item"><span class="nav-ico">🐳</span>Docker</a>
+<a href="pacman.html" class="nav-item"><span class="nav-ico">📦</span>pacman / yay / paru</a>
+<a href="spark.html" class="nav-item"><span class="nav-ico">⚡</span>Apache Spark / PySpark</a>
+<a href="markdown.html" class="nav-item"><span class="nav-ico">📝</span>Markdown</a>
+<a href="regex.html" class="nav-item"><span class="nav-ico">🔍</span>Регулярные выражения</a>
+<a href="jq-json.html" class="nav-item"><span class="nav-ico">🔧</span>jq + JSON</a>
+<a href="awk-sed.html" class="nav-item"><span class="nav-ico">✂️</span>awk / sed</a>
+<a href="airflow.html" class="nav-item"><span class="nav-ico">🌪️</span>Apache Airflow</a>
+<a href="http-curl.html" class="nav-item"><span class="nav-ico">🌐</span>HTTP / curl</a>
+<a href="yaml.html" class="nav-item"><span class="nav-ico">📄</span>YAML</a>
+<a href="vscode.html" class="nav-item"><span class="nav-ico">💻</span>VS Code</a>
+<a href="cron.html" class="nav-item"><span class="nav-ico">⏰</span>cron</a>
+<a href="fzf-zoxide.html" class="nav-item"><span class="nav-ico">🔎</span>fzf + zoxide</a>
+<a href="minikube-k8s.html" class="nav-item"><span class="nav-ico">☸️</span>Minikube / Kubernetes</a>
+<a href="cicd.html" class="nav-item"><span class="nav-ico">🦊</span>GitLab CI / GitHub Actions</a>
+<a href="nginx.html" class="nav-item"><span class="nav-ico">🌐</span>nginx</a>
+<a href="dbt.html" class="nav-item"><span class="nav-ico">🔧</span>dbt</a>
+<a href="kafka.html" class="nav-item"><span class="nav-ico">🐘</span>Apache Kafka</a>
+<a href="prometheus-grafana.html" class="nav-item"><span class="nav-ico">📊</span>Prometheus / Grafana</a>
+<a href="iceberg-nessie.html" class="nav-item"><span class="nav-ico">🧊</span>Iceberg / Nessie</a>
+<a href="impala.html" class="nav-item active"><span class="nav-ico">🐬</span>Apache Impala</a>
+<a href="terraform.html" class="nav-item"><span class="nav-ico">🏗️</span>Terraform</a>
+<a href="linux-internals.html" class="nav-item"><span class="nav-ico">🐧</span>Linux Internals</a>
+<a href="miscellaneous.html" class="nav-item"><span class="nav-ico">🧰</span>Miscellaneous</a>
+<a href="python-automation-libs.html" class="nav-item"><span class="nav-ico">🐍</span>Python: авт-ция (10 libs)</a>
+<a href="eza.html" class="nav-item"><span class="nav-ico">🌈</span>eza</a>
+<a href="dbeaver.html" class="nav-item"><span class="nav-ico">🗄️</span>DBeaver</a>
+<a href="zcode.html" class="nav-item"><span class="nav-ico">🤖</span>ZCode</a>
+<a href="warp.html" class="nav-item"><span class="nav-ico">🚀</span>Warp</a>
+<a href="agentic-ai-dev.html" class="nav-item"><span class="nav-ico">🤝</span>Агентная разработка с ИИ</a>
+    </nav>
+  </aside>
+
+  <main class="content">
+    <article>
+<h1 id="apache-impala-шпаргалка-по-sql-движку">🐬 Apache Impala — шпаргалка по SQL-движку<a class="headerlink" href="#apache-impala-шпаргалка-по-sql-движку" title="Ссылка">#</a></h1>
+<blockquote>
+<p><strong>Apache Impala</strong> — MPP SQL-движок для интерактивной аналитики на HDFS/S3/Kudu.
+Низкая задержка (миллисекунды), высокое параллелизм.
+Документация: https://impala.apache.org</p>
+</blockquote>
+<hr />
+<h2 id="главные-понятия">🔑 Главные понятия<a class="headerlink" href="#главные-понятия" title="Ссылка">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Термин</th>
+<th>Что значит</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>impalad</strong></td>
+<td>Демон на узле (Coordinator + Executor)</td>
+</tr>
+<tr>
+<td><strong>statestored</strong></td>
+<td>Распространение метаданных</td>
+</tr>
+<tr>
+<td><strong>catalogd</strong></td>
+<td>Метаданные каталога (HMS)</td>
+</tr>
+<tr>
+<td><strong>Coordinator</strong></td>
+<td>Узел, принимающий запрос</td>
+</tr>
+<tr>
+<td><strong>Executor</strong></td>
+<td>Узел, выполняющий фрагменты запроса</td>
+</tr>
+<tr>
+<td><strong>HMS</strong></td>
+<td>Hive Metastore (метаданные таблиц)</td>
+</tr>
+<tr>
+<td><strong>HDFS / S3 / Kudu</strong></td>
+<td>Хранилища</td>
+</tr>
+<tr>
+<td><strong>Parquet</strong></td>
+<td>Рекомендуемый формат</td>
+</tr>
+<tr>
+<td><strong>Compute Stats</strong></td>
+<td>Сбор статистики для оптимизатора</td>
+</tr>
+</tbody>
+</table>
+<h3 id="когда-impala-а-когда-spark-hive">Когда Impala, а когда Spark/Hive?<a class="headerlink" href="#когда-impala-а-когда-spark-hive" title="Ссылка">#</a></h3>
+<ul>
+<li><strong>Impala</strong>: интерактивные BI-запросы,.dashboard, низкая задержка (&lt;сек).</li>
+<li><strong>Hive</strong>: тяжёлые batch-задачи, трансформации.</li>
+<li><strong>Spark</strong>: ETL, ML, batch + streaming.</li>
+<li><strong>Presto/Trino</strong>:联邦查询, как Impala, но больше коннекторов.</li>
+</ul>
+<hr />
+<h2 id="запуск-docker-кластер">🚀 Запуск (Docker / кластер)<a class="headerlink" href="#запуск-docker-кластер" title="Ссылка">#</a></h2>
+<div class="highlight"><pre><span></span><code><span class="c1"># docker-compose.yml (упрощённо)</span>
+<span class="nt">services</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">impala-coord</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">apache/impala:latest</span>
+<span class="w">    </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">impalad</span>
+<span class="w">    </span><span class="nt">ports</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;127.0.0.1:21050:21050&quot;</span><span class="w">   </span><span class="c1"># HiveServer2 (JDBC/ODBC)</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;127.0.0.1:25000:25000&quot;</span><span class="w">   </span><span class="c1"># Web UI</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;127.0.0.1:28000:28000&quot;</span><span class="w">   </span><span class="c1"># debug</span>
+<span class="w">    </span><span class="nt">depends_on</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">statestored</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">catalogd</span><span class="p p-Indicator">]</span>
+
+<span class="w">  </span><span class="nt">statestored</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">apache/impala:latest</span>
+<span class="w">    </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">statestored</span>
+<span class="w">    </span><span class="nt">ports</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;127.0.0.1:25010:25010&quot;</span><span class="p p-Indicator">]</span>
+
+<span class="w">  </span><span class="nt">catalogd</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">apache/impala:latest</span>
+<span class="w">    </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">catalogd</span>
+<span class="w">    </span><span class="nt">ports</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;127.0.0.1:25020:25020&quot;</span><span class="p p-Indicator">]</span>
+<span class="w">    </span><span class="nt">depends_on</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">statestored</span><span class="p p-Indicator">]</span>
+</code></pre></div>
+
+<h3 id="подключение">Подключение<a class="headerlink" href="#подключение" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># impala-shell</span>
+impala-shell<span class="w"> </span>-i<span class="w"> </span>localhost<span class="w"> </span>-p<span class="w"> </span><span class="m">21050</span><span class="w"> </span>-d<span class="w"> </span>default
+
+<span class="c1"># С аутентификацией (Kerberos/LDAP)</span>
+impala-shell<span class="w"> </span>-i<span class="w"> </span>host<span class="w"> </span>-u<span class="w"> </span>user<span class="w"> </span>--ldap<span class="w"> </span>--ldap_password_cmd<span class="o">=</span><span class="s2">&quot;...&quot;</span>
+
+<span class="c1"># Через JDBC (DBeaver, Tableau)</span>
+jdbc:hive2://localhost:21050/default
+</code></pre></div>
+
+<hr />
+<h2 id="базовые-операции-hive-совместимый-sql">📝 Базовые операции (Hive-совместимый SQL)<a class="headerlink" href="#базовые-операции-hive-совместимый-sql" title="Ссылка">#</a></h2>
+<h3 id="ddl">DDL<a class="headerlink" href="#ddl" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1">-- Создать БД</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">DATABASE</span><span class="w"> </span><span class="k">IF</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">EXISTS</span><span class="w"> </span><span class="n">mydb</span>
+<span class="k">LOCATION</span><span class="w"> </span><span class="s1">&#39;/user/hive/warehouse/mydb.db&#39;</span><span class="p">;</span>
+
+<span class="c1">-- Создать таблицу (Parquet)</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">mydb</span><span class="p">.</span><span class="n">events</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="n">id</span><span class="w"> </span><span class="nb">BIGINT</span><span class="p">,</span>
+<span class="w">    </span><span class="n">event_time</span><span class="w"> </span><span class="k">TIMESTAMP</span><span class="p">,</span>
+<span class="w">    </span><span class="n">user_id</span><span class="w"> </span><span class="n">STRING</span><span class="p">,</span>
+<span class="w">    </span><span class="n">event_type</span><span class="w"> </span><span class="n">STRING</span><span class="p">,</span>
+<span class="w">    </span><span class="n">amount</span><span class="w"> </span><span class="nb">DECIMAL</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+<span class="p">)</span>
+<span class="n">PARTITIONED</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="p">(</span><span class="n">dt</span><span class="w"> </span><span class="n">STRING</span><span class="p">)</span>
+<span class="n">STORED</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">PARQUET</span><span class="p">;</span>
+
+<span class="c1">-- Внешняя таблица (на существующих файлах)</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">EXTERNAL</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">mydb</span><span class="p">.</span><span class="n">logs</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="n">line</span><span class="w"> </span><span class="n">STRING</span>
+<span class="p">)</span>
+<span class="n">STORED</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">TEXTFILE</span>
+<span class="k">LOCATION</span><span class="w"> </span><span class="s1">&#39;/data/logs/&#39;</span><span class="p">;</span>
+
+<span class="c1">-- Kudu таблица</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">mydb</span><span class="p">.</span><span class="n">users</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="n">id</span><span class="w"> </span><span class="nb">BIGINT</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="p">,</span>
+<span class="w">    </span><span class="n">name</span><span class="w"> </span><span class="n">STRING</span><span class="p">,</span>
+<span class="w">    </span><span class="n">email</span><span class="w"> </span><span class="n">STRING</span>
+<span class="p">)</span>
+<span class="n">STORED</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">KUDU</span>
+<span class="n">TBLPROPERTIES</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="s1">&#39;kudu.num_tablet_replicas&#39;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;3&#39;</span>
+<span class="p">);</span>
+
+<span class="c1">-- Iceberg таблица</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">mydb</span><span class="p">.</span><span class="n">events_iceberg</span><span class="w"> </span><span class="p">(</span><span class="n">id</span><span class="w"> </span><span class="nb">BIGINT</span><span class="p">,</span><span class="w"> </span><span class="p">...)</span>
+<span class="n">STORED</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">ICEBERG</span><span class="p">;</span>
+</code></pre></div>
+
+<h3 id="dml">DML<a class="headerlink" href="#dml" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1">-- Вставка</span>
+<span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">mydb</span><span class="p">.</span><span class="n">events</span><span class="w"> </span><span class="k">VALUES</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;2024-01-01&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;u1&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;click&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">.</span><span class="mi">5</span><span class="p">);</span>
+<span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">mydb</span><span class="p">.</span><span class="n">events</span><span class="w"> </span><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">staging</span><span class="p">.</span><span class="n">events</span><span class="p">;</span>
+
+<span class="c1">-- Перезапись (как INSERT OVERWRITE)</span>
+<span class="k">INSERT</span><span class="w"> </span><span class="n">OVERWRITE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">mydb</span><span class="p">.</span><span class="n">events</span><span class="w"> </span><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">staging</span><span class="p">;</span>
+
+<span class="c1">-- UPDATE / DELETE (только Kudu/Iceberg)</span>
+<span class="k">UPDATE</span><span class="w"> </span><span class="n">mydb</span><span class="p">.</span><span class="n">users</span><span class="w"> </span><span class="k">SET</span><span class="w"> </span><span class="n">email</span><span class="o">=</span><span class="s1">&#39;new@x.com&#39;</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">id</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span>
+<span class="k">DELETE</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">mydb</span><span class="p">.</span><span class="n">users</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">id</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span>
+
+<span class="c1">-- Truncate</span>
+<span class="k">TRUNCATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">mydb</span><span class="p">.</span><span class="n">events</span><span class="p">;</span>
+
+<span class="c1">-- Drop</span>
+<span class="k">DROP</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">mydb</span><span class="p">.</span><span class="n">events</span><span class="p">;</span>
+<span class="k">ALTER</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">mydb</span><span class="p">.</span><span class="n">events</span><span class="w"> </span><span class="k">RENAME</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="n">events_archive</span><span class="p">;</span>
+</code></pre></div>
+
+<hr />
+<h2 id="партиции">📊 Партиции<a class="headerlink" href="#партиции" title="Ссылка">#</a></h2>
+<h3 id="hive-style-partitioning">Hive-style partitioning<a class="headerlink" href="#hive-style-partitioning" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1">-- Статическая партиция</span>
+<span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">events</span><span class="w"> </span><span class="n">PARTITION</span><span class="w"> </span><span class="p">(</span><span class="n">dt</span><span class="o">=</span><span class="s1">&#39;2024-01-15&#39;</span><span class="p">)</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="n">event_time</span><span class="p">,</span><span class="w"> </span><span class="n">user_id</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">staging</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">dt</span><span class="o">=</span><span class="s1">&#39;2024-01-15&#39;</span><span class="p">;</span>
+
+<span class="c1">-- Динамическая (Impala сама распределит)</span>
+<span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">events</span><span class="w"> </span><span class="n">PARTITION</span><span class="w"> </span><span class="p">(</span><span class="n">dt</span><span class="p">)</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="n">event_time</span><span class="p">,</span><span class="w"> </span><span class="n">user_id</span><span class="p">,</span><span class="w"> </span><span class="n">dt</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">staging</span><span class="p">;</span>
+
+<span class="c1">-- Обновить список партиций</span>
+<span class="n">REFRESH</span><span class="w"> </span><span class="n">events</span><span class="p">;</span>
+<span class="n">REFRESH</span><span class="w"> </span><span class="n">events</span><span class="w"> </span><span class="n">PARTITION</span><span class="w"> </span><span class="p">(</span><span class="n">dt</span><span class="o">=</span><span class="s1">&#39;2024-01-15&#39;</span><span class="p">);</span>
+
+<span class="n">INVALIDATE</span><span class="w"> </span><span class="n">METADATA</span><span class="w"> </span><span class="n">events</span><span class="p">;</span><span class="w">          </span><span class="c1">-- полностью перечитать</span>
+<span class="n">INVALIDATE</span><span class="w"> </span><span class="n">METADATA</span><span class="p">;</span><span class="w">                 </span><span class="c1">-- все таблицы</span>
+</code></pre></div>
+
+<h3 id="управление-партициями">Управление партициями<a class="headerlink" href="#управление-партициями" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1">-- Добавить партицию</span>
+<span class="k">ALTER</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">events</span><span class="w"> </span><span class="k">ADD</span><span class="w"> </span><span class="n">PARTITION</span><span class="w"> </span><span class="p">(</span><span class="n">dt</span><span class="o">=</span><span class="s1">&#39;2024-02-01&#39;</span><span class="p">);</span>
+<span class="k">ALTER</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">events</span><span class="w"> </span><span class="k">ADD</span><span class="w"> </span><span class="k">IF</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">EXISTS</span><span class="w"> </span><span class="n">PARTITION</span><span class="w"> </span><span class="p">(</span><span class="n">dt</span><span class="o">=</span><span class="s1">&#39;2024-02-01&#39;</span><span class="p">);</span>
+
+<span class="c1">-- Удалить</span>
+<span class="k">ALTER</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">events</span><span class="w"> </span><span class="k">DROP</span><span class="w"> </span><span class="n">PARTITION</span><span class="w"> </span><span class="p">(</span><span class="n">dt</span><span class="o">=</span><span class="s1">&#39;2024-01-15&#39;</span><span class="p">);</span>
+
+<span class="c1">-- Изменить LOCATION</span>
+<span class="k">ALTER</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">events</span><span class="w"> </span><span class="n">PARTITION</span><span class="w"> </span><span class="p">(</span><span class="n">dt</span><span class="o">=</span><span class="s1">&#39;2024-01-15&#39;</span><span class="p">)</span><span class="w"> </span><span class="k">SET</span><span class="w"> </span><span class="k">LOCATION</span><span class="w"> </span><span class="s1">&#39;/new/path&#39;</span><span class="p">;</span>
+</code></pre></div>
+
+<hr />
+<h2 id="производительность">⚡ Производительность<a class="headerlink" href="#производительность" title="Ссылка">#</a></h2>
+<h3 id="сбор-статистики-критично">Сбор статистики (КРИТИЧНО!)<a class="headerlink" href="#сбор-статистики-критично" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1">-- Полная статистика</span>
+<span class="n">COMPUTE</span><span class="w"> </span><span class="n">STATS</span><span class="w"> </span><span class="n">events</span><span class="p">;</span>
+<span class="n">COMPUTE</span><span class="w"> </span><span class="n">INCREMENTAL</span><span class="w"> </span><span class="n">STATS</span><span class="w"> </span><span class="n">events</span><span class="p">;</span><span class="w">     </span><span class="c1">-- для партиционированных</span>
+
+<span class="c1">-- Столбцовая</span>
+<span class="n">COMPUTE</span><span class="w"> </span><span class="n">STATS</span><span class="w"> </span><span class="n">events</span><span class="w"> </span><span class="p">(</span><span class="n">event_type</span><span class="p">,</span><span class="w"> </span><span class="n">user_id</span><span class="p">);</span>
+
+<span class="c1">-- Удалить статистику</span>
+<span class="k">DROP</span><span class="w"> </span><span class="n">STATS</span><span class="w"> </span><span class="n">events</span><span class="p">;</span>
+<span class="k">DROP</span><span class="w"> </span><span class="n">INCREMENTAL</span><span class="w"> </span><span class="n">STATS</span><span class="w"> </span><span class="n">events</span><span class="p">;</span>
+
+<span class="c1">-- Посмотреть</span>
+<span class="k">SHOW</span><span class="w"> </span><span class="n">STATS</span><span class="w"> </span><span class="n">events</span><span class="p">;</span>
+<span class="k">SHOW</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">STATS</span><span class="w"> </span><span class="n">events</span><span class="p">;</span>
+<span class="k">SHOW</span><span class="w"> </span><span class="n">PARTITION</span><span class="w"> </span><span class="n">STATS</span><span class="w"> </span><span class="n">events</span><span class="w"> </span><span class="n">PARTITION</span><span class="w"> </span><span class="p">(</span><span class="n">dt</span><span class="o">=</span><span class="s1">&#39;2024-01-15&#39;</span><span class="p">);</span>
+</code></pre></div>
+
+<blockquote>
+<p>⚠️ БЕЗ <code>COMPUTE STATS</code> оптимизатор Impala работает вслепую → плохие планы.</p>
+</blockquote>
+<h3 id="analyze-альтернатива">ANALYZE (альтернатива)<a class="headerlink" href="#analyze-альтернатива" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">ANALYZE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">events</span><span class="w"> </span><span class="n">COMPUTE</span><span class="w"> </span><span class="k">STATISTICS</span><span class="p">;</span>
+<span class="k">ANALYZE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">events</span><span class="w"> </span><span class="n">COMPUTE</span><span class="w"> </span><span class="k">STATISTICS</span><span class="w"> </span><span class="k">FOR</span><span class="w"> </span><span class="n">COLUMNS</span><span class="w"> </span><span class="n">event_type</span><span class="p">,</span><span class="w"> </span><span class="n">user_id</span><span class="p">;</span>
+</code></pre></div>
+
+<h3 id="форматы-и-сжатие">Форматы и сжатие<a class="headerlink" href="#форматы-и-сжатие" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1">-- Parquet + Snappy (рекомендуется)</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">events</span><span class="w"> </span><span class="p">(...)</span>
+<span class="n">STORED</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">PARQUET</span>
+<span class="n">TBLPROPERTIES</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;parquet.compression&#39;</span><span class="o">=</span><span class="s1">&#39;SNAPPY&#39;</span><span class="p">);</span>
+
+<span class="c1">-- Другие форматы</span>
+<span class="n">STORED</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">TEXTFILE</span>
+<span class="n">STORED</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">AVRO</span>
+<span class="n">STORED</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">RCFILE</span>
+<span class="n">STORED</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">SEQUENCEFILE</span>
+<span class="n">STORED</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">KUDU</span>
+<span class="n">STORED</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">ICEBERG</span>
+</code></pre></div>
+
+<h3 id="параллелизм-память">Параллелизм / память<a class="headerlink" href="#параллелизм-память" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1">-- Установить параллелизм для запроса</span>
+<span class="k">SET</span><span class="w"> </span><span class="n">EXPLAIN_LEVEL</span><span class="o">=</span><span class="mi">2</span><span class="p">;</span>
+<span class="k">SET</span><span class="w"> </span><span class="n">MEM_LIMIT</span><span class="o">=</span><span class="mi">10</span><span class="k">g</span><span class="p">;</span><span class="w">          </span><span class="c1">-- лимит памяти на узел</span>
+<span class="k">SET</span><span class="w"> </span><span class="n">NUM_SCANNER_THREADS</span><span class="o">=</span><span class="mi">8</span><span class="p">;</span>
+<span class="k">SET</span><span class="w"> </span><span class="n">MT_DOP</span><span class="o">=</span><span class="mi">4</span><span class="p">;</span><span class="w">               </span><span class="c1">-- многопоточный query</span>
+
+<span class="c1">-- Время ожидания</span>
+<span class="k">SET</span><span class="w"> </span><span class="n">QUERY_TIMEOUT_S</span><span class="o">=</span><span class="mi">300</span><span class="p">;</span>
+</code></pre></div>
+
+<hr />
+<h2 id="explain-план-выполнения">🔍 EXPLAIN (план выполнения)<a class="headerlink" href="#explain-план-выполнения" title="Ссылка">#</a></h2>
+<div class="highlight"><pre><span></span><code><span class="k">EXPLAIN</span><span class="w"> </span><span class="k">SELECT</span><span class="w"> </span><span class="k">COUNT</span><span class="p">(</span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">events</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">dt</span><span class="o">=</span><span class="s1">&#39;2024-01-15&#39;</span><span class="p">;</span>
+<span class="k">EXPLAIN</span><span class="w"> </span><span class="k">LEVEL</span><span class="o">=</span><span class="mi">2</span><span class="w"> </span><span class="k">SELECT</span><span class="w"> </span><span class="p">...;</span><span class="w">          </span><span class="c1">-- подробнее</span>
+<span class="k">EXPLAIN</span><span class="w"> </span><span class="k">LEVEL</span><span class="o">=</span><span class="mi">3</span><span class="w"> </span><span class="k">SELECT</span><span class="w"> </span><span class="p">...;</span><span class="w">          </span><span class="c1">-- максимально</span>
+
+<span class="c1">-- Профилирование (после выполнения)</span>
+<span class="n">SUMMARY</span><span class="w"> </span><span class="k">SELECT</span><span class="w"> </span><span class="k">COUNT</span><span class="p">(</span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">events</span><span class="p">;</span>
+<span class="n">PROFILE</span><span class="p">;</span><span class="w">                              </span><span class="c1">-- полный профиль</span>
+</code></pre></div>
+
+<h3 id="что-смотреть-в-profile">Что смотреть в PROFILE<a class="headerlink" href="#что-смотреть-в-profile" title="Ссылка">#</a></h3>
+<ul>
+<li><code>NumPartitions</code> — сколько партиций просканировано.</li>
+<li><code>RowsRead</code> — сколько строк прочитано.</li>
+<li><code>BytesRead</code> — объём данных.</li>
+<li><code>PerHostPeakMemoryUsage</code> — пиковая память.</li>
+<li><code>Fragment</code> timings — что долго.</li>
+</ul>
+<hr />
+<h2 id="функции-sql-impala">📋 Функции SQL (Impala)<a class="headerlink" href="#функции-sql-impala" title="Ссылка">#</a></h2>
+<h3 id="агрегаты">Агрегаты<a class="headerlink" href="#агрегаты" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span>
+<span class="w">    </span><span class="k">COUNT</span><span class="p">(</span><span class="o">*</span><span class="p">),</span>
+<span class="w">    </span><span class="k">COUNT</span><span class="p">(</span><span class="k">DISTINCT</span><span class="w"> </span><span class="n">user_id</span><span class="p">),</span>
+<span class="w">    </span><span class="k">SUM</span><span class="p">(</span><span class="n">amount</span><span class="p">),</span>
+<span class="w">    </span><span class="k">AVG</span><span class="p">(</span><span class="n">amount</span><span class="p">),</span>
+<span class="w">    </span><span class="k">MIN</span><span class="p">(</span><span class="n">event_time</span><span class="p">),</span><span class="w"> </span><span class="k">MAX</span><span class="p">(</span><span class="n">event_time</span><span class="p">),</span>
+<span class="w">    </span><span class="n">STDDEV</span><span class="p">(</span><span class="n">amount</span><span class="p">),</span><span class="w"> </span><span class="n">VARIANCE</span><span class="p">(</span><span class="n">amount</span><span class="p">),</span>
+<span class="w">    </span><span class="n">NDV</span><span class="p">(</span><span class="n">user_id</span><span class="p">)</span><span class="w">                    </span><span class="c1">-- approximate distinct (HyperLogLog)</span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">events</span><span class="p">;</span>
+</code></pre></div>
+
+<h3 id="окна">Окна<a class="headerlink" href="#окна" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span>
+<span class="w">    </span><span class="n">user_id</span><span class="p">,</span>
+<span class="w">    </span><span class="n">event_time</span><span class="p">,</span>
+<span class="w">    </span><span class="n">ROW_NUMBER</span><span class="p">()</span><span class="w"> </span><span class="n">OVER</span><span class="w"> </span><span class="p">(</span><span class="n">PARTITION</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">user_id</span><span class="w"> </span><span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">event_time</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">rn</span><span class="p">,</span>
+<span class="w">    </span><span class="n">LAG</span><span class="p">(</span><span class="n">event_type</span><span class="p">)</span><span class="w"> </span><span class="n">OVER</span><span class="w"> </span><span class="p">(</span><span class="n">PARTITION</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">user_id</span><span class="w"> </span><span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">event_time</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">prev</span><span class="p">,</span>
+<span class="w">    </span><span class="n">LEAD</span><span class="p">(</span><span class="n">event_type</span><span class="p">)</span><span class="w"> </span><span class="n">OVER</span><span class="w"> </span><span class="p">(...)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="k">next</span><span class="p">,</span>
+<span class="w">    </span><span class="k">SUM</span><span class="p">(</span><span class="n">amount</span><span class="p">)</span><span class="w"> </span><span class="n">OVER</span><span class="w"> </span><span class="p">(</span><span class="n">PARTITION</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">user_id</span><span class="w"> </span><span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">event_time</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">cumulative</span><span class="p">,</span>
+<span class="w">    </span><span class="n">FIRST_VALUE</span><span class="p">(</span><span class="n">event_type</span><span class="p">)</span><span class="w"> </span><span class="n">OVER</span><span class="w"> </span><span class="p">(...)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="k">first</span><span class="p">,</span>
+<span class="w">    </span><span class="n">NTILE</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span><span class="w"> </span><span class="n">OVER</span><span class="w"> </span><span class="p">(...)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">quartile</span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">events</span><span class="p">;</span>
+</code></pre></div>
+
+<h3 id="дата-время">Дата/время<a class="headerlink" href="#дата-время" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">YEAR</span><span class="p">(</span><span class="n">date_col</span><span class="p">),</span><span class="w"> </span><span class="k">MONTH</span><span class="p">(</span><span class="n">date_col</span><span class="p">),</span><span class="w"> </span><span class="k">DAY</span><span class="p">(</span><span class="n">date_col</span><span class="p">),</span><span class="w"> </span><span class="n">HOUR</span><span class="p">(</span><span class="n">ts</span><span class="p">)</span>
+<span class="n">DATE_ADD</span><span class="p">(</span><span class="n">date_col</span><span class="p">,</span><span class="w"> </span><span class="nb">INTERVAL</span><span class="w"> </span><span class="mi">7</span><span class="w"> </span><span class="n">DAYS</span><span class="p">)</span>
+<span class="n">DATE_SUB</span><span class="p">(</span><span class="n">date_col</span><span class="p">,</span><span class="w"> </span><span class="nb">INTERVAL</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">MONTH</span><span class="p">)</span>
+<span class="n">DATEDIFF</span><span class="p">(</span><span class="k">end</span><span class="p">,</span><span class="w"> </span><span class="k">start</span><span class="p">)</span>
+<span class="n">UNIX_TIMESTAMP</span><span class="p">(</span><span class="n">ts</span><span class="p">),</span><span class="w"> </span><span class="n">FROM_UNIXTIME</span><span class="p">(</span><span class="n">unixts</span><span class="p">)</span>
+<span class="n">DATE_TRUNC</span><span class="p">(</span><span class="s1">&#39;MONTH&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">ts</span><span class="p">)</span>
+<span class="n">TO_DATE</span><span class="p">(</span><span class="n">ts</span><span class="p">),</span><span class="w"> </span><span class="n">NOW</span><span class="p">(),</span><span class="w"> </span><span class="k">CURRENT_TIMESTAMP</span><span class="p">()</span>
+</code></pre></div>
+
+<h3 id="строковые">Строковые<a class="headerlink" href="#строковые" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="n">SUBSTR</span><span class="p">(</span><span class="n">s</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">),</span><span class="w"> </span><span class="k">LENGTH</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+<span class="k">UPPER</span><span class="p">(</span><span class="n">s</span><span class="p">),</span><span class="w"> </span><span class="k">LOWER</span><span class="p">(</span><span class="n">s</span><span class="p">),</span><span class="w"> </span><span class="n">INITCAP</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+<span class="k">TRIM</span><span class="p">(</span><span class="n">s</span><span class="p">),</span><span class="w"> </span><span class="n">LTRIM</span><span class="p">(</span><span class="n">s</span><span class="p">),</span><span class="w"> </span><span class="n">RTRIM</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+<span class="n">SPLIT_PART</span><span class="p">(</span><span class="n">s</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;,&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span>
+<span class="n">REGEXP_EXTRACT</span><span class="p">(</span><span class="n">s</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;pattern&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span>
+<span class="n">REGEXP_REPLACE</span><span class="p">(</span><span class="n">s</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;pattern&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;repl&#39;</span><span class="p">)</span>
+<span class="n">CONCAT</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">,</span><span class="w"> </span><span class="k">c</span><span class="p">),</span><span class="w"> </span><span class="n">CONCAT_WS</span><span class="p">(</span><span class="s1">&#39;-&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">,</span><span class="w"> </span><span class="k">c</span><span class="p">)</span>
+</code></pre></div>
+
+<h3 id="условные">Условные<a class="headerlink" href="#условные" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">CASE</span><span class="w"> </span><span class="k">WHEN</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="k">THEN</span><span class="w"> </span><span class="s1">&#39;pos&#39;</span><span class="w"> </span><span class="k">WHEN</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="k">THEN</span><span class="w"> </span><span class="s1">&#39;neg&#39;</span><span class="w"> </span><span class="k">ELSE</span><span class="w"> </span><span class="s1">&#39;zero&#39;</span><span class="w"> </span><span class="k">END</span>
+<span class="k">COALESCE</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">,</span><span class="w"> </span><span class="k">c</span><span class="p">)</span><span class="w">         </span><span class="c1">-- первое не-null</span>
+<span class="n">NVL</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">)</span><span class="w">                 </span><span class="c1">-- как COALESCE(a, b)</span>
+<span class="k">NULLIF</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">)</span>
+<span class="n">DECODE</span><span class="p">(</span><span class="n">col</span><span class="p">,</span><span class="w"> </span><span class="n">val1</span><span class="p">,</span><span class="w"> </span><span class="n">res1</span><span class="p">,</span><span class="w"> </span><span class="n">val2</span><span class="p">,</span><span class="w"> </span><span class="n">res2</span><span class="p">,</span><span class="w"> </span><span class="k">default</span><span class="p">)</span>
+</code></pre></div>
+
+<hr />
+<h2 id="полезные-команды">🛠️ Полезные команды<a class="headerlink" href="#полезные-команды" title="Ссылка">#</a></h2>
+<div class="highlight"><pre><span></span><code><span class="k">SHOW</span><span class="w"> </span><span class="n">DATABASES</span><span class="p">;</span>
+<span class="k">SHOW</span><span class="w"> </span><span class="n">TABLES</span><span class="w"> </span><span class="k">IN</span><span class="w"> </span><span class="n">mydb</span><span class="p">;</span>
+<span class="k">SHOW</span><span class="w"> </span><span class="n">TABLES</span><span class="w"> </span><span class="k">IN</span><span class="w"> </span><span class="n">mydb</span><span class="w"> </span><span class="k">LIKE</span><span class="w"> </span><span class="s1">&#39;events*&#39;</span><span class="p">;</span>
+<span class="k">SHOW</span><span class="w"> </span><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">mydb</span><span class="p">.</span><span class="n">events</span><span class="p">;</span>
+<span class="k">DESCRIBE</span><span class="w"> </span><span class="n">mydb</span><span class="p">.</span><span class="n">events</span><span class="p">;</span>
+<span class="k">DESCRIBE</span><span class="w"> </span><span class="n">FORMATTED</span><span class="w"> </span><span class="n">mydb</span><span class="p">.</span><span class="n">events</span><span class="p">;</span>
+<span class="k">DESCRIBE</span><span class="w"> </span><span class="n">mydb</span><span class="p">.</span><span class="n">events</span><span class="p">.</span><span class="n">event_type</span><span class="p">;</span>
+
+<span class="k">SHOW</span><span class="w"> </span><span class="n">FUNCTIONS</span><span class="p">;</span>
+<span class="k">SHOW</span><span class="w"> </span><span class="k">AGGREGATE</span><span class="w"> </span><span class="n">FUNCTIONS</span><span class="p">;</span>
+<span class="k">SHOW</span><span class="w"> </span><span class="n">PARTITIONS</span><span class="w"> </span><span class="n">events</span><span class="p">;</span>
+
+<span class="c1">-- Метаданные</span>
+<span class="k">SHOW</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">STATS</span><span class="w"> </span><span class="n">events</span><span class="p">;</span>
+<span class="k">SHOW</span><span class="w"> </span><span class="k">COLUMN</span><span class="w"> </span><span class="n">STATS</span><span class="w"> </span><span class="n">events</span><span class="p">;</span>
+
+<span class="c1">-- Загрузить/выгрузить</span>
+<span class="k">LOAD</span><span class="w"> </span><span class="k">DATA</span><span class="w"> </span><span class="n">INPATH</span><span class="w"> </span><span class="s1">&#39;/path/file.csv&#39;</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">events</span><span class="p">;</span>
+<span class="k">INSERT</span><span class="w"> </span><span class="n">OVERWRITE</span><span class="w"> </span><span class="n">DIRECTORY</span><span class="w"> </span><span class="s1">&#39;/output&#39;</span><span class="w"> </span><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">events</span><span class="p">;</span>
+
+<span class="c1">-- Файлы таблицы</span>
+<span class="k">SHOW</span><span class="w"> </span><span class="n">FILES</span><span class="w"> </span><span class="k">IN</span><span class="w"> </span><span class="n">events</span><span class="p">;</span>
+<span class="k">SHOW</span><span class="w"> </span><span class="n">FILES</span><span class="w"> </span><span class="k">IN</span><span class="w"> </span><span class="n">events</span><span class="w"> </span><span class="n">PARTITION</span><span class="w"> </span><span class="p">(</span><span class="n">dt</span><span class="o">=</span><span class="s1">&#39;2024-01-15&#39;</span><span class="p">);</span>
+</code></pre></div>
+
+<hr />
+<h2 id="python-impyla-pyhive">🐍 Python (Impyla / PyHive)<a class="headerlink" href="#python-impyla-pyhive" title="Ссылка">#</a></h2>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">impala.dbapi</span><span class="w"> </span><span class="kn">import</span> <span class="n">connect</span>
+
+<span class="n">conn</span> <span class="o">=</span> <span class="n">connect</span><span class="p">(</span><span class="n">host</span><span class="o">=</span><span class="s1">&#39;localhost&#39;</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="mi">21050</span><span class="p">,</span> <span class="n">user</span><span class="o">=</span><span class="s1">&#39;impala&#39;</span><span class="p">)</span>
+<span class="n">cursor</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+
+<span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;USE mydb&#39;</span><span class="p">)</span>
+<span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;SELECT * FROM events LIMIT 10&#39;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">cursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
+
+<span class="c1"># Через pandas</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">impala.dbapi</span><span class="w"> </span><span class="kn">import</span> <span class="n">connect</span>
+
+<span class="n">conn</span> <span class="o">=</span> <span class="n">connect</span><span class="p">(</span><span class="n">host</span><span class="o">=</span><span class="s1">&#39;localhost&#39;</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="mi">21050</span><span class="p">)</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_sql</span><span class="p">(</span><span class="s1">&#39;SELECT * FROM mydb.events LIMIT 1000&#39;</span><span class="p">,</span> <span class="n">conn</span><span class="p">)</span>
+</code></pre></div>
+
+<h3 id="sqlalchemy">SQLAlchemy<a class="headerlink" href="#sqlalchemy" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">sqlalchemy</span><span class="w"> </span><span class="kn">import</span> <span class="n">create_engine</span>
+<span class="n">engine</span> <span class="o">=</span> <span class="n">create_engine</span><span class="p">(</span><span class="s1">&#39;impala://localhost:21050/mydb&#39;</span><span class="p">)</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_sql</span><span class="p">(</span><span class="s1">&#39;SELECT * FROM events&#39;</span><span class="p">,</span> <span class="n">engine</span><span class="p">)</span>
+</code></pre></div>
+
+<hr />
+<h2 id="web-ui">🌐 Web UI<a class="headerlink" href="#web-ui" title="Ссылка">#</a></h2>
+<ul>
+<li><strong>Coordinator UI</strong>: <code>http://host:25000/</code></li>
+<li>Active queries</li>
+<li>Completed queries</li>
+<li>Memory</li>
+<li>Sessions</li>
+<li><strong>Statestored</strong>: <code>http://host:25010/</code></li>
+<li><strong>Catalogd</strong>: <code>http://host:25020/</code></li>
+</ul>
+<p>В UI можно:
+- Смотреть выполняющиеся запросы.
+- Профиль завершённого.
+- Cancel долгого запроса.
+- Лимиты/квоты.</p>
+<hr />
+<h2 id="частые-ошибки">🪤 Частые ошибки<a class="headerlink" href="#частые-ошибки" title="Ссылка">#</a></h2>
+<ol>
+<li><strong>Не собраны STATS</strong> — <code>COMPUTE STATS</code> обязателен после INSERT/LOAD.</li>
+<li><strong><code>REFRESH</code> vs <code>INVALIDATE</code></strong> — REFRESH одной таблицы/партиции, INVALIDATE — всё.</li>
+<li><strong>Маленькие файлы</strong> — Parquet любит большие файлы (128MB+).</li>
+<li><strong>Много мелких партиций</strong> — overhead.</li>
+<li><strong>Нет partition pruning</strong> — фильтруйте по partition-колонке.</li>
+<li><strong>SELECT * на больших таблицах</strong> — миллиарды строк переносятся.</li>
+<li><strong>Курсоры в Python</strong> — <code>fetchall()</code> на больших данных → OOM.</li>
+<li><strong><code>SELECT DISTINCT</code></strong> — медленнее, чем <code>GROUP BY</code>.</li>
+<li><strong>Не настроен MEM_LIMIT</strong> — OOM на сложных JOIN.</li>
+<li><strong>Kudu без primary key</strong> — медленные UPDATE.</li>
+</ol>
+<hr />
+<h2 id="impala-vs-presto-trino-vs-spark-sql">🆚 Impala vs Presto/Trino vs Spark SQL<a class="headerlink" href="#impala-vs-presto-trino-vs-spark-sql" title="Ссылка">#</a></h2>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Impala</th>
+<th>Presto/Trino</th>
+<th>Spark SQL</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Latency</td>
+<td>⚡⚡⚡ (мс)</td>
+<td>⚡⚡</td>
+<td>⚡</td>
+</tr>
+<tr>
+<td>Throughput</td>
+<td>Высокий</td>
+<td>Средний</td>
+<td>Высокий</td>
+</tr>
+<tr>
+<td>Формат</td>
+<td>Parquet/Avro/Text/Kudu</td>
+<td>Любой</td>
+<td>Parquet/Avro</td>
+</tr>
+<tr>
+<td>HMS</td>
+<td>Нативно</td>
+<td>Опционально</td>
+<td>Опционально</td>
+</tr>
+<tr>
+<td>Memory</td>
+<td>Native C++</td>
+<td>JVM</td>
+<td>JVM</td>
+</tr>
+<tr>
+<td>Кластер</td>
+<td>HDFS-нативный</td>
+<td>Universal</td>
+<td>Universal</td>
+</tr>
+<tr>
+<td>Best for</td>
+<td>BI на Hadoop</td>
+<td>Federated</td>
+<td>ETL + BI</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="полезные-ссылки">🔗 Полезные ссылки<a class="headerlink" href="#полезные-ссылки" title="Ссылка">#</a></h2>
+<ul>
+<li>Документация: https://impala.apache.org/docs.html</li>
+<li>SQL Reference: https://impala.apache.org/docs/impala/latest/langref</li>
+<li>Impyla (Python): https://github.com/cloudera/impyla</li>
+<li>Tuning: https://impala.apache.org/docs/impala/latest/topics/impala_performance.html</li>
+<li>Awesome Impala: https://github.com/mulia/awesome-impala</li>
+</ul>
+<hr />
+<h2 id="полезные-советы">💡 Полезные советы<a class="headerlink" href="#полезные-советы" title="Ссылка">#</a></h2>
+<ol>
+<li><strong><code>COMPUTE STATS</code></strong> — после каждой загрузки данных.</li>
+<li><strong>Parquet + Snappy</strong> — лучший формат для Impala.</li>
+<li><strong>Partition pruning</strong> — фильтруйте по partition-колонке.</li>
+<li><strong><code>REFRESH</code></strong> после INSERT из других систем (Hive/Spark).</li>
+<li><strong><code>INVALIDATE METADATA</code></strong> — если менялась структура.</li>
+<li><strong>Memory limits</strong> — <code>SET MEM_LIMIT=10g;</code> для тяжёлых.</li>
+<li><strong><code>NDV()</code> вместо <code>COUNT(DISTINCT)</code></strong> — быстрее (approx).</li>
+<li><strong><code>LIMIT</code></strong> — для exploration.</li>
+<li><strong><code>EXPLAIN</code></strong> — смотрите partition pruning.</li>
+<li><strong><code>PROFILE</code></strong> — для тормозных запросов.</li>
+<li><strong>Кэш metadata</strong> — Coordinator кэширует, не паникуйте при «медленном старте».</li>
+<li><strong>Kudu</strong> — для часто обновляемых таблиц.</li>
+<li><strong>Iceberg</strong> — для time travel и эволюции схемы.</li>
+<li><strong>JDBC-пул</strong> — в BI-инструментах (Tableau, DBeaver).</li>
+<li><strong><code>impala-shell -f script.sql</code></strong> — для запуска SQL-файлов.</li>
+</ol>
+<hr />
+<p><em>Сгенерировано как шпаргалка. Impala — для low-latency SQL на Hadoop —
+углубляйтесь через https://impala.apache.org/docs.html</em></p>
+    </article>
+    <nav class="pagination">
+      <a class="pager prev" href="iceberg-nessie.html">← Iceberg / Nessie</a>
+      <a class="pager next" href="terraform.html">Terraform →</a>
+    </nav>
+  </main>
+
+  <aside class="toc">
+    <details open>
+      <summary>📑 Оглавление</summary>
+      <div class="toc-list">
+<div class="toc">
+<ul>
+<li><a href="#apache-impala-шпаргалка-по-sql-движку">🐬 Apache Impala — шпаргалка по SQL-движку</a><ul>
+<li><a href="#главные-понятия">🔑 Главные понятия</a><ul>
+<li><a href="#когда-impala-а-когда-spark-hive">Когда Impala, а когда Spark/Hive?</a></li>
+</ul>
+</li>
+<li><a href="#запуск-docker-кластер">🚀 Запуск (Docker / кластер)</a><ul>
+<li><a href="#подключение">Подключение</a></li>
+</ul>
+</li>
+<li><a href="#базовые-операции-hive-совместимый-sql">📝 Базовые операции (Hive-совместимый SQL)</a><ul>
+<li><a href="#ddl">DDL</a></li>
+<li><a href="#dml">DML</a></li>
+</ul>
+</li>
+<li><a href="#партиции">📊 Партиции</a><ul>
+<li><a href="#hive-style-partitioning">Hive-style partitioning</a></li>
+<li><a href="#управление-партициями">Управление партициями</a></li>
+</ul>
+</li>
+<li><a href="#производительность">⚡ Производительность</a><ul>
+<li><a href="#сбор-статистики-критично">Сбор статистики (КРИТИЧНО!)</a></li>
+<li><a href="#analyze-альтернатива">ANALYZE (альтернатива)</a></li>
+<li><a href="#форматы-и-сжатие">Форматы и сжатие</a></li>
+<li><a href="#параллелизм-память">Параллелизм / память</a></li>
+</ul>
+</li>
+<li><a href="#explain-план-выполнения">🔍 EXPLAIN (план выполнения)</a><ul>
+<li><a href="#что-смотреть-в-profile">Что смотреть в PROFILE</a></li>
+</ul>
+</li>
+<li><a href="#функции-sql-impala">📋 Функции SQL (Impala)</a><ul>
+<li><a href="#агрегаты">Агрегаты</a></li>
+<li><a href="#окна">Окна</a></li>
+<li><a href="#дата-время">Дата/время</a></li>
+<li><a href="#строковые">Строковые</a></li>
+<li><a href="#условные">Условные</a></li>
+</ul>
+</li>
+<li><a href="#полезные-команды">🛠️ Полезные команды</a></li>
+<li><a href="#python-impyla-pyhive">🐍 Python (Impyla / PyHive)</a><ul>
+<li><a href="#sqlalchemy">SQLAlchemy</a></li>
+</ul>
+</li>
+<li><a href="#web-ui">🌐 Web UI</a></li>
+<li><a href="#частые-ошибки">🪤 Частые ошибки</a></li>
+<li><a href="#impala-vs-presto-trino-vs-spark-sql">🆚 Impala vs Presto/Trino vs Spark SQL</a></li>
+<li><a href="#полезные-ссылки">🔗 Полезные ссылки</a></li>
+<li><a href="#полезные-советы">💡 Полезные советы</a></li>
+</ul>
+</li>
+</ul>
+</div>
+
+      </div>
+    </details>
+  </aside>
+</div>
+
+<button class="back-top" id="backTop" aria-label="Наверх">↑</button>
+
+<script src="assets/search.js"></script>
+<script src="assets/page.js"></script>
+</body>
+</html>

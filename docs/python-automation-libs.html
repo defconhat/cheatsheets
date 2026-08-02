@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Python: авт-ция (10 libs) — Шпаргалки</title>
+<link rel="stylesheet" href="assets/style.css">
+<link rel="stylesheet" href="assets/pygments.css">
+</head>
+<body>
+<div class="layout">
+  <aside class="sidebar">
+    <a href="index.html" class="brand">📌 Шпаргалки</a>
+    <nav class="nav">
+<a href="yazi.html" class="nav-item"><span class="nav-ico">📦</span>Yazi</a>
+<a href="neovim.html" class="nav-item"><span class="nav-ico">📘</span>Neovim (LazyVim)</a>
+<a href="niri.html" class="nav-item"><span class="nav-ico">🪟</span>Niri</a>
+<a href="tmux.html" class="nav-item"><span class="nav-ico">🪟</span>Tmux</a>
+<a href="bash.html" class="nav-item"><span class="nav-ico">🐚</span>Bash</a>
+<a href="git.html" class="nav-item"><span class="nav-ico">🔀</span>Git</a>
+<a href="terminal.html" class="nav-item"><span class="nav-ico">🖥️</span>Терминал Linux</a>
+<a href="powershell.html" class="nav-item"><span class="nav-ico">💻</span>PowerShell</a>
+<a href="cmd.html" class="nav-item"><span class="nav-ico">🪟</span>CMD (cmd.exe)</a>
+<a href="python.html" class="nav-item"><span class="nav-ico">🐍</span>Python</a>
+<a href="systemd.html" class="nav-item"><span class="nav-ico">⚙️</span>systemd</a>
+<a href="ssh.html" class="nav-item"><span class="nav-ico">🔐</span>SSH</a>
+<a href="make-cmake.html" class="nav-item"><span class="nav-ico">🔨</span>Make / CMake</a>
+<a href="docker.html" class="nav-item"><span class="nav-ico">🐳</span>Docker</a>
+<a href="pacman.html" class="nav-item"><span class="nav-ico">📦</span>pacman / yay / paru</a>
+<a href="spark.html" class="nav-item"><span class="nav-ico">⚡</span>Apache Spark / PySpark</a>
+<a href="markdown.html" class="nav-item"><span class="nav-ico">📝</span>Markdown</a>
+<a href="regex.html" class="nav-item"><span class="nav-ico">🔍</span>Регулярные выражения</a>
+<a href="jq-json.html" class="nav-item"><span class="nav-ico">🔧</span>jq + JSON</a>
+<a href="awk-sed.html" class="nav-item"><span class="nav-ico">✂️</span>awk / sed</a>
+<a href="airflow.html" class="nav-item"><span class="nav-ico">🌪️</span>Apache Airflow</a>
+<a href="http-curl.html" class="nav-item"><span class="nav-ico">🌐</span>HTTP / curl</a>
+<a href="yaml.html" class="nav-item"><span class="nav-ico">📄</span>YAML</a>
+<a href="vscode.html" class="nav-item"><span class="nav-ico">💻</span>VS Code</a>
+<a href="cron.html" class="nav-item"><span class="nav-ico">⏰</span>cron</a>
+<a href="fzf-zoxide.html" class="nav-item"><span class="nav-ico">🔎</span>fzf + zoxide</a>
+<a href="minikube-k8s.html" class="nav-item"><span class="nav-ico">☸️</span>Minikube / Kubernetes</a>
+<a href="cicd.html" class="nav-item"><span class="nav-ico">🦊</span>GitLab CI / GitHub Actions</a>
+<a href="nginx.html" class="nav-item"><span class="nav-ico">🌐</span>nginx</a>
+<a href="dbt.html" class="nav-item"><span class="nav-ico">🔧</span>dbt</a>
+<a href="kafka.html" class="nav-item"><span class="nav-ico">🐘</span>Apache Kafka</a>
+<a href="prometheus-grafana.html" class="nav-item"><span class="nav-ico">📊</span>Prometheus / Grafana</a>
+<a href="iceberg-nessie.html" class="nav-item"><span class="nav-ico">🧊</span>Iceberg / Nessie</a>
+<a href="impala.html" class="nav-item"><span class="nav-ico">🐬</span>Apache Impala</a>
+<a href="terraform.html" class="nav-item"><span class="nav-ico">🏗️</span>Terraform</a>
+<a href="linux-internals.html" class="nav-item"><span class="nav-ico">🐧</span>Linux Internals</a>
+<a href="miscellaneous.html" class="nav-item"><span class="nav-ico">🧰</span>Miscellaneous</a>
+<a href="python-automation-libs.html" class="nav-item active"><span class="nav-ico">🐍</span>Python: авт-ция (10 libs)</a>
+<a href="eza.html" class="nav-item"><span class="nav-ico">🌈</span>eza</a>
+<a href="dbeaver.html" class="nav-item"><span class="nav-ico">🗄️</span>DBeaver</a>
+<a href="zcode.html" class="nav-item"><span class="nav-ico">🤖</span>ZCode</a>
+<a href="warp.html" class="nav-item"><span class="nav-ico">🚀</span>Warp</a>
+<a href="agentic-ai-dev.html" class="nav-item"><span class="nav-ico">🤝</span>Агентная разработка с ИИ</a>
+    </nav>
+  </aside>
+
+  <main class="content">
+    <article>
+<h1 id="python-10-библиотек-для-автоматизации">🐍 Python: 10 библиотек для автоматизации<a class="headerlink" href="#python-10-библиотек-для-автоматизации" title="Ссылка">#</a></h1>
+<blockquote>
+<p>Компактные утилиты, которые экономят время при написании скриптов: интерфейс, системная автоматизация, работа с данными и архитектурой. Источник: <a href="https://habr.com/ru/articles/983158/">Хабр</a>.</p>
+</blockquote>
+<p><strong>Идея:</strong> Python известен концепцией «batteries included», но стандартные решения иногда громоздки. Эти 10 небольших библиотек делают интерфейс понятнее, сисадминство — проще, а архитектуру — надёжнее.</p>
+<hr />
+<h2 id="часть-1-интерфейс-и-визуализация">Часть 1. Интерфейс и визуализация<a class="headerlink" href="#часть-1-интерфейс-и-визуализация" title="Ссылка">#</a></h2>
+<p>Признак профессионального скрипта — обратная связь. Если процесс долгий, без индикации непонятно: завис или работает.</p>
+<h3 id="1-tqdm-прогресс-бары-которые-не-бесят">1. tqdm — прогресс-бары, которые не бесят<a class="headerlink" href="#1-tqdm-прогресс-бары-которые-не-бесят" title="Ссылка">#</a></h3>
+<p>Название с арабского — «прогресс». Простой способ добавить индикатор в любой цикл.</p>
+<p><strong>Проблема:</strong> непонимание, сколько займёт обработка большого массива данных.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">tqdm</span><span class="w"> </span><span class="kn">import</span> <span class="n">tqdm</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+
+<span class="c1"># Оборачиваем итератор</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">100</span><span class="p">),</span> <span class="n">desc</span><span class="o">=</span><span class="s2">&quot;Обработка файлов&quot;</span><span class="p">):</span>
+    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.1</span><span class="p">)</span>  <span class="c1"># Имитация работы</span>
+</code></pre></div>
+
+<p><strong>Плюсы:</strong> почти не нагружает систему, сама считает скорость и примерное время завершения, поддерживает вложенность.</p>
+<div class="highlight"><pre><span></span><code>pip<span class="w"> </span>install<span class="w"> </span>tqdm
+</code></pre></div>
+
+<hr />
+<h3 id="2-rich-терминал-как-искусство">2. Rich — терминал как искусство<a class="headerlink" href="#2-rich-терминал-как-искусство" title="Ссылка">#</a></h3>
+<p>Если <code>tqdm</code> отвечает только за полоски прогресса, то <strong>Rich</strong> берёт на себя вообще всё оформление консоли.</p>
+<p><strong>Проблема:</strong> чтение сплошного потока текста из <code>print()</code> утомляет, данные сливаются.</p>
+<p><strong>Возможности:</strong> таблицы, подсветка синтаксиса (JSON, SQL и др.), цветные логи.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">rich.console</span><span class="w"> </span><span class="kn">import</span> <span class="n">Console</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">rich.table</span><span class="w"> </span><span class="kn">import</span> <span class="n">Table</span>
+
+<span class="n">console</span> <span class="o">=</span> <span class="n">Console</span><span class="p">()</span>
+<span class="n">table</span> <span class="o">=</span> <span class="n">Table</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s2">&quot;Отчет по автоматизации&quot;</span><span class="p">)</span>
+
+<span class="n">table</span><span class="o">.</span><span class="n">add_column</span><span class="p">(</span><span class="s2">&quot;Задача&quot;</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="s2">&quot;cyan&quot;</span><span class="p">,</span> <span class="n">no_wrap</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">table</span><span class="o">.</span><span class="n">add_column</span><span class="p">(</span><span class="s2">&quot;Статус&quot;</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="s2">&quot;magenta&quot;</span><span class="p">)</span>
+<span class="n">table</span><span class="o">.</span><span class="n">add_column</span><span class="p">(</span><span class="s2">&quot;Время&quot;</span><span class="p">,</span> <span class="n">justify</span><span class="o">=</span><span class="s2">&quot;right&quot;</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="s2">&quot;green&quot;</span><span class="p">)</span>
+
+<span class="n">table</span><span class="o">.</span><span class="n">add_row</span><span class="p">(</span><span class="s2">&quot;Парсинг логов&quot;</span><span class="p">,</span> <span class="s2">&quot;✅ Успешно&quot;</span><span class="p">,</span> <span class="s2">&quot;1.2s&quot;</span><span class="p">)</span>
+<span class="n">table</span><span class="o">.</span><span class="n">add_row</span><span class="p">(</span><span class="s2">&quot;Очистка кэша&quot;</span><span class="p">,</span> <span class="s2">&quot;✅ Успешно&quot;</span><span class="p">,</span> <span class="s2">&quot;0.05s&quot;</span><span class="p">)</span>
+<span class="n">table</span><span class="o">.</span><span class="n">add_row</span><span class="p">(</span><span class="s2">&quot;Бэкап БД&quot;</span><span class="p">,</span> <span class="s2">&quot;❌ Ошибка&quot;</span><span class="p">,</span> <span class="s2">&quot;—&quot;</span><span class="p">)</span>
+
+<span class="n">console</span><span class="o">.</span><span class="n">print</span><span class="p">(</span><span class="n">table</span><span class="p">)</span>
+</code></pre></div>
+
+<p>В терминале это отобразится аккуратной выровненной таблицей с цветами.</p>
+<div class="highlight"><pre><span></span><code>pip<span class="w"> </span>install<span class="w"> </span>rich
+</code></pre></div>
+
+<hr />
+<h3 id="3-humanize-машинные-данные-человекочитаемые">3. Humanize — машинные данные → человекочитаемые<a class="headerlink" href="#3-humanize-машинные-данные-человекочитаемые" title="Ссылка">#</a></h3>
+<p>Переводит машинные величины (байты, секунды, числа) в понятный формат.</p>
+<p><strong>Проблема:</strong> скрипт выводит сырые данные вроде «Осталось 14567 секунд».</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">humanize</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">datetime</span>
+
+<span class="c1"># Конвертация размера</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">humanize</span><span class="o">.</span><span class="n">naturalsize</span><span class="p">(</span><span class="mi">1024</span> <span class="o">*</span> <span class="mi">1024</span> <span class="o">*</span> <span class="mi">50</span><span class="p">))</span>
+<span class="c1"># Результат: 50.0 MB</span>
+
+<span class="c1"># Конвертация времени</span>
+<span class="n">delta</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">timedelta</span><span class="p">(</span><span class="n">seconds</span><span class="o">=</span><span class="mi">3665</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">humanize</span><span class="o">.</span><span class="n">naturaldelta</span><span class="p">(</span><span class="n">delta</span><span class="p">))</span>
+<span class="c1"># Результат: an hour</span>
+
+<span class="c1"># Работа с числами</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">humanize</span><span class="o">.</span><span class="n">apnumber</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+<span class="c1"># Результат: one</span>
+</code></pre></div>
+
+<p><strong>Особенность:</strong> поддерживает локализацию (i18n) для перевода на нужный язык.</p>
+<div class="highlight"><pre><span></span><code>pip<span class="w"> </span>install<span class="w"> </span>humanize
+</code></pre></div>
+
+<hr />
+<h2 id="часть-2-системная-автоматизация-и-скриптинг">Часть 2. Системная автоматизация и скриптинг<a class="headerlink" href="#часть-2-системная-автоматизация-и-скриптинг" title="Ссылка">#</a></h2>
+<p>Скрипты часто выступают связующим звеном между программами. Инструменты для надёжного «клея».</p>
+<h3 id="4-sh-замена-subprocess-для-лаконичности">4. sh — замена subprocess для лаконичности<a class="headerlink" href="#4-sh-замена-subprocess-для-лаконичности" title="Ссылка">#</a></h3>
+<p>Синтаксис <code>subprocess</code> бывает избыточен. Библиотека <strong>sh</strong> позволяет вызывать консольные утилиты как функции Python.</p>
+<p><strong>Проблема:</strong> громоздкий код для запуска внешних процессов.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">sh</span>
+
+<span class="c1"># Вызов команды как функции</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">sh</span><span class="o">.</span><span class="n">ls</span><span class="p">(</span><span class="s2">&quot;-l&quot;</span><span class="p">,</span> <span class="s2">&quot;/usr/bin&quot;</span><span class="p">))</span>
+
+<span class="c1"># Канал (pipe): ls /etc | grep python</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">sh</span><span class="o">.</span><span class="n">grep</span><span class="p">(</span><span class="n">sh</span><span class="o">.</span><span class="n">ls</span><span class="p">(</span><span class="s2">&quot;/etc&quot;</span><span class="p">),</span> <span class="s2">&quot;python&quot;</span><span class="p">))</span>
+
+<span class="c1"># Работа с git</span>
+<span class="n">sh</span><span class="o">.</span><span class="n">git</span><span class="o">.</span><span class="n">checkout</span><span class="p">(</span><span class="s2">&quot;master&quot;</span><span class="p">)</span>
+<span class="n">sh</span><span class="o">.</span><span class="n">git</span><span class="o">.</span><span class="n">pull</span><span class="p">()</span>
+</code></pre></div>
+
+<p><strong>Плюсы:</strong> любая команда из <code>$PATH</code> доступна как функция; при ошибке выбрасывается исключение. Работает преимущественно на UNIX.</p>
+<div class="highlight"><pre><span></span><code>pip<span class="w"> </span>install<span class="w"> </span>sh
+</code></pre></div>
+
+<hr />
+<h3 id="5-watchdog-слежка-за-папкой-без-polling">5. Watchdog — слежка за папкой без polling<a class="headerlink" href="#5-watchdog-слежка-за-папкой-без-polling" title="Ссылка">#</a></h3>
+<p>Выполнять действие при появлении файла в директории — частая задача. Вместо постоянного опроса ФС <strong>Watchdog</strong> использует события ОС для мгновенной реакции.</p>
+<p><strong>Проблема:</strong> неэффективный polling директорий.</p>
+<p><strong>Сценарий:</strong> автоматическая сортировка скачанных файлов.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">watchdog.observers</span><span class="w"> </span><span class="kn">import</span> <span class="n">Observer</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">watchdog.events</span><span class="w"> </span><span class="kn">import</span> <span class="n">FileSystemEventHandler</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">MyHandler</span><span class="p">(</span><span class="n">FileSystemEventHandler</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">on_created</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Обнаружен новый файл: </span><span class="si">{</span><span class="n">event</span><span class="o">.</span><span class="n">src_path</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">observer</span> <span class="o">=</span> <span class="n">Observer</span><span class="p">()</span>
+<span class="n">observer</span><span class="o">.</span><span class="n">schedule</span><span class="p">(</span><span class="n">MyHandler</span><span class="p">(),</span> <span class="n">path</span><span class="o">=</span><span class="s1">&#39;./my_folder&#39;</span><span class="p">,</span> <span class="n">recursive</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">observer</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+        <span class="k">pass</span>  <span class="c1"># Фоновая работа</span>
+<span class="k">except</span> <span class="ne">KeyboardInterrupt</span><span class="p">:</span>
+    <span class="n">observer</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+</code></pre></div>
+
+<div class="highlight"><pre><span></span><code>pip<span class="w"> </span>install<span class="w"> </span>watchdog
+</code></pre></div>
+
+<hr />
+<h3 id="6-schedule-планировщик-с-человеческим-лицом">6. Schedule — планировщик с человеческим лицом<a class="headerlink" href="#6-schedule-планировщик-с-человеческим-лицом" title="Ссылка">#</a></h3>
+<p>Для запуска задач по расписанию не обязательно тащить Crontab. <strong>Schedule</strong> настраивает периодичность прямо в коде.</p>
+<p><strong>Проблема:</strong> сложность настройки периодических задач.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">schedule</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">job</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Делаю бэкап базы данных...&quot;</span><span class="p">)</span>
+
+<span class="c1"># Интуитивный синтаксис</span>
+<span class="n">schedule</span><span class="o">.</span><span class="n">every</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span><span class="o">.</span><span class="n">minutes</span><span class="o">.</span><span class="n">do</span><span class="p">(</span><span class="n">job</span><span class="p">)</span>
+<span class="n">schedule</span><span class="o">.</span><span class="n">every</span><span class="p">()</span><span class="o">.</span><span class="n">hour</span><span class="o">.</span><span class="n">do</span><span class="p">(</span><span class="n">job</span><span class="p">)</span>
+<span class="n">schedule</span><span class="o">.</span><span class="n">every</span><span class="p">()</span><span class="o">.</span><span class="n">day</span><span class="o">.</span><span class="n">at</span><span class="p">(</span><span class="s2">&quot;10:30&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">do</span><span class="p">(</span><span class="n">job</span><span class="p">)</span>
+<span class="n">schedule</span><span class="o">.</span><span class="n">every</span><span class="p">()</span><span class="o">.</span><span class="n">monday</span><span class="o">.</span><span class="n">do</span><span class="p">(</span><span class="n">job</span><span class="p">)</span>
+<span class="n">schedule</span><span class="o">.</span><span class="n">every</span><span class="p">()</span><span class="o">.</span><span class="n">wednesday</span><span class="o">.</span><span class="n">at</span><span class="p">(</span><span class="s2">&quot;13:15&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">do</span><span class="p">(</span><span class="n">job</span><span class="p">)</span>
+
+<span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+    <span class="n">schedule</span><span class="o">.</span><span class="n">run_pending</span><span class="p">()</span>
+    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</code></pre></div>
+
+<p><strong>Плюсы:</strong> код легко читается, нет тяжёлых зависимостей как в Celery.</p>
+<div class="highlight"><pre><span></span><code>pip<span class="w"> </span>install<span class="w"> </span>schedule
+</code></pre></div>
+
+<hr />
+<h2 id="часть-3-работа-с-данными-и-архитектурой">Часть 3. Работа с данными и архитектурой<a class="headerlink" href="#часть-3-работа-с-данными-и-архитектурой" title="Ссылка">#</a></h2>
+<p>С ростом скрипта важнее становятся безопасность кода и его чистота.</p>
+<h3 id="7-python-dotenv-прощай-хардкод">7. python-dotenv — прощай, хардкод<a class="headerlink" href="#7-python-dotenv-прощай-хардкод" title="Ссылка">#</a></h3>
+<p>Хранить пароли/токены в коде — плохая практика. <strong>python-dotenv</strong> загружает секреты из локального файла <code>.env</code>.</p>
+<p><strong>Проблема:</strong> случайная утечка ключей в систему контроля версий.</p>
+<blockquote>
+<p>⚠️ <strong>Важно:</strong> файл <code>.env</code> обязательно добавить в <code>.gitignore</code>.</p>
+</blockquote>
+<p>Содержимое <code>.env</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="na">API_KEY</span><span class="o">=</span><span class="s">your_secret_token_here</span>
+<span class="na">DB_URL</span><span class="o">=</span><span class="s">postgresql://user:password@localhost/db</span>
+</code></pre></div>
+
+<p>Использование:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">dotenv</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_dotenv</span>
+
+<span class="n">load_dotenv</span><span class="p">()</span>  <span class="c1"># Загрузка файла</span>
+
+<span class="n">api_key</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s2">&quot;API_KEY&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Ключ загружен: </span><span class="si">{</span><span class="n">api_key</span><span class="p">[:</span><span class="mi">4</span><span class="p">]</span><span class="si">}</span><span class="s2">...&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+<div class="highlight"><pre><span></span><code>pip<span class="w"> </span>install<span class="w"> </span>python-dotenv
+</code></pre></div>
+
+<hr />
+<h3 id="8-beartype-проверка-типов-на-скорости-света">8. Beartype — проверка типов на скорости света<a class="headerlink" href="#8-beartype-проверка-типов-на-скорости-света" title="Ссылка">#</a></h3>
+<p>Аннотации типов в Python по умолчанию <strong>не проверяются</strong> во время выполнения. <strong>Beartype</strong> добавляет такую проверку без существенной потери производительности.</p>
+<p><strong>Проблема:</strong> ошибки из-за передачи в функции данных неверных типов.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">beartype</span><span class="w"> </span><span class="kn">import</span> <span class="n">beartype</span>
+
+<span class="nd">@beartype</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">process_data</span><span class="p">(</span><span class="n">count</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">names</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Обрабатываю </span><span class="si">{</span><span class="n">count</span><span class="si">}</span><span class="s2"> имен&quot;</span><span class="p">)</span>
+
+<span class="n">process_data</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;Alice&quot;</span><span class="p">,</span> <span class="s2">&quot;Bob&quot;</span><span class="p">])</span>   <span class="c1"># Успешно</span>
+<span class="n">process_data</span><span class="p">(</span><span class="s2">&quot;5&quot;</span><span class="p">,</span> <span class="s2">&quot;Alice&quot;</span><span class="p">)</span>          <span class="c1"># BeartypeCallHintViolationError</span>
+</code></pre></div>
+
+<div class="highlight"><pre><span></span><code>pip<span class="w"> </span>install<span class="w"> </span>beartype
+</code></pre></div>
+
+<hr />
+<h3 id="9-loguru-логирование-приносящее-радость">9. Loguru — логирование, приносящее радость<a class="headerlink" href="#9-loguru-логирование-приносящее-радость" title="Ссылка">#</a></h3>
+<p>Стандартный модуль <code>logging</code> требует долгой настройки. <strong>Loguru</strong> позволяет начать логирование сразу.</p>
+<p><strong>Проблема:</strong> мучительная настройка логирования и его ротации.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">loguru</span><span class="w"> </span><span class="kn">import</span> <span class="n">logger</span>
+
+<span class="c1"># Запись в файл с ротацией по размеру</span>
+<span class="n">logger</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s2">&quot;debug.log&quot;</span><span class="p">,</span> <span class="n">rotation</span><span class="o">=</span><span class="s2">&quot;500 MB&quot;</span><span class="p">,</span> <span class="n">compression</span><span class="o">=</span><span class="s2">&quot;zip&quot;</span><span class="p">)</span>
+
+<span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Скрипт запущен&quot;</span><span class="p">)</span>
+<span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;Что-то пошло не так!&quot;</span><span class="p">)</span>
+
+<span class="nd">@logger</span><span class="o">.</span><span class="n">catch</span>  <span class="c1"># Декоратор для отлова ошибок</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">critical_function</span><span class="p">():</span>
+    <span class="k">return</span> <span class="mi">1</span> <span class="o">/</span> <span class="mi">0</span>
+
+<span class="n">critical_function</span><span class="p">()</span>
+</code></pre></div>
+
+<div class="highlight"><pre><span></span><code>pip<span class="w"> </span>install<span class="w"> </span>loguru
+</code></pre></div>
+
+<hr />
+<h3 id="10-icecream-забудьте-о-print-при-дебаге">10. IceCream — забудьте о print() при дебаге<a class="headerlink" href="#10-icecream-забудьте-о-print-при-дебаге" title="Ссылка">#</a></h3>
+<p>При отладке часто используют <code>print()</code>, но в куче вывода легко запутаться. <strong>IceCream</strong> (<code>ic</code>) упрощает этот процесс.</p>
+<p><strong>Проблема:</strong> необходимость вручную подписывать выводимые переменные.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">icecream</span><span class="w"> </span><span class="kn">import</span> <span class="n">ic</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">complex_function</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span>
+    <span class="n">ic</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>  <span class="c1"># Выведет имя переменной, её значение, строку и файл</span>
+    <span class="k">return</span> <span class="n">result</span>
+
+<span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;active&quot;</span><span class="p">}</span>
+<span class="n">ic</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>  <span class="c1"># Удобный вывод словаря</span>
+</code></pre></div>
+
+<div class="highlight"><pre><span></span><code>pip<span class="w"> </span>install<span class="w"> </span>icecream
+</code></pre></div>
+
+<hr />
+<h2 id="сводная-таблица">📊 Сводная таблица<a class="headerlink" href="#сводная-таблица" title="Ссылка">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Библиотека</th>
+<th>Назначение</th>
+<th>Категория</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><strong>tqdm</strong></td>
+<td>Прогресс-бары в циклах</td>
+<td>Интерфейс</td>
+</tr>
+<tr>
+<td>2</td>
+<td><strong>Rich</strong></td>
+<td>Таблицы, подсветка, цветные логи</td>
+<td>Интерфейс</td>
+</tr>
+<tr>
+<td>3</td>
+<td><strong>Humanize</strong></td>
+<td>Человекочитаемые размеры/время</td>
+<td>Интерфейс</td>
+</tr>
+<tr>
+<td>4</td>
+<td><strong>sh</strong></td>
+<td>Консольные утилиты как функции</td>
+<td>Системное</td>
+</tr>
+<tr>
+<td>5</td>
+<td><strong>Watchdog</strong></td>
+<td>Реакция на события ФС</td>
+<td>Системное</td>
+</tr>
+<tr>
+<td>6</td>
+<td><strong>Schedule</strong></td>
+<td>Планировщик задач в коде</td>
+<td>Системное</td>
+</tr>
+<tr>
+<td>7</td>
+<td><strong>python-dotenv</strong></td>
+<td>Секреты из <code>.env</code></td>
+<td>Архитектура</td>
+</tr>
+<tr>
+<td>8</td>
+<td><strong>Beartype</strong></td>
+<td>Проверка типов в рантайме</td>
+<td>Архитектура</td>
+</tr>
+<tr>
+<td>9</td>
+<td><strong>Loguru</strong></td>
+<td>Логирование без настройки</td>
+<td>Архитектура</td>
+</tr>
+<tr>
+<td>10</td>
+<td><strong>IceCream</strong></td>
+<td>Удобный дебаг вместо <code>print()</code></td>
+<td>Архитектура</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="установка-всего-сразу">🚀 Установка всего сразу<a class="headerlink" href="#установка-всего-сразу" title="Ссылка">#</a></h2>
+<div class="highlight"><pre><span></span><code>pip<span class="w"> </span>install<span class="w"> </span>tqdm<span class="w"> </span>rich<span class="w"> </span>humanize<span class="w"> </span>sh<span class="w"> </span>watchdog<span class="w"> </span>schedule<span class="w"> </span>python-dotenv<span class="w"> </span>beartype<span class="w"> </span>loguru<span class="w"> </span>icecream
+</code></pre></div>
+
+<hr />
+<h2 id="когда-что-использовать">🎯 Когда что использовать<a class="headerlink" href="#когда-что-использовать" title="Ссылка">#</a></h2>
+<ul>
+<li><strong>Визуализация:</strong> <code>tqdm</code> + <code>Rich</code> — прогресс и красивый вывод.</li>
+<li><strong>Системные задачи:</strong> <code>sh</code> + <code>Watchdog</code> — вызовы команд и слежение за файлами.</li>
+<li><strong>Порядок в архитектуре:</strong> <code>Loguru</code> + <code>python-dotenv</code> — логи и секреты.</li>
+<li><strong>Дебаг:</strong> <code>IceCream</code> — быстрая отладка без <code>print()</code>.</li>
+<li><strong>Надёжность:</strong> <code>Beartype</code> — проверка типов без потерь скорости.</li>
+</ul>
+<blockquote>
+<p>Умение автоматизировать заключается в выборе правильного инструмента, превращающего сложную задачу в простую.</p>
+</blockquote>
+<hr />
+<p><em>Источник: <a href="https://habr.com/ru/articles/983158/">Хабр — 10 полезных Python-библиотек</a></em></p>
+    </article>
+    <nav class="pagination">
+      <a class="pager prev" href="miscellaneous.html">← Miscellaneous</a>
+      <a class="pager next" href="eza.html">eza →</a>
+    </nav>
+  </main>
+
+  <aside class="toc">
+    <details open>
+      <summary>📑 Оглавление</summary>
+      <div class="toc-list">
+<div class="toc">
+<ul>
+<li><a href="#python-10-библиотек-для-автоматизации">🐍 Python: 10 библиотек для автоматизации</a><ul>
+<li><a href="#часть-1-интерфейс-и-визуализация">Часть 1. Интерфейс и визуализация</a><ul>
+<li><a href="#1-tqdm-прогресс-бары-которые-не-бесят">1. tqdm — прогресс-бары, которые не бесят</a></li>
+<li><a href="#2-rich-терминал-как-искусство">2. Rich — терминал как искусство</a></li>
+<li><a href="#3-humanize-машинные-данные-человекочитаемые">3. Humanize — машинные данные → человекочитаемые</a></li>
+</ul>
+</li>
+<li><a href="#часть-2-системная-автоматизация-и-скриптинг">Часть 2. Системная автоматизация и скриптинг</a><ul>
+<li><a href="#4-sh-замена-subprocess-для-лаконичности">4. sh — замена subprocess для лаконичности</a></li>
+<li><a href="#5-watchdog-слежка-за-папкой-без-polling">5. Watchdog — слежка за папкой без polling</a></li>
+<li><a href="#6-schedule-планировщик-с-человеческим-лицом">6. Schedule — планировщик с человеческим лицом</a></li>
+</ul>
+</li>
+<li><a href="#часть-3-работа-с-данными-и-архитектурой">Часть 3. Работа с данными и архитектурой</a><ul>
+<li><a href="#7-python-dotenv-прощай-хардкод">7. python-dotenv — прощай, хардкод</a></li>
+<li><a href="#8-beartype-проверка-типов-на-скорости-света">8. Beartype — проверка типов на скорости света</a></li>
+<li><a href="#9-loguru-логирование-приносящее-радость">9. Loguru — логирование, приносящее радость</a></li>
+<li><a href="#10-icecream-забудьте-о-print-при-дебаге">10. IceCream — забудьте о print() при дебаге</a></li>
+</ul>
+</li>
+<li><a href="#сводная-таблица">📊 Сводная таблица</a></li>
+<li><a href="#установка-всего-сразу">🚀 Установка всего сразу</a></li>
+<li><a href="#когда-что-использовать">🎯 Когда что использовать</a></li>
+</ul>
+</li>
+</ul>
+</div>
+
+      </div>
+    </details>
+  </aside>
+</div>
+
+<button class="back-top" id="backTop" aria-label="Наверх">↑</button>
+
+<script src="assets/search.js"></script>
+<script src="assets/page.js"></script>
+</body>
+</html>

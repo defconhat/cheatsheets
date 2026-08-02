@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tmux — Шпаргалки</title>
+<link rel="stylesheet" href="assets/style.css">
+<link rel="stylesheet" href="assets/pygments.css">
+</head>
+<body>
+<div class="layout">
+  <aside class="sidebar">
+    <a href="index.html" class="brand">📌 Шпаргалки</a>
+    <nav class="nav">
+<a href="yazi.html" class="nav-item"><span class="nav-ico">📦</span>Yazi</a>
+<a href="neovim.html" class="nav-item"><span class="nav-ico">📘</span>Neovim (LazyVim)</a>
+<a href="niri.html" class="nav-item"><span class="nav-ico">🪟</span>Niri</a>
+<a href="tmux.html" class="nav-item active"><span class="nav-ico">🪟</span>Tmux</a>
+<a href="bash.html" class="nav-item"><span class="nav-ico">🐚</span>Bash</a>
+<a href="git.html" class="nav-item"><span class="nav-ico">🔀</span>Git</a>
+<a href="terminal.html" class="nav-item"><span class="nav-ico">🖥️</span>Терминал Linux</a>
+<a href="powershell.html" class="nav-item"><span class="nav-ico">💻</span>PowerShell</a>
+<a href="cmd.html" class="nav-item"><span class="nav-ico">🪟</span>CMD (cmd.exe)</a>
+<a href="python.html" class="nav-item"><span class="nav-ico">🐍</span>Python</a>
+<a href="systemd.html" class="nav-item"><span class="nav-ico">⚙️</span>systemd</a>
+<a href="ssh.html" class="nav-item"><span class="nav-ico">🔐</span>SSH</a>
+<a href="make-cmake.html" class="nav-item"><span class="nav-ico">🔨</span>Make / CMake</a>
+<a href="docker.html" class="nav-item"><span class="nav-ico">🐳</span>Docker</a>
+<a href="pacman.html" class="nav-item"><span class="nav-ico">📦</span>pacman / yay / paru</a>
+<a href="spark.html" class="nav-item"><span class="nav-ico">⚡</span>Apache Spark / PySpark</a>
+<a href="markdown.html" class="nav-item"><span class="nav-ico">📝</span>Markdown</a>
+<a href="regex.html" class="nav-item"><span class="nav-ico">🔍</span>Регулярные выражения</a>
+<a href="jq-json.html" class="nav-item"><span class="nav-ico">🔧</span>jq + JSON</a>
+<a href="awk-sed.html" class="nav-item"><span class="nav-ico">✂️</span>awk / sed</a>
+<a href="airflow.html" class="nav-item"><span class="nav-ico">🌪️</span>Apache Airflow</a>
+<a href="http-curl.html" class="nav-item"><span class="nav-ico">🌐</span>HTTP / curl</a>
+<a href="yaml.html" class="nav-item"><span class="nav-ico">📄</span>YAML</a>
+<a href="vscode.html" class="nav-item"><span class="nav-ico">💻</span>VS Code</a>
+<a href="cron.html" class="nav-item"><span class="nav-ico">⏰</span>cron</a>
+<a href="fzf-zoxide.html" class="nav-item"><span class="nav-ico">🔎</span>fzf + zoxide</a>
+<a href="minikube-k8s.html" class="nav-item"><span class="nav-ico">☸️</span>Minikube / Kubernetes</a>
+<a href="cicd.html" class="nav-item"><span class="nav-ico">🦊</span>GitLab CI / GitHub Actions</a>
+<a href="nginx.html" class="nav-item"><span class="nav-ico">🌐</span>nginx</a>
+<a href="dbt.html" class="nav-item"><span class="nav-ico">🔧</span>dbt</a>
+<a href="kafka.html" class="nav-item"><span class="nav-ico">🐘</span>Apache Kafka</a>
+<a href="prometheus-grafana.html" class="nav-item"><span class="nav-ico">📊</span>Prometheus / Grafana</a>
+<a href="iceberg-nessie.html" class="nav-item"><span class="nav-ico">🧊</span>Iceberg / Nessie</a>
+<a href="impala.html" class="nav-item"><span class="nav-ico">🐬</span>Apache Impala</a>
+<a href="terraform.html" class="nav-item"><span class="nav-ico">🏗️</span>Terraform</a>
+<a href="linux-internals.html" class="nav-item"><span class="nav-ico">🐧</span>Linux Internals</a>
+<a href="miscellaneous.html" class="nav-item"><span class="nav-ico">🧰</span>Miscellaneous</a>
+<a href="python-automation-libs.html" class="nav-item"><span class="nav-ico">🐍</span>Python: авт-ция (10 libs)</a>
+<a href="eza.html" class="nav-item"><span class="nav-ico">🌈</span>eza</a>
+<a href="dbeaver.html" class="nav-item"><span class="nav-ico">🗄️</span>DBeaver</a>
+<a href="zcode.html" class="nav-item"><span class="nav-ico">🤖</span>ZCode</a>
+<a href="warp.html" class="nav-item"><span class="nav-ico">🚀</span>Warp</a>
+<a href="agentic-ai-dev.html" class="nav-item"><span class="nav-ico">🤝</span>Агентная разработка с ИИ</a>
+    </nav>
+  </aside>
+
+  <main class="content">
+    <article>
+<h1 id="tmux-шпаргалка-по-горячим-клавишам-и-командам">🪟 Tmux — шпаргалка по горячим клавишам и командам<a class="headerlink" href="#tmux-шпаргалка-по-горячим-клавишам-и-командам" title="Ссылка">#</a></h1>
+<blockquote>
+<p><strong>tmux</strong> — терминальный мультиплексор: несколько окон/панелей в одном терминале,
+сессии переживают закрытие терминала.
+Дом: https://github.com/tmux/tmux · Мануал: <code>man tmux</code></p>
+</blockquote>
+<hr />
+<h2 id="главные-понятия">🔑 Главные понятия<a class="headerlink" href="#главные-понятия" title="Ссылка">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Термин</th>
+<th>Что значит</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>server</strong></td>
+<td>Фоновый процесс tmux, хранит все сессии</td>
+</tr>
+<tr>
+<td><strong>session</strong></td>
+<td>Независимый набор окон (то, что «переживает» отключение)</td>
+</tr>
+<tr>
+<td><strong>window</strong></td>
+<td>Вкладка внутри сессии (как вкладка браузера)</td>
+</tr>
+<tr>
+<td><strong>pane</strong></td>
+<td>Область внутри окна (сплит)</td>
+</tr>
+<tr>
+<td><strong>prefix</strong></td>
+<td>Клавиша-модификатор перед командой. По умолчанию <strong><code>Ctrl-b</code></strong></td>
+</tr>
+<tr>
+<td><strong>attach</strong></td>
+<td>Подключиться к существующей сессии</td>
+</tr>
+</tbody>
+</table>
+<p>Далее обозначение: <strong><code>C-b</code></strong> = нажмите <code>Ctrl-b</code>, отпустите, затем следующую клавишу.</p>
+<hr />
+<h2 id="запуск-и-сессии">🚀 Запуск и сессии<a class="headerlink" href="#запуск-и-сессии" title="Ссылка">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Команда / Клавиша</th>
+<th>Действие</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>tmux</code></td>
+<td>Запустить новую сессию</td>
+</tr>
+<tr>
+<td><code>tmux new -s имя</code></td>
+<td>Новая сессия с именем</td>
+</tr>
+<tr>
+<td><code>tmux ls</code></td>
+<td>Список сессий</td>
+</tr>
+<tr>
+<td><code>tmux a</code> / <code>tmux attach</code></td>
+<td>Подключиться к последней сессии</td>
+</tr>
+<tr>
+<td><code>tmux a -t имя</code></td>
+<td>Подключиться к конкретной сессии</td>
+</tr>
+<tr>
+<td><code>tmux kill-session -t имя</code></td>
+<td>Убить сессию</td>
+</tr>
+<tr>
+<td><code>tmux kill-server</code></td>
+<td>Убить все сессии (весь сервер)</td>
+</tr>
+<tr>
+<td><code>tmux source ~/.tmux.conf</code></td>
+<td>Перечитать конфиг</td>
+</tr>
+<tr>
+<td><code>C-b d</code></td>
+<td>Отключиться от сессии (detach)</td>
+</tr>
+<tr>
+<td><code>C-b s</code></td>
+<td>Список сессий (интерактивно)</td>
+</tr>
+<tr>
+<td><code>C-b $</code></td>
+<td>Переименовать текущую сессию</td>
+</tr>
+<tr>
+<td><code>C-b (</code> / <code>C-b )</code></td>
+<td>Предыдущая / следующая сессия</td>
+</tr>
+<tr>
+<td><code>C-b L</code></td>
+<td>Переключиться на последнюю активную сессию</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="окна-windows">🖼️ Окна (windows)<a class="headerlink" href="#окна-windows" title="Ссылка">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Клавиша</th>
+<th>Действие</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>C-b c</code></td>
+<td>Создать окно</td>
+</tr>
+<tr>
+<td><code>C-b ,</code></td>
+<td>Переименовать окно</td>
+</tr>
+<tr>
+<td><code>C-b &amp;</code></td>
+<td>Закрыть окно (с подтверждением)</td>
+</tr>
+<tr>
+<td><code>C-b n</code> / <code>C-b p</code></td>
+<td>Следующее / предыдущее окно</td>
+</tr>
+<tr>
+<td><code>C-b 0..9</code></td>
+<td>Перейти к окну №0..9</td>
+</tr>
+<tr>
+<td><code>C-b w</code></td>
+<td>Список окон (интерактивно)</td>
+</tr>
+<tr>
+<td><code>C-b f</code></td>
+<td>Найти окно по заголовку/содержимому</td>
+</tr>
+<tr>
+<td><code>C-b .</code></td>
+<td>Перейти к окну по номеру</td>
+</tr>
+<tr>
+<td><code>C-b M-n</code> / <code>C-b M-p</code></td>
+<td>Следующее/пред. окно с alert&rsquo;ом</td>
+</tr>
+<tr>
+<td><code>swap-window -t -1</code> (в prompt)</td>
+<td>Поменять окна местами</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="панели-panes-сплиты">▦ Панели (panes — сплиты)<a class="headerlink" href="#панели-panes-сплиты" title="Ссылка">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Клавиша</th>
+<th>Действие</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>C-b %</code></td>
+<td>Разделить по вертикали (right)</td>
+</tr>
+<tr>
+<td><code>C-b "</code></td>
+<td>Разделить по горизонтали (below)</td>
+</tr>
+<tr>
+<td><code>C-b o</code></td>
+<td>Следующая панель (по кругу)</td>
+</tr>
+<tr>
+<td><code>C-b q</code></td>
+<td>Показать номера панелей (затем цифру — перейти)</td>
+</tr>
+<tr>
+<td><code>C-b ↑↓←→</code></td>
+<td>Перейти к панели в направлении</td>
+</tr>
+<tr>
+<td><code>C-b {</code> / <code>C-b }</code></td>
+<td>Поменять панели местами</td>
+</tr>
+<tr>
+<td><code>C-b x</code></td>
+<td>Закрыть панель (с подтверждем)</td>
+</tr>
+<tr>
+<td><code>C-b z</code></td>
+<td>Zoom (на весь экран / обратно)</td>
+</tr>
+<tr>
+<td><code>C-b Space</code></td>
+<td>Следующий layout (раскладка панелей)</td>
+</tr>
+<tr>
+<td><code>C-b !</code></td>
+<td>Вынести панель в отдельное окно</td>
+</tr>
+<tr>
+<td><code>C-b ;</code></td>
+<td>Последняя активная панель</td>
+</tr>
+<tr>
+<td><code>Resize:</code>C-b Ctrl-↑↓←→`</td>
+<td>Изменить размер панели (зажав prefix)</td>
+</tr>
+<tr>
+<td><code>resize-pane -L 10</code> (в prompt)</td>
+<td>На 10 влево</td>
+</tr>
+</tbody>
+</table>
+<h3 id="layout-ы-по-c-b-space">Layout&rsquo;ы (по <code>C-b Space</code>)<a class="headerlink" href="#layout-ы-по-c-b-space" title="Ссылка">#</a></h3>
+<ul>
+<li><strong>even-horizontal</strong> — все в ряд слева направо</li>
+<li><strong>even-vertical</strong> — все в столбик</li>
+<li><strong>main-horizontal</strong> — большое сверху, мелкие внизу</li>
+<li><strong>main-vertical</strong> — большое слева, мелкие справа</li>
+<li><strong>tiled</strong> — сетка</li>
+</ul>
+<hr />
+<h2 id="копирование-и-режим-прокрутки">📜 Копирование и режим прокрутки<a class="headerlink" href="#копирование-и-режим-прокрутки" title="Ссылка">#</a></h2>
+<p>По умолчанию режим копирования — <strong>emacs-стиль</strong> (можно поменять на vi в конфиге).</p>
+<table>
+<thead>
+<tr>
+<th>Клавиша</th>
+<th>Действие</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>C-b [</code></td>
+<td>Войти в режим копирования (copy mode)</td>
+</tr>
+<tr>
+<td><code>C-b PgUp</code></td>
+<td>То же (сразу прокрутка вверх)</td>
+</tr>
+<tr>
+<td>В copy mode:</td>
+<td></td>
+</tr>
+<tr>
+<td><code>↑ ↓</code> / <code>PgUp PgDn</code></td>
+<td>Перемещение</td>
+</tr>
+<tr>
+<td><code>Ctrl-u</code> / <code>Ctrl-d</code></td>
+<td>Пол-страницы</td>
+</tr>
+<tr>
+<td><code>Ctrl-b</code> / <code>Ctrl-f</code></td>
+<td>Страница</td>
+</tr>
+<tr>
+<td><code>g</code> / <code>G</code></td>
+<td>В начало / конец буфера</td>
+</tr>
+<tr>
+<td><code>/</code></td>
+<td>Поиск вперёд</td>
+</tr>
+<tr>
+<td><code>?</code></td>
+<td>Поиск назад</td>
+</tr>
+<tr>
+<td><code>n</code> / <code>N</code></td>
+<td>Следующее / предыдущее совпадение</td>
+</tr>
+<tr>
+<td><code>Space</code> (emacs) / <code>v</code> (vi)</td>
+<td>Начать выделение</td>
+</tr>
+<tr>
+<td><code>Enter</code></td>
+<td>Скопировать выделение</td>
+</tr>
+<tr>
+<td><code>q</code> / <code>Esc</code></td>
+<td>Выйти из copy mode</td>
+</tr>
+<tr>
+<td><code>C-b ]</code></td>
+<td>Вставить из буфера tmux</td>
+</tr>
+<tr>
+<td><code>C-b =</code></td>
+<td>Список буферов (выбрать)</td>
+</tr>
+<tr>
+<td><code>C-b #</code></td>
+<td>Список буферов</td>
+</tr>
+<tr>
+<td><code>save-buffer &lt;file&gt;</code> (в prompt)</td>
+<td>Сохранить буфер в файл</td>
+</tr>
+</tbody>
+</table>
+<h3 id="копирование-в-системный-буфер-обмена">Копирование в системный буфер обмена<a class="headerlink" href="#копирование-в-системный-буфер-обмена" title="Ссылка">#</a></h3>
+<p>Нужна интеграция с <code>xclip</code>/<code>wl-copy</code>. Пример для Wayland в <code>~/.tmux.conf</code>:</p>
+<div class="highlight"><pre><span></span><code># Копировать выделение в буфер Wayland
+bind-key -T copy-mode-vi y send-keys -X copy-pipe-and-cancel &quot;wl-copy&quot;
+bind-key -T copy-mode    y send-keys -X copy-pipe-and-cancel &quot;wl-copy&quot;
+</code></pre></div>
+
+<hr />
+<h2 id="prompt-и-команды-tmux-после-c-b">🎛️ Prompt и команды tmux (после <code>C-b :</code>)<a class="headerlink" href="#prompt-и-команды-tmux-после-c-b" title="Ссылка">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Команда</th>
+<th>Действие</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>:source ~/.tmux.conf</code></td>
+<td>Перечитать конфиг</td>
+</tr>
+<tr>
+<td><code>:new-session -s имя</code></td>
+<td>Новая сессия</td>
+</tr>
+<tr>
+<td><code>:new-window -n имя</code></td>
+<td>Новое окно</td>
+</tr>
+<tr>
+<td><code>:split-window -h</code></td>
+<td>Сплит вертикальный</td>
+</tr>
+<tr>
+<td><code>:split-window -v</code></td>
+<td>Сплит горизонтальный</td>
+</tr>
+<tr>
+<td><code>:kill-session</code></td>
+<td>Убить сессию</td>
+</tr>
+<tr>
+<td><code>:kill-window</code></td>
+<td>Убить окно</td>
+</tr>
+<tr>
+<td><code>:kill-pane</code></td>
+<td>Убить панель</td>
+</tr>
+<tr>
+<td><code>:resize-pane -L 10</code></td>
+<td>Ресайз влево на 10</td>
+</tr>
+<tr>
+<td><code>:move-window -t 2</code></td>
+<td>Переместить окно на индекс 2</td>
+</tr>
+<tr>
+<td><code>:swap-window -t -1</code></td>
+<td>Сдвинуть окно влево</td>
+</tr>
+<tr>
+<td><code>:clock-mode</code></td>
+<td>Часы (большие)</td>
+</tr>
+<tr>
+<td><code>:clear-history</code></td>
+<td>Очистить историю прокрутки панели</td>
+</tr>
+<tr>
+<td><code>:capture-pane -p</code></td>
+<td>Захватить содержимое панели в буфер</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="конфигурация-tmux-conf">⚙️ Конфигурация <code>~/.tmux.conf</code><a class="headerlink" href="#конфигурация-tmux-conf" title="Ссылка">#</a></h2>
+<p>Базовый полезный конфиг:</p>
+<div class="highlight"><pre><span></span><code># --- Основное ---
+set -g default-terminal &quot;tmux-256color&quot;
+set -ga terminal-overrides &quot;,xterm-256color:Tc&quot;   # true color
+set -g mouse on                                    # мышь (скролл, сплиты)
+set -g history-limit 50000                         # размер истории
+set -g base-index 1                                # окна с 1, а не с 0
+setw -g pane-base-index 1                          # панели с 1
+set -g renumber-windows on                         # перенумерация после закрытия
+set -g escape-time 0                               # убрать задержку Esc
+
+# --- Префикс на Ctrl-a (удобнее) ---
+unbind C-b
+set -g prefix C-a
+bind C-a send-prefix
+
+# --- Vi-стиль в copy mode ---
+setw -g mode-keys vi
+bind-key -T copy-mode-vi v send-keys -X begin-selection
+bind-key -T copy-mode-vi y send-keys -X copy-pipe-and-cancel &quot;wl-copy&quot;
+
+# --- Интуитивные сплиты (как в редакторах) ---
+bind | split-window -h -c &quot;#{pane_current_path}&quot;
+bind - split-window -v -c &quot;#{pane_current_path}&quot;
+unbind &#39;&quot;&#39;
+unbind %
+
+# --- Перенавигация панелей как в vim (Alt+hjkl) ---
+bind -n M-Left select-pane -L
+bind -n M-Right select-pane -R
+bind -n M-Up select-pane -U
+bind -n M-Down select-pane -D
+
+# --- Перезагруз конфига ---
+bind r source-file ~/.tmux.conf \; display &quot;Config reloaded!&quot;
+
+# --- Тема ---
+set -g status-style &quot;bg=default,fg=white&quot;
+set -g status-left &quot;#[fg=green,bold][#S] &quot;
+set -g status-right &quot;#[fg=cyan]%Y-%m-%d #[fg=yellow]%H:%M &quot;
+set -g status-interval 5
+setw -g window-status-current-style &quot;fg=black,bg=cyan,bold&quot;
+</code></pre></div>
+
+<p>После правки — <code>prefix + r</code> (если добавили бинд) или <code>:source ~/.tmux.conf</code>.</p>
+<hr />
+<h2 id="мышь">🖱️ Мышь<a class="headerlink" href="#мышь" title="Ссылка">#</a></h2>
+<p>Включить:</p>
+<div class="highlight"><pre><span></span><code>set -g mouse on
+</code></pre></div>
+
+<p>Что работает:
+- <strong>Скролл</strong> — автоматически входит в copy mode.
+- <strong>Клик по панели</strong> — переключение.
+- <strong>Drag по границе</strong> — изменение размера.
+- <strong>Drag по окну</strong> — перемещение между окнами.
+Временно отключить мышь: <code>prefix</code> затем <code>M</code> (или <code>:set mouse off</code>).</p>
+<hr />
+<h2 id="плагины-через-tpm">🧩 Плагины (через TPM)<a class="headerlink" href="#плагины-через-tpm" title="Ссылка">#</a></h2>
+<p><strong>TPM</strong> — Tmux Plugin Manager: https://github.com/tmux-plugins/tpm</p>
+<p>Установка:</p>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/tmux-plugins/tpm<span class="w"> </span>~/.tmux/plugins/tpm
+</code></pre></div>
+
+<p>В конец <code>~/.tmux.conf</code>:</p>
+<div class="highlight"><pre><span></span><code># --- Плагины ---
+set -g @plugin &#39;tmux-plugins/tpm&#39;
+set -g @plugin &#39;tmux-plugins/tmux-sensible&#39;      # sane defaults
+set -g @plugin &#39;tmux-plugins/tmux-resurrect&#39;     # сохранение сессий
+set -g @plugin &#39;tmux-plugins/tmux-continuum&#39;     # автосохранение
+set -g @plugin &#39;tmux-plugins/tmux-yank&#39;          # системный буфер обмена
+set -g @plugin &#39;tmux-plugins/tmux-pain-control&#39;  # удобные сплиты
+set -g @plugin &#39;dracula/tmux&#39;                     # тема Dracula
+
+# auto-restore + autosave
+set -g @continuum-restore &#39;on&#39;
+set -g @continuum-save-interval &#39;15&#39;
+
+# MUST be at the very bottom
+run &#39;~/.tmux/plugins/tpm/tmux&#39;
+</code></pre></div>
+
+<p>Установить плагины: <code>prefix + I</code> (большое I). Обновить: <code>prefix + U</code>.</p>
+<h3 id="полезные-плагины">Полезные плагины<a class="headerlink" href="#полезные-плагины" title="Ссылка">#</a></h3>
+<table>
+<thead>
+<tr>
+<th>Плагин</th>
+<th>Что делает</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>tmux-sensible</code></td>
+<td>Разумные настройки по умолчанию</td>
+</tr>
+<tr>
+<td><code>tmux-resurrect</code></td>
+<td>Сохраняет/восстанавливает сессии после ребута</td>
+</tr>
+<tr>
+<td><code>tmux-continuum</code></td>
+<td>Автосохранение + autorrestore</td>
+</tr>
+<tr>
+<td><code>tmux-yank</code></td>
+<td>Копирование в системный буфер</td>
+</tr>
+<tr>
+<td><code>tmux-pain-control</code></td>
+<td>Удобное управление панелями</td>
+</tr>
+<tr>
+<td><code>tmux-fzf</code></td>
+<td>FZF-интерфейс для tmux</td>
+</tr>
+<tr>
+<td><code>tmux-floax</code></td>
+<td>Плавающий scratch-терминал</td>
+</tr>
+<tr>
+<td><code>dracula/tmux</code> / <code>catppuccin/tmux</code></td>
+<td>Темы</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="скриптинг-tmux">🐚 Скриптинг tmux<a class="headerlink" href="#скриптинг-tmux" title="Ссылка">#</a></h2>
+<p>tmux отлично автоматизируется. Примеры:</p>
+<h3 id="скрипт-создания-dev-окружения">Скрипт создания dev-окружения<a class="headerlink" href="#скрипт-создания-dev-окружения" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="ch">#!/bin/bash</span>
+<span class="c1"># dev-setup.sh</span>
+<span class="nv">SESSION</span><span class="o">=</span><span class="s2">&quot;dev&quot;</span>
+
+tmux<span class="w"> </span>new-session<span class="w"> </span>-d<span class="w"> </span>-s<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$SESSION</span><span class="s2">&quot;</span><span class="w"> </span>-n<span class="w"> </span><span class="s1">&#39;editor&#39;</span>
+tmux<span class="w"> </span>send-keys<span class="w"> </span>-t<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$SESSION</span><span class="s2">:editor&quot;</span><span class="w"> </span><span class="s1">&#39;nvim .&#39;</span><span class="w"> </span>C-m
+
+tmux<span class="w"> </span>new-window<span class="w"> </span>-t<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$SESSION</span><span class="s2">&quot;</span><span class="w"> </span>-n<span class="w"> </span><span class="s1">&#39;server&#39;</span>
+tmux<span class="w"> </span>send-keys<span class="w"> </span>-t<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$SESSION</span><span class="s2">:server&quot;</span><span class="w"> </span><span class="s1">&#39;npm run dev&#39;</span><span class="w"> </span>C-m
+
+tmux<span class="w"> </span>split-window<span class="w"> </span>-t<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$SESSION</span><span class="s2">:server&quot;</span><span class="w"> </span>-v
+tmux<span class="w"> </span>send-keys<span class="w"> </span>-t<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$SESSION</span><span class="s2">:server&quot;</span><span class="w"> </span><span class="s1">&#39;tail -f log.txt&#39;</span><span class="w"> </span>C-m
+
+tmux<span class="w"> </span>new-window<span class="w"> </span>-t<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$SESSION</span><span class="s2">&quot;</span><span class="w"> </span>-n<span class="w"> </span><span class="s1">&#39;git&#39;</span>
+tmux<span class="w"> </span>send-keys<span class="w"> </span>-t<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$SESSION</span><span class="s2">:git&quot;</span><span class="w"> </span><span class="s1">&#39;lazygit&#39;</span><span class="w"> </span>C-m
+
+tmux<span class="w"> </span>attach-session<span class="w"> </span>-t<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$SESSION</span><span class="s2">&quot;</span>
+</code></pre></div>
+
+<h3 id="полезные-команды-для-скриптов">Полезные команды для скриптов<a class="headerlink" href="#полезные-команды-для-скриптов" title="Ссылка">#</a></h3>
+<table>
+<thead>
+<tr>
+<th>Команда</th>
+<th>Действие</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>tmux new-session -d -s имя</code></td>
+<td>Создать detached-сессию</td>
+</tr>
+<tr>
+<td><code>tmux send-keys 'cmd' C-m</code></td>
+<td>Послать команду + Enter в панель</td>
+</tr>
+<tr>
+<td><code>tmux send-keys -t target 'cmd' C-m</code></td>
+<td>В конкретную панель/окно</td>
+</tr>
+<tr>
+<td><code>tmux split-window -h -t session</code></td>
+<td>Разделить</td>
+</tr>
+<tr>
+<td><code>tmux select-layout -t session tiled</code></td>
+<td>Сетка</td>
+</tr>
+<tr>
+<td><code>tmux setw -t session synchronize-pane on</code></td>
+<td>Синхронный ввод во все панели</td>
+</tr>
+<tr>
+<td><code>tmux list-windows -a -F '#{session_name}'</code></td>
+<td>Имена сессий</td>
+</tr>
+<tr>
+<td><code>tmux display-message -p '#{pane_current_path}'</code></td>
+<td>Текущий путь панели</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="внутри-сессии-статус-бар-и-подсказки">⌨️ Внутри сессии: статус-бар и подсказки<a class="headerlink" href="#внутри-сессии-статус-бар-и-подсказки" title="Ссылка">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Клавиша</th>
+<th>Действие</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>C-b ?</code></td>
+<td>Полный список биндингов (встроенная справка!)</td>
+</tr>
+<tr>
+<td><code>C-b t</code></td>
+<td>Показать часы (большими цифрами)</td>
+</tr>
+<tr>
+<td><code>C-b :</code></td>
+<td>Командная строка tmux</td>
+</tr>
+<tr>
+<td><code>C-b r</code> (если настроен)</td>
+<td>Перезагрузить конфиг</td>
+</tr>
+<tr>
+<td><code>C-b [</code></td>
+<td>Copy mode / прокрутка истории</td>
+</tr>
+<tr>
+<td><code>C-b ~</code></td>
+<td>Показать сообщения tmux</td>
+</tr>
+<tr>
+<td><code>C-b i</code></td>
+<td>Информация о текущем окне</td>
+</tr>
+<tr>
+<td><code>C-b r</code></td>
+<td>Refresh-client (если глюки с размером)</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="полезные-советы">💡 Полезные советы<a class="headerlink" href="#полезные-советы" title="Ссылка">#</a></h2>
+<ol>
+<li><strong><code>prefix + ?</code></strong> — лучший способ вспомнить биндинги.</li>
+<li><strong>Detach</strong> (<code>C-b d</code>) — оставляет процессы работать; вернуться через <code>tmux a</code>.</li>
+<li><strong><code>tmux a -t имя</code></strong> — подключиться к конкретной сессии по имени.</li>
+<li><strong>SSH + tmux</strong> — на сервере всегда работайте в tmux: при обрыве связи
+   сессия сохранится, переподключились через <code>tmux a -d</code>.</li>
+<li><strong><code>-d</code></strong> при attach — отключить других клиентов (<code>tmux a -d -t имя</code>).</li>
+<li><strong><code>synchronize-pane</code></strong> — ввод одной команды во все панели сразу
+   (массовое управление серверами):
+   <code>:setw synchronize-pane on</code> / <code>off</code>.</li>
+<li><strong>Масштабирование панели</strong> — <code>C-b z</code> для работы в одной панели на весь экран.</li>
+<li><strong>Мышь</strong> — <code>set -g mouse on</code> сильно упрощает жизнь.</li>
+<li><strong>rename-window</strong> — <code>C-b ,</code> помогает не путаться в окнах.</li>
+<li><strong>Renumber windows</strong> — <code>set -g renumber-windows on</code> автоматически сдвигает
+    индексы после закрытия окна.</li>
+<li><strong><code>tmux kill-server</code></strong> — когда «всё сломалось» (убивает все сессии).</li>
+<li><strong>true color</strong> — <code>terminal-overrides ",*:Tc"</code> для корректных цветов
+    в редакторах.</li>
+<li><strong>SSH-мультиплексирование</strong>: <code>ssh user@host -t "tmux a -t main \|\| tmux new -s main"</code>
+    — подключение к существующей сессии или создание новой.</li>
+</ol>
+<hr />
+<h2 id="ссылки">🔗 Ссылки<a class="headerlink" href="#ссылки" title="Ссылка">#</a></h2>
+<ul>
+<li>Официальный сайт: https://github.com/tmux/tmux</li>
+<li>Мануал: <code>man tmux</code> (очень подробный)</li>
+<li>TPM (plugin manager): https://github.com/tmux-plugins/tpm</li>
+<li>tmux-resurrect: https://github.com/tmux-plugins/tmux-resurrect</li>
+<li>Awesome tmux: https://github.com/rothgar/awesome-tmux</li>
+<li>Книга: <em>tmux 2: Productive Mouse-Free Development</em> (Brian Hogan)</li>
+<li>Шпаргалка: https://tmuxcheatsheet.com</li>
+</ul>
+<hr />
+<p><em>Сгенерировано как шпаргалка. tmux имеет огромный функционал —
+актуальные биндинги смотрите через <code>C-b ?</code> и <code>man tmux</code>.</em></p>
+    </article>
+    <nav class="pagination">
+      <a class="pager prev" href="niri.html">← Niri</a>
+      <a class="pager next" href="bash.html">Bash →</a>
+    </nav>
+  </main>
+
+  <aside class="toc">
+    <details open>
+      <summary>📑 Оглавление</summary>
+      <div class="toc-list">
+<div class="toc">
+<ul>
+<li><a href="#tmux-шпаргалка-по-горячим-клавишам-и-командам">🪟 Tmux — шпаргалка по горячим клавишам и командам</a><ul>
+<li><a href="#главные-понятия">🔑 Главные понятия</a></li>
+<li><a href="#запуск-и-сессии">🚀 Запуск и сессии</a></li>
+<li><a href="#окна-windows">🖼️ Окна (windows)</a></li>
+<li><a href="#панели-panes-сплиты">▦ Панели (panes — сплиты)</a><ul>
+<li><a href="#layout-ы-по-c-b-space">Layout&rsquo;ы (по C-b Space)</a></li>
+</ul>
+</li>
+<li><a href="#копирование-и-режим-прокрутки">📜 Копирование и режим прокрутки</a><ul>
+<li><a href="#копирование-в-системный-буфер-обмена">Копирование в системный буфер обмена</a></li>
+</ul>
+</li>
+<li><a href="#prompt-и-команды-tmux-после-c-b">🎛️ Prompt и команды tmux (после C-b :)</a></li>
+<li><a href="#конфигурация-tmux-conf">⚙️ Конфигурация ~/.tmux.conf</a></li>
+<li><a href="#мышь">🖱️ Мышь</a></li>
+<li><a href="#плагины-через-tpm">🧩 Плагины (через TPM)</a><ul>
+<li><a href="#полезные-плагины">Полезные плагины</a></li>
+</ul>
+</li>
+<li><a href="#скриптинг-tmux">🐚 Скриптинг tmux</a><ul>
+<li><a href="#скрипт-создания-dev-окружения">Скрипт создания dev-окружения</a></li>
+<li><a href="#полезные-команды-для-скриптов">Полезные команды для скриптов</a></li>
+</ul>
+</li>
+<li><a href="#внутри-сессии-статус-бар-и-подсказки">⌨️ Внутри сессии: статус-бар и подсказки</a></li>
+<li><a href="#полезные-советы">💡 Полезные советы</a></li>
+<li><a href="#ссылки">🔗 Ссылки</a></li>
+</ul>
+</li>
+</ul>
+</div>
+
+      </div>
+    </details>
+  </aside>
+</div>
+
+<button class="back-top" id="backTop" aria-label="Наверх">↑</button>
+
+<script src="assets/search.js"></script>
+<script src="assets/page.js"></script>
+</body>
+</html>

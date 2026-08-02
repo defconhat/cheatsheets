@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Шпаргалки — Шпаргалки</title>
+<link rel="stylesheet" href="assets/style.css">
+<link rel="stylesheet" href="assets/pygments.css">
+</head>
+<body>
+<header class="hero">
+  <div class="hero-inner">
+    <h1>📌 Шпаргалки</h1>
+    <p class="subtitle">Горячие клавиши и команды для ежедневной работы</p>
+    <div class="search">
+      <input type="search" id="search" placeholder="🔍 Поиск по 43 шпаргалкам…" autocomplete="off">
+    </div>
+  </div>
+</header>
+
+<main class="grid" id="cards">
+        <a class="card" href="yazi.html" style="--accent:#7c3aed">
+          <div class="card-icon">📦</div>
+          <div class="card-body">
+            <h3>Yazi</h3>
+            <p>Терминальный файловый менеджер на Rust</p>
+            <div class="tags"><span class="tag">файлы</span><span class="tag">терминал</span><span class="tag">rust</span></div>
+          </div>
+          <div class="card-arrow">→</div>
+        </a>
+        <a class="card" href="neovim.html" style="--accent:#57b657">
+          <div class="card-icon">📘</div>
+          <div class="card-body">
+            <h3>Neovim (LazyVim)</h3>
+            <p>Дистрибутив Neovim на базе lazy.nvim</p>
+            <div class="tags"><span class="tag">редактор</span><span class="tag">vim</span><span class="tag">lsp</span></div>
+          </div>
+          <div class="card-arrow">→</div>
+        </a>
+        <a class="card" href="niri.html" style="--accent:#f59e0b">
+          <div class="card-icon">🪟</div>
+          <div class="card-body">
+            <h3>Niri</h3>
+            <p>Scrollable-tiling Wayland compositor</p>
+            <div class="tags"><span class="tag">wayland</span><span class="tag">wm</span><span class="tag">тайлинг</span></div>
+          </div>
+          <div class="card-arrow">→</div>
+        </a>
+        <a class="card" href="tmux.html" style="--accent:#06b6d4">
+          <div class="card-icon">🪟</div>
+          <div class="card-body">
+            <h3>Tmux</h3>
+            <p>Терминальный мультиплексор</p>
+            <div class="tags"><span class="tag">терминал</span><span class="tag">сессии</span><span class="tag">сплиты</span></div>
+          </div>
+          <div class="card-arrow">→</div>
+        </a>
+        <a class="card" href="bash.html" style="--accent:#eab308">
+          <div class="card-icon">🐚</div>
+          <div class="card-body">
+            <h3>Bash</h3>
+            <p>Скриптинг и использование оболочки</p>
+            <div class="tags"><span class="tag">shell</span><span class="tag">скрипты</span><span class="tag">автоматизация</span></div>
+          </div>
+          <div class="card-arrow">→</div>
+        </a>
+        <a class="card" href="git.html" style="--accent:#ef4444">
+          <div class="card-icon">🔀</div>
+          <div class="card-body">
+            <h3>Git</h3>
+            <p>Контроль версий и workflow</p>
+            <div class="tags"><span class="tag">vcs</span><span class="tag">github</span><span class="tag">коммиты</span></div>
+          </div>
+          <div class="card-arrow">→</div>
+        </a>
+        <a class="card" href="terminal.html" style="--accent:#10b981">
+          <div class="card-icon">🖥️</div>
+          <div class="card-body">
+            <h3>Терминал Linux</h3>
+            <p>Базовые и продвинутые команды</p>
+            <div class="tags"><span class="tag">cli</span><span class="tag">linux</span><span class="tag">команды</span></div>
+          </div>
+          <div class="card-arrow">→</div>
+        </a>
+        <a class="card" href="powershell.html" style="--accent:#0f7cbd">
+          <div class="card-icon">💻</div>
+          <div class="card-body">
+            <h3>PowerShell</h3>
+            <p>Кроссплатформенная оболочка и скриптинг (Windows/Linux)</p>
+            <div class="tags"><span class="tag">shell</span><span class="tag">windows</span><span class="tag">скрипты</span><span class="tag">.net</span></div>
+          </div>
+          <div class="card-arrow">→</div>
+        </a>
+        <a class="card" href="cmd.html" style="--accent:#71717a">
+          <div class="card-icon">🪟</div>
+          <div class="card-body">
+            <h3>CMD (cmd.exe)</h3>
+            <p>Классическая командная строка Windows</p>
+            <div class="tags"><span class="tag">windows</span><span class="tag">bat</span><span class="tag">cmd</span></div>
+          </div>
+          <div class="card-arrow">→</div>
+        </a>
+        <a class="card" href="python.html" style="--accent:#71717a">
+          <div class="card-icon">🐍</div>
+          <div class="card-body">
+            <h3>Python</h3>
+            <p>Язык и стандартная библиотека</p>
+            <div class="tags"><span class="tag">python</span><span class="tag">язык</span><span class="tag">stdlib</span></div>
+          </div>
+          <div class="card-arrow">→</div>
+        </a>
+        <a class="card" href="systemd.html" style="--accent:#71717a">
+          <div class="card-icon">⚙️</div>
+          <div class="card-body">
+            <h3>systemd</h3>
+            <p>Управление службами, таймеры, журналы</p>
+            <div class="tags"><span class="tag">linux</span><span class="tag">сервисы</span><span class="tag">init</span></div>
+          </div>
+          <div class="card-arrow">→</div>
+        </a>
+        <a class="card" href="ssh.html" style="--accent:#71717a">
+          <div class="card-icon">🔐</div>
+          <div class="card-body">
+            <h3>SSH</h3>
+            <p>Удалённый доступ, ключи, туннели</p>
+            <div class="tags"><span class="tag">сеть</span><span class="tag">безопасность</span><span class="tag">туннели</span></div>
+          </div>
+          <div class="card-arrow">→</div>
+        </a>
+        <a class="card" href="make-cmake.html" style="--accent:#71717a">
+          <div class="card-icon">🔨</div>
+          <div class="card-body">
+            <h3>Make / CMake</h3>
+            <p>Системы сборки для C/C++</p>
+            <div class="tags"><span class="tag">сборка</span><span class="tag">c/c++</span><span class="tag">make</span></div>
+          </div>
+          <div class="card-arrow">→</div>
+        </a>
+        <a class="card" href="docker.html" style="--accent:#71717a">
+          <div class="card-icon">🐳</div>
+          <div class="card-body">
+            <h3>Docker</h3>
+            <p>Контейнеризация и docker-compose</p>
+            <div class="tags"><span class="tag">контейнеры</span><span class="tag">devops</span><span class="tag">compose</span></div>
+          </div>
+          <div class="card-arrow">→</div>
+        </a>
+        <a class="card" href="pacman.html" style="--accent:#71717a">
+          <div class="card-icon">📦</div>
+          <div class="card-body">
+            <h3>pacman / yay / paru</h3>
+            <p>Пакетный менеджер Arch / CachyOS + AUR</p>
+            <div class="tags"><span class="tag">arch</span><span class="tag">aur</span><span class="tag">пакеты</span></div>
+          </div>
+          <div class="card-arrow">→</div>
+        </a>
+        <a class="card" href="spark.html" style="--accent:#71717a">
+          <div class="card-icon">⚡</div>
+          <div class="card-body">
+            <h3>Apache Spark / PySpark</h3>
+            <p>Распределённая обработка больших данных</p>
+            <div class="tags"><span class="tag">bigdata</span><span class="tag">etl</span><span class="tag">pyspark</span></div>
+          </div>
+          <div class="card-arrow">→</div>
+        </a>
+        <a class="card" href="markdown.html" style="--accent:#71717a">
+          <div class="card-icon">📝</div>
+          <div class="card-body">
+            <h3>Markdown</h3>
+            <p>Синтаксис разметки для README и документации</p>
+            <div class="tags"><span class="tag">разметка</span><span class="tag">docs</span><span class="tag">readme</span></div>
+          </div>
+          <div class="card-arrow">→</div>
+        </a>
+        <a class="card" href="regex.html" style="--accent:#71717a">
+          <div class="card-icon">🔍</div>
+          <div class="card-body">
+            <h3>Регулярные выражения</h3>
+            <p>Шаблоны для поиска и замены</p>
+            <div class="tags"><span class="tag">regex</span><span class="tag">поиск</span><span class="tag">текст</span></div>
+          </div>
+          <div class="card-arrow">→</div>
+        </a>
+        <a class="card" href="jq-json.html" style="--accent:#71717a">
+          <div class="card-icon">🔧</div>
+          <div class="card-body">
+            <h3>jq + JSON</h3>
+            <p>Обработка JSON в командной строке</p>
+            <div class="tags"><span class="tag">json</span><span class="tag">cli</span><span class="tag">jq</span></div>
+          </div>
+          <div class="card-arrow">→</div>
+        </a>
+        <a class="card" href="awk-sed.html" style="--accent:#71717a">
+          <div class="card-icon">✂️</div>
+          <div class="card-body">
+            <h3>awk / sed</h3>
+            <p>Обработка и редактирование текста</p>
+            <div class="tags"><span class="tag">текст</span><span class="tag">sed</span><span class="tag">awk</span></div>
+          </div>
+          <div class="card-arrow">→</div>
+        </a>
+        <a class="card" href="airflow.html" style="--accent:#71717a">
+          <div class="card-icon">🌪️</div>
+          <div class="card-body">
+            <h3>Apache Airflow</h3>
+            <p>Оркестрация ETL/ELT пайплайнов</p>
+            <div class="tags"><span class="tag">etl</span><span class="tag">оркестрация</span><span class="tag">dag</span></div>
+          </div>
+          <div class="card-arrow">→</div>
+        </a>
+        <a class="card" href="http-curl.html" style="--accent:#71717a">
+          <div class="card-icon">🌐</div>
+          <div class="card-body">
+            <h3>HTTP / curl</h3>
+            <p>HTTP-протокол и запросы curl</p>
+            <div class="tags"><span class="tag">http</span><span class="tag">curl</span><span class="tag">api</span></div>
+          </div>
+          <div class="card-arrow">→</div>
+        </a>
+        <a class="card" href="yaml.html" style="--accent:#71717a">
+          <div class="card-icon">📄</div>
+          <div class="card-body">
+            <h3>YAML</h3>
+            <p>Формат данных для K8s, Compose, CI/CD</p>
+            <div class="tags"><span class="tag">yaml</span><span class="tag">конфиг</span><span class="tag">k8s</span></div>
+          </div>
+          <div class="card-arrow">→</div>
+        </a>
+        <a class="card" href="vscode.html" style="--accent:#71717a">
+          <div class="card-icon">💻</div>
+          <div class="card-body">
+            <h3>VS Code</h3>
+            <p>Горячие клавиши и настройка редактора</p>
+            <div class="tags"><span class="tag">редактор</span><span class="tag">ide</span><span class="tag">shortcuts</span></div>
+          </div>
+          <div class="card-arrow">→</div>
+        </a>
+        <a class="card" href="cron.html" style="--accent:#71717a">
+          <div class="card-icon">⏰</div>
+          <div class="card-body">
+            <h3>cron</h3>
+            <p>Планировщик задач в Linux</p>
+            <div class="tags"><span class="tag">расписание</span><span class="tag">linux</span><span class="tag">automation</span></div>
+          </div>
+          <div class="card-arrow">→</div>
+        </a>
+        <a class="card" href="fzf-zoxide.html" style="--accent:#71717a">
+          <div class="card-icon">🔎</div>
+          <div class="card-body">
+            <h3>fzf + zoxide</h3>
+            <p>Fuzzy-поиск и умный cd</p>
+            <div class="tags"><span class="tag">cli</span><span class="tag">поиск</span><span class="tag">навигация</span></div>
+          </div>
+          <div class="card-arrow">→</div>
+        </a>
+        <a class="card" href="minikube-k8s.html" style="--accent:#71717a">
+          <div class="card-icon">☸️</div>
+          <div class="card-body">
+            <h3>Minikube / Kubernetes</h3>
+            <p>Локальный K8s и kubectl</p>
+            <div class="tags"><span class="tag">k8s</span><span class="tag">kubernetes</span><span class="tag">devops</span></div>
+          </div>
+          <div class="card-arrow">→</div>
+        </a>
+        <a class="card" href="cicd.html" style="--accent:#71717a">
+          <div class="card-icon">🦊</div>
+          <div class="card-body">
+            <h3>GitLab CI / GitHub Actions</h3>
+            <p>Непрерывная интеграция и доставка</p>
+            <div class="tags"><span class="tag">ci/cd</span><span class="tag">gitlab</span><span class="tag">github</span></div>
+          </div>
+          <div class="card-arrow">→</div>
+        </a>
+        <a class="card" href="nginx.html" style="--accent:#71717a">
+          <div class="card-icon">🌐</div>
+          <div class="card-body">
+            <h3>nginx</h3>
+            <p>Веб-сервер и reverse-proxy</p>
+            <div class="tags"><span class="tag">web</span><span class="tag">proxy</span><span class="tag">load-balancer</span></div>
+          </div>
+          <div class="card-arrow">→</div>
+        </a>
+        <a class="card" href="dbt.html" style="--accent:#71717a">
+          <div class="card-icon">🔧</div>
+          <div class="card-body">
+            <h3>dbt</h3>
+            <p>Трансформация данных в DWH</p>
+            <div class="tags"><span class="tag">data</span><span class="tag">etl</span><span class="tag">dwh</span></div>
+          </div>
+          <div class="card-arrow">→</div>
+        </a>
+        <a class="card" href="kafka.html" style="--accent:#71717a">
+          <div class="card-icon">🐘</div>
+          <div class="card-body">
+            <h3>Apache Kafka</h3>
+            <p>Потоковая обработка событий</p>
+            <div class="tags"><span class="tag">streaming</span><span class="tag">bigdata</span><span class="tag">events</span></div>
+          </div>
+          <div class="card-arrow">→</div>
+        </a>
+        <a class="card" href="prometheus-grafana.html" style="--accent:#71717a">
+          <div class="card-icon">📊</div>
+          <div class="card-body">
+            <h3>Prometheus / Grafana</h3>
+            <p>Сбор метрик и дашборды мониторинга</p>
+            <div class="tags"><span class="tag">мониторинг</span><span class="tag">метрики</span><span class="tag">dashboards</span></div>
+          </div>
+          <div class="card-arrow">→</div>
+        </a>
+        <a class="card" href="iceberg-nessie.html" style="--accent:#71717a">
+          <div class="card-icon">🧊</div>
+          <div class="card-body">
+            <h3>Iceberg / Nessie</h3>
+            <p>Table format + Git-подобный каталог для lakehouse</p>
+            <div class="tags"><span class="tag">lakehouse</span><span class="tag">table-format</span><span class="tag">bigdata</span></div>
+          </div>
+          <div class="card-arrow">→</div>
+        </a>
+        <a class="card" href="impala.html" style="--accent:#71717a">
+          <div class="card-icon">🐬</div>
+          <div class="card-body">
+            <h3>Apache Impala</h3>
+            <p>MPP SQL-движок для аналитики</p>
+            <div class="tags"><span class="tag">sql</span><span class="tag">bigdata</span><span class="tag">olap</span></div>
+          </div>
+          <div class="card-arrow">→</div>
+        </a>
+        <a class="card" href="terraform.html" style="--accent:#71717a">
+          <div class="card-icon">🏗️</div>
+          <div class="card-body">
+            <h3>Terraform</h3>
+            <p>Infrastructure as Code (облако, K8s)</p>
+            <div class="tags"><span class="tag">iac</span><span class="tag">облако</span><span class="tag">devops</span></div>
+          </div>
+          <div class="card-arrow">→</div>
+        </a>
+        <a class="card" href="linux-internals.html" style="--accent:#71717a">
+          <div class="card-icon">🐧</div>
+          <div class="card-body">
+            <h3>Linux Internals</h3>
+            <p>procfs / sysfs / cgroups / namespaces</p>
+            <div class="tags"><span class="tag">linux</span><span class="tag">ядро</span><span class="tag">cgroups</span></div>
+          </div>
+          <div class="card-arrow">→</div>
+        </a>
+        <a class="card" href="miscellaneous.html" style="--accent:#71717a">
+          <div class="card-icon">🧰</div>
+          <div class="card-body">
+            <h3>Miscellaneous</h3>
+            <p>SQL-трюки, CachyOS, Python, инструменты — сборник заметок</p>
+            <div class="tags"><span class="tag">заметки</span><span class="tag">sql</span><span class="tag">разное</span></div>
+          </div>
+          <div class="card-arrow">→</div>
+        </a>
+        <a class="card" href="python-automation-libs.html" style="--accent:#3b82f6">
+          <div class="card-icon">🐍</div>
+          <div class="card-body">
+            <h3>Python: авт-ция (10 libs)</h3>
+            <p>tqdm, Rich, sh, Watchdog, Loguru, IceCream и др.</p>
+            <div class="tags"><span class="tag">python</span><span class="tag">автоматизация</span><span class="tag">библиотеки</span></div>
+          </div>
+          <div class="card-arrow">→</div>
+        </a>
+        <a class="card" href="eza.html" style="--accent:#f59e0b">
+          <div class="card-icon">🌈</div>
+          <div class="card-body">
+            <h3>eza</h3>
+            <p>Современная замена ls (форк exa) на Rust</p>
+            <div class="tags"><span class="tag">терминал</span><span class="tag">ls</span><span class="tag">rust</span><span class="tag">файлы</span></div>
+          </div>
+          <div class="card-arrow">→</div>
+        </a>
+        <a class="card" href="dbeaver.html" style="--accent:#8b5cf6">
+          <div class="card-icon">🗄️</div>
+          <div class="card-body">
+            <h3>DBeaver</h3>
+            <p>Универсальный GUI-клиент для БД (Postgres, MySQL, ClickHouse…)</p>
+            <div class="tags"><span class="tag">базы-данных</span><span class="tag">sql</span><span class="tag">gui</span><span class="tag">postgres</span></div>
+          </div>
+          <div class="card-arrow">→</div>
+        </a>
+        <a class="card" href="zcode.html" style="--accent:#10b981">
+          <div class="card-icon">🤖</div>
+          <div class="card-body">
+            <h3>ZCode</h3>
+            <p>AI-агент для кодинга: команды, скиллы, MCP, плагины</p>
+            <div class="tags"><span class="tag">ai</span><span class="tag">агент</span><span class="tag">cli</span><span class="tag">автоматизация</span></div>
+          </div>
+          <div class="card-arrow">→</div>
+        </a>
+        <a class="card" href="warp.html" style="--accent:#06b6d4">
+          <div class="card-icon">🚀</div>
+          <div class="card-body">
+            <h3>Warp</h3>
+            <p>Терминал на Rust с блоками, AI и workflows</p>
+            <div class="tags"><span class="tag">терминал</span><span class="tag">ai</span><span class="tag">rust</span><span class="tag">cli</span></div>
+          </div>
+          <div class="card-arrow">→</div>
+        </a>
+        <a class="card" href="agentic-ai-dev.html" style="--accent:#f59e0b">
+          <div class="card-icon">🤝</div>
+          <div class="card-body">
+            <h3>Агентная разработка с ИИ</h3>
+            <p>Паттерны работы с AI-агентами: ZCode, Claude Code, Cursor</p>
+            <div class="tags"><span class="tag">ai</span><span class="tag">agentic</span><span class="tag">best-practices</span><span class="tag">workflow</span></div>
+          </div>
+          <div class="card-arrow">→</div>
+        </a>
+</main>
+
+<footer class="site-footer">
+  <p>Сгенерировано из Markdown · 43 шпаргалок ·
+    <a href="https://yazi-rs.github.io">источники</a> в каждом файле</p>
+</footer>
+
+<script src="assets/search.js"></script>
+</body>
+</html>

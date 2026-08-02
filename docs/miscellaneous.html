@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Miscellaneous — Шпаргалки</title>
+<link rel="stylesheet" href="assets/style.css">
+<link rel="stylesheet" href="assets/pygments.css">
+</head>
+<body>
+<div class="layout">
+  <aside class="sidebar">
+    <a href="index.html" class="brand">📌 Шпаргалки</a>
+    <nav class="nav">
+<a href="yazi.html" class="nav-item"><span class="nav-ico">📦</span>Yazi</a>
+<a href="neovim.html" class="nav-item"><span class="nav-ico">📘</span>Neovim (LazyVim)</a>
+<a href="niri.html" class="nav-item"><span class="nav-ico">🪟</span>Niri</a>
+<a href="tmux.html" class="nav-item"><span class="nav-ico">🪟</span>Tmux</a>
+<a href="bash.html" class="nav-item"><span class="nav-ico">🐚</span>Bash</a>
+<a href="git.html" class="nav-item"><span class="nav-ico">🔀</span>Git</a>
+<a href="terminal.html" class="nav-item"><span class="nav-ico">🖥️</span>Терминал Linux</a>
+<a href="powershell.html" class="nav-item"><span class="nav-ico">💻</span>PowerShell</a>
+<a href="cmd.html" class="nav-item"><span class="nav-ico">🪟</span>CMD (cmd.exe)</a>
+<a href="python.html" class="nav-item"><span class="nav-ico">🐍</span>Python</a>
+<a href="systemd.html" class="nav-item"><span class="nav-ico">⚙️</span>systemd</a>
+<a href="ssh.html" class="nav-item"><span class="nav-ico">🔐</span>SSH</a>
+<a href="make-cmake.html" class="nav-item"><span class="nav-ico">🔨</span>Make / CMake</a>
+<a href="docker.html" class="nav-item"><span class="nav-ico">🐳</span>Docker</a>
+<a href="pacman.html" class="nav-item"><span class="nav-ico">📦</span>pacman / yay / paru</a>
+<a href="spark.html" class="nav-item"><span class="nav-ico">⚡</span>Apache Spark / PySpark</a>
+<a href="markdown.html" class="nav-item"><span class="nav-ico">📝</span>Markdown</a>
+<a href="regex.html" class="nav-item"><span class="nav-ico">🔍</span>Регулярные выражения</a>
+<a href="jq-json.html" class="nav-item"><span class="nav-ico">🔧</span>jq + JSON</a>
+<a href="awk-sed.html" class="nav-item"><span class="nav-ico">✂️</span>awk / sed</a>
+<a href="airflow.html" class="nav-item"><span class="nav-ico">🌪️</span>Apache Airflow</a>
+<a href="http-curl.html" class="nav-item"><span class="nav-ico">🌐</span>HTTP / curl</a>
+<a href="yaml.html" class="nav-item"><span class="nav-ico">📄</span>YAML</a>
+<a href="vscode.html" class="nav-item"><span class="nav-ico">💻</span>VS Code</a>
+<a href="cron.html" class="nav-item"><span class="nav-ico">⏰</span>cron</a>
+<a href="fzf-zoxide.html" class="nav-item"><span class="nav-ico">🔎</span>fzf + zoxide</a>
+<a href="minikube-k8s.html" class="nav-item"><span class="nav-ico">☸️</span>Minikube / Kubernetes</a>
+<a href="cicd.html" class="nav-item"><span class="nav-ico">🦊</span>GitLab CI / GitHub Actions</a>
+<a href="nginx.html" class="nav-item"><span class="nav-ico">🌐</span>nginx</a>
+<a href="dbt.html" class="nav-item"><span class="nav-ico">🔧</span>dbt</a>
+<a href="kafka.html" class="nav-item"><span class="nav-ico">🐘</span>Apache Kafka</a>
+<a href="prometheus-grafana.html" class="nav-item"><span class="nav-ico">📊</span>Prometheus / Grafana</a>
+<a href="iceberg-nessie.html" class="nav-item"><span class="nav-ico">🧊</span>Iceberg / Nessie</a>
+<a href="impala.html" class="nav-item"><span class="nav-ico">🐬</span>Apache Impala</a>
+<a href="terraform.html" class="nav-item"><span class="nav-ico">🏗️</span>Terraform</a>
+<a href="linux-internals.html" class="nav-item"><span class="nav-ico">🐧</span>Linux Internals</a>
+<a href="miscellaneous.html" class="nav-item active"><span class="nav-ico">🧰</span>Miscellaneous</a>
+<a href="python-automation-libs.html" class="nav-item"><span class="nav-ico">🐍</span>Python: авт-ция (10 libs)</a>
+<a href="eza.html" class="nav-item"><span class="nav-ico">🌈</span>eza</a>
+<a href="dbeaver.html" class="nav-item"><span class="nav-ico">🗄️</span>DBeaver</a>
+<a href="zcode.html" class="nav-item"><span class="nav-ico">🤖</span>ZCode</a>
+<a href="warp.html" class="nav-item"><span class="nav-ico">🚀</span>Warp</a>
+<a href="agentic-ai-dev.html" class="nav-item"><span class="nav-ico">🤝</span>Агентная разработка с ИИ</a>
+    </nav>
+  </aside>
+
+  <main class="content">
+    <article>
+<h1 id="miscellaneous-сборник-технических-заметок-и-трюков">🧰 Miscellaneous — сборник технических заметок и трюков<a class="headerlink" href="#miscellaneous-сборник-технических-заметок-и-трюков" title="Ссылка">#</a></h1>
+<blockquote>
+<p>Коллекция разрозненных рецептов из практики: SQL-трюки, Linux, Python, CachyOS,
+мониторинг, инструменты. Собрано из рабочих заметок.</p>
+</blockquote>
+<hr />
+<h2 id="sql-трюки-и-оптимизации-postgresql-greenplum">🐘 SQL — трюки и оптимизации (PostgreSQL / Greenplum)<a class="headerlink" href="#sql-трюки-и-оптимизации-postgresql-greenplum" title="Ссылка">#</a></h2>
+<h3 id="очистка-данных-data-cleaning">🧹 Очистка данных (Data Cleaning)<a class="headerlink" href="#очистка-данных-data-cleaning" title="Ссылка">#</a></h3>
+<p><strong>Нормализация Unicode (диакритики):</strong></p>
+<div class="highlight"><pre><span></span><code><span class="c1">-- Привести акцентированные символы к ASCII</span>
+<span class="k">translate</span><span class="p">(</span><span class="k">column</span><span class="p">,</span>
+<span class="w">    </span><span class="s1">&#39;áéíóúàèìòùãẽĩõũâêîôûäëïöüçñ&#39;</span><span class="p">,</span>
+<span class="w">    </span><span class="s1">&#39;aeiouaeiouaeiouaeiouaeioucn&#39;</span>
+<span class="p">);</span>
+
+<span class="c1">-- Удаление всех не-ASCII символов</span>
+<span class="n">regexp_replace</span><span class="p">(</span><span class="k">column</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;[^\x00-\x7F]+&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;&#39;</span><span class="p">);</span>
+</code></pre></div>
+
+<blockquote>
+<p>💡 Подробнее: коллации (collation) в БД влияют на сортировку — одни и те же данные
+могут сортироваться по-разному в зависимости от <code>LC_COLLATE</code>.</p>
+</blockquote>
+<p><strong>Конвертация часовых поясов:</strong></p>
+<div class="highlight"><pre><span></span><code><span class="c1">-- Явное преобразование с tz-колонки</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="n">timestampz_column</span><span class="w"> </span><span class="k">AT</span><span class="w"> </span><span class="k">TIME</span><span class="w"> </span><span class="k">ZONE</span><span class="w"> </span><span class="s1">&#39;Europe/Moscow&#39;</span><span class="p">;</span>
+
+<span class="c1">-- Если временная зона указана не всегда</span>
+<span class="k">coalesce</span><span class="p">(</span>
+<span class="w">    </span><span class="n">try_cast</span><span class="p">(</span><span class="n">timestamp_column</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="k">timestamp</span><span class="w"> </span><span class="k">with</span><span class="w"> </span><span class="k">time</span><span class="w"> </span><span class="k">zone</span><span class="p">),</span>
+<span class="w">    </span><span class="n">timestamp_column</span><span class="p">::</span><span class="k">timestamp</span><span class="w"> </span><span class="k">AT</span><span class="w"> </span><span class="k">TIME</span><span class="w"> </span><span class="k">ZONE</span><span class="w"> </span><span class="s1">&#39;UTC&#39;</span>
+<span class="p">)</span>
+</code></pre></div>
+
+<p><strong>Удаление спецсимволов:</strong></p>
+<div class="highlight"><pre><span></span><code><span class="c1">-- Только буквы, цифры и пробелы</span>
+<span class="n">regexp_replace</span><span class="p">(</span><span class="k">column</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;[^a-zA-Z0-9\s]&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;&#39;</span><span class="p">);</span>
+
+<span class="c1">-- Удаление конкретных символов</span>
+<span class="k">translate</span><span class="p">(</span><span class="k">column</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;[]{}()*#$%@!?+=/\|&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;&#39;</span><span class="p">);</span>
+</code></pre></div>
+
+<p><strong>Приведение булевых значений к стандарту:</strong></p>
+<div class="highlight"><pre><span></span><code><span class="k">case</span>
+<span class="w">    </span><span class="k">when</span><span class="w"> </span><span class="k">lower</span><span class="p">(</span><span class="k">column</span><span class="p">)</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;1&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;yes&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;true&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;y&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;t&#39;</span><span class="p">)</span><span class="w">  </span><span class="k">then</span><span class="w"> </span><span class="k">true</span>
+<span class="w">    </span><span class="k">when</span><span class="w"> </span><span class="k">lower</span><span class="p">(</span><span class="k">column</span><span class="p">)</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;0&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;no&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;false&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;n&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;f&#39;</span><span class="p">)</span><span class="w">  </span><span class="k">then</span><span class="w"> </span><span class="k">false</span>
+<span class="w">    </span><span class="k">else</span><span class="w"> </span><span class="k">null</span>
+<span class="k">end</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">bool_column</span>
+</code></pre></div>
+
+<h3 id="оптимизации-запросов">⚡ Оптимизации запросов<a class="headerlink" href="#оптимизации-запросов" title="Ссылка">#</a></h3>
+<p><strong>Замена тяжёлого GROUP BY на WINDOW-функции (скоринг):</strong></p>
+<div class="highlight"><pre><span></span><code><span class="c1">-- БЫЛО: подзапрос с GROUP BY + обратный join</span>
+<span class="c1">-- СТАЛО:</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="k">SELECT</span><span class="w"> </span><span class="n">t</span><span class="p">.</span><span class="o">*</span><span class="p">,</span>
+<span class="w">           </span><span class="n">ROW_NUMBER</span><span class="p">()</span><span class="w"> </span><span class="n">OVER</span><span class="w"> </span><span class="p">(</span><span class="n">PARTITION</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">user_id</span><span class="w"> </span><span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="nb">date</span><span class="w"> </span><span class="k">DESC</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">rn</span>
+<span class="w">    </span><span class="k">FROM</span><span class="w"> </span><span class="n">t</span>
+<span class="p">)</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">rn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+</code></pre></div>
+
+<p><strong>Классический Pivot через <code>FILTER</code> (PostgreSQL/Greenplum):</strong></p>
+<div class="highlight"><pre><span></span><code><span class="c1">-- БЫЛО: нагромождение CASE WHEN</span>
+<span class="c1">-- СТАЛО: чище и быстрее</span>
+<span class="k">SUM</span><span class="p">(</span><span class="n">value</span><span class="p">)</span><span class="w"> </span><span class="n">FILTER</span><span class="w"> </span><span class="p">(</span><span class="k">WHERE</span><span class="w"> </span><span class="n">metric</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;clicks&#39;</span><span class="p">)</span><span class="w">    </span><span class="k">AS</span><span class="w"> </span><span class="n">clicks</span><span class="p">,</span>
+<span class="k">SUM</span><span class="p">(</span><span class="n">value</span><span class="p">)</span><span class="w"> </span><span class="n">FILTER</span><span class="w"> </span><span class="p">(</span><span class="k">WHERE</span><span class="w"> </span><span class="n">metric</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;opens&#39;</span><span class="p">)</span><span class="w">     </span><span class="k">AS</span><span class="w"> </span><span class="n">opens</span><span class="p">,</span>
+<span class="k">SUM</span><span class="p">(</span><span class="n">value</span><span class="p">)</span><span class="w"> </span><span class="n">FILTER</span><span class="w"> </span><span class="p">(</span><span class="k">WHERE</span><span class="w"> </span><span class="n">metric</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;delivered&#39;</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">delivered</span>
+</code></pre></div>
+
+<p><strong>Unpivot через <code>LATERAL CROSS JOIN</code>:</strong></p>
+<div class="highlight"><pre><span></span><code><span class="c1">-- БЫЛО: 3× UNION ALL</span>
+<span class="c1">-- СТАЛО: таблица читается 1 раз</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="n">t</span><span class="p">.</span><span class="n">user_id</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">.</span><span class="n">metric</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">.</span><span class="n">val</span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">metrics</span><span class="w"> </span><span class="n">t</span>
+<span class="k">CROSS</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="k">LATERAL</span><span class="w"> </span><span class="p">(</span><span class="k">VALUES</span>
+<span class="w">    </span><span class="p">(</span><span class="s1">&#39;sent&#39;</span><span class="p">,</span><span class="w">     </span><span class="n">t</span><span class="p">.</span><span class="n">sent</span><span class="p">),</span>
+<span class="w">    </span><span class="p">(</span><span class="s1">&#39;deliv&#39;</span><span class="p">,</span><span class="w">    </span><span class="n">t</span><span class="p">.</span><span class="n">delivered</span><span class="p">),</span>
+<span class="w">    </span><span class="p">(</span><span class="s1">&#39;opened&#39;</span><span class="p">,</span><span class="w">   </span><span class="n">t</span><span class="p">.</span><span class="n">opened</span><span class="p">)</span>
+<span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">x</span><span class="p">(</span><span class="n">metric</span><span class="p">,</span><span class="w"> </span><span class="n">val</span><span class="p">);</span>
+</code></pre></div>
+
+<p><strong><code>NULLS LAST</code> в <code>ORDER BY ... DESC</code>:</strong></p>
+<div class="highlight"><pre><span></span><code><span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">val</span><span class="w"> </span><span class="k">DESC</span><span class="w"> </span><span class="n">NULLS</span><span class="w"> </span><span class="k">LAST</span><span class="p">;</span>
+</code></pre></div>
+
+<blockquote>
+<p>По умолчанию в Postgres/Greenplum при <code>DESC</code> NULL&rsquo;ы вылетают первыми,
+ломая топ-10 метрик приложения.</p>
+</blockquote>
+<h3 id="sql-грабли-даже-для-сеньоров">⚠️ SQL-грабли (даже для сеньоров)<a class="headerlink" href="#sql-грабли-даже-для-сеньоров" title="Ссылка">#</a></h3>
+<ol>
+<li><strong><code>= NULL</code> никогда не true</strong> — используйте <code>IS NULL</code> / <code>IS NOT NULL</code>
+   (трёхзначная логика: <code>true</code>, <code>false</code>, <code>unknown</code>).</li>
+<li><strong><code>NOT IN (...)</code> + NULL в списке</strong> может вернуть 0 строк. Безопаснее <code>NOT EXISTS</code>.</li>
+<li><strong><code>LEFT JOIN</code> + фильтр в <code>WHERE</code></strong> превращается в <code>INNER JOIN</code>.
+   Фильтры по правой таблице кладите в <code>ON</code>.</li>
+<li><strong><code>COUNT(col)</code> пропускает NULL</strong>, а <code>COUNT(*)</code> — нет. Метрики «магически»
+   не сходятся.</li>
+<li><strong>NULL ломает конкатенацию и сравнения</strong> — используйте <code>COALESCE</code> осознанно.</li>
+</ol>
+<h3 id="sql-задача-с-подвохом-последний-заказ-оплачен">🎣 SQL-задача с подвохом: «последний заказ оплачен»<a class="headerlink" href="#sql-задача-с-подвохом-последний-заказ-оплачен" title="Ссылка">#</a></h3>
+<blockquote>
+<p>Найти пользователей, у которых <strong>последний</strong> заказ был оплачен.</p>
+</blockquote>
+<div class="highlight"><pre><span></span><code><span class="c1">-- orders: id | user_id | status | created_at</span>
+<span class="c1">-- user 10: paid(01-01) → cancelled(01-05)  ← последний cancelled!</span>
+</code></pre></div>
+
+<p><strong>❌ Неверно</strong> — фильтр <code>WHERE status='paid'</code> срабатывает до <code>ROW_NUMBER()</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="k">WITH</span><span class="w"> </span><span class="n">ranked</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="p">,</span><span class="w"> </span><span class="n">ROW_NUMBER</span><span class="p">()</span><span class="w"> </span><span class="n">OVER</span><span class="w"> </span><span class="p">(</span>
+<span class="w">        </span><span class="n">PARTITION</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">user_id</span><span class="w"> </span><span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">created_at</span><span class="w"> </span><span class="k">DESC</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">rn</span>
+<span class="w">    </span><span class="k">FROM</span><span class="w"> </span><span class="n">orders</span>
+<span class="w">    </span><span class="k">WHERE</span><span class="w"> </span><span class="n">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;paid&#39;</span><span class="w">          </span><span class="c1">-- ← отсёк cancelled слишком рано</span>
+<span class="p">)</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">ranked</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">rn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="c1">-- user 10 попадёт, хотя не должен</span>
+</code></pre></div>
+
+<p><strong>✅ Правильно</strong> — сначала последний заказ вообще, потом проверка статуса:</p>
+<div class="highlight"><pre><span></span><code><span class="k">WITH</span><span class="w"> </span><span class="n">ranked</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="p">,</span><span class="w"> </span><span class="n">ROW_NUMBER</span><span class="p">()</span><span class="w"> </span><span class="n">OVER</span><span class="w"> </span><span class="p">(</span>
+<span class="w">        </span><span class="n">PARTITION</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">user_id</span><span class="w"> </span><span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">created_at</span><span class="w"> </span><span class="k">DESC</span><span class="p">,</span><span class="w"> </span><span class="n">id</span><span class="w"> </span><span class="k">DESC</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">rn</span>
+<span class="w">    </span><span class="k">FROM</span><span class="w"> </span><span class="n">orders</span>
+<span class="p">)</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">ranked</span>
+<span class="k">WHERE</span><span class="w"> </span><span class="n">rn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">AND</span><span class="w"> </span><span class="n">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;paid&#39;</span><span class="p">;</span>
+</code></pre></div>
+
+<blockquote>
+<p>Порядок фильтрации в SQL полностью меняет смысл запроса.</p>
+</blockquote>
+<h3 id="sas-proc-sql-с-внешней-бд">📊 SAS — PROC SQL с внешней БД<a class="headerlink" href="#sas-proc-sql-с-внешней-бд" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">options</span> msglevel=i<span class="kr">;</span>
+<span class="kr">proc sql </span>_method _tree;
+    <span class="c">/* Сессия к СУБД (например, Oracle) */</span>
+    connect to oracle <span class="k">as</span> my_db (user=base_user password=XXXXX path=prod_db);
+
+    <span class="c">/* Тяжёлый расчёт на стороне БД */</span>
+    execute (
+        <span class="k">CREATE</span> <span class="k">TABLE</span> tmp_campaign_pre_target <span class="k">AS</span>
+        <span class="k">SELECT</span> client_id
+        <span class="k">FROM</span> customer_table
+        <span class="k">WHERE</span> active_flg = <span class="s">&#39;Y&#39;</span>
+    ) <span class="k">by</span> my_db;
+
+    <span class="c">/* КРИТИЧНО: рвём сессию, чтобы не висела «зомби» в СУБД */</span>
+    disconnect <span class="k">from</span> my_db<span class="kr">;</span>
+<span class="kr">quit;</span>
+</code></pre></div>
+
+<h3 id="маркетинговые-коммуникации-cmo-системы">📧 Маркетинговые коммуникации (CMO-системы)<a class="headerlink" href="#маркетинговые-коммуникации-cmo-системы" title="Ссылка">#</a></h3>
+<ul>
+<li><strong>Динамические шаблоны писем</strong> — работают; ключ задачи, например <code>BDM_6737</code>.</li>
+<li><strong>Динамическая дата в коммуникации:</strong></li>
+<li>Проблема: вместо <code>12.05.2026</code> подставляется <code>2026-05-12</code>.</li>
+<li>Решение: <code>to_char(поле_даты, 'dd.mm.yyyy')</code>. Но <code>to_char</code> в CMO может быть
+    скрыт по умолчанию — снимите флажок <strong>«Валидация формул»</strong>, и оно работает.</li>
+<li><strong>Отчёт:</strong> «сколько каждый юзер в среднем получил коммуникаций в месяц» от БС.</li>
+<li><strong>Идеи автоматизации:</strong></li>
+<li>Брать названия макетов из Confluence и генерировать скрипт проверки раскатки/откликов.</li>
+<li>Чекать коммуникации с одним макетом и <code>count &gt;= 15 000 000</code>.</li>
+</ul>
+<hr />
+<h2 id="linux-базовые-команды">🐧 Linux — базовые команды<a class="headerlink" href="#linux-базовые-команды" title="Ссылка">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Команда</th>
+<th>Что делает</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ls -la</code></td>
+<td>Содержимое каталога + скрытые файлы и права</td>
+</tr>
+<tr>
+<td><code>cd /var/log</code> / <code>cd ~</code></td>
+<td>Переход в каталог / домой</td>
+</tr>
+<tr>
+<td><code>pwd</code></td>
+<td>Где находитесь сейчас</td>
+</tr>
+<tr>
+<td><code>ps aux</code></td>
+<td>Все процессы (кто жрёт память / висит)</td>
+</tr>
+<tr>
+<td><code>systemctl status nginx</code></td>
+<td>Состояние сервиса</td>
+</tr>
+<tr>
+<td><code>journalctl -xe</code></td>
+<td>Системные логи</td>
+</tr>
+<tr>
+<td><code>journalctl -xe -f</code></td>
+<td>Логи в реальном времени</td>
+</tr>
+<tr>
+<td><code>journalctl -xe \| grep error</code></td>
+<td>Только ошибки</td>
+</tr>
+<tr>
+<td><code>top</code> / <code>htop</code></td>
+<td>Мониторинг ресурсов</td>
+</tr>
+<tr>
+<td><code>netstat</code> / <code>ss</code></td>
+<td>Сетевые подключения</td>
+</tr>
+<tr>
+<td><code>curl</code></td>
+<td>Проверка эндпоинтов</td>
+</tr>
+<tr>
+<td><code>ssh</code></td>
+<td>Подключение к серверу</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="cachyos-установка-и-восстановление-загрузчика">🐉 CachyOS — установка и восстановление загрузчика<a class="headerlink" href="#cachyos-установка-и-восстановление-загрузчика" title="Ссылка">#</a></h2>
+<h3 id="шаг-0-подготовка-live-usb">Шаг 0. Подготовка (Live USB)<a class="headerlink" href="#шаг-0-подготовка-live-usb" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># 1. Синхронизация времени</span>
+sudo<span class="w"> </span>timedatectl<span class="w"> </span>set-ntp<span class="w"> </span><span class="nb">true</span>
+
+<span class="c1"># 2. Самые быстрые зеркала</span>
+sudo<span class="w"> </span>cachyos-rate-mirrors
+
+<span class="c1"># 3. Обновить ключи и базы ОДНИМ запросом</span>
+sudo<span class="w"> </span>pacman<span class="w"> </span>-Sy<span class="w"> </span>archlinux-keyring<span class="w"> </span>cachyos-keyring<span class="w"> </span>--needed
+
+<span class="c1"># 4. Зарегистрировать ключи в системе</span>
+sudo<span class="w"> </span>pacman-key<span class="w"> </span>--populate<span class="w"> </span>archlinux<span class="w"> </span>cachyos
+
+<span class="c1"># 5. Установить Calamares</span>
+sudo<span class="w"> </span>pacman<span class="w"> </span>-S<span class="w"> </span>calamares<span class="w"> </span>cachyos-calamares-config<span class="w"> </span>cachyos-hooks<span class="w"> </span>--needed
+</code></pre></div>
+
+<h3 id="шаг-1-удаление-записи-из-nvram-bios-uefi">Шаг 1. Удаление записи из NVRAM (BIOS/UEFI)<a class="headerlink" href="#шаг-1-удаление-записи-из-nvram-bios-uefi" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Список загрузочных записей</span>
+sudo<span class="w"> </span>efibootmgr
+<span class="c1"># Boot0001* CachyOS   Boot0002* Windows Boot Manager ...</span>
+
+<span class="c1"># Удалить ненужную (XXXX — 4-значный номер, например 0001)</span>
+sudo<span class="w"> </span>efibootmgr<span class="w"> </span>-b<span class="w"> </span>XXXX<span class="w"> </span>-B
+</code></pre></div>
+
+<blockquote>
+<p>⚠️ Будьте предельно внимательны — не удалите загрузчик Windows или другой важной системы.</p>
+</blockquote>
+<h3 id="шаг-2-удаление-файлов-с-esp-раздела">Шаг 2. Удаление файлов с ESP-раздела<a class="headerlink" href="#шаг-2-удаление-файлов-с-esp-раздела" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>lsblk<span class="w">                                   </span><span class="c1"># найти ESP (FAT32, ~500MB–1GB)</span>
+sudo<span class="w"> </span>mount<span class="w"> </span>/dev/sdXY<span class="w"> </span>/mnt<span class="w">               </span><span class="c1"># примонтировать</span>
+ls<span class="w"> </span>/mnt/EFI/<span class="w">                            </span><span class="c1"># убедиться что удаляете нужное</span>
+sudo<span class="w"> </span>rm<span class="w"> </span>-rf<span class="w"> </span>/mnt/EFI/CachyOS
+</code></pre></div>
+
+<h3 id="шаг-3-чистка-записей-systemd-boot">Шаг 3. Чистка записей systemd-boot<a class="headerlink" href="#шаг-3-чистка-записей-systemd-boot" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>/boot/loader/entries/
+ls<span class="w"> </span>-l<span class="w">                                    </span><span class="c1"># файлы *.conf</span>
+<span class="c1"># открыть каждый и проверить, что пути/разделы существуют</span>
+<span class="c1"># удалить «битые»:</span>
+sudo<span class="w"> </span>rm<span class="w"> </span>имя_файла.conf
+sudo<span class="w"> </span>bootctl<span class="w"> </span>update<span class="w">                      </span><span class="c1"># перечитать структуру</span>
+</code></pre></div>
+
+<h3 id="после-установки">После установки<a class="headerlink" href="#после-установки" title="Ссылка">#</a></h3>
+<ol>
+<li>Проверить, что всё обновлено через <code>pacman</code> и загрузка идёт через зеркала.</li>
+<li>Сразу установить весь софт hypr-стека / окружения.</li>
+</ol>
+<h3 id="shell">Shell<a class="headerlink" href="#shell" title="Ссылка">#</a></h3>
+<ul>
+<li><code>zsh</code> + <code>p10k</code> (Powerlevel10k) — рекомендуемая связка.</li>
+</ul>
+<hr />
+<h2 id="prometheus-endpoints-метрик">📊 Prometheus — endpoints метрик<a class="headerlink" href="#prometheus-endpoints-метрик" title="Ссылка">#</a></h2>
+<p>Стандартные пути экспорта метрик для типового bigdata-стека:</p>
+<table>
+<thead>
+<tr>
+<th>Сервис</th>
+<th>Endpoint</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>cAdvisor</td>
+<td><code>http://cadvisor:8080/metrics</code></td>
+</tr>
+<tr>
+<td>MinIO</td>
+<td><code>http://minio:9000/minio/v2/metrics/cluster</code></td>
+</tr>
+<tr>
+<td>Node Exporter</td>
+<td><code>http://node-exporter:9100/metrics</code></td>
+</tr>
+<tr>
+<td>PostgreSQL</td>
+<td><code>http://postgres-exporter:9187/metrics</code></td>
+</tr>
+<tr>
+<td>Prometheus (self)</td>
+<td><code>http://localhost:9090/metrics</code></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="python-обработка-исключений">🐍 Python — обработка исключений<a class="headerlink" href="#python-обработка-исключений" title="Ссылка">#</a></h2>
+<p>Исключение — событие при ошибке. Не обработано → программа падает.</p>
+<div class="highlight"><pre><span></span><code><span class="k">try</span><span class="p">:</span>
+    <span class="n">age</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Сколько вам лет? &quot;</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Через год вам будет </span><span class="si">{</span><span class="n">age</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Ошибка: нужно ввести целое число!&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+<p><strong>Несколько типов + <code>else</code> + <code>finally</code>:</strong></p>
+<div class="highlight"><pre><span></span><code><span class="k">try</span><span class="p">:</span>
+    <span class="n">num</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Число: &quot;</span><span class="p">))</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="mi">100</span> <span class="o">/</span> <span class="n">num</span>
+<span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Это не число!&quot;</span><span class="p">)</span>
+<span class="k">except</span> <span class="ne">ZeroDivisionError</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Делить на ноль нельзя!&quot;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>              <span class="c1"># если ошибки не было</span>
+<span class="k">finally</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Выполнится всегда&quot;</span><span class="p">)</span> <span class="c1"># закрытие ресурсов</span>
+</code></pre></div>
+
+<blockquote>
+<p>⚠️ <strong>Голый <code>except:</code> — плохая практика</strong>: ловит вообще всё, включая
+<code>KeyboardInterrupt</code> (Ctrl+C). Ловите только ожидаемые исключения.</p>
+</blockquote>
+<p><strong>Мини-задача:</strong> запросить 2 числа, разделить, обработать <code>ValueError</code> и
+<code>ZeroDivisionError</code>, в <code>finally</code> вывести «Попытка деления завершена».</p>
+<hr />
+<h2 id="python-работа-с-датами-datetime">🐍 Python — работа с датами (<code>datetime</code>)<a class="headerlink" href="#python-работа-с-датами-datetime" title="Ссылка">#</a></h2>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">date</span><span class="p">,</span> <span class="n">time</span><span class="p">,</span> <span class="n">datetime</span><span class="p">,</span> <span class="n">timedelta</span>
+
+<span class="n">now</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>          <span class="c1"># 2026-07-20 14:30:45.123456</span>
+<span class="n">today</span> <span class="o">=</span> <span class="n">date</span><span class="o">.</span><span class="n">today</span><span class="p">()</span>          <span class="c1"># 2026-07-20</span>
+<span class="n">d</span> <span class="o">=</span> <span class="n">date</span><span class="p">(</span><span class="mi">2026</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>         <span class="c1"># создать дату</span>
+<span class="n">dt</span> <span class="o">=</span> <span class="n">datetime</span><span class="p">(</span><span class="mi">2026</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">45</span><span class="p">)</span>
+
+<span class="c1"># Части даты</span>
+<span class="n">dt</span><span class="o">.</span><span class="n">year</span><span class="p">,</span> <span class="n">dt</span><span class="o">.</span><span class="n">month</span><span class="p">,</span> <span class="n">dt</span><span class="o">.</span><span class="n">day</span><span class="p">,</span> <span class="n">dt</span><span class="o">.</span><span class="n">hour</span><span class="p">,</span> <span class="n">dt</span><span class="o">.</span><span class="n">minute</span>
+<span class="n">dt</span><span class="o">.</span><span class="n">weekday</span><span class="p">()</span>                  <span class="c1"># 0 = понедельник</span>
+
+<span class="c1"># Форматирование в строку</span>
+<span class="n">dt</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%d</span><span class="s2">.%m.%Y&quot;</span><span class="p">)</span>       <span class="c1"># &#39;20.07.2026&#39;</span>
+<span class="n">dt</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%H:%M:%S&quot;</span><span class="p">)</span>       <span class="c1"># &#39;14:30:45&#39;</span>
+<span class="n">dt</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%A, </span><span class="si">%d</span><span class="s2"> %B %Y&quot;</span><span class="p">)</span>   <span class="c1"># &#39;Monday, 20 July 2026&#39;</span>
+
+<span class="c1"># Парсинг строки → datetime</span>
+<span class="n">datetime</span><span class="o">.</span><span class="n">strptime</span><span class="p">(</span><span class="s2">&quot;20.07.2026&quot;</span><span class="p">,</span> <span class="s2">&quot;</span><span class="si">%d</span><span class="s2">.%m.%Y&quot;</span><span class="p">)</span>
+
+<span class="c1"># Арифметика (timedelta)</span>
+<span class="n">next_week</span> <span class="o">=</span> <span class="n">now</span> <span class="o">+</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="mi">7</span><span class="p">)</span>
+<span class="n">delta</span> <span class="o">=</span> <span class="n">datetime</span><span class="p">(</span><span class="mi">2027</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="o">-</span> <span class="n">now</span>
+<span class="n">delta</span><span class="o">.</span><span class="n">days</span><span class="p">,</span> <span class="n">delta</span><span class="o">.</span><span class="n">seconds</span>
+</code></pre></div>
+
+<p><strong>Основные коды формата:</strong>
+| Код | Что |
+|&mdash;|&mdash;|
+| <code>%Y</code> / <code>%y</code> | Год 4 / 2 цифры |
+| <code>%m</code> | Месяц (01–12) |
+| <code>%d</code> | День (01–31) |
+| <code>%H</code> / <code>%M</code> / <code>%S</code> | Час / мин / сек |
+| <code>%A</code> | День недели (полностью) |
+| <code>%B</code> | Месяц (полностью) |</p>
+<hr />
+<h2 id="vs-code-редактирование-windows">💻 VS Code — редактирование (Windows)<a class="headerlink" href="#vs-code-редактирование-windows" title="Ссылка">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Действие</th>
+<th>Сочетание</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Перенести строку вверх/вниз</td>
+<td><code>Alt + ↑</code> / <code>Alt + ↓</code></td>
+</tr>
+<tr>
+<td>Вырезать строку (без выделения)</td>
+<td><code>Ctrl + X</code></td>
+</tr>
+<tr>
+<td>Дублировать строку выше/ниже</td>
+<td><code>Shift + Alt + ↑</code> / <code>Shift + Alt + ↓</code></td>
+</tr>
+<tr>
+<td>Отступ вправо</td>
+<td><code>Tab</code> (выделив строки)</td>
+</tr>
+<tr>
+<td>Отступ влево</td>
+<td><code>Shift + Tab</code></td>
+</tr>
+<tr>
+<td>Удалить символ слева / справа</td>
+<td><code>Backspace</code> / <code>Delete</code></td>
+</tr>
+<tr>
+<td>Выделить слово / следующие совпадения</td>
+<td><code>Ctrl + D</code></td>
+</tr>
+<tr>
+<td>Выделить всю строку</td>
+<td><code>Ctrl + L</code></td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>Скрытая настройка Firefox/Gecko: <code>ui.key.menuAccessKeyFocuses</code>.</p>
+</blockquote>
+<hr />
+<h2 id="полезные-инструменты-и-ссылки">🔧 Полезные инструменты и ссылки<a class="headerlink" href="#полезные-инструменты-и-ссылки" title="Ссылка">#</a></h2>
+<h3 id="парсинг-pdf">Парсинг PDF<a class="headerlink" href="#парсинг-pdf" title="Ссылка">#</a></h3>
+<p><strong>OpenDataLoader PDF</strong> — бесплатный open-source PDF-парсер, преобразует PDF в
+<strong>Markdown / JSON / HTML</strong>. Удобен для RAG-пайплайнов, LLM-агентов и поиска.
+- Гибридный режим добавляет <strong>OCR</strong> для отсканированных документов.
+- Корректно обрабатывает таблицы, формулы, диаграммы.
+- Python / Node.js / Java.</p>
+<h3 id="упаковка-python-в-один-бинарник">Упаковка Python в один бинарник<a class="headerlink" href="#упаковка-python-в-один-бинарник" title="Ссылка">#</a></h3>
+<p><strong>PyApp</strong> — упаковывает Python-приложение в один исполняемый файл, который при
+запуске разворачивает окружение. Получателю не нужно ставить Python / разбираться
+в <code>pip</code> и venv.</p>
+<h3 id="альтернатива-datadog">Альтернатива Datadog<a class="headerlink" href="#альтернатива-datadog" title="Ссылка">#</a></h3>
+<p><strong>OpenObserve</strong> — один бинарник на Rust для логов, метрик, трейсов и
+фронтенд-мониторинга.
+- Движок запросов <strong>DataFusion</strong>, колоночный <strong>Parquet</strong>, S3-совместимое хранение.
+- SQL / PromQL вместо проприетарного языка.
+- Полная совместимость с <strong>OpenTelemetry</strong>.
+- Заявлено сокращение расходов на ~98% (бенчмарк автора).</p>
+<h3 id="обучение-ml-dl">Обучение ML/DL<a class="headerlink" href="#обучение-ml-dl" title="Ссылка">#</a></h3>
+<p><strong>Handson-ML3</strong> — серия Jupyter-ноутбуков по основам ML и DL на Python
+(Scikit-Learn, TensorFlow). https://github.com/ageron/handson-ml3</p>
+<h3 id="аппаратное-для-долгой-работы-с-текстом">Аппаратное (для долгой работы с текстом)<a class="headerlink" href="#аппаратное-для-долгой-работы-с-текстом" title="Ссылка">#</a></h3>
+<p><strong>ASUS PG27UCDM</strong> — QD-OLED 27&rdquo; 4K (~166 PPI), плоский экран, 4-е поколение панели.
+Базовые меры против выгорания: яркость ~120 нит, авто-скрытие панели задач,
+заставка, pixel shift. Горизонт до заметных следов — несколько лет.</p>
+<hr />
+<h2 id="метаправила-работы-с-задачами-и-данными">📐 Метаправила работы с задачами и данными<a class="headerlink" href="#метаправила-работы-с-задачами-и-данными" title="Ссылка">#</a></h2>
+<ul>
+<li>Сначала чекать, что обновлено всё через пакетный менеджер и что загрузка идёт через зеркала.</li>
+<li>Для типовых отчётов (например, «коммуникаций в месяц на юзера») фиксируйте формулу и источник.</li>
+<li>Автоматизируйте рутину: генерация скриптов проверки из эталонных названий (Confluence) — «изи».</li>
+<li>При поиске аномалий в коммуникациях — отсев по аномальному <code>count</code> (≥ 15M на один макет).</li>
+</ul>
+<hr />
+<h2 id="полезные-советы">💡 Полезные советы<a class="headerlink" href="#полезные-советы" title="Ссылка">#</a></h2>
+<ol>
+<li><strong>Порядок фильтрации в SQL</strong> меняет смысл запроса — фильтруйте на нужном шаге.</li>
+<li><strong><code>FILTER (WHERE ...)</code></strong> чище и быстрее нагромождения <code>CASE WHEN</code>.</li>
+<li><strong><code>LATERAL CROSS JOIN</code></strong> заменяет множественный <code>UNION ALL</code> для unpivot.</li>
+<li><strong><code>NULLS LAST</code></strong> в <code>ORDER BY DESC</code> — спасает топ-N отчёты.</li>
+<li><strong><code>COALESCE</code> / <code>NULLIF</code> / <code>IS NULL</code></strong> — три кита работы с NULL.</li>
+<li><strong><code>to_char</code> в CMO</strong> может быть скрыт — снимайте «Валидацию формул».</li>
+<li><strong>disconnect в SAS</strong> — обязательно рвите сессию к БД, иначе «зомби».</li>
+<li><strong>Исключения в Python</strong> — ловите конкретные, не голый <code>except:</code>.</li>
+<li><strong><code>strftime</code>/<code>strptime</code></strong> — формат должен точно соответствовать строке.</li>
+<li><strong>CachyOS</strong> — после установки проверьте зеркала и обновления до настройки окружения.</li>
+</ol>
+<hr />
+<h2 id="медицина-тинитус-внчс-нейропатия-заметки">🩺 Медицина: тинитус, ВНЧС, нейропатия (заметки)<a class="headerlink" href="#медицина-тинитус-внчс-нейропатия-заметки" title="Ссылка">#</a></h2>
+<blockquote>
+<p>Заметки собраны из открытых источников (Пикабу, Хабр и др.).
+Не являются медицинской рекомендацией — для ознакомления.</p>
+</blockquote>
+<h3 id="постановка-проблемы">Постановка проблемы<a class="headerlink" href="#постановка-проблемы" title="Ссылка">#</a></h3>
+<p>Тинитус (звон в ушах) + гиперакузия (тяжёлое восприятие обычных звуков, отдающее
+звоном и дребезгом). Длительный анамнез, множественные попытки лечения.</p>
+<h3 id="гипотезы-от-лора">Гипотезы (от ЛОРа)<a class="headerlink" href="#гипотезы-от-лора" title="Ссылка">#</a></h3>
+<ol>
+<li><strong>Вазоневральный конфликт</strong> — нерв соприкасается с артерией в голове.
+   - Подтверждён на ~80% по МРТ мозга.
+   - Решение (в теории): прокладка между конфликтующим нервом и артерией
+     (микрососудистая декомпрессия) — вопрос к нейрохирургам.</li>
+<li><strong>Дисфункция височно-нижнечелюстного сустава (ВНЧС)</strong> — часто бывает из-за
+   отсутствия задних зубов, на которых держится прикус.
+   - Решается с гнатологом, но долго и без гарантии — как фоновая задача.</li>
+</ol>
+<h3 id="зацепка-нейропатия-стременного-нерва">Зацепка: нейропатия стременного нерва<a class="headerlink" href="#зацепка-нейропатия-стременного-нерва" title="Ссылка">#</a></h3>
+<p>Исследование <strong>КСВП</strong> (коротких вызванных потенциалов коры мозга) и <strong>стволовых
+акустических вызванных потенциалов</strong> показало <strong>«нейропатию стременного нерва»</strong> —
+редкую, но первую конкретную зацепку. Может давать как звон (тинитус), так и
+гиперакузию. Дальше — к <strong>отоневрологу</strong> (хорошие специалисты редки, очередь
+может быть 2–2.5 месяца и более; в Питере к топовым — до 1.5–2 лет).</p>
+<h3 id="исследования">Исследования<a class="headerlink" href="#исследования" title="Ссылка">#</a></h3>
+<ul>
+<li>МРТ мозга</li>
+<li>МРТ ВНЧС</li>
+<li>Аудиометрия</li>
+<li>КСВП (короткие вызванные потенциалы коры мозга)</li>
+<li>Стволовые акустические вызванные потенциалы</li>
+</ul>
+<h3 id="имена-врачей-и-клиник-из-заметок">Имена врачей и клиник (из заметок)<a class="headerlink" href="#имена-врачей-и-клиник-из-заметок" title="Ссылка">#</a></h3>
+<table>
+<thead>
+<tr>
+<th>Кто</th>
+<th>Где</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Паукова Марина Владимировна</td>
+<td>Гута Клиник</td>
+</tr>
+<tr>
+<td>Нечаева Светлана Викторовна</td>
+<td>Клиника Сеченова (приёмный ЛОР, дневной стационар)</td>
+</tr>
+<tr>
+<td>Каспранская Галина Рустемовна</td>
+<td>—</td>
+</tr>
+<tr>
+<td>Воронов</td>
+<td>Питер, топ-отоневролог (очередь ~1.5–2 года)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="медикаментозные-направления-из-заметок">Медикаментозные направления (из заметок)<a class="headerlink" href="#медикаментозные-направления-из-заметок" title="Ссылка">#</a></h3>
+<ul>
+<li>противосудорожные</li>
+<li>цинк</li>
+<li>антигистаминные</li>
+</ul>
+<h3 id="упражнение-изолированное-укрепление-глубоких-сгибателей-шеи-усиленная-версия">Упражнение: изолированное укрепление глубоких сгибателей шеи (усиленная версия)<a class="headerlink" href="#упражнение-изолированное-укрепление-глубоких-сгибателей-шеи-усиленная-версия" title="Ссылка">#</a></h3>
+<p>Лёжа на спине:
+1. Подбородок чуть к груди (минимально!).
+2. Поднять голову на 1–2 см, не напрягая поверхностные мышцы.
+3. Удерживать 7–10 секунд.
+4. Отдых 5 сек.
+5. Повторить 10 раз.</p>
+<p><strong>Зачем:</strong> снижает компрессию в зоне C2–C5 → шум уменьшается через 7–14 дней.</p>
+<h3 id="сводка-по-тактике">Сводка по тактике<a class="headerlink" href="#сводка-по-тактике" title="Ссылка">#</a></h3>
+<ul>
+<li>Основные надежды — на нейрохирургов (вазоневральный конфликт).</li>
+<li>Проблему прикуса решать параллельно, но фоново (без гарантии результата).</li>
+<li>При первой конкретной зацепке (нейропатия стременного нерва) — целенаправленно
+  к отоневрологу.</li>
+</ul>
+<h3 id="источники">Источники<a class="headerlink" href="#источники" title="Ссылка">#</a></h3>
+<ul>
+<li>Хабр: https://habr.com/ru/articles/869164/</li>
+<li>Пикабу и другие открытые источники.</li>
+</ul>
+<hr />
+<h2 id="полезные-ссылки-и-ресурсы">🔗 Полезные ссылки и ресурсы<a class="headerlink" href="#полезные-ссылки-и-ресурсы" title="Ссылка">#</a></h2>
+<h3 id="обучение-ml-python">Обучение / ML / Python<a class="headerlink" href="#обучение-ml-python" title="Ссылка">#</a></h3>
+<ul>
+<li><strong>Hands-On Machine Learning (3rd ed.)</strong> — серия Jupyter-ноутбуков по основам
+  ML и DL на Python (Scikit-Learn, TensorFlow):
+  https://github.com/ageron/handson-ml3</li>
+</ul>
+<h3 id="статьи-и-сообщества">Статьи и сообщества<a class="headerlink" href="#статьи-и-сообщества" title="Ссылка">#</a></h3>
+<ul>
+<li><strong>Хабр</strong> (статьи по data/разработке/здоровью):
+  https://habr.com/ru/articles/869164/</li>
+<li><strong>Пикабу</strong> и другие открытые источники — заметки и личный опыт.</li>
+</ul>
+<h3 id="корпоративные-рабочие-ресурсы">Корпоративные / рабочие ресурсы<a class="headerlink" href="#корпоративные-рабочие-ресурсы" title="Ссылка">#</a></h3>
+<ul>
+<li>Omnissa Horizon Client (Windows, VDI):
+  <code>cdncl.goinvest.ru/files/app/Omnissa-Horizon-Client-2506-8.16.0-16560451995.exe</code></li>
+<li>Kapusta (подписка/биллинг):
+  https://kapusta-p.ru/sub/?id=MjI0NjU1NTQ2fGtwc3QyMDI1eA</li>
+</ul>
+<h3 id="скрытые-настройки-браузера-firefox-gecko">Скрытые настройки браузера (Firefox/Gecko)<a class="headerlink" href="#скрытые-настройки-браузера-firefox-gecko" title="Ссылка">#</a></h3>
+<ul>
+<li><code>ui.key.menuAccessKeyFocuses</code> — поведение клавиш доступа меню.</li>
+</ul>
+<h3 id="prometheus-endpoints-для-дашбордов-и-алертов">Prometheus endpoints (для дашбордов и алертов)<a class="headerlink" href="#prometheus-endpoints-для-дашбордов-и-алертов" title="Ссылка">#</a></h3>
+<table>
+<thead>
+<tr>
+<th>Сервис</th>
+<th>Endpoint</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>cAdvisor</td>
+<td><code>http://cadvisor:8080/metrics</code></td>
+</tr>
+<tr>
+<td>MinIO</td>
+<td><code>http://minio:9000/minio/v2/metrics/cluster</code></td>
+</tr>
+<tr>
+<td>Node Exporter</td>
+<td><code>http://node-exporter:9100/metrics</code></td>
+</tr>
+<tr>
+<td>PostgreSQL</td>
+<td><code>http://postgres-exporter:9187/metrics</code></td>
+</tr>
+<tr>
+<td>Prometheus (self)</td>
+<td><code>http://localhost:9090/metrics</code></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<p><em>Сборник технических и медицинских заметок из открытых источников (Пикабу, Хабр, рабочие конспекты).</em></p>
+    </article>
+    <nav class="pagination">
+      <a class="pager prev" href="linux-internals.html">← Linux Internals</a>
+      <a class="pager next" href="python-automation-libs.html">Python: авт-ция (10 libs) →</a>
+    </nav>
+  </main>
+
+  <aside class="toc">
+    <details open>
+      <summary>📑 Оглавление</summary>
+      <div class="toc-list">
+<div class="toc">
+<ul>
+<li><a href="#miscellaneous-сборник-технических-заметок-и-трюков">🧰 Miscellaneous — сборник технических заметок и трюков</a><ul>
+<li><a href="#sql-трюки-и-оптимизации-postgresql-greenplum">🐘 SQL — трюки и оптимизации (PostgreSQL / Greenplum)</a><ul>
+<li><a href="#очистка-данных-data-cleaning">🧹 Очистка данных (Data Cleaning)</a></li>
+<li><a href="#оптимизации-запросов">⚡ Оптимизации запросов</a></li>
+<li><a href="#sql-грабли-даже-для-сеньоров">⚠️ SQL-грабли (даже для сеньоров)</a></li>
+<li><a href="#sql-задача-с-подвохом-последний-заказ-оплачен">🎣 SQL-задача с подвохом: «последний заказ оплачен»</a></li>
+<li><a href="#sas-proc-sql-с-внешней-бд">📊 SAS — PROC SQL с внешней БД</a></li>
+<li><a href="#маркетинговые-коммуникации-cmo-системы">📧 Маркетинговые коммуникации (CMO-системы)</a></li>
+</ul>
+</li>
+<li><a href="#linux-базовые-команды">🐧 Linux — базовые команды</a></li>
+<li><a href="#cachyos-установка-и-восстановление-загрузчика">🐉 CachyOS — установка и восстановление загрузчика</a><ul>
+<li><a href="#шаг-0-подготовка-live-usb">Шаг 0. Подготовка (Live USB)</a></li>
+<li><a href="#шаг-1-удаление-записи-из-nvram-bios-uefi">Шаг 1. Удаление записи из NVRAM (BIOS/UEFI)</a></li>
+<li><a href="#шаг-2-удаление-файлов-с-esp-раздела">Шаг 2. Удаление файлов с ESP-раздела</a></li>
+<li><a href="#шаг-3-чистка-записей-systemd-boot">Шаг 3. Чистка записей systemd-boot</a></li>
+<li><a href="#после-установки">После установки</a></li>
+<li><a href="#shell">Shell</a></li>
+</ul>
+</li>
+<li><a href="#prometheus-endpoints-метрик">📊 Prometheus — endpoints метрик</a></li>
+<li><a href="#python-обработка-исключений">🐍 Python — обработка исключений</a></li>
+<li><a href="#python-работа-с-датами-datetime">🐍 Python — работа с датами (datetime)</a></li>
+<li><a href="#vs-code-редактирование-windows">💻 VS Code — редактирование (Windows)</a></li>
+<li><a href="#полезные-инструменты-и-ссылки">🔧 Полезные инструменты и ссылки</a><ul>
+<li><a href="#парсинг-pdf">Парсинг PDF</a></li>
+<li><a href="#упаковка-python-в-один-бинарник">Упаковка Python в один бинарник</a></li>
+<li><a href="#альтернатива-datadog">Альтернатива Datadog</a></li>
+<li><a href="#обучение-ml-dl">Обучение ML/DL</a></li>
+<li><a href="#аппаратное-для-долгой-работы-с-текстом">Аппаратное (для долгой работы с текстом)</a></li>
+</ul>
+</li>
+<li><a href="#метаправила-работы-с-задачами-и-данными">📐 Метаправила работы с задачами и данными</a></li>
+<li><a href="#полезные-советы">💡 Полезные советы</a></li>
+<li><a href="#медицина-тинитус-внчс-нейропатия-заметки">🩺 Медицина: тинитус, ВНЧС, нейропатия (заметки)</a><ul>
+<li><a href="#постановка-проблемы">Постановка проблемы</a></li>
+<li><a href="#гипотезы-от-лора">Гипотезы (от ЛОРа)</a></li>
+<li><a href="#зацепка-нейропатия-стременного-нерва">Зацепка: нейропатия стременного нерва</a></li>
+<li><a href="#исследования">Исследования</a></li>
+<li><a href="#имена-врачей-и-клиник-из-заметок">Имена врачей и клиник (из заметок)</a></li>
+<li><a href="#медикаментозные-направления-из-заметок">Медикаментозные направления (из заметок)</a></li>
+<li><a href="#упражнение-изолированное-укрепление-глубоких-сгибателей-шеи-усиленная-версия">Упражнение: изолированное укрепление глубоких сгибателей шеи (усиленная версия)</a></li>
+<li><a href="#сводка-по-тактике">Сводка по тактике</a></li>
+<li><a href="#источники">Источники</a></li>
+</ul>
+</li>
+<li><a href="#полезные-ссылки-и-ресурсы">🔗 Полезные ссылки и ресурсы</a><ul>
+<li><a href="#обучение-ml-python">Обучение / ML / Python</a></li>
+<li><a href="#статьи-и-сообщества">Статьи и сообщества</a></li>
+<li><a href="#корпоративные-рабочие-ресурсы">Корпоративные / рабочие ресурсы</a></li>
+<li><a href="#скрытые-настройки-браузера-firefox-gecko">Скрытые настройки браузера (Firefox/Gecko)</a></li>
+<li><a href="#prometheus-endpoints-для-дашбордов-и-алертов">Prometheus endpoints (для дашбордов и алертов)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+
+      </div>
+    </details>
+  </aside>
+</div>
+
+<button class="back-top" id="backTop" aria-label="Наверх">↑</button>
+
+<script src="assets/search.js"></script>
+<script src="assets/page.js"></script>
+</body>
+</html>

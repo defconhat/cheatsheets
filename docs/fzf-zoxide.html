@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>fzf + zoxide — Шпаргалки</title>
+<link rel="stylesheet" href="assets/style.css">
+<link rel="stylesheet" href="assets/pygments.css">
+</head>
+<body>
+<div class="layout">
+  <aside class="sidebar">
+    <a href="index.html" class="brand">📌 Шпаргалки</a>
+    <nav class="nav">
+<a href="yazi.html" class="nav-item"><span class="nav-ico">📦</span>Yazi</a>
+<a href="neovim.html" class="nav-item"><span class="nav-ico">📘</span>Neovim (LazyVim)</a>
+<a href="niri.html" class="nav-item"><span class="nav-ico">🪟</span>Niri</a>
+<a href="tmux.html" class="nav-item"><span class="nav-ico">🪟</span>Tmux</a>
+<a href="bash.html" class="nav-item"><span class="nav-ico">🐚</span>Bash</a>
+<a href="git.html" class="nav-item"><span class="nav-ico">🔀</span>Git</a>
+<a href="terminal.html" class="nav-item"><span class="nav-ico">🖥️</span>Терминал Linux</a>
+<a href="powershell.html" class="nav-item"><span class="nav-ico">💻</span>PowerShell</a>
+<a href="cmd.html" class="nav-item"><span class="nav-ico">🪟</span>CMD (cmd.exe)</a>
+<a href="python.html" class="nav-item"><span class="nav-ico">🐍</span>Python</a>
+<a href="systemd.html" class="nav-item"><span class="nav-ico">⚙️</span>systemd</a>
+<a href="ssh.html" class="nav-item"><span class="nav-ico">🔐</span>SSH</a>
+<a href="make-cmake.html" class="nav-item"><span class="nav-ico">🔨</span>Make / CMake</a>
+<a href="docker.html" class="nav-item"><span class="nav-ico">🐳</span>Docker</a>
+<a href="pacman.html" class="nav-item"><span class="nav-ico">📦</span>pacman / yay / paru</a>
+<a href="spark.html" class="nav-item"><span class="nav-ico">⚡</span>Apache Spark / PySpark</a>
+<a href="markdown.html" class="nav-item"><span class="nav-ico">📝</span>Markdown</a>
+<a href="regex.html" class="nav-item"><span class="nav-ico">🔍</span>Регулярные выражения</a>
+<a href="jq-json.html" class="nav-item"><span class="nav-ico">🔧</span>jq + JSON</a>
+<a href="awk-sed.html" class="nav-item"><span class="nav-ico">✂️</span>awk / sed</a>
+<a href="airflow.html" class="nav-item"><span class="nav-ico">🌪️</span>Apache Airflow</a>
+<a href="http-curl.html" class="nav-item"><span class="nav-ico">🌐</span>HTTP / curl</a>
+<a href="yaml.html" class="nav-item"><span class="nav-ico">📄</span>YAML</a>
+<a href="vscode.html" class="nav-item"><span class="nav-ico">💻</span>VS Code</a>
+<a href="cron.html" class="nav-item"><span class="nav-ico">⏰</span>cron</a>
+<a href="fzf-zoxide.html" class="nav-item active"><span class="nav-ico">🔎</span>fzf + zoxide</a>
+<a href="minikube-k8s.html" class="nav-item"><span class="nav-ico">☸️</span>Minikube / Kubernetes</a>
+<a href="cicd.html" class="nav-item"><span class="nav-ico">🦊</span>GitLab CI / GitHub Actions</a>
+<a href="nginx.html" class="nav-item"><span class="nav-ico">🌐</span>nginx</a>
+<a href="dbt.html" class="nav-item"><span class="nav-ico">🔧</span>dbt</a>
+<a href="kafka.html" class="nav-item"><span class="nav-ico">🐘</span>Apache Kafka</a>
+<a href="prometheus-grafana.html" class="nav-item"><span class="nav-ico">📊</span>Prometheus / Grafana</a>
+<a href="iceberg-nessie.html" class="nav-item"><span class="nav-ico">🧊</span>Iceberg / Nessie</a>
+<a href="impala.html" class="nav-item"><span class="nav-ico">🐬</span>Apache Impala</a>
+<a href="terraform.html" class="nav-item"><span class="nav-ico">🏗️</span>Terraform</a>
+<a href="linux-internals.html" class="nav-item"><span class="nav-ico">🐧</span>Linux Internals</a>
+<a href="miscellaneous.html" class="nav-item"><span class="nav-ico">🧰</span>Miscellaneous</a>
+<a href="python-automation-libs.html" class="nav-item"><span class="nav-ico">🐍</span>Python: авт-ция (10 libs)</a>
+<a href="eza.html" class="nav-item"><span class="nav-ico">🌈</span>eza</a>
+<a href="dbeaver.html" class="nav-item"><span class="nav-ico">🗄️</span>DBeaver</a>
+<a href="zcode.html" class="nav-item"><span class="nav-ico">🤖</span>ZCode</a>
+<a href="warp.html" class="nav-item"><span class="nav-ico">🚀</span>Warp</a>
+<a href="agentic-ai-dev.html" class="nav-item"><span class="nav-ico">🤝</span>Агентная разработка с ИИ</a>
+    </nav>
+  </aside>
+
+  <main class="content">
+    <article>
+<h1 id="fzf-zoxide-шпаргалка-по-fuzzy-поиску-и-переходам">🔎 fzf + zoxide — шпаргалка по fuzzy-поиску и переходам<a class="headerlink" href="#fzf-zoxide-шпаргалка-по-fuzzy-поиску-и-переходам" title="Ссылка">#</a></h1>
+<blockquote>
+<p><strong>fzf</strong> —通用 fuzzy finder (поиск файлов, команд, истории).
+<strong>zoxide</strong> — умный cd (запоминает часто посещаемые каталоги).</p>
+<p>fzf: https://github.com/junegunn/fzf · zoxide: https://github.com/ajitid/zoxide</p>
+</blockquote>
+<hr />
+<h1 id="часть-1-fzf">🔎 ЧАСТЬ 1. fzf<a class="headerlink" href="#часть-1-fzf" title="Ссылка">#</a></h1>
+<h2 id="установка">🚀 Установка<a class="headerlink" href="#установка" title="Ссылка">#</a></h2>
+<div class="highlight"><pre><span></span><code><span class="c1"># Arch / CachyOS</span>
+sudo<span class="w"> </span>pacman<span class="w"> </span>-S<span class="w"> </span>fzf
+
+<span class="c1"># Debian/Ubuntu</span>
+sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>fzf
+
+<span class="c1"># macOS</span>
+brew<span class="w"> </span>install<span class="w"> </span>fzf
+<span class="k">$(</span>brew<span class="w"> </span>--prefix<span class="k">)</span>/opt/fzf/install
+
+<span class="c1"># Через git (самая свежая версия)</span>
+git<span class="w"> </span>clone<span class="w"> </span>--depth<span class="w"> </span><span class="m">1</span><span class="w"> </span>https://github.com/junegunn/fzf.git<span class="w"> </span>~/.fzf
+~/.fzf/install
+
+<span class="c1"># Через cargo (Rust)</span>
+cargo<span class="w"> </span>install<span class="w"> </span>--locked<span class="w"> </span>skim<span class="w">     </span><span class="c1"># skim — Rust-альтернатива</span>
+</code></pre></div>
+
+<h3 id="интеграция-с-shell">Интеграция с shell<a class="headerlink" href="#интеграция-с-shell" title="Ссылка">#</a></h3>
+<p>После установки добавьте строки в <code>~/.bashrc</code> / <code>~/.zshrc</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Если ставили через pacman/apt — обычно уже автоматически</span>
+<span class="nb">source</span><span class="w"> </span>/usr/share/fzf/key-bindings.bash
+<span class="nb">source</span><span class="w"> </span>/usr/share/fzf/completion.bash
+
+<span class="c1"># Для zsh</span>
+<span class="nb">source</span><span class="w"> </span>/usr/share/fzf/key-bindings.zsh
+<span class="nb">source</span><span class="w"> </span>/usr/share/fzf/completion.zsh
+
+<span class="c1"># Если ставили через git/install script — автоматически</span>
+<span class="o">[</span><span class="w"> </span>-f<span class="w"> </span>~/.fzf.bash<span class="w"> </span><span class="o">]</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">source</span><span class="w"> </span>~/.fzf.bash
+</code></pre></div>
+
+<hr />
+<h2 id="базовое-использование">🎯 Базовое использование<a class="headerlink" href="#базовое-использование" title="Ссылка">#</a></h2>
+<div class="highlight"><pre><span></span><code><span class="c1"># Интерактивный поиск</span>
+fzf<span class="w">                                </span><span class="c1"># файлы в текущем каталоге</span>
+find<span class="w"> </span>.<span class="w"> </span>-type<span class="w"> </span>f<span class="w"> </span><span class="p">|</span><span class="w"> </span>fzf<span class="w">               </span><span class="c1"># через find</span>
+fd<span class="w"> </span>--type<span class="w"> </span>f<span class="w"> </span><span class="p">|</span><span class="w"> </span>fzf<span class="w">                  </span><span class="c1"># через fd (быстрее)</span>
+
+<span class="c1"># С другим источником</span>
+ls<span class="w"> </span>-la<span class="w"> </span><span class="p">|</span><span class="w"> </span>fzf
+cat<span class="w"> </span>/etc/passwd<span class="w"> </span><span class="p">|</span><span class="w"> </span>fzf
+pacman<span class="w"> </span>-Qq<span class="w"> </span><span class="p">|</span><span class="w"> </span>fzf<span class="w">                   </span><span class="c1"># выбор пакетов</span>
+
+<span class="c1"># Мульти-выбор (Tab)</span>
+fzf<span class="w"> </span>-m<span class="w">                             </span><span class="c1"># выбрать несколько</span>
+
+<span class="c1"># Выбрать и использовать</span>
+<span class="nv">file</span><span class="o">=</span><span class="k">$(</span>fzf<span class="k">)</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>xdg-open<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$file</span><span class="s2">&quot;</span>
+nvim<span class="w"> </span><span class="k">$(</span>fzf<span class="k">)</span><span class="w">                        </span><span class="c1"># открыть выбранный в nvim</span>
+code<span class="w"> </span><span class="k">$(</span>fzf<span class="k">)</span>
+<span class="nb">cd</span><span class="w"> </span><span class="k">$(</span>find<span class="w"> </span>.<span class="w"> </span>-type<span class="w"> </span>d<span class="w"> </span><span class="p">|</span><span class="w"> </span>fzf<span class="k">)</span>
+
+<span class="c1"># Предпросмотр</span>
+fzf<span class="w"> </span>--preview<span class="w"> </span><span class="s1">&#39;cat {}&#39;</span>
+fzf<span class="w"> </span>--preview<span class="w"> </span><span class="s1">&#39;bat --color=always {}&#39;</span><span class="w">    </span><span class="c1"># с подсветкой</span>
+fzf<span class="w"> </span>--preview<span class="w"> </span><span class="s1">&#39;head -100 {}&#39;</span>
+
+<span class="c1"># С привязкой клавиш</span>
+fzf<span class="w"> </span>--bind<span class="w"> </span><span class="s2">&quot;ctrl-r:reload(find . -type f)&quot;</span>
+</code></pre></div>
+
+<hr />
+<h2 id="встроенные-горячие-клавиши-после-интеграции">⌨️ Встроенные горячие клавиши (после интеграции)<a class="headerlink" href="#встроенные-горячие-клавиши-после-интеграции" title="Ссылка">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Клавиша</th>
+<th>Действие</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Ctrl-T</code></td>
+<td>Найти файл (вставить путь в командную строку)</td>
+</tr>
+<tr>
+<td><code>Ctrl-R</code></td>
+<td>Поиск по истории команд</td>
+</tr>
+<tr>
+<td><code>Alt-C</code></td>
+<td>Интерактивный cd (найти каталог и перейти)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="примеры">Примеры<a class="headerlink" href="#примеры" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Ctrl-T — вставить путь файла</span>
+vim<span class="w"> </span>&lt;Ctrl-T&gt;<span class="w">                       </span><span class="c1"># выберите файл → вставится путь</span>
+
+<span class="c1"># Ctrl-R — история</span>
+&lt;Ctrl-R&gt;<span class="w">                           </span><span class="c1"># начните печатать для поиска</span>
+<span class="c1"># Стрелки ↑↓ — выбор, Enter — выполнить</span>
+
+<span class="c1"># Alt-C — каталог</span>
+&lt;Alt-C&gt;<span class="w">                            </span><span class="c1"># выберите каталог → cd в него</span>
+</code></pre></div>
+
+<h3 id="внутри-fzf">Внутри fzf<a class="headerlink" href="#внутри-fzf" title="Ссылка">#</a></h3>
+<table>
+<thead>
+<tr>
+<th>Клавиша</th>
+<th>Действие</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>↑</code> <code>↓</code> или <code>Ctrl-J/K</code></td>
+<td>Навигация</td>
+</tr>
+<tr>
+<td><code>Enter</code></td>
+<td>Выбрать</td>
+</tr>
+<tr>
+<td><code>Tab</code></td>
+<td>Мультивыбор (с <code>-m</code>)</td>
+</tr>
+<tr>
+<td><code>Shift-Tab</code></td>
+<td>Снять выделение</td>
+</tr>
+<tr>
+<td><code>Ctrl-A</code> / <code>Ctrl-D</code></td>
+<td>Выбрать все / снять все</td>
+</tr>
+<tr>
+<td><code>Ctrl-R</code></td>
+<td>Включить/выключить reverse sort</td>
+</tr>
+<tr>
+<td><code>Ctrl-S</code></td>
+<td>Включить/выключить sort</td>
+</tr>
+<tr>
+<td><code>Esc</code> / <code>Ctrl-C</code> / <code>Ctrl-G</code></td>
+<td>Выйти</td>
+</tr>
+<tr>
+<td><code>Ctrl-W</code></td>
+<td>Стереть слово назад</td>
+</tr>
+<tr>
+<td><code>Ctrl-U</code></td>
+<td>Стереть строку</td>
+</tr>
+<tr>
+<td><code>Ctrl-Y</code></td>
+<td>Прокрутить preview вниз</td>
+</tr>
+<tr>
+<td><code>Ctrl-E</code></td>
+<td>Прокрутить preview вверх</td>
+</tr>
+<tr>
+<td><code>?</code></td>
+<td>Toggle help</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="цвета-и-кастомизация">🎨 Цвета и кастомизация<a class="headerlink" href="#цвета-и-кастомизация" title="Ссылка">#</a></h2>
+<div class="highlight"><pre><span></span><code><span class="c1"># Встроенные темы</span>
+fzf<span class="w"> </span>--color<span class="o">=</span>dark
+fzf<span class="w"> </span>--color<span class="o">=</span>light
+fzf<span class="w"> </span>--color<span class="o">=</span><span class="m">16</span><span class="w">      </span><span class="c1"># 16 цветов</span>
+
+<span class="c1"># Свои цвета (24-bit)</span>
+fzf<span class="w"> </span>--color<span class="o">=</span><span class="s1">&#39;fg:#ffffff,bg:#18181b,hl:#a3e635,fg+:#ffffff,bg+:#27272a,hl+:#a3e635,info:#71717a,prompt:#fbbf24,pointer:#f87171,marker:#a3e635,spinner:#06b6d4,header:#71717a&#39;</span>
+
+<span class="c1"># Через переменную окружения (для всех запусков)</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">FZF_DEFAULT_OPTS</span><span class="o">=</span><span class="s1">&#39;</span>
+<span class="s1">    --height 40%</span>
+<span class="s1">    --layout=reverse</span>
+<span class="s1">    --info=inline</span>
+<span class="s1">    --color=fg:#e4e4e7,bg:#18181b,hl:#a3e635,fg+:#fafafa,bg+:#27272a,hl+:#a3e635</span>
+<span class="s1">    --color=info:#71717a,prompt:#fbbf24,pointer:#f87171,marker:#a3e635,spinner:#06b6d4,header:#71717a</span>
+<span class="s1">    --bind=&quot;ctrl-d:half-page-down,ctrl-u:half-page-up&quot;</span>
+<span class="s1">&#39;</span>
+</code></pre></div>
+
+<h3 id="полезные-опции">Полезные опции<a class="headerlink" href="#полезные-опции" title="Ссылка">#</a></h3>
+<table>
+<thead>
+<tr>
+<th>Опция</th>
+<th>Что</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--height N%</code></td>
+<td>Высота окна (не на весь экран)</td>
+</tr>
+<tr>
+<td><code>--reverse</code></td>
+<td>Ввод сверху, результаты снизу</td>
+</tr>
+<tr>
+<td><code>--inline-info</code></td>
+<td>Инфа в одной строке с промптом</td>
+</tr>
+<tr>
+<td><code>--preview CMD</code></td>
+<td>Окно предпросмотра</td>
+</tr>
+<tr>
+<td><code>--preview-window=right:50%</code></td>
+<td>Расположение/размер preview</td>
+</tr>
+<tr>
+<td><code>--multi</code> / <code>-m</code></td>
+<td>Мультивыбор</td>
+</tr>
+<tr>
+<td><code>--prompt="&gt;"</code></td>
+<td>Свой промпт</td>
+</tr>
+<tr>
+<td><code>--header="..."</code></td>
+<td>Заголовок</td>
+</tr>
+<tr>
+<td><code>--bind=...</code></td>
+<td>Горячие клавиши</td>
+</tr>
+<tr>
+<td><code>--tiebreak=index</code></td>
+<td>Тай-брейк при равном score</td>
+</tr>
+<tr>
+<td><code>--no-sort</code></td>
+<td>Не сортировать</td>
+</tr>
+<tr>
+<td><code>--exact</code></td>
+<td>Точное совпадение</td>
+</tr>
+<tr>
+<td><code>--tac</code></td>
+<td>Reverse order (для истории)</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="интеграция-с-инструментами">🔗 Интеграция с инструментами<a class="headerlink" href="#интеграция-с-инструментами" title="Ссылка">#</a></h2>
+<h3 id="fzf-ripgrep-поиск-по-содержимому">fzf + ripgrep (поиск по содержимому)<a class="headerlink" href="#fzf-ripgrep-поиск-по-содержимому" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Найти файл с текстом</span>
+<span class="nv">RG_PREFIX</span><span class="o">=</span><span class="s2">&quot;rg --column --line-number --no-heading --color=always --smart-case&quot;</span>
+<span class="nv">INITIAL_QUERY</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="p">*</span><span class="k">:-</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="nv">IFS</span><span class="o">=</span>:<span class="w"> </span><span class="nb">read</span><span class="w"> </span>-ra<span class="w"> </span>selected<span class="w"> </span>&lt;<span class="w"> </span>&lt;<span class="o">(</span>
+<span class="w">    </span><span class="nv">FZF_DEFAULT_COMMAND</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$RG_PREFIX</span><span class="s2"> &#39;</span><span class="nv">$INITIAL_QUERY</span><span class="s2">&#39;&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>fzf<span class="w"> </span>--ansi<span class="w"> </span><span class="se">\</span>
+<span class="w">        </span>--color<span class="o">=</span><span class="s2">&quot;hl:-1:underline,hl+:-1:underline:reverse&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">        </span>--disabled<span class="w"> </span>--query<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$INITIAL_QUERY</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">        </span>--bind<span class="w"> </span><span class="s2">&quot;change:reload:sleep 0.1; </span><span class="nv">$RG_PREFIX</span><span class="s2"> {q} || true&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">        </span>--delimiter<span class="w"> </span>:<span class="w"> </span><span class="se">\</span>
+<span class="w">        </span>--preview<span class="w"> </span><span class="s1">&#39;bat --color=always {1} --highlight-line {2}&#39;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">        </span>--preview-window<span class="w"> </span><span class="s1">&#39;right,60%,border-left,+{2}+3/3&#39;</span>
+<span class="o">)</span>
+<span class="o">[</span>file,<span class="w"> </span>line<span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">selected</span><span class="p">[0]</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">selected</span><span class="p">[1]</span><span class="si">}</span><span class="s2">&quot;</span>
+</code></pre></div>
+
+<h3 id="fzf-bat-предпросмотр-с-подсветкой">fzf + bat (предпросмотр с подсветкой)<a class="headerlink" href="#fzf-bat-предпросмотр-с-подсветкой" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>fzf<span class="w"> </span>--preview<span class="w"> </span><span class="s1">&#39;bat --style=numbers --color=always {} | head -100&#39;</span>
+</code></pre></div>
+
+<h3 id="fzf-git">fzf + git<a class="headerlink" href="#fzf-git" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Переключиться на ветку</span>
+git<span class="w"> </span>branch<span class="w"> </span><span class="p">|</span><span class="w"> </span>fzf<span class="w"> </span><span class="p">|</span><span class="w"> </span>xargs<span class="w"> </span>git<span class="w"> </span>checkout
+
+<span class="c1"># Посмотреть коммит</span>
+git<span class="w"> </span>log<span class="w"> </span>--oneline<span class="w"> </span><span class="p">|</span><span class="w"> </span>fzf<span class="w"> </span><span class="p">|</span><span class="w"> </span>awk<span class="w"> </span><span class="s1">&#39;{print $1}&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>xargs<span class="w"> </span>git<span class="w"> </span>show
+
+<span class="c1"># Интерактивный git checkout</span>
+gco<span class="o">()</span><span class="w"> </span><span class="o">{</span>
+<span class="w">    </span>git<span class="w"> </span>branch<span class="w"> </span>--format<span class="o">=</span><span class="s1">&#39;%(refname:short)&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>fzf<span class="w"> </span><span class="p">|</span><span class="w"> </span>xargs<span class="w"> </span>git<span class="w"> </span>checkout
+<span class="o">}</span>
+
+<span class="c1"># Выбрать файлы из git status</span>
+git<span class="w"> </span>status<span class="w"> </span>-s<span class="w"> </span><span class="p">|</span><span class="w"> </span>fzf<span class="w"> </span>-m<span class="w"> </span><span class="p">|</span><span class="w"> </span>awk<span class="w"> </span><span class="s1">&#39;{print $2}&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>xargs<span class="w"> </span>git<span class="w"> </span>add
+</code></pre></div>
+
+<h3 id="fzf-pacman-yay">fzf + pacman / yay<a class="headerlink" href="#fzf-pacman-yay" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Установить пакет</span>
+pacman<span class="w"> </span>-Slq<span class="w"> </span><span class="p">|</span><span class="w"> </span>fzf<span class="w"> </span>-m<span class="w"> </span>--preview<span class="w"> </span><span class="s1">&#39;pacman -Si {1}&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>xargs<span class="w"> </span>-ro<span class="w"> </span>sudo<span class="w"> </span>pacman<span class="w"> </span>-S
+
+<span class="c1"># Удалить установленный</span>
+pacman<span class="w"> </span>-Qq<span class="w"> </span><span class="p">|</span><span class="w"> </span>fzf<span class="w"> </span>-m<span class="w"> </span>--preview<span class="w"> </span><span class="s1">&#39;pacman -Qi {1}&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>xargs<span class="w"> </span>-ro<span class="w"> </span>sudo<span class="w"> </span>pacman<span class="w"> </span>-Rns
+</code></pre></div>
+
+<h3 id="fzf-kill">fzf + kill<a class="headerlink" href="#fzf-kill" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Убить процесс</span>
+ps<span class="w"> </span>aux<span class="w"> </span><span class="p">|</span><span class="w"> </span>fzf<span class="w"> </span><span class="p">|</span><span class="w"> </span>awk<span class="w"> </span><span class="s1">&#39;{print $2}&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>xargs<span class="w"> </span><span class="nb">kill</span><span class="w"> </span>-9
+
+<span class="c1"># Функция</span>
+fkill<span class="o">()</span><span class="w"> </span><span class="o">{</span>
+<span class="w">    </span><span class="nv">pid</span><span class="o">=</span><span class="k">$(</span>ps<span class="w"> </span>-ef<span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span>1d<span class="w"> </span><span class="p">|</span><span class="w"> </span>fzf<span class="w"> </span>-m<span class="w"> </span><span class="p">|</span><span class="w"> </span>awk<span class="w"> </span><span class="s1">&#39;{print $2}&#39;</span><span class="k">)</span>
+<span class="w">    </span><span class="o">[</span><span class="w"> </span>-n<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$pid</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">kill</span><span class="w"> </span>-9<span class="w"> </span><span class="si">${</span><span class="nv">pid</span><span class="p">[@]</span><span class="si">}</span>
+<span class="o">}</span>
+</code></pre></div>
+
+<h3 id="fzf-docker">fzf + docker<a class="headerlink" href="#fzf-docker" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Зайти в контейнер</span>
+docker<span class="w"> </span>ps<span class="w"> </span><span class="p">|</span><span class="w"> </span>fzf<span class="w"> </span><span class="p">|</span><span class="w"> </span>awk<span class="w"> </span><span class="s1">&#39;{print $1}&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>xargs<span class="w"> </span>-I<span class="o">{}</span><span class="w"> </span>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span><span class="o">{}</span><span class="w"> </span>bash
+
+<span class="c1"># Убить контейнер</span>
+docker<span class="w"> </span>ps<span class="w"> </span>-a<span class="w"> </span><span class="p">|</span><span class="w"> </span>fzf<span class="w"> </span>-m<span class="w"> </span><span class="p">|</span><span class="w"> </span>awk<span class="w"> </span><span class="s1">&#39;{print $1}&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>xargs<span class="w"> </span>docker<span class="w"> </span>rm<span class="w"> </span>-f
+</code></pre></div>
+
+<h3 id="fzf-ssh">fzf + ssh<a class="headerlink" href="#fzf-ssh" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Выбрать хост из ~/.ssh/config</span>
+ssh<span class="w"> </span><span class="k">$(</span>grep<span class="w"> </span><span class="s2">&quot;^Host &quot;</span><span class="w"> </span>~/.ssh/config<span class="w"> </span><span class="p">|</span><span class="w"> </span>awk<span class="w"> </span><span class="s1">&#39;{print $2}&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>fzf<span class="k">)</span>
+</code></pre></div>
+
+<h3 id="fzf-environment-variables">fzf + environment variables<a class="headerlink" href="#fzf-environment-variables" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Выбрать переменную окружения</span>
+printenv<span class="w"> </span><span class="p">|</span><span class="w"> </span>fzf
+env<span class="w"> </span><span class="p">|</span><span class="w"> </span>fzf<span class="w"> </span><span class="p">|</span><span class="w"> </span>cut<span class="w"> </span>-d<span class="o">=</span><span class="w"> </span>-f1
+</code></pre></div>
+
+<h3 id="fzf-dirs-cd-в-часто-посещаемые">fzf + dirs (cd в часто посещаемые)<a class="headerlink" href="#fzf-dirs-cd-в-часто-посещаемые" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># С zoxide (см. ниже)</span>
+<span class="nb">cd</span><span class="w"> </span><span class="k">$(</span>zoxide<span class="w"> </span>query<span class="w"> </span>-l<span class="w"> </span><span class="p">|</span><span class="w"> </span>fzf<span class="k">)</span>
+</code></pre></div>
+
+<hr />
+<h2 id="shell-функции-с-fzf">🐚 Shell-функции с fzf<a class="headerlink" href="#shell-функции-с-fzf" title="Ссылка">#</a></h2>
+<div class="highlight"><pre><span></span><code><span class="c1"># Открыть файл в nvim</span>
+fe<span class="o">()</span><span class="w"> </span><span class="o">{</span>
+<span class="w">    </span><span class="nb">local</span><span class="w"> </span>files
+<span class="w">    </span><span class="nv">IFS</span><span class="o">=</span><span class="s1">$&#39;\n&#39;</span><span class="w"> </span><span class="nv">files</span><span class="o">=(</span><span class="k">$(</span>fzf<span class="w"> </span>--query<span class="o">=</span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span>--multi<span class="w"> </span>--select-1<span class="w"> </span>--exit-0<span class="k">)</span><span class="o">)</span>
+<span class="w">    </span><span class="o">[[</span><span class="w"> </span>-n<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$files</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]]</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="si">${</span><span class="nv">EDITOR</span><span class="k">:-</span><span class="nv">nvim</span><span class="si">}</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">files</span><span class="p">[@]</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="o">}</span>
+
+<span class="c1"># cd с предпросмотром</span>
+fd<span class="o">()</span><span class="w"> </span><span class="o">{</span>
+<span class="w">    </span><span class="nb">local</span><span class="w"> </span>dir
+<span class="w">    </span><span class="nv">dir</span><span class="o">=</span><span class="k">$(</span>find<span class="w"> </span><span class="si">${</span><span class="nv">1</span><span class="k">:-</span><span class="p">.</span><span class="si">}</span><span class="w"> </span>-type<span class="w"> </span>d<span class="w"> </span><span class="m">2</span>&gt;<span class="w"> </span>/dev/null<span class="w"> </span><span class="p">|</span><span class="w"> </span>fzf<span class="w"> </span>+m<span class="k">)</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">cd</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$dir</span><span class="s2">&quot;</span>
+<span class="o">}</span>
+
+<span class="c1"># История команд с fzf (если Ctrl-R не работает)</span>
+fh<span class="o">()</span><span class="w"> </span><span class="o">{</span>
+<span class="w">    </span>print<span class="w"> </span>-z<span class="w"> </span><span class="k">$(</span><span class="w"> </span><span class="o">([</span><span class="w"> </span>-n<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$ZSH_NAME</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">fc</span><span class="w"> </span>-l<span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nb">history</span><span class="k">)</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>fzf<span class="w"> </span>+s<span class="w"> </span>--tac<span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span><span class="s1">&#39;s/ *[0-9]* *//&#39;</span><span class="o">)</span>
+<span class="o">}</span>
+
+<span class="c1"># Grep с fzf</span>
+fg<span class="o">()</span><span class="w"> </span><span class="o">{</span>
+<span class="w">    </span>grep<span class="w"> </span>-rn<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span>.<span class="w"> </span><span class="p">|</span><span class="w"> </span>fzf
+<span class="o">}</span>
+</code></pre></div>
+
+<hr />
+<h2 id="fzf-vim-для-neovim-vim">📦 fzf.vim (для Neovim/Vim)<a class="headerlink" href="#fzf-vim-для-neovim-vim" title="Ссылка">#</a></h2>
+<p>В LazyVim уже есть fzf.lua или telescope. Для vanilla:</p>
+<div class="highlight"><pre><span></span><code>Plug <span class="s1">&#39;junegunn/fzf&#39;</span><span class="p">,</span> { <span class="s1">&#39;do&#39;</span>: { <span class="p">-&gt;</span> fzf#install<span class="p">()</span> } }
+Plug <span class="s1">&#39;junegunn/fzf.vim&#39;</span>
+
+<span class="c">&quot; Горячие клавиши</span>
+<span class="nb">nnoremap</span> <span class="p">&lt;</span>leader<span class="p">&gt;</span><span class="k">f</span> :Files<span class="p">&lt;</span>CR<span class="p">&gt;</span>
+<span class="nb">nnoremap</span> <span class="p">&lt;</span>leader<span class="p">&gt;</span><span class="k">g</span> :Rg<span class="p">&lt;</span>CR<span class="p">&gt;</span>
+<span class="nb">nnoremap</span> <span class="p">&lt;</span>leader<span class="p">&gt;</span><span class="k">b</span> :Buffers<span class="p">&lt;</span>CR<span class="p">&gt;</span>
+<span class="nb">nnoremap</span> <span class="p">&lt;</span>leader<span class="p">&gt;</span><span class="k">h</span> :History<span class="p">&lt;</span>CR<span class="p">&gt;</span>
+</code></pre></div>
+
+<hr />
+<h1 id="часть-2-zoxide">🌍 ЧАСТЬ 2. zoxide<a class="headerlink" href="#часть-2-zoxide" title="Ссылка">#</a></h1>
+<h2 id="установка_1">🚀 Установка<a class="headerlink" href="#установка_1" title="Ссылка">#</a></h2>
+<div class="highlight"><pre><span></span><code><span class="c1"># Arch / CachyOS</span>
+sudo<span class="w"> </span>pacman<span class="w"> </span>-S<span class="w"> </span>zoxide
+
+<span class="c1"># Debian/Ubuntu</span>
+sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>zoxide
+
+<span class="c1"># macOS</span>
+brew<span class="w"> </span>install<span class="w"> </span>zoxide
+
+<span class="c1"># Через cargo</span>
+cargo<span class="w"> </span>install<span class="w"> </span>zoxide<span class="w"> </span>--locked
+
+<span class="c1"># Windows</span>
+scoop<span class="w"> </span>install<span class="w"> </span>zoxide
+</code></pre></div>
+
+<h3 id="интеграция-с-shell_1">Интеграция с shell<a class="headerlink" href="#интеграция-с-shell_1" title="Ссылка">#</a></h3>
+<p>Добавьте в <code>~/.bashrc</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="nb">eval</span><span class="w"> </span><span class="s2">&quot;</span><span class="k">$(</span>zoxide<span class="w"> </span>init<span class="w"> </span>bash<span class="k">)</span><span class="s2">&quot;</span>
+</code></pre></div>
+
+<p><code>~/.zshrc</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="nb">eval</span><span class="w"> </span><span class="s2">&quot;</span><span class="k">$(</span>zoxide<span class="w"> </span>init<span class="w"> </span>zsh<span class="k">)</span><span class="s2">&quot;</span>
+</code></pre></div>
+
+<p><code>~/.config/fish/config.fish</code>:</p>
+<div class="highlight"><pre><span></span><code>zoxide init <span class="nb">fish</span> <span class="o">|</span> <span class="nb">source</span>
+</code></pre></div>
+
+<h3 id="опции-init">Опции init<a class="headerlink" href="#опции-init" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="nb">eval</span><span class="w"> </span><span class="s2">&quot;</span><span class="k">$(</span>zoxide<span class="w"> </span>init<span class="w"> </span>bash<span class="w"> </span>--cmd<span class="w"> </span><span class="nb">cd</span><span class="k">)</span><span class="s2">&quot;</span><span class="w">      </span><span class="c1"># заменить cd на z</span>
+<span class="nb">eval</span><span class="w"> </span><span class="s2">&quot;</span><span class="k">$(</span>zoxide<span class="w"> </span>init<span class="w"> </span>zsh<span class="w"> </span>--hook<span class="w"> </span>prompt<span class="k">)</span><span class="s2">&quot;</span><span class="w">  </span><span class="c1"># обновлять БД при каждом prompt</span>
+</code></pre></div>
+
+<hr />
+<h2 id="использование">🎯 Использование<a class="headerlink" href="#использование" title="Ссылка">#</a></h2>
+<div class="highlight"><pre><span></span><code><span class="c1"># Базовый переход (заменяет cd)</span>
+z<span class="w"> </span>myproject<span class="w">                        </span><span class="c1"># перейти в каталог с &quot;myproject&quot; в имени</span>
+z<span class="w"> </span>foo<span class="w"> </span>bar<span class="w">                          </span><span class="c1"># foo + bar</span>
+z<span class="w"> </span>..<span class="w">                               </span><span class="c1"># на уровень вверх</span>
+z<span class="w"> </span>-<span class="w">                                </span><span class="c1"># предыдущий каталог</span>
+
+<span class="c1"># Интерактивный выбор (с fzf)</span>
+zi<span class="w">                                 </span><span class="c1"># выбрать из всех известных каталогов</span>
+zi<span class="w"> </span>myproject<span class="w">                       </span><span class="c1"># отфильтровать по &quot;myproject&quot;</span>
+
+<span class="c1"># Самый часто посещаемый</span>
+z<span class="w"> </span>reports<span class="w">                          </span><span class="c1"># перейдёт в наиболее релевантный</span>
+
+<span class="c1"># Абсолютный путь</span>
+z<span class="w"> </span>/var/log
+
+<span class="c1"># Использовать обычный cd (если z = cd)</span>
+<span class="se">\c</span>d<span class="w"> </span>mydir<span class="w">                          </span><span class="c1"># обойти алиас</span>
+</code></pre></div>
+
+<h3 id="команды-zoxide">Команды zoxide<a class="headerlink" href="#команды-zoxide" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>z<span class="w"> </span>foo<span class="w">                       </span><span class="c1"># cd с fuzzy</span>
+zi<span class="w"> </span>foo<span class="w">                      </span><span class="c1"># интерактивно через fzf</span>
+zoxide<span class="w"> </span>query<span class="w"> </span>foo<span class="w">            </span><span class="c1"># показать лучший результат без перехода</span>
+zoxide<span class="w"> </span>query<span class="w"> </span>-l<span class="w">             </span><span class="c1"># список всех известных каталогов</span>
+zoxide<span class="w"> </span>query<span class="w"> </span>-l<span class="w"> </span>-s<span class="w">          </span><span class="c1"># + очки (score)</span>
+zoxide<span class="w"> </span>add<span class="w"> </span>/path/to/dir<span class="w">     </span><span class="c1"># добавить каталог вручную</span>
+zoxide<span class="w"> </span>remove<span class="w"> </span>/path<span class="w">         </span><span class="c1"># удалить из БД</span>
+zoxide<span class="w"> </span>edit<span class="w">                 </span><span class="c1"># интерактивно редактировать БД</span>
+zoxide<span class="w"> </span>reset<span class="w">                </span><span class="c1"># сбросить базу</span>
+</code></pre></div>
+
+<hr />
+<h2 id="как-работает-zoxide">📊 Как работает zoxide<a class="headerlink" href="#как-работает-zoxide" title="Ссылка">#</a></h2>
+<ul>
+<li>Записывает каждый <code>z</code>/<code>cd</code> в базу (<code>~/.local/share/zoxide/db.zo</code>).</li>
+<li>Каждому каталогу присваивается <strong>score</strong> (важность).</li>
+<li>Score растёт при частом посещении + уменьшается со временем.</li>
+</ul>
+<div class="highlight"><pre><span></span><code>&gt; zoxide query -l -s
+/path/to/project        50.5      # часто посещаемый
+/path/to/old/project    20.0      # реже
+/tmp                    5.0       # редко
+</code></pre></div>
+
+<p>Алгоритм: <code>age_decay * frequency</code>.
+- Новый каталог → score растёт быстро.
+- Старый/редкий → затухает.</p>
+<hr />
+<h2 id="настройка">⚙️ Настройка<a class="headerlink" href="#настройка" title="Ссылка">#</a></h2>
+<h3 id="переменные-окружения">Переменные окружения<a class="headerlink" href="#переменные-окружения" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># .bashrc / .zshrc</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">_ZO_DATA_DIR</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$HOME</span><span class="s2">/.local/share/zoxide&quot;</span><span class="w">   </span><span class="c1"># где хранить БД</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">_ZO_MAXAGE</span><span class="o">=</span><span class="m">10000</span><span class="w">                            </span><span class="c1"># лимит записей (по умолчанию 10000)</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">_ZO_ECHO</span><span class="o">=</span><span class="m">1</span><span class="w">                                  </span><span class="c1"># выводить путь при переходе</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">_ZO_RESOLVE_SYMLINKS</span><span class="o">=</span><span class="m">1</span><span class="w">                      </span><span class="c1"># resolve symlinks</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">_ZO_EXCLUDE_DIRS</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$HOME</span><span class="s2">/.git:</span><span class="nv">$HOME</span><span class="s2">/Trash&quot;</span><span class="w">   </span><span class="c1"># исключить каталоги</span>
+</code></pre></div>
+
+<h3 id="сменить-команду-например-на-cd">Сменить команду (например, на cd)<a class="headerlink" href="#сменить-команду-например-на-cd" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="nb">eval</span><span class="w"> </span><span class="s2">&quot;</span><span class="k">$(</span>zoxide<span class="w"> </span>init<span class="w"> </span>bash<span class="w"> </span>--cmd<span class="w"> </span><span class="nb">cd</span><span class="k">)</span><span class="s2">&quot;</span>
+<span class="c1"># теперь cd /path/to/project работает с fuzzy</span>
+<span class="c1"># но и обычный cd в подкаталог тоже работает</span>
+</code></pre></div>
+
+<hr />
+<h2 id="zoxide-vs-z-vs-autojump">🆚 zoxide vs z vs autojump<a class="headerlink" href="#zoxide-vs-z-vs-autojump" title="Ссылка">#</a></h2>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>zoxide</th>
+<th>z (rupa/z)</th>
+<th>autojump</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Язык</td>
+<td>Rust</td>
+<td>Bash</td>
+<td>Python</td>
+</tr>
+<tr>
+<td>Скорость</td>
+<td>⚡⚡⚡</td>
+<td>⚡⚡</td>
+<td>⚡</td>
+</tr>
+<tr>
+<td>Поддержка</td>
+<td>Активно</td>
+<td>Брошен</td>
+<td>Старый</td>
+</tr>
+<tr>
+<td>Сравнение</td>
+<td>умнее</td>
+<td>проще</td>
+<td>базовое</td>
+</tr>
+<tr>
+<td>Cross-platform</td>
+<td>✅</td>
+<td>только Unix</td>
+<td>Unix</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Рекомендуется</strong>: zoxide (Rust, активно развивается).</p>
+<hr />
+<h1 id="комбо-fzf-zoxide">🌟 Комбо fzf + zoxide<a class="headerlink" href="#комбо-fzf-zoxide" title="Ссылка">#</a></h1>
+<div class="highlight"><pre><span></span><code><span class="c1"># Установить fzf и zoxide</span>
+sudo<span class="w"> </span>pacman<span class="w"> </span>-S<span class="w"> </span>fzf<span class="w"> </span>zoxide
+
+<span class="c1"># В ~/.bashrc / ~/.zshrc:</span>
+<span class="nb">eval</span><span class="w"> </span><span class="s2">&quot;</span><span class="k">$(</span>zoxide<span class="w"> </span>init<span class="w"> </span>bash<span class="k">)</span><span class="s2">&quot;</span>
+<span class="nb">source</span><span class="w"> </span>/usr/share/fzf/key-bindings.bash
+<span class="nb">source</span><span class="w"> </span>/usr/share/fzf/completion.bash
+
+<span class="c1"># Полезные алиасы</span>
+<span class="nb">alias</span><span class="w"> </span><span class="nv">cd</span><span class="o">=</span><span class="s1">&#39;z&#39;</span><span class="w">                   </span><span class="c1"># если заменили</span>
+<span class="nb">alias</span><span class="w"> </span>zoxide-query<span class="o">=</span><span class="s1">&#39;zoxide query -l -s&#39;</span>
+
+<span class="c1"># Функция: открыть проект</span>
+proj<span class="o">()</span><span class="w"> </span><span class="o">{</span>
+<span class="w">    </span><span class="nb">local</span><span class="w"> </span>dir
+<span class="w">    </span><span class="nv">dir</span><span class="o">=</span><span class="k">$(</span>zoxide<span class="w"> </span>query<span class="w"> </span>-l<span class="w"> </span><span class="p">|</span><span class="w"> </span>fzf<span class="w"> </span>--preview<span class="w"> </span><span class="s1">&#39;tree -C {} | head -50&#39;</span><span class="k">)</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">cd</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$dir</span><span class="s2">&quot;</span>
+<span class="o">}</span>
+
+<span class="c1"># Функция: перейти и открыть nvim</span>
+v<span class="o">()</span><span class="w"> </span><span class="o">{</span>
+<span class="w">    </span><span class="nb">local</span><span class="w"> </span>dir
+<span class="w">    </span><span class="nv">dir</span><span class="o">=</span><span class="k">$(</span>zoxide<span class="w"> </span>query<span class="w"> </span>-l<span class="w"> </span><span class="p">|</span><span class="w"> </span>fzf<span class="k">)</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">cd</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$dir</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>nvim<span class="w"> </span>.
+<span class="o">}</span>
+</code></pre></div>
+
+<hr />
+<h2 id="частые-ошибки">🪤 Частые ошибки<a class="headerlink" href="#частые-ошибки" title="Ссылка">#</a></h2>
+<h3 id="fzf">fzf<a class="headerlink" href="#fzf" title="Ссылка">#</a></h3>
+<ol>
+<li><strong>Не работают <code>Ctrl-T</code>/<code>Ctrl-R</code>/<code>Alt-C</code></strong> — не подключены key-bindings.
+   Добавьте <code>source /usr/share/fzf/key-bindings.bash</code> в <code>.bashrc</code>.</li>
+<li><strong>Медленный поиск в больших каталогах</strong> — используйте <code>fd</code> вместо <code>find</code>.</li>
+<li><strong>Нет предпросмотра</strong> — добавьте <code>--preview 'cat {}'</code>.</li>
+<li><strong>Цвета не работают</strong> — терминал должен поддерживать 256/true color.</li>
+<li><strong>Мусор в списке</strong> — фильтруйте источник: <code>fd --type f | fzf</code>.</li>
+</ol>
+<h3 id="zoxide">zoxide<a class="headerlink" href="#zoxide" title="Ссылка">#</a></h3>
+<ol>
+<li><strong>База пустая</strong> — сначала надо переходить, чтобы zoxide запомнил.</li>
+<li><strong>Не реагирует</strong> — забыт <code>eval "$(zoxide init ...)"</code> в rc-файле.</li>
+<li><strong>Хочет в <code>/tmp</code></strong> — фильтруйте через <code>_ZO_EXCLUDE_DIRS</code>.</li>
+<li><strong>Старые записи</strong> — <code>zoxide reset</code> или <code>zoxide edit</code> для очистки.</li>
+<li><strong>z как cd</strong> — если нужно обычный cd, <code>\cd</code> или <code>command cd</code>.</li>
+</ol>
+<hr />
+<h2 id="полезные-ссылки">🔗 Полезные ссылки<a class="headerlink" href="#полезные-ссылки" title="Ссылка">#</a></h2>
+<h3 id="fzf_1">fzf<a class="headerlink" href="#fzf_1" title="Ссылка">#</a></h3>
+<ul>
+<li>GitHub: https://github.com/junegunn/fzf</li>
+<li>Wiki: https://github.com/junegunn/fzf/wiki</li>
+<li>Examples: https://github.com/junegunn/fzf/wiki/Examples</li>
+<li>fzf.vim: https://github.com/junegunn/fzf.vim</li>
+<li>skim (Rust alt): https://github.com/lotabout/skim</li>
+</ul>
+<h3 id="zoxide_1">zoxide<a class="headerlink" href="#zoxide_1" title="Ссылка">#</a></h3>
+<ul>
+<li>GitHub: https://github.com/ajitid/zoxide</li>
+<li>Документация: https://github.com/ajitid/zoxide#examples</li>
+<li>z (альтернатива): https://github.com/rupa/z</li>
+<li>autojump: https://github.com/wting/autojump</li>
+</ul>
+<hr />
+<h2 id="полезные-советы">💡 Полезные советы<a class="headerlink" href="#полезные-советы" title="Ссылка">#</a></h2>
+<ol>
+<li><strong>Ctrl-R</strong> — лучший способ искать по истории команд.</li>
+<li><strong>Alt-C</strong> — быстрый cd с fuzzy.</li>
+<li><strong>Ctrl-T</strong> — вставить путь файла в текущую команду.</li>
+<li><strong><code>--preview 'bat --color=always {}'</code></strong> — для предпросмотра с подсветкой.</li>
+<li><strong>fzf + fd</strong> — быстрее, чем fzf + find.</li>
+<li><strong>fzf + ripgrep</strong> — поиск по содержимому.</li>
+<li><strong>z <code>zi</code></strong> — интерактивный выбор через fzf.</li>
+<li><strong>zoxide <code>--cmd cd</code></strong> — заменить cd на умный cd.</li>
+<li><strong>Aliases</strong> — <code>alias cd=z</code> для бесшовного перехода.</li>
+<li><strong>fzf в скриптах</strong> — для интерактивного выбора.</li>
+<li><strong><code>fzf -m</code></strong> — мультивыбор через Tab.</li>
+<li><strong>Цвета через FZF_DEFAULT_OPTS</strong> — настройте один раз.</li>
+<li><strong>fzf.vim / fzf-lua</strong> — для Neovim.</li>
+<li><strong><code>z foo bar</code></strong> — fuzzy по нескольким словам.</li>
+<li><strong>Регулярно <code>zoxide reset</code></strong> — если база засорилась.</li>
+</ol>
+<hr />
+<p><em>Сгенерировано как шпаргалка. fzf и zoxide — основа продуктивности в терминале —
+углубляйтесь через https://github.com/junegunn/fzf/wiki/Examples</em></p>
+    </article>
+    <nav class="pagination">
+      <a class="pager prev" href="cron.html">← cron</a>
+      <a class="pager next" href="minikube-k8s.html">Minikube / Kubernetes →</a>
+    </nav>
+  </main>
+
+  <aside class="toc">
+    <details open>
+      <summary>📑 Оглавление</summary>
+      <div class="toc-list">
+<div class="toc">
+<ul>
+<li><a href="#fzf-zoxide-шпаргалка-по-fuzzy-поиску-и-переходам">🔎 fzf + zoxide — шпаргалка по fuzzy-поиску и переходам</a></li>
+<li><a href="#часть-1-fzf">🔎 ЧАСТЬ 1. fzf</a><ul>
+<li><a href="#установка">🚀 Установка</a><ul>
+<li><a href="#интеграция-с-shell">Интеграция с shell</a></li>
+</ul>
+</li>
+<li><a href="#базовое-использование">🎯 Базовое использование</a></li>
+<li><a href="#встроенные-горячие-клавиши-после-интеграции">⌨️ Встроенные горячие клавиши (после интеграции)</a><ul>
+<li><a href="#примеры">Примеры</a></li>
+<li><a href="#внутри-fzf">Внутри fzf</a></li>
+</ul>
+</li>
+<li><a href="#цвета-и-кастомизация">🎨 Цвета и кастомизация</a><ul>
+<li><a href="#полезные-опции">Полезные опции</a></li>
+</ul>
+</li>
+<li><a href="#интеграция-с-инструментами">🔗 Интеграция с инструментами</a><ul>
+<li><a href="#fzf-ripgrep-поиск-по-содержимому">fzf + ripgrep (поиск по содержимому)</a></li>
+<li><a href="#fzf-bat-предпросмотр-с-подсветкой">fzf + bat (предпросмотр с подсветкой)</a></li>
+<li><a href="#fzf-git">fzf + git</a></li>
+<li><a href="#fzf-pacman-yay">fzf + pacman / yay</a></li>
+<li><a href="#fzf-kill">fzf + kill</a></li>
+<li><a href="#fzf-docker">fzf + docker</a></li>
+<li><a href="#fzf-ssh">fzf + ssh</a></li>
+<li><a href="#fzf-environment-variables">fzf + environment variables</a></li>
+<li><a href="#fzf-dirs-cd-в-часто-посещаемые">fzf + dirs (cd в часто посещаемые)</a></li>
+</ul>
+</li>
+<li><a href="#shell-функции-с-fzf">🐚 Shell-функции с fzf</a></li>
+<li><a href="#fzf-vim-для-neovim-vim">📦 fzf.vim (для Neovim/Vim)</a></li>
+</ul>
+</li>
+<li><a href="#часть-2-zoxide">🌍 ЧАСТЬ 2. zoxide</a><ul>
+<li><a href="#установка_1">🚀 Установка</a><ul>
+<li><a href="#интеграция-с-shell_1">Интеграция с shell</a></li>
+<li><a href="#опции-init">Опции init</a></li>
+</ul>
+</li>
+<li><a href="#использование">🎯 Использование</a><ul>
+<li><a href="#команды-zoxide">Команды zoxide</a></li>
+</ul>
+</li>
+<li><a href="#как-работает-zoxide">📊 Как работает zoxide</a></li>
+<li><a href="#настройка">⚙️ Настройка</a><ul>
+<li><a href="#переменные-окружения">Переменные окружения</a></li>
+<li><a href="#сменить-команду-например-на-cd">Сменить команду (например, на cd)</a></li>
+</ul>
+</li>
+<li><a href="#zoxide-vs-z-vs-autojump">🆚 zoxide vs z vs autojump</a></li>
+</ul>
+</li>
+<li><a href="#комбо-fzf-zoxide">🌟 Комбо fzf + zoxide</a><ul>
+<li><a href="#частые-ошибки">🪤 Частые ошибки</a><ul>
+<li><a href="#fzf">fzf</a></li>
+<li><a href="#zoxide">zoxide</a></li>
+</ul>
+</li>
+<li><a href="#полезные-ссылки">🔗 Полезные ссылки</a><ul>
+<li><a href="#fzf_1">fzf</a></li>
+<li><a href="#zoxide_1">zoxide</a></li>
+</ul>
+</li>
+<li><a href="#полезные-советы">💡 Полезные советы</a></li>
+</ul>
+</li>
+</ul>
+</div>
+
+      </div>
+    </details>
+  </aside>
+</div>
+
+<button class="back-top" id="backTop" aria-label="Наверх">↑</button>
+
+<script src="assets/search.js"></script>
+<script src="assets/page.js"></script>
+</body>
+</html>

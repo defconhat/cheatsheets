@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>YAML — Шпаргалки</title>
+<link rel="stylesheet" href="assets/style.css">
+<link rel="stylesheet" href="assets/pygments.css">
+</head>
+<body>
+<div class="layout">
+  <aside class="sidebar">
+    <a href="index.html" class="brand">📌 Шпаргалки</a>
+    <nav class="nav">
+<a href="yazi.html" class="nav-item"><span class="nav-ico">📦</span>Yazi</a>
+<a href="neovim.html" class="nav-item"><span class="nav-ico">📘</span>Neovim (LazyVim)</a>
+<a href="niri.html" class="nav-item"><span class="nav-ico">🪟</span>Niri</a>
+<a href="tmux.html" class="nav-item"><span class="nav-ico">🪟</span>Tmux</a>
+<a href="bash.html" class="nav-item"><span class="nav-ico">🐚</span>Bash</a>
+<a href="git.html" class="nav-item"><span class="nav-ico">🔀</span>Git</a>
+<a href="terminal.html" class="nav-item"><span class="nav-ico">🖥️</span>Терминал Linux</a>
+<a href="powershell.html" class="nav-item"><span class="nav-ico">💻</span>PowerShell</a>
+<a href="cmd.html" class="nav-item"><span class="nav-ico">🪟</span>CMD (cmd.exe)</a>
+<a href="python.html" class="nav-item"><span class="nav-ico">🐍</span>Python</a>
+<a href="systemd.html" class="nav-item"><span class="nav-ico">⚙️</span>systemd</a>
+<a href="ssh.html" class="nav-item"><span class="nav-ico">🔐</span>SSH</a>
+<a href="make-cmake.html" class="nav-item"><span class="nav-ico">🔨</span>Make / CMake</a>
+<a href="docker.html" class="nav-item"><span class="nav-ico">🐳</span>Docker</a>
+<a href="pacman.html" class="nav-item"><span class="nav-ico">📦</span>pacman / yay / paru</a>
+<a href="spark.html" class="nav-item"><span class="nav-ico">⚡</span>Apache Spark / PySpark</a>
+<a href="markdown.html" class="nav-item"><span class="nav-ico">📝</span>Markdown</a>
+<a href="regex.html" class="nav-item"><span class="nav-ico">🔍</span>Регулярные выражения</a>
+<a href="jq-json.html" class="nav-item"><span class="nav-ico">🔧</span>jq + JSON</a>
+<a href="awk-sed.html" class="nav-item"><span class="nav-ico">✂️</span>awk / sed</a>
+<a href="airflow.html" class="nav-item"><span class="nav-ico">🌪️</span>Apache Airflow</a>
+<a href="http-curl.html" class="nav-item"><span class="nav-ico">🌐</span>HTTP / curl</a>
+<a href="yaml.html" class="nav-item active"><span class="nav-ico">📄</span>YAML</a>
+<a href="vscode.html" class="nav-item"><span class="nav-ico">💻</span>VS Code</a>
+<a href="cron.html" class="nav-item"><span class="nav-ico">⏰</span>cron</a>
+<a href="fzf-zoxide.html" class="nav-item"><span class="nav-ico">🔎</span>fzf + zoxide</a>
+<a href="minikube-k8s.html" class="nav-item"><span class="nav-ico">☸️</span>Minikube / Kubernetes</a>
+<a href="cicd.html" class="nav-item"><span class="nav-ico">🦊</span>GitLab CI / GitHub Actions</a>
+<a href="nginx.html" class="nav-item"><span class="nav-ico">🌐</span>nginx</a>
+<a href="dbt.html" class="nav-item"><span class="nav-ico">🔧</span>dbt</a>
+<a href="kafka.html" class="nav-item"><span class="nav-ico">🐘</span>Apache Kafka</a>
+<a href="prometheus-grafana.html" class="nav-item"><span class="nav-ico">📊</span>Prometheus / Grafana</a>
+<a href="iceberg-nessie.html" class="nav-item"><span class="nav-ico">🧊</span>Iceberg / Nessie</a>
+<a href="impala.html" class="nav-item"><span class="nav-ico">🐬</span>Apache Impala</a>
+<a href="terraform.html" class="nav-item"><span class="nav-ico">🏗️</span>Terraform</a>
+<a href="linux-internals.html" class="nav-item"><span class="nav-ico">🐧</span>Linux Internals</a>
+<a href="miscellaneous.html" class="nav-item"><span class="nav-ico">🧰</span>Miscellaneous</a>
+<a href="python-automation-libs.html" class="nav-item"><span class="nav-ico">🐍</span>Python: авт-ция (10 libs)</a>
+<a href="eza.html" class="nav-item"><span class="nav-ico">🌈</span>eza</a>
+<a href="dbeaver.html" class="nav-item"><span class="nav-ico">🗄️</span>DBeaver</a>
+<a href="zcode.html" class="nav-item"><span class="nav-ico">🤖</span>ZCode</a>
+<a href="warp.html" class="nav-item"><span class="nav-ico">🚀</span>Warp</a>
+<a href="agentic-ai-dev.html" class="nav-item"><span class="nav-ico">🤝</span>Агентная разработка с ИИ</a>
+    </nav>
+  </aside>
+
+  <main class="content">
+    <article>
+<h1 id="yaml-шпаргалка-по-синтаксису">📄 YAML — шпаргалка по синтаксису<a class="headerlink" href="#yaml-шпаргалка-по-синтаксису" title="Ссылка">#</a></h1>
+<blockquote>
+<p><strong>YAML</strong> (YAML Ain&rsquo;t Markup Language) — человекочитаемый формат сериализации данных.
+Используется в K8s, Docker Compose, Ansible, GitHub Actions, CI/CD.
+Документация: https://yaml.org · https://yaml.org/spec/1.2.2</p>
+</blockquote>
+<hr />
+<h2 id="главные-правила">🔑 Главные правила<a class="headerlink" href="#главные-правила" title="Ссылка">#</a></h2>
+<ol>
+<li><strong>Отступы — пробелами</strong> (не табами!). Обычно по 2 пробела.</li>
+<li><strong>Регистрозависимость</strong> (<code>Name</code> ≠ <code>name</code>).</li>
+<li><strong><code>:</code> после ключа</strong> + пробел: <code>key: value</code>.</li>
+<li><strong><code>#</code> — комментарий</strong> (до конца строки).</li>
+<li><strong><code>---</code> — разделитель документов</strong> (несколько YAML в одном файле).</li>
+<li><strong><code>...</code> — конец документа</strong> (опционально).</li>
+</ol>
+<hr />
+<h2 id="базовые-типы">🚀 Базовые типы<a class="headerlink" href="#базовые-типы" title="Ссылка">#</a></h2>
+<h3 id="скаляры">Скаляры<a class="headerlink" href="#скаляры" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="nt">string</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">hello</span>
+<span class="nt">string_quoted</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;hello&quot;</span>
+<span class="nt">string_single</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;hello&#39;</span>
+<span class="nt">integer</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">42</span>
+<span class="nt">float</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3.14</span>
+<span class="nt">boolean</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w">       </span><span class="c1"># или yes / on (не рекомендуется)</span>
+<span class="nt">boolean2</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span><span class="w">     </span><span class="c1"># или no / off</span>
+<span class="nt">null_value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">null</span><span class="w">    </span><span class="c1"># или ~</span>
+<span class="nt">null_implicit</span><span class="p">:</span><span class="w">      </span><span class="c1"># пустое = null</span>
+<span class="nt">date</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2024-01-15</span>
+<span class="nt">datetime</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2024-01-15T10:30:00Z</span>
+</code></pre></div>
+
+<h3 id="строки">Строки<a class="headerlink" href="#строки" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Простая</span>
+<span class="nt">plain</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">hello world</span>
+
+<span class="c1"># С кавычками (для спецсимволов)</span>
+<span class="nt">quoted</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;hello:</span><span class="nv"> </span><span class="s">world&quot;</span>
+<span class="nt">single</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;it</span><span class="se">&#39;&#39;</span><span class="s">s</span><span class="nv"> </span><span class="s">a</span><span class="nv"> </span><span class="s">test&#39;</span>
+
+<span class="c1"># Multiline (несколько строк)</span>
+<span class="nt">folded</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">&gt;</span><span class="w">            </span><span class="c1"># &gt; = folded (переносы → пробелы)</span>
+<span class="w">    </span><span class="no">This is</span>
+<span class="w">    </span><span class="no">a long paragraph</span>
+<span class="w">    </span><span class="no">on one line.</span>
+
+<span class="nt">literal</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span><span class="w">           </span><span class="c1"># | = literal (сохраняет переносы)</span>
+<span class="w">    </span><span class="no">Line 1</span>
+<span class="w">    </span><span class="no">Line 2</span>
+<span class="w">    </span><span class="no">Line 3</span>
+
+<span class="c1"># С сохранением trailing newline</span>
+<span class="nt">literal_keep</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|+</span>
+<span class="w">    </span><span class="no">text</span>
+<span class="w">    </span><span class="no">text</span>
+
+<span class="c1"># Без trailing newline</span>
+<span class="nt">literal_strip</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|-</span>
+<span class="w">    </span><span class="no">text</span>
+<span class="w">    </span><span class="no">text</span>
+</code></pre></div>
+
+<blockquote>
+<p>Multiline-операторы:
+- <code>|</code> — literal (как есть, с <code>\n</code>)
+- <code>&gt;</code> — folded (переносы → пробелы)
+- <code>+</code> — keep trailing newline
+- <code>-</code> — strip trailing newline</p>
+</blockquote>
+<hr />
+<h2 id="коллекции">📋 Коллекции<a class="headerlink" href="#коллекции" title="Ссылка">#</a></h2>
+<h3 id="последовательности-списки-массивы">Последовательности (списки/массивы)<a class="headerlink" href="#последовательности-списки-массивы" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Block style</span>
+<span class="nt">fruits</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">apple</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">banana</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">cherry</span>
+
+<span class="c1"># Inline (flow style)</span>
+<span class="nt">fruits</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">apple</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">banana</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">cherry</span><span class="p p-Indicator">]</span>
+
+<span class="c1"># Список словарей</span>
+<span class="nt">users</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Alice</span>
+<span class="w">    </span><span class="nt">age</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">30</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Bob</span>
+<span class="w">    </span><span class="nt">age</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">25</span>
+
+<span class="c1"># Список списков</span>
+<span class="nt">matrix</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">1</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">2</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">3</span><span class="p p-Indicator">]</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">4</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">5</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">6</span><span class="p p-Indicator">]</span>
+</code></pre></div>
+
+<h3 id="отображения-словари-объекты">Отображения (словари/объекты)<a class="headerlink" href="#отображения-словари-объекты" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Block style</span>
+<span class="nt">person</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Alice</span>
+<span class="w">  </span><span class="nt">age</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">30</span>
+<span class="w">  </span><span class="nt">address</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">city</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">NYC</span>
+<span class="w">    </span><span class="nt">zip</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;10001&quot;</span>
+
+<span class="c1"># Flow style</span>
+<span class="nt">person</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="nv">Alice</span><span class="p p-Indicator">,</span><span class="nt"> age</span><span class="p">:</span><span class="w"> </span><span class="nv">30</span><span class="p p-Indicator">}</span>
+
+<span class="c1"># Вложенные</span>
+<span class="nt">config</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">database</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">host</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">localhost</span>
+<span class="w">    </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5432</span>
+</code></pre></div>
+
+<h3 id="комбинирование">Комбинирование<a class="headerlink" href="#комбинирование" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="nt">servers</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">web1</span>
+<span class="w">    </span><span class="nt">ip</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10.0.0.1</span>
+<span class="w">    </span><span class="nt">roles</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">web</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">cache</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">db1</span>
+<span class="w">    </span><span class="nt">ip</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10.0.0.2</span>
+<span class="w">    </span><span class="nt">roles</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">primary</span>
+</code></pre></div>
+
+<hr />
+<h2 id="якоря-и-алиасы-dry">🔄 Якоря и алиасы (DRY)<a class="headerlink" href="#якоря-и-алиасы-dry" title="Ссылка">#</a></h2>
+<p>Повторное использование значений (как переменные).</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Определение якоря (&amp;name)</span>
+<span class="nt">defaults</span><span class="p">:</span><span class="w"> </span><span class="nl">&amp;defaults</span>
+<span class="w">  </span><span class="nt">adapter</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">postgres</span>
+<span class="w">  </span><span class="nt">host</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">localhost</span>
+<span class="w">  </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5432</span>
+
+<span class="c1"># Использование (*name) — ссылка</span>
+<span class="nt">development</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">&lt;&lt;</span><span class="p">:</span><span class="w"> </span><span class="nv">*defaults</span><span class="w">      </span><span class="c1"># merge keys</span>
+<span class="w">  </span><span class="nt">database</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">dev_db</span>
+
+<span class="nt">production</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">&lt;&lt;</span><span class="p">:</span><span class="w"> </span><span class="nv">*defaults</span>
+<span class="w">  </span><span class="nt">host</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">prod.example.com</span>
+<span class="w">  </span><span class="nt">database</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">prod_db</span>
+
+<span class="c1"># Переопределение после merge</span>
+<span class="nt">test</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">&lt;&lt;</span><span class="p">:</span><span class="w"> </span><span class="nv">*defaults</span>
+<span class="w">  </span><span class="nt">database</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">test_db</span><span class="w">   </span><span class="c1"># переопределит</span>
+</code></pre></div>
+
+<h3 id="альтернативный-синтаксис-yaml-1-2">Альтернативный синтаксис (YAML 1.2)<a class="headerlink" href="#альтернативный-синтаксис-yaml-1-2" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="nt">x-common</span><span class="p">:</span><span class="w"> </span><span class="nl">&amp;common</span>
+<span class="w">  </span><span class="nt">restart</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">unless-stopped</span>
+<span class="w">  </span><span class="nt">networks</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">appnet</span><span class="p p-Indicator">]</span>
+
+<span class="nt">services</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">web</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">&lt;&lt;</span><span class="p">:</span><span class="w"> </span><span class="nv">*common</span>
+<span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nginx</span>
+<span class="w">  </span><span class="nt">db</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">&lt;&lt;</span><span class="p">:</span><span class="w"> </span><span class="nv">*common</span>
+<span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">postgres</span>
+</code></pre></div>
+
+<hr />
+<h2 id="спецсимволы">🛠️ Спецсимволы<a class="headerlink" href="#спецсимволы" title="Ссылка">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Символ</th>
+<th>Назначение</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>#</code></td>
+<td>Комментарий</td>
+</tr>
+<tr>
+<td><code>---</code></td>
+<td>Начало документа</td>
+</tr>
+<tr>
+<td><code>...</code></td>
+<td>Конец документа</td>
+</tr>
+<tr>
+<td><code>-</code></td>
+<td>Элемент списка</td>
+</tr>
+<tr>
+<td><code>:</code></td>
+<td>Разделитель key: value</td>
+</tr>
+<tr>
+<td><code>&amp;</code></td>
+<td>Определить якорь</td>
+</tr>
+<tr>
+<td><code>*</code></td>
+<td>Ссылка на якорь</td>
+</tr>
+<tr>
+<td><code>&lt;&lt;</code></td>
+<td>Merge keys</td>
+</tr>
+<tr>
+<td><code>?</code></td>
+<td>Complex key</td>
+</tr>
+<tr>
+<td><code>!</code></td>
+<td>Тег типа</td>
+</tr>
+<tr>
+<td><code>|</code> / <code>&gt;</code></td>
+<td>Multiline literal/folded</td>
+</tr>
+<tr>
+<td><code>{}</code></td>
+<td>Flow mapping</td>
+</tr>
+<tr>
+<td><code>[]</code></td>
+<td>Flow sequence</td>
+</tr>
+<tr>
+<td><code>,</code></td>
+<td>Разделитель в flow</td>
+</tr>
+<tr>
+<td><code>~</code></td>
+<td>null</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="типы-и-теги">🏷️ Типы и теги<a class="headerlink" href="#типы-и-теги" title="Ссылка">#</a></h2>
+<p>YAML автоматически определяет тип, но можно явно:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Явные теги</span>
+<span class="nt">string</span><span class="p">:</span><span class="w"> </span><span class="kt">!!str</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">42</span>
+<span class="nt">integer</span><span class="p">:</span><span class="w"> </span><span class="kt">!!int</span><span class="w"> </span><span class="s">&quot;42&quot;</span>
+<span class="nt">float</span><span class="p">:</span><span class="w"> </span><span class="kt">!!float</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3</span>
+<span class="nt">bool</span><span class="p">:</span><span class="w"> </span><span class="kt">!!bool</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">yes</span>
+<span class="nt">null</span><span class="p">:</span><span class="w"> </span><span class="kt">!!null</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">~</span>
+<span class="nt">binary</span><span class="p">:</span><span class="w"> </span><span class="kt">!!binary</span><span class="w"> </span><span class="s">&quot;SGVsbG8=&quot;</span>
+<span class="nt">timestamp</span><span class="p">:</span><span class="w"> </span><span class="kt">!!timestamp</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2024-01-15T10:30:00Z</span>
+
+<span class="c1"># Пользовательские теги (в K8s, Ansible)</span>
+<span class="nt">custom</span><span class="p">:</span><span class="w"> </span><span class="kt">!my_tag</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">value</span>
+</code></pre></div>
+
+<h3 id="специальные-значения">Специальные значения<a class="headerlink" href="#специальные-значения" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># yes/no/on/off → boolean (ОПАСНО!)</span>
+<span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.0</span><span class="w">      </span><span class="c1"># float</span>
+<span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;1.0&quot;</span><span class="w">    </span><span class="c1"># string</span>
+<span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">yes</span><span class="w">      </span><span class="c1"># true (boolean)</span>
+<span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;yes&quot;</span><span class="w">    </span><span class="c1"># &quot;yes&quot; (string)</span>
+
+<span class="c1"># Sexagesimal (углы/время)</span>
+<span class="nt">time</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">12:30:00</span><span class="w">    </span><span class="c1"># интерпретируется как 4500</span>
+<span class="nt">ip</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">192.168.1.1</span><span class="w">   </span><span class="c1"># обычно строка, но следите</span>
+</code></pre></div>
+
+<blockquote>
+<p>⚠️ Всегда кавычьте строки, которые выглядят как числа/даты/булевы!</p>
+</blockquote>
+<hr />
+<h2 id="мультидокументы">🌍 Мультидокументы<a class="headerlink" href="#мультидокументы" title="Ссылка">#</a></h2>
+<div class="highlight"><pre><span></span><code><span class="nn">---</span>
+<span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v1</span>
+<span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Pod</span>
+<span class="nt">metadata</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">app1</span>
+<span class="nn">---</span>
+<span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v1</span>
+<span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Service</span>
+<span class="nt">metadata</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">app1-svc</span>
+</code></pre></div>
+
+<p>Используется в K8s для нескольких ресурсов в одном файле.</p>
+<hr />
+<h2 id="python-yaml">🐍 Python + YAML<a class="headerlink" href="#python-yaml" title="Ссылка">#</a></h2>
+<h3 id="pyyaml-классика">PyYAML (классика)<a class="headerlink" href="#pyyaml-классика" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">yaml</span>
+
+<span class="c1"># Чтение</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;config.yaml&quot;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">yaml</span><span class="o">.</span><span class="n">safe_load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>        <span class="c1"># безопасно (без произвольных объектов!)</span>
+
+<span class="c1"># Не использовать yaml.load() без Loader — уязвимость!</span>
+<span class="c1"># data = yaml.load(f, Loader=yaml.FullLoader)  # если нужны теги</span>
+
+<span class="c1"># Запись</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;out.yaml&quot;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">yaml</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">allow_unicode</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">default_flow_style</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">sort_keys</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="c1"># Несколько документов</span>
+<span class="k">for</span> <span class="n">doc</span> <span class="ow">in</span> <span class="n">yaml</span><span class="o">.</span><span class="n">safe_load_all</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">doc</span><span class="p">)</span>
+
+<span class="n">yaml</span><span class="o">.</span><span class="n">dump_all</span><span class="p">([</span><span class="n">doc1</span><span class="p">,</span> <span class="n">doc2</span><span class="p">],</span> <span class="n">f</span><span class="p">)</span>
+</code></pre></div>
+
+<h3 id="ruamel-yaml-сохраняет-форматирование-комментарии">ruamel.yaml (сохраняет форматирование/комментарии)<a class="headerlink" href="#ruamel-yaml-сохраняет-форматирование-комментарии" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">ruamel.yaml</span><span class="w"> </span><span class="kn">import</span> <span class="n">YAML</span>
+
+<span class="n">yaml</span> <span class="o">=</span> <span class="n">YAML</span><span class="p">()</span>
+<span class="n">yaml</span><span class="o">.</span><span class="n">preserve_quotes</span> <span class="o">=</span> <span class="kc">True</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;config.yaml&quot;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">yaml</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+
+<span class="n">data</span><span class="p">[</span><span class="s2">&quot;key&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;new value&quot;</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;config.yaml&quot;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">yaml</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>              <span class="c1"># сохранит комментарии и порядок!</span>
+</code></pre></div>
+
+<hr />
+<h2 id="cli-инструменты">🐚 CLI-инструменты<a class="headerlink" href="#cli-инструменты" title="Ссылка">#</a></h2>
+<h3 id="yq-как-jq-для-yaml">yq (как jq для YAML)<a class="headerlink" href="#yq-как-jq-для-yaml" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Установка</span>
+sudo<span class="w"> </span>pacman<span class="w"> </span>-S<span class="w"> </span>yq<span class="w">                  </span><span class="c1"># Arch (могут быть разные yq)</span>
+<span class="c1"># mikefarah/yq (Go, рекомендуется): https://github.com/mikefarah/yq</span>
+
+<span class="c1"># Чтение значения</span>
+yq<span class="w"> </span><span class="s1">&#39;.database.host&#39;</span><span class="w"> </span>config.yaml
+yq<span class="w"> </span><span class="s1">&#39;.services.web.image&#39;</span><span class="w"> </span>docker-compose.yaml
+
+<span class="c1"># Изменение (in-place)</span>
+yq<span class="w"> </span><span class="s1">&#39;.database.host = &quot;newhost&quot;&#39;</span><span class="w"> </span>config.yaml<span class="w"> </span>-i
+
+<span class="c1"># Конвертация в JSON</span>
+yq<span class="w"> </span>-o<span class="o">=</span>json<span class="w"> </span>config.yaml
+
+<span class="c1"># Конвертация JSON → YAML</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;{&quot;a&quot;:1}&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>yq<span class="w"> </span>-P
+
+<span class="c1"># Несколько документов</span>
+yq<span class="w"> </span><span class="s1">&#39;select(.kind == &quot;Pod&quot;)&#39;</span><span class="w"> </span>k8s.yaml
+</code></pre></div>
+
+<h3 id="альтернативы">Альтернативы<a class="headerlink" href="#альтернативы" title="Ссылка">#</a></h3>
+<ul>
+<li><strong>dasel</strong> — универсальный (JSON/YAML/TOML/XML)</li>
+<li><strong>yaml-cli</strong> — простой</li>
+<li><strong>jq + yq</strong> — конвертировать в JSON, обработать, вернуть</li>
+</ul>
+<hr />
+<h2 id="где-встречается-yaml">📋 Где встречается YAML<a class="headerlink" href="#где-встречается-yaml" title="Ссылка">#</a></h2>
+<h3 id="1-kubernetes">1. Kubernetes<a class="headerlink" href="#1-kubernetes" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">apps/v1</span>
+<span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Deployment</span>
+<span class="nt">metadata</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nginx-deployment</span>
+<span class="w">  </span><span class="nt">labels</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nginx</span>
+<span class="nt">spec</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">replicas</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3</span>
+<span class="w">  </span><span class="nt">selector</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">matchLabels</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nginx</span>
+<span class="w">  </span><span class="nt">template</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">metadata</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">labels</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nginx</span>
+<span class="w">    </span><span class="nt">spec</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">containers</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nginx</span>
+<span class="w">        </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nginx:1.25</span>
+<span class="w">        </span><span class="nt">ports</span><span class="p">:</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">containerPort</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">80</span>
+</code></pre></div>
+
+<h3 id="2-docker-compose">2. Docker Compose<a class="headerlink" href="#2-docker-compose" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;3.9&quot;</span>
+<span class="nt">services</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">web</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nginx:alpine</span>
+<span class="w">    </span><span class="nt">ports</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;127.0.0.1:8080:80&quot;</span>
+<span class="w">    </span><span class="nt">environment</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">DEBUG</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;true&quot;</span>
+<span class="w">    </span><span class="nt">depends_on</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">db</span>
+<span class="w">  </span><span class="nt">db</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">postgres:16</span>
+</code></pre></div>
+
+<h3 id="3-github-actions">3. GitHub Actions<a class="headerlink" href="#3-github-actions" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">CI</span>
+<span class="nt">on</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">push</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">branches</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">main</span><span class="p p-Indicator">]</span>
+<span class="w">  </span><span class="nt">pull_request</span><span class="p">:</span>
+<span class="nt">jobs</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">test</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">runs-on</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ubuntu-latest</span>
+<span class="w">    </span><span class="nt">steps</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">actions/checkout@v4</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Setup Python</span>
+<span class="w">        </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">actions/setup-python@v5</span>
+<span class="w">        </span><span class="nt">with</span><span class="p">:</span>
+<span class="w">          </span><span class="nt">python-version</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;3.12&quot;</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pip install -r requirements.txt</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pytest</span>
+</code></pre></div>
+
+<h3 id="4-ansible">4. Ansible<a class="headerlink" href="#4-ansible" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="nn">---</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Configure web server</span>
+<span class="w">  </span><span class="nt">hosts</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">webservers</span>
+<span class="w">  </span><span class="nt">become</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">yes</span>
+<span class="w">  </span><span class="nt">vars</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">http_port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">80</span>
+<span class="w">  </span><span class="nt">tasks</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Install nginx</span>
+<span class="w">      </span><span class="nt">apt</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nginx</span>
+<span class="w">        </span><span class="nt">state</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">present</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Start nginx</span>
+<span class="w">      </span><span class="nt">service</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nginx</span>
+<span class="w">        </span><span class="nt">state</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">started</span>
+<span class="w">        </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">yes</span>
+</code></pre></div>
+
+<h3 id="5-gitlab-ci">5. GitLab CI<a class="headerlink" href="#5-gitlab-ci" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="nt">stages</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">build</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">test</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">deploy</span>
+
+<span class="nt">build</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">stage</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">build</span>
+<span class="w">  </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">node:20</span>
+<span class="w">  </span><span class="nt">script</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">npm ci</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">npm run build</span>
+<span class="w">  </span><span class="nt">artifacts</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">paths</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">dist/</span>
+</code></pre></div>
+
+<h3 id="6-pre-commit">6. Pre-commit<a class="headerlink" href="#6-pre-commit" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="nt">repos</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">repo</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://github.com/astral-sh/ruff-pre-commit</span>
+<span class="w">    </span><span class="nt">rev</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v0.3.0</span>
+<span class="w">    </span><span class="nt">hooks</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ruff</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ruff-format</span>
+</code></pre></div>
+
+<hr />
+<h2 id="частые-ошибки-и-грабли">🪤 Частые ошибки и грабли<a class="headerlink" href="#частые-ошибки-и-грабли" title="Ссылка">#</a></h2>
+<ol>
+<li><strong>Табы вместо пробелов</strong> — YAML НЕ принимает табы для отступов.</li>
+<li><strong>Несогласованные отступы</strong> — все элементы списка должны быть на одном уровне.</li>
+<li><strong><code>key:value</code></strong> без пробела после двоеточия — <code>key:value</code> ошибка, нужно <code>key: value</code>.</li>
+<li><strong>Boolean конфузы</strong> — <code>yes/no/on/off</code> конвертируются в <code>true/false</code>.</li>
+<li><strong><code>version: 1.0</code></strong> — парсится как float. Кавычьте: <code>version: "1.0"</code>.</li>
+<li><strong><code>:</code> в строке</strong> — <code>message: hello: world</code> сломается. Кавычьте.</li>
+<li><strong>Trailing пробелы</strong> — невидимы, но могут ломать.</li>
+<li><strong>Anchor без merge</strong> — <code>*ref</code> заменит целиком, <code>&lt;&lt;: *ref</code> мерджит.</li>
+<li><strong>Спецсимволы в начале</strong> — <code>*</code>, <code>&amp;</code>, <code>!</code>, <code>|</code>, <code>&gt;</code>, <code>%</code>, <code>@</code>, ``` — кавычьте.</li>
+<li><strong><code>null</code> vs пустое</strong> — <code>key:</code> (без значения) = null.</li>
+<li><strong>YAML 1.1 vs 1.2</strong> — разные правила (например, <code>yes</code> → bool в 1.1).</li>
+<li><strong>Комментарии</strong> — не могут быть на той же строке после <code>|</code> или <code>&gt;</code>.</li>
+</ol>
+<hr />
+<h2 id="линтинг-и-валидация">🔧 Линтинг и валидация<a class="headerlink" href="#линтинг-и-валидация" title="Ссылка">#</a></h2>
+<h3 id="yamllint">yamllint<a class="headerlink" href="#yamllint" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>pacman<span class="w"> </span>-S<span class="w"> </span>yamllint
+yamllint<span class="w"> </span>config.yaml
+yamllint<span class="w"> </span>-d<span class="w"> </span>relaxed<span class="w"> </span>config.yaml
+yamllint<span class="w"> </span>.<span class="w">                          </span><span class="c1"># все .yaml в каталоге</span>
+
+<span class="c1"># .yamllint.yaml — конфиг</span>
+extends:<span class="w"> </span>default
+rules:
+<span class="w">  </span>line-length:<span class="w"> </span>disable
+<span class="w">  </span>indentation:
+<span class="w">    </span>spaces:<span class="w"> </span><span class="m">2</span>
+<span class="w">    </span>indent-sequences:<span class="w"> </span>consistent
+<span class="w">  </span>comments:
+<span class="w">    </span>require-starting-space:<span class="w"> </span><span class="nb">false</span>
+</code></pre></div>
+
+<h3 id="pre-commit">pre-commit<a class="headerlink" href="#pre-commit" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># .pre-commit-config.yaml</span>
+<span class="nt">repos</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">repo</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://github.com/adrienverge/yamllint.git</span>
+<span class="w">    </span><span class="nt">rev</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v1.35.1</span>
+<span class="w">    </span><span class="nt">hooks</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">yamllint</span>
+</code></pre></div>
+
+<h3 id="схема-schema-валидация">Схема (Schema) валидация<a class="headerlink" href="#схема-schema-валидация" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># K8s: kubeval</span>
+kubeval<span class="w"> </span>deployment.yaml
+
+<span class="c1"># JSON Schema + YAML</span>
+check-jsonschema<span class="w"> </span>--schema<span class="w"> </span>schema.yaml<span class="w"> </span>config.yaml
+
+<span class="c1"># В VS Code: YAML расширение Red Hat (с схемами)</span>
+</code></pre></div>
+
+<hr />
+<h2 id="полезные-ссылки">🔗 Полезные ссылки<a class="headerlink" href="#полезные-ссылки" title="Ссылка">#</a></h2>
+<ul>
+<li>Спецификация: https://yaml.org/spec/1.2.2</li>
+<li>YAML tutorial: https://circleci.com/blog/what-is-yaml-a-beginner-s-guide</li>
+<li>Online validator: https://yamlchecker.com</li>
+<li>Online parser: https://yaml-online-parser.appspot.com</li>
+<li>yq (mikefarah): https://github.com/mikefarah/yq</li>
+<li>yamllint: https://github.com/adrienverge/yamllint</li>
+<li>Awesome YAML: https://github.com/Maxel03/YAML-files</li>
+<li>JSON Schema Store: https://www.schemastore.org/json/</li>
+</ul>
+<hr />
+<h2 id="полезные-советы">💡 Полезные советы<a class="headerlink" href="#полезные-советы" title="Ссылка">#</a></h2>
+<ol>
+<li><strong>2 пробела</strong> для отступов (стандарт).</li>
+<li><strong>Никогда табы</strong> — только пробелы.</li>
+<li><strong>Кавычьте строки</strong> с цифрами/датами/<code>yes</code>/<code>no</code>.</li>
+<li><strong><code>yamllint</code></strong> — для единообразия в команде.</li>
+<li><strong>Якоря <code>&amp;</code>/<code>*</code></strong> — для DRY (не повторяйтесь).</li>
+<li><strong><code>&lt;&lt;: *ref</code></strong> — для merge keys (Docker Compose).</li>
+<li><strong><code>|</code> для скриптов</strong>, <code>&gt;</code> для текста.</li>
+<li><strong><code>safe_load</code></strong> в Python (безопасное чтение).</li>
+<li><strong><code>ruamel.yaml</code></strong> — для правки YAML с сохранением комментариев.</li>
+<li><strong>yq</strong> — как jq для YAML, мощно.</li>
+<li><strong>Схемы (Schema Store)</strong> — автокомплит в VS Code.</li>
+<li><strong>Multi-document (<code>---</code>)</strong> — для K8s манифестов.</li>
+<li>** Комментарии <code>#</code>** — для документации.</li>
+<li><strong>Не клади секреты</strong> в YAML — используйте vars/secrets.</li>
+<li><strong>Пробел после <code>:</code></strong> — обязательное правило.</li>
+</ol>
+<hr />
+<p><em>Сгенерировано как шпаргалка. YAML прост, но капризен —
+углубляйтесь через https://yaml.org/spec/1.2.2 и yamllint</em></p>
+    </article>
+    <nav class="pagination">
+      <a class="pager prev" href="http-curl.html">← HTTP / curl</a>
+      <a class="pager next" href="vscode.html">VS Code →</a>
+    </nav>
+  </main>
+
+  <aside class="toc">
+    <details open>
+      <summary>📑 Оглавление</summary>
+      <div class="toc-list">
+<div class="toc">
+<ul>
+<li><a href="#yaml-шпаргалка-по-синтаксису">📄 YAML — шпаргалка по синтаксису</a><ul>
+<li><a href="#главные-правила">🔑 Главные правила</a></li>
+<li><a href="#базовые-типы">🚀 Базовые типы</a><ul>
+<li><a href="#скаляры">Скаляры</a></li>
+<li><a href="#строки">Строки</a></li>
+</ul>
+</li>
+<li><a href="#коллекции">📋 Коллекции</a><ul>
+<li><a href="#последовательности-списки-массивы">Последовательности (списки/массивы)</a></li>
+<li><a href="#отображения-словари-объекты">Отображения (словари/объекты)</a></li>
+<li><a href="#комбинирование">Комбинирование</a></li>
+</ul>
+</li>
+<li><a href="#якоря-и-алиасы-dry">🔄 Якоря и алиасы (DRY)</a><ul>
+<li><a href="#альтернативный-синтаксис-yaml-1-2">Альтернативный синтаксис (YAML 1.2)</a></li>
+</ul>
+</li>
+<li><a href="#спецсимволы">🛠️ Спецсимволы</a></li>
+<li><a href="#типы-и-теги">🏷️ Типы и теги</a><ul>
+<li><a href="#специальные-значения">Специальные значения</a></li>
+</ul>
+</li>
+<li><a href="#мультидокументы">🌍 Мультидокументы</a></li>
+<li><a href="#python-yaml">🐍 Python + YAML</a><ul>
+<li><a href="#pyyaml-классика">PyYAML (классика)</a></li>
+<li><a href="#ruamel-yaml-сохраняет-форматирование-комментарии">ruamel.yaml (сохраняет форматирование/комментарии)</a></li>
+</ul>
+</li>
+<li><a href="#cli-инструменты">🐚 CLI-инструменты</a><ul>
+<li><a href="#yq-как-jq-для-yaml">yq (как jq для YAML)</a></li>
+<li><a href="#альтернативы">Альтернативы</a></li>
+</ul>
+</li>
+<li><a href="#где-встречается-yaml">📋 Где встречается YAML</a><ul>
+<li><a href="#1-kubernetes">1. Kubernetes</a></li>
+<li><a href="#2-docker-compose">2. Docker Compose</a></li>
+<li><a href="#3-github-actions">3. GitHub Actions</a></li>
+<li><a href="#4-ansible">4. Ansible</a></li>
+<li><a href="#5-gitlab-ci">5. GitLab CI</a></li>
+<li><a href="#6-pre-commit">6. Pre-commit</a></li>
+</ul>
+</li>
+<li><a href="#частые-ошибки-и-грабли">🪤 Частые ошибки и грабли</a></li>
+<li><a href="#линтинг-и-валидация">🔧 Линтинг и валидация</a><ul>
+<li><a href="#yamllint">yamllint</a></li>
+<li><a href="#pre-commit">pre-commit</a></li>
+<li><a href="#схема-schema-валидация">Схема (Schema) валидация</a></li>
+</ul>
+</li>
+<li><a href="#полезные-ссылки">🔗 Полезные ссылки</a></li>
+<li><a href="#полезные-советы">💡 Полезные советы</a></li>
+</ul>
+</li>
+</ul>
+</div>
+
+      </div>
+    </details>
+  </aside>
+</div>
+
+<button class="back-top" id="backTop" aria-label="Наверх">↑</button>
+
+<script src="assets/search.js"></script>
+<script src="assets/page.js"></script>
+</body>
+</html>

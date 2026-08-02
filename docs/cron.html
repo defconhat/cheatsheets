@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>cron — Шпаргалки</title>
+<link rel="stylesheet" href="assets/style.css">
+<link rel="stylesheet" href="assets/pygments.css">
+</head>
+<body>
+<div class="layout">
+  <aside class="sidebar">
+    <a href="index.html" class="brand">📌 Шпаргалки</a>
+    <nav class="nav">
+<a href="yazi.html" class="nav-item"><span class="nav-ico">📦</span>Yazi</a>
+<a href="neovim.html" class="nav-item"><span class="nav-ico">📘</span>Neovim (LazyVim)</a>
+<a href="niri.html" class="nav-item"><span class="nav-ico">🪟</span>Niri</a>
+<a href="tmux.html" class="nav-item"><span class="nav-ico">🪟</span>Tmux</a>
+<a href="bash.html" class="nav-item"><span class="nav-ico">🐚</span>Bash</a>
+<a href="git.html" class="nav-item"><span class="nav-ico">🔀</span>Git</a>
+<a href="terminal.html" class="nav-item"><span class="nav-ico">🖥️</span>Терминал Linux</a>
+<a href="powershell.html" class="nav-item"><span class="nav-ico">💻</span>PowerShell</a>
+<a href="cmd.html" class="nav-item"><span class="nav-ico">🪟</span>CMD (cmd.exe)</a>
+<a href="python.html" class="nav-item"><span class="nav-ico">🐍</span>Python</a>
+<a href="systemd.html" class="nav-item"><span class="nav-ico">⚙️</span>systemd</a>
+<a href="ssh.html" class="nav-item"><span class="nav-ico">🔐</span>SSH</a>
+<a href="make-cmake.html" class="nav-item"><span class="nav-ico">🔨</span>Make / CMake</a>
+<a href="docker.html" class="nav-item"><span class="nav-ico">🐳</span>Docker</a>
+<a href="pacman.html" class="nav-item"><span class="nav-ico">📦</span>pacman / yay / paru</a>
+<a href="spark.html" class="nav-item"><span class="nav-ico">⚡</span>Apache Spark / PySpark</a>
+<a href="markdown.html" class="nav-item"><span class="nav-ico">📝</span>Markdown</a>
+<a href="regex.html" class="nav-item"><span class="nav-ico">🔍</span>Регулярные выражения</a>
+<a href="jq-json.html" class="nav-item"><span class="nav-ico">🔧</span>jq + JSON</a>
+<a href="awk-sed.html" class="nav-item"><span class="nav-ico">✂️</span>awk / sed</a>
+<a href="airflow.html" class="nav-item"><span class="nav-ico">🌪️</span>Apache Airflow</a>
+<a href="http-curl.html" class="nav-item"><span class="nav-ico">🌐</span>HTTP / curl</a>
+<a href="yaml.html" class="nav-item"><span class="nav-ico">📄</span>YAML</a>
+<a href="vscode.html" class="nav-item"><span class="nav-ico">💻</span>VS Code</a>
+<a href="cron.html" class="nav-item active"><span class="nav-ico">⏰</span>cron</a>
+<a href="fzf-zoxide.html" class="nav-item"><span class="nav-ico">🔎</span>fzf + zoxide</a>
+<a href="minikube-k8s.html" class="nav-item"><span class="nav-ico">☸️</span>Minikube / Kubernetes</a>
+<a href="cicd.html" class="nav-item"><span class="nav-ico">🦊</span>GitLab CI / GitHub Actions</a>
+<a href="nginx.html" class="nav-item"><span class="nav-ico">🌐</span>nginx</a>
+<a href="dbt.html" class="nav-item"><span class="nav-ico">🔧</span>dbt</a>
+<a href="kafka.html" class="nav-item"><span class="nav-ico">🐘</span>Apache Kafka</a>
+<a href="prometheus-grafana.html" class="nav-item"><span class="nav-ico">📊</span>Prometheus / Grafana</a>
+<a href="iceberg-nessie.html" class="nav-item"><span class="nav-ico">🧊</span>Iceberg / Nessie</a>
+<a href="impala.html" class="nav-item"><span class="nav-ico">🐬</span>Apache Impala</a>
+<a href="terraform.html" class="nav-item"><span class="nav-ico">🏗️</span>Terraform</a>
+<a href="linux-internals.html" class="nav-item"><span class="nav-ico">🐧</span>Linux Internals</a>
+<a href="miscellaneous.html" class="nav-item"><span class="nav-ico">🧰</span>Miscellaneous</a>
+<a href="python-automation-libs.html" class="nav-item"><span class="nav-ico">🐍</span>Python: авт-ция (10 libs)</a>
+<a href="eza.html" class="nav-item"><span class="nav-ico">🌈</span>eza</a>
+<a href="dbeaver.html" class="nav-item"><span class="nav-ico">🗄️</span>DBeaver</a>
+<a href="zcode.html" class="nav-item"><span class="nav-ico">🤖</span>ZCode</a>
+<a href="warp.html" class="nav-item"><span class="nav-ico">🚀</span>Warp</a>
+<a href="agentic-ai-dev.html" class="nav-item"><span class="nav-ico">🤝</span>Агентная разработка с ИИ</a>
+    </nav>
+  </aside>
+
+  <main class="content">
+    <article>
+<h1 id="cron-шпаргалка-по-планировщику-задач">⏰ cron — шпаргалка по планировщику задач<a class="headerlink" href="#cron-шпаргалка-по-планировщику-задач" title="Ссылка">#</a></h1>
+<blockquote>
+<p><strong>cron</strong> — классический планировщик задач в Unix/Linux.
+Запускает команды по расписанию (каждую минуту, час, день и т.д.).
+Документация: <code>man cron</code> · <code>man crontab</code> · <code>man 5 crontab</code></p>
+</blockquote>
+<hr />
+<h2 id="главные-понятия">🔑 Главные понятия<a class="headerlink" href="#главные-понятия" title="Ссылка">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Термин</th>
+<th>Что значит</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>cron</strong></td>
+<td>Демон (служба), выполняющий задачи по расписанию</td>
+</tr>
+<tr>
+<td><strong>crontab</strong></td>
+<td>Файл с расписанием задач пользователя</td>
+</tr>
+<tr>
+<td><strong>cron job / task</strong></td>
+<td>Одна запись в crontab</td>
+</tr>
+<tr>
+<td><strong>cron expression</strong></td>
+<td>Формат времени (5 полей)</td>
+</tr>
+<tr>
+<td><strong>anacron</strong></td>
+<td>Для задач, которые можно пропустить (выполняет при загрузке)</td>
+</tr>
+<tr>
+<td><strong>crond</strong></td>
+<td>Процесс демона (системный)</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>Альтернатива</strong>: systemd timers (мощнее, с зависимостями и логами в journal).</p>
+</blockquote>
+<hr />
+<h2 id="команды-crontab">🚀 Команды crontab<a class="headerlink" href="#команды-crontab" title="Ссылка">#</a></h2>
+<div class="highlight"><pre><span></span><code>crontab<span class="w"> </span>-e<span class="w">                    </span><span class="c1"># редактировать свой crontab</span>
+crontab<span class="w"> </span>-l<span class="w">                    </span><span class="c1"># показать свой crontab</span>
+crontab<span class="w"> </span>-r<span class="w">                    </span><span class="c1"># удалить весь crontab</span>
+crontab<span class="w"> </span>-ri<span class="w">                   </span><span class="c1"># с подтверждением</span>
+crontab<span class="w"> </span>FILE<span class="w">                  </span><span class="c1"># установить из файла</span>
+crontab<span class="w"> </span>-u<span class="w"> </span>user<span class="w"> </span>-e<span class="w">            </span><span class="c1"># редактировать чужой (нужен root)</span>
+crontab<span class="w"> </span>-u<span class="w"> </span>user<span class="w"> </span>-l<span class="w">            </span><span class="c1"># показать чужой</span>
+crontab<span class="w"> </span>-u<span class="w"> </span>alice<span class="w"> </span>-e
+</code></pre></div>
+
+<h3 id="файлы">Файлы<a class="headerlink" href="#файлы" title="Ссылка">#</a></h3>
+<table>
+<thead>
+<tr>
+<th>Расположение</th>
+<th>Назначение</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>/etc/crontab</code></td>
+<td>Системный (с полем USER)</td>
+</tr>
+<tr>
+<td><code>/etc/cron.d/</code></td>
+<td>Системные drop-in (как отдельные crontab&rsquo;ы)</td>
+</tr>
+<tr>
+<td><code>/etc/cron.hourly/</code></td>
+<td>Скрипты, выполняемые раз в час</td>
+</tr>
+<tr>
+<td><code>/etc/cron.daily/</code></td>
+<td>Раз в день</td>
+</tr>
+<tr>
+<td><code>/etc/cron.weekly/</code></td>
+<td>Раз в неделю</td>
+</tr>
+<tr>
+<td>`/etc/cron.monthly/</td>
+<td>Раз в месяц</td>
+</tr>
+<tr>
+<td><code>/var/spool/cron/</code></td>
+<td>Пользовательские crontab&rsquo;ы</td>
+</tr>
+<tr>
+<td><code>/var/log/cron</code></td>
+<td>Логи (или journalctl на systemd)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="запуск-скриптов-из-etc-cron-hourly-daily">Запуск скриптов из /etc/cron.{hourly,daily,&hellip;}<a class="headerlink" href="#запуск-скриптов-из-etc-cron-hourly-daily" title="Ссылка">#</a></h3>
+<p>Просто положите исполняемый скрипт:</p>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>install<span class="w"> </span>-m<span class="w"> </span><span class="m">755</span><span class="w"> </span>backup.sh<span class="w"> </span>/etc/cron.daily/backup
+</code></pre></div>
+
+<p>Время выполнения настраивается в <code>/etc/crontab</code> (по умолчанию 6:25 для daily).</p>
+<hr />
+<h2 id="формат-cron-expression">📋 Формат cron expression<a class="headerlink" href="#формат-cron-expression" title="Ссылка">#</a></h2>
+<div class="highlight"><pre><span></span><code>┌───── минуты (0-59)
+│ ┌───── часы (0-23)
+│ │ ┌───── день месяца (1-31)
+│ │ │ ┌───── месяц (1-12 или JAN-DEC)
+│ │ │ │ ┌───── день недели (0-7, 0 и 7 = Sunday, или SUN-SAT)
+│ │ │ │ │
+* * * * * команда
+</code></pre></div>
+
+<h3 id="примеры">Примеры<a class="headerlink" href="#примеры" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code># Каждую минуту
+* * * * * /script.sh
+
+# Каждые 5 минут
+*/5 * * * * /script.sh
+
+# В 0 минуту каждого часа (раз в час)
+0 * * * * /script.sh
+
+# Каждый день в 3:00 ночи
+0 3 * * * /script.sh
+
+# Каждый понедельник в 9:00
+0 9 * * 1 /script.sh
+
+# Каждый понедельник и пятницу в 18:00
+0 18 * * 1,5 /script.sh
+
+# 1-го числа каждого месяца в полночь
+0 0 1 * * /script.sh
+
+# Каждые 15 минут в рабочее время (9-18) по будням
+*/15 9-18 * * 1-5 /script.sh
+
+# Каждый день 1 января в 00:00
+0 0 1 1 * /script.sh
+
+# Дважды в день (3:00 и 15:00)
+0 3,15 * * * /script.sh
+
+# Каждые 6 часов
+0 */6 * * * /script.sh
+
+# В 30 минут 3-го часа, каждые 2 дня
+30 3 */2 * * /script.sh
+
+# Каждую среду в полночь
+0 0 * * 3 /script.sh
+
+# В последний день месяца (через test)
+0 0 28-31 * * [ &quot;$(date +\%d -d tomorrow)&quot; = &quot;01&quot; ] &amp;&amp; /script.sh
+</code></pre></div>
+
+<h3 id="спец-строки-расширения-vixie-cron">Спец-строки (расширения Vixie cron)<a class="headerlink" href="#спец-строки-расширения-vixie-cron" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>@reboot         # при загрузке системы
+@yearly/@annually  # раз в год (0 0 1 1 *)
+@monthly        # раз в месяц (0 0 1 * *)
+@weekly         # раз в неделю (0 0 * * 0)
+@daily/@midnight  # раз в день (0 0 * * *)
+@hourly         # раз в час (0 * * * *)
+</code></pre></div>
+
+<div class="highlight"><pre><span></span><code>@reboot /script.sh
+@daily /backup.sh
+</code></pre></div>
+
+<h3 id="списки-диапазоны-шаги">Списки, диапазоны, шаги<a class="headerlink" href="#списки-диапазоны-шаги" title="Ссылка">#</a></h3>
+<table>
+<thead>
+<tr>
+<th>Синтаксис</th>
+<th>Пример</th>
+<th>Значение</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>*</code></td>
+<td><code>*</code></td>
+<td>Любое значение</td>
+</tr>
+<tr>
+<td>Конкретное</td>
+<td><code>5</code></td>
+<td>Ровно 5</td>
+</tr>
+<tr>
+<td><code>,</code> список</td>
+<td><code>1,5,10</code></td>
+<td>1, 5 или 10</td>
+</tr>
+<tr>
+<td><code>-</code> диапазон</td>
+<td><code>1-5</code></td>
+<td>от 1 до 5</td>
+</tr>
+<tr>
+<td><code>/</code> шаг</td>
+<td><code>*/5</code></td>
+<td>каждые 5 (0, 5, 10, &hellip;)</td>
+</tr>
+<tr>
+<td><code>2-10/2</code></td>
+<td><code>2-10/2</code></td>
+<td>2, 4, 6, 8, 10</td>
+</tr>
+</tbody>
+</table>
+<h3 id="дни-недели">Дни недели<a class="headerlink" href="#дни-недели" title="Ссылка">#</a></h3>
+<table>
+<thead>
+<tr>
+<th>Число</th>
+<th>День</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0 / 7</td>
+<td>Воскресенье (SUN)</td>
+</tr>
+<tr>
+<td>1</td>
+<td>Понедельник (MON)</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Вторник (TUE)</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Среда (WED)</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Четверг (THU)</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Пятница (FRI)</td>
+</tr>
+<tr>
+<td>6</td>
+<td>Суббота (SAT)</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="структура-crontab">📝 Структура crontab<a class="headerlink" href="#структура-crontab" title="Ссылка">#</a></h2>
+<h3 id="пользовательский-crontab">Пользовательский crontab<a class="headerlink" href="#пользовательский-crontab" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code># ── Переменные окружения ──────────────────────
+SHELL=/bin/bash
+PATH=/usr/local/bin:/usr/bin:/bin
+MAILTO=alice@example.com      # отправлять вывод на почту
+# MAILTO=&quot;&quot;                   # отключить почту
+HOME=/home/alice
+
+# ── Задачи ────────────────────────────────────
+# m  h  dom mon dow  command
+*/15 * *  *  *   /home/alice/scripts/sync.sh &gt;&gt; /tmp/sync.log 2&gt;&amp;1
+0   3  *  *  *   /usr/local/bin/backup.sh
+0   0  *  *  1   rsync -avz /data/ backup:/backup/
+@reboot           /home/alice/scripts/startup.sh
+</code></pre></div>
+
+<h3 id="системный-crontab-etc-crontab-с-полем-user">Системный crontab (/etc/crontab) — с полем USER<a class="headerlink" href="#системный-crontab-etc-crontab-с-полем-user" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>SHELL=/bin/bash
+PATH=/sbin:/bin:/usr/sbin:/usr/bin
+MAILTO=root
+
+# m  h  dom mon dow  user  command
+0   3  *  *  *   root   /usr/local/bin/backup.sh
+*/30 *  *  *  *   alice  /home/alice/scripts/sync.sh
+</code></pre></div>
+
+<hr />
+<h2 id="практические-примеры">🌍 Практические примеры<a class="headerlink" href="#практические-примеры" title="Ссылка">#</a></h2>
+<h3 id="1-регулярный-backup">1. Регулярный backup<a class="headerlink" href="#1-регулярный-backup" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code># Бэкап базы каждый день в 2:00
+0 2 * * * pg_dump mydb | gzip &gt; /backup/db-$(date +\%Y\%m\%d).sql.gz
+
+# Бэкап в S3 еженедельно
+0 4 * * 0 aws s3 sync /data/ s3://mybucket/backup/
+</code></pre></div>
+
+<h3 id="2-очистка-временных-файлов">2. Очистка временных файлов<a class="headerlink" href="#2-очистка-временных-файлов" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code># Удалить файлы старше 7 дней в /tmp
+0 3 * * * find /tmp -type f -mtime +7 -delete
+
+# Удалить логи старше 30 дней
+0 5 * * * find /var/log/app -name &quot;*.log&quot; -mtime +30 -exec gzip {} \;
+</code></pre></div>
+
+<h3 id="3-мониторинг-сайта">3. Мониторинг сайта<a class="headerlink" href="#3-мониторинг-сайта" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code># Каждую минуту проверять сайт
+* * * * * curl -sf https://example.com/health &gt; /dev/null || echo &quot;DOWN&quot; | mail -s &quot;Site down&quot; admin@example.com
+
+# Каждые 5 минут проверять SSL
+*/5 * * * * /scripts/check_ssl.sh
+</code></pre></div>
+
+<h3 id="4-обновление-сертификатов-let-s-encrypt">4. Обновление сертификатов Let&rsquo;s Encrypt<a class="headerlink" href="#4-обновление-сертификатов-let-s-encrypt" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code># Дважды в день проверять/обновлять
+0 0,12 * * * certbot renew --quiet
+</code></pre></div>
+
+<h3 id="5-запуск-docker-контейнеров">5. Запуск Docker-контейнеров<a class="headerlink" href="#5-запуск-docker-контейнеров" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code># Бэкап всех Docker volumes еженедельно
+0 2 * * 0 docker run --rm -v /var/lib/docker/volumes:/data alpine tar czf - /data | gzip &gt; /backup/volumes.tar.gz
+</code></pre></div>
+
+<h3 id="6-запуск-python-скрипта-в-venv">6. Запуск Python скрипта в venv<a class="headerlink" href="#6-запуск-python-скрипта-в-venv" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code># Ежечасно в venv
+0 * * * * cd /app &amp;&amp; .venv/bin/python script.py
+
+# Альтернатива с активацией
+0 * * * * /bin/bash -c &#39;source /app/.venv/bin/activate &amp;&amp; cd /app &amp;&amp; python script.py&#39;
+</code></pre></div>
+
+<h3 id="7-синхронизация-времени">7. Синхронизация времени<a class="headerlink" href="#7-синхронизация-времени" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code># Синхронизировать время каждый час
+0 * * * * /usr/sbin/ntpdate pool.ntp.org
+</code></pre></div>
+
+<h3 id="8-логирование-с-timestamp">8. Логирование с timestamp<a class="headerlink" href="#8-логирование-с-timestamp" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>* * * * * echo &quot;$(date): task ran&quot; &gt;&gt; /var/log/mytask.log
+</code></pre></div>
+
+<hr />
+<h2 id="частые-грабли-важно">⚠️ Частые грабли (важно!)<a class="headerlink" href="#частые-грабли-важно" title="Ссылка">#</a></h2>
+<h3 id="1-минимальная-среда-окружения">1. Минимальная среда окружения<a class="headerlink" href="#1-минимальная-среда-окружения" title="Ссылка">#</a></h3>
+<p>cron запускает задачи в <strong>минимальной среде</strong> — не ваши <code>.bashrc</code>/<code>.zshrc</code>!</p>
+<div class="highlight"><pre><span></span><code># ❌ Не сработает — PATH короткий
+* * * * * curl https://example.com/
+
+# ✅ Указать полный путь
+* * * * * /usr/local/bin/curl https://example.com/
+
+# ✅ Или расширить PATH в начале crontab
+PATH=/usr/local/bin:/usr/bin:/bin
+* * * * * curl https://example.com/
+</code></pre></div>
+
+<h3 id="2-спецсимвол-в-cron-newline">2. <code>%</code> — спецсимвол в cron (newline)<a class="headerlink" href="#2-спецсимвол-в-cron-newline" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code># ❌ % нужно экранировать!
+* * * * * date +%Y-%m-%d
+
+# ✅ Экранировать
+* * * * * date +\%Y-\%m-\%d
+
+# Или использовать одинарные кавычки (но % всё равно спецсимвол)
+* * * * * bash -c &#39;date +%Y-%m-%d&#39;
+</code></pre></div>
+
+<h3 id="3-относительные-пути-не-работают">3. Относительные пути не работают<a class="headerlink" href="#3-относительные-пути-не-работают" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code># ❌ cron запускается из HOME (или /)
+* * * * * cd project &amp;&amp; ./script.sh
+
+# ✅ Абсолютные пути
+* * * * * /home/alice/project/script.sh
+
+# ✅ cd с абсолютным путём
+* * * * * cd /home/alice/project &amp;&amp; /home/alice/project/script.sh
+</code></pre></div>
+
+<h3 id="4-перенаправление-вывода">4. Перенаправление вывода<a class="headerlink" href="#4-перенаправление-вывода" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code># ❌ По умолчанию cron отправит stdout по почте (MAILTO)
+* * * * * /script.sh
+
+# ✅ Логировать
+* * * * * /script.sh &gt;&gt; /var/log/script.log 2&gt;&amp;1
+
+# ✅ Выкинуть вывод
+* * * * * /script.sh &gt; /dev/null 2&gt;&amp;1
+
+# ✅ Только ошибки
+* * * * * /script.sh &gt; /dev/null
+</code></pre></div>
+
+<h3 id="5-не-работает-скрипт-проверьте-права-и-shebang">5. Не работает скрипт — проверьте права и shebang<a class="headerlink" href="#5-не-работает-скрипт-проверьте-права-и-shebang" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>chmod<span class="w"> </span>+x<span class="w"> </span>script.sh
+head<span class="w"> </span>-1<span class="w"> </span>script.sh<span class="w">              </span><span class="c1"># должна быть строка #!/bin/bash</span>
+</code></pre></div>
+
+<h3 id="6-дублирование-при-перезагрузке">6. Дублирование при перезагрузке<a class="headerlink" href="#6-дублирование-при-перезагрузке" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code># @reboot + обычное расписание могут запуститься дважды при загрузке в момент расписания
+</code></pre></div>
+
+<h3 id="7-часовой-пояс">7. Часовой пояс<a class="headerlink" href="#7-часовой-пояс" title="Ссылка">#</a></h3>
+<p>cron использует <strong>системный</strong> timezone.</p>
+<div class="highlight"><pre><span></span><code>timedatectl<span class="w">                  </span><span class="c1"># проверить</span>
+sudo<span class="w"> </span>timedatectl<span class="w"> </span>set-timezone<span class="w"> </span>Europe/Moscow
+sudo<span class="w"> </span>systemctl<span class="w"> </span>restart<span class="w"> </span>cron<span class="w">  </span><span class="c1"># перезапустить, чтобы подхватил</span>
+</code></pre></div>
+
+<hr />
+<h2 id="отладка-cron">🐛 Отладка cron<a class="headerlink" href="#отладка-cron" title="Ссылка">#</a></h2>
+<h3 id="проверить-синтаксис">Проверить синтаксис<a class="headerlink" href="#проверить-синтаксис" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># crontab -e и сохранить → cron проверяет и сообщает об ошибках</span>
+<span class="c1"># Или использовать онлайн-валидатор: https://crontab.guru</span>
+</code></pre></div>
+
+<h3 id="проверить-что-cron-вообще-работает">Проверить, что cron вообще работает<a class="headerlink" href="#проверить-что-cron-вообще-работает" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>systemctl<span class="w"> </span>status<span class="w"> </span>cron<span class="w">        </span><span class="c1"># или crond</span>
+sudo<span class="w"> </span>systemctl<span class="w"> </span>restart<span class="w"> </span>cron
+pgrep<span class="w"> </span>cron<span class="w">                   </span><span class="c1"># процесс запущен?</span>
+</code></pre></div>
+
+<h3 id="посмотреть-логи">Посмотреть логи<a class="headerlink" href="#посмотреть-логи" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># systemd</span>
+sudo<span class="w"> </span>journalctl<span class="w"> </span>-u<span class="w"> </span>cron<span class="w"> </span>-f
+sudo<span class="w"> </span>journalctl<span class="w"> </span>-u<span class="w"> </span>cron<span class="w"> </span>--since<span class="w"> </span><span class="s2">&quot;1 hour ago&quot;</span>
+sudo<span class="w"> </span>journalctl<span class="w"> </span>-t<span class="w"> </span>cron
+
+<span class="c1"># Старый стиль (Debian/Ubuntu)</span>
+sudo<span class="w"> </span>tail<span class="w"> </span>-f<span class="w"> </span>/var/log/cron.log
+sudo<span class="w"> </span>grep<span class="w"> </span>CRON<span class="w"> </span>/var/log/syslog
+
+<span class="c1"># RHEL/CentOS</span>
+sudo<span class="w"> </span>tail<span class="w"> </span>-f<span class="w"> </span>/var/log/cron
+</code></pre></div>
+
+<h3 id="тест-простая-задача">Тест: простая задача<a class="headerlink" href="#тест-простая-задача" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>* * * * * echo &quot;$(date) cron works&quot; &gt;&gt; /tmp/crontest.log
+</code></pre></div>
+
+<p>Через минуту проверьте:</p>
+<div class="highlight"><pre><span></span><code>cat<span class="w"> </span>/tmp/crontest.log
+</code></pre></div>
+
+<h3 id="cron-не-запускает-чеклист">cron не запускает — чеклист<a class="headerlink" href="#cron-не-запускает-чеклист" title="Ссылка">#</a></h3>
+<ol>
+<li>✅ Сервис активен? <code>systemctl status cron</code></li>
+<li>✅ crontab сохранён? <code>crontab -l</code></li>
+<li>✅ Права на скрипт? <code>chmod +x</code></li>
+<li>✅ Shebang в скрипте? <code>#!/bin/bash</code></li>
+<li>✅ Абсолютные пути? <code>/usr/bin/python</code>, не <code>python</code></li>
+<li>✅ Вывод логируется? <code>&gt;&gt; /log 2&gt;&amp;1</code></li>
+<li>✅ <code>%</code> экранированы? <code>\%</code></li>
+<li>✅ Cron user имеет права? (для root-задач)</li>
+<li>✅ Часовой пояс правильный?</li>
+<li>✅ Машина не спала/не выключалась в это время?</li>
+</ol>
+<h3 id="инструменты">Инструменты<a class="headerlink" href="#инструменты" title="Ссылка">#</a></h3>
+<ul>
+<li><strong>crontab.guru</strong> — онлайн тестер cron-выражений: https://crontab.guru</li>
+<li><strong>cronitor</strong> — мониторинг cron jobs: https://cronitor.io</li>
+<li><strong>cron-utils</strong> (Java) — парсинг и описание</li>
+</ul>
+<hr />
+<h2 id="anacron-для-настольных-пк">🌐 anacron — для настольных ПК<a class="headerlink" href="#anacron-для-настольных-пк" title="Ссылка">#</a></h2>
+<p>cron не запускает пропущенные задачи (если ПК был выключен).
+<strong>anacron</strong> запускает пропущенное при включении.</p>
+<h3 id="etc-anacrontab">/etc/anacrontab<a class="headerlink" href="#etc-anacrontab" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code># period  delay  job-identifier  command
+1         5      cron.daily      run-parts /etc/cron.daily
+7         25     cron.weekly     run-parts /etc/cron.weekly
+@monthly  45     cron.monthly    run-parts /etc/cron.monthly
+</code></pre></div>
+
+<ul>
+<li><code>period</code> — как часто (в днях)</li>
+<li><code>delay</code> — задержка после загрузки (минуты)</li>
+<li><code>job-identifier</code> — имя (для /var/spool/anacron)</li>
+</ul>
+<h3 id="когда-использовать-anacron">Когда использовать anacron<a class="headerlink" href="#когда-использовать-anacron" title="Ссылка">#</a></h3>
+<ul>
+<li>Настольные ПК / ноутбуки (могут быть выключены ночью).</li>
+<li>Задачи, которые нужно выполнить обязательно (backup, обновления).</li>
+</ul>
+<hr />
+<h2 id="cron-vs-systemd-timers">🆚 cron vs systemd timers<a class="headerlink" href="#cron-vs-systemd-timers" title="Ссылка">#</a></h2>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>cron</th>
+<th>systemd timers</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Простота</td>
+<td>★★★★★</td>
+<td>★★★</td>
+</tr>
+<tr>
+<td>Логи</td>
+<td>в файле/MAILTO</td>
+<td>в journal</td>
+</tr>
+<tr>
+<td>Зависимости</td>
+<td>нет</td>
+<td>есть (After=)</td>
+</tr>
+<tr>
+<td>Условия (Condition)</td>
+<td>нет</td>
+<td>есть</td>
+</tr>
+<tr>
+<td>Пропущенные задачи</td>
+<td>только anacron</td>
+<td><code>Persistent=true</code></td>
+</tr>
+<tr>
+<td>Точность</td>
+<td>минута</td>
+<td>миллисекунды</td>
+</tr>
+<tr>
+<td>Передача параметров</td>
+<td>строка команды</td>
+<td>environment, args</td>
+</tr>
+<tr>
+<td>Мониторинг</td>
+<td>вручную</td>
+<td><code>systemctl list-timers</code></td>
+</tr>
+<tr>
+<td>Дебаг</td>
+<td>сложно</td>
+<td>легко (journal)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Когда что</strong>:
+- <strong>cron</strong>: простые задачи, совместимость, очень простая настройка.
+- <strong>systemd timers</strong>: современные Linux, нужны зависимости/условия/логи.</p>
+<h3 id="пример-та-же-задача-двумя-способами">Пример: та же задача двумя способами<a class="headerlink" href="#пример-та-же-задача-двумя-способами" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code># cron
+0 3 * * * /usr/local/bin/backup.sh
+</code></pre></div>
+
+<div class="highlight"><pre><span></span><code><span class="c1"># /etc/systemd/system/backup.service</span>
+<span class="k">[Unit]</span>
+<span class="na">Description</span><span class="o">=</span><span class="s">Daily backup</span>
+
+<span class="k">[Service]</span>
+<span class="na">Type</span><span class="o">=</span><span class="s">oneshot</span>
+<span class="na">ExecStart</span><span class="o">=</span><span class="s">/usr/local/bin/backup.sh</span>
+</code></pre></div>
+
+<div class="highlight"><pre><span></span><code><span class="c1"># /etc/systemd/system/backup.timer</span>
+<span class="k">[Unit]</span>
+<span class="na">Description</span><span class="o">=</span><span class="s">Run backup daily</span>
+
+<span class="k">[Timer]</span>
+<span class="na">OnCalendar</span><span class="o">=</span><span class="s">*-*-* 03:00:00</span>
+<span class="na">Persistent</span><span class="o">=</span><span class="s">true</span>
+
+<span class="k">[Install]</span>
+<span class="na">WantedBy</span><span class="o">=</span><span class="s">timers.target</span>
+</code></pre></div>
+
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>systemctl<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>--now<span class="w"> </span>backup.timer
+</code></pre></div>
+
+<hr />
+<h2 id="cron-в-docker">🌍 cron в Docker<a class="headerlink" href="#cron-в-docker" title="Ссылка">#</a></h2>
+<div class="highlight"><pre><span></span><code><span class="c"># Dockerfile</span>
+<span class="k">FROM</span><span class="w"> </span><span class="s">alpine</span>
+<span class="k">RUN</span><span class="w"> </span>apk<span class="w"> </span>add<span class="w"> </span>--no-cache<span class="w"> </span>bash
+<span class="k">COPY</span><span class="w"> </span>script.sh<span class="w"> </span>/script.sh
+<span class="k">COPY</span><span class="w"> </span>crontab<span class="w"> </span>/etc/crontabs/root
+<span class="k">RUN</span><span class="w"> </span>chmod<span class="w"> </span>+x<span class="w"> </span>/script.sh
+<span class="k">CMD</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;crond&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;-f&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;-l&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;2&quot;</span><span class="p">]</span>
+</code></pre></div>
+
+<div class="highlight"><pre><span></span><code># crontab
+* * * * * /script.sh &gt;&gt; /var/log/script.log 2&gt;&amp;1
+</code></pre></div>
+
+<h3 id="альтернативы-для-docker">Альтернативы для Docker<a class="headerlink" href="#альтернативы-для-docker" title="Ссылка">#</a></h3>
+<ul>
+<li><strong>supercronic</strong> — cron для контейнеров (с логами в stdout).</li>
+<li><strong>ofelia</strong> — Docker-native scheduler.</li>
+<li><strong>systemd timers</strong> в Docker (через specific base image).</li>
+</ul>
+<hr />
+<h2 id="частые-ошибки">🪤 Частые ошибки<a class="headerlink" href="#частые-ошибки" title="Ссылка">#</a></h2>
+<ol>
+<li><strong>Короткий PATH</strong> — используйте абсолютные пути или расширьте PATH.</li>
+<li><strong><code>%</code> без экранирования</strong> — <code>date +%Y</code> → <code>date +\%Y</code>.</li>
+<li><strong>Без логирования</strong> — <code>&gt; /dev/null 2&gt;&amp;1</code> или в файл.</li>
+<li><strong>MAILTO спам</strong> — по умолчанию cron шлёт вывод на почту. Отключите <code>MAILTO=""</code>.</li>
+<li><strong>Забыли <code>chmod +x</code></strong> — скрипт не запустится.</li>
+<li><strong>Shebang отсутствует</strong> — cron не знает, чем выполнять.</li>
+<li><strong>Не обновляется часовой пояс</strong> — <code>systemctl restart cron</code>.</li>
+<li><strong>Вложенный crontab</strong> — не делайте <code>crontab -e</code> из cron job.</li>
+<li><strong>Минута=0 vs <code>*</code></strong> — <code>0 * * * *</code> (раз в час) ≠ <code>* * * * *</code> (раз в минуту).</li>
+<li><strong>0 и 7 — оба воскресенье</strong> — путаница в дне недели.</li>
+</ol>
+<hr />
+<h2 id="полезные-ссылки">🔗 Полезные ссылки<a class="headerlink" href="#полезные-ссылки" title="Ссылка">#</a></h2>
+<ul>
+<li>man: <code>man 5 crontab</code>, <code>man cron</code></li>
+<li>crontab.guru (тестер): https://crontab.guru</li>
+<li>Wikipedia: https://ru.wikipedia.org/wiki/Cron</li>
+<li>cron scheduler online: https://www.freeformatter.com/cron-expression-generator-quartz.html</li>
+<li>systemd timers comparison: https://wiki.archlinux.org/title/Cron</li>
+<li>Awesome Cron: https://github.com/while-loop/cron-cheatsheet</li>
+</ul>
+<hr />
+<h2 id="полезные-советы">💡 Полезные советы<a class="headerlink" href="#полезные-советы" title="Ссылка">#</a></h2>
+<ol>
+<li><strong>crontab.guru</strong> — всегда проверяйте выражение онлайн.</li>
+<li><strong>Абсолютные пути</strong> — для всего (команды, скрипты, файлы).</li>
+<li><strong>Логируйте</strong> — <code>&gt;&gt; /log 2&gt;&amp;1</code>, иначе не узнаете об ошибках.</li>
+<li><strong><code>MAILTO=""</code></strong> — отключите спам почтой.</li>
+<li><strong><code>@reboot</code></strong> — для запуска при старте системы.</li>
+<li><strong><code>anacron</code></strong> — для настольных ПК (запустит пропущенное).</li>
+<li><strong>systemd timers</strong> — для новых задач на современных Linux.</li>
+<li><strong>Test в CLI</strong> — <code>* * * * * echo test &gt;&gt; /tmp/test</code> для проверки.</li>
+<li><strong>Часовой пояс</strong> — <code>timedatectl</code> + <code>systemctl restart cron</code>.</li>
+<li><strong>Минимальная среда</strong> — cron не загружает <code>.bashrc</code>.</li>
+<li><strong><code>*/5</code></strong> — каждые 5 минут, а не «в 5 минуту».</li>
+<li><strong>Lock-файлы</strong> — для задач, которые не должны перекрываться (<code>flock</code>).</li>
+<li><strong><code>flock -n /tmp/lock.lock -c 'command'</code></strong> — защита от параллельного запуска.</li>
+<li><strong>Не ставьте <code>cron</code> в Docker</strong> — используйте supercronic или внешний оркестратор.</li>
+<li><strong>Мониторинг</strong> — используйте healthchecks.io или dead-mans-snitch для критичных задач.</li>
+</ol>
+<hr />
+<p><em>Сгенерировано как шпаргалка. cron прост, но капризен —
+углубляйтесь через <code>man 5 crontab</code> и crontab.guru</em></p>
+    </article>
+    <nav class="pagination">
+      <a class="pager prev" href="vscode.html">← VS Code</a>
+      <a class="pager next" href="fzf-zoxide.html">fzf + zoxide →</a>
+    </nav>
+  </main>
+
+  <aside class="toc">
+    <details open>
+      <summary>📑 Оглавление</summary>
+      <div class="toc-list">
+<div class="toc">
+<ul>
+<li><a href="#cron-шпаргалка-по-планировщику-задач">⏰ cron — шпаргалка по планировщику задач</a><ul>
+<li><a href="#главные-понятия">🔑 Главные понятия</a></li>
+<li><a href="#команды-crontab">🚀 Команды crontab</a><ul>
+<li><a href="#файлы">Файлы</a></li>
+<li><a href="#запуск-скриптов-из-etc-cron-hourly-daily">Запуск скриптов из /etc/cron.{hourly,daily,&hellip;}</a></li>
+</ul>
+</li>
+<li><a href="#формат-cron-expression">📋 Формат cron expression</a><ul>
+<li><a href="#примеры">Примеры</a></li>
+<li><a href="#спец-строки-расширения-vixie-cron">Спец-строки (расширения Vixie cron)</a></li>
+<li><a href="#списки-диапазоны-шаги">Списки, диапазоны, шаги</a></li>
+<li><a href="#дни-недели">Дни недели</a></li>
+</ul>
+</li>
+<li><a href="#структура-crontab">📝 Структура crontab</a><ul>
+<li><a href="#пользовательский-crontab">Пользовательский crontab</a></li>
+<li><a href="#системный-crontab-etc-crontab-с-полем-user">Системный crontab (/etc/crontab) — с полем USER</a></li>
+</ul>
+</li>
+<li><a href="#практические-примеры">🌍 Практические примеры</a><ul>
+<li><a href="#1-регулярный-backup">1. Регулярный backup</a></li>
+<li><a href="#2-очистка-временных-файлов">2. Очистка временных файлов</a></li>
+<li><a href="#3-мониторинг-сайта">3. Мониторинг сайта</a></li>
+<li><a href="#4-обновление-сертификатов-let-s-encrypt">4. Обновление сертификатов Let&rsquo;s Encrypt</a></li>
+<li><a href="#5-запуск-docker-контейнеров">5. Запуск Docker-контейнеров</a></li>
+<li><a href="#6-запуск-python-скрипта-в-venv">6. Запуск Python скрипта в venv</a></li>
+<li><a href="#7-синхронизация-времени">7. Синхронизация времени</a></li>
+<li><a href="#8-логирование-с-timestamp">8. Логирование с timestamp</a></li>
+</ul>
+</li>
+<li><a href="#частые-грабли-важно">⚠️ Частые грабли (важно!)</a><ul>
+<li><a href="#1-минимальная-среда-окружения">1. Минимальная среда окружения</a></li>
+<li><a href="#2-спецсимвол-в-cron-newline">2. % — спецсимвол в cron (newline)</a></li>
+<li><a href="#3-относительные-пути-не-работают">3. Относительные пути не работают</a></li>
+<li><a href="#4-перенаправление-вывода">4. Перенаправление вывода</a></li>
+<li><a href="#5-не-работает-скрипт-проверьте-права-и-shebang">5. Не работает скрипт — проверьте права и shebang</a></li>
+<li><a href="#6-дублирование-при-перезагрузке">6. Дублирование при перезагрузке</a></li>
+<li><a href="#7-часовой-пояс">7. Часовой пояс</a></li>
+</ul>
+</li>
+<li><a href="#отладка-cron">🐛 Отладка cron</a><ul>
+<li><a href="#проверить-синтаксис">Проверить синтаксис</a></li>
+<li><a href="#проверить-что-cron-вообще-работает">Проверить, что cron вообще работает</a></li>
+<li><a href="#посмотреть-логи">Посмотреть логи</a></li>
+<li><a href="#тест-простая-задача">Тест: простая задача</a></li>
+<li><a href="#cron-не-запускает-чеклист">cron не запускает — чеклист</a></li>
+<li><a href="#инструменты">Инструменты</a></li>
+</ul>
+</li>
+<li><a href="#anacron-для-настольных-пк">🌐 anacron — для настольных ПК</a><ul>
+<li><a href="#etc-anacrontab">/etc/anacrontab</a></li>
+<li><a href="#когда-использовать-anacron">Когда использовать anacron</a></li>
+</ul>
+</li>
+<li><a href="#cron-vs-systemd-timers">🆚 cron vs systemd timers</a><ul>
+<li><a href="#пример-та-же-задача-двумя-способами">Пример: та же задача двумя способами</a></li>
+</ul>
+</li>
+<li><a href="#cron-в-docker">🌍 cron в Docker</a><ul>
+<li><a href="#альтернативы-для-docker">Альтернативы для Docker</a></li>
+</ul>
+</li>
+<li><a href="#частые-ошибки">🪤 Частые ошибки</a></li>
+<li><a href="#полезные-ссылки">🔗 Полезные ссылки</a></li>
+<li><a href="#полезные-советы">💡 Полезные советы</a></li>
+</ul>
+</li>
+</ul>
+</div>
+
+      </div>
+    </details>
+  </aside>
+</div>
+
+<button class="back-top" id="backTop" aria-label="Наверх">↑</button>
+
+<script src="assets/search.js"></script>
+<script src="assets/page.js"></script>
+</body>
+</html>

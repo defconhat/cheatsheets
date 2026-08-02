@@ -1,0 +1,1137 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HTTP / curl — Шпаргалки</title>
+<link rel="stylesheet" href="assets/style.css">
+<link rel="stylesheet" href="assets/pygments.css">
+</head>
+<body>
+<div class="layout">
+  <aside class="sidebar">
+    <a href="index.html" class="brand">📌 Шпаргалки</a>
+    <nav class="nav">
+<a href="yazi.html" class="nav-item"><span class="nav-ico">📦</span>Yazi</a>
+<a href="neovim.html" class="nav-item"><span class="nav-ico">📘</span>Neovim (LazyVim)</a>
+<a href="niri.html" class="nav-item"><span class="nav-ico">🪟</span>Niri</a>
+<a href="tmux.html" class="nav-item"><span class="nav-ico">🪟</span>Tmux</a>
+<a href="bash.html" class="nav-item"><span class="nav-ico">🐚</span>Bash</a>
+<a href="git.html" class="nav-item"><span class="nav-ico">🔀</span>Git</a>
+<a href="terminal.html" class="nav-item"><span class="nav-ico">🖥️</span>Терминал Linux</a>
+<a href="powershell.html" class="nav-item"><span class="nav-ico">💻</span>PowerShell</a>
+<a href="cmd.html" class="nav-item"><span class="nav-ico">🪟</span>CMD (cmd.exe)</a>
+<a href="python.html" class="nav-item"><span class="nav-ico">🐍</span>Python</a>
+<a href="systemd.html" class="nav-item"><span class="nav-ico">⚙️</span>systemd</a>
+<a href="ssh.html" class="nav-item"><span class="nav-ico">🔐</span>SSH</a>
+<a href="make-cmake.html" class="nav-item"><span class="nav-ico">🔨</span>Make / CMake</a>
+<a href="docker.html" class="nav-item"><span class="nav-ico">🐳</span>Docker</a>
+<a href="pacman.html" class="nav-item"><span class="nav-ico">📦</span>pacman / yay / paru</a>
+<a href="spark.html" class="nav-item"><span class="nav-ico">⚡</span>Apache Spark / PySpark</a>
+<a href="markdown.html" class="nav-item"><span class="nav-ico">📝</span>Markdown</a>
+<a href="regex.html" class="nav-item"><span class="nav-ico">🔍</span>Регулярные выражения</a>
+<a href="jq-json.html" class="nav-item"><span class="nav-ico">🔧</span>jq + JSON</a>
+<a href="awk-sed.html" class="nav-item"><span class="nav-ico">✂️</span>awk / sed</a>
+<a href="airflow.html" class="nav-item"><span class="nav-ico">🌪️</span>Apache Airflow</a>
+<a href="http-curl.html" class="nav-item active"><span class="nav-ico">🌐</span>HTTP / curl</a>
+<a href="yaml.html" class="nav-item"><span class="nav-ico">📄</span>YAML</a>
+<a href="vscode.html" class="nav-item"><span class="nav-ico">💻</span>VS Code</a>
+<a href="cron.html" class="nav-item"><span class="nav-ico">⏰</span>cron</a>
+<a href="fzf-zoxide.html" class="nav-item"><span class="nav-ico">🔎</span>fzf + zoxide</a>
+<a href="minikube-k8s.html" class="nav-item"><span class="nav-ico">☸️</span>Minikube / Kubernetes</a>
+<a href="cicd.html" class="nav-item"><span class="nav-ico">🦊</span>GitLab CI / GitHub Actions</a>
+<a href="nginx.html" class="nav-item"><span class="nav-ico">🌐</span>nginx</a>
+<a href="dbt.html" class="nav-item"><span class="nav-ico">🔧</span>dbt</a>
+<a href="kafka.html" class="nav-item"><span class="nav-ico">🐘</span>Apache Kafka</a>
+<a href="prometheus-grafana.html" class="nav-item"><span class="nav-ico">📊</span>Prometheus / Grafana</a>
+<a href="iceberg-nessie.html" class="nav-item"><span class="nav-ico">🧊</span>Iceberg / Nessie</a>
+<a href="impala.html" class="nav-item"><span class="nav-ico">🐬</span>Apache Impala</a>
+<a href="terraform.html" class="nav-item"><span class="nav-ico">🏗️</span>Terraform</a>
+<a href="linux-internals.html" class="nav-item"><span class="nav-ico">🐧</span>Linux Internals</a>
+<a href="miscellaneous.html" class="nav-item"><span class="nav-ico">🧰</span>Miscellaneous</a>
+<a href="python-automation-libs.html" class="nav-item"><span class="nav-ico">🐍</span>Python: авт-ция (10 libs)</a>
+<a href="eza.html" class="nav-item"><span class="nav-ico">🌈</span>eza</a>
+<a href="dbeaver.html" class="nav-item"><span class="nav-ico">🗄️</span>DBeaver</a>
+<a href="zcode.html" class="nav-item"><span class="nav-ico">🤖</span>ZCode</a>
+<a href="warp.html" class="nav-item"><span class="nav-ico">🚀</span>Warp</a>
+<a href="agentic-ai-dev.html" class="nav-item"><span class="nav-ico">🤝</span>Агентная разработка с ИИ</a>
+    </nav>
+  </aside>
+
+  <main class="content">
+    <article>
+<h1 id="http-curl-postman-шпаргалка">🌐 HTTP / curl / Postman — шпаргалка<a class="headerlink" href="#http-curl-postman-шпаргалка" title="Ссылка">#</a></h1>
+<blockquote>
+<p><strong>HTTP</strong> — протокол прикладного уровня (request-response).
+<strong>curl</strong> — утилита командной строки для HTTP-запросов.
+<strong>Postman</strong> — GUI для тестирования API.</p>
+</blockquote>
+<hr />
+<h2 id="http-протокол">🔑 HTTP-протокол<a class="headerlink" href="#http-протокол" title="Ссылка">#</a></h2>
+<h3 id="структура-запроса">Структура запроса<a class="headerlink" href="#структура-запроса" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>POST /api/users HTTP/1.1              ← метод + путь + версия
+Host: api.example.com                  ← заголовки
+Content-Type: application/json
+Authorization: Bearer xyz123
+Content-Length: 42
+
+{&quot;name&quot;: &quot;Alice&quot;, &quot;age&quot;: 30}          ← тело (body)
+</code></pre></div>
+
+<h3 id="структура-ответа">Структура ответа<a class="headerlink" href="#структура-ответа" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>HTTP/1.1 200 OK                        ← версия + статус + причина
+Content-Type: application/json
+Content-Length: 28
+
+{&quot;id&quot;: 1, &quot;name&quot;: &quot;Alice&quot;}            ← тело
+</code></pre></div>
+
+<h3 id="методы-verbs">Методы (verbs)<a class="headerlink" href="#методы-verbs" title="Ссылка">#</a></h3>
+<table>
+<thead>
+<tr>
+<th>Метод</th>
+<th>Назначение</th>
+<th>Идемпотентен</th>
+<th>Безопасный</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>GET</code></td>
+<td>Получить ресурс</td>
+<td>✅</td>
+<td>✅</td>
+</tr>
+<tr>
+<td><code>POST</code></td>
+<td>Создать ресурс</td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+<tr>
+<td><code>PUT</code></td>
+<td>Заменить ресурс целиком</td>
+<td>✅</td>
+<td>❌</td>
+</tr>
+<tr>
+<td><code>PATCH</code></td>
+<td>Частично изменить</td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+<tr>
+<td><code>DELETE</code></td>
+<td>Удалить</td>
+<td>✅</td>
+<td>❌</td>
+</tr>
+<tr>
+<td><code>HEAD</code></td>
+<td>Только заголовки (как GET без тела)</td>
+<td>✅</td>
+<td>✅</td>
+</tr>
+<tr>
+<td><code>OPTIONS</code></td>
+<td>Какие методы поддерживаются</td>
+<td>✅</td>
+<td>✅</td>
+</tr>
+<tr>
+<td><code>TRACE</code></td>
+<td>Эхо-запрос (для отладки)</td>
+<td>✅</td>
+<td>✅</td>
+</tr>
+<tr>
+<td><code>CONNECT</code></td>
+<td>Прокси-туннель</td>
+<td>—</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<h3 id="статус-коды">Статус-коды<a class="headerlink" href="#статус-коды" title="Ссылка">#</a></h3>
+<table>
+<thead>
+<tr>
+<th>Диапазон</th>
+<th>Что значит</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>1xx</strong></td>
+<td>Informational (редко)</td>
+</tr>
+<tr>
+<td><strong>2xx</strong></td>
+<td>Success</td>
+</tr>
+<tr>
+<td><strong>3xx</strong></td>
+<td>Redirection</td>
+</tr>
+<tr>
+<td><strong>4xx</strong></td>
+<td>Client error</td>
+</tr>
+<tr>
+<td><strong>5xx</strong></td>
+<td>Server error</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Код</th>
+<th>Имя</th>
+<th>Описание</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>200</strong></td>
+<td>OK</td>
+<td>Успех</td>
+</tr>
+<tr>
+<td><strong>201</strong></td>
+<td>Created</td>
+<td>Ресурс создан</td>
+</tr>
+<tr>
+<td><strong>202</strong></td>
+<td>Accepted</td>
+<td>Принято в обработку</td>
+</tr>
+<tr>
+<td><strong>204</strong></td>
+<td>No Content</td>
+<td>Успех без тела</td>
+</tr>
+<tr>
+<td><strong>301</strong></td>
+<td>Moved Permanently</td>
+<td>Постоянный редирект</td>
+</tr>
+<tr>
+<td><strong>302</strong></td>
+<td>Found</td>
+<td>Временный редирект</td>
+</tr>
+<tr>
+<td><strong>304</strong></td>
+<td>Not Modified</td>
+<td>Кэш валиден</td>
+</tr>
+<tr>
+<td><strong>307</strong></td>
+<td>Temporary Redirect</td>
+<td>Временный (тот же метод)</td>
+</tr>
+<tr>
+<td><strong>308</strong></td>
+<td>Permanent Redirect</td>
+<td>Постоянный (тот же метод)</td>
+</tr>
+<tr>
+<td><strong>400</strong></td>
+<td>Bad Request</td>
+<td>Неверный запрос</td>
+</tr>
+<tr>
+<td><strong>401</strong></td>
+<td>Unauthorized</td>
+<td>Не аутентифицирован</td>
+</tr>
+<tr>
+<td><strong>403</strong></td>
+<td>Forbidden</td>
+<td>Нет прав</td>
+</tr>
+<tr>
+<td><strong>404</strong></td>
+<td>Not Found</td>
+<td>Не найдено</td>
+</tr>
+<tr>
+<td><strong>405</strong></td>
+<td>Method Not Allowed</td>
+<td>Метод не поддерживается</td>
+</tr>
+<tr>
+<td><strong>409</strong></td>
+<td>Conflict</td>
+<td>Конфликт (уже существует)</td>
+</tr>
+<tr>
+<td><strong>422</strong></td>
+<td>Unprocessable Entity</td>
+<td>Ошибка валидации</td>
+</tr>
+<tr>
+<td><strong>429</strong></td>
+<td>Too Many Requests</td>
+<td>Rate limit</td>
+</tr>
+<tr>
+<td><strong>500</strong></td>
+<td>Internal Server Error</td>
+<td>Внутренняя ошибка</td>
+</tr>
+<tr>
+<td><strong>502</strong></td>
+<td>Bad Gateway</td>
+<td>Прокси upstream упал</td>
+</tr>
+<tr>
+<td><strong>503</strong></td>
+<td>Service Unavailable</td>
+<td>Сервис недоступен</td>
+</tr>
+<tr>
+<td><strong>504</strong></td>
+<td>Gateway Timeout</td>
+<td>Прокси upstream таймаут</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="curl-установка">🚀 curl — установка<a class="headerlink" href="#curl-установка" title="Ссылка">#</a></h2>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>pacman<span class="w"> </span>-S<span class="w"> </span>curl<span class="w">                 </span><span class="c1"># Arch</span>
+sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>curl<span class="w">               </span><span class="c1"># Debian/Ubuntu</span>
+<span class="c1"># macOS: уже встроен</span>
+<span class="c1"># Windows 10+: уже встроен</span>
+</code></pre></div>
+
+<hr />
+<h2 id="базовые-запросы">🎯 Базовые запросы<a class="headerlink" href="#базовые-запросы" title="Ссылка">#</a></h2>
+<div class="highlight"><pre><span></span><code><span class="c1"># GET (по умолчанию)</span>
+curl<span class="w"> </span>https://example.com
+curl<span class="w"> </span>-X<span class="w"> </span>GET<span class="w"> </span>https://api.example.com/users
+
+<span class="c1"># POST</span>
+curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span>https://api.example.com/users
+
+<span class="c1"># С заголовками и телом</span>
+curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span>https://api.example.com/users<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-H<span class="w"> </span><span class="s2">&quot;Content-Type: application/json&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-d<span class="w"> </span><span class="s1">&#39;{&quot;name&quot;:&quot;Alice&quot;,&quot;age&quot;:30}&#39;</span>
+
+<span class="c1"># PUT</span>
+curl<span class="w"> </span>-X<span class="w"> </span>PUT<span class="w"> </span>https://api.example.com/users/1<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-H<span class="w"> </span><span class="s2">&quot;Content-Type: application/json&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-d<span class="w"> </span><span class="s1">&#39;{&quot;name&quot;:&quot;Alice Updated&quot;}&#39;</span>
+
+<span class="c1"># DELETE</span>
+curl<span class="w"> </span>-X<span class="w"> </span>DELETE<span class="w"> </span>https://api.example.com/users/1
+
+<span class="c1"># PATCH</span>
+curl<span class="w"> </span>-X<span class="w"> </span>PATCH<span class="w"> </span>https://api.example.com/users/1<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-H<span class="w"> </span><span class="s2">&quot;Content-Type: application/json&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-d<span class="w"> </span><span class="s1">&#39;{&quot;age&quot;:31}&#39;</span>
+</code></pre></div>
+
+<hr />
+<h2 id="полезные-флаги-curl">⚙️ Полезные флаги curl<a class="headerlink" href="#полезные-флаги-curl" title="Ссылка">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Флаг</th>
+<th>Назначение</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>-X METHOD</code></td>
+<td>Указать метод</td>
+</tr>
+<tr>
+<td><code>-H "Header: val"</code></td>
+<td>Заголовок (можно несколько)</td>
+</tr>
+<tr>
+<td><code>-d "data"</code></td>
+<td>Тело запроса (POST)</td>
+</tr>
+<tr>
+<td><code>-d @file</code></td>
+<td>Тело из файла</td>
+</tr>
+<tr>
+<td><code>--data-raw</code></td>
+<td>Как -d, без интерпретации @</td>
+</tr>
+<tr>
+<td><code>-G</code></td>
+<td>Сделать данные query-параметрами GET</td>
+</tr>
+<tr>
+<td><code>-o file</code></td>
+<td>Вывод в файл</td>
+</tr>
+<tr>
+<td><code>-O</code></td>
+<td>Сохранить с тем же именем</td>
+</tr>
+<tr>
+<td><code>-i</code></td>
+<td>Показать заголовки ответа</td>
+</tr>
+<tr>
+<td><code>-I</code></td>
+<td>Только заголовки (HEAD)</td>
+</tr>
+<tr>
+<td><code>-v</code></td>
+<td>Verbose (заголовки запроса и ответа)</td>
+</tr>
+<tr>
+<td><code>-s</code></td>
+<td>Silent (без прогресса)</td>
+</tr>
+<tr>
+<td><code>-S</code></td>
+<td>Show errors even with -s</td>
+</tr>
+<tr>
+<td><code>-L</code></td>
+<td>Следовать редиректам</td>
+</tr>
+<tr>
+<td><code>-k</code></td>
+<td>Игнорировать SSL-ошибки</td>
+</tr>
+<tr>
+<td><code>-u user:pass</code></td>
+<td>Basic auth</td>
+</tr>
+<tr>
+<td><code>-u user:</code></td>
+<td>Запросить пароль интерактивно</td>
+</tr>
+<tr>
+<td><code>--max-time N</code></td>
+<td>Общий таймаут (сек)</td>
+</tr>
+<tr>
+<td><code>--connect-timeout N</code></td>
+<td>Таймаут подключения</td>
+</tr>
+<tr>
+<td><code>-A "UA"</code></td>
+<td>User-Agent</td>
+</tr>
+<tr>
+<td><code>-b "cookie"</code></td>
+<td>Cookie</td>
+</tr>
+<tr>
+<td><code>-b file</code></td>
+<td>Cookie из файла</td>
+</tr>
+<tr>
+<td><code>-c file</code></td>
+<td>Сохранить cookie</td>
+</tr>
+<tr>
+<td><code>--compressed</code></td>
+<td>Запросить сжатие (gzip)</td>
+</tr>
+<tr>
+<td><code>-x proxy</code></td>
+<td>Прокси</td>
+</tr>
+<tr>
+<td><code>-w FORMAT</code></td>
+<td>Свой формат вывода</td>
+</tr>
+<tr>
+<td><code>--resolve host:port:addr</code></td>
+<td>Подменить DNS</td>
+</tr>
+<tr>
+<td><code>--location</code></td>
+<td>Следовать редиректам</td>
+</tr>
+<tr>
+<td><code>-n</code></td>
+<td>Использовать ~/.netrc</td>
+</tr>
+<tr>
+<td><code>--url URL</code></td>
+<td>URL (когда несколько)</td>
+</tr>
+<tr>
+<td><code>-K config</code></td>
+<td>Читать опции из файла</td>
+</tr>
+<tr>
+<td><code>--retry N</code></td>
+<td>Повторов при ошибке</td>
+</tr>
+<tr>
+<td><code>--trace file</code></td>
+<td>Полный дамп в файл</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="передача-данных">🔤 Передача данных<a class="headerlink" href="#передача-данных" title="Ссылка">#</a></h2>
+<h3 id="query-параметры">Query-параметры<a class="headerlink" href="#query-параметры" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Вручную</span>
+curl<span class="w"> </span><span class="s2">&quot;https://api.example.com/search?q=python&amp;page=2&quot;</span>
+
+<span class="c1"># Через -G + --data-urlencode</span>
+curl<span class="w"> </span>-G<span class="w"> </span>https://api.example.com/search<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--data-urlencode<span class="w"> </span><span class="s2">&quot;q=hello world&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--data-urlencode<span class="w"> </span><span class="s2">&quot;page=2&quot;</span>
+
+<span class="c1"># urlencode значения</span>
+curl<span class="w"> </span>--data-urlencode<span class="w"> </span><span class="s2">&quot;name=John Doe&quot;</span><span class="w"> </span>https://...
+</code></pre></div>
+
+<h3 id="json">JSON<a class="headerlink" href="#json" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Один заголовок + данные</span>
+curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span>https://api.example.com/users<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-H<span class="w"> </span><span class="s2">&quot;Content-Type: application/json&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-d<span class="w"> </span><span class="s1">&#39;{&quot;name&quot;:&quot;Alice&quot;,&quot;age&quot;:30}&#39;</span>
+
+<span class="c1"># Из файла</span>
+curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span>https://api.example.com/users<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-H<span class="w"> </span><span class="s2">&quot;Content-Type: application/json&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-d<span class="w"> </span>@data.json
+
+<span class="c1"># Несколько заголовков</span>
+curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span>URL<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-H<span class="w"> </span><span class="s2">&quot;Content-Type: application/json&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-H<span class="w"> </span><span class="s2">&quot;Authorization: Bearer token&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-H<span class="w"> </span><span class="s2">&quot;Accept: application/json&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-d<span class="w"> </span>@data.json
+</code></pre></div>
+
+<h3 id="form-data">Form data<a class="headerlink" href="#form-data" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># application/x-www-form-urlencoded (по умолчанию для -d)</span>
+curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span>https://example.com/login<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-d<span class="w"> </span><span class="s2">&quot;username=alice&amp;password=secret&quot;</span>
+
+<span class="c1"># multipart/form-data (для файлов)</span>
+curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span>https://example.com/upload<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-F<span class="w"> </span><span class="s2">&quot;file=@photo.jpg&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-F<span class="w"> </span><span class="s2">&quot;name=Alice&quot;</span>
+
+<span class="c1"># Несколько файлов</span>
+curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span>https://example.com/upload<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-F<span class="w"> </span><span class="s2">&quot;files[]=@a.txt&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-F<span class="w"> </span><span class="s2">&quot;files[]=@b.txt&quot;</span>
+</code></pre></div>
+
+<h3 id="чтение-из-stdin">Чтение из stdin<a class="headerlink" href="#чтение-из-stdin" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;{&quot;key&quot;:&quot;value&quot;}&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span>URL<span class="w"> </span>-H<span class="w"> </span><span class="s2">&quot;Content-Type: application/json&quot;</span><span class="w"> </span>-d<span class="w"> </span>@-
+</code></pre></div>
+
+<hr />
+<h2 id="аутентификация">🔐 Аутентификация<a class="headerlink" href="#аутентификация" title="Ссылка">#</a></h2>
+<h3 id="basic-auth">Basic Auth<a class="headerlink" href="#basic-auth" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>curl<span class="w"> </span>-u<span class="w"> </span>user:password<span class="w"> </span>https://api.example.com/
+curl<span class="w"> </span>-u<span class="w"> </span>user<span class="w"> </span>https://api.example.com/<span class="w">      </span><span class="c1"># спросит пароль</span>
+curl<span class="w"> </span>-u<span class="w"> </span>alice:secret<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span>URL
+</code></pre></div>
+
+<h3 id="bearer-token-jwt">Bearer Token (JWT)<a class="headerlink" href="#bearer-token-jwt" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="nv">TOKEN</span><span class="o">=</span><span class="s2">&quot;eyJhbGc...&quot;</span>
+curl<span class="w"> </span>-H<span class="w"> </span><span class="s2">&quot;Authorization: Bearer </span><span class="nv">$TOKEN</span><span class="s2">&quot;</span><span class="w"> </span>https://api.example.com/
+</code></pre></div>
+
+<h3 id="api-key">API Key<a class="headerlink" href="#api-key" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># В заголовке</span>
+curl<span class="w"> </span>-H<span class="w"> </span><span class="s2">&quot;X-API-Key: abc123&quot;</span><span class="w"> </span>https://api.example.com/
+
+<span class="c1"># В query</span>
+curl<span class="w"> </span><span class="s2">&quot;https://api.example.com/?api_key=abc123&quot;</span>
+</code></pre></div>
+
+<h3 id="oauth-2-0">OAuth 2.0<a class="headerlink" href="#oauth-2-0" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Получить токен</span>
+curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span>https://auth.example.com/oauth/token<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-d<span class="w"> </span><span class="s2">&quot;grant_type=password&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-d<span class="w"> </span><span class="s2">&quot;username=alice&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-d<span class="w"> </span><span class="s2">&quot;password=secret&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-u<span class="w"> </span>client_id:client_secret
+
+<span class="c1"># Использовать</span>
+curl<span class="w"> </span>-H<span class="w"> </span><span class="s2">&quot;Authorization: Bearer ACCESS_TOKEN&quot;</span><span class="w"> </span>https://api.example.com/
+</code></pre></div>
+
+<h3 id="netrc-для-повторных-запросов">.netrc (для повторных запросов)<a class="headerlink" href="#netrc-для-повторных-запросов" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># ~/.netrc</span>
+machine<span class="w"> </span>api.example.com
+login<span class="w"> </span>alice
+password<span class="w"> </span>secret
+
+<span class="c1"># Использование</span>
+curl<span class="w"> </span>-n<span class="w"> </span>https://api.example.com/<span class="w">   </span><span class="c1"># -n = использовать .netrc</span>
+chmod<span class="w"> </span><span class="m">600</span><span class="w"> </span>~/.netrc<span class="w">                 </span><span class="c1"># права!</span>
+</code></pre></div>
+
+<hr />
+<h2 id="заголовки">📋 Заголовки<a class="headerlink" href="#заголовки" title="Ссылка">#</a></h2>
+<h3 id="частые-заголовки-запроса">Частые заголовки запроса<a class="headerlink" href="#частые-заголовки-запроса" title="Ссылка">#</a></h3>
+<table>
+<thead>
+<tr>
+<th>Заголовок</th>
+<th>Что</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Host</code></td>
+<td>Имя хоста (обязательный в HTTP/1.1)</td>
+</tr>
+<tr>
+<td><code>User-Agent</code></td>
+<td>Идентификация клиента</td>
+</tr>
+<tr>
+<td><code>Accept</code></td>
+<td>Что клиент хочет получить</td>
+</tr>
+<tr>
+<td><code>Accept-Encoding</code></td>
+<td>gzip, br</td>
+</tr>
+<tr>
+<td><code>Content-Type</code></td>
+<td>Тип тела запроса</td>
+</tr>
+<tr>
+<td><code>Authorization</code></td>
+<td>Авторизация</td>
+</tr>
+<tr>
+<td><code>Cookie</code></td>
+<td>Куки</td>
+</tr>
+<tr>
+<td><code>Origin</code> / <code>Referer</code></td>
+<td>Для CORS</td>
+</tr>
+<tr>
+<td><code>Cache-Control</code></td>
+<td>no-cache</td>
+</tr>
+<tr>
+<td><code>If-None-Match</code> / <code>If-Modified-Since</code></td>
+<td>Кэширование</td>
+</tr>
+<tr>
+<td><code>X-Forwarded-For</code></td>
+<td>IP клиента (через прокси)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="content-type">Content-Type<a class="headerlink" href="#content-type" title="Ссылка">#</a></h3>
+<table>
+<thead>
+<tr>
+<th>Значение</th>
+<th>Используется для</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>application/json</code></td>
+<td>JSON</td>
+</tr>
+<tr>
+<td><code>application/x-www-form-urlencoded</code></td>
+<td>Формы</td>
+</tr>
+<tr>
+<td><code>multipart/form-data</code></td>
+<td>Загрузка файлов</td>
+</tr>
+<tr>
+<td><code>text/html</code></td>
+<td>HTML</td>
+</tr>
+<tr>
+<td><code>text/plain</code></td>
+<td>Простой текст</td>
+</tr>
+<tr>
+<td><code>application/xml</code></td>
+<td>XML</td>
+</tr>
+<tr>
+<td><code>application/octet-stream</code></td>
+<td>Бинарный</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight"><pre><span></span><code><span class="c1"># Посмотреть отправляемые/получаемые заголовки</span>
+curl<span class="w"> </span>-v<span class="w"> </span>https://example.com/
+curl<span class="w"> </span>-I<span class="w"> </span>https://example.com/<span class="w">      </span><span class="c1"># только заголовки ответа (HEAD)</span>
+curl<span class="w"> </span>-i<span class="w"> </span>https://example.com/<span class="w">      </span><span class="c1"># заголовки + тело</span>
+</code></pre></div>
+
+<hr />
+<h2 id="вывод-и-сохранение">📥 Вывод и сохранение<a class="headerlink" href="#вывод-и-сохранение" title="Ссылка">#</a></h2>
+<div class="highlight"><pre><span></span><code><span class="c1"># В файл</span>
+curl<span class="w"> </span>-o<span class="w"> </span>output.html<span class="w"> </span>https://example.com/
+curl<span class="w"> </span>-o<span class="w"> </span>/tmp/data.json<span class="w"> </span>https://api.example.com/
+
+<span class="c1"># С тем же именем (как в URL)</span>
+curl<span class="w"> </span>-O<span class="w"> </span>https://example.com/file.zip
+curl<span class="w"> </span>-O<span class="w"> </span>URL1<span class="w"> </span>-O<span class="w"> </span>URL2<span class="w">              </span><span class="c1"># несколько файлов</span>
+
+<span class="c1"># С 原来 именем</span>
+curl<span class="w"> </span>-O<span class="w"> </span>https://example.com/file.zip<span class="w">   </span><span class="c1"># → ./file.zip</span>
+
+<span class="c1"># Продолжить загрузку (если прервалась)</span>
+curl<span class="w"> </span>-C<span class="w"> </span>-<span class="w"> </span>-O<span class="w"> </span>https://example.com/bigfile.zip
+
+<span class="c1"># Скачать только если новее</span>
+curl<span class="w"> </span>-z<span class="w"> </span>file.zip<span class="w"> </span>-O<span class="w"> </span>https://example.com/file.zip
+
+<span class="c1"># Limit скорости</span>
+curl<span class="w"> </span>--limit-rate<span class="w"> </span>100k<span class="w"> </span>-O<span class="w"> </span>https://example.com/bigfile
+</code></pre></div>
+
+<h3 id="форматированный-вывод">Форматированный вывод<a class="headerlink" href="#форматированный-вывод" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Только статус-код</span>
+curl<span class="w"> </span>-s<span class="w"> </span>-o<span class="w"> </span>/dev/null<span class="w"> </span>-w<span class="w"> </span><span class="s2">&quot;%{http_code}\n&quot;</span><span class="w"> </span>https://example.com/
+
+<span class="c1"># Время запроса</span>
+curl<span class="w"> </span>-s<span class="w"> </span>-o<span class="w"> </span>/dev/null<span class="w"> </span>-w<span class="w"> </span><span class="s2">&quot;%{time_total}s\n&quot;</span><span class="w"> </span>https://example.com/
+
+<span class="c1"># Подробный формат</span>
+curl<span class="w"> </span>-w<span class="w"> </span><span class="s2">&quot;@curl-format.txt&quot;</span><span class="w"> </span>-o<span class="w"> </span>/dev/null<span class="w"> </span>-s<span class="w"> </span>https://example.com/
+
+<span class="c1"># curl-format.txt:</span>
+<span class="c1">#    http_code: %{http_code}</span>
+<span class="c1">#    time_namelookup: %{time_namelookup}</span>
+<span class="c1">#    time_connect: %{time_connect}</span>
+<span class="c1">#    time_total: %{time_total}</span>
+<span class="c1">#    size_download: %{size_download}</span>
+
+<span class="c1"># JSON через jq</span>
+curl<span class="w"> </span>-s<span class="w"> </span>https://api.github.com/users/torvalds<span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span><span class="s1">&#39;.login&#39;</span>
+</code></pre></div>
+
+<hr />
+<h2 id="редиректы-и-прокси">🔄 Редиректы и прокси<a class="headerlink" href="#редиректы-и-прокси" title="Ссылка">#</a></h2>
+<h3 id="редиректы">Редиректы<a class="headerlink" href="#редиректы" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>curl<span class="w"> </span>-L<span class="w"> </span>https://example.com/redirect<span class="w">    </span><span class="c1"># следовать (3xx)</span>
+curl<span class="w"> </span>-L<span class="w"> </span>--max-redirs<span class="w"> </span><span class="m">5</span><span class="w"> </span>URL<span class="w">              </span><span class="c1"># лимит редиректов</span>
+</code></pre></div>
+
+<h3 id="прокси">Прокси<a class="headerlink" href="#прокси" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>curl<span class="w"> </span>-x<span class="w"> </span>http://proxy.example.com:8080<span class="w"> </span>https://target.com
+curl<span class="w"> </span>-x<span class="w"> </span>socks5://127.0.0.1:1080<span class="w"> </span>https://target.com
+curl<span class="w"> </span>-x<span class="w"> </span>http://user:pass@proxy:8080<span class="w"> </span>URL
+
+<span class="c1"># Без прокси для конкретных хостов</span>
+curl<span class="w"> </span>--noproxy<span class="w"> </span><span class="s2">&quot;localhost,127.0.0.1&quot;</span><span class="w"> </span>https://example.com
+
+<span class="c1"># Tor</span>
+curl<span class="w"> </span>--socks5-hostname<span class="w"> </span><span class="m">127</span>.0.0.1:9050<span class="w"> </span>https://check.torproject.org/
+</code></pre></div>
+
+<h3 id="dns">DNS<a class="headerlink" href="#dns" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Resolve override (для теста без DNS)</span>
+curl<span class="w"> </span>--resolve<span class="w"> </span>api.example.com:443:1.2.3.4<span class="w"> </span>https://api.example.com/
+
+<span class="c1"># Нестандартный DNS</span>
+curl<span class="w"> </span>--dns-servers<span class="w"> </span><span class="m">8</span>.8.8.8<span class="w"> </span>https://example.com<span class="w">   </span><span class="c1"># если curl с c-ares</span>
+</code></pre></div>
+
+<hr />
+<h2 id="https-ssl">🔒 HTTPS / SSL<a class="headerlink" href="#https-ssl" title="Ссылка">#</a></h2>
+<div class="highlight"><pre><span></span><code><span class="c1"># Игнорировать ошибки сертификата (НЕ для продакшена!)</span>
+curl<span class="w"> </span>-k<span class="w"> </span>https://self-signed.example.com/
+curl<span class="w"> </span>--insecure<span class="w"> </span>URL
+
+<span class="c1"># Указать сертификат клиента</span>
+curl<span class="w"> </span>--cert<span class="w"> </span>client.pem<span class="w"> </span>--key<span class="w"> </span>client.key<span class="w"> </span>https://api.example.com/
+curl<span class="w"> </span>--cert<span class="w"> </span>client.pem:password<span class="w"> </span>URL
+curl<span class="w"> </span>-E<span class="w"> </span>client.pem<span class="w"> </span>URL
+
+<span class="c1"># CA bundle</span>
+curl<span class="w"> </span>--cacert<span class="w"> </span>/etc/ssl/certs/ca-certificates.crt<span class="w"> </span>URL
+
+<span class="c1"># Указать TLS-версию</span>
+curl<span class="w"> </span>--tlsv1.2<span class="w"> </span>URL
+curl<span class="w"> </span>--tlsv1.3<span class="w"> </span>URL
+curl<span class="w"> </span>--tls-max<span class="w"> </span><span class="m">1</span>.2<span class="w"> </span>URL
+</code></pre></div>
+
+<hr />
+<h2 id="практические-примеры">🛠️ Практические примеры<a class="headerlink" href="#практические-примеры" title="Ссылка">#</a></h2>
+<h3 id="1-github-api">1. GitHub API<a class="headerlink" href="#1-github-api" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Получить информацию о пользователе</span>
+curl<span class="w"> </span>-s<span class="w"> </span>https://api.github.com/users/torvalds<span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span><span class="s1">&#39;.login, .bio&#39;</span>
+
+<span class="c1"># Список репозиториев</span>
+curl<span class="w"> </span>-s<span class="w"> </span>https://api.github.com/users/torvalds/repos<span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span>-r<span class="w"> </span><span class="s1">&#39;.[].full_name&#39;</span>
+
+<span class="c1"># Создать репозиторий (нужен токен)</span>
+curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span>https://api.github.com/user/repos<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-H<span class="w"> </span><span class="s2">&quot;Authorization: token YOUR_TOKEN&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-d<span class="w"> </span><span class="s1">&#39;{&quot;name&quot;:&quot;my-new-repo&quot;,&quot;private&quot;:true}&#39;</span>
+</code></pre></div>
+
+<h3 id="2-rest-api-crud">2. REST API CRUD<a class="headerlink" href="#2-rest-api-crud" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="nv">BASE</span><span class="o">=</span><span class="s2">&quot;https://jsonplaceholder.typicode.com&quot;</span>
+
+<span class="c1"># Create</span>
+curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$BASE</span><span class="s2">/posts&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-H<span class="w"> </span><span class="s2">&quot;Content-Type: application/json&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-d<span class="w"> </span><span class="s1">&#39;{&quot;title&quot;:&quot;foo&quot;,&quot;body&quot;:&quot;bar&quot;,&quot;userId&quot;:1}&#39;</span>
+
+<span class="c1"># Read</span>
+curl<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$BASE</span><span class="s2">/posts/1&quot;</span>
+curl<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$BASE</span><span class="s2">/posts?userId=1&quot;</span>
+
+<span class="c1"># Update</span>
+curl<span class="w"> </span>-X<span class="w"> </span>PUT<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$BASE</span><span class="s2">/posts/1&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-H<span class="w"> </span><span class="s2">&quot;Content-Type: application/json&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-d<span class="w"> </span><span class="s1">&#39;{&quot;id&quot;:1,&quot;title&quot;:&quot;updated&quot;,&quot;body&quot;:&quot;new&quot;,&quot;userId&quot;:1}&#39;</span>
+
+<span class="c1"># Delete</span>
+curl<span class="w"> </span>-X<span class="w"> </span>DELETE<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$BASE</span><span class="s2">/posts/1&quot;</span>
+</code></pre></div>
+
+<h3 id="3-проверка-сайта">3. Проверка сайта<a class="headerlink" href="#3-проверка-сайта" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Статус + время</span>
+curl<span class="w"> </span>-s<span class="w"> </span>-o<span class="w"> </span>/dev/null<span class="w"> </span>-w<span class="w"> </span><span class="s2">&quot;Status: %{http_code}, Time: %{time_total}s\n&quot;</span><span class="w"> </span>https://example.com
+
+<span class="c1"># Headers</span>
+curl<span class="w"> </span>-I<span class="w"> </span>https://example.com/
+
+<span class="c1"># SSL-сертификат (истекает?)</span>
+<span class="nb">echo</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>openssl<span class="w"> </span>s_client<span class="w"> </span>-servername<span class="w"> </span>example.com<span class="w"> </span>-connect<span class="w"> </span>example.com:443<span class="w"> </span><span class="m">2</span>&gt;/dev/null<span class="w"> </span><span class="p">|</span><span class="w"> </span>openssl<span class="w"> </span>x509<span class="w"> </span>-noout<span class="w"> </span>-dates
+</code></pre></div>
+
+<h3 id="4-отправка-файла">4. Отправка файла<a class="headerlink" href="#4-отправка-файла" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Загрузить файл</span>
+curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span>https://uploads.example.com/<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-F<span class="w"> </span><span class="s2">&quot;file=@report.pdf&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-F<span class="w"> </span><span class="s2">&quot;description=Monthly report&quot;</span>
+
+<span class="c1"># Multipart с несколькими полями</span>
+curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span>https://api.example.com/submit<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-F<span class="w"> </span><span class="s2">&quot;name=Alice&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-F<span class="w"> </span><span class="s2">&quot;email=alice@example.com&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-F<span class="w"> </span><span class="s2">&quot;cv=@resume.pdf&quot;</span>
+</code></pre></div>
+
+<h3 id="5-локальный-сервер">5. Локальный сервер<a class="headerlink" href="#5-локальный-сервер" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Проверить локальный сервис</span>
+curl<span class="w"> </span>http://localhost:8000/
+curl<span class="w"> </span>http://localhost:8000/api/health
+
+<span class="c1"># С разными эндпоинтами</span>
+curl<span class="w"> </span>http://localhost:8000/users
+curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span>http://localhost:8000/users<span class="w"> </span>-d<span class="w"> </span><span class="s1">&#39;{&quot;name&quot;:&quot;test&quot;}&#39;</span><span class="w"> </span>-H<span class="w"> </span><span class="s2">&quot;Content-Type: application/json&quot;</span>
+</code></pre></div>
+
+<h3 id="6-скачивание-с-прогрессом">6. Скачивание с прогрессом<a class="headerlink" href="#6-скачивание-с-прогрессом" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>curl<span class="w"> </span>-#<span class="w"> </span>-O<span class="w"> </span>https://example.com/bigfile.zip<span class="w">       </span><span class="c1"># прогресс-бар</span>
+curl<span class="w"> </span>--progress-bar<span class="w"> </span>-O<span class="w"> </span>URL
+</code></pre></div>
+
+<h3 id="7-имитация-браузера">7. Имитация браузера<a class="headerlink" href="#7-имитация-браузера" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>curl<span class="w"> </span>-A<span class="w"> </span><span class="s2">&quot;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-H<span class="w"> </span><span class="s2">&quot;Accept: text/html,application/xhtml+xml&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-H<span class="w"> </span><span class="s2">&quot;Accept-Language: en-US,en;q=0.9&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>https://example.com/
+</code></pre></div>
+
+<h3 id="8-webhook-discord-slack">8. Webhook (Discord/Slack)<a class="headerlink" href="#8-webhook-discord-slack" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span>https://discord.com/api/webhooks/...<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-H<span class="w"> </span><span class="s2">&quot;Content-Type: application/json&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-d<span class="w"> </span><span class="s1">&#39;{&quot;content&quot;:&quot;Deploy successful!&quot;}&#39;</span>
+</code></pre></div>
+
+<h3 id="9-пагинация-цикл">9. Пагинация / цикл<a class="headerlink" href="#9-пагинация-цикл" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">for</span><span class="w"> </span>page<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="m">3</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<span class="w">    </span>curl<span class="w"> </span>-s<span class="w"> </span><span class="s2">&quot;https://api.example.com/items?page=</span><span class="nv">$page</span><span class="s2">&quot;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>all.json
+<span class="k">done</span>
+</code></pre></div>
+
+<h3 id="10-альтернатива-postman-в-cli-httpie">10. Альтернатива Postman в CLI (httpie)<a class="headerlink" href="#10-альтернатива-postman-в-cli-httpie" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>pacman<span class="w"> </span>-S<span class="w"> </span>httpie
+http<span class="w"> </span>https://example.com/
+http<span class="w"> </span>POST<span class="w"> </span>api.example.com/users<span class="w"> </span><span class="nv">name</span><span class="o">=</span>Alice<span class="w"> </span>age:<span class="o">=</span><span class="m">30</span><span class="w">     </span><span class="c1"># := для чисел</span>
+http<span class="w"> </span>--download<span class="w"> </span>https://example.com/file.zip
+</code></pre></div>
+
+<hr />
+<h2 id="postman-insomnia-bruno">📮 Postman / Insomnia / Bruno<a class="headerlink" href="#postman-insomnia-bruno" title="Ссылка">#</a></h2>
+<h3 id="postman-основные-понятия">Postman — основные понятия<a class="headerlink" href="#postman-основные-понятия" title="Ссылка">#</a></h3>
+<ul>
+<li><strong>Collection</strong> — набор запросов (группа)</li>
+<li><strong>Request</strong> — один HTTP-запрос</li>
+<li><strong>Environment</strong> — переменные окружения (dev/prod URL, токены)</li>
+<li><strong>Pre-request Script</strong> — JS перед запросом (генерация токена)</li>
+<li><strong>Tests</strong> — assertions на ответ</li>
+<li><strong>Variables</strong> — <code>{{base_url}}</code>, <code>{{token}}</code></li>
+</ul>
+<h3 id="tests-javascript">Tests (JavaScript)<a class="headerlink" href="#tests-javascript" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1">// Проверка статус-кода</span>
+<span class="nx">pm</span><span class="p">.</span><span class="nx">test</span><span class="p">(</span><span class="s2">&quot;Status is 200&quot;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">pm</span><span class="p">.</span><span class="nx">response</span><span class="p">.</span><span class="nx">to</span><span class="p">.</span><span class="nx">have</span><span class="p">.</span><span class="nx">status</span><span class="p">(</span><span class="mf">200</span><span class="p">);</span>
+<span class="p">});</span>
+
+<span class="c1">// Проверка JSON-поля</span>
+<span class="nx">pm</span><span class="p">.</span><span class="nx">test</span><span class="p">(</span><span class="s2">&quot;User has name&quot;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">pm</span><span class="p">.</span><span class="nx">expect</span><span class="p">(</span><span class="nx">pm</span><span class="p">.</span><span class="nx">response</span><span class="p">.</span><span class="nx">json</span><span class="p">().</span><span class="nx">name</span><span class="p">).</span><span class="nx">to</span><span class="p">.</span><span class="nx">eql</span><span class="p">(</span><span class="s2">&quot;Alice&quot;</span><span class="p">);</span>
+<span class="p">});</span>
+
+<span class="c1">// Сохранить токен в переменную</span>
+<span class="kd">let</span><span class="w"> </span><span class="nx">token</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">pm</span><span class="p">.</span><span class="nx">response</span><span class="p">.</span><span class="nx">json</span><span class="p">().</span><span class="nx">token</span><span class="p">;</span>
+<span class="nx">pm</span><span class="p">.</span><span class="nx">environment</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="s2">&quot;auth_token&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">token</span><span class="p">);</span>
+
+<span class="c1">// Время ответа</span>
+<span class="nx">pm</span><span class="p">.</span><span class="nx">test</span><span class="p">(</span><span class="s2">&quot;Fast response&quot;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">pm</span><span class="p">.</span><span class="nx">expect</span><span class="p">(</span><span class="nx">pm</span><span class="p">.</span><span class="nx">response</span><span class="p">.</span><span class="nx">responseTime</span><span class="p">).</span><span class="nx">to</span><span class="p">.</span><span class="nx">be</span><span class="p">.</span><span class="nx">below</span><span class="p">(</span><span class="mf">200</span><span class="p">);</span>
+<span class="p">});</span>
+</code></pre></div>
+
+<h3 id="альтернативы">Альтернативы<a class="headerlink" href="#альтернативы" title="Ссылка">#</a></h3>
+<table>
+<thead>
+<tr>
+<th>Инструмент</th>
+<th>Описание</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Postman</strong></td>
+<td>Классика, electron, нужен аккаунт</td>
+</tr>
+<tr>
+<td><strong>Insomnia</strong></td>
+<td>Легче, меньше рекламы</td>
+</tr>
+<tr>
+<td><strong>Bruno</strong></td>
+<td>Open-source, хранит запросы в git</td>
+</tr>
+<tr>
+<td><strong>HTTPie</strong></td>
+<td>CLI, дружелюбный синтаксис</td>
+</tr>
+<tr>
+<td><strong>curl</strong></td>
+<td>CLI, везде есть</td>
+</tr>
+<tr>
+<td><strong>xa</strong> / <strong>hurl</strong></td>
+<td>CLI для тестирования (как pytest)</td>
+</tr>
+<tr>
+<td><strong>vim-rest-console</strong></td>
+<td>В Vim</td>
+</tr>
+<tr>
+<td><strong>REST Client</strong> (VS Code)</td>
+<td>Расширение, <code>.http</code> файлы</td>
+</tr>
+</tbody>
+</table>
+<h3 id="http-файлы-rest-client-jetbrains">.http файлы (REST Client / JetBrains)<a class="headerlink" href="#http-файлы-rest-client-jetbrains" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="err">### Получить пользователей</span>
+<span class="err">GET https://api.example.com/users</span>
+<span class="err">Authorization: Bearer {{token}}</span>
+
+<span class="err">### Создать пользователя</span>
+<span class="err">POST https://api.example.com/users</span>
+<span class="err">Content-Type: application/json</span>
+
+<span class="err">{</span>
+<span class="err">    &quot;name&quot;: &quot;Alice&quot;,</span>
+<span class="err">    &quot;age&quot;: 30</span>
+<span class="err">}</span>
+
+<span class="err">### Переменные</span>
+<span class="err">@token = abc123</span>
+<span class="err">@baseUrl = https://api.example.com</span>
+</code></pre></div>
+
+<hr />
+<h2 id="http-2-и-http-3">🌍 HTTP/2 и HTTP/3<a class="headerlink" href="#http-2-и-http-3" title="Ссылка">#</a></h2>
+<div class="highlight"><pre><span></span><code><span class="c1"># Проверить версию HTTP</span>
+curl<span class="w"> </span>-sI<span class="w"> </span>--http2<span class="w"> </span>https://example.com/<span class="w"> </span><span class="p">|</span><span class="w"> </span>head<span class="w"> </span>-1
+<span class="c1"># HTTP/2 200</span>
+
+<span class="c1"># Принудительно</span>
+curl<span class="w"> </span>--http2<span class="w"> </span>URL
+curl<span class="w"> </span>--http3<span class="w"> </span>URL<span class="w">           </span><span class="c1"># HTTP/3 (QUIC)</span>
+curl<span class="w"> </span>--http1.1<span class="w"> </span>URL
+</code></pre></div>
+
+<h3 id="grpc">gRPC<a class="headerlink" href="#grpc" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># grpcurl</span>
+grpcurl<span class="w"> </span>-plaintext<span class="w"> </span>-d<span class="w"> </span><span class="s1">&#39;{&quot;name&quot;:&quot;Alice&quot;}&#39;</span><span class="w"> </span>localhost:50051<span class="w"> </span>my.Service/Method
+
+<span class="c1"># BloomRPC (GUI)</span>
+<span class="c1"># Postman (с gRPC support)</span>
+</code></pre></div>
+
+<hr />
+<h2 id="частые-ошибки">🪤 Частые ошибки<a class="headerlink" href="#частые-ошибки" title="Ссылка">#</a></h2>
+<ol>
+<li><strong>Не quoted URL</strong> — <code>curl https://example.com/?a=1&amp;b=2</code> → <code>&amp;</code> в shell!
+   Всегда <code>curl "https://..."</code>.</li>
+<li><strong><code>-d</code> без <code>-X POST</code></strong> — curl сам поставит POST, но привычнее явно.</li>
+<li><strong><code>-L</code> для редиректов</strong> — без него получишь 3xx, а не финальный ответ.</li>
+<li><strong>Content-Type</strong> — без него сервер не поймёт формат.</li>
+<li><strong><code>-k</code> в продакшене</strong> — опасно, отрубает проверку сертификата.</li>
+<li><strong><code>-u</code> в истории</strong> — оставляет пароль в <code>.bash_history</code>.</li>
+<li><strong>Пробелы в URL</strong> — нужно <code>%20</code> или <code>--data-urlencode</code>.</li>
+<li><strong><code>-v</code> в логи</strong> — выводит заголовки в stderr, не stdout.</li>
+<li><strong>JSON в одинарных кавычках</strong> — в shell нужны двойные внутри <code>-d</code>.</li>
+<li><strong>Забыли <code>-s</code></strong> — прогресс-бар засоряет скрипты.</li>
+</ol>
+<hr />
+<h2 id="полезные-ссылки">🔗 Полезные ссылки<a class="headerlink" href="#полезные-ссылки" title="Ссылка">#</a></h2>
+<ul>
+<li>curl docs: https://curl.se/docs/manpage.html</li>
+<li>Everything curl: https://everything.curl.dev</li>
+<li>httpie: https://httpie.io</li>
+<li>httpbin (тестовый сервер): https://httpbin.org</li>
+<li>Postman: https://www.postman.com</li>
+<li>Insomnia: https://insomnia.rest</li>
+<li>Bruno: https://www.usebruno.com</li>
+<li>Mozilla HTTP: https://developer.mozilla.org/ru/docs/Web/HTTP</li>
+<li>HTTP status dogs: https://httpstatusdogs.com</li>
+<li>REST API Tutorial: https://restfulapi.net</li>
+</ul>
+<hr />
+<h2 id="полезные-советы">💡 Полезные советы<a class="headerlink" href="#полезные-советы" title="Ссылка">#</a></h2>
+<ol>
+<li><strong><code>-s</code> + <code>-o /dev/null</code> + <code>-w</code></strong> — для скриптов (только статус/время).</li>
+<li><strong><code>jq</code></strong> — парсить JSON-ответы в CLI.</li>
+<li><strong><code>.http</code> файлы</strong> — для командной документации API (JetBrains, VS Code REST Client).</li>
+<li><strong>Environment variables</strong> в Postman — для dev/prod/testing.</li>
+<li><strong><code>-L</code></strong> — следовать редиректам (часто забывают).</li>
+<li><strong><code>-i</code></strong> — посмотреть заголовки ответа вместе с телом.</li>
+<li><strong><code>-v</code></strong> — отладка (видны и запрос, и ответ).</li>
+<li><strong><code>--data-urlencode</code></strong> — для query-параметров со спецсимволами.</li>
+<li><strong>Bearer token в <code>-H</code></strong> — стандарт для JWT/OAuth.</li>
+<li><strong><code>.netrc</code></strong> — для повторных запросов к одному хосту.</li>
+<li><strong><code>httpie</code></strong> — дружелюбнее curl для повседневной работы.</li>
+<li><strong><code>curl --resolve</code></strong> — тестировать сайт без DNS (полезно для миграций).</li>
+<li><strong><code>-w "@format.txt"</code></strong> — кастомный вывод для бенчмарков.</li>
+<li><strong><code>--retry 3</code></strong> — повтор при сетевых ошибках.</li>
+<li><strong>Webhooks</strong> — типичный use case для curl в CI/CD.</li>
+</ol>
+<hr />
+<p><em>Сгенерировано как шпаргалка. HTTP/curl — основа веб-разработки —
+углубляйтесь через https://developer.mozilla.org/ru/docs/Web/HTTP и <code>man curl</code></em></p>
+    </article>
+    <nav class="pagination">
+      <a class="pager prev" href="airflow.html">← Apache Airflow</a>
+      <a class="pager next" href="yaml.html">YAML →</a>
+    </nav>
+  </main>
+
+  <aside class="toc">
+    <details open>
+      <summary>📑 Оглавление</summary>
+      <div class="toc-list">
+<div class="toc">
+<ul>
+<li><a href="#http-curl-postman-шпаргалка">🌐 HTTP / curl / Postman — шпаргалка</a><ul>
+<li><a href="#http-протокол">🔑 HTTP-протокол</a><ul>
+<li><a href="#структура-запроса">Структура запроса</a></li>
+<li><a href="#структура-ответа">Структура ответа</a></li>
+<li><a href="#методы-verbs">Методы (verbs)</a></li>
+<li><a href="#статус-коды">Статус-коды</a></li>
+</ul>
+</li>
+<li><a href="#curl-установка">🚀 curl — установка</a></li>
+<li><a href="#базовые-запросы">🎯 Базовые запросы</a></li>
+<li><a href="#полезные-флаги-curl">⚙️ Полезные флаги curl</a></li>
+<li><a href="#передача-данных">🔤 Передача данных</a><ul>
+<li><a href="#query-параметры">Query-параметры</a></li>
+<li><a href="#json">JSON</a></li>
+<li><a href="#form-data">Form data</a></li>
+<li><a href="#чтение-из-stdin">Чтение из stdin</a></li>
+</ul>
+</li>
+<li><a href="#аутентификация">🔐 Аутентификация</a><ul>
+<li><a href="#basic-auth">Basic Auth</a></li>
+<li><a href="#bearer-token-jwt">Bearer Token (JWT)</a></li>
+<li><a href="#api-key">API Key</a></li>
+<li><a href="#oauth-2-0">OAuth 2.0</a></li>
+<li><a href="#netrc-для-повторных-запросов">.netrc (для повторных запросов)</a></li>
+</ul>
+</li>
+<li><a href="#заголовки">📋 Заголовки</a><ul>
+<li><a href="#частые-заголовки-запроса">Частые заголовки запроса</a></li>
+<li><a href="#content-type">Content-Type</a></li>
+</ul>
+</li>
+<li><a href="#вывод-и-сохранение">📥 Вывод и сохранение</a><ul>
+<li><a href="#форматированный-вывод">Форматированный вывод</a></li>
+</ul>
+</li>
+<li><a href="#редиректы-и-прокси">🔄 Редиректы и прокси</a><ul>
+<li><a href="#редиректы">Редиректы</a></li>
+<li><a href="#прокси">Прокси</a></li>
+<li><a href="#dns">DNS</a></li>
+</ul>
+</li>
+<li><a href="#https-ssl">🔒 HTTPS / SSL</a></li>
+<li><a href="#практические-примеры">🛠️ Практические примеры</a><ul>
+<li><a href="#1-github-api">1. GitHub API</a></li>
+<li><a href="#2-rest-api-crud">2. REST API CRUD</a></li>
+<li><a href="#3-проверка-сайта">3. Проверка сайта</a></li>
+<li><a href="#4-отправка-файла">4. Отправка файла</a></li>
+<li><a href="#5-локальный-сервер">5. Локальный сервер</a></li>
+<li><a href="#6-скачивание-с-прогрессом">6. Скачивание с прогрессом</a></li>
+<li><a href="#7-имитация-браузера">7. Имитация браузера</a></li>
+<li><a href="#8-webhook-discord-slack">8. Webhook (Discord/Slack)</a></li>
+<li><a href="#9-пагинация-цикл">9. Пагинация / цикл</a></li>
+<li><a href="#10-альтернатива-postman-в-cli-httpie">10. Альтернатива Postman в CLI (httpie)</a></li>
+</ul>
+</li>
+<li><a href="#postman-insomnia-bruno">📮 Postman / Insomnia / Bruno</a><ul>
+<li><a href="#postman-основные-понятия">Postman — основные понятия</a></li>
+<li><a href="#tests-javascript">Tests (JavaScript)</a></li>
+<li><a href="#альтернативы">Альтернативы</a></li>
+<li><a href="#http-файлы-rest-client-jetbrains">.http файлы (REST Client / JetBrains)</a></li>
+</ul>
+</li>
+<li><a href="#http-2-и-http-3">🌍 HTTP/2 и HTTP/3</a><ul>
+<li><a href="#grpc">gRPC</a></li>
+</ul>
+</li>
+<li><a href="#частые-ошибки">🪤 Частые ошибки</a></li>
+<li><a href="#полезные-ссылки">🔗 Полезные ссылки</a></li>
+<li><a href="#полезные-советы">💡 Полезные советы</a></li>
+</ul>
+</li>
+</ul>
+</div>
+
+      </div>
+    </details>
+  </aside>
+</div>
+
+<button class="back-top" id="backTop" aria-label="Наверх">↑</button>
+
+<script src="assets/search.js"></script>
+<script src="assets/page.js"></script>
+</body>
+</html>

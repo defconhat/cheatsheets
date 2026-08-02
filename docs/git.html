@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Git — Шпаргалки</title>
+<link rel="stylesheet" href="assets/style.css">
+<link rel="stylesheet" href="assets/pygments.css">
+</head>
+<body>
+<div class="layout">
+  <aside class="sidebar">
+    <a href="index.html" class="brand">📌 Шпаргалки</a>
+    <nav class="nav">
+<a href="yazi.html" class="nav-item"><span class="nav-ico">📦</span>Yazi</a>
+<a href="neovim.html" class="nav-item"><span class="nav-ico">📘</span>Neovim (LazyVim)</a>
+<a href="niri.html" class="nav-item"><span class="nav-ico">🪟</span>Niri</a>
+<a href="tmux.html" class="nav-item"><span class="nav-ico">🪟</span>Tmux</a>
+<a href="bash.html" class="nav-item"><span class="nav-ico">🐚</span>Bash</a>
+<a href="git.html" class="nav-item active"><span class="nav-ico">🔀</span>Git</a>
+<a href="terminal.html" class="nav-item"><span class="nav-ico">🖥️</span>Терминал Linux</a>
+<a href="powershell.html" class="nav-item"><span class="nav-ico">💻</span>PowerShell</a>
+<a href="cmd.html" class="nav-item"><span class="nav-ico">🪟</span>CMD (cmd.exe)</a>
+<a href="python.html" class="nav-item"><span class="nav-ico">🐍</span>Python</a>
+<a href="systemd.html" class="nav-item"><span class="nav-ico">⚙️</span>systemd</a>
+<a href="ssh.html" class="nav-item"><span class="nav-ico">🔐</span>SSH</a>
+<a href="make-cmake.html" class="nav-item"><span class="nav-ico">🔨</span>Make / CMake</a>
+<a href="docker.html" class="nav-item"><span class="nav-ico">🐳</span>Docker</a>
+<a href="pacman.html" class="nav-item"><span class="nav-ico">📦</span>pacman / yay / paru</a>
+<a href="spark.html" class="nav-item"><span class="nav-ico">⚡</span>Apache Spark / PySpark</a>
+<a href="markdown.html" class="nav-item"><span class="nav-ico">📝</span>Markdown</a>
+<a href="regex.html" class="nav-item"><span class="nav-ico">🔍</span>Регулярные выражения</a>
+<a href="jq-json.html" class="nav-item"><span class="nav-ico">🔧</span>jq + JSON</a>
+<a href="awk-sed.html" class="nav-item"><span class="nav-ico">✂️</span>awk / sed</a>
+<a href="airflow.html" class="nav-item"><span class="nav-ico">🌪️</span>Apache Airflow</a>
+<a href="http-curl.html" class="nav-item"><span class="nav-ico">🌐</span>HTTP / curl</a>
+<a href="yaml.html" class="nav-item"><span class="nav-ico">📄</span>YAML</a>
+<a href="vscode.html" class="nav-item"><span class="nav-ico">💻</span>VS Code</a>
+<a href="cron.html" class="nav-item"><span class="nav-ico">⏰</span>cron</a>
+<a href="fzf-zoxide.html" class="nav-item"><span class="nav-ico">🔎</span>fzf + zoxide</a>
+<a href="minikube-k8s.html" class="nav-item"><span class="nav-ico">☸️</span>Minikube / Kubernetes</a>
+<a href="cicd.html" class="nav-item"><span class="nav-ico">🦊</span>GitLab CI / GitHub Actions</a>
+<a href="nginx.html" class="nav-item"><span class="nav-ico">🌐</span>nginx</a>
+<a href="dbt.html" class="nav-item"><span class="nav-ico">🔧</span>dbt</a>
+<a href="kafka.html" class="nav-item"><span class="nav-ico">🐘</span>Apache Kafka</a>
+<a href="prometheus-grafana.html" class="nav-item"><span class="nav-ico">📊</span>Prometheus / Grafana</a>
+<a href="iceberg-nessie.html" class="nav-item"><span class="nav-ico">🧊</span>Iceberg / Nessie</a>
+<a href="impala.html" class="nav-item"><span class="nav-ico">🐬</span>Apache Impala</a>
+<a href="terraform.html" class="nav-item"><span class="nav-ico">🏗️</span>Terraform</a>
+<a href="linux-internals.html" class="nav-item"><span class="nav-ico">🐧</span>Linux Internals</a>
+<a href="miscellaneous.html" class="nav-item"><span class="nav-ico">🧰</span>Miscellaneous</a>
+<a href="python-automation-libs.html" class="nav-item"><span class="nav-ico">🐍</span>Python: авт-ция (10 libs)</a>
+<a href="eza.html" class="nav-item"><span class="nav-ico">🌈</span>eza</a>
+<a href="dbeaver.html" class="nav-item"><span class="nav-ico">🗄️</span>DBeaver</a>
+<a href="zcode.html" class="nav-item"><span class="nav-ico">🤖</span>ZCode</a>
+<a href="warp.html" class="nav-item"><span class="nav-ico">🚀</span>Warp</a>
+<a href="agentic-ai-dev.html" class="nav-item"><span class="nav-ico">🤝</span>Агентная разработка с ИИ</a>
+    </nav>
+  </aside>
+
+  <main class="content">
+    <article>
+<h1 id="git-шпаргалка-по-командам-и-workflow">🔀 Git — шпаргалка по командам и workflow<a class="headerlink" href="#git-шпаргалка-по-командам-и-workflow" title="Ссылка">#</a></h1>
+<blockquote>
+<p><strong>Git</strong> — распределённая система контроля версий.
+Документация: https://git-scm.com/docs · Книга: https://git-scm.com/book/ru/v2</p>
+</blockquote>
+<hr />
+<h2 id="первичная-настройка">⚙️ Первичная настройка<a class="headerlink" href="#первичная-настройка" title="Ссылка">#</a></h2>
+<div class="highlight"><pre><span></span><code><span class="c1"># Имя и email (попадают в коммиты)</span>
+git<span class="w"> </span>config<span class="w"> </span>--global<span class="w"> </span>user.name<span class="w"> </span><span class="s2">&quot;Your Name&quot;</span>
+git<span class="w"> </span>config<span class="w"> </span>--global<span class="w"> </span>user.email<span class="w"> </span><span class="s2">&quot;you@example.com&quot;</span>
+
+<span class="c1"># Имя основной ветки по умолчанию</span>
+git<span class="w"> </span>config<span class="w"> </span>--global<span class="w"> </span>init.defaultBranch<span class="w"> </span>main
+
+<span class="c1"># Редактор для коммитов/merge</span>
+git<span class="w"> </span>config<span class="w"> </span>--global<span class="w"> </span>core.editor<span class="w"> </span><span class="s2">&quot;nvim&quot;</span>
+git<span class="w"> </span>config<span class="w"> </span>--global<span class="w"> </span>core.editor<span class="w"> </span><span class="s2">&quot;code --wait&quot;</span>
+
+<span class="c1"># Визуальный diff/merge инструмент</span>
+git<span class="w"> </span>config<span class="w"> </span>--global<span class="w"> </span>merge.tool<span class="w"> </span>vimdiff
+
+<span class="c1"># Цвета</span>
+git<span class="w"> </span>config<span class="w"> </span>--global<span class="w"> </span>color.ui<span class="w"> </span>auto
+
+<span class="c1"># Кэш пароля (HTTPS) — 1 час / на диск</span>
+git<span class="w"> </span>config<span class="w"> </span>--global<span class="w"> </span>credential.helper<span class="w"> </span><span class="s1">&#39;cache --timeout=3600&#39;</span>
+git<span class="w"> </span>config<span class="w"> </span>--global<span class="w"> </span>credential.helper<span class="w"> </span>store<span class="w">      </span><span class="c1"># навсегда в ~/.git-credentials</span>
+
+<span class="c1"># Алиасы (см. ниже блок про алиасы)</span>
+git<span class="w"> </span>config<span class="w"> </span>--global<span class="w"> </span>alias.co<span class="w"> </span>checkout
+git<span class="w"> </span>config<span class="w"> </span>--global<span class="w"> </span>alias.br<span class="w"> </span>branch
+git<span class="w"> </span>config<span class="w"> </span>--global<span class="w"> </span>alias.ci<span class="w"> </span>commit
+git<span class="w"> </span>config<span class="w"> </span>--global<span class="w"> </span>alias.st<span class="w"> </span>status
+git<span class="w"> </span>config<span class="w"> </span>--global<span class="w"> </span>alias.lg<span class="w"> </span><span class="s2">&quot;log --oneline --graph --all --decorate&quot;</span>
+
+<span class="c1"># Автопуш текущей ветки</span>
+git<span class="w"> </span>config<span class="w"> </span>--global<span class="w"> </span>push.default<span class="w"> </span>current
+
+<span class="c1"># Pull с rebase вместо merge</span>
+git<span class="w"> </span>config<span class="w"> </span>--global<span class="w"> </span>pull.rebase<span class="w"> </span><span class="nb">true</span>
+
+<span class="c1"># Показать все настройки</span>
+git<span class="w"> </span>config<span class="w"> </span>--list
+git<span class="w"> </span>config<span class="w"> </span>--list<span class="w"> </span>--global
+</code></pre></div>
+
+<h3 id="где-хранятся-настройки">Где хранятся настройки<a class="headerlink" href="#где-хранятся-настройки" title="Ссылка">#</a></h3>
+<table>
+<thead>
+<tr>
+<th>Файл</th>
+<th>Область</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>~/.gitconfig</code></td>
+<td><code>--global</code> (пользователь)</td>
+</tr>
+<tr>
+<td><code>.git/config</code> (в репо)</td>
+<td><code>--local</code> (только этот репо)</td>
+</tr>
+<tr>
+<td><code>/etc/gitconfig</code></td>
+<td><code>--system</code> (вся система)</td>
+</tr>
+</tbody>
+</table>
+<p>Приоритет: local &gt; global &gt; system.</p>
+<hr />
+<h2 id="создание-репозитория">🆕 Создание репозитория<a class="headerlink" href="#создание-репозитория" title="Ссылка">#</a></h2>
+<div class="highlight"><pre><span></span><code><span class="c1"># Создать новый локальный репозиторий</span>
+mkdir<span class="w"> </span>myproject<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">cd</span><span class="w"> </span>myproject
+git<span class="w"> </span>init
+git<span class="w"> </span>init<span class="w"> </span>-b<span class="w"> </span>main<span class="w">                </span><span class="c1"># сразу с веткой main</span>
+
+<span class="c1"># Клонировать существующий</span>
+git<span class="w"> </span>clone<span class="w"> </span>&lt;url&gt;
+git<span class="w"> </span>clone<span class="w"> </span>&lt;url&gt;<span class="w"> </span>mydir<span class="w">           </span><span class="c1"># в указанную папку</span>
+git<span class="w"> </span>clone<span class="w"> </span>--depth<span class="w"> </span><span class="m">1</span><span class="w"> </span>&lt;url&gt;<span class="w">       </span><span class="c1"># shallow clone (только последний коммит)</span>
+git<span class="w"> </span>clone<span class="w"> </span>--recursive<span class="w"> </span>&lt;url&gt;<span class="w">     </span><span class="c1"># с подмодулями</span>
+git<span class="w"> </span>clone<span class="w"> </span>git@github.com:user/repo.git<span class="w">     </span><span class="c1"># по SSH</span>
+git<span class="w"> </span>clone<span class="w"> </span>https://github.com/user/repo.git<span class="w"> </span><span class="c1"># по HTTPS</span>
+
+<span class="c1"># Клонировать только одну ветку</span>
+git<span class="w"> </span>clone<span class="w"> </span>-b<span class="w"> </span>develop<span class="w"> </span>--single-branch<span class="w"> </span>&lt;url&gt;
+</code></pre></div>
+
+<hr />
+<h2 id="статус-и-базовый-цикл">📋 Статус и базовый цикл<a class="headerlink" href="#статус-и-базовый-цикл" title="Ссылка">#</a></h2>
+<p>Жизненный цикл файла: <strong>untracked → staged → committed</strong></p>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>status<span class="w">                     </span><span class="c1"># текущее состояние</span>
+git<span class="w"> </span>status<span class="w"> </span>-s<span class="w">                  </span><span class="c1"># компактный вид</span>
+git<span class="w"> </span>status<span class="w"> </span>-sb<span class="w">                 </span><span class="c1"># + инфо о ветке/upstream</span>
+
+<span class="c1"># Стадия</span>
+git<span class="w"> </span>add<span class="w"> </span>file.txt<span class="w">               </span><span class="c1"># добавить файл</span>
+git<span class="w"> </span>add<span class="w"> </span>.<span class="w">                      </span><span class="c1"># всё в текущей папке</span>
+git<span class="w"> </span>add<span class="w"> </span>-A<span class="w">                     </span><span class="c1"># все изменения (вкл. удаления) во всём репо</span>
+git<span class="w"> </span>add<span class="w"> </span>-u<span class="w">                     </span><span class="c1"># только отслеживаемые (без новых)</span>
+git<span class="w"> </span>add<span class="w"> </span>-p<span class="w">                     </span><span class="c1"># интерактивно по кускам (hunks)</span>
+git<span class="w"> </span>add<span class="w"> </span>-i<span class="w">                     </span><span class="c1"># интерактивное меню</span>
+
+<span class="c1"># Коммит</span>
+git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;Сообщение&quot;</span>
+git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;Заголовок&quot;</span><span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;Подробное описание&quot;</span>
+git<span class="w"> </span>commit<span class="w"> </span>-am<span class="w"> </span><span class="s2">&quot;msg&quot;</span><span class="w">           </span><span class="c1"># add + commit (только tracked)</span>
+git<span class="w"> </span>commit<span class="w">                     </span><span class="c1"># откроет редактор для сообщения</span>
+git<span class="w"> </span>commit<span class="w"> </span>--amend<span class="w">             </span><span class="c1"># изменить последний коммит (сообщение + staged)</span>
+git<span class="w"> </span>commit<span class="w"> </span>--amend<span class="w"> </span>--no-edit<span class="w">   </span><span class="c1"># дополнить коммит, не меняя сообщение</span>
+git<span class="w"> </span>commit<span class="w"> </span>--date<span class="o">=</span><span class="s2">&quot;2024-01-01T12:00:00&quot;</span><span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;msg&quot;</span><span class="w">   </span><span class="c1"># своя дата</span>
+
+<span class="c1"># История</span>
+git<span class="w"> </span>log<span class="w">                        </span><span class="c1"># вся история</span>
+git<span class="w"> </span>log<span class="w"> </span>--oneline<span class="w">              </span><span class="c1"># кратко</span>
+git<span class="w"> </span>log<span class="w"> </span>--oneline<span class="w"> </span>--graph<span class="w"> </span>--all<span class="w">   </span><span class="c1"># дерево всех веток</span>
+git<span class="w"> </span>log<span class="w"> </span>-p<span class="w">                     </span><span class="c1"># с diff&#39;ом каждого коммита</span>
+git<span class="w"> </span>log<span class="w"> </span>--stat<span class="w">                 </span><span class="c1"># со статистикой файлов</span>
+git<span class="w"> </span>log<span class="w"> </span>-5<span class="w">                     </span><span class="c1"># последние 5</span>
+git<span class="w"> </span>log<span class="w"> </span>--author<span class="o">=</span><span class="s2">&quot;Alice&quot;</span>
+git<span class="w"> </span>log<span class="w"> </span>--since<span class="o">=</span><span class="s2">&quot;2 weeks ago&quot;</span>
+git<span class="w"> </span>log<span class="w"> </span>--<span class="w"> </span>path/to/file<span class="w">        </span><span class="c1"># история конкретного файла</span>
+git<span class="w"> </span>log<span class="w"> </span>-S<span class="w"> </span><span class="s2">&quot;functionName&quot;</span><span class="w">      </span><span class="c1"># когда добавили/удалили строку</span>
+git<span class="w"> </span>show<span class="w"> </span>&lt;commit&gt;<span class="w">              </span><span class="c1"># детали конкретного коммита</span>
+git<span class="w"> </span>show<span class="w"> </span>HEAD<span class="w">                  </span><span class="c1"># последний коммит</span>
+git<span class="w"> </span>show<span class="w"> </span>HEAD~1<span class="w">                </span><span class="c1"># предпоследний</span>
+git<span class="w"> </span>blame<span class="w"> </span>file.txt<span class="w">             </span><span class="c1"># кто и когда написал каждую строку</span>
+</code></pre></div>
+
+<hr />
+<h2 id="ветвление">🌿 Ветвление<a class="headerlink" href="#ветвление" title="Ссылка">#</a></h2>
+<div class="highlight"><pre><span></span><code><span class="c1"># Просмотр</span>
+git<span class="w"> </span>branch<span class="w">                     </span><span class="c1"># локальные ветки</span>
+git<span class="w"> </span>branch<span class="w"> </span>-a<span class="w">                  </span><span class="c1"># все (включая remote)</span>
+git<span class="w"> </span>branch<span class="w"> </span>-r<span class="w">                  </span><span class="c1"># только remote</span>
+git<span class="w"> </span>branch<span class="w"> </span>-v<span class="w">                  </span><span class="c1"># + последний коммит</span>
+git<span class="w"> </span>branch<span class="w"> </span>-vv<span class="w">                 </span><span class="c1"># + upstream</span>
+
+<span class="c1"># Создание</span>
+git<span class="w"> </span>branch<span class="w"> </span>feature<span class="w">             </span><span class="c1"># создать</span>
+git<span class="w"> </span>branch<span class="w"> </span>feature<span class="w"> </span>main<span class="w">        </span><span class="c1"># от main</span>
+git<span class="w"> </span>checkout<span class="w"> </span>feature<span class="w">           </span><span class="c1"># переключиться</span>
+git<span class="w"> </span>checkout<span class="w"> </span>-b<span class="w"> </span>feature<span class="w">        </span><span class="c1"># создать + переключиться (классика)</span>
+git<span class="w"> </span>switch<span class="w"> </span>feature<span class="w">             </span><span class="c1"># переключиться (новая команда)</span>
+git<span class="w"> </span>switch<span class="w"> </span>-c<span class="w"> </span>feature<span class="w">          </span><span class="c1"># создать + переключиться (новая)</span>
+
+<span class="c1"># Переименование</span>
+git<span class="w"> </span>branch<span class="w"> </span>-m<span class="w"> </span>new-name<span class="w">         </span><span class="c1"># текущую</span>
+git<span class="w"> </span>branch<span class="w"> </span>-m<span class="w"> </span>old<span class="w"> </span>new<span class="w">          </span><span class="c1"># любую</span>
+
+<span class="c1"># Удаление</span>
+git<span class="w"> </span>branch<span class="w"> </span>-d<span class="w"> </span>feature<span class="w">          </span><span class="c1"># безопасно (если слита)</span>
+git<span class="w"> </span>branch<span class="w"> </span>-D<span class="w"> </span>feature<span class="w">          </span><span class="c1"># принудительно (даже если не слита)</span>
+
+<span class="c1"># Удалить все слитые локальные ветки</span>
+git<span class="w"> </span>branch<span class="w"> </span>--merged<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-v<span class="w"> </span><span class="s1">&#39;*&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>xargs<span class="w"> </span>git<span class="w"> </span>branch<span class="w"> </span>-d
+
+<span class="c1"># Удалить remote-ветку</span>
+git<span class="w"> </span>push<span class="w"> </span>origin<span class="w"> </span>--delete<span class="w"> </span>feature
+git<span class="w"> </span>push<span class="w"> </span>origin<span class="w"> </span>:feature<span class="w">       </span><span class="c1"># короткая форма</span>
+</code></pre></div>
+
+<hr />
+<h2 id="получение-и-отправка-изменений">🔄 Получение и отправка изменений<a class="headerlink" href="#получение-и-отправка-изменений" title="Ссылка">#</a></h2>
+<div class="highlight"><pre><span></span><code><span class="c1"># Получить изменения без слияния</span>
+git<span class="w"> </span>fetch<span class="w">                      </span><span class="c1"># от upstream</span>
+git<span class="w"> </span>fetch<span class="w"> </span>origin<span class="w">               </span><span class="c1"># явно</span>
+git<span class="w"> </span>fetch<span class="w"> </span>--all<span class="w">                </span><span class="c1"># от всех remote</span>
+git<span class="w"> </span>fetch<span class="w"> </span>--prune<span class="w">              </span><span class="c1"># + удалить мёртвые remote-ссылки</span>
+
+<span class="c1"># Получить и слить с текущей</span>
+git<span class="w"> </span>pull<span class="w">                       </span><span class="c1"># = fetch + merge</span>
+git<span class="w"> </span>pull<span class="w"> </span>--rebase<span class="w">              </span><span class="c1"># = fetch + rebase (чище история)</span>
+git<span class="w"> </span>pull<span class="w"> </span>origin<span class="w"> </span>main
+
+<span class="c1"># Отправить</span>
+git<span class="w"> </span>push<span class="w">                       </span><span class="c1"># в upstream</span>
+git<span class="w"> </span>push<span class="w"> </span>origin<span class="w"> </span>feature<span class="w">        </span><span class="c1"># в конкретную ветку</span>
+git<span class="w"> </span>push<span class="w"> </span>-u<span class="w"> </span>origin<span class="w"> </span>feature<span class="w">     </span><span class="c1"># установить upstream (-u)</span>
+git<span class="w"> </span>push<span class="w"> </span>--force-with-lease<span class="w">    </span><span class="c1"># безопасный force-push (если никто не запушил)</span>
+git<span class="w"> </span>push<span class="w"> </span>--force<span class="w">               </span><span class="c1"># ❗ перетирает чужую историю</span>
+git<span class="w"> </span>push<span class="w"> </span>--tags<span class="w">                </span><span class="c1"># отправить теги</span>
+git<span class="w"> </span>push<span class="w"> </span>--all<span class="w">                 </span><span class="c1"># все ветки</span>
+</code></pre></div>
+
+<h3 id="разница-merge-rebase-pull">Разница merge / rebase / pull<a class="headerlink" href="#разница-merge-rebase-pull" title="Ссылка">#</a></h3>
+<ul>
+<li><strong><code>git pull</code></strong> = <code>fetch</code> + <code>merge</code> (появляется merge-commit)</li>
+<li><strong><code>git pull --rebase</code></strong> = <code>fetch</code> + <code>rebase</code> (линейная история)</li>
+<li><strong>Rebase</strong> переписывает историю — НЕ делайте на публичных ветках!</li>
+</ul>
+<hr />
+<h2 id="слияние-merge-и-rebase">🔀 Слияние (merge) и rebase<a class="headerlink" href="#слияние-merge-и-rebase" title="Ссылка">#</a></h2>
+<h3 id="merge">merge<a class="headerlink" href="#merge" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>checkout<span class="w"> </span>main<span class="w">              </span><span class="c1"># перейти в целевую ветку</span>
+git<span class="w"> </span>merge<span class="w"> </span>feature<span class="w">              </span><span class="c1"># влить feature в main</span>
+git<span class="w"> </span>merge<span class="w"> </span>--no-ff<span class="w"> </span>feature<span class="w">      </span><span class="c1"># всегда создавать merge-commit</span>
+git<span class="w"> </span>merge<span class="w"> </span>--squash<span class="w"> </span>feature<span class="w">     </span><span class="c1"># собрать все коммиты в один (без merge-commit)</span>
+git<span class="w"> </span>merge<span class="w"> </span>--abort<span class="w">              </span><span class="c1"># отменить конфликтующий merge</span>
+</code></pre></div>
+
+<h3 id="rebase">rebase<a class="headerlink" href="#rebase" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>checkout<span class="w"> </span>feature
+git<span class="w"> </span>rebase<span class="w"> </span>main<span class="w">                </span><span class="c1"># перенести feature поверх main</span>
+git<span class="w"> </span>rebase<span class="w"> </span>-i<span class="w"> </span>HEAD~5<span class="w">           </span><span class="c1"># интерактивный rebase (5 коммитов)</span>
+git<span class="w"> </span>rebase<span class="w"> </span>--abort<span class="w">             </span><span class="c1"># отменить</span>
+git<span class="w"> </span>rebase<span class="w"> </span>--continue<span class="w">          </span><span class="c1"># продолжить после разрешения конфликта</span>
+git<span class="w"> </span>rebase<span class="w"> </span>--skip<span class="w">              </span><span class="c1"># пропустить проблемный коммит</span>
+</code></pre></div>
+
+<h3 id="интерактивный-rebase-i-что-можно-делать">Интерактивный rebase (<code>-i</code>) — что можно делать<a class="headerlink" href="#интерактивный-rebase-i-что-можно-делать" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>rebase<span class="w"> </span>-i<span class="w"> </span>HEAD~4
+</code></pre></div>
+
+<p>Откроется редактор со списком коммитов и командами:
+| Команда | Действие |
+|&mdash;|&mdash;|
+| <code>pick</code> (или <code>p</code>) | оставить как есть |
+| <code>reword</code> (<code>r</code>) | изменить сообщение |
+| <code>edit</code> (<code>e</code>) | остановиться для правок |
+| <code>squash</code> (<code>s</code>) | объединить с предыдущим |
+| <code>fixup</code> (<code>f</code>) | объединить, выбросив сообщение |
+| <code>exec</code> (<code>x</code>) | запустить команду |
+| <code>drop</code> (<code>d</code>) | удалить коммит |
+| <code>squash</code> + reorder | менять порядок строками |</p>
+<hr />
+<h2 id="конфликты">⚔️ Конфликты<a class="headerlink" href="#конфликты" title="Ссылка">#</a></h2>
+<div class="highlight"><pre><span></span><code><span class="c1"># Возникают при merge/rebase/pull</span>
+<span class="c1"># Файлы с конфликтами помечены в git status</span>
+
+<span class="c1"># В файле будет:</span>
+<span class="c1"># &lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD</span>
+<span class="c1"># ваша версия</span>
+<span class="c1"># =======</span>
+<span class="c1"># чужая версия</span>
+<span class="c1"># &gt;&gt;&gt;&gt;&gt;&gt;&gt; feature</span>
+
+<span class="c1"># Действия</span>
+git<span class="w"> </span>status<span class="w">                     </span><span class="c1"># увидеть conflicted файлы</span>
+<span class="c1"># 1. Откройте файл, разрешите конфликт вручную (или через merge.tool)</span>
+<span class="c1"># 2. git add file.txt         (отметить как разрешённый)</span>
+<span class="c1"># 3. git commit               (для merge) или git rebase --continue</span>
+
+<span class="c1"># Если хочется откатиться</span>
+git<span class="w"> </span>merge<span class="w"> </span>--abort<span class="w">              </span><span class="c1"># отменить merge</span>
+git<span class="w"> </span>rebase<span class="w"> </span>--abort<span class="w">             </span><span class="c1"># отменить rebase</span>
+git<span class="w"> </span>checkout<span class="w"> </span>--ours<span class="w"> </span>file<span class="w">       </span><span class="c1"># оставить свою версию</span>
+git<span class="w"> </span>checkout<span class="w"> </span>--theirs<span class="w"> </span>file<span class="w">     </span><span class="c1"># оставить чужую версию</span>
+
+<span class="c1"># Простой merge-инструмент для разрешения</span>
+git<span class="w"> </span>mergetool
+</code></pre></div>
+
+<hr />
+<h2 id="отмена-и-изменение">🗑️ Отмена и изменение<a class="headerlink" href="#отмена-и-изменение" title="Ссылка">#</a></h2>
+<div class="highlight"><pre><span></span><code><span class="c1"># Изменить последний коммит (добавить файлы или поменять сообщение)</span>
+git<span class="w"> </span>add<span class="w"> </span>forgotten_file
+git<span class="w"> </span>commit<span class="w"> </span>--amend<span class="w"> </span>--no-edit
+
+<span class="c1"># Отменить staging (unstage)</span>
+git<span class="w"> </span>restore<span class="w"> </span>--staged<span class="w"> </span>file.txt<span class="w">       </span><span class="c1"># современно</span>
+git<span class="w"> </span>reset<span class="w"> </span>HEAD<span class="w"> </span>file.txt<span class="w">             </span><span class="c1"># классика</span>
+
+<span class="c1"># Отменить локальные изменения файла</span>
+git<span class="w"> </span>restore<span class="w"> </span>file.txt<span class="w">                </span><span class="c1"># современно</span>
+git<span class="w"> </span>checkout<span class="w"> </span>--<span class="w"> </span>file.txt<span class="w">            </span><span class="c1"># классика</span>
+
+<span class="c1"># Отменить ВСЕ локальные изменения</span>
+git<span class="w"> </span>restore<span class="w"> </span>.
+git<span class="w"> </span>checkout<span class="w"> </span>--<span class="w"> </span>.
+
+<span class="c1"># Сбросить к конкретному коммиту</span>
+git<span class="w"> </span>reset<span class="w"> </span>--soft<span class="w"> </span>HEAD~1<span class="w">         </span><span class="c1"># удалить коммит, оставить изменения staged</span>
+git<span class="w"> </span>reset<span class="w"> </span>HEAD~1<span class="w">                </span><span class="c1"># mixed: изменения unstaged</span>
+git<span class="w"> </span>reset<span class="w"> </span>--hard<span class="w"> </span>HEAD~1<span class="w">         </span><span class="c1"># ❗ удалить коммит И изменения</span>
+git<span class="w"> </span>reset<span class="w"> </span>--hard<span class="w"> </span>origin/main<span class="w">    </span><span class="c1"># ❗ стать точно как remote (локал потерян)</span>
+
+<span class="c1"># Отменить коммит, сохранив его в истории (безопасно)</span>
+git<span class="w"> </span>revert<span class="w"> </span>&lt;commit&gt;<span class="w">             </span><span class="c1"># создаёт обратный коммит</span>
+git<span class="w"> </span>revert<span class="w"> </span>HEAD<span class="w">                 </span><span class="c1"># отменить последний</span>
+git<span class="w"> </span>revert<span class="w"> </span>&lt;c1&gt;<span class="w"> </span>&lt;c2&gt;<span class="w">            </span><span class="c1"># несколько</span>
+
+<span class="c1"># Сравнение reset режимов</span>
+<span class="c1"># --soft   HEAD двигается, staged и working tree остаются</span>
+<span class="c1"># --mixed  HEAD двигается, staged сбрасывается, working остаётся</span>
+<span class="c1"># --hard   HEAD двигается, staged И working сбрасываются (❗ потеря)</span>
+</code></pre></div>
+
+<hr />
+<h2 id="разница-diff">🔍 Разница (diff)<a class="headerlink" href="#разница-diff" title="Ссылка">#</a></h2>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>diff<span class="w">                       </span><span class="c1"># working tree vs staged (незакоммиченные)</span>
+git<span class="w"> </span>diff<span class="w"> </span>--staged<span class="w">              </span><span class="c1"># staged vs HEAD (что попадёт в коммит)</span>
+git<span class="w"> </span>diff<span class="w"> </span>--cached<span class="w">              </span><span class="c1"># то же, что --staged</span>
+git<span class="w"> </span>diff<span class="w"> </span>HEAD<span class="w">                  </span><span class="c1"># working vs HEAD (всё незакоммиченное)</span>
+git<span class="w"> </span>diff<span class="w"> </span>main<span class="w"> </span>feature<span class="w">          </span><span class="c1"># между ветками</span>
+git<span class="w"> </span>diff<span class="w"> </span>&lt;c1&gt;<span class="w"> </span>&lt;c2&gt;<span class="w">             </span><span class="c1"># между коммитами</span>
+git<span class="w"> </span>diff<span class="w"> </span>&lt;c1&gt;<span class="w"> </span>&lt;c2&gt;<span class="w"> </span>--<span class="w"> </span>file<span class="w">     </span><span class="c1"># конкретный файл</span>
+git<span class="w"> </span>diff<span class="w"> </span>--stat<span class="w">                </span><span class="c1"># только статистика</span>
+git<span class="w"> </span>diff<span class="w"> </span>--name-only<span class="w">           </span><span class="c1"># только имена файлов</span>
+git<span class="w"> </span>diff<span class="w"> </span>-w<span class="w">                    </span><span class="c1"># игнорировать пробелы</span>
+git<span class="w"> </span>diff<span class="w"> </span>--word-diff<span class="w">           </span><span class="c1"># пословно</span>
+git<span class="w"> </span>diff<span class="w"> </span>branch1..branch2<span class="w">      </span><span class="c1"># разница между tips</span>
+git<span class="w"> </span>diff<span class="w"> </span>branch1...branch2<span class="w">     </span><span class="c1"># от общего предка</span>
+</code></pre></div>
+
+<hr />
+<h2 id="теги">🏷️ Теги<a class="headerlink" href="#теги" title="Ссылка">#</a></h2>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>tag<span class="w"> </span>v1.0.0<span class="w">                    </span><span class="c1"># lightweight tag</span>
+git<span class="w"> </span>tag<span class="w"> </span>-a<span class="w"> </span>v1.0.0<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;Релиз 1.0&quot;</span><span class="w">  </span><span class="c1"># annotated (рекомендуется)</span>
+git<span class="w"> </span>tag<span class="w"> </span>v1.0.0<span class="w"> </span>&lt;commit&gt;<span class="w">           </span><span class="c1"># тег на конкретный коммит</span>
+
+git<span class="w"> </span>tag<span class="w">                           </span><span class="c1"># список</span>
+git<span class="w"> </span>tag<span class="w"> </span>-l<span class="w"> </span><span class="s2">&quot;v1.*&quot;</span><span class="w">                 </span><span class="c1"># по шаблону</span>
+git<span class="w"> </span>show<span class="w"> </span>v1.0.0<span class="w">                   </span><span class="c1"># детали тега</span>
+
+git<span class="w"> </span>push<span class="w"> </span>origin<span class="w"> </span>v1.0.0<span class="w">            </span><span class="c1"># отправить один тег</span>
+git<span class="w"> </span>push<span class="w"> </span>origin<span class="w"> </span>--tags<span class="w">            </span><span class="c1"># все теги</span>
+
+git<span class="w"> </span>tag<span class="w"> </span>-d<span class="w"> </span>v1.0.0<span class="w">                 </span><span class="c1"># удалить локально</span>
+git<span class="w"> </span>push<span class="w"> </span>origin<span class="w"> </span>--delete<span class="w"> </span>v1.0.0<span class="w">   </span><span class="c1"># удалить на remote</span>
+</code></pre></div>
+
+<hr />
+<h2 id="stash-спрятать-изменения">📦 Stash — спрятать изменения<a class="headerlink" href="#stash-спрятать-изменения" title="Ссылка">#</a></h2>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>stash<span class="w">                       </span><span class="c1"># спрятать tracked-изменения</span>
+git<span class="w"> </span>stash<span class="w"> </span>-u<span class="w">                    </span><span class="c1"># + untracked</span>
+git<span class="w"> </span>stash<span class="w"> </span>-a<span class="w">                    </span><span class="c1"># + ignored</span>
+git<span class="w"> </span>stash<span class="w"> </span>save<span class="w"> </span><span class="s2">&quot;message&quot;</span><span class="w">        </span><span class="c1"># с сообщением (старый синтаксис)</span>
+git<span class="w"> </span>stash<span class="w"> </span>push<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;message&quot;</span><span class="w">     </span><span class="c1"># новый синтаксис</span>
+
+git<span class="w"> </span>stash<span class="w"> </span>list<span class="w">                  </span><span class="c1"># список стэшей</span>
+git<span class="w"> </span>stash<span class="w"> </span>show<span class="w">                  </span><span class="c1"># что в верхнем стэше</span>
+git<span class="w"> </span>stash<span class="w"> </span>show<span class="w"> </span>-p<span class="w">               </span><span class="c1"># с diff</span>
+git<span class="w"> </span>stash<span class="w"> </span>show<span class="w"> </span>stash@<span class="o">{</span><span class="m">2</span><span class="o">}</span><span class="w">        </span><span class="c1"># конкретный</span>
+
+git<span class="w"> </span>stash<span class="w"> </span>pop<span class="w">                   </span><span class="c1"># применить верхний и удалить</span>
+git<span class="w"> </span>stash<span class="w"> </span>apply<span class="w">                 </span><span class="c1"># применить, но оставить в стэше</span>
+git<span class="w"> </span>stash<span class="w"> </span>apply<span class="w"> </span>stash@<span class="o">{</span><span class="m">2</span><span class="o">}</span><span class="w">       </span><span class="c1"># конкретный</span>
+git<span class="w"> </span>stash<span class="w"> </span>drop<span class="w">                  </span><span class="c1"># удалить верхний</span>
+git<span class="w"> </span>stash<span class="w"> </span>clear<span class="w">                 </span><span class="c1"># удалить все</span>
+
+<span class="c1"># Частичный стэш</span>
+git<span class="w"> </span>stash<span class="w"> </span>-p<span class="w">                    </span><span class="c1"># выбрать hunks интерактивно</span>
+</code></pre></div>
+
+<hr />
+<h2 id="remote-репозитории">🗂️ Remote-репозитории<a class="headerlink" href="#remote-репозитории" title="Ссылка">#</a></h2>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>remote<span class="w"> </span>-v<span class="w">                   </span><span class="c1"># список remote</span>
+git<span class="w"> </span>remote<span class="w"> </span>show<span class="w"> </span>origin<span class="w">          </span><span class="c1"># детали</span>
+git<span class="w"> </span>remote<span class="w"> </span>add<span class="w"> </span>upstream<span class="w"> </span>&lt;url&gt;<span class="w">   </span><span class="c1"># добавить</span>
+git<span class="w"> </span>remote<span class="w"> </span>rename<span class="w"> </span>origin<span class="w"> </span>o<span class="w">      </span><span class="c1"># переименовать</span>
+git<span class="w"> </span>remote<span class="w"> </span>remove<span class="w"> </span>origin<span class="w">        </span><span class="c1"># удалить</span>
+git<span class="w"> </span>remote<span class="w"> </span>set-url<span class="w"> </span>origin<span class="w"> </span>&lt;url&gt;<span class="w"> </span><span class="c1"># сменить URL</span>
+
+<span class="c1"># Сменить HTTPS → SSH</span>
+git<span class="w"> </span>remote<span class="w"> </span>set-url<span class="w"> </span>origin<span class="w"> </span>git@github.com:user/repo.git
+
+<span class="c1"># Fetch из upstream (форк)</span>
+git<span class="w"> </span>fetch<span class="w"> </span>upstream
+git<span class="w"> </span>merge<span class="w"> </span>upstream/main
+</code></pre></div>
+
+<hr />
+<h2 id="подмодули-submodules">📚 Подмодули (submodules)<a class="headerlink" href="#подмодули-submodules" title="Ссылка">#</a></h2>
+<div class="highlight"><pre><span></span><code><span class="c1"># Добавить подмодуль</span>
+git<span class="w"> </span>submodule<span class="w"> </span>add<span class="w"> </span>&lt;url&gt;<span class="w"> </span>path/to/sub
+
+<span class="c1"># Клонировать репо с подмодулями</span>
+git<span class="w"> </span>clone<span class="w"> </span>--recursive<span class="w"> </span>&lt;url&gt;
+<span class="c1"># или после клонирования:</span>
+git<span class="w"> </span>submodule<span class="w"> </span>update<span class="w"> </span>--init<span class="w"> </span>--recursive
+
+<span class="c1"># Обновить все подмодули до remote-версий</span>
+git<span class="w"> </span>submodule<span class="w"> </span>update<span class="w"> </span>--remote<span class="w"> </span>--merge
+
+<span class="c1"># Выполнить команду во всех подмодулях</span>
+git<span class="w"> </span>submodule<span class="w"> </span>foreach<span class="w"> </span><span class="s1">&#39;git status&#39;</span>
+
+<span class="c1"># Удалить подмодуль</span>
+git<span class="w"> </span>submodule<span class="w"> </span>deinit<span class="w"> </span>-f<span class="w"> </span>path/to/sub
+git<span class="w"> </span>rm<span class="w"> </span>path/to/sub
+rm<span class="w"> </span>-rf<span class="w"> </span>.git/modules/path/to/sub
+</code></pre></div>
+
+<hr />
+<h2 id="продвинутые-команды">🔬 Продвинутые команды<a class="headerlink" href="#продвинутые-команды" title="Ссылка">#</a></h2>
+<h3 id="cherry-pick">cherry-pick<a class="headerlink" href="#cherry-pick" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>cherry-pick<span class="w"> </span>&lt;commit&gt;<span class="w">        </span><span class="c1"># применить коммит из другой ветки</span>
+git<span class="w"> </span>cherry-pick<span class="w"> </span>&lt;c1&gt;..&lt;c2&gt;<span class="w">      </span><span class="c1"># диапазон (не вкл. c1)</span>
+git<span class="w"> </span>cherry-pick<span class="w"> </span>--abort
+</code></pre></div>
+
+<h3 id="bisect-бинарный-поиск-бага">bisect — бинарный поиск бага<a class="headerlink" href="#bisect-бинарный-поиск-бага" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>bisect<span class="w"> </span>start
+git<span class="w"> </span>bisect<span class="w"> </span>bad<span class="w">                  </span><span class="c1"># текущий коммит — плохой</span>
+git<span class="w"> </span>bisect<span class="w"> </span>good<span class="w"> </span>v1.0.0<span class="w">          </span><span class="c1"># v1.0.0 — хороший</span>
+<span class="c1"># git сам будет чекать коммиты, вы отмечаете:</span>
+git<span class="w"> </span>bisect<span class="w"> </span>good<span class="w">   </span><span class="c1"># или</span>
+git<span class="w"> </span>bisect<span class="w"> </span>bad
+git<span class="w"> </span>bisect<span class="w"> </span>reset<span class="w">                 </span><span class="c1"># выйти</span>
+</code></pre></div>
+
+<h3 id="reflog-спасение-потерянного">reflog — спасение потерянного<a class="headerlink" href="#reflog-спасение-потерянного" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>reflog<span class="w">                      </span><span class="c1"># журнал ВСЕХ перемещений HEAD</span>
+git<span class="w"> </span>reflog<span class="w"> </span>--all
+<span class="c1"># найти хэш потерянного коммита и:</span>
+git<span class="w"> </span>reset<span class="w"> </span>--hard<span class="w"> </span>&lt;hash&gt;
+</code></pre></div>
+
+<h3 id="blame-grep">blame / grep<a class="headerlink" href="#blame-grep" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>blame<span class="w"> </span>file<span class="w">                  </span><span class="c1"># кто написал каждую строку</span>
+git<span class="w"> </span>blame<span class="w"> </span>-L<span class="w"> </span><span class="m">10</span>,20<span class="w"> </span>file<span class="w">         </span><span class="c1"># диапазон строк</span>
+git<span class="w"> </span>grep<span class="w"> </span><span class="s2">&quot;pattern&quot;</span><span class="w">              </span><span class="c1"># поиск по tracked-файлам</span>
+git<span class="w"> </span>grep<span class="w"> </span>-n<span class="w"> </span><span class="s2">&quot;pattern&quot;</span><span class="w">           </span><span class="c1"># с номерами строк</span>
+git<span class="w"> </span>log<span class="w"> </span>-S<span class="w"> </span><span class="s2">&quot;func(&quot;</span><span class="w"> </span>--<span class="w"> </span><span class="s1">&#39;*.py&#39;</span><span class="w">    </span><span class="c1"># когда появилась/исчезла строка</span>
+</code></pre></div>
+
+<h3 id="worktree-несколько-рабочих-деревьев">worktree — несколько рабочих деревьев<a class="headerlink" href="#worktree-несколько-рабочих-деревьев" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>worktree<span class="w"> </span>add<span class="w"> </span>../project-feature<span class="w"> </span>feature
+git<span class="w"> </span>worktree<span class="w"> </span>list
+git<span class="w"> </span>worktree<span class="w"> </span>remove<span class="w"> </span>../project-feature
+</code></pre></div>
+
+<h3 id="restore-новые-команды">restore (новые команды)<a class="headerlink" href="#restore-новые-команды" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>restore<span class="w"> </span>file<span class="w">                </span><span class="c1"># отменить изменения в файле</span>
+git<span class="w"> </span>restore<span class="w"> </span>--staged<span class="w"> </span>file<span class="w">       </span><span class="c1"># unstage</span>
+git<span class="w"> </span>restore<span class="w"> </span>--source<span class="o">=</span>HEAD~1<span class="w"> </span>file<span class="w">  </span><span class="c1"># из конкретного коммита</span>
+git<span class="w"> </span>restore<span class="w"> </span>--source<span class="o">=</span>main<span class="w"> </span>file
+</code></pre></div>
+
+<hr />
+<h2 id="игнорирование-файлов-gitignore">📊 Игнорирование файлов (<code>.gitignore</code>)<a class="headerlink" href="#игнорирование-файлов-gitignore" title="Ссылка">#</a></h2>
+<div class="highlight"><pre><span></span><code># Комментарий
+*.log              # все .log
+node_modules/      # каталог
+build/             # каталог
+.env               # конкретный файл
+!important.env     # исключение из игнора
+
+# Языки
+*.pyc
+__pycache__/
+.venv/
+dist/
+*.o
+*.exe
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+</code></pre></div>
+
+<h3 id="управление-ignore">Управление ignore<a class="headerlink" href="#управление-ignore" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Файл уже закоммичен, но теперь в gitignore</span>
+git<span class="w"> </span>rm<span class="w"> </span>--cached<span class="w"> </span>file<span class="w">             </span><span class="c1"># удалить из индекса, оставить локально</span>
+git<span class="w"> </span>rm<span class="w"> </span>-r<span class="w"> </span>--cached<span class="w"> </span>node_modules<span class="w">  </span><span class="c1"># рекурсивно</span>
+
+<span class="c1"># Глобальный gitignore</span>
+git<span class="w"> </span>config<span class="w"> </span>--global<span class="w"> </span>core.excludesfile<span class="w"> </span>~/.gitignore_global
+
+<span class="c1"># Кто игнорирует этот файл?</span>
+git<span class="w"> </span>check-ignore<span class="w"> </span>-v<span class="w"> </span>file
+</code></pre></div>
+
+<hr />
+<h2 id="алиасы-полезные">🎯 Алиасы (полезные)<a class="headerlink" href="#алиасы-полезные" title="Ссылка">#</a></h2>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>config<span class="w"> </span>--global<span class="w"> </span>alias.co<span class="w"> </span>checkout
+git<span class="w"> </span>config<span class="w"> </span>--global<span class="w"> </span>alias.br<span class="w"> </span>branch
+git<span class="w"> </span>config<span class="w"> </span>--global<span class="w"> </span>alias.ci<span class="w"> </span>commit
+git<span class="w"> </span>config<span class="w"> </span>--global<span class="w"> </span>alias.st<span class="w"> </span>status
+git<span class="w"> </span>config<span class="w"> </span>--global<span class="w"> </span>alias.unstage<span class="w"> </span><span class="s1">&#39;reset HEAD --&#39;</span>
+git<span class="w"> </span>config<span class="w"> </span>--global<span class="w"> </span>alias.last<span class="w"> </span><span class="s1">&#39;log -1 HEAD&#39;</span>
+git<span class="w"> </span>config<span class="w"> </span>--global<span class="w"> </span>alias.visual<span class="w"> </span><span class="s1">&#39;!gitk&#39;</span>
+
+<span class="c1"># Красивый лог</span>
+git<span class="w"> </span>config<span class="w"> </span>--global<span class="w"> </span>alias.lg<span class="w"> </span><span class="s2">&quot;log --color --graph --pretty=format:&#39;%C(auto)%h%Creset -%C(auto)%d%Creset %s %Cgreen(%cr) %C(bold blue)&lt;%an&gt;%Creset&#39; --abbrev-commit&quot;</span>
+
+<span class="c1"># В виде одних хэшей</span>
+git<span class="w"> </span>config<span class="w"> </span>--global<span class="w"> </span>alias.ll<span class="w"> </span><span class="s2">&quot;log --oneline --decorate&quot;</span>
+</code></pre></div>
+
+<p>Использование: <code>git lg</code>, <code>git ci -m "..."</code>, <code>git co main</code>.</p>
+<hr />
+<h2 id="лучшие-практики-workflow">🌟 Лучшие практики (workflow)<a class="headerlink" href="#лучшие-практики-workflow" title="Ссылка">#</a></h2>
+<h3 id="1-классический-feature-branch">1. Классический feature-branch<a class="headerlink" href="#1-классический-feature-branch" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>checkout<span class="w"> </span>main
+git<span class="w"> </span>pull
+git<span class="w"> </span>checkout<span class="w"> </span>-b<span class="w"> </span>feature/add-login
+<span class="c1"># ... работа, коммиты ...</span>
+git<span class="w"> </span>push<span class="w"> </span>-u<span class="w"> </span>origin<span class="w"> </span>feature/add-login
+<span class="c1"># создать Pull Request на GitHub/GitLab</span>
+</code></pre></div>
+
+<h3 id="2-коммиты-как-писать-сообщения">2. Коммиты: как писать сообщения<a class="headerlink" href="#2-коммиты-как-писать-сообщения" title="Ссылка">#</a></h3>
+<p><strong>Conventional Commits:</strong></p>
+<div class="highlight"><pre><span></span><code>&lt;type&gt;(&lt;scope&gt;): &lt;subject&gt;
+
+&lt;body&gt;
+
+&lt;footer&gt;
+</code></pre></div>
+
+<p>Типы: <code>feat</code>, <code>fix</code>, <code>docs</code>, <code>style</code>, <code>refactor</code>, <code>test</code>, <code>chore</code>, <code>perf</code>, <code>build</code>, <code>ci</code>.</p>
+<p>Примеры:</p>
+<div class="highlight"><pre><span></span><code>feat(auth): add OAuth2 login
+fix(api): handle null response
+docs: update README
+chore: bump dependencies
+</code></pre></div>
+
+<ul>
+<li>Заголовок <strong>до 50 символов</strong>, в повелительном наклонении («add», не «added»).</li>
+<li>Тело — что и зачем (не как), до 72 символов в строке.</li>
+<li>Один коммит = одно логическое изменение.</li>
+</ul>
+<h3 id="3-перед-коммитом">3. Перед коммитом<a class="headerlink" href="#3-перед-коммитом" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>status<span class="w">                  </span><span class="c1"># что изменилось</span>
+git<span class="w"> </span>diff<span class="w">                    </span><span class="c1"># посмотреть</span>
+git<span class="w"> </span>diff<span class="w"> </span>--staged<span class="w">           </span><span class="c1"># что попадёт в коммит</span>
+</code></pre></div>
+
+<h3 id="4-синхронизация-с-remote">4. Синхронизация с remote<a class="headerlink" href="#4-синхронизация-с-remote" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>fetch<span class="w"> </span>--prune<span class="w">           </span><span class="c1"># получить + убрать мёртвые ветки</span>
+git<span class="w"> </span>pull<span class="w"> </span>--rebase<span class="w">           </span><span class="c1"># чище история</span>
+</code></pre></div>
+
+<h3 id="5-чистая-история-перед-pr">5. Чистая история перед PR<a class="headerlink" href="#5-чистая-история-перед-pr" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>rebase<span class="w"> </span>-i<span class="w"> </span>HEAD~5<span class="w">        </span><span class="c1"># объединить/переименовать коммиты</span>
+git<span class="w"> </span>push<span class="w"> </span>--force-with-lease<span class="w"> </span><span class="c1"># безопасный force-push</span>
+</code></pre></div>
+
+<hr />
+<h2 id="github-gitlab-через-cli-gh">🐙 GitHub / GitLab через CLI (<code>gh</code>)<a class="headerlink" href="#github-gitlab-через-cli-gh" title="Ссылка">#</a></h2>
+<div class="highlight"><pre><span></span><code><span class="c1"># Установка (Arch)</span>
+sudo<span class="w"> </span>pacman<span class="w"> </span>-S<span class="w"> </span>github-cli
+gh<span class="w"> </span>auth<span class="w"> </span>login<span class="w">                 </span><span class="c1"># авторизация</span>
+
+<span class="c1"># Клонировать репо</span>
+gh<span class="w"> </span>repo<span class="w"> </span>clone<span class="w"> </span>user/repo
+
+<span class="c1"># Создать PR</span>
+gh<span class="w"> </span>pr<span class="w"> </span>create<span class="w"> </span>--fill<span class="w">           </span><span class="c1"># из текущей ветки, с авто-заполнением</span>
+gh<span class="w"> </span>pr<span class="w"> </span>create<span class="w"> </span>--title<span class="w"> </span><span class="s2">&quot;...&quot;</span><span class="w"> </span>--body<span class="w"> </span><span class="s2">&quot;...&quot;</span>
+gh<span class="w"> </span>pr<span class="w"> </span>list
+gh<span class="w"> </span>pr<span class="w"> </span>view<span class="w"> </span><span class="m">123</span>
+gh<span class="w"> </span>pr<span class="w"> </span>checkout<span class="w"> </span><span class="m">123</span><span class="w">            </span><span class="c1"># переключиться на PR</span>
+gh<span class="w"> </span>pr<span class="w"> </span>merge<span class="w"> </span><span class="m">123</span><span class="w"> </span>--squash<span class="w"> </span>--delete-branch
+
+<span class="c1"># Issues</span>
+gh<span class="w"> </span>issue<span class="w"> </span>create
+gh<span class="w"> </span>issue<span class="w"> </span>list
+gh<span class="w"> </span>issue<span class="w"> </span>view<span class="w"> </span><span class="m">5</span>
+
+<span class="c1"># Релизы</span>
+gh<span class="w"> </span>release<span class="w"> </span>create<span class="w"> </span>v1.0.0<span class="w"> </span>./build/*.zip<span class="w"> </span>--title<span class="w"> </span><span class="s2">&quot;...&quot;</span><span class="w"> </span>--notes<span class="w"> </span><span class="s2">&quot;...&quot;</span>
+</code></pre></div>
+
+<hr />
+<h2 id="аварийные-ситуации">🚨 Аварийные ситуации<a class="headerlink" href="#аварийные-ситуации" title="Ссылка">#</a></h2>
+<h3 id="я-закоммитил-не-туда">«Я закоммитил не туда»<a class="headerlink" href="#я-закоммитил-не-туда" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>reset<span class="w"> </span>--soft<span class="w"> </span>HEAD~1<span class="w">       </span><span class="c1"># отменить коммит, изменения staged</span>
+git<span class="w"> </span>checkout<span class="w"> </span>correct-branch
+git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;...&quot;</span>
+</code></pre></div>
+
+<h3 id="я-потерял-коммит-после-reset-hard">«Я потерял коммит после reset &ndash;hard»<a class="headerlink" href="#я-потерял-коммит-после-reset-hard" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>reflog<span class="w">                    </span><span class="c1"># найти хэш</span>
+git<span class="w"> </span>reset<span class="w"> </span>--hard<span class="w"> </span>&lt;hash&gt;<span class="w">       </span><span class="c1"># вернуть</span>
+</code></pre></div>
+
+<h3 id="случайно-сделал-commit-amend-и-запушил">«Случайно сделал commit &ndash;amend и запушил»<a class="headerlink" href="#случайно-сделал-commit-amend-и-запушил" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Если запушен — попросите коллег pull --rebase, ничего страшного</span>
+<span class="c1"># Если ещё не запушен — ничего делать не надо</span>
+</code></pre></div>
+
+<h3 id="хочу-удалить-файл-из-истории-например-секрет">«Хочу удалить файл из истории» (например, секрет)<a class="headerlink" href="#хочу-удалить-файл-из-истории-например-секрет" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>filter-repo<span class="w"> </span>--path<span class="w"> </span>secrets.txt<span class="w"> </span>--invert-paths
+<span class="c1"># или старый (медленный) способ:</span>
+git<span class="w"> </span>filter-branch<span class="w"> </span>--force<span class="w"> </span>--index-filter<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="s1">&#39;git rm --cached --ignore-unmatch secrets.txt&#39;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--prune-empty<span class="w"> </span>--tag-name-filter<span class="w"> </span>cat<span class="w"> </span>--<span class="w"> </span>--all
+git<span class="w"> </span>push<span class="w"> </span>origin<span class="w"> </span>--force<span class="w"> </span>--all
+</code></pre></div>
+
+<h3 id="слияние-пошло-не-так-хочу-всё-вернуть">«Слияние пошло не так, хочу всё вернуть»<a class="headerlink" href="#слияние-пошло-не-так-хочу-всё-вернуть" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>merge<span class="w"> </span>--abort<span class="w">             </span><span class="c1"># для merge</span>
+git<span class="w"> </span>rebase<span class="w"> </span>--abort<span class="w">            </span><span class="c1"># для rebase</span>
+git<span class="w"> </span>reset<span class="w"> </span>--merge<span class="w"> </span>ORIG_HEAD<span class="w">   </span><span class="c1"># универсально к состоянию до merge</span>
+</code></pre></div>
+
+<h3 id="случайно-удалил-ветку">«Случайно удалил ветку»<a class="headerlink" href="#случайно-удалил-ветку" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>reflog<span class="w">                    </span><span class="c1"># найти последний коммит ветки</span>
+git<span class="w"> </span>branch<span class="w"> </span>recovered<span class="w"> </span>&lt;hash&gt;<span class="w">   </span><span class="c1"># создать ветку на этом коммите</span>
+</code></pre></div>
+
+<hr />
+<h2 id="полезные-запросы">📊 Полезные запросы<a class="headerlink" href="#полезные-запросы" title="Ссылка">#</a></h2>
+<div class="highlight"><pre><span></span><code><span class="c1"># Кто сколько коммитов (топ контрибьюторов)</span>
+git<span class="w"> </span>shortlog<span class="w"> </span>-sn
+
+<span class="c1"># Статистика по автору</span>
+git<span class="w"> </span>log<span class="w"> </span>--author<span class="o">=</span><span class="s2">&quot;Alice&quot;</span><span class="w"> </span>--oneline<span class="w"> </span><span class="p">|</span><span class="w"> </span>wc<span class="w"> </span>-l
+
+<span class="c1"># Файлы, изменённые между коммитами</span>
+git<span class="w"> </span>diff<span class="w"> </span>--name-only<span class="w"> </span>&lt;c1&gt;<span class="w"> </span>&lt;c2&gt;
+
+<span class="c1"># Размер репозитория</span>
+git<span class="w"> </span>count-objects<span class="w"> </span>-vH
+
+<span class="c1"># Найти Largest-файлы в истории</span>
+git<span class="w"> </span>rev-list<span class="w"> </span>--objects<span class="w"> </span>--all<span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>git<span class="w"> </span>cat-file<span class="w"> </span>--batch-check<span class="o">=</span><span class="s1">&#39;%(objecttype) %(objectname) %(objectsize) %(rest)&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>awk<span class="w"> </span><span class="s1">&#39;/^blob/ {print substr($0,6)}&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sort<span class="w"> </span>-k2<span class="w"> </span>-rn<span class="w"> </span><span class="p">|</span><span class="w"> </span>head
+
+<span class="c1"># Показать файл из другого коммита, не переключаясь</span>
+git<span class="w"> </span>show<span class="w"> </span>main:file.txt
+
+<span class="c1"># Список всех файлов в репо на HEAD</span>
+git<span class="w"> </span>ls-files
+
+<span class="c1"># История файла (даже удалённого)</span>
+git<span class="w"> </span>log<span class="w"> </span>--follow<span class="w"> </span>--<span class="w"> </span>path/to/file
+</code></pre></div>
+
+<hr />
+<h2 id="git-hooks-хуки">🪝 Git Hooks (хуки)<a class="headerlink" href="#git-hooks-хуки" title="Ссылка">#</a></h2>
+<p>Хуки живут в <code>.git/hooks/</code> (не версонируются) или через core.hooksPath.</p>
+<table>
+<thead>
+<tr>
+<th>Хук</th>
+<th>Когда срабатывает</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>pre-commit</code></td>
+<td>перед коммитом (линтер, форматирование)</td>
+</tr>
+<tr>
+<td><code>commit-msg</code></td>
+<td>проверка сообщения</td>
+</tr>
+<tr>
+<td><code>pre-push</code></td>
+<td>перед push</td>
+</tr>
+<tr>
+<td><code>post-merge</code></td>
+<td>после merge/pull</td>
+</tr>
+<tr>
+<td><code>pre-rebase</code></td>
+<td>перед rebase</td>
+</tr>
+</tbody>
+</table>
+<p>Рекомендация: <strong>husky</strong> / <strong>pre-commit</strong> / <strong>lefthook</strong> для управления хуками
+(с поддержкой конфига в репозитории).</p>
+<hr />
+<h2 id="полезные-советы">💡 Полезные советы<a class="headerlink" href="#полезные-советы" title="Ссылка">#</a></h2>
+<ol>
+<li><strong>Commit часто, мелкими порциями</strong> — легче откатывать и ревьюить.</li>
+<li><strong><code>git pull --rebase</code></strong> — чистая линейная история без merge-коммитов.</li>
+<li><strong><code>git push --force-with-lease</code></strong> вместо <code>--force</code> — не перетрете чужое.</li>
+<li><strong><code>git reflog</code></strong> — ваш спасатель; почти ничего не теряется навсегда.</li>
+<li><strong><code>.gitignore</code> с первого дня</strong> — не коммитьте <code>node_modules</code>, <code>.env</code>, <code>build/</code>.</li>
+<li><strong><code>git stash</code></strong> — спрятать изменения, чтобы переключиться на другую ветку.</li>
+<li><strong><code>git add -p</code></strong> — добавлять изменения по кускам, а не целыми файлами.</li>
+<li><strong><code>git cherry-pick</code></strong> — перенести коммит между ветками без merge.</li>
+<li><strong>Один коммит — одна логика</strong> — не мешайте фичу с рефакторингом.</li>
+<li><strong>Conventional Commits</strong> — стандартизирует историю и помогает changelog&rsquo;у.</li>
+<li><strong>Pull Request ASAP</strong> — даже WIP, чтобы получить обратную связь.</li>
+<li><strong><code>git bisect</code></strong> — найдёт коммит, который сломал сборку, бинарным поиском.</li>
+<li><strong>Не rebas&rsquo;ьте публичные ветки</strong> (main, develop) — только свои feature.</li>
+<li><strong><code>gh</code> CLI</strong> — мощно упрощает работу с GitHub прямо из терминала.</li>
+<li><strong>Lazygit / <code>tig</code></strong> — TUI-клиенты сильно ускоряют рутину.</li>
+</ol>
+<hr />
+<h2 id="ссылки">🔗 Ссылки<a class="headerlink" href="#ссылки" title="Ссылка">#</a></h2>
+<ul>
+<li>Официальная книга (RU): https://git-scm.com/book/ru/v2</li>
+<li>Документация: https://git-scm.com/docs</li>
+<li>Интерактивный туториал: https://learngitbranching.js.org</li>
+<li>Визуальный reference: https://onlywei.github.io/explain-git-with-d3</li>
+<li>GitHub Cheatsheet: https://training.github.com</li>
+<li>Atlassian Tutorial: https://www.atlassian.com/git/tutorials</li>
+<li>First Aid Git: https://firstaidgit.ru</li>
+<li>Lazygit: https://github.com/jesseduffield/lazygit</li>
+<li><code>gh</code> CLI: https://cli.github.com</li>
+</ul>
+<hr />
+<p><em>Сгенерировано как шпаргалка. Git огромен —
+углубляйтесь через <code>man git</code>, <code>git &lt;cmd&gt; --help</code> и книгу.</em></p>
+    </article>
+    <nav class="pagination">
+      <a class="pager prev" href="bash.html">← Bash</a>
+      <a class="pager next" href="terminal.html">Терминал Linux →</a>
+    </nav>
+  </main>
+
+  <aside class="toc">
+    <details open>
+      <summary>📑 Оглавление</summary>
+      <div class="toc-list">
+<div class="toc">
+<ul>
+<li><a href="#git-шпаргалка-по-командам-и-workflow">🔀 Git — шпаргалка по командам и workflow</a><ul>
+<li><a href="#первичная-настройка">⚙️ Первичная настройка</a><ul>
+<li><a href="#где-хранятся-настройки">Где хранятся настройки</a></li>
+</ul>
+</li>
+<li><a href="#создание-репозитория">🆕 Создание репозитория</a></li>
+<li><a href="#статус-и-базовый-цикл">📋 Статус и базовый цикл</a></li>
+<li><a href="#ветвление">🌿 Ветвление</a></li>
+<li><a href="#получение-и-отправка-изменений">🔄 Получение и отправка изменений</a><ul>
+<li><a href="#разница-merge-rebase-pull">Разница merge / rebase / pull</a></li>
+</ul>
+</li>
+<li><a href="#слияние-merge-и-rebase">🔀 Слияние (merge) и rebase</a><ul>
+<li><a href="#merge">merge</a></li>
+<li><a href="#rebase">rebase</a></li>
+<li><a href="#интерактивный-rebase-i-что-можно-делать">Интерактивный rebase (-i) — что можно делать</a></li>
+</ul>
+</li>
+<li><a href="#конфликты">⚔️ Конфликты</a></li>
+<li><a href="#отмена-и-изменение">🗑️ Отмена и изменение</a></li>
+<li><a href="#разница-diff">🔍 Разница (diff)</a></li>
+<li><a href="#теги">🏷️ Теги</a></li>
+<li><a href="#stash-спрятать-изменения">📦 Stash — спрятать изменения</a></li>
+<li><a href="#remote-репозитории">🗂️ Remote-репозитории</a></li>
+<li><a href="#подмодули-submodules">📚 Подмодули (submodules)</a></li>
+<li><a href="#продвинутые-команды">🔬 Продвинутые команды</a><ul>
+<li><a href="#cherry-pick">cherry-pick</a></li>
+<li><a href="#bisect-бинарный-поиск-бага">bisect — бинарный поиск бага</a></li>
+<li><a href="#reflog-спасение-потерянного">reflog — спасение потерянного</a></li>
+<li><a href="#blame-grep">blame / grep</a></li>
+<li><a href="#worktree-несколько-рабочих-деревьев">worktree — несколько рабочих деревьев</a></li>
+<li><a href="#restore-новые-команды">restore (новые команды)</a></li>
+</ul>
+</li>
+<li><a href="#игнорирование-файлов-gitignore">📊 Игнорирование файлов (.gitignore)</a><ul>
+<li><a href="#управление-ignore">Управление ignore</a></li>
+</ul>
+</li>
+<li><a href="#алиасы-полезные">🎯 Алиасы (полезные)</a></li>
+<li><a href="#лучшие-практики-workflow">🌟 Лучшие практики (workflow)</a><ul>
+<li><a href="#1-классический-feature-branch">1. Классический feature-branch</a></li>
+<li><a href="#2-коммиты-как-писать-сообщения">2. Коммиты: как писать сообщения</a></li>
+<li><a href="#3-перед-коммитом">3. Перед коммитом</a></li>
+<li><a href="#4-синхронизация-с-remote">4. Синхронизация с remote</a></li>
+<li><a href="#5-чистая-история-перед-pr">5. Чистая история перед PR</a></li>
+</ul>
+</li>
+<li><a href="#github-gitlab-через-cli-gh">🐙 GitHub / GitLab через CLI (gh)</a></li>
+<li><a href="#аварийные-ситуации">🚨 Аварийные ситуации</a><ul>
+<li><a href="#я-закоммитил-не-туда">«Я закоммитил не туда»</a></li>
+<li><a href="#я-потерял-коммит-после-reset-hard">«Я потерял коммит после reset &ndash;hard»</a></li>
+<li><a href="#случайно-сделал-commit-amend-и-запушил">«Случайно сделал commit &ndash;amend и запушил»</a></li>
+<li><a href="#хочу-удалить-файл-из-истории-например-секрет">«Хочу удалить файл из истории» (например, секрет)</a></li>
+<li><a href="#слияние-пошло-не-так-хочу-всё-вернуть">«Слияние пошло не так, хочу всё вернуть»</a></li>
+<li><a href="#случайно-удалил-ветку">«Случайно удалил ветку»</a></li>
+</ul>
+</li>
+<li><a href="#полезные-запросы">📊 Полезные запросы</a></li>
+<li><a href="#git-hooks-хуки">🪝 Git Hooks (хуки)</a></li>
+<li><a href="#полезные-советы">💡 Полезные советы</a></li>
+<li><a href="#ссылки">🔗 Ссылки</a></li>
+</ul>
+</li>
+</ul>
+</div>
+
+      </div>
+    </details>
+  </aside>
+</div>
+
+<button class="back-top" id="backTop" aria-label="Наверх">↑</button>
+
+<script src="assets/search.js"></script>
+<script src="assets/page.js"></script>
+</body>
+</html>

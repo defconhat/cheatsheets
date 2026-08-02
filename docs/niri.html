@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Niri — Шпаргалки</title>
+<link rel="stylesheet" href="assets/style.css">
+<link rel="stylesheet" href="assets/pygments.css">
+</head>
+<body>
+<div class="layout">
+  <aside class="sidebar">
+    <a href="index.html" class="brand">📌 Шпаргалки</a>
+    <nav class="nav">
+<a href="yazi.html" class="nav-item"><span class="nav-ico">📦</span>Yazi</a>
+<a href="neovim.html" class="nav-item"><span class="nav-ico">📘</span>Neovim (LazyVim)</a>
+<a href="niri.html" class="nav-item active"><span class="nav-ico">🪟</span>Niri</a>
+<a href="tmux.html" class="nav-item"><span class="nav-ico">🪟</span>Tmux</a>
+<a href="bash.html" class="nav-item"><span class="nav-ico">🐚</span>Bash</a>
+<a href="git.html" class="nav-item"><span class="nav-ico">🔀</span>Git</a>
+<a href="terminal.html" class="nav-item"><span class="nav-ico">🖥️</span>Терминал Linux</a>
+<a href="powershell.html" class="nav-item"><span class="nav-ico">💻</span>PowerShell</a>
+<a href="cmd.html" class="nav-item"><span class="nav-ico">🪟</span>CMD (cmd.exe)</a>
+<a href="python.html" class="nav-item"><span class="nav-ico">🐍</span>Python</a>
+<a href="systemd.html" class="nav-item"><span class="nav-ico">⚙️</span>systemd</a>
+<a href="ssh.html" class="nav-item"><span class="nav-ico">🔐</span>SSH</a>
+<a href="make-cmake.html" class="nav-item"><span class="nav-ico">🔨</span>Make / CMake</a>
+<a href="docker.html" class="nav-item"><span class="nav-ico">🐳</span>Docker</a>
+<a href="pacman.html" class="nav-item"><span class="nav-ico">📦</span>pacman / yay / paru</a>
+<a href="spark.html" class="nav-item"><span class="nav-ico">⚡</span>Apache Spark / PySpark</a>
+<a href="markdown.html" class="nav-item"><span class="nav-ico">📝</span>Markdown</a>
+<a href="regex.html" class="nav-item"><span class="nav-ico">🔍</span>Регулярные выражения</a>
+<a href="jq-json.html" class="nav-item"><span class="nav-ico">🔧</span>jq + JSON</a>
+<a href="awk-sed.html" class="nav-item"><span class="nav-ico">✂️</span>awk / sed</a>
+<a href="airflow.html" class="nav-item"><span class="nav-ico">🌪️</span>Apache Airflow</a>
+<a href="http-curl.html" class="nav-item"><span class="nav-ico">🌐</span>HTTP / curl</a>
+<a href="yaml.html" class="nav-item"><span class="nav-ico">📄</span>YAML</a>
+<a href="vscode.html" class="nav-item"><span class="nav-ico">💻</span>VS Code</a>
+<a href="cron.html" class="nav-item"><span class="nav-ico">⏰</span>cron</a>
+<a href="fzf-zoxide.html" class="nav-item"><span class="nav-ico">🔎</span>fzf + zoxide</a>
+<a href="minikube-k8s.html" class="nav-item"><span class="nav-ico">☸️</span>Minikube / Kubernetes</a>
+<a href="cicd.html" class="nav-item"><span class="nav-ico">🦊</span>GitLab CI / GitHub Actions</a>
+<a href="nginx.html" class="nav-item"><span class="nav-ico">🌐</span>nginx</a>
+<a href="dbt.html" class="nav-item"><span class="nav-ico">🔧</span>dbt</a>
+<a href="kafka.html" class="nav-item"><span class="nav-ico">🐘</span>Apache Kafka</a>
+<a href="prometheus-grafana.html" class="nav-item"><span class="nav-ico">📊</span>Prometheus / Grafana</a>
+<a href="iceberg-nessie.html" class="nav-item"><span class="nav-ico">🧊</span>Iceberg / Nessie</a>
+<a href="impala.html" class="nav-item"><span class="nav-ico">🐬</span>Apache Impala</a>
+<a href="terraform.html" class="nav-item"><span class="nav-ico">🏗️</span>Terraform</a>
+<a href="linux-internals.html" class="nav-item"><span class="nav-ico">🐧</span>Linux Internals</a>
+<a href="miscellaneous.html" class="nav-item"><span class="nav-ico">🧰</span>Miscellaneous</a>
+<a href="python-automation-libs.html" class="nav-item"><span class="nav-ico">🐍</span>Python: авт-ция (10 libs)</a>
+<a href="eza.html" class="nav-item"><span class="nav-ico">🌈</span>eza</a>
+<a href="dbeaver.html" class="nav-item"><span class="nav-ico">🗄️</span>DBeaver</a>
+<a href="zcode.html" class="nav-item"><span class="nav-ico">🤖</span>ZCode</a>
+<a href="warp.html" class="nav-item"><span class="nav-ico">🚀</span>Warp</a>
+<a href="agentic-ai-dev.html" class="nav-item"><span class="nav-ico">🤝</span>Агентная разработка с ИИ</a>
+    </nav>
+  </aside>
+
+  <main class="content">
+    <article>
+<h1 id="niri-шпаргалка-по-горячим-клавишам">🪟 Niri — шпаргалка по горячим клавишам<a class="headerlink" href="#niri-шпаргалка-по-горячим-клавишам" title="Ссылка">#</a></h1>
+<blockquote>
+<p><strong>Niri</strong> — scrollable-tiling Wayland compositor.
+Окна выкладываются в бесконечную горизонтальную «ленту» — не перекрывают друг друга.
+Дом: https://github.com/YaLTeR/niri · Документация: https://github.com/YaLTeR/niri/wiki</p>
+<p>⚠️ В конфиге используются ключи-модификаторы:
+<code>Mod</code> = Super (Windows key) — по умолчанию в niri.
+Сменить можно в <code>config.kdl</code> (<code>modifier = "Super"</code> → <code>"Alt"</code> и т.п.)</p>
+</blockquote>
+<hr />
+<h2 id="главное-концепция-ленты">🪟 Главное — концепция ленты<a class="headerlink" href="#главное-концепция-ленты" title="Ссылка">#</a></h2>
+<ul>
+<li>Окна в одном workspace расположены <strong>в ряд по горизонтали</strong> (scrollable tiling).</li>
+<li>Переключаетесь между ними, прокручивая ленту влево/вправо.</li>
+<li>Нет «стека» и перекрытий — каждое окно видно целиком.</li>
+<li>Workspaces независимы, у каждого своя лента.</li>
+</ul>
+<hr />
+<h2 id="запуск-управление-сессией">🚀 Запуск / управление сессией<a class="headerlink" href="#запуск-управление-сессией" title="Ссылка">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Клавиша</th>
+<th>Действие</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>niri</code></td>
+<td>Запустить niri (если вручную)</td>
+</tr>
+<tr>
+<td><code>Mod+Shift+E</code> / <code>Mod+Ctrl+Esc</code> (настраивается)</td>
+<td>Выйти из сессии (выход/перезагрузка compositor&rsquo;а)</td>
+</tr>
+<tr>
+<td><code>Mod+Shift+/</code> (<code>?</code>)</td>
+<td>Показать шпаргалку (встроенный overview hotkeys)</td>
+</tr>
+<tr>
+<td><code>Mod+Shift+P</code></td>
+<td>Power menu (если настроено)</td>
+</tr>
+<tr>
+<td><code>niri msg action --help</code></td>
+<td>Список доступных действий через CLI</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="окна">🖼️ Окна<a class="headerlink" href="#окна" title="Ссылка">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Клавиша</th>
+<th>Действие</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Mod+T</code></td>
+<td>Открыть терминал (по умолчанию <code>alacritty</code>)</td>
+</tr>
+<tr>
+<td><code>Mod+D</code></td>
+<td>Запустить приложение (лаунчер, обычно <code>fuzzel</code>/<code>wofi</code>/<code>anyrun</code>)</td>
+</tr>
+<tr>
+<td><code>Mod+Q</code></td>
+<td>Закрыть окно</td>
+</tr>
+<tr>
+<td><code>Mod+Shift+H</code> / <code>Mod+Shift+L</code></td>
+<td>Переместить окно влево/вправо по ленте</td>
+</tr>
+<tr>
+<td><code>Mod+H</code> / <code>Mod+L</code> (или <code>←</code>/<code>→</code>)</td>
+<td>Фокус на окно влево/вправо</td>
+</tr>
+<tr>
+<td><code>Mod+K</code> / <code>Mod+J</code> (или <code>↑</code>/<code>↓</code>)</td>
+<td>Перемещение фокуса в столбцах (если окна в столбце)</td>
+</tr>
+<tr>
+<td><code>Mod+Ctrl+H/L</code></td>
+<td>Поменять окно местами влево/вправо</td>
+</tr>
+<tr>
+<td><code>Mod+R</code></td>
+<td>Войти в режим resize (изменить ширину)</td>
+</tr>
+<tr>
+<td><code>Mod+F</code> (или <code>Mod+M</code>)</td>
+<td>Полноэкранный режим (maximize column)</td>
+</tr>
+<tr>
+<td><code>Mod+C</code></td>
+<td>Центрировать столбец (centre column)</td>
+</tr>
+<tr>
+<td><code>Mod+-</code> / <code>Mod+=</code></td>
+<td>Уменьшить / увеличить ширину столбца</td>
+</tr>
+<tr>
+<td><code>Mod+W</code></td>
+<td>Wide column (растянуть столбец)</td>
+</tr>
+<tr>
+<td><code>Mod+[</code> / <code>Mod+]</code></td>
+<td>Move window to column left / right</td>
+</tr>
+<tr>
+<td><code>Mod+Shift+↑/↓</code></td>
+<td>Сдвинуть окно вверх/вниз внутри столбца</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="workspaces-виртуальные-рабочие-столы">🖥️ Workspaces (виртуальные рабочие столы)<a class="headerlink" href="#workspaces-виртуальные-рабочие-столы" title="Ссылка">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Клавиша</th>
+<th>Действие</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Mod+1</code> … <code>Mod+9</code> / <code>Mod+0</code></td>
+<td>Перейти на workspace №1–10 (по умолчанию 10)</td>
+</tr>
+<tr>
+<td><code>Mod+Tab</code> (или <code>Mod+Left/Right</code> в некоторых конфигах)</td>
+<td>Предыдущий / следующий workspace</td>
+</tr>
+<tr>
+<td><code>Mod+Shift+1..0</code></td>
+<td>Переместить окно на workspace №1–10</td>
+</tr>
+<tr>
+<td><code>Mod+Wheel</code></td>
+<td>Переключение workspaces колесом мыши</td>
+</tr>
+<tr>
+<td><code>Mod+Scroll</code> на фоне</td>
+<td>Переключение workspaces колесом</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="прокрутка-ленты-обзор">📜 Прокрутка ленты / обзор<a class="headerlink" href="#прокрутка-ленты-обзор" title="Ссылка">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Клавиша</th>
+<th>Действие</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Mod+O</code> (overview)</td>
+<td>Обзор всех окон/workspaces (как Expo)</td>
+</tr>
+<tr>
+<td><code>Mod+Shift+←</code> / <code>→</code></td>
+<td>Прокрутить ленту влево / вправо</td>
+</tr>
+<tr>
+<td><code>Mod+PgUp</code> / <code>Mod+PgDn</code></td>
+<td>Прокрутить ленту</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="floating-fullscreen">🪟 Floating / Fullscreen<a class="headerlink" href="#floating-fullscreen" title="Ссылка">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Клавиша</th>
+<th>Действие</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Mod+Shift+F</code> / <code>Mod+V</code></td>
+<td>Toggle floating (поверх ленты)</td>
+</tr>
+<tr>
+<td><code>Mod+F</code></td>
+<td>Toggle maximize (полная ширина столбца)</td>
+</tr>
+<tr>
+<td><code>Mod+Shift+Space</code></td>
+<td>Toggle column width preset (у некоторых конфигов)</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="мультимедиа-клавиши-если-настроены">🔊 Мультимедиа клавиши (если настроены)<a class="headerlink" href="#мультимедиа-клавиши-если-настроены" title="Ссылка">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Клавиша</th>
+<th>Действие</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>XF86AudioRaiseVolume</code></td>
+<td>Громкость +</td>
+</tr>
+<tr>
+<td><code>XF86AudioLowerVolume</code></td>
+<td>Громкость −</td>
+</tr>
+<tr>
+<td><code>XF86AudioMute</code></td>
+<td>Mute</td>
+</tr>
+<tr>
+<td><code>XF86AudioPlay/Pause</code></td>
+<td>Play/Pause</td>
+</tr>
+<tr>
+<td><code>XF86AudioNext</code> / <code>Prev</code></td>
+<td>Следующий / предыдущий трек</td>
+</tr>
+<tr>
+<td><code>XF86MonBrightnessUp/Down</code></td>
+<td>Яркость монитора + / −</td>
+</tr>
+<tr>
+<td><code>Print</code> / <code>Mod+Print</code></td>
+<td>Скриншот (через <code>grim</code> / <code>grimblast</code> / <code>satty</code>)</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="мышь">🖱️ Мышь<a class="headerlink" href="#мышь" title="Ссылка">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Действие</th>
+<th>Эффект</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Mod+ЛКМ</code> (drag)</td>
+<td>Переместить окно (move)</td>
+</tr>
+<tr>
+<td><code>Mod+ПКМ</code> (drag)</td>
+<td>Изменить размер окна (resize)</td>
+</tr>
+<tr>
+<td><code>Mod+Колесо</code></td>
+<td>Переключение workspaces</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="cli-niri-msg">🛠️ CLI — <code>niri msg</code><a class="headerlink" href="#cli-niri-msg" title="Ссылка">#</a></h2>
+<p>Управление niri из терминала (скрипты, keybind&rsquo;ы, ибар&rsquo;ы):</p>
+<table>
+<thead>
+<tr>
+<th>Команда</th>
+<th>Действие</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>niri msg action focus-window-left</code></td>
+<td>Фокус влево</td>
+</tr>
+<tr>
+<td><code>niri msg action focus-window-right</code></td>
+<td>Фокус вправо</td>
+</tr>
+<tr>
+<td><code>niri msg action focus-workspace-down</code></td>
+<td>Следующий workspace</td>
+</tr>
+<tr>
+<td><code>niri msg action move-column-left/right</code></td>
+<td>Двигать столбец</td>
+</tr>
+<tr>
+<td><code>niri msg action close-window</code></td>
+<td>Закрыть окно</td>
+</tr>
+<tr>
+<td><code>niri msg action maximize-column</code></td>
+<td>Maximize</td>
+</tr>
+<tr>
+<td><code>niri msg action do-screen-transition</code></td>
+<td>Эффект перехода</td>
+</tr>
+<tr>
+<td><code>niri msg workspaces</code></td>
+<td>Вывести список workspaces (для status bar)</td>
+</tr>
+<tr>
+<td><code>niri msg focused-window</code></td>
+<td>Информация об активном окне</td>
+</tr>
+<tr>
+<td><code>niri msg event-stream</code></td>
+<td>Поток событий (для waybar/пагинация)</td>
+</tr>
+<tr>
+<td><code>niri validate</code></td>
+<td>Проверить конфиг на ошибки</td>
+</tr>
+<tr>
+<td><code>niri msg version</code></td>
+<td>Версия niri</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="конфигурация">⚙️ Конфигурация<a class="headerlink" href="#конфигурация" title="Ссылка">#</a></h2>
+<p>Расположение: <code>~/.config/niri/config.kdl</code> (формат KDL)</p>
+<p>Пример фрагмента:</p>
+<div class="highlight"><pre><span></span><code>// Модификатор по умолчанию
+Mod T  { spawn &quot;alacritty&quot;; }
+Mod D  { spawn &quot;fuzzel&quot;; }
+Mod Q  { close-window; }
+Mod Shift+E { quit; }
+
+// Фокус
+Mod H { focus-column-left; }
+Mod L { focus-column-right; }
+Mod K { focus-window-up; }
+Mod J { focus-window-down; }
+
+// Workspaces
+Mod 1 { focus-workspace 1; }
+Mod 2 { focus-workspace 2; }
+Mod Shift+1 { move-column-to-workspace 1; }
+
+// Скриншот
+Print { spawn &quot;grimblast&quot; &quot;copy&quot; &quot;area&quot;; }
+
+// Громкость
+XF86AudioRaiseVolume { spawn &quot;wpctl&quot; &quot;set-volume&quot; &quot;@DEFAULT_AUDIO_SINK@&quot; &quot;5%+&quot;; }
+XF86AudioMute        { spawn &quot;wpctl&quot; &quot;set-mute&quot;   &quot;@DEFAULT_AUDIO_SINK@&quot; &quot;toggle&quot;; }
+</code></pre></div>
+
+<p>Проверка конфига:</p>
+<div class="highlight"><pre><span></span><code>niri<span class="w"> </span>validate
+</code></pre></div>
+
+<p>Изменения применяются <strong>на лету</strong> — niri автоматически перезагружает конфиг при сохранении файла.</p>
+<hr />
+<h2 id="типичный-стек-с-niri">🧩 Типичный стек с niri<a class="headerlink" href="#типичный-стек-с-niri" title="Ссылка">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Компонент</th>
+<th>Что</th>
+<th>Примеры</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Бар</td>
+<td>status bar</td>
+<td><code>waybar</code>, <code>ironbar</code>, <code>fnott</code></td>
+</tr>
+<tr>
+<td>Лаунчер</td>
+<td>запуск приложений</td>
+<td><code>fuzzel</code>, <code>wofi</code>, <code>anyrun</code>, <code>tofi</code></td>
+</tr>
+<tr>
+<td>Уведомления</td>
+<td>notification daemon</td>
+<td><code>mako</code>, <code>dunst</code>, <code>swaync</code></td>
+</tr>
+<tr>
+<td>Обои</td>
+<td>wallpaper</td>
+<td><code>swaybg</code>, <code>swww</code>, <code>hyprpaper</code>-like</td>
+</tr>
+<tr>
+<td>Скриншоты</td>
+<td>screenshot</td>
+<td><code>grim</code> + <code>slurp</code>, <code>grimblast</code>, <code>satty</code></td>
+</tr>
+<tr>
+<td>Блокировка экрана</td>
+<td>lockscreen</td>
+<td><code>swaylock</code>, <code>hyprlock</code></td>
+</tr>
+<tr>
+<td>Idle</td>
+<td>энергосбережение</td>
+<td><code>swayidle</code></td>
+</tr>
+<tr>
+<td>Polkit</td>
+<td>авторизация</td>
+<td><code>polkit-gnome</code>, <code>hyprpolkitagent</code></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="полезные-советы">💡 Полезные советы<a class="headerlink" href="#полезные-советы" title="Ссылка">#</a></h2>
+<ol>
+<li><strong>Встроенный overview</strong> — <code>Mod+Shift+/</code> (или <code>Mod+O</code>) показывает все
+   столбцы/окна текущего workspace.</li>
+<li><strong>Нет overlays/stacking</strong> — не пытайтесь делать «плавающие» окна как в
+   i3/sway; используйте floating-режим (<code>Mod+Shift+F</code>) для диалогов.</li>
+<li><strong>Многомониторность</strong> — каждый монитор имеет свой набор workspaces.</li>
+<li><strong>Анимации</strong> настраиваются в секции <code>environment</code> / <code>animations</code>.</li>
+<li><strong>niri ipc</strong> — <code>niri msg event-stream</code> даёт JSON-поток для waybar.</li>
+<li><strong>waybar</strong>: используйте модуль <code>custom/niri</code> или <code>niri/workspaces</code> —
+   есть готовые примеры в репо niri.</li>
+<li><strong>Проверка конфига</strong> перед перезапуском — <code>niri validate</code>.</li>
+<li><strong>Документация по всем action&rsquo;ам</strong> — <code>niri msg action --help</code> и
+   https://github.com/YaLTeR/niri/wiki/Configuration:-Key-Bindings</li>
+<li><strong>Шпаргалку внутри niri</strong> можно вывести в floating окне через конфиг —
+   смотрите раздел Hotkey-Overlay в wiki.</li>
+<li><strong>Скрипт быстрого переключения раскладки</strong> — <code>swaywsr</code>,
+    <code>kbd-switcher</code>, или <code>hyprctl</code>-аналог через <code>niri msg</code>.</li>
+</ol>
+<hr />
+<h2 id="ссылки">🔗 Ссылки<a class="headerlink" href="#ссылки" title="Ссылка">#</a></h2>
+<ul>
+<li>Niri GitHub: https://github.com/YaLTeR/niri</li>
+<li>Wiki (конфиг): https://github.com/YaLTeR/niri/wiki</li>
+<li>Key bindings: https://github.com/YaLTeR/niri/wiki/Configuration:-Key-Bindings</li>
+<li>Default config: https://github.com/YaLTeR/niri/wiki/Configuration:-Sample-Config</li>
+<li>Сообщество / примеры: https://github.com/sorchix/niri-config (и др.)</li>
+</ul>
+<hr />
+<p><em>Сгенерировано как шпаргалка. Niri активно развивается —
+актуальные action&rsquo;ы смотрите через <code>niri msg action --help</code> и в wiki.</em></p>
+    </article>
+    <nav class="pagination">
+      <a class="pager prev" href="neovim.html">← Neovim (LazyVim)</a>
+      <a class="pager next" href="tmux.html">Tmux →</a>
+    </nav>
+  </main>
+
+  <aside class="toc">
+    <details open>
+      <summary>📑 Оглавление</summary>
+      <div class="toc-list">
+<div class="toc">
+<ul>
+<li><a href="#niri-шпаргалка-по-горячим-клавишам">🪟 Niri — шпаргалка по горячим клавишам</a><ul>
+<li><a href="#главное-концепция-ленты">🪟 Главное — концепция ленты</a></li>
+<li><a href="#запуск-управление-сессией">🚀 Запуск / управление сессией</a></li>
+<li><a href="#окна">🖼️ Окна</a></li>
+<li><a href="#workspaces-виртуальные-рабочие-столы">🖥️ Workspaces (виртуальные рабочие столы)</a></li>
+<li><a href="#прокрутка-ленты-обзор">📜 Прокрутка ленты / обзор</a></li>
+<li><a href="#floating-fullscreen">🪟 Floating / Fullscreen</a></li>
+<li><a href="#мультимедиа-клавиши-если-настроены">🔊 Мультимедиа клавиши (если настроены)</a></li>
+<li><a href="#мышь">🖱️ Мышь</a></li>
+<li><a href="#cli-niri-msg">🛠️ CLI — niri msg</a></li>
+<li><a href="#конфигурация">⚙️ Конфигурация</a></li>
+<li><a href="#типичный-стек-с-niri">🧩 Типичный стек с niri</a></li>
+<li><a href="#полезные-советы">💡 Полезные советы</a></li>
+<li><a href="#ссылки">🔗 Ссылки</a></li>
+</ul>
+</li>
+</ul>
+</div>
+
+      </div>
+    </details>
+  </aside>
+</div>
+
+<button class="back-top" id="backTop" aria-label="Наверх">↑</button>
+
+<script src="assets/search.js"></script>
+<script src="assets/page.js"></script>
+</body>
+</html>

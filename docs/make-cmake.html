@@ -1,0 +1,1570 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Make / CMake — Шпаргалки</title>
+<link rel="stylesheet" href="assets/style.css">
+<link rel="stylesheet" href="assets/pygments.css">
+</head>
+<body>
+<div class="layout">
+  <aside class="sidebar">
+    <a href="index.html" class="brand">📌 Шпаргалки</a>
+    <nav class="nav">
+<a href="yazi.html" class="nav-item"><span class="nav-ico">📦</span>Yazi</a>
+<a href="neovim.html" class="nav-item"><span class="nav-ico">📘</span>Neovim (LazyVim)</a>
+<a href="niri.html" class="nav-item"><span class="nav-ico">🪟</span>Niri</a>
+<a href="tmux.html" class="nav-item"><span class="nav-ico">🪟</span>Tmux</a>
+<a href="bash.html" class="nav-item"><span class="nav-ico">🐚</span>Bash</a>
+<a href="git.html" class="nav-item"><span class="nav-ico">🔀</span>Git</a>
+<a href="terminal.html" class="nav-item"><span class="nav-ico">🖥️</span>Терминал Linux</a>
+<a href="powershell.html" class="nav-item"><span class="nav-ico">💻</span>PowerShell</a>
+<a href="cmd.html" class="nav-item"><span class="nav-ico">🪟</span>CMD (cmd.exe)</a>
+<a href="python.html" class="nav-item"><span class="nav-ico">🐍</span>Python</a>
+<a href="systemd.html" class="nav-item"><span class="nav-ico">⚙️</span>systemd</a>
+<a href="ssh.html" class="nav-item"><span class="nav-ico">🔐</span>SSH</a>
+<a href="make-cmake.html" class="nav-item active"><span class="nav-ico">🔨</span>Make / CMake</a>
+<a href="docker.html" class="nav-item"><span class="nav-ico">🐳</span>Docker</a>
+<a href="pacman.html" class="nav-item"><span class="nav-ico">📦</span>pacman / yay / paru</a>
+<a href="spark.html" class="nav-item"><span class="nav-ico">⚡</span>Apache Spark / PySpark</a>
+<a href="markdown.html" class="nav-item"><span class="nav-ico">📝</span>Markdown</a>
+<a href="regex.html" class="nav-item"><span class="nav-ico">🔍</span>Регулярные выражения</a>
+<a href="jq-json.html" class="nav-item"><span class="nav-ico">🔧</span>jq + JSON</a>
+<a href="awk-sed.html" class="nav-item"><span class="nav-ico">✂️</span>awk / sed</a>
+<a href="airflow.html" class="nav-item"><span class="nav-ico">🌪️</span>Apache Airflow</a>
+<a href="http-curl.html" class="nav-item"><span class="nav-ico">🌐</span>HTTP / curl</a>
+<a href="yaml.html" class="nav-item"><span class="nav-ico">📄</span>YAML</a>
+<a href="vscode.html" class="nav-item"><span class="nav-ico">💻</span>VS Code</a>
+<a href="cron.html" class="nav-item"><span class="nav-ico">⏰</span>cron</a>
+<a href="fzf-zoxide.html" class="nav-item"><span class="nav-ico">🔎</span>fzf + zoxide</a>
+<a href="minikube-k8s.html" class="nav-item"><span class="nav-ico">☸️</span>Minikube / Kubernetes</a>
+<a href="cicd.html" class="nav-item"><span class="nav-ico">🦊</span>GitLab CI / GitHub Actions</a>
+<a href="nginx.html" class="nav-item"><span class="nav-ico">🌐</span>nginx</a>
+<a href="dbt.html" class="nav-item"><span class="nav-ico">🔧</span>dbt</a>
+<a href="kafka.html" class="nav-item"><span class="nav-ico">🐘</span>Apache Kafka</a>
+<a href="prometheus-grafana.html" class="nav-item"><span class="nav-ico">📊</span>Prometheus / Grafana</a>
+<a href="iceberg-nessie.html" class="nav-item"><span class="nav-ico">🧊</span>Iceberg / Nessie</a>
+<a href="impala.html" class="nav-item"><span class="nav-ico">🐬</span>Apache Impala</a>
+<a href="terraform.html" class="nav-item"><span class="nav-ico">🏗️</span>Terraform</a>
+<a href="linux-internals.html" class="nav-item"><span class="nav-ico">🐧</span>Linux Internals</a>
+<a href="miscellaneous.html" class="nav-item"><span class="nav-ico">🧰</span>Miscellaneous</a>
+<a href="python-automation-libs.html" class="nav-item"><span class="nav-ico">🐍</span>Python: авт-ция (10 libs)</a>
+<a href="eza.html" class="nav-item"><span class="nav-ico">🌈</span>eza</a>
+<a href="dbeaver.html" class="nav-item"><span class="nav-ico">🗄️</span>DBeaver</a>
+<a href="zcode.html" class="nav-item"><span class="nav-ico">🤖</span>ZCode</a>
+<a href="warp.html" class="nav-item"><span class="nav-ico">🚀</span>Warp</a>
+<a href="agentic-ai-dev.html" class="nav-item"><span class="nav-ico">🤝</span>Агентная разработка с ИИ</a>
+    </nav>
+  </aside>
+
+  <main class="content">
+    <article>
+<h1 id="make-cmake-шпаргалка-по-системам-сборки">🔨 Make / CMake — шпаргалка по системам сборки<a class="headerlink" href="#make-cmake-шпаргалка-по-системам-сборки" title="Ссылка">#</a></h1>
+<blockquote>
+<p><strong>Make</strong> — классическая утилита сборки (описывает зависимости и команды).
+<strong>CMake</strong> — генератор систем сборки (создаёт Makefile/Ninja/VS-проекты из <code>CMakeLists.txt</code>).</p>
+<p>Документация:
+- Make: https://www.gnu.org/software/make/manual
+- CMake: https://cmake.org/cmake/help/latest</p>
+</blockquote>
+<hr />
+<h1 id="часть-1-make">🛠️ ЧАСТЬ 1. MAKE<a class="headerlink" href="#часть-1-make" title="Ссылка">#</a></h1>
+<h2 id="главные-понятия">🔑 Главные понятия<a class="headerlink" href="#главные-понятия" title="Ссылка">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Термин</th>
+<th>Что значит</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Makefile</strong></td>
+<td>Файл с правилами сборки</td>
+</tr>
+<tr>
+<td><strong>target (цель)</strong></td>
+<td>То, что можно собрать (<code>make all</code>, <code>make clean</code>)</td>
+</tr>
+<tr>
+<td><strong>prerequisite (зависимость)</strong></td>
+<td>Файлы/цели, от которых зависит target</td>
+</tr>
+<tr>
+<td><strong>recipe (рецепт)</strong></td>
+<td>Команды для сборки target (с TAB!)</td>
+</tr>
+<tr>
+<td><strong>variable</strong></td>
+<td><code>CC = gcc</code></td>
+</tr>
+<tr>
+<td><strong>automatic variable</strong></td>
+<td><code>$@</code>, <code>$&lt;</code>, <code>$^</code></td>
+</tr>
+<tr>
+<td><strong>.PHONY</strong></td>
+<td>Цель, не являющаяся файлом (always run)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Главное правило Make</strong>: цель пересобирается, если она старше любой зависимости.</p>
+<hr />
+<h2 id="структура-makefile">📝 Структура Makefile<a class="headerlink" href="#структура-makefile" title="Ссылка">#</a></h2>
+<div class="highlight"><pre><span></span><code><span class="c"># Комментарий</span>
+
+<span class="c"># Переменные</span>
+<span class="nv">CC</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>gcc
+<span class="nv">CFLAGS</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>-Wall<span class="w"> </span>-Wextra<span class="w"> </span>-g<span class="w"> </span>-O2
+<span class="nv">LDFLAGS</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>-lm
+<span class="nv">TARGET</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>myapp
+<span class="nv">SRC</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">$(</span>wildcard<span class="w"> </span>*.c<span class="k">)</span>
+<span class="nv">OBJ</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">$(</span>SRC:.c<span class="o">=</span>.o<span class="k">)</span>
+
+<span class="c"># Правило (внимание: TAB перед командой, НЕ пробелы!)</span>
+<span class="nf">target</span><span class="o">:</span><span class="w"> </span><span class="n">prerequisites</span>
+<span class="err">&lt;TAB&gt;command1</span>
+<span class="err">&lt;TAB&gt;command2</span>
+
+<span class="c"># Первое правило — цель по умолчанию (make без аргументов)</span>
+<span class="nf">all</span><span class="o">:</span><span class="w"> </span><span class="k">$(</span><span class="nv">TARGET</span><span class="k">)</span>
+
+<span class="nf">$(TARGET)</span><span class="o">:</span><span class="w"> </span><span class="k">$(</span><span class="nv">OBJ</span><span class="k">)</span>
+<span class="w">    </span><span class="k">$(</span>CC<span class="k">)</span><span class="w"> </span><span class="k">$(</span>OBJ<span class="k">)</span><span class="w"> </span>-o<span class="w"> </span><span class="nv">$@</span><span class="w"> </span><span class="k">$(</span>LDFLAGS<span class="k">)</span>
+
+<span class="nf">%.o</span><span class="o">:</span><span class="w"> </span>%.<span class="n">c</span>
+<span class="w">    </span><span class="k">$(</span>CC<span class="k">)</span><span class="w"> </span><span class="k">$(</span>CFLAGS<span class="k">)</span><span class="w"> </span>-c<span class="w"> </span>$&lt;<span class="w"> </span>-o<span class="w"> </span><span class="nv">$@</span>
+
+<span class="nf">clean</span><span class="o">:</span>
+<span class="w">    </span>rm<span class="w"> </span>-f<span class="w"> </span><span class="k">$(</span>OBJ<span class="k">)</span><span class="w"> </span><span class="k">$(</span>TARGET<span class="k">)</span>
+
+<span class="nf">.PHONY</span><span class="o">:</span><span class="w"> </span><span class="n">all</span> <span class="n">clean</span>
+</code></pre></div>
+
+<blockquote>
+<p>⚠️ <strong>КРИТИЧНО</strong>: рецепты (команды) должны начинаться с <strong>TAB</strong>, а не пробелами.
+Самая частая ошибка: <code>make: *** missing separator. Stop.</code></p>
+</blockquote>
+<hr />
+<h2 id="команды-make">🚀 Команды make<a class="headerlink" href="#команды-make" title="Ссылка">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Команда</th>
+<th>Действие</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>make</code></td>
+<td>Собрать первую цель (обычно <code>all</code>)</td>
+</tr>
+<tr>
+<td><code>make target</code></td>
+<td>Собрать конкретную цель</td>
+</tr>
+<tr>
+<td><code>make -j4</code></td>
+<td>Параллельно (4 процесса)</td>
+</tr>
+<tr>
+<td><code>make -j$(nproc)</code></td>
+<td>Использовать все ядра</td>
+</tr>
+<tr>
+<td><code>make -f MyMakefile</code></td>
+<td>Указать файл</td>
+</tr>
+<tr>
+<td><code>make -C dir</code></td>
+<td>Перейти в каталог и запустить make</td>
+</tr>
+<tr>
+<td><code>make -C dir target</code></td>
+<td>С конкретной целью</td>
+</tr>
+<tr>
+<td><code>make clean</code></td>
+<td>Удалить артефакты сборки</td>
+</tr>
+<tr>
+<td><code>make install</code></td>
+<td>Установить (часто требует sudo)</td>
+</tr>
+<tr>
+<td><code>make -n</code> / <code>--dry-run</code></td>
+<td>Только показать команды, не выполнять</td>
+</tr>
+<tr>
+<td><code>make -t</code> / <code>--touch</code></td>
+<td>Отметить цели как свежие</td>
+</tr>
+<tr>
+<td><code>make -B</code> / <code>--always-make</code></td>
+<td>Принудительно пересобрать</td>
+</tr>
+<tr>
+<td><code>make -d</code></td>
+<td>Подробный отладочный вывод</td>
+</tr>
+<tr>
+<td><code>make --trace</code></td>
+<td>Показать порядок выполнения</td>
+</tr>
+<tr>
+<td><code>make VAR=value</code></td>
+<td>Переопределить переменную</td>
+</tr>
+<tr>
+<td><code>make -p</code></td>
+<td>База правил (все встроенные)</td>
+</tr>
+<tr>
+<td><code>make help</code></td>
+<td>(если в Makefile есть цель help)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="установка">Установка<a class="headerlink" href="#установка" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Arch / CachyOS</span>
+sudo<span class="w"> </span>pacman<span class="w"> </span>-S<span class="w"> </span>make<span class="w"> </span>gcc
+
+<span class="c1"># Debian/Ubuntu</span>
+sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>build-essential
+
+<span class="c1"># macOS (с Xcode Command Line Tools)</span>
+xcode-select<span class="w"> </span>--install
+
+<span class="c1"># Windows: через MSYS2, WSL или Chocolatey</span>
+choco<span class="w"> </span>install<span class="w"> </span>make
+</code></pre></div>
+
+<hr />
+<h2 id="переменные">🔤 Переменные<a class="headerlink" href="#переменные" title="Ссылка">#</a></h2>
+<div class="highlight"><pre><span></span><code><span class="c"># Присваивание</span>
+<span class="nv">CC</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>gcc<span class="w">               </span><span class="c1"># рекурсивное (ленивое, может быть медленным)</span>
+<span class="nv">CC</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span>gcc<span class="w">              </span><span class="c1"># простое (немедленное вычисление)</span>
+<span class="nv">CC</span><span class="w"> </span><span class="o">?=</span><span class="w"> </span>gcc<span class="w">              </span><span class="c1"># только если не задана</span>
+<span class="nv">CC</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span>-O2<span class="w">              </span><span class="c1"># добавить к значению</span>
+
+<span class="c"># Использование</span>
+<span class="k">$(</span><span class="nv">CC</span><span class="k">)</span><span class="w">                  </span><span class="c"># разворачивается в значение</span>
+<span class="err">${CC}</span><span class="w">                  </span><span class="c"># альтернативный синтаксис</span>
+<span class="err">$X</span><span class="w">                     </span><span class="c"># односимвольное имя (избегайте)</span>
+
+<span class="c"># Встроенные переменные</span>
+<span class="err">CC</span><span class="w">                     </span><span class="c"># C compiler (по умолчанию cc)</span>
+<span class="err">CXX</span><span class="w">                    </span><span class="c"># C++ compiler (g++)</span>
+<span class="err">CFLAGS</span><span class="w">                 </span><span class="c"># флаги C</span>
+<span class="err">CXXFLAGS</span><span class="w">               </span><span class="c"># флаги C++</span>
+<span class="err">LDFLAGS</span><span class="w">                </span><span class="c"># флаги линкера</span>
+<span class="err">LDLIBS</span><span class="w">                 </span><span class="c"># библиотеки</span>
+<span class="err">MAKE</span><span class="w">                   </span><span class="c"># имя make (для рекурсивных вызовов)</span>
+<span class="err">MAKEFLAGS</span><span class="w">              </span><span class="c"># флаги для вложенных вызовов</span>
+
+<span class="c"># Переопределение из командной строки (ПРИОРИТЕТ)</span>
+<span class="err">make</span><span class="w"> </span><span class="nv">CC</span><span class="o">=</span>clang<span class="w"> </span><span class="nv">CFLAGS</span><span class="o">=</span><span class="s2">&quot;-O3&quot;</span>
+</code></pre></div>
+
+<h3 id="автоматические-переменные">Автоматические переменные<a class="headerlink" href="#автоматические-переменные" title="Ссылка">#</a></h3>
+<table>
+<thead>
+<tr>
+<th>Переменная</th>
+<th>Значение</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>$@</code></td>
+<td>Имя цели</td>
+</tr>
+<tr>
+<td><code>$&lt;</code></td>
+<td>Имя первой зависимости</td>
+</tr>
+<tr>
+<td><code>$^</code></td>
+<td>Все зависимости (без дублей)</td>
+</tr>
+<tr>
+<td><code>$+</code></td>
+<td>Все зависимости (с дублями)</td>
+</tr>
+<tr>
+<td><code>$?</code></td>
+<td>Зависимости новее цели</td>
+</tr>
+<tr>
+<td><code>$*</code></td>
+<td>Stem (без расширения) для pattern rules</td>
+</tr>
+<tr>
+<td><code>$(@D)</code></td>
+<td>Каталог цели</td>
+</tr>
+<tr>
+<td><code>$(@F)</code></td>
+<td>Имя файла цели</td>
+</tr>
+<tr>
+<td><code>$$</code></td>
+<td>Буквальный <code>$</code> (для shell-переменных)</td>
+</tr>
+<tr>
+<td><code>$(MAKE)</code></td>
+<td>Имя make (рекомендуется для рекурсии)</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="виды-целей">🎯 Виды целей<a class="headerlink" href="#виды-целей" title="Ссылка">#</a></h2>
+<h3 id="1-файловые-цели-связаны-с-файлами">1. Файловые цели (связаны с файлами)<a class="headerlink" href="#1-файловые-цели-связаны-с-файлами" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="nf">app</span><span class="o">:</span><span class="w"> </span><span class="n">main</span>.<span class="n">o</span> <span class="n">utils</span>.<span class="n">o</span>
+<span class="w">    </span>gcc<span class="w"> </span>$^<span class="w"> </span>-o<span class="w"> </span><span class="nv">$@</span>
+
+<span class="nf">main.o</span><span class="o">:</span><span class="w"> </span><span class="n">main</span>.<span class="n">c</span> <span class="n">utils</span>.<span class="n">h</span>
+<span class="w">    </span>gcc<span class="w"> </span>-c<span class="w"> </span>$&lt;<span class="w"> </span>-o<span class="w"> </span><span class="nv">$@</span>
+
+<span class="nf">utils.o</span><span class="o">:</span><span class="w"> </span><span class="n">utils</span>.<span class="n">c</span> <span class="n">utils</span>.<span class="n">h</span>
+<span class="w">    </span>gcc<span class="w"> </span>-c<span class="w"> </span>$&lt;<span class="w"> </span>-o<span class="w"> </span><span class="nv">$@</span>
+</code></pre></div>
+
+<h3 id="2-phony-цели-не-файлы">2. Phony-цели (не файлы)<a class="headerlink" href="#2-phony-цели-не-файлы" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="nf">.PHONY</span><span class="o">:</span><span class="w"> </span><span class="n">all</span> <span class="n">clean</span> <span class="n">install</span> <span class="n">test</span>
+
+<span class="nf">all</span><span class="o">:</span><span class="w"> </span><span class="n">app</span>
+
+<span class="nf">clean</span><span class="o">:</span>
+<span class="w">    </span>rm<span class="w"> </span>-f<span class="w"> </span>*.o<span class="w"> </span>app
+
+<span class="nf">install</span><span class="o">:</span><span class="w"> </span><span class="n">app</span>
+<span class="w">    </span>install<span class="w"> </span>-m<span class="w"> </span><span class="m">755</span><span class="w"> </span>app<span class="w"> </span><span class="k">$(</span>DESTDIR<span class="k">)</span>/usr/bin/
+
+<span class="nf">test</span><span class="o">:</span>
+<span class="w">    </span>./app<span class="w"> </span>--test
+</code></pre></div>
+
+<blockquote>
+<p><code>.PHONY</code> гарантирует, что цель выполнится всегда, даже если есть файл с таким именем.</p>
+</blockquote>
+<h3 id="3-pattern-rules-шаблонные-правила">3. Pattern rules (шаблонные правила)<a class="headerlink" href="#3-pattern-rules-шаблонные-правила" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c"># Скомпилировать любой .c → .o</span>
+<span class="nf">%.o</span><span class="o">:</span><span class="w"> </span>%.<span class="n">c</span>
+<span class="w">    </span><span class="k">$(</span>CC<span class="k">)</span><span class="w"> </span><span class="k">$(</span>CFLAGS<span class="k">)</span><span class="w"> </span>-c<span class="w"> </span>$&lt;<span class="w"> </span>-o<span class="w"> </span><span class="nv">$@</span>
+
+<span class="c"># Несколько расширений</span>
+<span class="nf">%.html</span><span class="o">:</span><span class="w"> </span>%.<span class="n">md</span>
+<span class="w">    </span>pandoc<span class="w"> </span>$&lt;<span class="w"> </span>-o<span class="w"> </span><span class="nv">$@</span>
+
+<span class="c"># Stem (для нестандартных)</span>
+<span class="nf">%</span><span class="o">:</span><span class="w"> </span>%.<span class="n">in</span>
+<span class="w">    </span>sed<span class="w"> </span>-e<span class="w"> </span><span class="s1">&#39;s/@VERSION@/1.0/g&#39;</span><span class="w"> </span>$&lt;<span class="w"> </span>&gt;<span class="w"> </span><span class="nv">$@</span>
+</code></pre></div>
+
+<h3 id="4-static-pattern-rules-для-конкретных-файлов">4. Static pattern rules (для конкретных файлов)<a class="headerlink" href="#4-static-pattern-rules-для-конкретных-файлов" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="nv">OBJ</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>main.o<span class="w"> </span>utils.o<span class="w"> </span>config.o
+
+<span class="nf">$(OBJ)</span><span class="o">:</span><span class="w"> </span>%.<span class="n">o</span>: %.<span class="n">c</span>
+<span class="w">    </span><span class="k">$(</span>CC<span class="k">)</span><span class="w"> </span><span class="k">$(</span>CFLAGS<span class="k">)</span><span class="w"> </span>-c<span class="w"> </span>$&lt;<span class="w"> </span>-o<span class="w"> </span><span class="nv">$@</span>
+</code></pre></div>
+
+<hr />
+<h2 id="функции-make">🛠️ Функции make<a class="headerlink" href="#функции-make" title="Ссылка">#</a></h2>
+<div class="highlight"><pre><span></span><code><span class="c"># Подстановка значений</span>
+<span class="nv">SRC</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">$(</span>wildcard<span class="w"> </span>src/*.c<span class="k">)</span><span class="w">        </span><span class="c1"># все .c в src/</span>
+<span class="nv">OBJ</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">$(</span>patsubst<span class="w"> </span>src/%.c,build/%.o,<span class="k">$(</span>SRC<span class="k">))</span><span class="w">   </span><span class="c1"># src/a.c → build/a.o</span>
+<span class="nv">OBJ</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">$(</span>SRC:.c<span class="o">=</span>.o<span class="k">)</span><span class="w">               </span><span class="c1"># короткая форма</span>
+<span class="nv">OBJ</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">$(</span>SRC:%.c<span class="o">=</span>%.o<span class="k">)</span><span class="w">             </span><span class="c1"># явная форма</span>
+
+<span class="c"># Текстовые функции</span>
+<span class="k">$(</span><span class="nv">strip</span> <span class="k">$(</span><span class="nv">VAR</span><span class="k">))</span><span class="w">                  </span><span class="c"># убрать пробелы</span>
+<span class="k">$(</span><span class="nv">subst</span> <span class="nv">from</span>,<span class="nv">to</span>,<span class="nv">text</span><span class="k">)</span><span class="w">            </span><span class="c"># замена</span>
+<span class="k">$(</span><span class="nv">patsubst</span> %<span class="nv">.c</span>,%<span class="nv">.o</span>,<span class="k">$(</span><span class="nv">SRC</span><span class="k">))</span><span class="w">       </span><span class="c"># по шаблону</span>
+<span class="k">$(</span><span class="nv">filter</span> %<span class="nv">.c</span>,<span class="k">$(</span><span class="nv">FILES</span><span class="k">))</span><span class="w">           </span><span class="c"># только .c</span>
+<span class="k">$(</span><span class="nv">filter-out</span> %<span class="nv">.h</span>,<span class="k">$(</span><span class="nv">FILES</span><span class="k">))</span><span class="w">       </span><span class="c"># всё кроме .h</span>
+<span class="k">$(</span><span class="nv">words</span> <span class="k">$(</span><span class="nv">LIST</span><span class="k">))</span><span class="w">                 </span><span class="c"># число слов</span>
+<span class="k">$(</span><span class="nv">word</span> <span class="nv">2</span>,<span class="k">$(</span><span class="nv">LIST</span><span class="k">))</span><span class="w">                </span><span class="c"># 2-е слово</span>
+<span class="k">$(</span><span class="nv">firstword</span> <span class="k">$(</span><span class="nv">LIST</span><span class="k">))</span>
+<span class="k">$(</span><span class="nv">sort</span> <span class="k">$(</span><span class="nv">LIST</span><span class="k">))</span><span class="w">                  </span><span class="c"># уникальные отсортированные</span>
+
+<span class="c"># Пути</span>
+<span class="k">$(</span><span class="nv">dir</span> <span class="nv">src</span>/<span class="nv">a.c</span><span class="k">)</span><span class="w">                   </span><span class="c"># src/</span>
+<span class="k">$(</span><span class="nv">notdir</span> <span class="nv">src</span>/<span class="nv">a.c</span><span class="k">)</span><span class="w">                </span><span class="c"># a.c</span>
+<span class="k">$(</span><span class="nv">basename</span> <span class="nv">src</span>/<span class="nv">a.c</span><span class="k">)</span><span class="w">              </span><span class="c"># src/a</span>
+<span class="k">$(</span><span class="nv">suffix</span> <span class="nv">src</span>/<span class="nv">a.c</span><span class="k">)</span><span class="w">                </span><span class="c"># .c</span>
+<span class="k">$(</span><span class="nv">addprefix</span> <span class="nv">build</span>/,<span class="k">$(</span><span class="nv">OBJ</span><span class="k">))</span><span class="w">       </span><span class="c"># добавить префикс</span>
+<span class="k">$(</span><span class="nv">addsuffix</span> <span class="nv">.o</span>,<span class="k">$(</span><span class="nv">BASES</span><span class="k">))</span><span class="w">         </span><span class="c"># добавить суффикс</span>
+<span class="k">$(</span><span class="nv">abspath</span> <span class="nv">.</span>/<span class="nv">file</span><span class="k">)</span><span class="w">                </span><span class="c"># абсолютный путь</span>
+<span class="k">$(</span><span class="nv">realpath</span> <span class="nv">file</span><span class="k">)</span><span class="w">                 </span><span class="c"># реальный путь (resolve symlinks)</span>
+
+<span class="c"># Shell</span>
+<span class="k">$(</span><span class="nv">shell</span> <span class="nv">date</span> +%<span class="nv">Y</span><span class="k">)</span><span class="w">                </span><span class="c"># вывод команды</span>
+<span class="k">$(</span><span class="nv">shell</span> <span class="nv">pwd</span><span class="k">)</span>
+<span class="nv">TODAY</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="k">$(</span>shell<span class="w"> </span>date<span class="w"> </span>+%Y-%m-%d<span class="k">)</span>
+
+<span class="c"># Условия</span>
+<span class="cp">ifeq ($(CC),gcc)</span>
+<span class="w">    </span><span class="nv">CFLAGS</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span>-std<span class="o">=</span>c11
+<span class="cp">else ifeq ($(CC),clang)</span>
+<span class="w">    </span><span class="nv">CFLAGS</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span>-std<span class="o">=</span>c11
+<span class="cp">else</span>
+<span class="w">    </span><span class="k">$(</span>error<span class="w"> </span>Unknown<span class="w"> </span>compiler<span class="w"> </span><span class="k">$(</span>CC<span class="k">))</span>
+<span class="cp">endif</span>
+
+<span class="cp">ifneq ($(DEBUG),)</span>
+<span class="w">    </span><span class="nv">CFLAGS</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span>-g<span class="w"> </span>-O0
+<span class="cp">endif</span>
+
+<span class="cp">ifdef VERBOSE</span>
+<span class="w">    </span><span class="nv">Q</span><span class="w"> </span><span class="o">=</span>
+<span class="cp">else</span>
+<span class="w">    </span><span class="nv">Q</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>@
+<span class="cp">endif</span>
+
+<span class="c"># Цикл</span>
+<span class="nv">DIRS</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span>a<span class="w"> </span>b<span class="w"> </span>c
+<span class="nf">dirs</span><span class="o">:</span>
+<span class="w">    </span>@for<span class="w"> </span>d<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="k">$(</span>DIRS<span class="k">)</span><span class="p">;</span><span class="w"> </span><span class="k">do</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="nv">$$</span>d<span class="p">;</span><span class="w"> </span><span class="k">done</span>
+
+<span class="c"># foreach</span>
+<span class="nv">LIBS</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">$(</span>foreach<span class="w"> </span>dir,<span class="k">$(</span>DIRS<span class="k">)</span>,<span class="k">$(</span>dir<span class="k">)</span>/lib.a<span class="k">)</span>
+</code></pre></div>
+
+<hr />
+<h2 id="полный-пример-makefile-для-c-проекта">📦 Полный пример Makefile для C-проекта<a class="headerlink" href="#полный-пример-makefile-для-c-проекта" title="Ссылка">#</a></h2>
+<div class="highlight"><pre><span></span><code><span class="c"># ── Конфигурация ─────────────────────────────────────</span>
+<span class="nv">CC</span><span class="w">      </span><span class="o">:=</span><span class="w"> </span>gcc
+<span class="nv">CFLAGS</span><span class="w">  </span><span class="o">:=</span><span class="w"> </span>-Wall<span class="w"> </span>-Wextra<span class="w"> </span>-Werror<span class="w"> </span>-std<span class="o">=</span>c11<span class="w"> </span>-g
+<span class="nv">LDFLAGS</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span>-lm
+<span class="nv">PREFIX</span><span class="w">  </span><span class="o">?=</span><span class="w"> </span>/usr/local
+
+<span class="c"># ── Файлы ────────────────────────────────────────────</span>
+<span class="nv">SRC_DIR</span><span class="w">  </span><span class="o">:=</span><span class="w"> </span>src
+<span class="nv">BUILD_DIR</span><span class="o">:=</span><span class="w"> </span>build
+<span class="nv">BIN</span><span class="w">      </span><span class="o">:=</span><span class="w"> </span>myapp
+
+<span class="nv">SRC</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="k">$(</span>wildcard<span class="w"> </span><span class="k">$(</span>SRC_DIR<span class="k">)</span>/*.c<span class="k">)</span>
+<span class="nv">OBJ</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="k">$(</span>patsubst<span class="w"> </span><span class="k">$(</span>SRC_DIR<span class="k">)</span>/%.c,<span class="k">$(</span>BUILD_DIR<span class="k">)</span>/%.o,<span class="k">$(</span>SRC<span class="k">))</span>
+<span class="nv">DEP</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="k">$(</span>OBJ:.o<span class="o">=</span>.d<span class="k">)</span>
+
+<span class="c"># ── Цели ─────────────────────────────────────────────</span>
+<span class="nf">.PHONY</span><span class="o">:</span><span class="w"> </span><span class="n">all</span> <span class="n">clean</span> <span class="n">install</span> <span class="n">uninstall</span> <span class="n">run</span> <span class="n">test</span> <span class="n">help</span>
+
+<span class="nf">all</span><span class="o">:</span><span class="w"> </span><span class="k">$(</span><span class="nv">BUILD_DIR</span><span class="k">)</span>/<span class="k">$(</span><span class="nv">BIN</span><span class="k">)</span>
+
+<span class="nf">$(BUILD_DIR)/$(BIN)</span><span class="o">:</span><span class="w"> </span><span class="k">$(</span><span class="nv">OBJ</span><span class="k">)</span>
+<span class="w">    </span>@mkdir<span class="w"> </span>-p<span class="w"> </span><span class="k">$(</span>@D<span class="k">)</span>
+<span class="w">    </span><span class="k">$(</span>CC<span class="k">)</span><span class="w"> </span>$^<span class="w"> </span>-o<span class="w"> </span><span class="nv">$@</span><span class="w"> </span><span class="k">$(</span>LDFLAGS<span class="k">)</span>
+
+<span class="nf">$(BUILD_DIR)/%.o</span><span class="o">:</span><span class="w"> </span><span class="k">$(</span><span class="nv">SRC_DIR</span><span class="k">)</span>/%.<span class="n">c</span>
+<span class="w">    </span>@mkdir<span class="w"> </span>-p<span class="w"> </span><span class="k">$(</span>@D<span class="k">)</span>
+<span class="w">    </span><span class="k">$(</span>CC<span class="k">)</span><span class="w"> </span><span class="k">$(</span>CFLAGS<span class="k">)</span><span class="w"> </span>-MMD<span class="w"> </span>-MP<span class="w"> </span>-c<span class="w"> </span>$&lt;<span class="w"> </span>-o<span class="w"> </span><span class="nv">$@</span>
+
+<span class="cp">-include $(DEP)        # авто-зависимости</span>
+
+<span class="nf">run</span><span class="o">:</span><span class="w"> </span><span class="n">all</span>
+<span class="w">    </span>./<span class="k">$(</span>BUILD_DIR<span class="k">)</span>/<span class="k">$(</span>BIN<span class="k">)</span>
+
+<span class="nf">test</span><span class="o">:</span><span class="w"> </span><span class="n">all</span>
+<span class="w">    </span>./<span class="k">$(</span>BUILD_DIR<span class="k">)</span>/<span class="k">$(</span>BIN<span class="k">)</span><span class="w"> </span>--test
+
+<span class="nf">clean</span><span class="o">:</span>
+<span class="w">    </span>rm<span class="w"> </span>-rf<span class="w"> </span><span class="k">$(</span>BUILD_DIR<span class="k">)</span>
+
+<span class="nf">install</span><span class="o">:</span><span class="w"> </span><span class="n">all</span>
+<span class="w">    </span>install<span class="w"> </span>-d<span class="w"> </span><span class="k">$(</span>DESTDIR<span class="k">)$(</span>PREFIX<span class="k">)</span>/bin
+<span class="w">    </span>install<span class="w"> </span>-m<span class="w"> </span><span class="m">755</span><span class="w"> </span><span class="k">$(</span>BUILD_DIR<span class="k">)</span>/<span class="k">$(</span>BIN<span class="k">)</span><span class="w"> </span><span class="k">$(</span>DESTDIR<span class="k">)$(</span>PREFIX<span class="k">)</span>/bin/
+
+<span class="nf">uninstall</span><span class="o">:</span>
+<span class="w">    </span>rm<span class="w"> </span>-f<span class="w"> </span><span class="k">$(</span>DESTDIR<span class="k">)$(</span>PREFIX<span class="k">)</span>/bin/<span class="k">$(</span>BIN<span class="k">)</span>
+
+<span class="nf">help</span><span class="o">:</span>
+<span class="w">    </span>@echo<span class="w"> </span><span class="s2">&quot;Targets:&quot;</span>
+<span class="w">    </span>@echo<span class="w"> </span><span class="s2">&quot;  all       - build </span><span class="k">$(</span>BIN<span class="k">)</span><span class="s2"> (default)&quot;</span>
+<span class="w">    </span>@echo<span class="w"> </span><span class="s2">&quot;  run       - build and run&quot;</span>
+<span class="w">    </span>@echo<span class="w"> </span><span class="s2">&quot;  test      - run tests&quot;</span>
+<span class="w">    </span>@echo<span class="w"> </span><span class="s2">&quot;  clean     - remove build artifacts&quot;</span>
+<span class="w">    </span>@echo<span class="w"> </span><span class="s2">&quot;  install   - install to </span><span class="k">$(</span>PREFIX<span class="k">)</span><span class="s2">&quot;</span>
+<span class="w">    </span>@echo<span class="w"> </span><span class="s2">&quot;  uninstall - remove installed binary&quot;</span>
+</code></pre></div>
+
+<h3 id="авто-зависимости-d-файлы">Авто-зависимости (<code>.d</code> файлы)<a class="headerlink" href="#авто-зависимости-d-файлы" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c"># Ключ -MMD генерирует .d-файл рядом с .o</span>
+<span class="nv">CFLAGS</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span>-MMD<span class="w"> </span>-MP
+<span class="cp">-include $(DEP)</span>
+</code></pre></div>
+
+<p>Это автоматически отслеживает зависимости от <code>.h</code> файлов (правило пересобирается при изменении заголовка).</p>
+<hr />
+<h2 id="make-как-task-runner-не-только-для-c">🐚 Make как task runner (не только для C!)<a class="headerlink" href="#make-как-task-runner-не-только-для-c" title="Ссылка">#</a></h2>
+<p>Makefile — отличный раннер задач для любого проекта:</p>
+<div class="highlight"><pre><span></span><code><span class="nf">.PHONY</span><span class="o">:</span><span class="w"> </span><span class="n">dev</span> <span class="n">build</span> <span class="n">test</span> <span class="n">lint</span> <span class="n">fmt</span> <span class="n">deploy</span> <span class="n">docker</span>-<span class="n">up</span> <span class="n">docker</span>-<span class="n">down</span>
+
+<span class="c"># Python проект</span>
+<span class="nf">venv</span><span class="o">:</span>
+<span class="w">    </span>python<span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </span>.venv
+<span class="w">    </span>.venv/bin/pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>requirements.txt
+
+<span class="nf">dev</span><span class="o">:</span><span class="w"> </span><span class="n">venv</span>
+<span class="w">    </span>.venv/bin/python<span class="w"> </span>-m<span class="w"> </span>flask<span class="w"> </span>run<span class="w"> </span>--reload
+
+<span class="nf">test</span><span class="o">:</span>
+<span class="w">    </span>pytest<span class="w"> </span>-v
+
+<span class="nf">lint</span><span class="o">:</span>
+<span class="w">    </span>ruff<span class="w"> </span>check<span class="w"> </span>.
+<span class="w">    </span>mypy<span class="w"> </span>.
+
+<span class="nf">fmt</span><span class="o">:</span>
+<span class="w">    </span>ruff<span class="w"> </span>format<span class="w"> </span>.
+<span class="w">    </span>isort<span class="w"> </span>.
+
+<span class="c"># Node проект</span>
+<span class="nf">node_modules</span><span class="o">:</span>
+<span class="w">    </span>npm<span class="w"> </span>install
+
+<span class="nf">dev-js</span><span class="o">:</span>
+<span class="w">    </span>npm<span class="w"> </span>run<span class="w"> </span>dev
+
+<span class="nf">build-js</span><span class="o">:</span>
+<span class="w">    </span>npm<span class="w"> </span>run<span class="w"> </span>build
+
+<span class="c"># Docker</span>
+<span class="nf">docker-up</span><span class="o">:</span>
+<span class="w">    </span>docker<span class="w"> </span>compose<span class="w"> </span>up<span class="w"> </span>-d
+
+<span class="nf">docker-down</span><span class="o">:</span>
+<span class="w">    </span>docker<span class="w"> </span>compose<span class="w"> </span>down
+
+<span class="c"># Деплой</span>
+<span class="nf">deploy</span><span class="o">:</span>
+<span class="w">    </span>rsync<span class="w"> </span>-avz<span class="w"> </span>--delete<span class="w"> </span>./dist/<span class="w"> </span>user@server:/var/www/app/
+<span class="w">    </span>ssh<span class="w"> </span>user@server<span class="w"> </span><span class="s2">&quot;systemctl restart myapp&quot;</span>
+</code></pre></div>
+
+<p>Использование:</p>
+<div class="highlight"><pre><span></span><code>make<span class="w"> </span>dev<span class="w">          </span><span class="c1"># запуск дев-сервера</span>
+make<span class="w"> </span><span class="nb">test</span><span class="w">         </span><span class="c1"># тесты</span>
+make<span class="w"> </span>deploy<span class="w">       </span><span class="c1"># деплой</span>
+</code></pre></div>
+
+<hr />
+<h2 id="частые-ошибки-make">🪤 Частые ошибки Make<a class="headerlink" href="#частые-ошибки-make" title="Ссылка">#</a></h2>
+<ol>
+<li><strong>TAB vs пробелы</strong> — рецепты должны быть с TAB. <code>missing separator</code>.</li>
+<li><strong>Файл с именем цели</strong> — например, если есть файл <code>clean</code>, цель не выполнится.
+   Всегда добавляйте <code>.PHONY</code>.</li>
+<li><strong><code>=</code> vs <code>:=</code></strong> — <code>=</code> ленивое (рекурсивное), может дать неожиданный результат.
+   Используйте <code>:=</code> (простое присваивание).</li>
+<li><strong>Параллельность</strong> — <code>make -j</code> требует корректных зависимостей, иначе гонки.</li>
+<li><strong><code>$@</code> vs <code>$$@</code></strong> — <code>$$</code> для shell-переменных, <code>$</code> для make-переменных.</li>
+<li><strong>Длинные строки</strong> — продолжение через <code>\</code> (backslash).</li>
+<li><strong>Изменение переменной</strong> — командная строка переопределяет <code>=</code>, но не <code>override</code>.</li>
+</ol>
+<hr />
+<h1 id="часть-2-cmake">🔨 ЧАСТЬ 2. CMAKE<a class="headerlink" href="#часть-2-cmake" title="Ссылка">#</a></h1>
+<h2 id="главные-понятия_1">🔑 Главные понятия<a class="headerlink" href="#главные-понятия_1" title="Ссылка">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Термин</th>
+<th>Что значит</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>CMakeLists.txt</strong></td>
+<td>Конфигурационный файл (скрипт на CMake-языке)</td>
+</tr>
+<tr>
+<td><strong>generator</strong></td>
+<td>Что генерировать: Makefiles, Ninja, VS, Xcode</td>
+</tr>
+<tr>
+<td><strong>build directory</strong></td>
+<td>Отдельный каталог для сборки (out-of-source)</td>
+</tr>
+<tr>
+<td><strong>target</strong></td>
+<td>Цель сборки: executable, library, custom</td>
+</tr>
+<tr>
+<td><strong>variable / cache</strong></td>
+<td><code>set(VAR value)</code> / переменные в кэше</td>
+</tr>
+<tr>
+<td><strong>property</strong></td>
+<td>Свойства target&rsquo;а, файла, каталога</td>
+</tr>
+<tr>
+<td><strong>find_package</strong></td>
+<td>Найти стороннюю библиотеку</td>
+</tr>
+<tr>
+<td><strong>toolchain</strong></td>
+<td>Файл кросс-компиляции</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="базовый-цикл-работы">🚀 Базовый цикл работы<a class="headerlink" href="#базовый-цикл-работы" title="Ссылка">#</a></h2>
+<div class="highlight"><pre><span></span><code><span class="c1"># 1. Конфигурация (генерация Makefile/Ninja в build/)</span>
+cmake<span class="w"> </span>-B<span class="w"> </span>build<span class="w">                     </span><span class="c1"># -B = build directory (современный синтаксис)</span>
+<span class="c1"># или</span>
+cmake<span class="w"> </span>-S<span class="w"> </span>.<span class="w"> </span>-B<span class="w"> </span>build<span class="w">                </span><span class="c1"># -S = source directory</span>
+
+<span class="c1"># С опциями</span>
+cmake<span class="w"> </span>-B<span class="w"> </span>build<span class="w"> </span>-DCMAKE_BUILD_TYPE<span class="o">=</span>Release
+cmake<span class="w"> </span>-B<span class="w"> </span>build<span class="w"> </span>-DCMAKE_INSTALL_PREFIX<span class="o">=</span>/opt/myapp
+
+<span class="c1"># С конкретным генератором</span>
+cmake<span class="w"> </span>-B<span class="w"> </span>build<span class="w"> </span>-G<span class="w"> </span><span class="s2">&quot;Ninja&quot;</span>
+cmake<span class="w"> </span>-B<span class="w"> </span>build<span class="w"> </span>-G<span class="w"> </span><span class="s2">&quot;Unix Makefiles&quot;</span>
+cmake<span class="w"> </span>-B<span class="w"> </span>build<span class="w"> </span>-G<span class="w"> </span><span class="s2">&quot;Visual Studio 17 2022&quot;</span>
+
+<span class="c1"># 2. Сборка</span>
+cmake<span class="w"> </span>--build<span class="w"> </span>build<span class="w">                </span><span class="c1"># современный универсальный синтаксис</span>
+cmake<span class="w"> </span>--build<span class="w"> </span>build<span class="w"> </span>-j4<span class="w">            </span><span class="c1"># параллельно</span>
+cmake<span class="w"> </span>--build<span class="w"> </span>build<span class="w"> </span>--target<span class="w"> </span>myapp<span class="w"> </span><span class="c1"># конкретная цель</span>
+cmake<span class="w"> </span>--build<span class="w"> </span>build<span class="w"> </span>--config<span class="w"> </span>Release<span class="w">  </span><span class="c1"># для multi-config (VS, Xcode)</span>
+
+<span class="c1"># 3. Установка</span>
+cmake<span class="w"> </span>--install<span class="w"> </span>build<span class="w">              </span><span class="c1"># в CMAKE_INSTALL_PREFIX</span>
+sudo<span class="w"> </span>cmake<span class="w"> </span>--install<span class="w"> </span>build
+
+<span class="c1"># 4. Очистка</span>
+rm<span class="w"> </span>-rf<span class="w"> </span>build<span class="w">                       </span><span class="c1"># полностью пересоздать</span>
+</code></pre></div>
+
+<h3 id="установка_1">Установка<a class="headerlink" href="#установка_1" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>pacman<span class="w"> </span>-S<span class="w"> </span>cmake<span class="w"> </span>ninja<span class="w">         </span><span class="c1"># Arch</span>
+sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>cmake<span class="w"> </span>ninja-build<span class="w"> </span><span class="c1"># Debian/Ubuntu</span>
+</code></pre></div>
+
+<hr />
+<h2 id="структура-cmakelists-txt">📝 Структура CMakeLists.txt<a class="headerlink" href="#структура-cmakelists-txt" title="Ссылка">#</a></h2>
+<h3 id="минимальный-пример-один-файл">Минимальный пример (один файл)<a class="headerlink" href="#минимальный-пример-один-файл" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c"># CMakeLists.txt</span>
+<span class="nb">cmake_minimum_required</span><span class="p">(</span><span class="s">VERSION</span><span class="w"> </span><span class="s">3.15</span><span class="p">)</span>
+<span class="nb">project</span><span class="p">(</span><span class="s">MyApp</span>
+<span class="w">    </span><span class="s">VERSION</span><span class="w"> </span><span class="s">1.0.0</span>
+<span class="w">    </span><span class="s">DESCRIPTION</span><span class="w"> </span><span class="s2">&quot;My awesome app&quot;</span>
+<span class="w">    </span><span class="s">LANGUAGES</span><span class="w"> </span><span class="s">C</span><span class="w"> </span><span class="s">CXX</span><span class="p">)</span>
+
+<span class="nb">set</span><span class="p">(</span><span class="s">CMAKE_C_STANDARD</span><span class="w"> </span><span class="s">11</span><span class="p">)</span>
+<span class="nb">set</span><span class="p">(</span><span class="s">CMAKE_C_STANDARD_REQUIRED</span><span class="w"> </span><span class="s">ON</span><span class="p">)</span>
+<span class="nb">set</span><span class="p">(</span><span class="s">CMAKE_CXX_STANDARD</span><span class="w"> </span><span class="s">17</span><span class="p">)</span>
+
+<span class="c"># Создать исполняемый файл</span>
+<span class="nb">add_executable</span><span class="p">(</span><span class="s">myapp</span><span class="w"> </span><span class="s">src/main.c</span><span class="w"> </span><span class="s">src/utils.c</span><span class="p">)</span>
+
+<span class="c"># Опции компиляции</span>
+<span class="nb">target_compile_options</span><span class="p">(</span><span class="s">myapp</span><span class="w"> </span><span class="s">PRIVATE</span><span class="w"> </span><span class="s">-Wall</span><span class="w"> </span><span class="s">-Wextra</span><span class="p">)</span>
+
+<span class="c"># Линковка библиотек</span>
+<span class="nb">target_link_libraries</span><span class="p">(</span><span class="s">myapp</span><span class="w"> </span><span class="s">PRIVATE</span><span class="w"> </span><span class="s">m</span><span class="p">)</span>
+
+<span class="c"># Включить директории с заголовками</span>
+<span class="nb">target_include_directories</span><span class="p">(</span><span class="s">myapp</span><span class="w"> </span><span class="s">PRIVATE</span><span class="w"> </span><span class="s">include</span><span class="p">)</span>
+
+<span class="c"># Установка</span>
+<span class="nb">install</span><span class="p">(</span><span class="s">TARGETS</span><span class="w"> </span><span class="s">myapp</span><span class="w"> </span><span class="s">DESTINATION</span><span class="w"> </span><span class="s">bin</span><span class="p">)</span>
+</code></pre></div>
+
+<h3 id="сборка-и-запуск">Сборка и запуск<a class="headerlink" href="#сборка-и-запуск" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>cmake<span class="w"> </span>-B<span class="w"> </span>build
+cmake<span class="w"> </span>--build<span class="w"> </span>build
+./build/myapp
+</code></pre></div>
+
+<hr />
+<h2 id="цели-targets">🎯 Цели (targets)<a class="headerlink" href="#цели-targets" title="Ссылка">#</a></h2>
+<h3 id="исполняемый-файл">Исполняемый файл<a class="headerlink" href="#исполняемый-файл" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="nb">add_executable</span><span class="p">(</span><span class="s">myapp</span><span class="w"> </span><span class="s">main.c</span><span class="p">)</span>
+<span class="nb">add_executable</span><span class="p">(</span><span class="s">myapp</span><span class="w"> </span><span class="s">main.cpp</span><span class="w"> </span><span class="s">utils.cpp</span><span class="p">)</span><span class="w">        </span><span class="c"># несколько файлов</span>
+<span class="nb">add_executable</span><span class="p">(</span><span class="s">myapp</span><span class="w"> </span><span class="o">${</span><span class="nv">SOURCES</span><span class="o">}</span><span class="p">)</span><span class="w">                </span><span class="c"># из переменной</span>
+</code></pre></div>
+
+<h3 id="статическая-библиотека-a">Статическая библиотека (.a)<a class="headerlink" href="#статическая-библиотека-a" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="nb">add_library</span><span class="p">(</span><span class="s">mylib</span><span class="w"> </span><span class="s">STATIC</span><span class="w"> </span><span class="s">src/lib.c</span><span class="p">)</span>
+</code></pre></div>
+
+<h3 id="динамическая-библиотека-so">Динамическая библиотека (.so)<a class="headerlink" href="#динамическая-библиотека-so" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="nb">add_library</span><span class="p">(</span><span class="s">mylib</span><span class="w"> </span><span class="s">SHARED</span><span class="w"> </span><span class="s">src/lib.c</span><span class="p">)</span>
+</code></pre></div>
+
+<h3 id="модуль-плагин-загружается-dlopen">Модуль (плагин, загружается dlopen)<a class="headerlink" href="#модуль-плагин-загружается-dlopen" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="nb">add_library</span><span class="p">(</span><span class="s">myplugin</span><span class="w"> </span><span class="s">MODULE</span><span class="w"> </span><span class="s">src/plugin.c</span><span class="p">)</span>
+</code></pre></div>
+
+<h3 id="interface-library-только-заголовки-header-only">Interface library (только заголовки, header-only)<a class="headerlink" href="#interface-library-только-заголовки-header-only" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="nb">add_library</span><span class="p">(</span><span class="s">myheader</span><span class="w"> </span><span class="s">INTERFACE</span><span class="p">)</span>
+<span class="nb">target_include_directories</span><span class="p">(</span><span class="s">myheader</span><span class="w"> </span><span class="s">INTERFACE</span><span class="w"> </span><span class="s">include/</span><span class="p">)</span>
+</code></pre></div>
+
+<h3 id="object-library-только-объектные-файлы-для-переиспользования">Object library (только объектные файлы, для переиспользования)<a class="headerlink" href="#object-library-только-объектные-файлы-для-переиспользования" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="nb">add_library</span><span class="p">(</span><span class="s">common</span><span class="w"> </span><span class="s">OBJECT</span><span class="w"> </span><span class="s">src/common.c</span><span class="p">)</span>
+</code></pre></div>
+
+<hr />
+<h2 id="зависимости-и-видимость-private-public-interface">🔗 Зависимости и видимость (PRIVATE/PUBLIC/INTERFACE)<a class="headerlink" href="#зависимости-и-видимость-private-public-interface" title="Ссылка">#</a></h2>
+<p><strong>Ключевая концепция CMake</strong>: <strong>transitive dependencies</strong>.</p>
+<table>
+<thead>
+<tr>
+<th>Ключевое слово</th>
+<th>Используется в самом target</th>
+<th>Используется зависящими</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>PRIVATE</code></td>
+<td>✅</td>
+<td>❌</td>
+</tr>
+<tr>
+<td><code>PUBLIC</code></td>
+<td>✅</td>
+<td>✅</td>
+</tr>
+<tr>
+<td><code>INTERFACE</code></td>
+<td>❌</td>
+<td>✅</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight"><pre><span></span><code><span class="c"># mylib использует json внутренне (PRIVATE)</span>
+<span class="nb">target_link_libraries</span><span class="p">(</span><span class="s">mylib</span><span class="w"> </span><span class="s">PRIVATE</span><span class="w"> </span><span class="s">nlohmann_json</span><span class="p">)</span>
+
+<span class="c"># myapp использует mylib публично (myapp видит API mylib)</span>
+<span class="nb">target_link_libraries</span><span class="p">(</span><span class="s">myapp</span><span class="w"> </span><span class="s">PUBLIC</span><span class="w"> </span><span class="s">mylib</span><span class="p">)</span>
+
+<span class="c"># Header-only library — только INTERFACE</span>
+<span class="nb">target_include_directories</span><span class="p">(</span><span class="s">myheader</span><span class="w"> </span><span class="s">INTERFACE</span><span class="w"> </span><span class="s">include/</span><span class="p">)</span>
+</code></pre></div>
+
+<p><strong>Правило</strong>:
+- <code>PRIVATE</code> — для внутренней реализации
+- <code>PUBLIC</code> — если ваше API использует эту зависимость (передаётся в заголовках)
+- <code>INTERFACE</code> — для header-only библиотек</p>
+<hr />
+<h2 id="поиск-библиотек-findpackage">📦 Поиск библиотек (find_package)<a class="headerlink" href="#поиск-библиотек-findpackage" title="Ссылка">#</a></h2>
+<div class="highlight"><pre><span></span><code><span class="c"># Найти установленную библиотеку</span>
+<span class="nb">find_package</span><span class="p">(</span><span class="s">OpenSSL</span><span class="w"> </span><span class="s">REQUIRED</span><span class="p">)</span>
+<span class="nb">find_package</span><span class="p">(</span><span class="s">ZLIB</span><span class="w"> </span><span class="s">REQUIRED</span><span class="p">)</span>
+<span class="nb">find_package</span><span class="p">(</span><span class="s">Threads</span><span class="w"> </span><span class="s">REQUIRED</span><span class="p">)</span>
+
+<span class="c"># После find_package используем импортированный target</span>
+<span class="nb">target_link_libraries</span><span class="p">(</span><span class="s">myapp</span><span class="w"> </span><span class="s">PRIVATE</span><span class="w"> </span><span class="s">OpenSSL::SSL</span><span class="w"> </span><span class="s">OpenSSL::Crypto</span><span class="p">)</span>
+<span class="nb">target_link_libraries</span><span class="p">(</span><span class="s">myapp</span><span class="w"> </span><span class="s">PRIVATE</span><span class="w"> </span><span class="s">ZLIB::ZLIB</span><span class="p">)</span>
+<span class="nb">target_link_libraries</span><span class="p">(</span><span class="s">myapp</span><span class="w"> </span><span class="s">PRIVATE</span><span class="w"> </span><span class="s">Threads::Threads</span><span class="p">)</span>
+
+<span class="c"># Найти с опциями</span>
+<span class="nb">find_package</span><span class="p">(</span><span class="s">Qt6</span><span class="w"> </span><span class="s">COMPONENTS</span><span class="w"> </span><span class="s">Core</span><span class="w"> </span><span class="s">Widgets</span><span class="w"> </span><span class="s">REQUIRED</span><span class="p">)</span>
+<span class="nb">target_link_libraries</span><span class="p">(</span><span class="s">myapp</span><span class="w"> </span><span class="s">PRIVATE</span><span class="w"> </span><span class="s">Qt6::Core</span><span class="w"> </span><span class="s">Qt6::Widgets</span><span class="p">)</span>
+
+<span class="c"># Найти в конкретном месте</span>
+<span class="nb">set</span><span class="p">(</span><span class="s">CMAKE_PREFIX_PATH</span><span class="w"> </span><span class="s2">&quot;/opt/Qt/6.5/gcc_64&quot;</span><span class="p">)</span>
+<span class="nb">find_package</span><span class="p">(</span><span class="s">Qt6</span><span class="w"> </span><span class="s">COMPONENTS</span><span class="w"> </span><span class="s">Core</span><span class="w"> </span><span class="s">REQUIRED</span><span class="p">)</span>
+
+<span class="c"># Свои модули поиска</span>
+<span class="nb">set</span><span class="p">(</span><span class="s">CMAKE_MODULE_PATH</span><span class="w"> </span><span class="s2">&quot;${CMAKE_SOURCE_DIR}/cmake&quot;</span><span class="p">)</span>
+<span class="nb">find_package</span><span class="p">(</span><span class="s">MyLib</span><span class="w"> </span><span class="s">REQUIRED</span><span class="p">)</span><span class="w">        </span><span class="c"># ищет FindMyLib.cmake</span>
+</code></pre></div>
+
+<h3 id="findpackage-режимы">find_package режимы<a class="headerlink" href="#findpackage-режимы" title="Ссылка">#</a></h3>
+<ul>
+<li><strong>Module mode</strong>: ищет <code>FindXXX.cmake</code> (в <code>CMAKE_MODULE_PATH</code> или встроенные)</li>
+<li><strong>Config mode</strong>: использует <code>XXXConfig.cmake</code> из установленного пакета (рекомендуется авторами библиотек)</li>
+</ul>
+<h3 id="полезные-встроенные-findpackage">Полезные встроенные find_package<a class="headerlink" href="#полезные-встроенные-findpackage" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="nb">find_package</span><span class="p">(</span><span class="s">Threads</span><span class="w"> </span><span class="s">REQUIRED</span><span class="p">)</span><span class="w">       </span><span class="c"># pthreads</span>
+<span class="nb">find_package</span><span class="p">(</span><span class="s">OpenMP</span><span class="w"> </span><span class="s">REQUIRED</span><span class="p">)</span><span class="w">        </span><span class="c"># OpenMP</span>
+<span class="nb">find_package</span><span class="p">(</span><span class="s">ZLIB</span><span class="p">)</span><span class="w">                   </span><span class="c"># zlib</span>
+<span class="nb">find_package</span><span class="p">(</span><span class="s">PNG</span><span class="p">)</span><span class="w">                    </span><span class="c"># libpng</span>
+<span class="nb">find_package</span><span class="p">(</span><span class="s">OpenGL</span><span class="p">)</span><span class="w">                 </span><span class="c"># OpenGL</span>
+<span class="nb">find_package</span><span class="p">(</span><span class="s">SDL2</span><span class="p">)</span><span class="w">                   </span><span class="c"># SDL2</span>
+<span class="nb">find_package</span><span class="p">(</span><span class="s">Boost</span><span class="w"> </span><span class="s">COMPONENTS</span><span class="w"> </span><span class="s">system</span><span class="w"> </span><span class="s">filesystem</span><span class="w"> </span><span class="s">REQUIRED</span><span class="p">)</span>
+</code></pre></div>
+
+<hr />
+<h2 id="опции-и-переменные-кэша">⚙️ Опции и переменные кэша<a class="headerlink" href="#опции-и-переменные-кэша" title="Ссылка">#</a></h2>
+<h3 id="свои-опции-как-в-больших-проектах">Свои опции (как в больших проектах)<a class="headerlink" href="#свои-опции-как-в-больших-проектах" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="nb">option</span><span class="p">(</span><span class="s">BUILD_TESTS</span><span class="w"> </span><span class="s2">&quot;Build unit tests&quot;</span><span class="w"> </span><span class="s">ON</span><span class="p">)</span>
+<span class="nb">option</span><span class="p">(</span><span class="s">USE_OPENGL</span><span class="w"> </span><span class="s2">&quot;Enable OpenGL support&quot;</span><span class="w"> </span><span class="s">OFF</span><span class="p">)</span>
+<span class="nb">option</span><span class="p">(</span><span class="s">BUILD_SHARED_LIBS</span><span class="w"> </span><span class="s2">&quot;Build shared libraries&quot;</span><span class="w"> </span><span class="s">OFF</span><span class="p">)</span>
+
+<span class="nb">if</span><span class="p">(</span><span class="s">BUILD_TESTS</span><span class="p">)</span>
+<span class="w">    </span><span class="nb">enable_testing</span><span class="p">()</span>
+<span class="w">    </span><span class="nb">add_subdirectory</span><span class="p">(</span><span class="s">tests</span><span class="p">)</span>
+<span class="nb">endif</span><span class="p">()</span>
+
+<span class="nb">if</span><span class="p">(</span><span class="s">USE_OPENGL</span><span class="p">)</span>
+<span class="w">    </span><span class="nb">find_package</span><span class="p">(</span><span class="s">OpenGL</span><span class="w"> </span><span class="s">REQUIRED</span><span class="p">)</span>
+<span class="w">    </span><span class="nb">target_link_libraries</span><span class="p">(</span><span class="s">myapp</span><span class="w"> </span><span class="s">PRIVATE</span><span class="w"> </span><span class="s">OpenGL::GL</span><span class="p">)</span>
+<span class="w">    </span><span class="nb">target_compile_definitions</span><span class="p">(</span><span class="s">myapp</span><span class="w"> </span><span class="s">PRIVATE</span><span class="w"> </span><span class="s">USE_OPENGL=1</span><span class="p">)</span>
+<span class="nb">endif</span><span class="p">()</span>
+</code></pre></div>
+
+<p>Использование:</p>
+<div class="highlight"><pre><span></span><code>cmake<span class="w"> </span>-B<span class="w"> </span>build<span class="w"> </span>-DBUILD_TESTS<span class="o">=</span>OFF<span class="w"> </span>-DUSE_OPENGL<span class="o">=</span>ON
+</code></pre></div>
+
+<h3 id="полезные-переменные-cmake">Полезные переменные CMake<a class="headerlink" href="#полезные-переменные-cmake" title="Ссылка">#</a></h3>
+<table>
+<thead>
+<tr>
+<th>Переменная</th>
+<th>Назначение</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>CMAKE_BUILD_TYPE</code></td>
+<td>Debug/Release/RelWithDebInfo/MinSizeRel</td>
+</tr>
+<tr>
+<td><code>CMAKE_INSTALL_PREFIX</code></td>
+<td>Куда ставить (<code>/usr/local</code> по умолчанию)</td>
+</tr>
+<tr>
+<td><code>CMAKE_C_COMPILER</code></td>
+<td>Компилятор C</td>
+</tr>
+<tr>
+<td><code>CMAKE_CXX_COMPILER</code></td>
+<td>Компилятор C++</td>
+</tr>
+<tr>
+<td><code>CMAKE_C_FLAGS</code></td>
+<td>Флаги C</td>
+</tr>
+<tr>
+<td><code>CMAKE_CXX_STANDARD</code></td>
+<td>Стандарт C++ (11/14/17/20/23)</td>
+</tr>
+<tr>
+<td><code>CMAKE_PREFIX_PATH</code></td>
+<td>Где искать библиотеки</td>
+</tr>
+<tr>
+<td><code>CMAKE_MODULE_PATH</code></td>
+<td>Где искать FindXXX.cmake</td>
+</tr>
+<tr>
+<td><code>CMAKE_SOURCE_DIR</code></td>
+<td>Корень проекта</td>
+</tr>
+<tr>
+<td><code>CMAKE_BINARY_DIR</code></td>
+<td>Каталог сборки</td>
+</tr>
+<tr>
+<td><code>CMAKE_CURRENT_SOURCE_DIR</code></td>
+<td>Текущий каталог</td>
+</tr>
+<tr>
+<td><code>BUILD_SHARED_LIBS</code></td>
+<td>Глобально: shared vs static</td>
+</tr>
+<tr>
+<td><code>CMAKE_TOOLCHAIN_FILE</code></td>
+<td>Файл toolchain (кросс-компиляция)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="типы-сборки-cmakebuildtype">Типы сборки (CMAKE_BUILD_TYPE)<a class="headerlink" href="#типы-сборки-cmakebuildtype" title="Ссылка">#</a></h3>
+<table>
+<thead>
+<tr>
+<th>Тип</th>
+<th>Флаги</th>
+<th>Назначение</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Debug</code></td>
+<td><code>-g -O0</code></td>
+<td>Отладка</td>
+</tr>
+<tr>
+<td><code>Release</code></td>
+<td><code>-O3 -DNDEBUG</code></td>
+<td>Релиз</td>
+</tr>
+<tr>
+<td><code>RelWithDebInfo</code></td>
+<td><code>-O2 -g -DNDEBUG</code></td>
+<td>Релиз с дебаг-инфо</td>
+</tr>
+<tr>
+<td><code>MinSizeRel</code></td>
+<td><code>-Os -DNDEBUG</code></td>
+<td>Минимальный размер</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight"><pre><span></span><code>cmake<span class="w"> </span>-B<span class="w"> </span>build<span class="w"> </span>-DCMAKE_BUILD_TYPE<span class="o">=</span>Release
+<span class="c1"># Для multi-config (VS, Xcode) — при сборке:</span>
+cmake<span class="w"> </span>--build<span class="w"> </span>build<span class="w"> </span>--config<span class="w"> </span>Release
+</code></pre></div>
+
+<hr />
+<h2 id="многокаталожный-проект">🗂️ Многокаталожный проект<a class="headerlink" href="#многокаталожный-проект" title="Ссылка">#</a></h2>
+<div class="highlight"><pre><span></span><code>project/
+├── CMakeLists.txt
+├── src/
+│   ├── CMakeLists.txt
+│   ├── main.c
+│   └── lib/
+│       ├── CMakeLists.txt
+│       └── utils.c
+└── tests/
+    └── CMakeLists.txt
+</code></pre></div>
+
+<p><strong>Корневой <code>CMakeLists.txt</code></strong>:</p>
+<div class="highlight"><pre><span></span><code><span class="nb">cmake_minimum_required</span><span class="p">(</span><span class="s">VERSION</span><span class="w"> </span><span class="s">3.15</span><span class="p">)</span>
+<span class="nb">project</span><span class="p">(</span><span class="s">MyProject</span><span class="w"> </span><span class="s">VERSION</span><span class="w"> </span><span class="s">1.0</span><span class="w"> </span><span class="s">LANGUAGES</span><span class="w"> </span><span class="s">C</span><span class="p">)</span>
+
+<span class="nb">add_subdirectory</span><span class="p">(</span><span class="s">src</span><span class="p">)</span>
+<span class="nb">add_subdirectory</span><span class="p">(</span><span class="s">src/lib</span><span class="p">)</span>
+
+<span class="nb">option</span><span class="p">(</span><span class="s">BUILD_TESTS</span><span class="w"> </span><span class="s2">&quot;Build tests&quot;</span><span class="w"> </span><span class="s">ON</span><span class="p">)</span>
+<span class="nb">if</span><span class="p">(</span><span class="s">BUILD_TESTS</span><span class="p">)</span>
+<span class="w">    </span><span class="nb">enable_testing</span><span class="p">()</span>
+<span class="w">    </span><span class="nb">add_subdirectory</span><span class="p">(</span><span class="s">tests</span><span class="p">)</span>
+<span class="nb">endif</span><span class="p">()</span>
+</code></pre></div>
+
+<p><strong><code>src/CMakeLists.txt</code></strong>:</p>
+<div class="highlight"><pre><span></span><code><span class="nb">add_executable</span><span class="p">(</span><span class="s">myapp</span><span class="w"> </span><span class="s">main.c</span><span class="p">)</span>
+<span class="nb">target_link_libraries</span><span class="p">(</span><span class="s">myapp</span><span class="w"> </span><span class="s">PRIVATE</span><span class="w"> </span><span class="s">mylib</span><span class="p">)</span>
+</code></pre></div>
+
+<p><strong><code>src/lib/CMakeLists.txt</code></strong>:</p>
+<div class="highlight"><pre><span></span><code><span class="nb">add_library</span><span class="p">(</span><span class="s">mylib</span><span class="w"> </span><span class="s">STATIC</span><span class="w"> </span><span class="s">utils.c</span><span class="p">)</span>
+<span class="nb">target_include_directories</span><span class="p">(</span><span class="s">mylib</span><span class="w"> </span><span class="s">PUBLIC</span><span class="w"> </span><span class="o">${</span><span class="nv">CMAKE_CURRENT_SOURCE_DIR</span><span class="o">}</span><span class="p">)</span>
+</code></pre></div>
+
+<hr />
+<h2 id="тесты-ctest">🧪 Тесты (CTest)<a class="headerlink" href="#тесты-ctest" title="Ссылка">#</a></h2>
+<div class="highlight"><pre><span></span><code><span class="c"># Включить CTest</span>
+<span class="nb">enable_testing</span><span class="p">()</span>
+
+<span class="c"># Простой тест (запуск исполняемого файла)</span>
+<span class="nb">add_executable</span><span class="p">(</span><span class="s">test_math</span><span class="w"> </span><span class="s">tests/test_math.c</span><span class="p">)</span>
+<span class="nb">target_link_libraries</span><span class="p">(</span><span class="s">test_math</span><span class="w"> </span><span class="s">PRIVATE</span><span class="w"> </span><span class="s">mylib</span><span class="p">)</span>
+<span class="nb">add_test</span><span class="p">(</span><span class="s">NAME</span><span class="w"> </span><span class="s">math_test</span><span class="w"> </span><span class="s">COMMAND</span><span class="w"> </span><span class="s">test_math</span><span class="p">)</span>
+
+<span class="c"># Тест с аргументами</span>
+<span class="nb">add_test</span><span class="p">(</span><span class="s">NAME</span><span class="w"> </span><span class="s">mytest</span><span class="w"> </span><span class="s">COMMAND</span><span class="w"> </span><span class="s">myapp</span><span class="w"> </span><span class="s">--test</span><span class="w"> </span><span class="s">--verbose</span><span class="p">)</span>
+
+<span class="c"># Тест в конкретной рабочей директории</span>
+<span class="nb">add_test</span><span class="p">(</span><span class="s">NAME</span><span class="w"> </span><span class="s">config_test</span><span class="w"> </span><span class="s">COMMAND</span><span class="w"> </span><span class="s">myapp</span><span class="w"> </span><span class="s">--config</span>
+<span class="w">    </span><span class="s">WORKING_DIRECTORY</span><span class="w"> </span><span class="o">${</span><span class="nv">CMAKE_SOURCE_DIR</span><span class="o">}</span><span class="s">/tests</span><span class="p">)</span>
+
+<span class="c"># Пропустить тест</span>
+<span class="nb">set_tests_properties</span><span class="p">(</span><span class="s">broken_test</span><span class="w"> </span><span class="s">PROPERTIES</span><span class="w"> </span><span class="s">DISABLED</span><span class="w"> </span><span class="s">TRUE</span><span class="p">)</span>
+
+<span class="c"># Зависимости тестов</span>
+<span class="nb">set_tests_properties</span><span class="p">(</span><span class="s">test_b</span><span class="w"> </span><span class="s">PROPERTIES</span><span class="w"> </span><span class="s">DEPENDS</span><span class="w"> </span><span class="s">test_a</span><span class="p">)</span>
+</code></pre></div>
+
+<p>Запуск тестов:</p>
+<div class="highlight"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>build<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>ctest<span class="w">                   </span><span class="c1"># все тесты</span>
+ctest<span class="w"> </span>-V<span class="w">                            </span><span class="c1"># подробно (verbose)</span>
+ctest<span class="w"> </span>-VV<span class="w">                           </span><span class="c1"># очень подробно</span>
+ctest<span class="w"> </span>-j4<span class="w">                           </span><span class="c1"># параллельно</span>
+ctest<span class="w"> </span>-R<span class="w"> </span>math<span class="w">                       </span><span class="c1"># по имени (regex)</span>
+ctest<span class="w"> </span>-E<span class="w"> </span>slow<span class="w">                       </span><span class="c1"># исключить</span>
+ctest<span class="w"> </span>--output-on-failure<span class="w">           </span><span class="c1"># вывод при падении</span>
+ctest<span class="w"> </span>-L<span class="w"> </span>unit<span class="w">                       </span><span class="c1"># по label</span>
+</code></pre></div>
+
+<hr />
+<h2 id="установка-install">📥 Установка (install)<a class="headerlink" href="#установка-install" title="Ссылка">#</a></h2>
+<div class="highlight"><pre><span></span><code><span class="c"># Установка исполняемого файла</span>
+<span class="nb">install</span><span class="p">(</span><span class="s">TARGETS</span><span class="w"> </span><span class="s">myapp</span>
+<span class="w">    </span><span class="s">RUNTIME</span><span class="w"> </span><span class="s">DESTINATION</span><span class="w"> </span><span class="s">bin</span><span class="p">)</span>
+
+<span class="c"># Библиотеки и заголовки</span>
+<span class="nb">install</span><span class="p">(</span><span class="s">TARGETS</span><span class="w"> </span><span class="s">mylib</span>
+<span class="w">    </span><span class="s">LIBRARY</span><span class="w"> </span><span class="s">DESTINATION</span><span class="w"> </span><span class="s">lib</span>
+<span class="w">    </span><span class="s">ARCHIVE</span><span class="w"> </span><span class="s">DESTINATION</span><span class="w"> </span><span class="s">lib</span>
+<span class="w">    </span><span class="s">RUNTIME</span><span class="w"> </span><span class="s">DESTINATION</span><span class="w"> </span><span class="s">bin</span><span class="p">)</span><span class="w">        </span><span class="c"># для Windows DLL</span>
+
+<span class="nb">install</span><span class="p">(</span><span class="s">DIRECTORY</span><span class="w"> </span><span class="s">include/</span>
+<span class="w">    </span><span class="s">DESTINATION</span><span class="w"> </span><span class="s">include/mylib</span>
+<span class="w">    </span><span class="s">FILES_MATCHING</span><span class="w"> </span><span class="s">PATTERN</span><span class="w"> </span><span class="s2">&quot;*.h&quot;</span><span class="p">)</span>
+
+<span class="c"># Конфиги, man-страницы</span>
+<span class="nb">install</span><span class="p">(</span><span class="s">FILES</span><span class="w"> </span><span class="s">myapp.conf</span><span class="w"> </span><span class="s">DESTINATION</span><span class="w"> </span><span class="s">etc</span><span class="p">)</span>
+<span class="nb">install</span><span class="p">(</span><span class="s">FILES</span><span class="w"> </span><span class="s">myapp.1</span><span class="w"> </span><span class="s">DESTINATION</span><span class="w"> </span><span class="s">share/man/man1</span><span class="p">)</span>
+
+<span class="c"># Свои скрипты</span>
+<span class="nb">install</span><span class="p">(</span><span class="s">PROGRAMS</span><span class="w"> </span><span class="s">scripts/setup.sh</span><span class="w"> </span><span class="s">DESTINATION</span><span class="w"> </span><span class="s">bin</span><span class="p">)</span>
+
+<span class="c"># Целевой install (с экспортом для других проектов)</span>
+<span class="nb">install</span><span class="p">(</span><span class="s">TARGETS</span><span class="w"> </span><span class="s">mylib</span><span class="w"> </span><span class="s">EXPORT</span><span class="w"> </span><span class="s">MyLibTargets</span>
+<span class="w">    </span><span class="s">LIBRARY</span><span class="w"> </span><span class="s">DESTINATION</span><span class="w"> </span><span class="s">lib</span>
+<span class="w">    </span><span class="s">ARCHIVE</span><span class="w"> </span><span class="s">DESTINATION</span><span class="w"> </span><span class="s">lib</span><span class="p">)</span>
+<span class="nb">install</span><span class="p">(</span><span class="s">EXPORT</span><span class="w"> </span><span class="s">MyLibTargets</span>
+<span class="w">    </span><span class="s">FILE</span><span class="w"> </span><span class="s">MyLibTargets.cmake</span>
+<span class="w">    </span><span class="s">NAMESPACE</span><span class="w"> </span><span class="s">MyLib::</span>
+<span class="w">    </span><span class="s">DESTINATION</span><span class="w"> </span><span class="s">lib/cmake/MyLib</span><span class="p">)</span>
+</code></pre></div>
+
+<div class="highlight"><pre><span></span><code>cmake<span class="w"> </span>--install<span class="w"> </span>build<span class="w">                    </span><span class="c1"># в CMAKE_INSTALL_PREFIX</span>
+cmake<span class="w"> </span>--install<span class="w"> </span>build<span class="w"> </span>--prefix<span class="w"> </span>/opt/app<span class="w">  </span><span class="c1"># переопределить</span>
+sudo<span class="w"> </span>cmake<span class="w"> </span>--install<span class="w"> </span>build<span class="w">               </span><span class="c1"># системно</span>
+</code></pre></div>
+
+<hr />
+<h2 id="команды-cmake-основные">🔤 Команды CMake (основные)<a class="headerlink" href="#команды-cmake-основные" title="Ссылка">#</a></h2>
+<h3 id="команды-для-target-ов-современный-cmake">Команды для target&rsquo;ов (современный CMake)<a class="headerlink" href="#команды-для-target-ов-современный-cmake" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="nb">add_executable</span><span class="p">(</span><span class="s">name</span><span class="w"> </span><span class="s">sources...</span><span class="p">)</span>
+<span class="nb">add_library</span><span class="p">(</span><span class="s">name</span><span class="w"> </span><span class="s">[STATIC|SHARED|MODULE|INTERFACE]</span><span class="w"> </span><span class="s">sources...</span><span class="p">)</span>
+
+<span class="c"># Настройки target&#39;а (рекомендуется вместо глобальных)</span>
+<span class="nb">target_include_directories</span><span class="p">(</span><span class="s">name</span><span class="w"> </span><span class="s">PUBLIC</span><span class="w"> </span><span class="s">include/</span><span class="p">)</span>
+<span class="nb">target_compile_definitions</span><span class="p">(</span><span class="s">name</span><span class="w"> </span><span class="s">PRIVATE</span><span class="w"> </span><span class="s">DEBUG=1</span><span class="w"> </span><span class="s">VERSION=</span><span class="s2">&quot;1.0&quot;</span><span class="p">)</span>
+<span class="nb">target_compile_features</span><span class="p">(</span><span class="s">name</span><span class="w"> </span><span class="s">PRIVATE</span><span class="w"> </span><span class="s">cxx_std_17</span><span class="p">)</span>
+<span class="nb">target_compile_options</span><span class="p">(</span><span class="s">name</span><span class="w"> </span><span class="s">PRIVATE</span><span class="w"> </span><span class="s">-Wall</span><span class="w"> </span><span class="s">-Wextra</span><span class="p">)</span>
+<span class="nb">target_link_libraries</span><span class="p">(</span><span class="s">name</span><span class="w"> </span><span class="s">PRIVATE</span><span class="w"> </span><span class="s">otherlib</span><span class="p">)</span>
+<span class="nb">target_link_directories</span><span class="p">(</span><span class="s">name</span><span class="w"> </span><span class="s">PRIVATE</span><span class="w"> </span><span class="s">/opt/lib</span><span class="p">)</span><span class="w">   </span><span class="c"># избегайте, используйте find_package</span>
+<span class="nb">target_link_options</span><span class="p">(</span><span class="s">name</span><span class="w"> </span><span class="s">PRIVATE</span><span class="w"> </span><span class="s">-static</span><span class="p">)</span>
+<span class="nb">target_sources</span><span class="p">(</span><span class="s">name</span><span class="w"> </span><span class="s">PRIVATE</span><span class="w"> </span><span class="s">src/new.c</span><span class="p">)</span>
+<span class="nb">target_include_directories</span><span class="p">(</span><span class="s">name</span><span class="w"> </span><span class="s">SYSTEM</span><span class="w"> </span><span class="s">PRIVATE</span><span class="w"> </span><span class="s">/opt/include</span><span class="p">)</span>
+</code></pre></div>
+
+<h3 id="работа-с-переменными">Работа с переменными<a class="headerlink" href="#работа-с-переменными" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="nb">set</span><span class="p">(</span><span class="s">MYVAR</span><span class="w"> </span><span class="s2">&quot;value&quot;</span><span class="p">)</span>
+<span class="nb">set</span><span class="p">(</span><span class="s">LIST</span><span class="w"> </span><span class="s">a</span><span class="w"> </span><span class="s">b</span><span class="w"> </span><span class="s">c</span><span class="p">)</span>
+<span class="nb">list</span><span class="p">(</span><span class="s">APPEND</span><span class="w"> </span><span class="s">LIST</span><span class="w"> </span><span class="s">d</span><span class="p">)</span><span class="w">                    </span><span class="c"># добавить</span>
+<span class="nb">list</span><span class="p">(</span><span class="s">REMOVE_ITEM</span><span class="w"> </span><span class="s">LIST</span><span class="w"> </span><span class="s">b</span><span class="p">)</span><span class="w">               </span><span class="c"># удалить</span>
+<span class="nb">list</span><span class="p">(</span><span class="s">SORT</span><span class="w"> </span><span class="s">LIST</span><span class="p">)</span>
+<span class="nb">list</span><span class="p">(</span><span class="s">JOIN</span><span class="w"> </span><span class="s">LIST</span><span class="w"> </span><span class="s2">&quot;,&quot;</span><span class="w"> </span><span class="s">STRING</span><span class="p">)</span>
+<span class="nb">set</span><span class="p">(</span><span class="s">MYVAR</span><span class="w"> </span><span class="o">${</span><span class="nv">MYVAR</span><span class="o">}</span><span class="w"> </span><span class="s">extra</span><span class="p">)</span><span class="w">              </span><span class="c"># конкатенация</span>
+
+<span class="c"># Условия</span>
+<span class="nb">if</span><span class="p">(</span><span class="s">USE_FEATURE</span><span class="p">)</span>
+<span class="w">    </span><span class="err">...</span>
+<span class="nb">elseif</span><span class="p">(</span><span class="s">OTHER</span><span class="p">)</span>
+<span class="w">    </span><span class="err">...</span>
+<span class="nb">else</span><span class="p">()</span>
+<span class="w">    </span><span class="err">...</span>
+<span class="nb">endif</span><span class="p">()</span>
+
+<span class="c"># Циклы</span>
+<span class="nb">foreach</span><span class="p">(</span><span class="s">item</span><span class="w"> </span><span class="s">IN</span><span class="w"> </span><span class="s">LISTS</span><span class="w"> </span><span class="s">ITEMS</span><span class="p">)</span>
+<span class="w">    </span><span class="nb">message</span><span class="p">(</span><span class="s">STATUS</span><span class="w"> </span><span class="s2">&quot;Item: ${item}&quot;</span><span class="p">)</span>
+<span class="nb">endforeach</span><span class="p">()</span>
+
+<span class="nb">foreach</span><span class="p">(</span><span class="s">i</span><span class="w"> </span><span class="s">RANGE</span><span class="w"> </span><span class="s">0</span><span class="w"> </span><span class="s">10</span><span class="w"> </span><span class="s">2</span><span class="p">)</span><span class="w">                </span><span class="c"># 0, 2, 4, ..., 10</span>
+<span class="w">    </span><span class="err">...</span>
+<span class="nb">endforeach</span><span class="p">()</span>
+
+<span class="nb">while</span><span class="p">(</span><span class="s">CONDITION</span><span class="p">)</span>
+<span class="w">    </span><span class="err">...</span>
+<span class="nb">endwhile</span><span class="p">()</span>
+</code></pre></div>
+
+<h3 id="условия-в-if">Условия в if()<a class="headerlink" href="#условия-в-if" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="nb">if</span><span class="p">(</span><span class="s">VAR</span><span class="p">)</span><span class="w">                    </span><span class="c"># true если определена и не пустая/0/false/NO/OFF</span>
+<span class="nb">if</span><span class="p">(</span><span class="s">NOT</span><span class="w"> </span><span class="s">VAR</span><span class="p">)</span>
+<span class="nb">if</span><span class="p">(</span><span class="s">A</span><span class="w"> </span><span class="s">AND</span><span class="w"> </span><span class="s">B</span><span class="p">)</span><span class="w"> </span><span class="err">/</span><span class="w"> </span><span class="nb">if</span><span class="p">(</span><span class="s">A</span><span class="w"> </span><span class="s">OR</span><span class="w"> </span><span class="s">B</span><span class="p">)</span>
+
+<span class="nb">if</span><span class="p">(</span><span class="s">DEFINED</span><span class="w"> </span><span class="s">VAR</span><span class="p">)</span><span class="w">            </span><span class="c"># переменная определена</span>
+<span class="nb">if</span><span class="p">(</span><span class="s">EXISTS</span><span class="w"> </span><span class="s">path</span><span class="p">)</span><span class="w">            </span><span class="c"># файл/каталог существует</span>
+<span class="nb">if</span><span class="p">(</span><span class="s">IS_DIRECTORY</span><span class="w"> </span><span class="s">path</span><span class="p">)</span>
+<span class="nb">if</span><span class="p">(</span><span class="s">COMMAND</span><span class="w"> </span><span class="s">name</span><span class="p">)</span><span class="w">           </span><span class="c"># команда существует</span>
+
+<span class="nb">if</span><span class="p">(</span><span class="s">A</span><span class="w"> </span><span class="s">STREQUAL</span><span class="w"> </span><span class="s">B</span><span class="p">)</span><span class="w">           </span><span class="c"># строки равны</span>
+<span class="nb">if</span><span class="p">(</span><span class="s">A</span><span class="w"> </span><span class="s">MATCHES</span><span class="w"> </span><span class="s">regex</span><span class="p">)</span><span class="w">        </span><span class="c"># регулярка</span>
+
+<span class="nb">if</span><span class="p">(</span><span class="s">A</span><span class="w"> </span><span class="s">LESS</span><span class="w"> </span><span class="s">B</span><span class="p">)</span><span class="w"> </span><span class="err">/</span><span class="w"> </span><span class="err">GREATER</span><span class="w"> </span><span class="err">/</span><span class="w"> </span><span class="err">EQUAL</span><span class="w">    </span><span class="c"># числа</span>
+<span class="nb">if</span><span class="p">(</span><span class="s">VERSION_LESS</span><span class="w"> </span><span class="s">3.15</span><span class="p">)</span>
+
+<span class="nb">if</span><span class="p">(</span><span class="o">${</span><span class="nv">CMAKE_SYSTEM_NAME</span><span class="o">}</span><span class="w"> </span><span class="s">STREQUAL</span><span class="w"> </span><span class="s2">&quot;Linux&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="err">...</span>
+<span class="nb">endif</span><span class="p">()</span>
+</code></pre></div>
+
+<h3 id="прочее">Прочее<a class="headerlink" href="#прочее" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="nb">message</span><span class="p">(</span><span class="s">STATUS</span><span class="w"> </span><span class="s2">&quot;Message&quot;</span><span class="p">)</span><span class="w">              </span><span class="c"># информационное</span>
+<span class="nb">message</span><span class="p">(</span><span class="s">WARNING</span><span class="w"> </span><span class="s2">&quot;Warning&quot;</span><span class="p">)</span><span class="w">             </span><span class="c"># предупреждение</span>
+<span class="nb">message</span><span class="p">(</span><span class="s">FATAL_ERROR</span><span class="w"> </span><span class="s2">&quot;Error&quot;</span><span class="p">)</span><span class="w">           </span><span class="c"># ошибка + остановка</span>
+<span class="nb">message</span><span class="p">(</span><span class="s">AUTHOR_WARNING</span><span class="w"> </span><span class="s2">&quot;...&quot;</span><span class="p">)</span><span class="w">          </span><span class="c"># только разработчику</span>
+
+<span class="nb">file</span><span class="p">(</span><span class="s">GLOB</span><span class="w"> </span><span class="s">SOURCES</span><span class="w"> </span><span class="s">src/*.cpp</span><span class="p">)</span><span class="w">           </span><span class="c"># не использовать для источников!</span>
+<span class="nb">file</span><span class="p">(</span><span class="s">GLOB_RECURSE</span><span class="w"> </span><span class="s">SOURCES</span><span class="w"> </span><span class="s">src/**/*.cpp</span><span class="p">)</span>
+<span class="c"># ❌ CMake не пересоздаст список при добавлении новых файлов</span>
+<span class="c"># ✅ Используйте явно: add_executable(a.cpp b.cpp)</span>
+
+<span class="nb">file</span><span class="p">(</span><span class="s">MAKE_DIRECTORY</span><span class="w"> </span><span class="o">${</span><span class="nv">CMAKE_BINARY_DIR</span><span class="o">}</span><span class="s">/logs</span><span class="p">)</span>
+<span class="nb">file</span><span class="p">(</span><span class="s">COPY</span><span class="w"> </span><span class="s">config/</span><span class="w"> </span><span class="s">DESTINATION</span><span class="w"> </span><span class="o">${</span><span class="nv">CMAKE_BINARY_DIR</span><span class="o">}</span><span class="s">/config</span><span class="p">)</span>
+<span class="nb">file</span><span class="p">(</span><span class="s">WRITE</span><span class="w"> </span><span class="s">file.txt</span><span class="w"> </span><span class="s2">&quot;content&quot;</span><span class="p">)</span>
+<span class="nb">file</span><span class="p">(</span><span class="s">READ</span><span class="w"> </span><span class="s">file.txt</span><span class="w"> </span><span class="s">CONTENT</span><span class="p">)</span>
+
+<span class="nb">include_directories</span><span class="p">(</span><span class="s">include/</span><span class="p">)</span><span class="w">          </span><span class="c"># глобально (избегайте, используйте target_include_directories)</span>
+<span class="nb">link_libraries</span><span class="p">(</span><span class="s">m</span><span class="p">)</span><span class="w">                      </span><span class="c"># глобально (избегайте)</span>
+<span class="nb">add_definitions</span><span class="p">(</span><span class="s">-DDEBUG=1</span><span class="p">)</span><span class="w">             </span><span class="c"># глобально (избегайте)</span>
+</code></pre></div>
+
+<hr />
+<h2 id="практический-пример-cmakelists-txt">🛠️ Практический пример CMakeLists.txt<a class="headerlink" href="#практический-пример-cmakelists-txt" title="Ссылка">#</a></h2>
+<p>Полный пример для проекта на C++:</p>
+<div class="highlight"><pre><span></span><code><span class="nb">cmake_minimum_required</span><span class="p">(</span><span class="s">VERSION</span><span class="w"> </span><span class="s">3.16</span><span class="p">)</span>
+<span class="nb">project</span><span class="p">(</span><span class="s">MyApp</span>
+<span class="w">    </span><span class="s">VERSION</span><span class="w"> </span><span class="s">1.2.0</span>
+<span class="w">    </span><span class="s">LANGUAGES</span><span class="w"> </span><span class="s">CXX</span><span class="p">)</span>
+
+<span class="c"># ── Стандарт C++ ────────────────────────────────────</span>
+<span class="nb">set</span><span class="p">(</span><span class="s">CMAKE_CXX_STANDARD</span><span class="w"> </span><span class="s">17</span><span class="p">)</span>
+<span class="nb">set</span><span class="p">(</span><span class="s">CMAKE_CXX_STANDARD_REQUIRED</span><span class="w"> </span><span class="s">ON</span><span class="p">)</span>
+<span class="nb">set</span><span class="p">(</span><span class="s">CMAKE_CXX_EXTENSIONS</span><span class="w"> </span><span class="s">OFF</span><span class="p">)</span>
+
+<span class="c"># ── Опции ───────────────────────────────────────────</span>
+<span class="nb">option</span><span class="p">(</span><span class="s">BUILD_TESTS</span><span class="w"> </span><span class="s2">&quot;Build tests&quot;</span><span class="w"> </span><span class="s">OFF</span><span class="p">)</span>
+<span class="nb">option</span><span class="p">(</span><span class="s">BUILD_SHARED_LIBS</span><span class="w"> </span><span class="s2">&quot;Build shared&quot;</span><span class="w"> </span><span class="s">OFF</span><span class="p">)</span>
+
+<span class="c"># ── По умолчанию Release если не задано ─────────────</span>
+<span class="nb">if</span><span class="p">(</span><span class="s">NOT</span><span class="w"> </span><span class="s">CMAKE_BUILD_TYPE</span><span class="w"> </span><span class="s">AND</span><span class="w"> </span><span class="s">NOT</span><span class="w"> </span><span class="s">CMAKE_CONFIGURATION_TYPES</span><span class="p">)</span>
+<span class="w">    </span><span class="nb">set</span><span class="p">(</span><span class="s">CMAKE_BUILD_TYPE</span><span class="w"> </span><span class="s">Release</span><span class="w"> </span><span class="s">CACHE</span><span class="w"> </span><span class="s">STRING</span><span class="w"> </span><span class="s2">&quot;Build type&quot;</span><span class="w"> </span><span class="s">FORCE</span><span class="p">)</span>
+<span class="nb">endif</span><span class="p">()</span>
+
+<span class="c"># ── Источники ───────────────────────────────────────</span>
+<span class="nb">set</span><span class="p">(</span><span class="s">LIB_SOURCES</span>
+<span class="w">    </span><span class="s">src/database.cpp</span>
+<span class="w">    </span><span class="s">src/network.cpp</span>
+<span class="w">    </span><span class="s">src/utils.cpp</span><span class="p">)</span>
+
+<span class="c"># ── Библиотека ──────────────────────────────────────</span>
+<span class="nb">add_library</span><span class="p">(</span><span class="s">mylib</span><span class="w"> </span><span class="o">${</span><span class="nv">LIB_SOURCES</span><span class="o">}</span><span class="p">)</span>
+<span class="nb">target_include_directories</span><span class="p">(</span><span class="s">mylib</span><span class="w"> </span><span class="s">PUBLIC</span>
+<span class="w">    </span><span class="o">$&lt;</span><span class="nv">BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include</span><span class="o">&gt;</span>
+<span class="w">    </span><span class="o">$&lt;</span><span class="nv">INSTALL_INTERFACE:include</span><span class="o">&gt;</span><span class="p">)</span>
+
+<span class="c"># Предупреждения</span>
+<span class="nb">if</span><span class="p">(</span><span class="s">CMAKE_CXX_COMPILER_ID</span><span class="w"> </span><span class="s">MATCHES</span><span class="w"> </span><span class="s2">&quot;GNU|Clang&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="nb">target_compile_options</span><span class="p">(</span><span class="s">mylib</span><span class="w"> </span><span class="s">PRIVATE</span><span class="w"> </span><span class="s">-Wall</span><span class="w"> </span><span class="s">-Wextra</span><span class="w"> </span><span class="s">-Wpedantic</span><span class="p">)</span>
+<span class="nb">elseif</span><span class="p">(</span><span class="s">MSVC</span><span class="p">)</span>
+<span class="w">    </span><span class="nb">target_compile_options</span><span class="p">(</span><span class="s">mylib</span><span class="w"> </span><span class="s">PRIVATE</span><span class="w"> </span><span class="s">/W4</span><span class="p">)</span>
+<span class="nb">endif</span><span class="p">()</span>
+
+<span class="c"># ── Зависимости ─────────────────────────────────────</span>
+<span class="nb">find_package</span><span class="p">(</span><span class="s">Threads</span><span class="w"> </span><span class="s">REQUIRED</span><span class="p">)</span>
+<span class="nb">target_link_libraries</span><span class="p">(</span><span class="s">mylib</span><span class="w"> </span><span class="s">PUBLIC</span><span class="w"> </span><span class="s">Threads::Threads</span><span class="p">)</span>
+
+<span class="c"># SQLite3 через pkg-config</span>
+<span class="nb">find_package</span><span class="p">(</span><span class="s">PkgConfig</span><span class="w"> </span><span class="s">REQUIRED</span><span class="p">)</span>
+<span class="nb">pkg_check_modules</span><span class="p">(</span><span class="s">SQLITE3</span><span class="w"> </span><span class="s">REQUIRED</span><span class="w"> </span><span class="s">sqlite3</span><span class="p">)</span>
+<span class="nb">target_link_libraries</span><span class="p">(</span><span class="s">mylib</span><span class="w"> </span><span class="s">PRIVATE</span><span class="w"> </span><span class="o">${</span><span class="nv">SQLITE3_LIBRARIES</span><span class="o">}</span><span class="p">)</span>
+<span class="nb">target_include_directories</span><span class="p">(</span><span class="s">mylib</span><span class="w"> </span><span class="s">PRIVATE</span><span class="w"> </span><span class="o">${</span><span class="nv">SQLITE3_INCLUDE_DIRS</span><span class="o">}</span><span class="p">)</span>
+
+<span class="c"># ── Исполняемый файл ────────────────────────────────</span>
+<span class="nb">add_executable</span><span class="p">(</span><span class="s">myapp</span><span class="w"> </span><span class="s">src/main.cpp</span><span class="p">)</span>
+<span class="nb">target_link_libraries</span><span class="p">(</span><span class="s">myapp</span><span class="w"> </span><span class="s">PRIVATE</span><span class="w"> </span><span class="s">mylib</span><span class="p">)</span>
+
+<span class="c"># ── Тесты ───────────────────────────────────────────</span>
+<span class="nb">if</span><span class="p">(</span><span class="s">BUILD_TESTS</span><span class="p">)</span>
+<span class="w">    </span><span class="nb">enable_testing</span><span class="p">()</span>
+<span class="w">    </span><span class="nb">add_subdirectory</span><span class="p">(</span><span class="s">tests</span><span class="p">)</span>
+<span class="nb">endif</span><span class="p">()</span>
+
+<span class="c"># ── Установка ───────────────────────────────────────</span>
+<span class="nb">include</span><span class="p">(</span><span class="s">GNUInstallDirs</span><span class="p">)</span>
+<span class="nb">install</span><span class="p">(</span><span class="s">TARGETS</span><span class="w"> </span><span class="s">myapp</span><span class="w"> </span><span class="s">mylib</span>
+<span class="w">    </span><span class="s">RUNTIME</span><span class="w"> </span><span class="s">DESTINATION</span><span class="w"> </span><span class="o">${</span><span class="nv">CMAKE_INSTALL_BINDIR</span><span class="o">}</span>
+<span class="w">    </span><span class="s">LIBRARY</span><span class="w"> </span><span class="s">DESTINATION</span><span class="w"> </span><span class="o">${</span><span class="nv">CMAKE_INSTALL_LIBDIR</span><span class="o">}</span>
+<span class="w">    </span><span class="s">ARCHIVE</span><span class="w"> </span><span class="s">DESTINATION</span><span class="w"> </span><span class="o">${</span><span class="nv">CMAKE_INSTALL_LIBDIR</span><span class="o">}</span><span class="p">)</span>
+
+<span class="nb">install</span><span class="p">(</span><span class="s">DIRECTORY</span><span class="w"> </span><span class="s">include/</span>
+<span class="w">    </span><span class="s">DESTINATION</span><span class="w"> </span><span class="o">${</span><span class="nv">CMAKE_INSTALL_INCLUDEDIR</span><span class="o">}</span><span class="p">)</span>
+</code></pre></div>
+
+<hr />
+<h2 id="кроссплатформенность">🌍 Кроссплатформенность<a class="headerlink" href="#кроссплатформенность" title="Ссылка">#</a></h2>
+<div class="highlight"><pre><span></span><code><span class="c"># Определить ОС</span>
+<span class="nb">if</span><span class="p">(</span><span class="s">WIN32</span><span class="p">)</span>
+<span class="w">    </span><span class="c"># Windows (вкл. 64-bit)</span>
+<span class="w">    </span><span class="nb">target_compile_definitions</span><span class="p">(</span><span class="s">myapp</span><span class="w"> </span><span class="s">PRIVATE</span><span class="w"> </span><span class="s">PLATFORM_WIN</span><span class="p">)</span>
+<span class="nb">elseif</span><span class="p">(</span><span class="s">UNIX</span><span class="w"> </span><span class="s">AND</span><span class="w"> </span><span class="s">APPLE</span><span class="p">)</span>
+<span class="w">    </span><span class="c"># macOS</span>
+<span class="w">    </span><span class="nb">target_compile_definitions</span><span class="p">(</span><span class="s">myapp</span><span class="w"> </span><span class="s">PRIVATE</span><span class="w"> </span><span class="s">PLATFORM_MAC</span><span class="p">)</span>
+<span class="nb">elseif</span><span class="p">(</span><span class="s">UNIX</span><span class="p">)</span>
+<span class="w">    </span><span class="c"># Linux/Unix</span>
+<span class="w">    </span><span class="nb">target_compile_definitions</span><span class="p">(</span><span class="s">myapp</span><span class="w"> </span><span class="s">PRIVATE</span><span class="w"> </span><span class="s">PLATFORM_LINUX</span><span class="p">)</span>
+<span class="nb">endif</span><span class="p">()</span>
+
+<span class="c"># Compiler ID</span>
+<span class="nb">if</span><span class="p">(</span><span class="s">CMAKE_CXX_COMPILER_ID</span><span class="w"> </span><span class="s">STREQUAL</span><span class="w"> </span><span class="s2">&quot;GNU&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="nb">target_compile_options</span><span class="p">(</span><span class="s">myapp</span><span class="w"> </span><span class="s">PRIVATE</span><span class="w"> </span><span class="s">-Wall</span><span class="p">)</span>
+<span class="nb">elseif</span><span class="p">(</span><span class="s">CMAKE_CXX_COMPILER_ID</span><span class="w"> </span><span class="s">STREQUAL</span><span class="w"> </span><span class="s2">&quot;MSVC&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="nb">target_compile_options</span><span class="p">(</span><span class="s">myapp</span><span class="w"> </span><span class="s">PRIVATE</span><span class="w"> </span><span class="s">/W4</span><span class="p">)</span>
+<span class="nb">elseif</span><span class="p">(</span><span class="s">CMAKE_CXX_COMPILER_ID</span><span class="w"> </span><span class="s">STREQUAL</span><span class="w"> </span><span class="s2">&quot;Clang&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="nb">target_compile_options</span><span class="p">(</span><span class="s">myapp</span><span class="w"> </span><span class="s">PRIVATE</span><span class="w"> </span><span class="s">-Wall</span><span class="w"> </span><span class="s">-Wextra</span><span class="p">)</span>
+<span class="nb">endif</span><span class="p">()</span>
+
+<span class="c"># Разные источники по платформе</span>
+<span class="nb">if</span><span class="p">(</span><span class="s">WIN32</span><span class="p">)</span>
+<span class="w">    </span><span class="nb">target_sources</span><span class="p">(</span><span class="s">myapp</span><span class="w"> </span><span class="s">PRIVATE</span><span class="w"> </span><span class="s">src/windows_specific.cpp</span><span class="p">)</span>
+<span class="nb">else</span><span class="p">()</span>
+<span class="w">    </span><span class="nb">target_sources</span><span class="p">(</span><span class="s">myapp</span><span class="w"> </span><span class="s">PRIVATE</span><span class="w"> </span><span class="s">src/posix_specific.cpp</span><span class="p">)</span>
+<span class="nb">endif</span><span class="p">()</span>
+
+<span class="c"># Архитектура</span>
+<span class="nb">if</span><span class="p">(</span><span class="s">CMAKE_SIZEOF_VOID_P</span><span class="w"> </span><span class="s">EQUAL</span><span class="w"> </span><span class="s">8</span><span class="p">)</span>
+<span class="w">    </span><span class="nb">message</span><span class="p">(</span><span class="s">STATUS</span><span class="w"> </span><span class="s2">&quot;64-bit&quot;</span><span class="p">)</span>
+<span class="nb">else</span><span class="p">()</span>
+<span class="w">    </span><span class="nb">message</span><span class="p">(</span><span class="s">STATUS</span><span class="w"> </span><span class="s2">&quot;32-bit&quot;</span><span class="p">)</span>
+<span class="nb">endif</span><span class="p">()</span>
+</code></pre></div>
+
+<h3 id="gnuinstalldirs-стандартные-пути">GNUInstallDirs — стандартные пути<a class="headerlink" href="#gnuinstalldirs-стандартные-пути" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="nb">include</span><span class="p">(</span><span class="s">GNUInstallDirs</span><span class="p">)</span>
+<span class="c"># Доступны:</span>
+<span class="c"># CMAKE_INSTALL_BINDIR      - bin</span>
+<span class="c"># CMAKE_INSTALL_LIBDIR      - lib или lib64</span>
+<span class="c"># CMAKE_INSTALL_INCLUDEDIR  - include</span>
+<span class="c"># CMAKE_INSTALL_DATADIR     - share</span>
+<span class="c"># CMAKE_INSTALL_MANDIR      - share/man</span>
+
+<span class="nb">install</span><span class="p">(</span><span class="s">TARGETS</span><span class="w"> </span><span class="s">myapp</span>
+<span class="w">    </span><span class="s">RUNTIME</span><span class="w"> </span><span class="s">DESTINATION</span><span class="w"> </span><span class="o">${</span><span class="nv">CMAKE_INSTALL_BINDIR</span><span class="o">}</span>
+<span class="w">    </span><span class="s">LIBRARY</span><span class="w"> </span><span class="s">DESTINATION</span><span class="w"> </span><span class="o">${</span><span class="nv">CMAKE_INSTALL_LIBDIR</span><span class="o">}</span><span class="p">)</span>
+</code></pre></div>
+
+<hr />
+<h2 id="generator-expressions">🎯 Generator Expressions<a class="headerlink" href="#generator-expressions" title="Ссылка">#</a></h2>
+<p>Мощный механизм для условных значений:</p>
+<div class="highlight"><pre><span></span><code><span class="c"># Различные пути для сборки и установки</span>
+<span class="nb">target_include_directories</span><span class="p">(</span><span class="s">mylib</span><span class="w"> </span><span class="s">PUBLIC</span>
+<span class="w">    </span><span class="o">$&lt;</span><span class="nv">BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include</span><span class="o">&gt;</span>
+<span class="w">    </span><span class="o">$&lt;</span><span class="nv">INSTALL_INTERFACE:include</span><span class="o">&gt;</span>
+<span class="p">)</span>
+
+<span class="c"># Условные флаги</span>
+<span class="nb">target_compile_options</span><span class="p">(</span><span class="s">myapp</span><span class="w"> </span><span class="s">PRIVATE</span>
+<span class="w">    </span><span class="o">$&lt;</span><span class="nv">$&lt;CXX_COMPILER_ID:GNU</span><span class="o">&gt;</span><span class="s">:-Wall&gt;</span>
+<span class="w">    </span><span class="o">$&lt;</span><span class="nv">$&lt;CXX_COMPILER_ID:MSVC</span><span class="o">&gt;</span><span class="s">:/W4&gt;</span>
+<span class="w">    </span><span class="o">$&lt;</span><span class="nv">$&lt;CONFIG:Debug</span><span class="o">&gt;</span><span class="s">:-g</span><span class="w"> </span><span class="s">-O0&gt;</span>
+<span class="w">    </span><span class="o">$&lt;</span><span class="nv">$&lt;CONFIG:Release</span><span class="o">&gt;</span><span class="s">:-O3&gt;</span>
+<span class="p">)</span>
+
+<span class="c"># Платформо-зависимые библиотеки</span>
+<span class="nb">target_link_libraries</span><span class="p">(</span><span class="s">myapp</span><span class="w"> </span><span class="s">PRIVATE</span>
+<span class="w">    </span><span class="o">$&lt;</span><span class="nv">$&lt;PLATFORM_ID:Windows</span><span class="o">&gt;</span><span class="s">:ws2_32&gt;</span>
+<span class="w">    </span><span class="o">$&lt;</span><span class="nv">$&lt;PLATFORM_ID:Linux</span><span class="o">&gt;</span><span class="s">:rt&gt;</span>
+<span class="p">)</span>
+</code></pre></div>
+
+<p>Частые generator expressions:
+| Выражение | Значение |
+|&mdash;|&mdash;|
+| <code>$&lt;CONFIG:Debug&gt;</code> | True если конфиг Debug |
+| <code>$&lt;PLATFORM_ID:Linux&gt;</code> | True если Linux |
+| <code>$&lt;CXX_COMPILER_ID:GNU&gt;</code> | True если компилятор GCC |
+| <code>$&lt;BOOL:value&gt;</code> | Преобразовать в true/false |
+| <code>$&lt;STREQUAL:a,b&gt;</code> | Сравнение строк |
+| <code>$&lt;TARGET_FILE:mylib&gt;</code> | Путь к собранному файлу |
+| <code>$&lt;TARGET_PROPERTY:t,PROP&gt;</code> | Свойство target&rsquo;а |
+| <code>$&lt;BUILD_INTERFACE:...&gt;</code> | Только при сборке |
+| <code>$&lt;INSTALL_INTERFACE:...&gt;</code> | Только при установке |</p>
+<hr />
+<h2 id="дебаг-и-анализ">🐛 Дебаг и анализ<a class="headerlink" href="#дебаг-и-анализ" title="Ссылка">#</a></h2>
+<div class="highlight"><pre><span></span><code><span class="c1"># Подробный вывод при конфигурации</span>
+cmake<span class="w"> </span>-B<span class="w"> </span>build<span class="w"> </span>--debug-output
+cmake<span class="w"> </span>-B<span class="w"> </span>build<span class="w"> </span>--trace<span class="w">                </span><span class="c1"># показать выполнение всех команд</span>
+cmake<span class="w"> </span>-B<span class="w"> </span>build<span class="w"> </span>--trace-expand<span class="w">         </span><span class="c1"># + раскрытие переменных</span>
+
+<span class="c1"># Посмотреть финальные команды компилятора</span>
+make<span class="w"> </span><span class="nv">VERBOSE</span><span class="o">=</span><span class="m">1</span><span class="w">                        </span><span class="c1"># в build/</span>
+cmake<span class="w"> </span>--build<span class="w"> </span>build<span class="w"> </span>--<span class="w"> </span><span class="nv">VERBOSE</span><span class="o">=</span><span class="m">1</span>
+
+<span class="c1"># Изучить кэш</span>
+cmake<span class="w"> </span>-L<span class="w"> </span>-B<span class="w"> </span>build<span class="w">                     </span><span class="c1"># некэшированные переменные</span>
+cmake<span class="w"> </span>-LA<span class="w"> </span>-B<span class="w"> </span>build<span class="w">                    </span><span class="c1"># все</span>
+cat<span class="w"> </span>build/CMakeCache.txt<span class="w">              </span><span class="c1"># напрямую</span>
+
+<span class="c1"># Сменить опцию без перенастройки</span>
+cmake<span class="w"> </span>-B<span class="w"> </span>build<span class="w"> </span>-DBUILD_TESTS<span class="o">=</span>ON<span class="w">       </span><span class="c1"># обновит кэш</span>
+
+<span class="c1"># Очистить кэш</span>
+rm<span class="w"> </span>build/CMakeCache.txt<span class="w">               </span><span class="c1"># сохранить структуру, сбросить опции</span>
+
+<span class="c1"># Полный rebuild</span>
+rm<span class="w"> </span>-rf<span class="w"> </span>build<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>cmake<span class="w"> </span>-B<span class="w"> </span>build
+
+<span class="c1"># Граф зависимостей</span>
+cmake<span class="w"> </span>--graphviz<span class="o">=</span>deps.dot<span class="w"> </span>-B<span class="w"> </span>build<span class="w">    </span><span class="c1"># создать Graphviz</span>
+</code></pre></div>
+
+<h3 id="полезные-инструменты">Полезные инструменты<a class="headerlink" href="#полезные-инструменты" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>ccmake<span class="w"> </span>-B<span class="w"> </span>build<span class="w">          </span><span class="c1"># TUI для редактирования кэша ( curses )</span>
+cmake-gui<span class="w">                </span><span class="c1"># GUI для Windows/macOS</span>
+
+<span class="c1"># Анализ собранного</span>
+ldd<span class="w"> </span>build/myapp<span class="w">          </span><span class="c1"># зависимости (Linux)</span>
+otool<span class="w"> </span>-L<span class="w"> </span>myapp<span class="w">           </span><span class="c1"># (macOS)</span>
+</code></pre></div>
+
+<hr />
+<h2 id="fetchcontent-скачать-зависимости-модерн">🔗 FetchContent — скачать зависимости (модерн)<a class="headerlink" href="#fetchcontent-скачать-зависимости-модерн" title="Ссылка">#</a></h2>
+<div class="highlight"><pre><span></span><code><span class="nb">include</span><span class="p">(</span><span class="s">FetchContent</span><span class="p">)</span>
+
+<span class="c"># Скачать GoogleTest</span>
+<span class="nb">FetchContent_Declare</span><span class="p">(</span>
+<span class="w">    </span><span class="s">googletest</span>
+<span class="w">    </span><span class="s">GIT_REPOSITORY</span><span class="w"> </span><span class="s">https://github.com/google/googletest.git</span>
+<span class="w">    </span><span class="s">GIT_TAG</span><span class="w"> </span><span class="s">release-1.14.0</span>
+<span class="p">)</span>
+<span class="nb">FetchContent_MakeAvailable</span><span class="p">(</span><span class="s">googletest</span><span class="p">)</span>
+
+<span class="nb">target_link_libraries</span><span class="p">(</span><span class="s">myapp</span><span class="w"> </span><span class="s">PRIVATE</span><span class="w"> </span><span class="s">gtest_main</span><span class="p">)</span>
+</code></pre></div>
+
+<p>Преимущества:
+- Не нужно <code>find_package</code> + предварительная установка
+- Воспроизводимые сборки
+- Версия зафиксирована в репозитории</p>
+<hr />
+<h2 id="сравнение-make-и-cmake">🆚 Сравнение Make и CMake<a class="headerlink" href="#сравнение-make-и-cmake" title="Ссылка">#</a></h2>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Make</th>
+<th>CMake</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Уровень</td>
+<td>Низкий (правила)</td>
+<td>Высокий (метасборка)</td>
+</tr>
+<tr>
+<td>Файл</td>
+<td><code>Makefile</code></td>
+<td><code>CMakeLists.txt</code></td>
+</tr>
+<tr>
+<td>Кроссплатформенность</td>
+<td>❌ Unix-ориентирован</td>
+<td>✅ Win/Mac/Linux</td>
+</tr>
+<tr>
+<td>IDE-интеграция</td>
+<td>базовая</td>
+<td>✅ VS, Xcode, CLion</td>
+</tr>
+<tr>
+<td>Поиск библиотек</td>
+<td>вручную</td>
+<td>✅ find_package</td>
+</tr>
+<tr>
+<td>Многоконфигурация</td>
+<td>❌</td>
+<td>✅ Debug/Release</td>
+</tr>
+<tr>
+<td>Сложность</td>
+<td>просто для маленьких</td>
+<td>сложнее, но мощнее</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Когда что использовать</strong>:
+- <strong>Make</strong>: маленькие проекты, скриптовые языки (как task runner), простой C.
+- <strong>CMake</strong>: средние и большие C/C++ проекты, кроссплатформа, библиотеки.</p>
+<hr />
+<h2 id="частые-ошибки-cmake">🪤 Частые ошибки CMake<a class="headerlink" href="#частые-ошибки-cmake" title="Ссылка">#</a></h2>
+<ol>
+<li><strong><code>file(GLOB)</code> для источников</strong> — CMake не узнает о новых файлах без rerun.
+   Явно перечисляйте <code>add_executable(a.cpp b.cpp)</code>.</li>
+<li><strong>Глобальные команды</strong> — <code>include_directories</code>, <code>link_libraries</code>,
+   <code>add_definitions</code> влияют на всё. Используйте <code>target_*</code>.</li>
+<li><strong>In-source build</strong> — не собирайте в корне (<code>cmake .</code>).
+   Всегда <code>cmake -B build</code>.</li>
+<li><strong>Забыли <code>target_link_libraries</code></strong> — <code>undefined reference</code> при линковке.</li>
+<li><strong>PUBLIC vs PRIVATE</strong> — неправильная видимость раздувает зависимости.</li>
+<li><strong>Не указали <code>CMAKE_CXX_STANDARD</code></strong> — разные компиляторы, разные дефолты.</li>
+<li><strong><code>add_subdirectory</code> до <code>add_library</code></strong> — порядок важен.</li>
+<li><strong>Кэш не обновился</strong> — после правки CMakeLists иногда нужно <code>rm -rf build</code>.</li>
+<li><strong>Hardcoded paths</strong> — <code>${CMAKE_SOURCE_DIR}</code> вместо абсолютных.</li>
+<li><strong>Смешение старого и нового стиля</strong> — <code>include_directories</code> + <code>target_*</code>.</li>
+</ol>
+<hr />
+<h2 id="полезные-ссылки">🔗 Полезные ссылки<a class="headerlink" href="#полезные-ссылки" title="Ссылка">#</a></h2>
+<h3 id="make">Make<a class="headerlink" href="#make" title="Ссылка">#</a></h3>
+<ul>
+<li>GNU Make manual: https://www.gnu.org/software/make/manual</li>
+<li>Makefile tutorial: https://makefiletutorial.com</li>
+<li>Awesome Makefile: https://github.com/thockin/makefile-tutorial</li>
+</ul>
+<h3 id="cmake">CMake<a class="headerlink" href="#cmake" title="Ссылка">#</a></h3>
+<ul>
+<li>Официальный tutorial: https://cmake.org/cmake/help/latest/guide/tutorial</li>
+<li>CMake reference: https://cmake.org/cmake/help/latest/manual/cmake-commands.7.html</li>
+<li>Modern CMake: https://cliutils.gitlab.io/modern-cmake</li>
+<li>Professional CMake: https://crascit.com/professional-cmake</li>
+<li>Effective CMake (Daniel Pfeifer): https://www.youtube.com/watch?v=bsXLMQ6WgIk</li>
+</ul>
+<hr />
+<h2 id="полезные-советы">💡 Полезные советы<a class="headerlink" href="#полезные-советы" title="Ссылка">#</a></h2>
+<h3 id="make_1">Make<a class="headerlink" href="#make_1" title="Ссылка">#</a></h3>
+<ol>
+<li><strong>TAB, не пробелы</strong> — самая частая ошибка.</li>
+<li><strong><code>.PHONY</code></strong> для целей, не являющихся файлами.</li>
+<li><strong><code>:=</code> вместо <code>=</code></strong> — избегайте сюрпризов ленивых переменных.</li>
+<li><strong><code>-MMD -MP</code></strong> — авто-зависимости от заголовков.</li>
+<li><strong><code>make -j$(nproc)</code></strong> — параллельная сборка.</li>
+<li><strong>Make как task runner</strong> — для Python/Node тоже удобен.</li>
+<li><strong><code>$@ $&lt; $^</code></strong> — запомните автоматические переменные.</li>
+</ol>
+<h3 id="cmake_1">CMake<a class="headerlink" href="#cmake_1" title="Ссылка">#</a></h3>
+<ol>
+<li><strong>Out-of-source build</strong> — всегда <code>cmake -B build</code>, не собирайте в корне.</li>
+<li><strong>Target-based</strong> — используйте <code>target_*</code>, не глобальные <code>include_directories</code>.</li>
+<li><strong>PRIVATE/PUBLIC/INTERFACE</strong> — правильно задавайте видимость.</li>
+<li><strong>find_package + imported targets</strong> — современный способ зависимостей.</li>
+<li><strong>FetchContent</strong> — для управления исходниками зависимостей.</li>
+<li><strong>GNUInstallDirs</strong> — стандартные пути установки.</li>
+<li><strong><code>CMAKE_CXX_STANDARD</code></strong> — зафиксируйте стандарт C++.</li>
+<li><strong>Generator expressions</strong> — для платформо-зависимой логики.</li>
+<li><strong>CTest</strong> — встроенный раннер тестов.</li>
+<li><strong>Modern CMake (3.x+)</strong> — не используйте устаревшие практики 2.x.</li>
+</ol>
+<hr />
+<p><em>Сгенерировано как шпаргалка. Системы сборки сложны —
+углубляйтесь через <code>man make</code>, <code>cmake --help</code> и официальные туториалы.</em></p>
+    </article>
+    <nav class="pagination">
+      <a class="pager prev" href="ssh.html">← SSH</a>
+      <a class="pager next" href="docker.html">Docker →</a>
+    </nav>
+  </main>
+
+  <aside class="toc">
+    <details open>
+      <summary>📑 Оглавление</summary>
+      <div class="toc-list">
+<div class="toc">
+<ul>
+<li><a href="#make-cmake-шпаргалка-по-системам-сборки">🔨 Make / CMake — шпаргалка по системам сборки</a></li>
+<li><a href="#часть-1-make">🛠️ ЧАСТЬ 1. MAKE</a><ul>
+<li><a href="#главные-понятия">🔑 Главные понятия</a></li>
+<li><a href="#структура-makefile">📝 Структура Makefile</a></li>
+<li><a href="#команды-make">🚀 Команды make</a><ul>
+<li><a href="#установка">Установка</a></li>
+</ul>
+</li>
+<li><a href="#переменные">🔤 Переменные</a><ul>
+<li><a href="#автоматические-переменные">Автоматические переменные</a></li>
+</ul>
+</li>
+<li><a href="#виды-целей">🎯 Виды целей</a><ul>
+<li><a href="#1-файловые-цели-связаны-с-файлами">1. Файловые цели (связаны с файлами)</a></li>
+<li><a href="#2-phony-цели-не-файлы">2. Phony-цели (не файлы)</a></li>
+<li><a href="#3-pattern-rules-шаблонные-правила">3. Pattern rules (шаблонные правила)</a></li>
+<li><a href="#4-static-pattern-rules-для-конкретных-файлов">4. Static pattern rules (для конкретных файлов)</a></li>
+</ul>
+</li>
+<li><a href="#функции-make">🛠️ Функции make</a></li>
+<li><a href="#полный-пример-makefile-для-c-проекта">📦 Полный пример Makefile для C-проекта</a><ul>
+<li><a href="#авто-зависимости-d-файлы">Авто-зависимости (.d файлы)</a></li>
+</ul>
+</li>
+<li><a href="#make-как-task-runner-не-только-для-c">🐚 Make как task runner (не только для C!)</a></li>
+<li><a href="#частые-ошибки-make">🪤 Частые ошибки Make</a></li>
+</ul>
+</li>
+<li><a href="#часть-2-cmake">🔨 ЧАСТЬ 2. CMAKE</a><ul>
+<li><a href="#главные-понятия_1">🔑 Главные понятия</a></li>
+<li><a href="#базовый-цикл-работы">🚀 Базовый цикл работы</a><ul>
+<li><a href="#установка_1">Установка</a></li>
+</ul>
+</li>
+<li><a href="#структура-cmakelists-txt">📝 Структура CMakeLists.txt</a><ul>
+<li><a href="#минимальный-пример-один-файл">Минимальный пример (один файл)</a></li>
+<li><a href="#сборка-и-запуск">Сборка и запуск</a></li>
+</ul>
+</li>
+<li><a href="#цели-targets">🎯 Цели (targets)</a><ul>
+<li><a href="#исполняемый-файл">Исполняемый файл</a></li>
+<li><a href="#статическая-библиотека-a">Статическая библиотека (.a)</a></li>
+<li><a href="#динамическая-библиотека-so">Динамическая библиотека (.so)</a></li>
+<li><a href="#модуль-плагин-загружается-dlopen">Модуль (плагин, загружается dlopen)</a></li>
+<li><a href="#interface-library-только-заголовки-header-only">Interface library (только заголовки, header-only)</a></li>
+<li><a href="#object-library-только-объектные-файлы-для-переиспользования">Object library (только объектные файлы, для переиспользования)</a></li>
+</ul>
+</li>
+<li><a href="#зависимости-и-видимость-private-public-interface">🔗 Зависимости и видимость (PRIVATE/PUBLIC/INTERFACE)</a></li>
+<li><a href="#поиск-библиотек-findpackage">📦 Поиск библиотек (find_package)</a><ul>
+<li><a href="#findpackage-режимы">find_package режимы</a></li>
+<li><a href="#полезные-встроенные-findpackage">Полезные встроенные find_package</a></li>
+</ul>
+</li>
+<li><a href="#опции-и-переменные-кэша">⚙️ Опции и переменные кэша</a><ul>
+<li><a href="#свои-опции-как-в-больших-проектах">Свои опции (как в больших проектах)</a></li>
+<li><a href="#полезные-переменные-cmake">Полезные переменные CMake</a></li>
+<li><a href="#типы-сборки-cmakebuildtype">Типы сборки (CMAKE_BUILD_TYPE)</a></li>
+</ul>
+</li>
+<li><a href="#многокаталожный-проект">🗂️ Многокаталожный проект</a></li>
+<li><a href="#тесты-ctest">🧪 Тесты (CTest)</a></li>
+<li><a href="#установка-install">📥 Установка (install)</a></li>
+<li><a href="#команды-cmake-основные">🔤 Команды CMake (основные)</a><ul>
+<li><a href="#команды-для-target-ов-современный-cmake">Команды для target&rsquo;ов (современный CMake)</a></li>
+<li><a href="#работа-с-переменными">Работа с переменными</a></li>
+<li><a href="#условия-в-if">Условия в if()</a></li>
+<li><a href="#прочее">Прочее</a></li>
+</ul>
+</li>
+<li><a href="#практический-пример-cmakelists-txt">🛠️ Практический пример CMakeLists.txt</a></li>
+<li><a href="#кроссплатформенность">🌍 Кроссплатформенность</a><ul>
+<li><a href="#gnuinstalldirs-стандартные-пути">GNUInstallDirs — стандартные пути</a></li>
+</ul>
+</li>
+<li><a href="#generator-expressions">🎯 Generator Expressions</a></li>
+<li><a href="#дебаг-и-анализ">🐛 Дебаг и анализ</a><ul>
+<li><a href="#полезные-инструменты">Полезные инструменты</a></li>
+</ul>
+</li>
+<li><a href="#fetchcontent-скачать-зависимости-модерн">🔗 FetchContent — скачать зависимости (модерн)</a></li>
+<li><a href="#сравнение-make-и-cmake">🆚 Сравнение Make и CMake</a></li>
+<li><a href="#частые-ошибки-cmake">🪤 Частые ошибки CMake</a></li>
+<li><a href="#полезные-ссылки">🔗 Полезные ссылки</a><ul>
+<li><a href="#make">Make</a></li>
+<li><a href="#cmake">CMake</a></li>
+</ul>
+</li>
+<li><a href="#полезные-советы">💡 Полезные советы</a><ul>
+<li><a href="#make_1">Make</a></li>
+<li><a href="#cmake_1">CMake</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+
+      </div>
+    </details>
+  </aside>
+</div>
+
+<button class="back-top" id="backTop" aria-label="Наверх">↑</button>
+
+<script src="assets/search.js"></script>
+<script src="assets/page.js"></script>
+</body>
+</html>

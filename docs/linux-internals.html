@@ -1,0 +1,880 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Linux Internals — Шпаргалки</title>
+<link rel="stylesheet" href="assets/style.css">
+<link rel="stylesheet" href="assets/pygments.css">
+</head>
+<body>
+<div class="layout">
+  <aside class="sidebar">
+    <a href="index.html" class="brand">📌 Шпаргалки</a>
+    <nav class="nav">
+<a href="yazi.html" class="nav-item"><span class="nav-ico">📦</span>Yazi</a>
+<a href="neovim.html" class="nav-item"><span class="nav-ico">📘</span>Neovim (LazyVim)</a>
+<a href="niri.html" class="nav-item"><span class="nav-ico">🪟</span>Niri</a>
+<a href="tmux.html" class="nav-item"><span class="nav-ico">🪟</span>Tmux</a>
+<a href="bash.html" class="nav-item"><span class="nav-ico">🐚</span>Bash</a>
+<a href="git.html" class="nav-item"><span class="nav-ico">🔀</span>Git</a>
+<a href="terminal.html" class="nav-item"><span class="nav-ico">🖥️</span>Терминал Linux</a>
+<a href="powershell.html" class="nav-item"><span class="nav-ico">💻</span>PowerShell</a>
+<a href="cmd.html" class="nav-item"><span class="nav-ico">🪟</span>CMD (cmd.exe)</a>
+<a href="python.html" class="nav-item"><span class="nav-ico">🐍</span>Python</a>
+<a href="systemd.html" class="nav-item"><span class="nav-ico">⚙️</span>systemd</a>
+<a href="ssh.html" class="nav-item"><span class="nav-ico">🔐</span>SSH</a>
+<a href="make-cmake.html" class="nav-item"><span class="nav-ico">🔨</span>Make / CMake</a>
+<a href="docker.html" class="nav-item"><span class="nav-ico">🐳</span>Docker</a>
+<a href="pacman.html" class="nav-item"><span class="nav-ico">📦</span>pacman / yay / paru</a>
+<a href="spark.html" class="nav-item"><span class="nav-ico">⚡</span>Apache Spark / PySpark</a>
+<a href="markdown.html" class="nav-item"><span class="nav-ico">📝</span>Markdown</a>
+<a href="regex.html" class="nav-item"><span class="nav-ico">🔍</span>Регулярные выражения</a>
+<a href="jq-json.html" class="nav-item"><span class="nav-ico">🔧</span>jq + JSON</a>
+<a href="awk-sed.html" class="nav-item"><span class="nav-ico">✂️</span>awk / sed</a>
+<a href="airflow.html" class="nav-item"><span class="nav-ico">🌪️</span>Apache Airflow</a>
+<a href="http-curl.html" class="nav-item"><span class="nav-ico">🌐</span>HTTP / curl</a>
+<a href="yaml.html" class="nav-item"><span class="nav-ico">📄</span>YAML</a>
+<a href="vscode.html" class="nav-item"><span class="nav-ico">💻</span>VS Code</a>
+<a href="cron.html" class="nav-item"><span class="nav-ico">⏰</span>cron</a>
+<a href="fzf-zoxide.html" class="nav-item"><span class="nav-ico">🔎</span>fzf + zoxide</a>
+<a href="minikube-k8s.html" class="nav-item"><span class="nav-ico">☸️</span>Minikube / Kubernetes</a>
+<a href="cicd.html" class="nav-item"><span class="nav-ico">🦊</span>GitLab CI / GitHub Actions</a>
+<a href="nginx.html" class="nav-item"><span class="nav-ico">🌐</span>nginx</a>
+<a href="dbt.html" class="nav-item"><span class="nav-ico">🔧</span>dbt</a>
+<a href="kafka.html" class="nav-item"><span class="nav-ico">🐘</span>Apache Kafka</a>
+<a href="prometheus-grafana.html" class="nav-item"><span class="nav-ico">📊</span>Prometheus / Grafana</a>
+<a href="iceberg-nessie.html" class="nav-item"><span class="nav-ico">🧊</span>Iceberg / Nessie</a>
+<a href="impala.html" class="nav-item"><span class="nav-ico">🐬</span>Apache Impala</a>
+<a href="terraform.html" class="nav-item"><span class="nav-ico">🏗️</span>Terraform</a>
+<a href="linux-internals.html" class="nav-item active"><span class="nav-ico">🐧</span>Linux Internals</a>
+<a href="miscellaneous.html" class="nav-item"><span class="nav-ico">🧰</span>Miscellaneous</a>
+<a href="python-automation-libs.html" class="nav-item"><span class="nav-ico">🐍</span>Python: авт-ция (10 libs)</a>
+<a href="eza.html" class="nav-item"><span class="nav-ico">🌈</span>eza</a>
+<a href="dbeaver.html" class="nav-item"><span class="nav-ico">🗄️</span>DBeaver</a>
+<a href="zcode.html" class="nav-item"><span class="nav-ico">🤖</span>ZCode</a>
+<a href="warp.html" class="nav-item"><span class="nav-ico">🚀</span>Warp</a>
+<a href="agentic-ai-dev.html" class="nav-item"><span class="nav-ico">🤝</span>Агентная разработка с ИИ</a>
+    </nav>
+  </aside>
+
+  <main class="content">
+    <article>
+<h1 id="linux-internals-шпаргалка-procfs-sysfs-cgroups-namespaces">🐧 Linux Internals — шпаргалка (procfs / sysfs / cgroups / namespaces)<a class="headerlink" href="#linux-internals-шпаргалка-procfs-sysfs-cgroups-namespaces" title="Ссылка">#</a></h1>
+<blockquote>
+<p>Внутреннее устройство Linux: виртуальные ФС, контроль ресурсов, изоляция.
+То, на чём строятся Docker, systemd, top, ps и другие инструменты.
+Документация: <code>man proc</code> · <code>man sysfs</code> · https://www.kernel.org/doc/html/latest/admin-guide</p>
+</blockquote>
+<hr />
+<h2 id="proc-procfs-процессы-и-ядро">📁 /proc — procfs (процессы и ядро)<a class="headerlink" href="#proc-procfs-процессы-и-ядро" title="Ссылка">#</a></h2>
+<p>Виртуальная файловая система: <strong>информация о процессах и ядре</strong>.
+Не занимает места на диске — генерируется на лету.</p>
+<h3 id="процессы">Процессы<a class="headerlink" href="#процессы" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>/proc/&lt;pid&gt;/            # информация о процессе
+├── cmdline             # команда запуска (с аргументами, \0-разделитель)
+├── cwd → /path         # симлинк на текущий каталог
+├── exe → /path         # симлинк на исполняемый файл
+├── environ             # переменные окружения (\0-разделитель)
+├── status              # статус (читаемо)
+├── stat                # статус (для парсинга)
+├── io                  # статистика ввода-вывода
+├── maps                # карта памяти
+├── mem                 # память процесса (нужны права)
+├── fd/                 # файловые дескрипторы
+│   ├── 0 → /dev/pts/0  # stdin
+│   ├── 1 → ...         # stdout
+│   └── 2 → ...         # stderr
+├── mounts              # что примонтировано (для процесса)
+├── net/                # сетевое пространство (namespaces)
+├── ns/                 # namespace&#39;ы процесса
+└── cgroup              # в каких cgroup состоит
+</code></pre></div>
+
+<div class="highlight"><pre><span></span><code><span class="c1"># Примеры</span>
+cat<span class="w"> </span>/proc/<span class="nv">$$</span>/cmdline<span class="w"> </span><span class="p">|</span><span class="w"> </span>tr<span class="w"> </span><span class="s1">&#39;\0&#39;</span><span class="w"> </span><span class="s1">&#39; &#39;</span><span class="w">         </span><span class="c1"># команда текущего shell</span>
+cat<span class="w"> </span>/proc/1/status<span class="w"> </span><span class="p">|</span><span class="w"> </span>head<span class="w">                  </span><span class="c1"># init/systemd</span>
+cat<span class="w"> </span>/proc/<span class="k">$(</span>pgrep<span class="w"> </span>nginx<span class="w"> </span><span class="p">|</span><span class="w"> </span>head<span class="w"> </span>-1<span class="k">)</span>/environ<span class="w"> </span><span class="p">|</span><span class="w"> </span>tr<span class="w"> </span><span class="s1">&#39;\0&#39;</span><span class="w"> </span><span class="s1">&#39;\n&#39;</span><span class="w">   </span><span class="c1"># env nginx</span>
+
+ls<span class="w"> </span>-la<span class="w"> </span>/proc/1234/fd/<span class="w">                      </span><span class="c1"># открытые файлы процесса</span>
+readlink<span class="w"> </span>/proc/1234/exe<span class="w">                    </span><span class="c1"># путь к бинарнику</span>
+readlink<span class="w"> </span>/proc/1234/cwd<span class="w">                    </span><span class="c1"># текущий каталог</span>
+
+<span class="c1"># Кто держит файл открытым</span>
+ls<span class="w"> </span>-l<span class="w"> </span>/proc/*/fd/*<span class="w"> </span><span class="m">2</span>&gt;/dev/null<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>filename
+
+<span class="c1"># Все процессы и их команды</span>
+ps<span class="w"> </span>-e<span class="w"> </span>-o<span class="w"> </span>pid,cmd<span class="w">        </span><span class="c1"># = читает /proc</span>
+</code></pre></div>
+
+<h3 id="системная-информация">Системная информация<a class="headerlink" href="#системная-информация" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>cat<span class="w"> </span>/proc/cpuinfo<span class="w">                         </span><span class="c1"># процессоры</span>
+cat<span class="w"> </span>/proc/meminfo<span class="w">                         </span><span class="c1"># память</span>
+cat<span class="w"> </span>/proc/loadavg<span class="w">                         </span><span class="c1"># load average</span>
+cat<span class="w"> </span>/proc/uptime<span class="w">                          </span><span class="c1"># время работы (сек)</span>
+cat<span class="w"> </span>/proc/version<span class="w">                         </span><span class="c1"># версия ядра</span>
+cat<span class="w"> </span>/proc/cmdline<span class="w">                         </span><span class="c1"># параметры загрузки ядра</span>
+
+cat<span class="w"> </span>/proc/filesystems<span class="w">                     </span><span class="c1"># поддерживаемые ФС</span>
+cat<span class="w"> </span>/proc/mounts<span class="w">                          </span><span class="c1"># примонтированные ФС</span>
+
+<span class="c1"># Сеть</span>
+cat<span class="w"> </span>/proc/net/tcp<span class="w">                         </span><span class="c1"># TCP-соединения</span>
+cat<span class="w"> </span>/proc/net/udp
+cat<span class="w"> </span>/proc/net/dev<span class="w">                         </span><span class="c1"># статистика интерфейсов</span>
+cat<span class="w"> </span>/proc/net/route<span class="w">                       </span><span class="c1"># таблица маршрутов</span>
+
+<span class="c1"># Железо</span>
+cat<span class="w"> </span>/proc/interrupts<span class="w">                      </span><span class="c1"># прерывания</span>
+cat<span class="w"> </span>/proc/dma
+cat<span class="w"> </span>/proc/ioports
+cat<span class="w"> </span>/proc/iomem
+</code></pre></div>
+
+<h3 id="динамическая-настройка-ядра">Динамическая настройка ядра<a class="headerlink" href="#динамическая-настройка-ядра" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># /proc/sys — настраиваемые параметры (sysctl)</span>
+cat<span class="w"> </span>/proc/sys/net/ipv4/ip_forward<span class="w">         </span><span class="c1"># статус IP-форвардинга</span>
+<span class="nb">echo</span><span class="w"> </span><span class="m">1</span><span class="w"> </span>&gt;<span class="w"> </span>/proc/sys/net/ipv4/ip_forward<span class="w">    </span><span class="c1"># включить (временно!)</span>
+
+<span class="c1"># Безопаснее через sysctl</span>
+sudo<span class="w"> </span>sysctl<span class="w"> </span>-w<span class="w"> </span>net.ipv4.ip_forward<span class="o">=</span><span class="m">1</span>
+<span class="c1"># Постоянно — в /etc/sysctl.d/*.conf</span>
+</code></pre></div>
+
+<hr />
+<h2 id="sys-sysfs-устройства-и-драйверы">🎛️ /sys — sysfs (устройства и драйверы)<a class="headerlink" href="#sys-sysfs-устройства-и-драйверы" title="Ссылка">#</a></h2>
+<p>Информация о <strong>устройствах, драйверах, ядре</strong> (введено в 2.6).</p>
+<div class="highlight"><pre><span></span><code>/sys/
+├── block/               # блочные устройства (sda, nvme0n1)
+│   └── sda/
+│       ├── size         # размер в блоках
+│       ├── device/model # модель
+│       └── stat         # статистика I/O
+├── bus/                 # шины (pci, usb, ...)
+├── class/               # классы устройств
+│   ├── net/             # сетевые интерфейсы
+│   │   └── eth0/
+│   │       ├── address  # MAC
+│   │       ├── mtu
+│   │       └── statistics/
+│   ├── block/           # блочные
+│   ├── tty/             # терминалы
+│   └── hwmon/           # датчики (temp, fan)
+├── dev/                 # устройства по типу (char, block)
+├── devices/             # дерево устройств (по шинам)
+├── firmware/            # прошивки (ACPI, EFI)
+├── fs/                  # файловые системы
+├── kernel/              # ядро
+│   ├── hostname
+│   ├── ostype
+│   └── mm/              # memory management
+├── module/              # загруженные модули
+└── power/               # управление питанием
+</code></pre></div>
+
+<div class="highlight"><pre><span></span><code><span class="c1"># Примеры</span>
+cat<span class="w"> </span>/sys/class/net/enp4s0/address<span class="w">        </span><span class="c1"># MAC-адрес</span>
+cat<span class="w"> </span>/sys/class/hwmon/hwmon2/temp1_input<span class="w">  </span><span class="c1"># температура (÷1000 = °C)</span>
+cat<span class="w"> </span>/sys/block/sda/size<span class="w">                  </span><span class="c1"># размер в 512-байт блоках</span>
+cat<span class="w"> </span>/sys/block/nvme0n1/device/model<span class="w">      </span><span class="c1"># модель SSD</span>
+
+<span class="c1"># Сетевые интерфейсы</span>
+ls<span class="w"> </span>/sys/class/net/
+
+<span class="c1"># Загруженные модули</span>
+ls<span class="w"> </span>/sys/module/
+
+<span class="c1"># Bluetooth, USB и т.п.</span>
+ls<span class="w"> </span>/sys/bus/usb/devices/
+</code></pre></div>
+
+<h3 id="управление-через-sysfs">Управление через sysfs<a class="headerlink" href="#управление-через-sysfs" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Включить/выключить светодиод</span>
+<span class="nb">echo</span><span class="w"> </span><span class="m">1</span><span class="w"> </span>&gt;<span class="w"> </span>/sys/class/leds/input0::capslock/brightness
+
+<span class="c1"># Изменить яркость экрана</span>
+<span class="nb">echo</span><span class="w"> </span><span class="m">500</span><span class="w"> </span>&gt;<span class="w"> </span>/sys/class/backlight/intel_backlight/brightness
+
+<span class="c1"># Перезагрузить PCI-устройство</span>
+<span class="nb">echo</span><span class="w"> </span><span class="m">1</span><span class="w"> </span>&gt;<span class="w"> </span>/sys/bus/pci/devices/0000:00:00.0/reset
+
+<span class="c1"># Отмонтировать USB</span>
+<span class="nb">echo</span><span class="w"> </span><span class="m">1</span><span class="w"> </span>&gt;<span class="w"> </span>/sys/bus/usb/devices/1-2/remove
+</code></pre></div>
+
+<hr />
+<h2 id="cgroups-control-groups">📊 cgroups (Control Groups)<a class="headerlink" href="#cgroups-control-groups" title="Ссылка">#</a></h2>
+<p><strong>Контроль ресурсов</strong> процессов: CPU, RAM, I/O, сеть.
+Используется systemd, Docker, Kubernetes, LXC.</p>
+<h3 id="версии">Версии<a class="headerlink" href="#версии" title="Ссылка">#</a></h3>
+<ul>
+<li><strong>cgroup v1</strong> — старая, по контроллеру на иерархию.</li>
+<li><strong>cgroup v2</strong> — унифицированная (рекомендуется, дефолт в новых ядрах).</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="c1"># Какая версия</span>
+stat<span class="w"> </span>-fc<span class="w"> </span>%T<span class="w"> </span>/sys/fs/cgroup/
+<span class="c1"># cgroup2fs — v2</span>
+<span class="c1"># tmpfs — v1</span>
+
+<span class="c1"># Mount</span>
+mount<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>cgroup
+</code></pre></div>
+
+<h3 id="иерархия-cgroup-v2">Иерархия cgroup v2<a class="headerlink" href="#иерархия-cgroup-v2" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>/sys/fs/cgroup/
+├── cpu.weight             # вес CPU
+├── memory.max             # лимит памяти (всех детей)
+├── io.max                 # I/O лимиты
+├── user.slice/            # пользовательские процессы
+├── system.slice/          # системные сервисы
+│   ├── docker.service/
+│   │   ├── cpu.max
+│   │   ├── memory.max
+│   │   └── cgroup.procs   # PID&#39;ы
+└── ...
+</code></pre></div>
+
+<h3 id="управление-cgroup-v2-вручную">Управление cgroup v2 вручную<a class="headerlink" href="#управление-cgroup-v2-вручную" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Создать группу</span>
+sudo<span class="w"> </span>mkdir<span class="w"> </span>/sys/fs/cgroup/myapp
+
+<span class="c1"># Лимит памяти (50MB)</span>
+<span class="nb">echo</span><span class="w"> </span><span class="m">52428800</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sudo<span class="w"> </span>tee<span class="w"> </span>/sys/fs/cgroup/myapp/memory.max
+
+<span class="c1"># CPU weight (1-10000)</span>
+<span class="nb">echo</span><span class="w"> </span><span class="m">100</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sudo<span class="w"> </span>tee<span class="w"> </span>/sys/fs/cgroup/myapp/cpu.weight
+
+<span class="c1"># CPU max (полное ядро = 100000/100000)</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;100000 100000&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sudo<span class="w"> </span>tee<span class="w"> </span>/sys/fs/cgroup/myapp/cpu.max
+
+<span class="c1"># Добавить процесс</span>
+<span class="nb">echo</span><span class="w"> </span><span class="nv">$$</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sudo<span class="w"> </span>tee<span class="w"> </span>/sys/fs/cgroup/myapp/cgroup.procs
+
+<span class="c1"># Посмотреть использование</span>
+cat<span class="w"> </span>/sys/fs/cgroup/myapp/memory.current
+cat<span class="w"> </span>/sys/fs/cgroup/myapp/cpu.stat
+</code></pre></div>
+
+<h3 id="контроллеры-cgroup-v2">Контроллеры cgroup v2<a class="headerlink" href="#контроллеры-cgroup-v2" title="Ссылка">#</a></h3>
+<table>
+<thead>
+<tr>
+<th>Контроллер</th>
+<th>Что</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>cpu</code></td>
+<td>CPU time, weight, max</td>
+</tr>
+<tr>
+<td><code>cpuset</code></td>
+<td>На каких ядрах</td>
+</tr>
+<tr>
+<td><code>memory</code></td>
+<td>RAM, swap</td>
+</tr>
+<tr>
+<td><code>io</code></td>
+<td>I/O (BPS, IOPS)</td>
+</tr>
+<tr>
+<td><code>pids</code></td>
+<td>Макс. число процессов</td>
+</tr>
+<tr>
+<td><code>rdma</code></td>
+<td>RDMA ресурсы</td>
+</tr>
+<tr>
+<td><code>hugetlb</code></td>
+<td>Huge pages</td>
+</tr>
+<tr>
+<td><code>devices</code></td>
+<td>Доступ к устройствам (только v1)</td>
+</tr>
+<tr>
+<td><code>freezer</code></td>
+<td>Заморозка процессов (в v2 встроено)</td>
+</tr>
+<tr>
+<td><code>net_cls</code> / <code>net_prio</code></td>
+<td>Сетевые теги (только v1)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="cgroup-через-systemd">cgroup через systemd<a class="headerlink" href="#cgroup-через-systemd" title="Ссылка">#</a></h3>
+<p>systemd управляет cgroups автоматически:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Запустить сервис с лимитами</span>
+sudo<span class="w"> </span>systemd-run<span class="w"> </span>--uid<span class="o">=</span><span class="m">1000</span><span class="w"> </span>--gid<span class="o">=</span><span class="m">1000</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--property<span class="o">=</span><span class="nv">MemoryMax</span><span class="o">=</span>500M<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--property<span class="o">=</span><span class="nv">CPUQuota</span><span class="o">=</span><span class="m">50</span>%<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--property<span class="o">=</span><span class="nv">IOWeight</span><span class="o">=</span><span class="m">10</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--unit<span class="o">=</span>myapp<span class="w"> </span>--slice<span class="o">=</span>user-1000.slice<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>/usr/bin/myapp
+
+<span class="c1"># Статус</span>
+systemctl<span class="w"> </span>status<span class="w"> </span>myapp
+systemd-cgls<span class="w">                       </span><span class="c1"># дерево cgroups</span>
+systemd-cgtop<span class="w">                      </span><span class="c1"># top по cgroups</span>
+
+<span class="c1"># Лимиты через .service</span>
+<span class="c1"># /etc/systemd/system/myapp.service</span>
+<span class="o">[</span>Service<span class="o">]</span>
+<span class="nv">ExecStart</span><span class="o">=</span>/usr/bin/myapp
+<span class="nv">MemoryMax</span><span class="o">=</span>500M
+<span class="nv">CPUQuota</span><span class="o">=</span><span class="m">50</span>%
+<span class="nv">TasksMax</span><span class="o">=</span><span class="m">100</span>
+<span class="nv">IOWeight</span><span class="o">=</span><span class="m">10</span>
+</code></pre></div>
+
+<h3 id="docker-и-cgroups">Docker и cgroups<a class="headerlink" href="#docker-и-cgroups" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>docker<span class="w"> </span>run<span class="w"> </span>--memory<span class="o">=</span>512m<span class="w"> </span>--cpus<span class="o">=</span><span class="m">1</span>.5<span class="w"> </span>myapp
+<span class="c1"># = создаёт cgroup в /sys/fs/cgroup/system.slice/docker-&lt;id&gt;/</span>
+</code></pre></div>
+
+<hr />
+<h2 id="namespaces-изоляция">🌍 Namespaces (изоляция)<a class="headerlink" href="#namespaces-изоляция" title="Ссылка">#</a></h2>
+<p><strong>Изоляция ресурсов</strong> — основа контейнеров (Docker, Podman, LXC).
+Каждый namespace — отдельное &ldquo;представление&rdquo; ресурса.</p>
+<h3 id="типы-namespaces">Типы namespaces<a class="headerlink" href="#типы-namespaces" title="Ссылка">#</a></h3>
+<table>
+<thead>
+<tr>
+<th>Namespace</th>
+<th>Что изолирует</th>
+<th>С версии</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>mnt</strong></td>
+<td>Точки монтирования (ФС)</td>
+<td>2.4.19</td>
+</tr>
+<tr>
+<td><strong>pid</strong></td>
+<td>PID (номера процессов)</td>
+<td>2.6.24</td>
+</tr>
+<tr>
+<td><strong>net</strong></td>
+<td>Сетевые интерфейсы, порты, маршруты</td>
+<td>2.6.29</td>
+</tr>
+<tr>
+<td><strong>ipc</strong></td>
+<td>IPC (очереди сообщений, semaphores)</td>
+<td>2.6.19</td>
+</tr>
+<tr>
+<td><strong>uts</strong></td>
+<td>Hostname, domainname</td>
+<td>2.6.19</td>
+</tr>
+<tr>
+<td><strong>user</strong></td>
+<td>UID/GID (map)</td>
+<td>3.8</td>
+</tr>
+<tr>
+<td><strong>cgroup</strong></td>
+<td>Cgroup view</td>
+<td>4.6</td>
+</tr>
+<tr>
+<td><strong>time</strong></td>
+<td>Часы (boottime, monotonic)</td>
+<td>5.6</td>
+</tr>
+</tbody>
+</table>
+<h3 id="просмотр-namespaces-процесса">Просмотр namespaces процесса<a class="headerlink" href="#просмотр-namespaces-процесса" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>ls<span class="w"> </span>-la<span class="w"> </span>/proc/&lt;pid&gt;/ns/
+<span class="c1"># lrwxrwxrwx ... ipc -&gt; ipc:[4026531839]</span>
+<span class="c1"># lrwxrwxrwx ... mnt -&gt; mnt:[4026531840]</span>
+<span class="c1"># lrwxrwxrwx ... net -&gt; net:[4026531992]</span>
+<span class="c1"># lrwxrwxrwx ... pid -&gt; pid:[4026531836]</span>
+<span class="c1"># lrwxrwxrwx ... user -&gt; user:[4026531837]</span>
+<span class="c1"># lrwxrwxrwx ... uts -&gt; uts:[4026531838]</span>
+
+<span class="c1"># Число в скобках — inode; одинаковое = один namespace</span>
+</code></pre></div>
+
+<h3 id="утилиты-для-namespaces">Утилиты для namespaces<a class="headerlink" href="#утилиты-для-namespaces" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># nsenter — выполнить в namespace другого процесса</span>
+sudo<span class="w"> </span>nsenter<span class="w"> </span>-t<span class="w"> </span>&lt;pid&gt;<span class="w"> </span>-m<span class="w"> </span>-u<span class="w"> </span>-i<span class="w"> </span>-n<span class="w"> </span>-p<span class="w"> </span>--<span class="w"> </span>bash<span class="w">   </span><span class="c1"># войти в namespaces контейнера</span>
+sudo<span class="w"> </span>nsenter<span class="w"> </span>-t<span class="w"> </span><span class="k">$(</span>pgrep<span class="w"> </span>nginx<span class="k">)</span><span class="w"> </span>-n<span class="w"> </span>--<span class="w"> </span>ip<span class="w"> </span>a<span class="w">      </span><span class="c1"># сеть nginx</span>
+
+<span class="c1"># unshare — создать новый namespace и выполнить команду</span>
+sudo<span class="w"> </span>unshare<span class="w"> </span>--fork<span class="w"> </span>--pid<span class="w"> </span>--mount-proc<span class="w"> </span>bash<span class="w">    </span><span class="c1"># новый PID namespace</span>
+unshare<span class="w"> </span>--user<span class="w"> </span>--map-root-user<span class="w"> </span>bash<span class="w">            </span><span class="c1"># стать root в новом user ns</span>
+sudo<span class="w"> </span>unshare<span class="w"> </span>--net<span class="w"> </span>bash<span class="w">                        </span><span class="c1"># изолированная сеть</span>
+
+<span class="c1"># lsns — список всех namespace&#39;ов</span>
+lsns<span class="w">                                           </span><span class="c1"># все</span>
+lsns<span class="w"> </span>-t<span class="w"> </span>net<span class="w">                                    </span><span class="c1"># только network</span>
+lsns<span class="w"> </span>-t<span class="w"> </span>pid
+
+<span class="c1"># ip netns — управление network namespaces</span>
+sudo<span class="w"> </span>ip<span class="w"> </span>netns<span class="w"> </span>add<span class="w"> </span>mynet
+sudo<span class="w"> </span>ip<span class="w"> </span>netns<span class="w"> </span>list
+sudo<span class="w"> </span>ip<span class="w"> </span>netns<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>mynet<span class="w"> </span>ip<span class="w"> </span>a
+sudo<span class="w"> </span>ip<span class="w"> </span>netns<span class="w"> </span>del<span class="w"> </span>mynet
+</code></pre></div>
+
+<h3 id="пример-ручной-контейнер">Пример: ручной контейнер<a class="headerlink" href="#пример-ручной-контейнер" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># 1. Создать namespaces</span>
+sudo<span class="w"> </span>unshare<span class="w"> </span>--fork<span class="w"> </span>--pid<span class="w"> </span>--mount<span class="w"> </span>--net<span class="w"> </span>--uts<span class="w"> </span>--ipc<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--mount-proc<span class="w"> </span>bash
+
+<span class="c1"># Внутри:</span>
+hostname<span class="w"> </span>mycontainer
+mount<span class="w"> </span>-t<span class="w"> </span>proc<span class="w"> </span>proc<span class="w"> </span>/proc
+ip<span class="w"> </span>link<span class="w"> </span><span class="nb">set</span><span class="w"> </span>lo<span class="w"> </span>up
+
+<span class="c1"># 2. Это и есть контейнер!</span>
+ps<span class="w"> </span>aux<span class="w">        </span><span class="c1"># PID 1 — bash</span>
+ip<span class="w"> </span>a<span class="w">          </span><span class="c1"># своя сеть</span>
+mount<span class="w">         </span><span class="c1"># свои точки монтирования</span>
+</code></pre></div>
+
+<h3 id="docker-и-namespaces">Docker и namespaces<a class="headerlink" href="#docker-и-namespaces" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>docker<span class="w"> </span>run<span class="w"> </span>--pid<span class="o">=</span>host<span class="w"> </span>...<span class="w">        </span><span class="c1"># использовать host PID ns</span>
+docker<span class="w"> </span>run<span class="w"> </span>--network<span class="o">=</span>host<span class="w"> </span>...<span class="w">    </span><span class="c1"># host network ns</span>
+docker<span class="w"> </span>run<span class="w"> </span>--userns<span class="o">=</span>host<span class="w"> </span>...
+docker<span class="w"> </span>run<span class="w"> </span>--uts<span class="o">=</span>host<span class="w"> </span>...
+
+<span class="c1"># Все ns процесса-контейнера:</span>
+ls<span class="w"> </span>-la<span class="w"> </span>/proc/<span class="k">$(</span>docker<span class="w"> </span>inspect<span class="w"> </span>-f<span class="w"> </span><span class="s1">&#39;{{.State.Pid}}&#39;</span><span class="w"> </span>container<span class="k">)</span>/ns/
+</code></pre></div>
+
+<hr />
+<h2 id="связь-cgroups-namespaces-контейнеры">🧩 Связь cgroups + namespaces = контейнеры<a class="headerlink" href="#связь-cgroups-namespaces-контейнеры" title="Ссылка">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Технология</th>
+<th>cgroups</th>
+<th>namespaces</th>
+<th>Что даёт</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Docker</td>
+<td>✅</td>
+<td>✅</td>
+<td>Контейнеры</td>
+</tr>
+<tr>
+<td>Podman</td>
+<td>✅</td>
+<td>✅</td>
+<td>Rootless контейнеры</td>
+</tr>
+<tr>
+<td>LXC / LXD</td>
+<td>✅</td>
+<td>✅</td>
+<td>Полноценные Linux-контейнеры</td>
+</tr>
+<tr>
+<td>Kubernetes pods</td>
+<td>✅</td>
+<td>✅ (разделяют net)</td>
+<td>Оркестрация</td>
+</tr>
+<tr>
+<td>systemd-nspawn</td>
+<td>✅</td>
+<td>✅</td>
+<td>Лёгкие контейнеры</td>
+</tr>
+<tr>
+<td>Firejail</td>
+<td>—</td>
+<td>✅</td>
+<td>Песочница для приложений</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="другие-виртуальные-фс">📡 Другие виртуальные ФС<a class="headerlink" href="#другие-виртуальные-фс" title="Ссылка">#</a></h2>
+<h3 id="dev-устройства">/dev — устройства<a class="headerlink" href="#dev-устройства" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>ls<span class="w"> </span>/dev/
+<span class="c1"># /dev/null —黑洞</span>
+<span class="c1"># /dev/zero — бесконечные нули</span>
+<span class="c1"># /dev/random, /dev/urandom — случайные</span>
+<span class="c1"># /dev/pts/* — псевдотерминалы</span>
+<span class="c1"># /dev/sda, /dev/nvme0n1 — диски</span>
+<span class="c1"># /dev/stdin, /dev/stdout, /dev/stderr</span>
+<span class="c1"># /dev/tcp, /dev/udp — сетевые (только bash)</span>
+
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;hello&quot;</span><span class="w"> </span>&gt;<span class="w"> </span>/dev/null<span class="w">           </span><span class="c1"># выкинуть вывод</span>
+dd<span class="w"> </span><span class="k">if</span><span class="o">=</span>/dev/zero<span class="w"> </span><span class="nv">of</span><span class="o">=</span>file<span class="w"> </span><span class="nv">bs</span><span class="o">=</span>1M<span class="w"> </span><span class="nv">count</span><span class="o">=</span><span class="m">10</span>
+head<span class="w"> </span>-c<span class="w"> </span><span class="m">16</span><span class="w"> </span>/dev/urandom<span class="w"> </span><span class="p">|</span><span class="w"> </span>xxd
+</code></pre></div>
+
+<h3 id="tmp-временные-файлы">/tmp — временные файлы<a class="headerlink" href="#tmp-временные-файлы" title="Ссылка">#</a></h3>
+<ul>
+<li>Часто tmpfs (в RAM) — быстро, но теряется при ребуте.</li>
+<li>Очищается при загрузке (systemd-tmpfiles).</li>
+</ul>
+<h3 id="run-runtime-данные">/run — runtime данные<a class="headerlink" href="#run-runtime-данные" title="Ссылка">#</a></h3>
+<ul>
+<li>PID-файлы, сокеты, lock-файлы.</li>
+<li>tmpfs, очищается при загрузке.</li>
+</ul>
+<div class="highlight"><pre><span></span><code>ls<span class="w"> </span>/run/
+<span class="c1"># /run/user/&lt;uid&gt;/ — пользовательские (XDG_RUNTIME_DIR)</span>
+</code></pre></div>
+
+<h3 id="debugfs">debugfs<a class="headerlink" href="#debugfs" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># /sys/kernel/debug — отладочная информация (root)</span>
+sudo<span class="w"> </span>mount<span class="w"> </span>-t<span class="w"> </span>debugfs<span class="w"> </span>none<span class="w"> </span>/sys/kernel/debug
+ls<span class="w"> </span>/sys/kernel/debug/
+</code></pre></div>
+
+<h3 id="tracefs">tracefs<a class="headerlink" href="#tracefs" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># /sys/kernel/tracing — ftrace</span>
+sudo<span class="w"> </span>cat<span class="w"> </span>/sys/kernel/tracing/available_tracers
+<span class="nb">echo</span><span class="w"> </span><span class="k">function</span><span class="w"> </span>&gt;<span class="w"> </span>/sys/kernel/tracing/current_tracer
+<span class="nb">echo</span><span class="w"> </span><span class="m">1</span><span class="w"> </span>&gt;<span class="w"> </span>/sys/kernel/tracing/tracing_on
+cat<span class="w"> </span>/sys/kernel/tracing/trace<span class="w"> </span><span class="p">|</span><span class="w"> </span>head
+</code></pre></div>
+
+<hr />
+<h2 id="утилиты-для-интроспекции">🛠️ Утилиты для интроспекции<a class="headerlink" href="#утилиты-для-интроспекции" title="Ссылка">#</a></h2>
+<h3 id="процессы_1">Процессы<a class="headerlink" href="#процессы_1" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>ps<span class="w"> </span>aux<span class="w"> </span>/<span class="w"> </span>ps<span class="w"> </span>-ef<span class="w">                </span><span class="c1"># процессы</span>
+pstree<span class="w"> </span>-p<span class="w">                     </span><span class="c1"># дерево процессов</span>
+top<span class="w"> </span>/<span class="w"> </span>htop<span class="w"> </span>/<span class="w"> </span>btop<span class="w">             </span><span class="c1"># мониторинг</span>
+pgrep<span class="w"> </span>-af<span class="w"> </span>nginx<span class="w">               </span><span class="c1"># найти процессы</span>
+pidof<span class="w"> </span>nginx<span class="w">                   </span><span class="c1"># PID по имени</span>
+
+<span class="c1"># lsof — открытые файлы</span>
+lsof<span class="w">                          </span><span class="c1"># все</span>
+lsof<span class="w"> </span>-p<span class="w"> </span><span class="m">1234</span><span class="w">                  </span><span class="c1"># процесс</span>
+lsof<span class="w"> </span>-i<span class="w"> </span>:80<span class="w">                   </span><span class="c1"># кто слушает порт</span>
+lsof<span class="w"> </span>/var/log/syslog<span class="w">          </span><span class="c1"># кто открыл файл</span>
+
+<span class="c1"># fuser — кто использует</span>
+fuser<span class="w"> </span>-v<span class="w"> </span><span class="m">80</span>/tcp
+fuser<span class="w"> </span>-k<span class="w"> </span>/var/log/app.log<span class="w">     </span><span class="c1"># убить процессы, использующие файл</span>
+</code></pre></div>
+
+<h3 id="сеть">Сеть<a class="headerlink" href="#сеть" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>ss<span class="w"> </span>-tlnp<span class="w">                      </span><span class="c1"># TCP-порты с процессами</span>
+ss<span class="w"> </span>-tuln<span class="w">                      </span><span class="c1"># TCP+UDP</span>
+ss<span class="w"> </span>-t<span class="w"> </span>state<span class="w"> </span>established<span class="w">       </span><span class="c1"># активные</span>
+ip<span class="w"> </span>a<span class="w"> </span>/<span class="w"> </span>ip<span class="w"> </span>route
+netstat<span class="w"> </span><span class="o">(</span>старый<span class="o">)</span>
+</code></pre></div>
+
+<h3 id="память">Память<a class="headerlink" href="#память" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>free<span class="w"> </span>-h<span class="w">                       </span><span class="c1"># общая</span>
+cat<span class="w"> </span>/proc/meminfo<span class="w">             </span><span class="c1"># подробно</span>
+vmstat<span class="w"> </span><span class="m">1</span><span class="w">                      </span><span class="c1"># статистика каждую секунду</span>
+slabtop<span class="w">                       </span><span class="c1"># slab cache (kernel)</span>
+pmap<span class="w"> </span><span class="m">1234</span><span class="w">                     </span><span class="c1"># карта памяти процесса</span>
+cat<span class="w"> </span>/proc/1234/maps<span class="w">           </span><span class="c1"># то же в /proc</span>
+</code></pre></div>
+
+<h3 id="i-o">I/O<a class="headerlink" href="#i-o" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>iostat<span class="w"> </span>-x<span class="w"> </span><span class="m">1</span><span class="w">                   </span><span class="c1"># статистика дисков</span>
+iotop<span class="w">                         </span><span class="c1"># топ по I/O</span>
+pidstat<span class="w"> </span>-d<span class="w"> </span><span class="m">1</span><span class="w">                  </span><span class="c1"># по процессам</span>
+</code></pre></div>
+
+<h3 id="системные-вызовы">Системные вызовы<a class="headerlink" href="#системные-вызовы" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>strace<span class="w"> </span>-p<span class="w"> </span><span class="m">1234</span><span class="w">                </span><span class="c1"># трассировка системных вызовов</span>
+strace<span class="w"> </span>-e<span class="w"> </span><span class="nv">trace</span><span class="o">=</span>openat,read,write<span class="w"> </span>-p<span class="w"> </span><span class="m">1234</span>
+strace<span class="w"> </span>-c<span class="w"> </span>ls<span class="w">                  </span><span class="c1"># статистика syscalls</span>
+ltrace<span class="w"> </span>ls<span class="w">                     </span><span class="c1"># библиотечные вызовы</span>
+perf<span class="w"> </span>stat<span class="w"> </span>-a<span class="w"> </span>sleep<span class="w"> </span><span class="m">1</span><span class="w">          </span><span class="c1"># perf-счётчики</span>
+perf<span class="w"> </span>top<span class="w">                      </span><span class="c1"># top по функциям в kernel</span>
+</code></pre></div>
+
+<h3 id="ebpf-современная-интроспекция">eBPF (современная интроспекция)<a class="headerlink" href="#ebpf-современная-интроспекция" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># bpftrace — мощный трассировщик</span>
+sudo<span class="w"> </span>bpftrace<span class="w"> </span>-e<span class="w"> </span><span class="s1">&#39;tracepoint:syscalls:sys_enter_openat { @[comm] = count(); }&#39;</span>
+
+<span class="c1"># BCC tools</span>
+sudo<span class="w"> </span>execsnoop<span class="w">                </span><span class="c1"># новые процессы</span>
+sudo<span class="w"> </span>opensnoop<span class="w">                </span><span class="c1"># открытия файлов</span>
+sudo<span class="w"> </span>biosnoop<span class="w">                 </span><span class="c1"># I/O</span>
+sudo<span class="w"> </span>tcpconnect<span class="w">               </span><span class="c1"># TCP-соединения</span>
+sudo<span class="w"> </span>runqlat<span class="w">                  </span><span class="c1"># задержки планировщика</span>
+</code></pre></div>
+
+<hr />
+<h2 id="параметры-ядра-sysctl">🎛️ Параметры ядра (sysctl)<a class="headerlink" href="#параметры-ядра-sysctl" title="Ссылка">#</a></h2>
+<div class="highlight"><pre><span></span><code><span class="c1"># Текущие</span>
+sysctl<span class="w"> </span>-a<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>ipv4
+
+<span class="c1"># Изменить временно</span>
+sudo<span class="w"> </span>sysctl<span class="w"> </span>-w<span class="w"> </span>net.ipv4.ip_forward<span class="o">=</span><span class="m">1</span>
+
+<span class="c1"># Постоянно — /etc/sysctl.d/99-my.conf</span>
+net.ipv4.ip_forward<span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span>
+vm.swappiness<span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">10</span>
+fs.file-max<span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1000000</span>
+net.core.somaxconn<span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">65535</span>
+
+<span class="c1"># Применить</span>
+sudo<span class="w"> </span>sysctl<span class="w"> </span>-p<span class="w"> </span>/etc/sysctl.d/99-my.conf
+</code></pre></div>
+
+<h3 id="полезные-параметры">Полезные параметры<a class="headerlink" href="#полезные-параметры" title="Ссылка">#</a></h3>
+<table>
+<thead>
+<tr>
+<th>Параметр</th>
+<th>Что</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>net.ipv4.ip_forward</code></td>
+<td>IP-форвардинг (для роутеров/Docker)</td>
+</tr>
+<tr>
+<td><code>vm.swappiness</code></td>
+<td>Склонность к swap (0-100)</td>
+</tr>
+<tr>
+<td><code>vm.overcommit_memory</code></td>
+<td>Выделение памяти</td>
+</tr>
+<tr>
+<td><code>fs.file-max</code></td>
+<td>Лимит открытых файлов</td>
+</tr>
+<tr>
+<td><code>net.core.somaxconn</code></td>
+<td>Размер очереди listen</td>
+</tr>
+<tr>
+<td><code>net.ipv4.tcp_max_syn_backlog</code></td>
+<td>SYN backlog</td>
+</tr>
+<tr>
+<td><code>kernel.pid_max</code></td>
+<td>Максимум PID</td>
+</tr>
+<tr>
+<td><code>net.ipv4.tcp_tw_reuse</code></td>
+<td>Переиспользование TIME_WAIT</td>
+</tr>
+</tbody>
+</table>
+<h3 id="ulimit-vs-sysctl">ulimit vs sysctl<a class="headerlink" href="#ulimit-vs-sysctl" title="Ссылка">#</a></h3>
+<ul>
+<li><code>ulimit</code> (per-process) — <code>ulimit -n 65535</code> (open files).</li>
+<li><code>sysctl</code> (system-wide) — <code>fs.file-max</code>.</li>
+<li><code>/etc/security/limits.conf</code> — persisting ulimits.</li>
+</ul>
+<hr />
+<h2 id="практическое-применение">🐛 Практическое применение<a class="headerlink" href="#практическое-применение" title="Ссылка">#</a></h2>
+<h3 id="1-кто-держит-порт">1. Кто держит порт?<a class="headerlink" href="#1-кто-держит-порт" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>ss<span class="w"> </span>-tlnp<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>:8080
+sudo<span class="w"> </span>lsof<span class="w"> </span>-i<span class="w"> </span>:8080
+sudo<span class="w"> </span>fuser<span class="w"> </span>-v<span class="w"> </span><span class="m">8080</span>/tcp
+</code></pre></div>
+
+<h3 id="2-кто-пишет-в-файл">2. Кто пишет в файл?<a class="headerlink" href="#2-кто-пишет-в-файл" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>lsof<span class="w"> </span>/var/log/syslog
+<span class="c1"># или inotify</span>
+sudo<span class="w"> </span>inotifywait<span class="w"> </span>-m<span class="w"> </span>/path
+<span class="c1"># или через eBPF</span>
+sudo<span class="w"> </span>opensnoop<span class="w"> </span>-n<span class="w"> </span>nginx
+</code></pre></div>
+
+<h3 id="3-почему-процесс-тормозит">3. Почему процесс тормозит?<a class="headerlink" href="#3-почему-процесс-тормозит" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Что делает</span>
+sudo<span class="w"> </span>strace<span class="w"> </span>-p<span class="w"> </span><span class="m">1234</span><span class="w"> </span>-c<span class="w">         </span><span class="c1"># статистика syscalls</span>
+sudo<span class="w"> </span>strace<span class="w"> </span>-p<span class="w"> </span><span class="m">1234</span><span class="w"> </span>-e<span class="w"> </span><span class="nv">trace</span><span class="o">=</span>futex,read,write
+
+<span class="c1"># CPU profile</span>
+sudo<span class="w"> </span>perf<span class="w"> </span>top<span class="w"> </span>-p<span class="w"> </span><span class="m">1234</span>
+
+<span class="c1"># I/O profile</span>
+sudo<span class="w"> </span>iotop<span class="w"> </span>-p<span class="w"> </span><span class="m">1234</span>
+pidstat<span class="w"> </span>-d<span class="w"> </span>-p<span class="w"> </span><span class="m">1234</span><span class="w"> </span><span class="m">1</span>
+</code></pre></div>
+
+<h3 id="4-контейнер-без-docker">4. Контейнер без docker<a class="headerlink" href="#4-контейнер-без-docker" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># systemd-nspawn — лёгкий контейнер</span>
+sudo<span class="w"> </span>debootstrap<span class="w"> </span>stable<span class="w"> </span>/var/lib/container/debian<span class="w"> </span>http://deb.debian.org/debian
+sudo<span class="w"> </span>systemd-nspawn<span class="w"> </span>-D<span class="w"> </span>/var/lib/container/debian
+</code></pre></div>
+
+<h3 id="5-ограничить-память-процесса">5. Ограничить память процесса<a class="headerlink" href="#5-ограничить-память-процесса" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Через systemd</span>
+sudo<span class="w"> </span>systemd-run<span class="w"> </span>--scope<span class="w"> </span>-p<span class="w"> </span><span class="nv">MemoryMax</span><span class="o">=</span>100M<span class="w"> </span>stress<span class="w"> </span>--vm<span class="w"> </span><span class="m">1</span><span class="w"> </span>--vm-bytes<span class="w"> </span>200M
+
+<span class="c1"># Напрямую в cgroup v2</span>
+sudo<span class="w"> </span>mkdir<span class="w"> </span>/sys/fs/cgroup/stress
+<span class="nb">echo</span><span class="w"> </span><span class="m">104857600</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sudo<span class="w"> </span>tee<span class="w"> </span>/sys/fs/cgroup/stress/memory.max
+<span class="nb">echo</span><span class="w"> </span><span class="nv">$$</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sudo<span class="w"> </span>tee<span class="w"> </span>/sys/fs/cgroup/stress/cgroup.procs
+stress<span class="w"> </span>--vm<span class="w"> </span><span class="m">1</span><span class="w"> </span>--vm-bytes<span class="w"> </span>200M<span class="w">    </span><span class="c1"># будет OOM-killed</span>
+</code></pre></div>
+
+<h3 id="6-найти-утечку-памяти-в-процессе">6. Найти утечку памяти в процессе<a class="headerlink" href="#6-найти-утечку-памяти-в-процессе" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>cat<span class="w"> </span>/proc/&lt;pid&gt;/status<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-E<span class="w"> </span><span class="s1">&#39;VmRSS|VmSize|VmPeak&#39;</span>
+watch<span class="w"> </span>-n<span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="s1">&#39;cat /proc/&lt;pid&gt;/status | grep VmRSS&#39;</span>
+<span class="c1"># Растёт → утечка</span>
+</code></pre></div>
+
+<h3 id="7-сделать-образ-контейнера-минимальным">7. Сделать образ контейнера минимальным<a class="headerlink" href="#7-сделать-образ-контейнера-минимальным" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Свои namespace&#39;ы через unshare</span>
+unshare<span class="w"> </span>--pid<span class="w"> </span>--fork<span class="w"> </span>--mount-proc<span class="w"> </span>--net<span class="w"> </span>--uts<span class="w"> </span>--ipc<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>bash<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;hostname test; mount -t proc proc /proc; ip link set lo up; ps aux&quot;</span>
+</code></pre></div>
+
+<hr />
+<h2 id="частые-ошибки">🪤 Частые ошибки<a class="headerlink" href="#частые-ошибки" title="Ссылка">#</a></h2>
+<ol>
+<li><strong>Не root не видит /proc/&lt;чужой_pid&gt;</strong> — нужны права или <code>ptrace_scope=0</code>.</li>
+<li><strong>Ручная правка /proc/sys</strong> — временно, используйте sysctl.</li>
+<li><strong><code>echo 1 &gt; /proc/sys/...</code></strong> без sudo — permission denied.</li>
+<li><strong>Смешивание cgroup v1/v2</strong> — переход болезненный.</li>
+<li><strong>Лимит cgroup без swappiness</strong> — OOM на ровном месте.</li>
+<li><strong><code>docker run --network=host</code></strong> — нет изоляции сети.</li>
+<li><strong>Не размонтированный namespace</strong> — утечка ресурсов.</li>
+<li><strong><code>ulimit</code> не наследуется</strong> через systemd без <code>LimitNOFILE=</code>.</li>
+<li><strong><code>ftrace</code> требует root</strong> — или <code>CAP_SYS_ADMIN</code>.</li>
+<li><strong><code>/proc/&lt;pid&gt;/mem</code></strong> читается только с <code>ptrace</code> или root.</li>
+</ol>
+<hr />
+<h2 id="полезные-ссылки">🔗 Полезные ссылки<a class="headerlink" href="#полезные-ссылки" title="Ссылка">#</a></h2>
+<ul>
+<li>man: <code>man proc</code>, <code>man sysfs</code>, <code>man cgroups</code>, <code>man namespaces</code></li>
+<li>kernel.org: https://www.kernel.org/doc/html/latest/admin-guide</li>
+<li>cgroup v2 docs: https://www.kernel.org/doc/html/latest/admin-guide/cgroup-v2.html</li>
+<li>namespaces overview: https://man7.org/linux/man-pages/man7/namespaces.7.html</li>
+<li>LWN cgroups: https://lwn.net/Articles/604609</li>
+<li>BPF Performance Tools (книга, Brendan Gregg)</li>
+<li>bpftrace: https://github.com/iovisor/bpftrace</li>
+<li>BCC tools: https://github.com/iovisor/bcc</li>
+<li>systemd.resource-control: <code>man systemd.resource-control</code></li>
+</ul>
+<hr />
+<h2 id="полезные-советы">💡 Полезные советы<a class="headerlink" href="#полезные-советы" title="Ссылка">#</a></h2>
+<ol>
+<li><strong><code>/proc</code> — ваш друг</strong> — там почти всё о процессах и ядре.</li>
+<li><strong><code>lsns</code> / <code>nsenter</code></strong> — для дебага контейнеров.</li>
+<li><strong><code>systemd-cgls</code> / <code>systemd-cgtop</code></strong> — топ процессов по cgroups.</li>
+<li><strong><code>strace</code></strong> — когда процесс «завис» или ведёт себя странно.</li>
+<li><strong><code>lsof</code> / <code>ss -p</code></strong> — кто держит порт/файл.</li>
+<li><strong>cgroup v2</strong> — будущее, переходите.</li>
+<li><strong><code>sysctl -p</code></strong> — после правки <code>/etc/sysctl.d/*.conf</code>.</li>
+<li><strong>eBPF/bpftrace</strong> — современная, безопасная интроспекция.</li>
+<li><strong><code>perf</code></strong> — для профилирования ядра/процессов.</li>
+<li><strong><code>/sys/class/hwmon</code></strong> — датчики температуры/вентиляторов.</li>
+<li><strong>Docker = cgroups + namespaces</strong> — понимание баз = понимание контейнеров.</li>
+<li><strong><code>unshare</code></strong> — для ручного создания namespace&rsquo;ов.</li>
+<li><strong>Limits</strong>: ulimit (per-process) vs sysctl (system) vs limits.conf.</li>
+<li><strong><code>/proc/&lt;pid&gt;/maps</code></strong> — карта памяти, для отладки memory leaks.</li>
+<li><strong>OOM killer</strong> — смотрит на oom_score в <code>/proc/&lt;pid&gt;/oom_score</code>.</li>
+</ol>
+<hr />
+<p><em>Сгенерировано как шпаргалка. Linux internals — глубокая тема —
+углубляйтесь через man pages и https://www.kernel.org/doc/html/latest/</em></p>
+    </article>
+    <nav class="pagination">
+      <a class="pager prev" href="terraform.html">← Terraform</a>
+      <a class="pager next" href="miscellaneous.html">Miscellaneous →</a>
+    </nav>
+  </main>
+
+  <aside class="toc">
+    <details open>
+      <summary>📑 Оглавление</summary>
+      <div class="toc-list">
+<div class="toc">
+<ul>
+<li><a href="#linux-internals-шпаргалка-procfs-sysfs-cgroups-namespaces">🐧 Linux Internals — шпаргалка (procfs / sysfs / cgroups / namespaces)</a><ul>
+<li><a href="#proc-procfs-процессы-и-ядро">📁 /proc — procfs (процессы и ядро)</a><ul>
+<li><a href="#процессы">Процессы</a></li>
+<li><a href="#системная-информация">Системная информация</a></li>
+<li><a href="#динамическая-настройка-ядра">Динамическая настройка ядра</a></li>
+</ul>
+</li>
+<li><a href="#sys-sysfs-устройства-и-драйверы">🎛️ /sys — sysfs (устройства и драйверы)</a><ul>
+<li><a href="#управление-через-sysfs">Управление через sysfs</a></li>
+</ul>
+</li>
+<li><a href="#cgroups-control-groups">📊 cgroups (Control Groups)</a><ul>
+<li><a href="#версии">Версии</a></li>
+<li><a href="#иерархия-cgroup-v2">Иерархия cgroup v2</a></li>
+<li><a href="#управление-cgroup-v2-вручную">Управление cgroup v2 вручную</a></li>
+<li><a href="#контроллеры-cgroup-v2">Контроллеры cgroup v2</a></li>
+<li><a href="#cgroup-через-systemd">cgroup через systemd</a></li>
+<li><a href="#docker-и-cgroups">Docker и cgroups</a></li>
+</ul>
+</li>
+<li><a href="#namespaces-изоляция">🌍 Namespaces (изоляция)</a><ul>
+<li><a href="#типы-namespaces">Типы namespaces</a></li>
+<li><a href="#просмотр-namespaces-процесса">Просмотр namespaces процесса</a></li>
+<li><a href="#утилиты-для-namespaces">Утилиты для namespaces</a></li>
+<li><a href="#пример-ручной-контейнер">Пример: ручной контейнер</a></li>
+<li><a href="#docker-и-namespaces">Docker и namespaces</a></li>
+</ul>
+</li>
+<li><a href="#связь-cgroups-namespaces-контейнеры">🧩 Связь cgroups + namespaces = контейнеры</a></li>
+<li><a href="#другие-виртуальные-фс">📡 Другие виртуальные ФС</a><ul>
+<li><a href="#dev-устройства">/dev — устройства</a></li>
+<li><a href="#tmp-временные-файлы">/tmp — временные файлы</a></li>
+<li><a href="#run-runtime-данные">/run — runtime данные</a></li>
+<li><a href="#debugfs">debugfs</a></li>
+<li><a href="#tracefs">tracefs</a></li>
+</ul>
+</li>
+<li><a href="#утилиты-для-интроспекции">🛠️ Утилиты для интроспекции</a><ul>
+<li><a href="#процессы_1">Процессы</a></li>
+<li><a href="#сеть">Сеть</a></li>
+<li><a href="#память">Память</a></li>
+<li><a href="#i-o">I/O</a></li>
+<li><a href="#системные-вызовы">Системные вызовы</a></li>
+<li><a href="#ebpf-современная-интроспекция">eBPF (современная интроспекция)</a></li>
+</ul>
+</li>
+<li><a href="#параметры-ядра-sysctl">🎛️ Параметры ядра (sysctl)</a><ul>
+<li><a href="#полезные-параметры">Полезные параметры</a></li>
+<li><a href="#ulimit-vs-sysctl">ulimit vs sysctl</a></li>
+</ul>
+</li>
+<li><a href="#практическое-применение">🐛 Практическое применение</a><ul>
+<li><a href="#1-кто-держит-порт">1. Кто держит порт?</a></li>
+<li><a href="#2-кто-пишет-в-файл">2. Кто пишет в файл?</a></li>
+<li><a href="#3-почему-процесс-тормозит">3. Почему процесс тормозит?</a></li>
+<li><a href="#4-контейнер-без-docker">4. Контейнер без docker</a></li>
+<li><a href="#5-ограничить-память-процесса">5. Ограничить память процесса</a></li>
+<li><a href="#6-найти-утечку-памяти-в-процессе">6. Найти утечку памяти в процессе</a></li>
+<li><a href="#7-сделать-образ-контейнера-минимальным">7. Сделать образ контейнера минимальным</a></li>
+</ul>
+</li>
+<li><a href="#частые-ошибки">🪤 Частые ошибки</a></li>
+<li><a href="#полезные-ссылки">🔗 Полезные ссылки</a></li>
+<li><a href="#полезные-советы">💡 Полезные советы</a></li>
+</ul>
+</li>
+</ul>
+</div>
+
+      </div>
+    </details>
+  </aside>
+</div>
+
+<button class="back-top" id="backTop" aria-label="Наверх">↑</button>
+
+<script src="assets/search.js"></script>
+<script src="assets/page.js"></script>
+</body>
+</html>

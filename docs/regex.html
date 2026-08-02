@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Регулярные выражения — Шпаргалки</title>
+<link rel="stylesheet" href="assets/style.css">
+<link rel="stylesheet" href="assets/pygments.css">
+</head>
+<body>
+<div class="layout">
+  <aside class="sidebar">
+    <a href="index.html" class="brand">📌 Шпаргалки</a>
+    <nav class="nav">
+<a href="yazi.html" class="nav-item"><span class="nav-ico">📦</span>Yazi</a>
+<a href="neovim.html" class="nav-item"><span class="nav-ico">📘</span>Neovim (LazyVim)</a>
+<a href="niri.html" class="nav-item"><span class="nav-ico">🪟</span>Niri</a>
+<a href="tmux.html" class="nav-item"><span class="nav-ico">🪟</span>Tmux</a>
+<a href="bash.html" class="nav-item"><span class="nav-ico">🐚</span>Bash</a>
+<a href="git.html" class="nav-item"><span class="nav-ico">🔀</span>Git</a>
+<a href="terminal.html" class="nav-item"><span class="nav-ico">🖥️</span>Терминал Linux</a>
+<a href="powershell.html" class="nav-item"><span class="nav-ico">💻</span>PowerShell</a>
+<a href="cmd.html" class="nav-item"><span class="nav-ico">🪟</span>CMD (cmd.exe)</a>
+<a href="python.html" class="nav-item"><span class="nav-ico">🐍</span>Python</a>
+<a href="systemd.html" class="nav-item"><span class="nav-ico">⚙️</span>systemd</a>
+<a href="ssh.html" class="nav-item"><span class="nav-ico">🔐</span>SSH</a>
+<a href="make-cmake.html" class="nav-item"><span class="nav-ico">🔨</span>Make / CMake</a>
+<a href="docker.html" class="nav-item"><span class="nav-ico">🐳</span>Docker</a>
+<a href="pacman.html" class="nav-item"><span class="nav-ico">📦</span>pacman / yay / paru</a>
+<a href="spark.html" class="nav-item"><span class="nav-ico">⚡</span>Apache Spark / PySpark</a>
+<a href="markdown.html" class="nav-item"><span class="nav-ico">📝</span>Markdown</a>
+<a href="regex.html" class="nav-item active"><span class="nav-ico">🔍</span>Регулярные выражения</a>
+<a href="jq-json.html" class="nav-item"><span class="nav-ico">🔧</span>jq + JSON</a>
+<a href="awk-sed.html" class="nav-item"><span class="nav-ico">✂️</span>awk / sed</a>
+<a href="airflow.html" class="nav-item"><span class="nav-ico">🌪️</span>Apache Airflow</a>
+<a href="http-curl.html" class="nav-item"><span class="nav-ico">🌐</span>HTTP / curl</a>
+<a href="yaml.html" class="nav-item"><span class="nav-ico">📄</span>YAML</a>
+<a href="vscode.html" class="nav-item"><span class="nav-ico">💻</span>VS Code</a>
+<a href="cron.html" class="nav-item"><span class="nav-ico">⏰</span>cron</a>
+<a href="fzf-zoxide.html" class="nav-item"><span class="nav-ico">🔎</span>fzf + zoxide</a>
+<a href="minikube-k8s.html" class="nav-item"><span class="nav-ico">☸️</span>Minikube / Kubernetes</a>
+<a href="cicd.html" class="nav-item"><span class="nav-ico">🦊</span>GitLab CI / GitHub Actions</a>
+<a href="nginx.html" class="nav-item"><span class="nav-ico">🌐</span>nginx</a>
+<a href="dbt.html" class="nav-item"><span class="nav-ico">🔧</span>dbt</a>
+<a href="kafka.html" class="nav-item"><span class="nav-ico">🐘</span>Apache Kafka</a>
+<a href="prometheus-grafana.html" class="nav-item"><span class="nav-ico">📊</span>Prometheus / Grafana</a>
+<a href="iceberg-nessie.html" class="nav-item"><span class="nav-ico">🧊</span>Iceberg / Nessie</a>
+<a href="impala.html" class="nav-item"><span class="nav-ico">🐬</span>Apache Impala</a>
+<a href="terraform.html" class="nav-item"><span class="nav-ico">🏗️</span>Terraform</a>
+<a href="linux-internals.html" class="nav-item"><span class="nav-ico">🐧</span>Linux Internals</a>
+<a href="miscellaneous.html" class="nav-item"><span class="nav-ico">🧰</span>Miscellaneous</a>
+<a href="python-automation-libs.html" class="nav-item"><span class="nav-ico">🐍</span>Python: авт-ция (10 libs)</a>
+<a href="eza.html" class="nav-item"><span class="nav-ico">🌈</span>eza</a>
+<a href="dbeaver.html" class="nav-item"><span class="nav-ico">🗄️</span>DBeaver</a>
+<a href="zcode.html" class="nav-item"><span class="nav-ico">🤖</span>ZCode</a>
+<a href="warp.html" class="nav-item"><span class="nav-ico">🚀</span>Warp</a>
+<a href="agentic-ai-dev.html" class="nav-item"><span class="nav-ico">🤝</span>Агентная разработка с ИИ</a>
+    </nav>
+  </aside>
+
+  <main class="content">
+    <article>
+<h1 id="регулярные-выражения-regex-шпаргалка">🔍 Регулярные выражения (regex) — шпаргалка<a class="headerlink" href="#регулярные-выражения-regex-шпаргалка" title="Ссылка">#</a></h1>
+<blockquote>
+<p><strong>Регулярные выражения</strong> — язык для поиска и замены по шаблонам.
+Применяются в grep, sed, awk, Python re, JavaScript, редакторах, SQL.
+Документация: https://www.regular-expressions.info · https://regex101.com</p>
+</blockquote>
+<hr />
+<h2 id="главные-понятия">🔑 Главные понятия<a class="headerlink" href="#главные-понятия" title="Ссылка">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Термин</th>
+<th>Что значит</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Pattern (шаблон)</strong></td>
+<td>Описание того, что ищем</td>
+</tr>
+<tr>
+<td><strong>Match (совпадение)</strong></td>
+<td>Найденный текст</td>
+</tr>
+<tr>
+<td><strong>Group (группа)</strong></td>
+<td>Часть шаблона в скобках <code>(...)</code></td>
+</tr>
+<tr>
+<td><strong>Character class</strong></td>
+<td><code>[abc]</code> — любой из перечисленных</td>
+</tr>
+<tr>
+<td><strong>Quantifier</strong></td>
+<td><code>*</code>, <code>+</code>, <code>?</code>, <code>{n,m}</code> — сколько раз</td>
+</tr>
+<tr>
+<td><strong>Anchor</strong></td>
+<td><code>^</code>, <code>$</code>, <code>\b</code> — позиция в строке</td>
+</tr>
+<tr>
+<td><strong>Greedy / Lazy</strong></td>
+<td>Жадный (максимум) / ленивый (минимум)</td>
+</tr>
+<tr>
+<td><strong>Flag</strong></td>
+<td>Модификатор (<code>g</code>, <code>i</code>, <code>m</code>, <code>s</code>)</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="базовые-символы">🎯 Базовые символы<a class="headerlink" href="#базовые-символы" title="Ссылка">#</a></h2>
+<h3 id="обычные-символы">Обычные символы<a class="headerlink" href="#обычные-символы" title="Ссылка">#</a></h3>
+<p>Большинство символов означают сами себя: <code>a</code>, <code>B</code>, <code>7</code>, <code>@</code>.</p>
+<div class="highlight"><pre><span></span><code>cat        → соответствует &quot;cat&quot;
+hello      → &quot;hello&quot;
+</code></pre></div>
+
+<h3 id="метасимволы-special">Метасимволы (special)<a class="headerlink" href="#метасимволы-special" title="Ссылка">#</a></h3>
+<p>Эти символы имеют спец-значение, чтобы сопоставить буквально — экранируйте <code>\</code>:</p>
+<div class="highlight"><pre><span></span><code>.  ^  $  *  +  ?  {  }  [  ]  \  |  (  )
+</code></pre></div>
+
+<div class="highlight"><pre><span></span><code>\.         → точка буквально
+\*         → звёздочка буквально
+\\         → обратный слэш
+</code></pre></div>
+
+<hr />
+<h2 id="классы-символов">🅰️ Классы символов<a class="headerlink" href="#классы-символов" title="Ссылка">#</a></h2>
+<h3 id="произвольный-набор">Произвольный набор <code>[...]</code><a class="headerlink" href="#произвольный-набор" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>[abc]      → любой из a, b, c
+[a-z]      → любая строчная буква
+[A-Z]      → любая заглавная
+[0-9]      → любая цифра (= \d)
+[a-zA-Z0-9] → буква или цифра
+[aeiou]    → гласная
+[^abc]     → ЛЮБОЙ КРОМЕ a, b, c (отрицание)
+[^0-9]     → не цифра
+[-a-z]     → буквы или дефис (в начале/конце — буквально)
+</code></pre></div>
+
+<h3 id="предопределённые-классы">Предопределённые классы<a class="headerlink" href="#предопределённые-классы" title="Ссылка">#</a></h3>
+<table>
+<thead>
+<tr>
+<th>Шаблон</th>
+<th>Соответствует</th>
+<th>Отрицание</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>\d</code></td>
+<td>Цифра <code>[0-9]</code></td>
+<td><code>\D</code></td>
+</tr>
+<tr>
+<td><code>\w</code></td>
+<td>Буква/цифра/<code>_</code> <code>[a-zA-Z0-9_]</code></td>
+<td><code>\W</code></td>
+</tr>
+<tr>
+<td><code>\s</code></td>
+<td>Пробел, таб, перевод строки</td>
+<td><code>\S</code></td>
+</tr>
+<tr>
+<td><code>.</code></td>
+<td>Любой символ кроме <code>\n</code></td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>\b</code></td>
+<td>Граница слова (word boundary)</td>
+<td><code>\B</code></td>
+</tr>
+<tr>
+<td><code>\t</code></td>
+<td>Таб</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>\n</code></td>
+<td>Перевод строки</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>\r</code></td>
+<td>Возврат каретки</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<h3 id="unicode-в-современных-движках">Unicode (в современных движках)<a class="headerlink" href="#unicode-в-современных-движках" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>\p{L}      → любая буква (Unicode)
+\p{Ll}     → строчная буква
+\p{Lu}     → заглавная
+\p{N}      → число
+\p{Cc}     → управляющий символ
+\P{L}      → не буква
+</code></pre></div>
+
+<blockquote>
+<p>⚠️ В Python — <code>re.UNICODE</code> по умолчанию в Python 3.
+В POSIX grep — нет <code>\d</code>, нужно <code>[0-9]</code> или <code>[[:digit:]]</code>.</p>
+</blockquote>
+<hr />
+<h2 id="квантификаторы-сколько-раз">🔢 Квантификаторы (сколько раз)<a class="headerlink" href="#квантификаторы-сколько-раз" title="Ссылка">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Квантификатор</th>
+<th>Значение</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>*</code></td>
+<td>0 или более</td>
+</tr>
+<tr>
+<td><code>+</code></td>
+<td>1 или более</td>
+</tr>
+<tr>
+<td><code>?</code></td>
+<td>0 или 1 (опционально)</td>
+</tr>
+<tr>
+<td><code>{n}</code></td>
+<td>Ровно n раз</td>
+</tr>
+<tr>
+<td><code>{n,}</code></td>
+<td>n или более</td>
+</tr>
+<tr>
+<td><code>{n,m}</code></td>
+<td>от n до m раз</td>
+</tr>
+<tr>
+<td><code>{,m}</code></td>
+<td>от 0 до m</td>
+</tr>
+</tbody>
+</table>
+<p>Примеры:</p>
+<div class="highlight"><pre><span></span><code>colou?r       → &quot;color&quot; или &quot;colour&quot;
+[0-9]+        → одно и более цифр
+\d{4}         → ровно 4 цифры (год)
+\d{2,4}       → 2, 3 или 4 цифры
+\d{3}-\d{2}-\d{4}  → телефон/SSN
+a{0,5}        → от 0 до 5 букв &quot;a&quot;
+</code></pre></div>
+
+<h3 id="жадные-vs-ленивые-greedy-vs-lazy">Жадные vs ленивые (Greedy vs Lazy)<a class="headerlink" href="#жадные-vs-ленивые-greedy-vs-lazy" title="Ссылка">#</a></h3>
+<p>По умолчанию квантификаторы <strong>жадные</strong> (берут максимально возможное).</p>
+<div class="highlight"><pre><span></span><code>&lt;.*&gt;         → жадный: от первого &lt; до ПОСЛЕДНЕГО &gt;
+&lt;.*?&gt;        → ленивый: до ПЕРВОГО &gt;
+
+# Дано: &lt;a&gt;&lt;b&gt;
+&lt;.*&gt;         → совпадёт целиком: &lt;a&gt;&lt;b&gt;
+&lt;.*?&gt;        → совпадёт: &lt;a&gt;
+</code></pre></div>
+
+<p>Чтобы сделать ленивым — добавьте <code>?</code>:</p>
+<div class="highlight"><pre><span></span><code>*?  +?  ??  {n,}?  {n,m}?
+</code></pre></div>
+
+<h3 id="possessive-без-отката">Possessive (без отката)<a class="headerlink" href="#possessive-без-отката" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>*+  ++  ?+  {n,}+
+</code></pre></div>
+
+<p>Не откатываются назад — быстрее, но могут не найти.
+(Java, PCRE; в Python нет, но есть atomic groups <code>(?&gt;...)</code>)</p>
+<hr />
+<h2 id="якоря-позиции">🎯 Якоря (позиции)<a class="headerlink" href="#якоря-позиции" title="Ссылка">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Якорь</th>
+<th>Значение</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>^</code></td>
+<td>Начало строки</td>
+</tr>
+<tr>
+<td><code>$</code></td>
+<td>Конец строки</td>
+</tr>
+<tr>
+<td><code>\b</code></td>
+<td>Граница слова</td>
+</tr>
+<tr>
+<td><code>\B</code></td>
+<td>НЕ граница слова</td>
+</tr>
+<tr>
+<td><code>\A</code></td>
+<td>Начало всей строки (не зависит от <code>m</code>)</td>
+</tr>
+<tr>
+<td><code>\z</code></td>
+<td>Конец всей строки</td>
+</tr>
+<tr>
+<td><code>\G</code></td>
+<td>Начало поиска или конец предыдущего</td>
+</tr>
+</tbody>
+</table>
+<p>Примеры:</p>
+<div class="highlight"><pre><span></span><code>^Hello          → &quot;Hello&quot; только в начале
+world$          → &quot;world&quot; только в конце
+^\s*$           → строка только из пробелов
+\bword\b        → &quot;word&quot; как отдельное слово (не &quot;sword&quot;, &quot;words&quot;)
+\bword          → слово начинается на &quot;word&quot;
+word\b          → слово заканчивается на &quot;word&quot;
+</code></pre></div>
+
+<blockquote>
+<p><code>\b</code> — это позиция между <code>\w</code> и <code>\W</code>.</p>
+</blockquote>
+<hr />
+<h2 id="группы-и-обратные-ссылки">🎨 Группы и обратные ссылки<a class="headerlink" href="#группы-и-обратные-ссылки" title="Ссылка">#</a></h2>
+<h3 id="захватывающие-группы">Захватывающие группы <code>(...)</code><a class="headerlink" href="#захватывающие-группы" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>(\d{4})-(\d{2})-(\d{2})    → дата, 3 группы: год, месяц, день
+
+(ab)+                       → &quot;ab&quot;, &quot;abab&quot;, &quot;ababab&quot;
+</code></pre></div>
+
+<h3 id="обратные-ссылки-backreferences">Обратные ссылки (backreferences)<a class="headerlink" href="#обратные-ссылки-backreferences" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>(\w)\1          → два одинаковых символа (&quot;aa&quot;, &quot;bb&quot;, &quot;11&quot;)
+(\w+)\s\1       → повторённое слово (&quot;the the&quot;)
+([&quot;&#39;]).*?\1     → строка в кавычках (одинаковых)
+</code></pre></div>
+
+<h3 id="незахватывающие-группы">Незахватывающие группы <code>(?:...)</code><a class="headerlink" href="#незахватывающие-группы" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>(?:https?|ftp)://       → группа без захвата
+(\d{4})(?:-|/)(\d{2})   → разделитель не нужен в результате
+</code></pre></div>
+
+<h3 id="именованные-группы-p-name-python-name-pcre">Именованные группы <code>(?P&lt;name&gt;...)</code> (Python) / <code>(?&lt;name&gt;...)</code> (PCRE)<a class="headerlink" href="#именованные-группы-p-name-python-name-pcre" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>(?P&lt;year&gt;\d{4})-(?P&lt;month&gt;\d{2})-(?P&lt;day&gt;\d{2})
+
+# Python: m.group(&quot;year&quot;)
+# JS:     match.groups.year
+</code></pre></div>
+
+<h3 id="альтернативы">Альтернативы <code>|</code><a class="headerlink" href="#альтернативы" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>cat|dog|bird          → &quot;cat&quot; ИЛИ &quot;dog&quot; ИЛИ &quot;bird&quot;
+(https?|ftp)          → &quot;http&quot;, &quot;https&quot; или &quot;ftp&quot;
+\b(\w+)\s+\1\b        → повторённое слово
+yes|no                → &quot;yes&quot; или &quot;no&quot;
+</code></pre></div>
+
+<hr />
+<h2 id="lookaround-опережающие-и-ретроспективные-проверки">⚡ Lookaround (опережающие и ретроспективные проверки)<a class="headerlink" href="#lookaround-опережающие-и-ретроспективные-проверки" title="Ссылка">#</a></h2>
+<p>Lookaround проверяет, что идёт до/после, <strong>не включая</strong> в совпадение.</p>
+<h3 id="lookahead-вперёд">Lookahead (вперёд) <code>(?=...)</code> / <code>(?!...)</code><a class="headerlink" href="#lookahead-вперёд" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>foo(?=bar)        → &quot;foo&quot;, только если за ним &quot;bar&quot;
+foo(?!bar)        → &quot;foo&quot;, только если за ним НЕ &quot;bar&quot;
+
+\d+(?= dollars)   → число, после которого &quot; dollars&quot;
+</code></pre></div>
+
+<h3 id="lookbehind-назад">Lookbehind (назад) <code>(?&lt;=...)</code> / <code>(?&lt;!...)</code><a class="headerlink" href="#lookbehind-назад" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>(?&lt;=\$)\d+        → число, перед которым &quot;$&quot;
+                 → в &quot;$100&quot; совпадёт &quot;100&quot;
+(?&lt;!\$)\d+        → число, перед которым НЕ &quot;$&quot;
+
+(?&lt;=Mr\. )\w+     → имя после &quot;Mr. &quot;
+</code></pre></div>
+
+<h3 id="примеры-с-lookaround">Примеры с lookaround<a class="headerlink" href="#примеры-с-lookaround" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code># Пароль: минимум 8 символов, есть цифра, есть заглавная
+(?=.*\d)(?=.*[A-Z]).{8,}
+
+# Число между 1 и 100
+\b([1-9][0-9]?|100)\b
+
+# Слово, не preceded by #
+(?&lt;!#)\b\w+\b
+</code></pre></div>
+
+<hr />
+<h2 id="флаги-модификаторы">🚩 Флаги (модификаторы)<a class="headerlink" href="#флаги-модификаторы" title="Ссылка">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Флаг</th>
+<th>Имя</th>
+<th>Что делает</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>g</code></td>
+<td>global</td>
+<td>Все совпадения, а не только первое</td>
+</tr>
+<tr>
+<td><code>i</code></td>
+<td>case-insensitive</td>
+<td>Без учёта регистра</td>
+</tr>
+<tr>
+<td><code>m</code></td>
+<td>multiline</td>
+<td><code>^</code>/<code>$</code> на каждой строке (а не всей строке)</td>
+</tr>
+<tr>
+<td><code>s</code></td>
+<td>dotall</td>
+<td><code>.</code> включает <code>\n</code></td>
+</tr>
+<tr>
+<td><code>x</code></td>
+<td>extended</td>
+<td>Игнорировать пробелы и <code>#</code>-комментарии</td>
+</tr>
+<tr>
+<td><code>u</code></td>
+<td>unicode</td>
+<td>Unicode-режим</td>
+</tr>
+<tr>
+<td><code>y</code></td>
+<td>sticky</td>
+<td>Искать с <code>lastIndex</code></td>
+</tr>
+</tbody>
+</table>
+<p>Синтаксис:
+- <strong>Python</strong>: <code>re.compile(r"...", re.IGNORECASE | re.MULTILINE)</code>
+- <strong>JavaScript</strong>: <code>/pattern/gi</code> или <code>new RegExp("pattern", "gi")</code>
+- <strong>PCRE/PHP</strong>: <code>/pattern/gimu</code>
+- <strong>grep</strong>: <code>grep -i</code>, <code>grep -E</code>, и т.д.</p>
+<h3 id="пример-с-x-extended">Пример с x (extended)<a class="headerlink" href="#пример-с-x-extended" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>\d{4} - \d{2} - \d{2}     # дата (пробелы игнорируются)
+# комментарий
+</code></pre></div>
+
+<hr />
+<h2 id="практические-примеры">🛠️ Практические примеры<a class="headerlink" href="#практические-примеры" title="Ссылка">#</a></h2>
+<h3 id="email-упрощённый">Email (упрощённый)<a class="headerlink" href="#email-упрощённый" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>[\w.+-]+@[\w-]+\.[\w.]+
+[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}
+</code></pre></div>
+
+<blockquote>
+<p>Полный RFC 5322 email-regex огромный, на практике используют упрощённый.</p>
+</blockquote>
+<h3 id="url">URL<a class="headerlink" href="#url" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>https?://[\w.-]+(?:\.[a-zA-Z]{2,})?(?:/[^\s]*)?
+</code></pre></div>
+
+<h3 id="ipv4">IPv4<a class="headerlink" href="#ipv4" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>\b(?:\d{1,3}\.){3}\d{1,3}\b
+
+# Со строгой проверкой диапазонов
+\b(?:(?:25[0-5]|2[0-4]\d|[01]?\d\d?)\.){3}(?:25[0-5]|2[0-4]\d|[01]?\d\d?)\b
+</code></pre></div>
+
+<h3 id="телефон">Телефон<a class="headerlink" href="#телефон" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>\+?\d{1,3}[-.\s]?\(?\d{1,4}\)?[-.\s]?\d{3,4}[-.\s]?\d{4}
+
+# Российский мобильный
+\+7\s?$?$?\d{3}$?$?\s?\d{3}[-.\s]?\d{2}[-.\s]?\d{2}
+</code></pre></div>
+
+<h3 id="дата">Дата<a class="headerlink" href="#дата" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>\d{4}-\d{2}-\d{2}                 # ISO: 2024-01-15
+\d{2}\.\d{2}\.\d{4}               # EU: 15.01.2024
+\b(0[1-9]|1[0-2])/(0[1-9]|[12]\d|3[01])/(\d{4}|d{2})\b  # MM/DD/YYYY
+</code></pre></div>
+
+<h3 id="время">Время<a class="headerlink" href="#время" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>\b([01]\d|2[0-3]):([0-5]\d)(:[0-5]\d)?\b   # HH:MM:SS
+</code></pre></div>
+
+<h3 id="число-с-дробной-частью-и-знаком">Число (с дробной частью и знаком)<a class="headerlink" href="#число-с-дробной-частью-и-знаком" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>[-+]?\d+(?:\.\d+)?
+[-+]?(?:\d+\.?\d*|\.\d+)
+</code></pre></div>
+
+<h3 id="hex-цвет">Hex-цвет<a class="headerlink" href="#hex-цвет" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>#[0-9a-fA-F]{3}([0-9a-fA-F]{3})?     # #abc или #abcdef
+</code></pre></div>
+
+<h3 id="ip-port">IP+port<a class="headerlink" href="#ip-port" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>(\d{1,3}\.){3}\d{1,3}:\d+
+</code></pre></div>
+
+<h3 id="hexadecimal">Hexadecimal<a class="headerlink" href="#hexadecimal" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>\b0x[0-9a-fA-F]+\b
+\b[0-9a-fA-F]+\b
+</code></pre></div>
+
+<h3 id="uuid">UUID<a class="headerlink" href="#uuid" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}
+</code></pre></div>
+
+<h3 id="слабый-пароль-для-примера">Слабый пароль (для примера)<a class="headerlink" href="#слабый-пароль-для-примера" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code># Минимум 8 символов, 1 заглавная, 1 цифра
+^(?=.*[A-Z])(?=.*\d).{8,}$
+</code></pre></div>
+
+<h3 id="извлечь-ключ-значение">Извлечь ключ=значение<a class="headerlink" href="#извлечь-ключ-значение" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>(\w+)=(\S+)
+</code></pre></div>
+
+<h3 id="удалить-html-теги">Удалить HTML-теги<a class="headerlink" href="#удалить-html-теги" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>&lt;[^&gt;]+&gt;
+</code></pre></div>
+
+<h3 id="повторённое-слово">Повторённое слово<a class="headerlink" href="#повторённое-слово" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>\b(\w+)\s+\1\b
+</code></pre></div>
+
+<hr />
+<h2 id="в-python-re">🐍 В Python (<code>re</code>)<a class="headerlink" href="#в-python-re" title="Ссылка">#</a></h2>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">re</span>
+
+<span class="c1"># Поиск первого совпадения</span>
+<span class="n">m</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\d+&quot;</span><span class="p">,</span> <span class="s2">&quot;abc123def&quot;</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">m</span><span class="p">:</span>
+    <span class="n">m</span><span class="o">.</span><span class="n">group</span><span class="p">()</span>       <span class="c1"># &#39;123&#39;</span>
+    <span class="n">m</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>       <span class="c1"># 3 (индекс начала)</span>
+    <span class="n">m</span><span class="o">.</span><span class="n">end</span><span class="p">()</span>         <span class="c1"># 6</span>
+    <span class="n">m</span><span class="o">.</span><span class="n">span</span><span class="p">()</span>        <span class="c1"># (3, 6)</span>
+
+<span class="c1"># Все совпадения</span>
+<span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\d+&quot;</span><span class="p">,</span> <span class="s2">&quot;a1 b22 c333&quot;</span><span class="p">)</span>          <span class="c1"># [&#39;1&#39;, &#39;22&#39;, &#39;333&#39;]</span>
+<span class="n">re</span><span class="o">.</span><span class="n">finditer</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\d+&quot;</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>                   <span class="c1"># итератор Match</span>
+
+<span class="c1"># С группами → кортежи</span>
+<span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;(\w+)=(\d+)&quot;</span><span class="p">,</span> <span class="s2">&quot;a=1 b=2&quot;</span><span class="p">)</span>       <span class="c1"># [(&#39;a&#39;,&#39;1&#39;), (&#39;b&#39;,&#39;2&#39;)]</span>
+
+<span class="c1"># Замена</span>
+<span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\d+&quot;</span><span class="p">,</span> <span class="s2">&quot;#&quot;</span><span class="p">,</span> <span class="s2">&quot;a1 b22&quot;</span><span class="p">)</span>               <span class="c1"># &#39;a# b#&#39;</span>
+<span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;(\w+)@(\w+)&quot;</span><span class="p">,</span> <span class="sa">r</span><span class="s2">&quot;\2/\1&quot;</span><span class="p">,</span> <span class="n">s</span><span class="p">)</span>          <span class="c1"># с группами</span>
+<span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\d&quot;</span><span class="p">,</span> <span class="s2">&quot;#&quot;</span><span class="p">,</span> <span class="s2">&quot;abc123&quot;</span><span class="p">,</span> <span class="n">count</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>        <span class="c1"># только первые 2</span>
+
+<span class="c1"># Разделение</span>
+<span class="n">re</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;[,\s]+&quot;</span><span class="p">,</span> <span class="s2">&quot;a, b c,d&quot;</span><span class="p">)</span>             <span class="c1"># [&#39;a&#39;, &#39;b&#39;, &#39;c&#39;, &#39;d&#39;]</span>
+<span class="n">re</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;(\d+)&quot;</span><span class="p">,</span> <span class="s2">&quot;a1b22c&quot;</span><span class="p">)</span>                 <span class="c1"># с сохранением разделителя</span>
+
+<span class="c1"># Полное совпадение</span>
+<span class="n">re</span><span class="o">.</span><span class="n">fullmatch</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\d+&quot;</span><span class="p">,</span> <span class="s2">&quot;123&quot;</span><span class="p">)</span>                  <span class="c1"># Match (вся строка)</span>
+<span class="n">re</span><span class="o">.</span><span class="n">fullmatch</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\d+&quot;</span><span class="p">,</span> <span class="s2">&quot;12a&quot;</span><span class="p">)</span>                  <span class="c1"># None</span>
+
+<span class="c1"># Флаги</span>
+<span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;hello&quot;</span><span class="p">,</span> <span class="s2">&quot;HELLO&quot;</span><span class="p">,</span> <span class="n">re</span><span class="o">.</span><span class="n">I</span><span class="p">)</span>           <span class="c1"># case-insensitive</span>
+<span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;^\w+&quot;</span><span class="p">,</span> <span class="s2">&quot;a</span><span class="se">\n</span><span class="s2">b</span><span class="se">\n</span><span class="s2">c&quot;</span><span class="p">,</span> <span class="n">re</span><span class="o">.</span><span class="n">M</span><span class="p">)</span>         <span class="c1"># multiline</span>
+<span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;a.b&quot;</span><span class="p">,</span> <span class="s2">&quot;a</span><span class="se">\n</span><span class="s2">b&quot;</span><span class="p">,</span> <span class="n">re</span><span class="o">.</span><span class="n">S</span><span class="p">)</span>              <span class="c1"># dotall (. включает \n)</span>
+<span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;  \d+  &quot;</span><span class="p">,</span> <span class="s2">&quot;  1  &quot;</span><span class="p">,</span> <span class="n">re</span><span class="o">.</span><span class="n">X</span><span class="p">)</span>         <span class="c1"># extended (пробелы игнорируются)</span>
+
+<span class="c1"># Компилирование (для повторного использования)</span>
+<span class="n">pattern</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\d+&quot;</span><span class="p">)</span>
+<span class="n">pattern</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="s2">&quot;a1 b2&quot;</span><span class="p">)</span>                     <span class="c1"># быстрее в цикле</span>
+<span class="n">pattern</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s2">&quot;#&quot;</span><span class="p">,</span> <span class="s2">&quot;a1 b2&quot;</span><span class="p">)</span>
+
+<span class="c1"># Именованные группы</span>
+<span class="n">m</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;(?P&lt;year&gt;\d</span><span class="si">{4}</span><span class="s2">)-(?P&lt;m&gt;\d</span><span class="si">{2}</span><span class="s2">)&quot;</span><span class="p">,</span> <span class="s2">&quot;2024-01&quot;</span><span class="p">)</span>
+<span class="n">m</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="s2">&quot;year&quot;</span><span class="p">)</span>                              <span class="c1"># &#39;2024&#39;</span>
+<span class="n">m</span><span class="o">.</span><span class="n">groupdict</span><span class="p">()</span>                                <span class="c1"># {&#39;year&#39;: &#39;2024&#39;, &#39;m&#39;: &#39;01&#39;}</span>
+</code></pre></div>
+
+<hr />
+<h2 id="в-разных-инструментах">🔧 В разных инструментах<a class="headerlink" href="#в-разных-инструментах" title="Ссылка">#</a></h2>
+<h3 id="grep-egrep-rg">grep / egrep / rg<a class="headerlink" href="#grep-egrep-rg" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>grep<span class="w"> </span><span class="s2">&quot;pattern&quot;</span><span class="w"> </span>file<span class="w">                 </span><span class="c1"># базовый regex (BRE)</span>
+grep<span class="w"> </span>-E<span class="w"> </span><span class="s2">&quot;pattern&quot;</span><span class="w"> </span>file<span class="w">              </span><span class="c1"># extended (ERE)</span>
+grep<span class="w"> </span>-P<span class="w"> </span><span class="s2">&quot;pattern&quot;</span><span class="w"> </span>file<span class="w">              </span><span class="c1"># PCRE (если собран с libpcre)</span>
+egrep<span class="w"> </span><span class="s2">&quot;pattern&quot;</span><span class="w"> </span>file<span class="w">                </span><span class="c1"># = grep -E</span>
+rg<span class="w"> </span><span class="s2">&quot;pattern&quot;</span><span class="w">                        </span><span class="c1"># ripgrep (рекомендуется, PCRE с -P)</span>
+
+grep<span class="w"> </span>-i<span class="w"> </span><span class="s2">&quot;error&quot;</span><span class="w"> </span>log<span class="w">                 </span><span class="c1"># без учёта регистра</span>
+grep<span class="w"> </span>-v<span class="w"> </span><span class="s2">&quot;debug&quot;</span><span class="w"> </span>log<span class="w">                 </span><span class="c1"># инверсия (НЕ содержит)</span>
+grep<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;error&quot;</span><span class="w"> </span>log<span class="w">                 </span><span class="c1"># подсчёт</span>
+grep<span class="w"> </span>-n<span class="w"> </span><span class="s2">&quot;error&quot;</span><span class="w"> </span>log<span class="w">                 </span><span class="c1"># номера строк</span>
+grep<span class="w"> </span>-r<span class="w"> </span><span class="s2">&quot;TODO&quot;</span><span class="w"> </span>.<span class="w">                    </span><span class="c1"># рекурсивно</span>
+grep<span class="w"> </span>-E<span class="w"> </span><span class="s2">&quot;^\d{4}-\d{2}&quot;</span><span class="w"> </span>log<span class="w">          </span><span class="c1"># дата в начале строки</span>
+grep<span class="w"> </span>-E<span class="w"> </span><span class="s2">&quot;192\.168\.[0-9]+\.[0-9]+&quot;</span><span class="w"> </span>access.log
+grep<span class="w"> </span>-P<span class="w"> </span><span class="s2">&quot;\bword\b&quot;</span><span class="w"> </span>file<span class="w">             </span><span class="c1"># границы слов</span>
+
+<span class="c1"># Извлечь только совпадение (grep -o)</span>
+grep<span class="w"> </span>-oE<span class="w"> </span><span class="s2">&quot;\d+&quot;</span><span class="w"> </span>file<span class="w">                 </span><span class="c1"># [&#39;123&#39;, &#39;456&#39;, ...]</span>
+</code></pre></div>
+
+<h3 id="sed">sed<a class="headerlink" href="#sed" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Замена</span>
+sed<span class="w"> </span><span class="s1">&#39;s/old/new/&#39;</span><span class="w"> </span>file<span class="w">               </span><span class="c1"># первое вхождение в строке</span>
+sed<span class="w"> </span><span class="s1">&#39;s/old/new/g&#39;</span><span class="w"> </span>file<span class="w">              </span><span class="c1"># все вхождения</span>
+sed<span class="w"> </span><span class="s1">&#39;s/old/new/2&#39;</span><span class="w"> </span>file<span class="w">              </span><span class="c1"># только 2-е</span>
+sed<span class="w"> </span>-i<span class="w"> </span><span class="s1">&#39;s/old/new/g&#39;</span><span class="w"> </span>file<span class="w">           </span><span class="c1"># in-place</span>
+sed<span class="w"> </span>-E<span class="w"> </span><span class="s1">&#39;s/[0-9]+/#/g&#39;</span><span class="w"> </span>file<span class="w">          </span><span class="c1"># extended regex</span>
+sed<span class="w"> </span>-E<span class="w"> </span><span class="s1">&#39;s/([0-9]{4})-([0-9]{2})/\2\/\1/g&#39;</span><span class="w">   </span><span class="c1"># группы</span>
+
+<span class="c1"># Удаление строк</span>
+sed<span class="w"> </span><span class="s1">&#39;/^$/d&#39;</span><span class="w"> </span>file<span class="w">                    </span><span class="c1"># удалить пустые строки</span>
+sed<span class="w"> </span><span class="s1">&#39;/pattern/d&#39;</span><span class="w"> </span>file<span class="w">               </span><span class="c1"># удалить строки с pattern</span>
+sed<span class="w"> </span><span class="s1">&#39;5,10d&#39;</span><span class="w"> </span>file<span class="w">                    </span><span class="c1"># удалить строки 5-10</span>
+</code></pre></div>
+
+<h3 id="awk">awk<a class="headerlink" href="#awk" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>awk<span class="w"> </span><span class="s1">&#39;/pattern/&#39;</span><span class="w"> </span>file<span class="w">                </span><span class="c1"># строки с совпадением</span>
+awk<span class="w"> </span><span class="s1">&#39;/start/,/end/&#39;</span><span class="w"> </span>file<span class="w">            </span><span class="c1"># диапазон</span>
+awk<span class="w"> </span>-F:<span class="w"> </span><span class="s1">&#39;{print $1}&#39;</span><span class="w"> </span>/etc/passwd<span class="w">    </span><span class="c1"># первое поле (разделитель :)</span>
+</code></pre></div>
+
+<h3 id="javascript">JavaScript<a class="headerlink" href="#javascript" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="s2">&quot;abc123&quot;</span><span class="p">.</span><span class="nx">match</span><span class="p">(</span><span class="sr">/\d+/</span><span class="p">)</span><span class="w">               </span><span class="c1">// [&#39;123&#39;]</span>
+<span class="s2">&quot;abc123&quot;</span><span class="p">.</span><span class="nx">match</span><span class="p">(</span><span class="sr">/\d+/g</span><span class="p">)</span><span class="w">              </span><span class="c1">// [&#39;123&#39;]</span>
+<span class="s2">&quot;abc123&quot;</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/\d+/g</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;#&quot;</span><span class="p">)</span><span class="w">       </span><span class="c1">// &#39;abc#&#39;</span>
+<span class="sr">/\d+/</span><span class="p">.</span><span class="nx">test</span><span class="p">(</span><span class="s2">&quot;abc123&quot;</span><span class="p">)</span><span class="w">                </span><span class="c1">// true</span>
+
+<span class="c1">// Именованные группы</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">m</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;2024-01&quot;</span><span class="p">.</span><span class="nx">match</span><span class="p">(</span><span class="sr">/(?&lt;year&gt;\d{4})-(?&lt;month&gt;\d{2})/</span><span class="p">);</span>
+<span class="nx">m</span><span class="p">.</span><span class="nx">groups</span><span class="p">.</span><span class="nx">year</span><span class="w">                       </span><span class="c1">// &#39;2024&#39;</span>
+
+<span class="c1">// String.matchAll (ES2020)</span>
+<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kd">const</span><span class="w"> </span><span class="nx">m</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="s2">&quot;a1 b22&quot;</span><span class="p">.</span><span class="nx">matchAll</span><span class="p">(</span><span class="sr">/(\w)(\d+)/g</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">m</span><span class="p">[</span><span class="mf">1</span><span class="p">],</span><span class="w"> </span><span class="nx">m</span><span class="p">[</span><span class="mf">2</span><span class="p">]);</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<h3 id="sql-postgresql">SQL (PostgreSQL)<a class="headerlink" href="#sql-postgresql" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1">-- Базовый regex</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">users</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">email</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="s1">&#39;.*@example\.com&#39;</span><span class="p">;</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">users</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">email</span><span class="w"> </span><span class="o">~*</span><span class="w"> </span><span class="s1">&#39;EXAMPLE&#39;</span><span class="p">;</span><span class="w">   </span><span class="c1">-- case-insensitive</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">users</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">email</span><span class="w"> </span><span class="o">!~</span><span class="w"> </span><span class="s1">&#39;test&#39;</span><span class="p">;</span><span class="w">      </span><span class="c1">-- NOT match</span>
+
+<span class="c1">-- Извлечение</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="p">(</span><span class="n">regexp_match</span><span class="p">(</span><span class="s1">&#39;2024-01-15&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;(\d{4})-(\d{2})&#39;</span><span class="p">))[</span><span class="mi">1</span><span class="p">];</span><span class="w">   </span><span class="c1">-- &#39;2024&#39;</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="n">regexp_matches</span><span class="p">(</span><span class="s1">&#39;a1 b2&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;(\w)(\d)&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;g&#39;</span><span class="p">);</span><span class="w">              </span><span class="c1">-- все</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="n">regexp_replace</span><span class="p">(</span><span class="s1">&#39;abc123&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;\d+&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;#&#39;</span><span class="p">);</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="s1">&#39;abc123&#39;</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="s1">&#39;\d+&#39;</span><span class="p">;</span><span class="w">   </span><span class="c1">-- true</span>
+</code></pre></div>
+
+<h3 id="vim-neovim">Vim / Neovim<a class="headerlink" href="#vim-neovim" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="p">:</span>%s<span class="sr">/old/</span><span class="k">new</span>/<span class="k">g</span>           <span class="c">&quot; заменить во всём файле</span>
+<span class="p">:</span>%s<span class="sr">/old/</span><span class="k">new</span>/gc          <span class="c">&quot; с подтверждением</span>
+<span class="p">:</span>/pattern               <span class="c">&quot; поиск</span>
+<span class="p">:</span><span class="k">v</span><span class="sr">/pattern/</span><span class="k">d</span>            <span class="c">&quot; удалить строки БЕЗ pattern</span>
+</code></pre></div>
+
+<hr />
+<h2 id="тестирование-и-отладка">🧪 Тестирование и отладка<a class="headerlink" href="#тестирование-и-отладка" title="Ссылка">#</a></h2>
+<h3 id="regex101-com-лучший-онлайн-инструмент">regex101.com — лучший онлайн-инструмент<a class="headerlink" href="#regex101-com-лучший-онлайн-инструмент" title="Ссылка">#</a></h3>
+<ul>
+<li>Выбор движка (PCRE, Python, JavaScript, Go)</li>
+<li>Объяснение по шагам</li>
+<li>Группы highlighting</li>
+<li>Тесты (unit tests)</li>
+</ul>
+<h3 id="другие-инструменты">Другие инструменты<a class="headerlink" href="#другие-инструменты" title="Ссылка">#</a></h3>
+<ul>
+<li><strong>debuggex.com</strong> — визуализация как railroad-диаграмма</li>
+<li><strong>regexr.com</strong> — шпаргалка + тестер</li>
+<li><strong>regex-vis.com</strong> — визуализация</li>
+<li><strong>grex</strong> — генератор regex из примеров строк (Rust)</li>
+<li><strong>jq</strong> для JSON + regex</li>
+</ul>
+<h3 id="grex-генератор-regex-из-примеров">grex — генератор regex из примеров<a class="headerlink" href="#grex-генератор-regex-из-примеров" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>grex<span class="w"> </span><span class="s2">&quot;abc&quot;</span><span class="w"> </span><span class="s2">&quot;abd&quot;</span><span class="w"> </span><span class="s2">&quot;abe&quot;</span>
+<span class="c1"># → ^ab[c-e]$</span>
+
+grex<span class="w"> </span><span class="s2">&quot;2024-01-01&quot;</span><span class="w"> </span><span class="s2">&quot;2024-01-02&quot;</span>
+<span class="c1"># → ^2024-01-0[12]$</span>
+</code></pre></div>
+
+<hr />
+<h2 id="когда-не-использовать-regex">⚠️ Когда НЕ использовать regex<a class="headerlink" href="#когда-не-использовать-regex" title="Ссылка">#</a></h2>
+<p>Regex НЕ подходит для:
+1. <strong>HTML/XML</strong> — используйте парсер (BeautifulSoup, lxml).
+2. <strong>Сложные email</strong> — используйте библиотеку валидации.
+3. <strong>Вложенные структуры</strong> — (a(b)c) — regex не считает.
+4. <strong>CPF/Credit card с checksum</strong> — нужна логика проверки.
+5. <strong>Конечные автоматы</strong> — слишком сложные правила.</p>
+<blockquote>
+<p>Цитата: «Some people, when confronted with a problem, think &ldquo;I know, I&rsquo;ll use regular expressions.&rdquo; Now they have two problems.» — Jamie Zawinski</p>
+</blockquote>
+<hr />
+<h2 id="частые-ошибки">🪤 Частые ошибки<a class="headerlink" href="#частые-ошибки" title="Ссылка">#</a></h2>
+<ol>
+<li><strong>Неэкранированные спецсимволы</strong> — <code>.</code> соответствует всему, нужна <code>\.</code> для точки.</li>
+<li><strong>Жадность <code>.*</code></strong> — часто захватывает больше, чем ожидалось. Используйте <code>.*?</code>.</li>
+<li><strong>Забыли <code>^</code>/<code>$</code></strong> — найдёт частичное совпадение вместо всей строки.</li>
+<li><strong><code>\b</code> для русского</strong> — <code>\b</code> работает с <code>[a-zA-Z0-9_]</code>, для кириллицы нужен <code>\b</code> с unicode-флагом.</li>
+<li><strong>Catastrophic backtracking</strong> — сложные паттерны могут зависнуть.</li>
+<li><strong><code>.</code> не включает <code>\n</code></strong> — нужен <code>s</code>-флаг или <code>[\s\S]</code>.</li>
+<li><strong>Группы нумеруются с 1</strong> — <code>\0</code> это всё совпадение.</li>
+<li><strong>Lookbehind переменной длины</strong> — поддерживается не везде (в Java/PCRE да, в JS ограниченно).</li>
+<li><strong>ReDoS</strong> — злоумышленник может повесить сервис плохим regex.</li>
+<li><strong>Не компилировать</strong> — <code>re.compile</code> быстрее при повторном использовании.</li>
+</ol>
+<hr />
+<h2 id="полезные-ссылки">🔗 Полезные ссылки<a class="headerlink" href="#полезные-ссылки" title="Ссылка">#</a></h2>
+<ul>
+<li>regex101 (лучший тестер): https://regex101.com</li>
+<li>Regular Expressions Info: https://www.regular-expressions.info</li>
+<li>RegexOne (интерактивный курс): https://regexone.com</li>
+<li>RexEgg (продвинутый): https://www.rexegg.com</li>
+<li>PCRE docs: https://www.pcre.org/original/doc/html/</li>
+<li>Python re: https://docs.python.org/3/library/re.html</li>
+<li>JavaScript MDN: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions</li>
+<li>grex: https://github.com/pemistahl/grex</li>
+<li>Learn Regex (RU): https://github.com/streetturtle/Regex-parser</li>
+<li>awesome-regex: https://github.com/aloisdg/awesome-regex</li>
+</ul>
+<hr />
+<h2 id="полезные-советы">💡 Полезные советы<a class="headerlink" href="#полезные-советы" title="Ссылка">#</a></h2>
+<ol>
+<li><strong>regex101.com</strong> — всегда тестируйте перед использованием.</li>
+<li><strong>Комментируйте</strong> сложные паттерны (флаг <code>x</code> / <code>re.X</code>).</li>
+<li><strong>Именованные группы</strong> — читаемее, чем нумерованные.</li>
+<li><strong><code>re.compile</code></strong> — для повторного использования.</li>
+<li><strong>Raw strings <code>r"..."</code></strong> в Python — не надо двойное экранирование.</li>
+<li><strong>Жадность</strong> — если захватывается лишнее, добавьте <code>?</code>.</li>
+<li><strong>Якоря <code>^</code>/<code>$</code>/<code>\b</code></strong> — для точности совпадения.</li>
+<li><strong>Избегайте <code>.*</code></strong> — часто медленно и неточно.</li>
+<li><strong>Регулярки для паролей</strong> — лучше валидировать отдельно в коде.</li>
+<li><strong>grex</strong> — генерирует regex из примеров.</li>
+<li><strong>Не парсите HTML regex&rsquo;ом</strong> — используйте BeautifulSoup.</li>
+<li><strong>Catastrophic backtracking</strong> — тестируйте на больших входах.</li>
+<li><strong>Anchor your pattern</strong> — <code>^...$</code> для полной валидации строки.</li>
+<li><strong>Тестируйте на разных входах</strong> — позитивные и негативные.</li>
+<li><strong>Документируйте</strong> — regex без объяснения через полгода непонятен.</li>
+</ol>
+<hr />
+<p><em>Сгенерировано как шпаргалка. Regex сложен —
+углубляйтесь через https://regex101.com и https://www.regular-expressions.info</em></p>
+    </article>
+    <nav class="pagination">
+      <a class="pager prev" href="markdown.html">← Markdown</a>
+      <a class="pager next" href="jq-json.html">jq + JSON →</a>
+    </nav>
+  </main>
+
+  <aside class="toc">
+    <details open>
+      <summary>📑 Оглавление</summary>
+      <div class="toc-list">
+<div class="toc">
+<ul>
+<li><a href="#регулярные-выражения-regex-шпаргалка">🔍 Регулярные выражения (regex) — шпаргалка</a><ul>
+<li><a href="#главные-понятия">🔑 Главные понятия</a></li>
+<li><a href="#базовые-символы">🎯 Базовые символы</a><ul>
+<li><a href="#обычные-символы">Обычные символы</a></li>
+<li><a href="#метасимволы-special">Метасимволы (special)</a></li>
+</ul>
+</li>
+<li><a href="#классы-символов">🅰️ Классы символов</a><ul>
+<li><a href="#произвольный-набор">Произвольный набор [...]</a></li>
+<li><a href="#предопределённые-классы">Предопределённые классы</a></li>
+<li><a href="#unicode-в-современных-движках">Unicode (в современных движках)</a></li>
+</ul>
+</li>
+<li><a href="#квантификаторы-сколько-раз">🔢 Квантификаторы (сколько раз)</a><ul>
+<li><a href="#жадные-vs-ленивые-greedy-vs-lazy">Жадные vs ленивые (Greedy vs Lazy)</a></li>
+<li><a href="#possessive-без-отката">Possessive (без отката)</a></li>
+</ul>
+</li>
+<li><a href="#якоря-позиции">🎯 Якоря (позиции)</a></li>
+<li><a href="#группы-и-обратные-ссылки">🎨 Группы и обратные ссылки</a><ul>
+<li><a href="#захватывающие-группы">Захватывающие группы (...)</a></li>
+<li><a href="#обратные-ссылки-backreferences">Обратные ссылки (backreferences)</a></li>
+<li><a href="#незахватывающие-группы">Незахватывающие группы (?:...)</a></li>
+<li><a href="#именованные-группы-p-name-python-name-pcre">Именованные группы (?P&lt;name&gt;...) (Python) / (?&lt;name&gt;...) (PCRE)</a></li>
+<li><a href="#альтернативы">Альтернативы |</a></li>
+</ul>
+</li>
+<li><a href="#lookaround-опережающие-и-ретроспективные-проверки">⚡ Lookaround (опережающие и ретроспективные проверки)</a><ul>
+<li><a href="#lookahead-вперёд">Lookahead (вперёд) (?=...) / (?!...)</a></li>
+<li><a href="#lookbehind-назад">Lookbehind (назад) (?&lt;=...) / (?&lt;!...)</a></li>
+<li><a href="#примеры-с-lookaround">Примеры с lookaround</a></li>
+</ul>
+</li>
+<li><a href="#флаги-модификаторы">🚩 Флаги (модификаторы)</a><ul>
+<li><a href="#пример-с-x-extended">Пример с x (extended)</a></li>
+</ul>
+</li>
+<li><a href="#практические-примеры">🛠️ Практические примеры</a><ul>
+<li><a href="#email-упрощённый">Email (упрощённый)</a></li>
+<li><a href="#url">URL</a></li>
+<li><a href="#ipv4">IPv4</a></li>
+<li><a href="#телефон">Телефон</a></li>
+<li><a href="#дата">Дата</a></li>
+<li><a href="#время">Время</a></li>
+<li><a href="#число-с-дробной-частью-и-знаком">Число (с дробной частью и знаком)</a></li>
+<li><a href="#hex-цвет">Hex-цвет</a></li>
+<li><a href="#ip-port">IP+port</a></li>
+<li><a href="#hexadecimal">Hexadecimal</a></li>
+<li><a href="#uuid">UUID</a></li>
+<li><a href="#слабый-пароль-для-примера">Слабый пароль (для примера)</a></li>
+<li><a href="#извлечь-ключ-значение">Извлечь ключ=значение</a></li>
+<li><a href="#удалить-html-теги">Удалить HTML-теги</a></li>
+<li><a href="#повторённое-слово">Повторённое слово</a></li>
+</ul>
+</li>
+<li><a href="#в-python-re">🐍 В Python (re)</a></li>
+<li><a href="#в-разных-инструментах">🔧 В разных инструментах</a><ul>
+<li><a href="#grep-egrep-rg">grep / egrep / rg</a></li>
+<li><a href="#sed">sed</a></li>
+<li><a href="#awk">awk</a></li>
+<li><a href="#javascript">JavaScript</a></li>
+<li><a href="#sql-postgresql">SQL (PostgreSQL)</a></li>
+<li><a href="#vim-neovim">Vim / Neovim</a></li>
+</ul>
+</li>
+<li><a href="#тестирование-и-отладка">🧪 Тестирование и отладка</a><ul>
+<li><a href="#regex101-com-лучший-онлайн-инструмент">regex101.com — лучший онлайн-инструмент</a></li>
+<li><a href="#другие-инструменты">Другие инструменты</a></li>
+<li><a href="#grex-генератор-regex-из-примеров">grex — генератор regex из примеров</a></li>
+</ul>
+</li>
+<li><a href="#когда-не-использовать-regex">⚠️ Когда НЕ использовать regex</a></li>
+<li><a href="#частые-ошибки">🪤 Частые ошибки</a></li>
+<li><a href="#полезные-ссылки">🔗 Полезные ссылки</a></li>
+<li><a href="#полезные-советы">💡 Полезные советы</a></li>
+</ul>
+</li>
+</ul>
+</div>
+
+      </div>
+    </details>
+  </aside>
+</div>
+
+<button class="back-top" id="backTop" aria-label="Наверх">↑</button>
+
+<script src="assets/search.js"></script>
+<script src="assets/page.js"></script>
+</body>
+</html>

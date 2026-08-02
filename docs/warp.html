@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Warp — Шпаргалки</title>
+<link rel="stylesheet" href="assets/style.css">
+<link rel="stylesheet" href="assets/pygments.css">
+</head>
+<body>
+<div class="layout">
+  <aside class="sidebar">
+    <a href="index.html" class="brand">📌 Шпаргалки</a>
+    <nav class="nav">
+<a href="yazi.html" class="nav-item"><span class="nav-ico">📦</span>Yazi</a>
+<a href="neovim.html" class="nav-item"><span class="nav-ico">📘</span>Neovim (LazyVim)</a>
+<a href="niri.html" class="nav-item"><span class="nav-ico">🪟</span>Niri</a>
+<a href="tmux.html" class="nav-item"><span class="nav-ico">🪟</span>Tmux</a>
+<a href="bash.html" class="nav-item"><span class="nav-ico">🐚</span>Bash</a>
+<a href="git.html" class="nav-item"><span class="nav-ico">🔀</span>Git</a>
+<a href="terminal.html" class="nav-item"><span class="nav-ico">🖥️</span>Терминал Linux</a>
+<a href="powershell.html" class="nav-item"><span class="nav-ico">💻</span>PowerShell</a>
+<a href="cmd.html" class="nav-item"><span class="nav-ico">🪟</span>CMD (cmd.exe)</a>
+<a href="python.html" class="nav-item"><span class="nav-ico">🐍</span>Python</a>
+<a href="systemd.html" class="nav-item"><span class="nav-ico">⚙️</span>systemd</a>
+<a href="ssh.html" class="nav-item"><span class="nav-ico">🔐</span>SSH</a>
+<a href="make-cmake.html" class="nav-item"><span class="nav-ico">🔨</span>Make / CMake</a>
+<a href="docker.html" class="nav-item"><span class="nav-ico">🐳</span>Docker</a>
+<a href="pacman.html" class="nav-item"><span class="nav-ico">📦</span>pacman / yay / paru</a>
+<a href="spark.html" class="nav-item"><span class="nav-ico">⚡</span>Apache Spark / PySpark</a>
+<a href="markdown.html" class="nav-item"><span class="nav-ico">📝</span>Markdown</a>
+<a href="regex.html" class="nav-item"><span class="nav-ico">🔍</span>Регулярные выражения</a>
+<a href="jq-json.html" class="nav-item"><span class="nav-ico">🔧</span>jq + JSON</a>
+<a href="awk-sed.html" class="nav-item"><span class="nav-ico">✂️</span>awk / sed</a>
+<a href="airflow.html" class="nav-item"><span class="nav-ico">🌪️</span>Apache Airflow</a>
+<a href="http-curl.html" class="nav-item"><span class="nav-ico">🌐</span>HTTP / curl</a>
+<a href="yaml.html" class="nav-item"><span class="nav-ico">📄</span>YAML</a>
+<a href="vscode.html" class="nav-item"><span class="nav-ico">💻</span>VS Code</a>
+<a href="cron.html" class="nav-item"><span class="nav-ico">⏰</span>cron</a>
+<a href="fzf-zoxide.html" class="nav-item"><span class="nav-ico">🔎</span>fzf + zoxide</a>
+<a href="minikube-k8s.html" class="nav-item"><span class="nav-ico">☸️</span>Minikube / Kubernetes</a>
+<a href="cicd.html" class="nav-item"><span class="nav-ico">🦊</span>GitLab CI / GitHub Actions</a>
+<a href="nginx.html" class="nav-item"><span class="nav-ico">🌐</span>nginx</a>
+<a href="dbt.html" class="nav-item"><span class="nav-ico">🔧</span>dbt</a>
+<a href="kafka.html" class="nav-item"><span class="nav-ico">🐘</span>Apache Kafka</a>
+<a href="prometheus-grafana.html" class="nav-item"><span class="nav-ico">📊</span>Prometheus / Grafana</a>
+<a href="iceberg-nessie.html" class="nav-item"><span class="nav-ico">🧊</span>Iceberg / Nessie</a>
+<a href="impala.html" class="nav-item"><span class="nav-ico">🐬</span>Apache Impala</a>
+<a href="terraform.html" class="nav-item"><span class="nav-ico">🏗️</span>Terraform</a>
+<a href="linux-internals.html" class="nav-item"><span class="nav-ico">🐧</span>Linux Internals</a>
+<a href="miscellaneous.html" class="nav-item"><span class="nav-ico">🧰</span>Miscellaneous</a>
+<a href="python-automation-libs.html" class="nav-item"><span class="nav-ico">🐍</span>Python: авт-ция (10 libs)</a>
+<a href="eza.html" class="nav-item"><span class="nav-ico">🌈</span>eza</a>
+<a href="dbeaver.html" class="nav-item"><span class="nav-ico">🗄️</span>DBeaver</a>
+<a href="zcode.html" class="nav-item"><span class="nav-ico">🤖</span>ZCode</a>
+<a href="warp.html" class="nav-item active"><span class="nav-ico">🚀</span>Warp</a>
+<a href="agentic-ai-dev.html" class="nav-item"><span class="nav-ico">🤝</span>Агентная разработка с ИИ</a>
+    </nav>
+  </aside>
+
+  <main class="content">
+    <article>
+<h1 id="warp-шпаргалка">🚀 Warp — шпаргалка<a class="headerlink" href="#warp-шпаргалка" title="Ссылка">#</a></h1>
+<blockquote>
+<p><strong>Warp</strong> — терминал на Rust с GPU-рендерингом, IDE-фичами и встроенным AI.
+Блоки (Blocks), автодополнение, команда-как-текст, воркфлоу. Дом: https://www.warp.dev</p>
+</blockquote>
+<hr />
+<h2 id="установка">📦 Установка<a class="headerlink" href="#установка" title="Ссылка">#</a></h2>
+<div class="highlight"><pre><span></span><code><span class="c1"># Arch / CachyOS (AUR)</span>
+yay<span class="w"> </span>-S<span class="w"> </span>warp-terminal
+paru<span class="w"> </span>-S<span class="w"> </span>warp-terminal
+
+<span class="c1"># macOS</span>
+brew<span class="w"> </span>install<span class="w"> </span>--cask<span class="w"> </span>warp
+
+<span class="c1"># Linux (.deb / .rpm / .pkg)</span>
+<span class="c1"># скачать с https://www.warp.dev/downloads</span>
+
+<span class="c1"># Windows</span>
+<span class="c1"># скачать .exe с https://www.warp.dev/downloads</span>
+</code></pre></div>
+
+<blockquote>
+<p>Warp бесплатен с обязательной авторизацией (Google/GitHub). Есть <strong>Warp Drive</strong> (синхронизация) и <strong>Warp AI</strong> (платная подписка для команд).</p>
+</blockquote>
+<hr />
+<h2 id="ключевые-концепции">🎨 Ключевые концепции<a class="headerlink" href="#ключевые-концепции" title="Ссылка">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Концепт</th>
+<th>Что это</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Block (блок)</strong></td>
+<td>Один ввод-вывод команды с заголовком и контекстом. Как «ячейка» в ноутбуке.</td>
+</tr>
+<tr>
+<td><strong>Workflows</strong></td>
+<td>Переиспользуемые параметризованные команды (как функции).</td>
+</tr>
+<tr>
+<td><strong>Command Palette</strong></td>
+<td>Поиск любой команды/настройки (как в VS Code).</td>
+</tr>
+<tr>
+<td><strong>Warp AI / Agent Mode</strong></td>
+<td>Встроенный ИИ-ассистент для генерации/объяснения команд.</td>
+</tr>
+<tr>
+<td><strong>Warp Drive</strong></td>
+<td>Облачная синхронизация настроек, истории, workflows.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="горячие-клавиши">⌨️ Горячие клавиши<a class="headerlink" href="#горячие-клавиши" title="Ссылка">#</a></h2>
+<h3 id="навигация-по-блокам">Навигация по блокам<a class="headerlink" href="#навигация-по-блокам" title="Ссылка">#</a></h3>
+<table>
+<thead>
+<tr>
+<th>Клавиша</th>
+<th>Действие</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Ctrl+↑</code> / <code>Ctrl+↓</code></td>
+<td>Прыжок к предыдущему / следующему блоку</td>
+</tr>
+<tr>
+<td><code>Cmd+↑</code> / <code>Cmd+↓</code> (mac)</td>
+<td>То же на macOS</td>
+</tr>
+<tr>
+<td><code>Ctrl+Shift+↑</code></td>
+<td>Выделить блок целиком</td>
+</tr>
+<tr>
+<td><code>Ctrl+Home</code> / <code>Ctrl+End</code></td>
+<td>В самое начало / конец сессии</td>
+</tr>
+</tbody>
+</table>
+<h3 id="ввод-и-редактирование">Ввод и редактирование<a class="headerlink" href="#ввод-и-редактирование" title="Ссылка">#</a></h3>
+<table>
+<thead>
+<tr>
+<th>Клавиша</th>
+<th>Действие</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Enter</code></td>
+<td>Выполнить команду</td>
+</tr>
+<tr>
+<td><code>Shift+Enter</code></td>
+<td>Перенос строки (многострочный ввод)</td>
+</tr>
+<tr>
+<td><code>Ctrl+C</code></td>
+<td>Отменить текущий ввод / прервать процесс</td>
+</tr>
+<tr>
+<td><code>Ctrl+D</code></td>
+<td>EOF / закрыть шелл</td>
+</tr>
+<tr>
+<td><code>Ctrl+R</code></td>
+<td>Поиск по истории (инкрементальный)</td>
+</tr>
+<tr>
+<td><code>Ctrl+L</code></td>
+<td>Очистить экран</td>
+</tr>
+<tr>
+<td><code>Tab</code></td>
+<td>Автодополнение</td>
+</tr>
+<tr>
+<td><code>Ctrl+Space</code></td>
+<td>Принять автодополнение целиком</td>
+</tr>
+<tr>
+<td><code>↑</code> / <code>↓</code></td>
+<td>Навигация по истории команд</td>
+</tr>
+<tr>
+<td><code>Ctrl+_</code></td>
+<td>Отменить (undo) в строке ввода</td>
+</tr>
+<tr>
+<td><code>Alt+←</code> / <code>Alt+→</code></td>
+<td>Слово влево / вправо</td>
+</tr>
+</tbody>
+</table>
+<h3 id="вкладки-и-окна">Вкладки и окна<a class="headerlink" href="#вкладки-и-окна" title="Ссылка">#</a></h3>
+<table>
+<thead>
+<tr>
+<th>Клавиша</th>
+<th>Действие</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Ctrl+T</code></td>
+<td>Новая вкладка</td>
+</tr>
+<tr>
+<td><code>Ctrl+W</code></td>
+<td>Закрыть вкладку</td>
+</tr>
+<tr>
+<td><code>Ctrl+Shift+T</code></td>
+<td>Новое окно</td>
+</tr>
+<tr>
+<td><code>Alt+1…9</code></td>
+<td>Переключение на вкладку N</td>
+</tr>
+<tr>
+<td><code>Ctrl+Tab</code> / <code>Ctrl+Shift+Tab</code></td>
+<td>Следующая / предыдущая вкладка</td>
+</tr>
+</tbody>
+</table>
+<h3 id="сплиты-разделение-панелей">Сплиты (разделение панелей)<a class="headerlink" href="#сплиты-разделение-панелей" title="Ссылка">#</a></h3>
+<table>
+<thead>
+<tr>
+<th>Клавиша</th>
+<th>Действие</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Ctrl+Shift+D</code></td>
+<td>Сплит справа (vertical)</td>
+</tr>
+<tr>
+<td><code>Cmd+D</code> (mac)</td>
+<td>Сплит справа на macOS</td>
+</tr>
+<tr>
+<td><code>Ctrl+Shift+S</code></td>
+<td>Сплит снизу (horizontal)</td>
+</tr>
+<tr>
+<td><code>Alt+[</code> / <code>Alt+]</code></td>
+<td>Фокус на соседнюю панель</td>
+</tr>
+<tr>
+<td><code>Alt+Shift+←/→/↑/↓</code></td>
+<td>Ресайз панели</td>
+</tr>
+</tbody>
+</table>
+<h3 id="открытие-интерфейса">Открытие интерфейса<a class="headerlink" href="#открытие-интерфейса" title="Ссылка">#</a></h3>
+<table>
+<thead>
+<tr>
+<th>Клавиша</th>
+<th>Действие</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Ctrl+P</code></td>
+<td>Command Palette (как VS Code) — быстрый доступ ко всему</td>
+</tr>
+<tr>
+<td><code>Ctrl+,</code></td>
+<td>Настройки (Settings)</td>
+</tr>
+<tr>
+<td><code>Ctrl+=</code> / <code>Ctrl+-</code></td>
+<td>Зум (увеличить/уменьшить шрифт)</td>
+</tr>
+<tr>
+<td><code>Ctrl+0</code></td>
+<td>Сбросить зум</td>
+</tr>
+<tr>
+<td><code>Ctrl+\</code></td>
+<td>Открыть список workflows</td>
+</tr>
+<tr>
+<td><code>Ctrl+Shift+A</code></td>
+<td><strong>AI Agent Mode</strong> (режим ИИ-ассистента)</td>
+</tr>
+<tr>
+<td><code>#</code></td>
+<td>Начать промпт к ИИ прямо в строке ввода</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="ai-agent-mode">🤖 AI (Agent Mode)<a class="headerlink" href="#ai-agent-mode" title="Ссылка">#</a></h2>
+<p>Warp имеет встроенный ИИ — можно генерировать команды из текста, объяснять ошибки, рефакторить скрипты.</p>
+<h3 id="использование">Использование<a class="headerlink" href="#использование" title="Ссылка">#</a></h3>
+<ol>
+<li>Нажать <code>#</code> в строке ввода → режим промпта к ИИ.</li>
+<li>Описать, что нужно: «найти все .log файлы крупнее 100MB».</li>
+<li>ИИ предложит команду, можно отредактировать перед выполнением.</li>
+<li><code>Ctrl+Shift+A</code> — полноценный Agent Mode (итеративный диалог).</li>
+</ol>
+<h3 id="полезные-промпты">Полезные промпты<a class="headerlink" href="#полезные-промпты" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code># найди все файлы .py, изменённые за последнюю неделю
+# объясни ошибку последней команды
+# сделай oneliner: посчитать кол-во строк во всех .csv
+# сгенерируй ssh-туннель к user@bastion с пробросом 5432
+</code></pre></div>
+
+<h3 id="объяснение-ошибок">Объяснение ошибок<a class="headerlink" href="#объяснение-ошибок" title="Ссылка">#</a></h3>
+<p>При падении команды — кликнуть на блок → <strong>«Explain this error»</strong> / иконка ✨. ИИ объяснит причину и предложит фикс.</p>
+<hr />
+<h2 id="workflows-ваш-bashrc-на-стероидах">🔄 Workflows (ваш «.bashrc на стероидах»)<a class="headerlink" href="#workflows-ваш-bashrc-на-стероидах" title="Ссылка">#</a></h2>
+<p>Workflow — параметризованный шаблон команды, доступный по имени.</p>
+<h3 id="создание">Создание<a class="headerlink" href="#создание" title="Ссылка">#</a></h3>
+<ol>
+<li>Выполнить команду → кликнуть на блок → <strong>«Save as Workflow»</strong>.</li>
+<li>Или: Settings → Workflows → New.</li>
+</ol>
+<h3 id="пример-warp-workflows-deploy-github-yml">Пример <code>.warp/workflows/deploy-github.yml</code><a class="headerlink" href="#пример-warp-workflows-deploy-github-yml" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">deploy-github</span>
+<span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|-</span>
+<span class="w">  </span><span class="no">gh release create {{tag}} dist/* --notes &quot;{{notes}}&quot;</span>
+<span class="nt">tags</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">git</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">release</span><span class="p p-Indicator">]</span>
+<span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Создать GitHub Release и залить артефакты</span>
+<span class="nt">arguments</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tag</span>
+<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Версия релиза (напр. v1.2.3)</span>
+<span class="w">    </span><span class="nt">default_value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">latest</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">notes</span>
+<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Описание релиза</span>
+</code></pre></div>
+
+<h3 id="вызов">Вызов<a class="headerlink" href="#вызов" title="Ссылка">#</a></h3>
+<ul>
+<li><code>Ctrl+\</code> → выбрать из списка, либо</li>
+<li>Начать вводить имя → подстановка с полями для параметров.</li>
+</ul>
+<p>Workflows хранятся в:
+- <code>~/.warp/workflows/</code> (глобально)
+- <code>&lt;repo&gt;/.warp/workflows/</code> (для проекта, можно коммитить)</p>
+<hr />
+<h2 id="оформление-themes">🎨 Оформление (Themes)<a class="headerlink" href="#оформление-themes" title="Ссылка">#</a></h2>
+<ul>
+<li><strong>Settings → Appearance</strong>.</li>
+<li>Светлые/тёмные темы, кастомные пресеты.</li>
+<li>Поддержка <strong>Nerd Fonts</strong> (для иконок в shell-prompt).</li>
+<li>GPU-рендеринг = плавный скролл даже на 100k строк.</li>
+</ul>
+<h3 id="шрифты">Шрифты<a class="headerlink" href="#шрифты" title="Ссылка">#</a></h3>
+<p>Рекомендуются: JetBrainsMono Nerd Font, FiraCode Nerd Font, MesloLGS NF (для p10k).</p>
+<hr />
+<h2 id="поиск-и-история">🔍 Поиск и история<a class="headerlink" href="#поиск-и-история" title="Ссылка">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Что</th>
+<th>Как</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Инкрементальный поиск истории</td>
+<td><code>Ctrl+R</code></td>
+</tr>
+<tr>
+<td>Поиск по выводу блока</td>
+<td>кликнуть блок → <code>Ctrl+F</code></td>
+</tr>
+<tr>
+<td>Фильтр команд по подстроке</td>
+<td><code>Ctrl+R</code> + ввод</td>
+</tr>
+<tr>
+<td>Скопировать весь вывод блока</td>
+<td>клик на блок → <code>Cmd+C</code> / иконка 📋</td>
+</tr>
+<tr>
+<td>Поделиться блоком (ссылка)</td>
+<td>блок → «Share» (через Warp Drive)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="история">История<a class="headerlink" href="#история" title="Ссылка">#</a></h3>
+<ul>
+<li>Сохраняется локально + опционально в Warp Drive (синхрон между машинами).</li>
+<li>Можно искать по дате/команде/директории.</li>
+</ul>
+<hr />
+<h2 id="sessions-projects">🖥️ Sessions / Projects<a class="headerlink" href="#sessions-projects" title="Ссылка">#</a></h2>
+<ul>
+<li><strong>Project</strong> — привязка к папке с настройками: env-переменные, tabs, workflows.</li>
+<li>При открытии проекта восстанавливаются вкладки и переменные.</li>
+<li>Settings → Projects → добавить папку → задать env.</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="c1"># Пример .warp/projects/myapp.toml (упрощённо)</span>
+<span class="o">[</span>project<span class="o">]</span>
+<span class="nv">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;myapp&quot;</span>
+<span class="nv">path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;~/code/myapp&quot;</span>
+<span class="nv">windows</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[]</span>
+<span class="nv">env</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="nv">DATABASE_URL</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;postgres://localhost/myapp&quot;</span><span class="w"> </span><span class="o">}</span>
+</code></pre></div>
+
+<hr />
+<h2 id="конфиг-и-настройки">⚙️ Конфиг и настройки<a class="headerlink" href="#конфиг-и-настройки" title="Ссылка">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Где</th>
+<th>Что</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Ctrl+,</code></td>
+<td>Главное окно настроек</td>
+</tr>
+<tr>
+<td><code>Features</code></td>
+<td>Включить/выключить фичи</td>
+</tr>
+<tr>
+<td><code>Appearance</code></td>
+<td>Темы, шрифты, отступы</td>
+</tr>
+<tr>
+<td><code>Keyboard Shortcuts</code></td>
+<td>Все хоткеи (можно переназначить)</td>
+</tr>
+<tr>
+<td><code>Notifications</code></td>
+<td>Уведомления о завершении команд</td>
+</tr>
+<tr>
+<td><code>Session</code></td>
+<td>Стартовая директория, шелл</td>
+</tr>
+<tr>
+<td><code>AI</code></td>
+<td>Подключение моделей (OpenAI/Anthropic/локальные)</td>
+</tr>
+<tr>
+<td><code>Account</code></td>
+<td>Warp Drive, синхронизация</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="сочетания-с-другими-инструментами">🧩 Сочетания с другими инструментами<a class="headerlink" href="#сочетания-с-другими-инструментами" title="Ссылка">#</a></h2>
+<h3 id="starship-powerlevel10k">starship / powerlevel10k<a class="headerlink" href="#starship-powerlevel10k" title="Ссылка">#</a></h3>
+<p>Warp совместим с любым shell-prompt — просто настрой как обычно в <code>~/.zshrc</code> / <code>~/.bashrc</code>.</p>
+<h3 id="tmux">tmux<a class="headerlink" href="#tmux" title="Ссылка">#</a></h3>
+<p>Можно использовать внутри Warp. Блоки Warp и сплиты tmux — ортогональны.</p>
+<h3 id="zsh-bash-fish">zsh / bash / fish<a class="headerlink" href="#zsh-bash-fish" title="Ссылка">#</a></h3>
+<p>Warp поддерживает любой шелл. Автодополнение и блоки работают везде.</p>
+<hr />
+<h2 id="частые-сценарии">💡 Частые сценарии<a class="headerlink" href="#частые-сценарии" title="Ссылка">#</a></h2>
+<h3 id="сгенерировать-сложную-команду-через-ии">Сгенерировать сложную команду через ИИ<a class="headerlink" href="#сгенерировать-сложную-команду-через-ии" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code># найти все docker-контейнеры старше 7 дней и остановить
+</code></pre></div>
+
+<p>Warp предложит что-то вроде:</p>
+<div class="highlight"><pre><span></span><code>docker<span class="w"> </span>ps<span class="w"> </span>-a<span class="w"> </span>--filter<span class="w"> </span><span class="s2">&quot;status=running&quot;</span><span class="w"> </span>--format<span class="w"> </span><span class="s1">&#39;{{.Names}}&#39;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span><span class="p">|</span><span class="w"> </span>xargs<span class="w"> </span>-I<span class="o">{}</span><span class="w"> </span>docker<span class="w"> </span>stop<span class="w"> </span><span class="o">{}</span>
+</code></pre></div>
+
+<h3 id="скопировать-путь-из-блока">Скопировать путь из блока<a class="headerlink" href="#скопировать-путь-из-блока" title="Ссылка">#</a></h3>
+<p>Клик по блоку → <code>Cmd+C</code> копирует <strong>весь вывод</strong>. Для части вывода — выделить мышкой.</p>
+<h3 id="поделиться-логом-с-коллегой">Поделиться логом с коллегой<a class="headerlink" href="#поделиться-логом-с-коллегой" title="Ссылка">#</a></h3>
+<p>Блок → «Share to Warp» → ссылка (через Warp Drive).</p>
+<h3 id="переиспользовать-длинную-команду">Переиспользовать длинную команду<a class="headerlink" href="#переиспользовать-длинную-команду" title="Ссылка">#</a></h3>
+<p>Сохранить как workflow (<code>Ctrl+\</code> → New) → вызывать по имени + параметры.</p>
+<hr />
+<h2 id="минусы-и-нюансы">⚠️ Минусы и нюансы<a class="headerlink" href="#минусы-и-нюансы" title="Ссылка">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Минус</th>
+<th>Комментарий</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Требует логин</strong></td>
+<td>Без аккаунта не запускается (бесплатный)</td>
+</tr>
+<tr>
+<td><strong>Проприетарный</strong></td>
+<td>Открыто не ядро, только workflows/themes</td>
+</tr>
+<tr>
+<td><strong>Память</strong></td>
+<td>Rust + GPU, но тяжелее <code>kitty</code> / <code>alacritty</code></td>
+</tr>
+<tr>
+<td><strong>Wayland</strong></td>
+<td>Поддержка улучшается, но на Linux есть шероховатости</td>
+</tr>
+<tr>
+<td><strong>Warp AI платно</strong></td>
+<td>Без подписки — ограниченный режим</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="warp-vs-альтернативы">🆚 Warp vs альтернативы<a class="headerlink" href="#warp-vs-альтернативы" title="Ссылка">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Терминал</th>
+<th>Плюсы</th>
+<th>Минусы</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Warp</strong></td>
+<td>Блоки, AI, workflows, GPU</td>
+<td>Логин, закрытый код</td>
+</tr>
+<tr>
+<td><strong>Kitty</strong></td>
+<td>Лёгкий, GPU, тайлинг, скрипты</td>
+<td>Нет AI из коробки</td>
+</tr>
+<tr>
+<td><strong>Alacritty</strong></td>
+<td>Очень быстрый, минималистичный</td>
+<td>Нет фич (вкладок, сплитов)</td>
+</tr>
+<tr>
+<td><strong>WezTerm</strong></td>
+<td>Мощный Lua-конфиг, мульти-платформа</td>
+<td>Сложнее настройка</td>
+</tr>
+<tr>
+<td><strong>GNOME Terminal / Konsole</strong></td>
+<td>Дефолт, простые</td>
+<td>Медленные, без AI</td>
+</tr>
+<tr>
+<td><strong>iTerm2</strong></td>
+<td>(mac) де-факто стандарт</td>
+<td>Только macOS</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="источники">🔗 Источники<a class="headerlink" href="#источники" title="Ссылка">#</a></h2>
+<ul>
+<li>Дом: https://www.warp.dev</li>
+<li>Документация: https://docs.warp.dev</li>
+<li>Workflows: https://docs.warp.dev/features/workflows</li>
+<li>Горячие клавиши: https://docs.warp.dev/help/keyboard-shortcuts</li>
+<li>Themes: https://docs.warp.dev/features/themes</li>
+</ul>
+    </article>
+    <nav class="pagination">
+      <a class="pager prev" href="zcode.html">← ZCode</a>
+      <a class="pager next" href="agentic-ai-dev.html">Агентная разработка с ИИ →</a>
+    </nav>
+  </main>
+
+  <aside class="toc">
+    <details open>
+      <summary>📑 Оглавление</summary>
+      <div class="toc-list">
+<div class="toc">
+<ul>
+<li><a href="#warp-шпаргалка">🚀 Warp — шпаргалка</a><ul>
+<li><a href="#установка">📦 Установка</a></li>
+<li><a href="#ключевые-концепции">🎨 Ключевые концепции</a></li>
+<li><a href="#горячие-клавиши">⌨️ Горячие клавиши</a><ul>
+<li><a href="#навигация-по-блокам">Навигация по блокам</a></li>
+<li><a href="#ввод-и-редактирование">Ввод и редактирование</a></li>
+<li><a href="#вкладки-и-окна">Вкладки и окна</a></li>
+<li><a href="#сплиты-разделение-панелей">Сплиты (разделение панелей)</a></li>
+<li><a href="#открытие-интерфейса">Открытие интерфейса</a></li>
+</ul>
+</li>
+<li><a href="#ai-agent-mode">🤖 AI (Agent Mode)</a><ul>
+<li><a href="#использование">Использование</a></li>
+<li><a href="#полезные-промпты">Полезные промпты</a></li>
+<li><a href="#объяснение-ошибок">Объяснение ошибок</a></li>
+</ul>
+</li>
+<li><a href="#workflows-ваш-bashrc-на-стероидах">🔄 Workflows (ваш «.bashrc на стероидах»)</a><ul>
+<li><a href="#создание">Создание</a></li>
+<li><a href="#пример-warp-workflows-deploy-github-yml">Пример .warp/workflows/deploy-github.yml</a></li>
+<li><a href="#вызов">Вызов</a></li>
+</ul>
+</li>
+<li><a href="#оформление-themes">🎨 Оформление (Themes)</a><ul>
+<li><a href="#шрифты">Шрифты</a></li>
+</ul>
+</li>
+<li><a href="#поиск-и-история">🔍 Поиск и история</a><ul>
+<li><a href="#история">История</a></li>
+</ul>
+</li>
+<li><a href="#sessions-projects">🖥️ Sessions / Projects</a></li>
+<li><a href="#конфиг-и-настройки">⚙️ Конфиг и настройки</a></li>
+<li><a href="#сочетания-с-другими-инструментами">🧩 Сочетания с другими инструментами</a><ul>
+<li><a href="#starship-powerlevel10k">starship / powerlevel10k</a></li>
+<li><a href="#tmux">tmux</a></li>
+<li><a href="#zsh-bash-fish">zsh / bash / fish</a></li>
+</ul>
+</li>
+<li><a href="#частые-сценарии">💡 Частые сценарии</a><ul>
+<li><a href="#сгенерировать-сложную-команду-через-ии">Сгенерировать сложную команду через ИИ</a></li>
+<li><a href="#скопировать-путь-из-блока">Скопировать путь из блока</a></li>
+<li><a href="#поделиться-логом-с-коллегой">Поделиться логом с коллегой</a></li>
+<li><a href="#переиспользовать-длинную-команду">Переиспользовать длинную команду</a></li>
+</ul>
+</li>
+<li><a href="#минусы-и-нюансы">⚠️ Минусы и нюансы</a></li>
+<li><a href="#warp-vs-альтернативы">🆚 Warp vs альтернативы</a></li>
+<li><a href="#источники">🔗 Источники</a></li>
+</ul>
+</li>
+</ul>
+</div>
+
+      </div>
+    </details>
+  </aside>
+</div>
+
+<button class="back-top" id="backTop" aria-label="Наверх">↑</button>
+
+<script src="assets/search.js"></script>
+<script src="assets/page.js"></script>
+</body>
+</html>

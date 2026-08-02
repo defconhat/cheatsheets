@@ -1,0 +1,913 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bash — Шпаргалки</title>
+<link rel="stylesheet" href="assets/style.css">
+<link rel="stylesheet" href="assets/pygments.css">
+</head>
+<body>
+<div class="layout">
+  <aside class="sidebar">
+    <a href="index.html" class="brand">📌 Шпаргалки</a>
+    <nav class="nav">
+<a href="yazi.html" class="nav-item"><span class="nav-ico">📦</span>Yazi</a>
+<a href="neovim.html" class="nav-item"><span class="nav-ico">📘</span>Neovim (LazyVim)</a>
+<a href="niri.html" class="nav-item"><span class="nav-ico">🪟</span>Niri</a>
+<a href="tmux.html" class="nav-item"><span class="nav-ico">🪟</span>Tmux</a>
+<a href="bash.html" class="nav-item active"><span class="nav-ico">🐚</span>Bash</a>
+<a href="git.html" class="nav-item"><span class="nav-ico">🔀</span>Git</a>
+<a href="terminal.html" class="nav-item"><span class="nav-ico">🖥️</span>Терминал Linux</a>
+<a href="powershell.html" class="nav-item"><span class="nav-ico">💻</span>PowerShell</a>
+<a href="cmd.html" class="nav-item"><span class="nav-ico">🪟</span>CMD (cmd.exe)</a>
+<a href="python.html" class="nav-item"><span class="nav-ico">🐍</span>Python</a>
+<a href="systemd.html" class="nav-item"><span class="nav-ico">⚙️</span>systemd</a>
+<a href="ssh.html" class="nav-item"><span class="nav-ico">🔐</span>SSH</a>
+<a href="make-cmake.html" class="nav-item"><span class="nav-ico">🔨</span>Make / CMake</a>
+<a href="docker.html" class="nav-item"><span class="nav-ico">🐳</span>Docker</a>
+<a href="pacman.html" class="nav-item"><span class="nav-ico">📦</span>pacman / yay / paru</a>
+<a href="spark.html" class="nav-item"><span class="nav-ico">⚡</span>Apache Spark / PySpark</a>
+<a href="markdown.html" class="nav-item"><span class="nav-ico">📝</span>Markdown</a>
+<a href="regex.html" class="nav-item"><span class="nav-ico">🔍</span>Регулярные выражения</a>
+<a href="jq-json.html" class="nav-item"><span class="nav-ico">🔧</span>jq + JSON</a>
+<a href="awk-sed.html" class="nav-item"><span class="nav-ico">✂️</span>awk / sed</a>
+<a href="airflow.html" class="nav-item"><span class="nav-ico">🌪️</span>Apache Airflow</a>
+<a href="http-curl.html" class="nav-item"><span class="nav-ico">🌐</span>HTTP / curl</a>
+<a href="yaml.html" class="nav-item"><span class="nav-ico">📄</span>YAML</a>
+<a href="vscode.html" class="nav-item"><span class="nav-ico">💻</span>VS Code</a>
+<a href="cron.html" class="nav-item"><span class="nav-ico">⏰</span>cron</a>
+<a href="fzf-zoxide.html" class="nav-item"><span class="nav-ico">🔎</span>fzf + zoxide</a>
+<a href="minikube-k8s.html" class="nav-item"><span class="nav-ico">☸️</span>Minikube / Kubernetes</a>
+<a href="cicd.html" class="nav-item"><span class="nav-ico">🦊</span>GitLab CI / GitHub Actions</a>
+<a href="nginx.html" class="nav-item"><span class="nav-ico">🌐</span>nginx</a>
+<a href="dbt.html" class="nav-item"><span class="nav-ico">🔧</span>dbt</a>
+<a href="kafka.html" class="nav-item"><span class="nav-ico">🐘</span>Apache Kafka</a>
+<a href="prometheus-grafana.html" class="nav-item"><span class="nav-ico">📊</span>Prometheus / Grafana</a>
+<a href="iceberg-nessie.html" class="nav-item"><span class="nav-ico">🧊</span>Iceberg / Nessie</a>
+<a href="impala.html" class="nav-item"><span class="nav-ico">🐬</span>Apache Impala</a>
+<a href="terraform.html" class="nav-item"><span class="nav-ico">🏗️</span>Terraform</a>
+<a href="linux-internals.html" class="nav-item"><span class="nav-ico">🐧</span>Linux Internals</a>
+<a href="miscellaneous.html" class="nav-item"><span class="nav-ico">🧰</span>Miscellaneous</a>
+<a href="python-automation-libs.html" class="nav-item"><span class="nav-ico">🐍</span>Python: авт-ция (10 libs)</a>
+<a href="eza.html" class="nav-item"><span class="nav-ico">🌈</span>eza</a>
+<a href="dbeaver.html" class="nav-item"><span class="nav-ico">🗄️</span>DBeaver</a>
+<a href="zcode.html" class="nav-item"><span class="nav-ico">🤖</span>ZCode</a>
+<a href="warp.html" class="nav-item"><span class="nav-ico">🚀</span>Warp</a>
+<a href="agentic-ai-dev.html" class="nav-item"><span class="nav-ico">🤝</span>Агентная разработка с ИИ</a>
+    </nav>
+  </aside>
+
+  <main class="content">
+    <article>
+<h1 id="bash-шпаргалка-по-скриптингу-и-использованию">🐚 Bash — шпаргалка по скриптингу и использованию<a class="headerlink" href="#bash-шпаргалка-по-скриптингу-и-использованию" title="Ссылка">#</a></h1>
+<blockquote>
+<p><strong>bash</strong> — стандартная оболочка Linux (Bourne-Again Shell).
+Мануал: <code>man bash</code> · Справочник: https://www.gnu.org/software/bash/manual</p>
+<p>Применимо к большинству POSIX-shell&rsquo;ов (с оговорками для zsh/fish).</p>
+</blockquote>
+<hr />
+<h2 id="базовый-синтаксис">🚀 Базовый синтаксис<a class="headerlink" href="#базовый-синтаксис" title="Ссылка">#</a></h2>
+<h3 id="shebang">Shebang<a class="headerlink" href="#shebang" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="ch">#!/usr/bin/env bash</span>
+<span class="c1"># Всегда ставьте в первой строке скрипта.</span>
+<span class="c1"># Использование env — портативно (находит bash в PATH).</span>
+</code></pre></div>
+
+<h3 id="строгий-режим-рекомендуется-всегда">Строгий режим (рекомендуется всегда)<a class="headerlink" href="#строгий-режим-рекомендуется-всегда" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="nb">set</span><span class="w"> </span>-euo<span class="w"> </span>pipefail
+<span class="c1"># -e          выйти при ошибке любой команды</span>
+<span class="c1"># -u          ошибка при использовании несуществующей переменной</span>
+<span class="c1"># -o pipefail_pipeline] код ошибки последней упавшей команды в пайпе</span>
+<span class="nv">IFS</span><span class="o">=</span><span class="s1">$&#39;\n\t&#39;</span><span class="w">   </span><span class="c1"># безопасный разделитель полей</span>
+</code></pre></div>
+
+<h3 id="запуск-скрипта">Запуск скрипта<a class="headerlink" href="#запуск-скрипта" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>chmod<span class="w"> </span>+x<span class="w"> </span>script.sh
+./script.sh<span class="w">                 </span><span class="c1"># как исполняемый</span>
+
+bash<span class="w"> </span>script.sh<span class="w">              </span><span class="c1"># явно через bash</span>
+bash<span class="w"> </span>-x<span class="w"> </span>script.sh<span class="w">           </span><span class="c1"># с трассировкой (debug)</span>
+bash<span class="w"> </span>-n<span class="w"> </span>script.sh<span class="w">           </span><span class="c1"># только проверка синтаксиса</span>
+<span class="nb">source</span><span class="w"> </span>script.sh<span class="w">  </span>/<span class="w">  </span>.<span class="w"> </span>script.sh<span class="w">   </span><span class="c1"># выполнить в текущем shell</span>
+</code></pre></div>
+
+<hr />
+<h2 id="комментарии-и-вывод">💬 Комментарии и вывод<a class="headerlink" href="#комментарии-и-вывод" title="Ссылка">#</a></h2>
+<div class="highlight"><pre><span></span><code><span class="c1"># Это комментарий</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Hello&quot;</span><span class="w">               </span><span class="c1"># простейший вывод</span>
+<span class="nb">echo</span><span class="w"> </span>-n<span class="w"> </span><span class="s2">&quot;без перевода&quot;</span><span class="w">      </span><span class="c1"># без \n</span>
+<span class="nb">echo</span><span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;строка\tс\tтабами&quot;</span><span class="w"> </span><span class="c1"># интерпретация escape</span>
+<span class="nb">printf</span><span class="w"> </span><span class="s2">&quot;Имя: %-10s Возраст: %d\n&quot;</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$name</span><span class="s2">&quot;</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$age</span><span class="s2">&quot;</span><span class="w">   </span><span class="c1"># форматированный</span>
+</code></pre></div>
+
+<hr />
+<h2 id="переменные">🔤 Переменные<a class="headerlink" href="#переменные" title="Ссылка">#</a></h2>
+<div class="highlight"><pre><span></span><code><span class="nv">name</span><span class="o">=</span><span class="s2">&quot;Alice&quot;</span><span class="w">               </span><span class="c1"># БЕЗ пробелов вокруг =</span>
+<span class="nv">age</span><span class="o">=</span><span class="m">30</span>
+<span class="nb">readonly</span><span class="w"> </span><span class="nv">PI</span><span class="o">=</span><span class="m">3</span>.14<span class="w">           </span><span class="c1"># константа</span>
+<span class="nb">unset</span><span class="w"> </span>name<span class="w">                 </span><span class="c1"># удалить переменную</span>
+
+<span class="c1"># Использование</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$name</span><span class="s2">&quot;</span><span class="w">               </span><span class="c1"># всегда берите в кавычки!</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">name</span><span class="si">}</span><span class="s2">&quot;</span><span class="w">             </span><span class="c1"># явный синтаксис</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$name_$suffix</span><span class="s2">&quot;</span><span class="w">       </span><span class="c1"># неоднозначно</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">name</span><span class="si">}</span><span class="s2">_</span><span class="nv">$suffix</span><span class="s2">&quot;</span><span class="w">     </span><span class="c1"># правильно</span>
+<span class="nv">greeting</span><span class="o">=</span><span class="s2">&quot;Hi, </span><span class="nv">$name</span><span class="s2">!&quot;</span><span class="w">      </span><span class="c1"># подстановка внутри строки</span>
+</code></pre></div>
+
+<h3 id="важно-про-кавычки">⚠️ Важно про кавычки<a class="headerlink" href="#важно-про-кавычки" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="nv">file</span><span class="o">=</span><span class="s2">&quot;my file.txt&quot;</span>
+ls<span class="w"> </span><span class="nv">$file</span><span class="w">          </span><span class="c1"># ОШИБКА: разобьётся на &quot;my&quot; и &quot;file.txt&quot;</span>
+ls<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$file</span><span class="s2">&quot;</span><span class="w">        </span><span class="c1"># ПРАВИЛЬНО: один аргумент</span>
+ls<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$file</span><span class="s2">&quot;</span>.bak<span class="w">    </span><span class="c1"># с дополнительным текстом</span>
+
+<span class="c1"># Разница одинарных и двойных:</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$name</span><span class="s2">&quot;</span><span class="w">      </span><span class="c1"># значение переменной</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;$name&#39;</span><span class="w">      </span><span class="c1"># буквально $name</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;`date`&quot;</span><span class="w">     </span><span class="c1"># вывод команды (старый синтаксис)</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="k">$(</span>date<span class="k">)</span><span class="s2">&quot;</span><span class="w">    </span><span class="c1"># вывод команды (современный, предпочтительный)</span>
+</code></pre></div>
+
+<hr />
+<h2 id="чтение-ввода">📥 Чтение ввода<a class="headerlink" href="#чтение-ввода" title="Ссылка">#</a></h2>
+<div class="highlight"><pre><span></span><code><span class="nb">read</span><span class="w"> </span>-p<span class="w"> </span><span class="s2">&quot;Введите имя: &quot;</span><span class="w"> </span>name<span class="w">        </span><span class="c1"># с приглашением</span>
+<span class="nb">read</span><span class="w"> </span>-s<span class="w"> </span>-p<span class="w"> </span><span class="s2">&quot;Пароль: &quot;</span><span class="w"> </span>password<span class="w">      </span><span class="c1"># молча (как пароль)</span>
+<span class="nb">read</span><span class="w"> </span>-a<span class="w"> </span>nums<span class="w">                        </span><span class="c1"># в массив (через пробел)</span>
+<span class="nb">read</span><span class="w"> </span>line<span class="w">                           </span><span class="c1"># вся строка в $line</span>
+<span class="nb">read</span><span class="w"> </span>-r<span class="w"> </span>line<span class="w">                        </span><span class="c1"># -r не интерпретировать \</span>
+<span class="nv">IFS</span><span class="o">=</span>:<span class="w"> </span><span class="nb">read</span><span class="w"> </span>user<span class="w"> </span>passwd<span class="w"> </span>uid<span class="w"> </span>&lt;<span class="w"> </span>/etc/passwd<span class="w">   </span><span class="c1"># с разделителем</span>
+</code></pre></div>
+
+<hr />
+<h2 id="параметры-и-аргументы">🎯 Параметры и аргументы<a class="headerlink" href="#параметры-и-аргументы" title="Ссылка">#</a></h2>
+<div class="highlight"><pre><span></span><code>./script.sh<span class="w"> </span>foo<span class="w"> </span>bar<span class="w"> </span>baz
+<span class="c1"># $0 = ./script.sh (имя скрипта)</span>
+<span class="c1"># $1 = foo          (1-й аргумент)</span>
+<span class="c1"># $2 = bar</span>
+<span class="c1"># $3 = baz</span>
+<span class="c1"># $# = 3            (число аргументов)</span>
+<span class="c1"># $@ = foo bar baz  (все аргументы, по одному)</span>
+<span class="c1"># &quot;$@&quot;              ← так правильно (сохраняет пробелы в аргументах)</span>
+<span class="c1"># $* = foo bar baz  (одна строка)</span>
+</code></pre></div>
+
+<h3 id="разбор-аргументов-getopts">Разбор аргументов (getopts)<a class="headerlink" href="#разбор-аргументов-getopts" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">while</span><span class="w"> </span><span class="nb">getopts</span><span class="w"> </span><span class="s2">&quot;:a:b:cv&quot;</span><span class="w"> </span>opt<span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<span class="w">  </span><span class="k">case</span><span class="w"> </span><span class="nv">$opt</span><span class="w"> </span><span class="k">in</span>
+<span class="w">    </span>a<span class="o">)</span><span class="w"> </span><span class="nv">arg_a</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$OPTARG</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">;;</span>
+<span class="w">    </span>b<span class="o">)</span><span class="w"> </span><span class="nv">arg_b</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$OPTARG</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">;;</span>
+<span class="w">    </span>c<span class="o">)</span><span class="w"> </span><span class="nv">flag_c</span><span class="o">=</span><span class="m">1</span><span class="w"> </span><span class="p">;;</span>
+<span class="w">    </span>v<span class="o">)</span><span class="w"> </span><span class="nv">verbose</span><span class="o">=</span><span class="m">1</span><span class="w"> </span><span class="p">;;</span>
+<span class="w">    </span><span class="se">\?</span><span class="o">)</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Неизвестный: -</span><span class="nv">$OPTARG</span><span class="s2">&quot;</span><span class="w"> </span>&gt;<span class="p">&amp;</span><span class="m">2</span><span class="p">;</span><span class="w"> </span><span class="nb">exit</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="p">;;</span>
+<span class="w">    </span>:<span class="o">)</span><span class="w">  </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Требуется аргумент: -</span><span class="nv">$OPTARG</span><span class="s2">&quot;</span><span class="w"> </span>&gt;<span class="p">&amp;</span><span class="m">2</span><span class="p">;</span><span class="w"> </span><span class="nb">exit</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="p">;;</span>
+<span class="w">  </span><span class="k">esac</span>
+<span class="k">done</span>
+<span class="nb">shift</span><span class="w"> </span><span class="k">$((</span><span class="nv">OPTIND</span><span class="w"> </span><span class="o">-</span><span class="m">1</span><span class="k">))</span><span class="w">   </span><span class="c1"># отбросить разобранные опции</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Остальные: </span><span class="nv">$@</span><span class="s2">&quot;</span>
+</code></pre></div>
+
+<hr />
+<h2 id="арифметика">🔢 Арифметика<a class="headerlink" href="#арифметика" title="Ссылка">#</a></h2>
+<div class="highlight"><pre><span></span><code><span class="c1"># Только целые числа!</span>
+<span class="nv">x</span><span class="o">=</span><span class="m">5</span>
+<span class="nv">y</span><span class="o">=</span><span class="m">3</span>
+<span class="nb">echo</span><span class="w"> </span><span class="k">$((</span><span class="nv">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nv">y</span><span class="k">))</span><span class="w">          </span><span class="c1"># 8 — сложение</span>
+<span class="nb">echo</span><span class="w"> </span><span class="k">$((</span><span class="nv">x</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nv">y</span><span class="k">))</span><span class="w">          </span><span class="c1"># 2</span>
+<span class="nb">echo</span><span class="w"> </span><span class="k">$((</span><span class="nv">x</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nv">y</span><span class="k">))</span><span class="w">          </span><span class="c1"># 15</span>
+<span class="nb">echo</span><span class="w"> </span><span class="k">$((</span><span class="nv">x</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="nv">y</span><span class="k">))</span><span class="w">          </span><span class="c1"># 1 (целочисленное!)</span>
+<span class="nb">echo</span><span class="w"> </span><span class="k">$((</span><span class="nv">x</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="nv">y</span><span class="k">))</span><span class="w">          </span><span class="c1"># 2 (остаток)</span>
+<span class="nb">echo</span><span class="w"> </span><span class="k">$((</span><span class="m">2</span><span class="w"> </span><span class="o">**</span><span class="w"> </span><span class="m">10</span><span class="k">))</span><span class="w">        </span><span class="c1"># 1024 (степень)</span>
+<span class="o">((</span>x++<span class="o">))</span><span class="w">                  </span><span class="c1"># инкремент</span>
+<span class="o">((</span><span class="nv">x</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="m">5</span><span class="o">))</span><span class="w">               </span><span class="c1"># сокращённые операторы</span>
+<span class="o">((</span>x<span class="w"> </span>&gt;<span class="w"> </span><span class="m">4</span><span class="o">))</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span>yes<span class="w">    </span><span class="c1"># сравнение</span>
+
+<span class="c1"># Сравнения возвращают 0 (true) / 1 (false) для if</span>
+<span class="k">if</span><span class="w"> </span><span class="o">((</span><span class="w"> </span>x<span class="w"> </span>&gt;<span class="o">=</span><span class="w"> </span><span class="m">18</span><span class="w"> </span><span class="o">))</span><span class="p">;</span><span class="w"> </span><span class="k">then</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;взрослый&quot;</span><span class="p">;</span><span class="w"> </span><span class="k">fi</span>
+</code></pre></div>
+
+<h3 id="дробные-числа-нужен-bc-awk">Дробные числа — нужен bc/awk<a class="headerlink" href="#дробные-числа-нужен-bc-awk" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;scale=2; 10/3&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>bc<span class="w">        </span><span class="c1"># 3.33</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;3.14 * 2&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>bc<span class="w">             </span><span class="c1"># 6.28</span>
+awk<span class="w"> </span><span class="s1">&#39;BEGIN { print 10/3 }&#39;</span><span class="w">        </span><span class="c1"># 3.33333</span>
+</code></pre></div>
+
+<hr />
+<h2 id="строки">📊 Строки<a class="headerlink" href="#строки" title="Ссылка">#</a></h2>
+<div class="highlight"><pre><span></span><code><span class="nv">s</span><span class="o">=</span><span class="s2">&quot;Hello, World&quot;</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${#</span><span class="nv">s</span><span class="si">}</span><span class="s2">&quot;</span><span class="w">              </span><span class="c1"># 12 — длина строки</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">s</span><span class="p">:</span><span class="nv">0</span><span class="p">:</span><span class="nv">5</span><span class="si">}</span><span class="s2">&quot;</span><span class="w">           </span><span class="c1"># &quot;Hello&quot; — срез с 0, 5 символов</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">s</span><span class="p">:</span><span class="nv">7</span><span class="si">}</span><span class="s2">&quot;</span><span class="w">             </span><span class="c1"># &quot;World&quot; — с 7-го символа до конца</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">s</span><span class="p">,</span><span class="si">}</span><span class="s2">&quot;</span><span class="w">              </span><span class="c1"># &quot;hello, World&quot; — первый символ в нижний регистр</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">s</span><span class="p">^^</span><span class="si">}</span><span class="s2">&quot;</span><span class="w">             </span><span class="c1"># &quot;HELLO, WORLD&quot; — весь в верхний</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">s</span><span class="p">,,</span><span class="si">}</span><span class="s2">&quot;</span><span class="w">             </span><span class="c1"># весь в нижний</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">s</span><span class="p">//o/0</span><span class="si">}</span><span class="s2">&quot;</span><span class="w">          </span><span class="c1"># &quot;Hell0, W0rld&quot; — замена всех вхождений</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">s</span><span class="p">/o/0</span><span class="si">}</span><span class="s2">&quot;</span><span class="w">           </span><span class="c1"># &quot;Hell0, World&quot; — только первое</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">s</span><span class="p">/#Hello/Hi</span><span class="si">}</span><span class="s2">&quot;</span><span class="w">     </span><span class="c1"># &quot;Hi, World&quot; — в начале</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">s</span><span class="p">/%World/Earth</span><span class="si">}</span><span class="s2">&quot;</span><span class="w">  </span><span class="c1"># &quot;Hello, Earth&quot; — в конце</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">s</span><span class="p">#H</span><span class="si">}</span><span class="s2">&quot;</span><span class="w">             </span><span class="c1"># &quot;ello, World&quot; — удалить префикс (короткий)</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">s</span><span class="p">##He</span><span class="si">}</span><span class="s2">&quot;</span><span class="w">           </span><span class="c1"># &quot;llo, World&quot; — удалить префикс (жадный)</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">s</span><span class="p">%d</span><span class="si">}</span><span class="s2">&quot;</span><span class="w">             </span><span class="c1"># &quot;Hello, Worl&quot; — удалить суффикс</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">s</span><span class="p">%,*</span><span class="si">}</span><span class="s2">&quot;</span><span class="w">            </span><span class="c1"># &quot;Hello&quot;      — до первой запятой</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">s</span><span class="p">#*, </span><span class="si">}</span><span class="s2">&quot;</span><span class="w">           </span><span class="c1"># &quot;World&quot;      — после запятой</span>
+</code></pre></div>
+
+<h3 id="мнемоника-для-и">Мнемоника для <code>#</code> и <code>%</code><a class="headerlink" href="#мнемоника-для-и" title="Ссылка">#</a></h3>
+<ul>
+<li><strong><code>#</code></strong> — на клавиатуре слева от <code>$</code> → удаляет <strong>слева</strong> (префикс)</li>
+<li><strong><code>%</code></strong> — справа от <code>$</code> → удаляет <strong>справа</strong> (суффикс)</li>
+</ul>
+<hr />
+<h2 id="массивы">📋 Массивы<a class="headerlink" href="#массивы" title="Ссылка">#</a></h2>
+<div class="highlight"><pre><span></span><code><span class="c1"># Обычные массивы (индексные)</span>
+<span class="nv">fruits</span><span class="o">=(</span><span class="s2">&quot;apple&quot;</span><span class="w"> </span><span class="s2">&quot;banana&quot;</span><span class="w"> </span><span class="s2">&quot;cherry&quot;</span><span class="o">)</span>
+<span class="nv">fruits</span><span class="o">+=(</span><span class="s2">&quot;date&quot;</span><span class="o">)</span><span class="w">              </span><span class="c1"># добавить элемент</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">fruits</span><span class="p">[0]</span><span class="si">}</span><span class="s2">&quot;</span><span class="w">           </span><span class="c1"># apple</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">fruits</span><span class="p">[@]</span><span class="si">}</span><span class="s2">&quot;</span><span class="w">           </span><span class="c1"># все элементы</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${#</span><span class="nv">fruits</span><span class="p">[@]</span><span class="si">}</span><span class="s2">&quot;</span><span class="w">          </span><span class="c1"># 4 — число элементов</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="p">!fruits[@]</span><span class="si">}</span><span class="s2">&quot;</span><span class="w">          </span><span class="c1"># индексы: 0 1 2 3</span>
+fruits<span class="o">[</span><span class="m">1</span><span class="o">]=</span><span class="s2">&quot;blueberry&quot;</span><span class="w">        </span><span class="c1"># изменить</span>
+<span class="nb">unset</span><span class="w"> </span><span class="s1">&#39;fruits[0]&#39;</span><span class="w">             </span><span class="c1"># удалить элемент</span>
+
+<span class="c1"># Перебор</span>
+<span class="k">for</span><span class="w"> </span>f<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">fruits</span><span class="p">[@]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">;</span><span class="w"> </span><span class="k">do</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$f</span><span class="s2">&quot;</span><span class="p">;</span><span class="w"> </span><span class="k">done</span>
+
+<span class="c1"># Ассоциативные (как dict/map)</span>
+<span class="nb">declare</span><span class="w"> </span>-A<span class="w"> </span>person
+person<span class="o">[</span>name<span class="o">]=</span><span class="s2">&quot;Alice&quot;</span>
+person<span class="o">[</span>age<span class="o">]=</span><span class="m">30</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">person</span><span class="p">[name]</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="k">for</span><span class="w"> </span>key<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="p">!person[@]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">;</span><span class="w"> </span><span class="k">do</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$key</span><span class="s2"> = </span><span class="si">${</span><span class="nv">person</span><span class="p">[</span><span class="nv">$key</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">;</span><span class="w"> </span><span class="k">done</span>
+</code></pre></div>
+
+<hr />
+<h2 id="условия">🔀 Условия<a class="headerlink" href="#условия" title="Ссылка">#</a></h2>
+<h3 id="if-elif-else">if / elif / else<a class="headerlink" href="#if-elif-else" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span>-z<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$var</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;пустая&quot;</span>
+<span class="k">elif</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$var</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;yes&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;да&quot;</span>
+<span class="k">else</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;другое&quot;</span>
+<span class="k">fi</span>
+</code></pre></div>
+
+<h3 id="vs-vs-test"><code>[[ ]]</code> vs <code>[ ]</code> vs <code>test</code><a class="headerlink" href="#vs-vs-test" title="Ссылка">#</a></h3>
+<ul>
+<li><strong><code>[[ ]]</code></strong> — расширенный синтаксис bash, безопасный, используйте его.</li>
+<li><strong><code>[ ]</code></strong> — POSIX-вариант, медленнее, для совместимости.</li>
+<li><code>test</code> — то же, что <code>[ ]</code>.</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="o">[[</span><span class="w"> </span><span class="nv">$a</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nv">$b</span><span class="w"> </span><span class="o">]]</span><span class="w">      </span><span class="c1"># строки равны</span>
+<span class="o">[[</span><span class="w"> </span><span class="nv">$a</span><span class="w"> </span>!<span class="o">=</span><span class="w"> </span><span class="nv">$b</span><span class="w"> </span><span class="o">]]</span><span class="w">      </span><span class="c1"># не равны</span>
+<span class="o">[[</span><span class="w"> </span><span class="nv">$a</span><span class="w"> </span>&lt;<span class="w"> </span><span class="nv">$b</span><span class="w"> </span><span class="o">]]</span><span class="w">       </span><span class="c1"># лексикографическое (в алфавите)</span>
+<span class="o">[[</span><span class="w"> </span><span class="nv">$a</span><span class="w"> </span><span class="o">=</span>~<span class="w"> </span>^<span class="o">[</span><span class="m">0</span>-9<span class="o">]</span>+$<span class="w"> </span><span class="o">]]</span><span class="c1"># регулярное выражение!</span>
+<span class="o">[[</span><span class="w"> </span>-n<span class="w"> </span><span class="nv">$a</span><span class="w"> </span><span class="o">]]</span><span class="w">         </span><span class="c1"># не пустая</span>
+<span class="o">[[</span><span class="w"> </span>-z<span class="w"> </span><span class="nv">$a</span><span class="w"> </span><span class="o">]]</span><span class="w">         </span><span class="c1"># пустая</span>
+</code></pre></div>
+
+<h3 id="файловые-проверки">Файловые проверки<a class="headerlink" href="#файловые-проверки" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="o">[[</span><span class="w"> </span>-e<span class="w"> </span>file<span class="w"> </span><span class="o">]]</span><span class="w">       </span><span class="c1"># существует</span>
+<span class="o">[[</span><span class="w"> </span>-f<span class="w"> </span>file<span class="w"> </span><span class="o">]]</span><span class="w">       </span><span class="c1"># обычный файл</span>
+<span class="o">[[</span><span class="w"> </span>-d<span class="w"> </span>dir<span class="w">  </span><span class="o">]]</span><span class="w">       </span><span class="c1"># каталог</span>
+<span class="o">[[</span><span class="w"> </span>-L<span class="w"> </span>link<span class="w"> </span><span class="o">]]</span><span class="w">       </span><span class="c1"># символическая ссылка</span>
+<span class="o">[[</span><span class="w"> </span>-r<span class="w"> </span>file<span class="w"> </span><span class="o">]]</span><span class="w">       </span><span class="c1"># читаемый</span>
+<span class="o">[[</span><span class="w"> </span>-w<span class="w"> </span>file<span class="w"> </span><span class="o">]]</span><span class="w">       </span><span class="c1"># writable</span>
+<span class="o">[[</span><span class="w"> </span>-x<span class="w"> </span>file<span class="w"> </span><span class="o">]]</span><span class="w">       </span><span class="c1"># исполняемый</span>
+<span class="o">[[</span><span class="w"> </span>-s<span class="w"> </span>file<span class="w"> </span><span class="o">]]</span><span class="w">       </span><span class="c1"># непустой (size &gt; 0)</span>
+<span class="o">[[</span><span class="w"> </span>file1<span class="w"> </span>-nt<span class="w"> </span>file2<span class="w"> </span><span class="o">]]</span><span class="w">  </span><span class="c1"># новее</span>
+<span class="o">[[</span><span class="w"> </span>file1<span class="w"> </span>-ot<span class="w"> </span>file2<span class="w"> </span><span class="o">]]</span><span class="w">  </span><span class="c1"># старше</span>
+</code></pre></div>
+
+<h3 id="числовые-сравнения-в">Числовые сравнения (в <code>[ ]</code>)<a class="headerlink" href="#числовые-сравнения-в" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="o">[</span><span class="w"> </span><span class="nv">$a</span><span class="w"> </span>-eq<span class="w"> </span><span class="nv">$b</span><span class="w"> </span><span class="o">]</span><span class="w">    </span><span class="c1"># равно</span>
+<span class="o">[</span><span class="w"> </span><span class="nv">$a</span><span class="w"> </span>-ne<span class="w"> </span><span class="nv">$b</span><span class="w"> </span><span class="o">]</span><span class="w">    </span><span class="c1"># не равно</span>
+<span class="o">[</span><span class="w"> </span><span class="nv">$a</span><span class="w"> </span>-lt<span class="w"> </span><span class="nv">$b</span><span class="w"> </span><span class="o">]</span><span class="w">    </span><span class="c1"># меньше</span>
+<span class="o">[</span><span class="w"> </span><span class="nv">$a</span><span class="w"> </span>-le<span class="w"> </span><span class="nv">$b</span><span class="w"> </span><span class="o">]</span><span class="w">    </span><span class="c1"># меньше или равно</span>
+<span class="o">[</span><span class="w"> </span><span class="nv">$a</span><span class="w"> </span>-gt<span class="w"> </span><span class="nv">$b</span><span class="w"> </span><span class="o">]</span><span class="w">    </span><span class="c1"># больше</span>
+<span class="o">[</span><span class="w"> </span><span class="nv">$a</span><span class="w"> </span>-ge<span class="w"> </span><span class="nv">$b</span><span class="w"> </span><span class="o">]</span><span class="w">    </span><span class="c1"># больше или равно</span>
+<span class="c1"># В (( )) можно обычными &lt; &gt; &lt;= &gt;= == !=</span>
+</code></pre></div>
+
+<h3 id="case-switch">case (switch)<a class="headerlink" href="#case-switch" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">case</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span><span class="k">in</span>
+<span class="w">    </span>start<span class="o">)</span><span class="w">   </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Запуск&quot;</span><span class="p">;;</span>
+<span class="w">    </span>stop<span class="o">)</span><span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Остановка&quot;</span><span class="p">;;</span>
+<span class="w">    </span>restart<span class="o">)</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Перезапуск&quot;</span><span class="p">;;</span>
+<span class="w">    </span>status<span class="o">)</span><span class="w">  </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Статус&quot;</span><span class="p">;;</span>
+<span class="w">    </span>-h<span class="p">|</span>--help<span class="o">)</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Использование: </span><span class="nv">$0</span><span class="s2"> {start|stop|restart}&quot;</span><span class="p">;;</span>
+<span class="w">    </span>*<span class="o">)</span><span class="w">       </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Неизвестная команда: </span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span>&gt;<span class="p">&amp;</span><span class="m">2</span><span class="p">;</span><span class="w"> </span><span class="nb">exit</span><span class="w"> </span><span class="m">1</span><span class="p">;;</span>
+<span class="k">esac</span>
+</code></pre></div>
+
+<h3 id="тернарный-оператор">Тернарный оператор<a class="headerlink" href="#тернарный-оператор" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="o">[[</span><span class="w"> </span>-f<span class="w"> </span>config<span class="w"> </span><span class="o">]]</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">source</span><span class="w"> </span>config<span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;нет конфига&quot;</span>
+<span class="nv">result</span><span class="o">=</span><span class="k">$((</span><span class="w"> </span><span class="nv">x</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="m">5</span><span class="w"> </span>?<span class="w"> </span><span class="m">1</span><span class="w"> </span>:<span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="k">))</span>
+</code></pre></div>
+
+<hr />
+<h2 id="циклы">🔁 Циклы<a class="headerlink" href="#циклы" title="Ссылка">#</a></h2>
+<h3 id="for">for<a class="headerlink" href="#for" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">for</span><span class="w"> </span>i<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="m">3</span><span class="w"> </span><span class="m">4</span><span class="w"> </span><span class="m">5</span><span class="p">;</span><span class="w"> </span><span class="k">do</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$i</span><span class="s2">&quot;</span><span class="p">;</span><span class="w"> </span><span class="k">done</span>
+<span class="k">for</span><span class="w"> </span>i<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="o">{</span><span class="m">1</span>..5<span class="o">}</span><span class="p">;</span><span class="w">        </span><span class="k">do</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$i</span><span class="s2">&quot;</span><span class="p">;</span><span class="w"> </span><span class="k">done</span><span class="w">    </span><span class="c1"># range</span>
+<span class="k">for</span><span class="w"> </span>i<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="o">{</span><span class="m">1</span>..10..2<span class="o">}</span><span class="p">;</span><span class="w">    </span><span class="k">do</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$i</span><span class="s2">&quot;</span><span class="p">;</span><span class="w"> </span><span class="k">done</span><span class="w">    </span><span class="c1"># шаг 2</span>
+<span class="k">for</span><span class="w"> </span>i<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="o">{</span>a..z<span class="o">}</span><span class="p">;</span><span class="w">        </span><span class="k">do</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$i</span><span class="s2">&quot;</span><span class="p">;</span><span class="w"> </span><span class="k">done</span><span class="w">    </span><span class="c1"># буквы</span>
+<span class="k">for</span><span class="w"> </span>f<span class="w"> </span><span class="k">in</span><span class="w"> </span>*.txt<span class="p">;</span><span class="w">         </span><span class="k">do</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$f</span><span class="s2">&quot;</span><span class="p">;</span><span class="w"> </span><span class="k">done</span><span class="w">    </span><span class="c1"># glob</span>
+<span class="k">for</span><span class="w"> </span>f<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$@</span><span class="s2">&quot;</span><span class="p">;</span><span class="w">          </span><span class="k">do</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;арг: </span><span class="nv">$f</span><span class="s2">&quot;</span><span class="p">;</span><span class="w"> </span><span class="k">done</span>
+<span class="k">for</span><span class="w"> </span><span class="o">((</span><span class="nv">i</span><span class="o">=</span><span class="m">0</span><span class="p">;</span><span class="w"> </span>i&lt;<span class="m">10</span><span class="p">;</span><span class="w"> </span>i++<span class="o">))</span><span class="p">;</span><span class="w"> </span><span class="k">do</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$i</span><span class="s2">&quot;</span><span class="p">;</span><span class="w"> </span><span class="k">done</span><span class="w">    </span><span class="c1"># C-style</span>
+
+<span class="c1"># C-style над массивом</span>
+<span class="nv">arr</span><span class="o">=(</span>a<span class="w"> </span>b<span class="w"> </span>c<span class="o">)</span>
+<span class="k">for</span><span class="w"> </span><span class="o">((</span><span class="nv">i</span><span class="o">=</span><span class="m">0</span><span class="p">;</span><span class="w"> </span>i&lt;<span class="si">${#</span><span class="nv">arr</span><span class="p">[@]</span><span class="si">}</span><span class="p">;</span><span class="w"> </span>i++<span class="o">))</span><span class="p">;</span><span class="w"> </span><span class="k">do</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">arr</span><span class="p">[i]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">;</span><span class="w"> </span><span class="k">done</span>
+</code></pre></div>
+
+<h3 id="while-until">while / until<a class="headerlink" href="#while-until" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="nv">n</span><span class="o">=</span><span class="m">0</span>
+<span class="k">while</span><span class="w"> </span><span class="o">((</span><span class="w"> </span>n<span class="w"> </span>&lt;<span class="w"> </span><span class="m">5</span><span class="w"> </span><span class="o">))</span><span class="p">;</span><span class="w"> </span><span class="k">do</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$n</span><span class="s2">&quot;</span><span class="p">;</span><span class="w"> </span><span class="o">((</span>n++<span class="o">))</span><span class="p">;</span><span class="w"> </span><span class="k">done</span>
+
+<span class="k">while</span><span class="w"> </span><span class="nb">read</span><span class="w"> </span>-r<span class="w"> </span>line<span class="p">;</span><span class="w"> </span><span class="k">do</span><span class="w">     </span><span class="c1"># читать файл построчно</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$line</span><span class="s2">&quot;</span>
+<span class="k">done</span><span class="w"> </span>&lt;<span class="w"> </span>file.txt
+
+<span class="c1"># while с пайпом (subshell — переменные не выйдут наружу!)</span>
+some_cmd<span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="k">while</span><span class="w"> </span><span class="nb">read</span><span class="w"> </span>-r<span class="w"> </span>line<span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<span class="w">    </span><span class="nv">count</span><span class="o">=</span><span class="k">$((</span><span class="nv">count</span><span class="o">+</span><span class="m">1</span><span class="k">))</span>
+<span class="k">done</span>
+<span class="c1"># Чтобы переменные сохранились — используйте lastpipe или process substitution:</span>
+<span class="k">while</span><span class="w"> </span><span class="nb">read</span><span class="w"> </span>-r<span class="w"> </span>line<span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<span class="w">    </span><span class="nv">count</span><span class="o">=</span><span class="k">$((</span><span class="nv">count</span><span class="o">+</span><span class="m">1</span><span class="k">))</span>
+<span class="k">done</span><span class="w"> </span>&lt;<span class="w"> </span>&lt;<span class="o">(</span>some_cmd<span class="o">)</span>
+</code></pre></div>
+
+<h3 id="break-continue">break / continue<a class="headerlink" href="#break-continue" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">for</span><span class="w"> </span>i<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="o">{</span><span class="m">1</span>..10<span class="o">}</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<span class="w">    </span><span class="o">[[</span><span class="w"> </span><span class="nv">$i</span><span class="w"> </span>-eq<span class="w"> </span><span class="m">5</span><span class="w"> </span><span class="o">]]</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="k">break</span><span class="w">        </span><span class="c1"># выход из цикла</span>
+<span class="w">    </span><span class="o">[[</span><span class="w"> </span><span class="k">$((</span><span class="nv">i</span><span class="o">%</span><span class="m">2</span><span class="k">))</span><span class="w"> </span>-eq<span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="o">]]</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="k">continue</span><span class="w">  </span><span class="c1"># пропуск чётных</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$i</span><span class="s2">&quot;</span>
+<span class="k">done</span>
+</code></pre></div>
+
+<hr />
+<h2 id="функции">🧮 Функции<a class="headerlink" href="#функции" title="Ссылка">#</a></h2>
+<div class="highlight"><pre><span></span><code><span class="c1"># Два синтаксиса</span>
+greet<span class="o">()</span><span class="w"> </span><span class="o">{</span>
+<span class="w">    </span><span class="nb">local</span><span class="w"> </span><span class="nv">name</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w">           </span><span class="c1"># local — важная штука!</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Hello, </span><span class="nv">$name</span><span class="s2">&quot;</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="m">0</span><span class="w">                  </span><span class="c1"># код возврата (0-255), не значение!</span>
+<span class="o">}</span>
+
+<span class="k">function</span><span class="w"> </span>greet2<span class="w"> </span><span class="o">{</span><span class="w">              </span><span class="c1"># устаревший синтаксис</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Hi&quot;</span>
+<span class="o">}</span>
+
+<span class="c1"># Вызов</span>
+greet<span class="w"> </span><span class="s2">&quot;Alice&quot;</span>
+greet<span class="w"> </span><span class="s2">&quot;Alice&quot;</span><span class="w"> </span><span class="s2">&quot;Bob&quot;</span><span class="w">           </span><span class="c1"># лишние аргументы игнорируются</span>
+<span class="c1"># Внутри функции: $1, $2, $@, $# — аргументы функции (не скрипта)</span>
+
+<span class="c1"># &quot;Возврат значения&quot; — через echo + подстановку</span>
+get_pid<span class="o">()</span><span class="w"> </span><span class="o">{</span><span class="w"> </span>pgrep<span class="w"> </span>-x<span class="w"> </span>nginx<span class="p">;</span><span class="w"> </span><span class="o">}</span>
+<span class="nv">pid</span><span class="o">=</span><span class="k">$(</span>get_pid<span class="k">)</span>
+</code></pre></div>
+
+<hr />
+<h2 id="ввод-вывод-и-перенаправления">📤 Ввод/вывод и перенаправления<a class="headerlink" href="#ввод-вывод-и-перенаправления" title="Ссылка">#</a></h2>
+<div class="highlight"><pre><span></span><code>cmd<span class="w"> </span>&gt;<span class="w"> </span>file<span class="w">          </span><span class="c1"># stdout в файл (перезапись)</span>
+cmd<span class="w"> </span>&gt;&gt;<span class="w"> </span>file<span class="w">         </span><span class="c1"># stdout дописать</span>
+cmd<span class="w"> </span><span class="m">2</span>&gt;<span class="w"> </span>file<span class="w">         </span><span class="c1"># stderr в файл</span>
+cmd<span class="w"> </span>&gt;<span class="w"> </span>file<span class="w"> </span><span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span><span class="w">     </span><span class="c1"># stdout + stderr в файл</span>
+cmd<span class="w"> </span><span class="p">&amp;</span>&gt;<span class="w"> </span>file<span class="w">         </span><span class="c1"># то же (короткая форма в bash)</span>
+cmd<span class="w"> </span>&gt;<span class="w"> </span>/dev/null<span class="w"> </span><span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span><span class="w">  </span><span class="c1"># выкинуть весь вывод</span>
+cmd<span class="w"> </span>&lt;<span class="w"> </span>file<span class="w">          </span><span class="c1"># stdin из файла</span>
+cmd<span class="w"> </span><span class="s">&lt;&lt; &#39;EOF&#39;        # heredoc (буквальный, без подстановки)</span>
+<span class="s">строка1</span>
+<span class="s">$name               # так НЕ подставится</span>
+<span class="s">EOF</span>
+
+cmd<span class="w"> </span><span class="s">&lt;&lt; EOF          # heredoc с подстановкой переменных</span>
+<span class="s">привет, $USER</span>
+<span class="s">EOF</span>
+
+cmd<span class="w"> </span><span class="o">&lt;&lt;&lt;</span><span class="w"> </span><span class="s2">&quot;строка&quot;</span><span class="w">    </span><span class="c1"># here-string (одна строка в stdin)</span>
+
+<span class="c1"># Process substitution</span>
+diff<span class="w"> </span>&lt;<span class="o">(</span>ls<span class="w"> </span>dir1<span class="o">)</span><span class="w"> </span>&lt;<span class="o">(</span>ls<span class="w"> </span>dir2<span class="o">)</span><span class="w">        </span><span class="c1"># выводы команд как файлы</span>
+<span class="k">while</span><span class="w"> </span><span class="nb">read</span><span class="w"> </span>x<span class="p">;</span><span class="w"> </span><span class="k">do</span><span class="w"> </span>...<span class="p">;</span><span class="w"> </span><span class="k">done</span><span class="w"> </span>&lt;<span class="w"> </span>&lt;<span class="o">(</span>find<span class="w"> </span>.<span class="w"> </span>-name<span class="w"> </span><span class="s1">&#39;*.py&#39;</span><span class="o">)</span>
+</code></pre></div>
+
+<h3 id="дескрипторы">Дескрипторы<a class="headerlink" href="#дескрипторы" title="Ссылка">#</a></h3>
+<table>
+<thead>
+<tr>
+<th>FD</th>
+<th>Что</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>stdin (ввод)</td>
+</tr>
+<tr>
+<td>1</td>
+<td>stdout (вывод)</td>
+</tr>
+<tr>
+<td>2</td>
+<td>stderr (ошибки)</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="коды-возврата-и-проверка-команд">🚦 Коды возврата и проверка команд<a class="headerlink" href="#коды-возврата-и-проверка-команд" title="Ссылка">#</a></h2>
+<div class="highlight"><pre><span></span><code>cmd<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;успех (код 0)&quot;</span>
+cmd<span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;провал (код ≠ 0)&quot;</span>
+cmd1<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>cmd2<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>cmd3<span class="w">       </span><span class="c1"># цепочка успехов</span>
+cmd1<span class="w"> </span><span class="o">||</span><span class="w"> </span>cmd2<span class="w"> </span><span class="o">||</span><span class="w"> </span>cmd3<span class="w">       </span><span class="c1"># цепочка фолбэков</span>
+
+<span class="k">if</span><span class="w"> </span>cmd<span class="p">;</span><span class="w"> </span><span class="k">then</span><span class="w"> </span>...<span class="p">;</span><span class="w"> </span><span class="k">fi</span><span class="w">       </span><span class="c1"># выполняется, если код 0</span>
+<span class="nb">echo</span><span class="w"> </span><span class="nv">$?</span><span class="w">                    </span><span class="c1"># код возврата последней команды</span>
+true<span class="p">;</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="nv">$?</span><span class="w">              </span><span class="c1"># 0</span>
+false<span class="p">;</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="nv">$?</span><span class="w">             </span><span class="c1"># 1</span>
+!<span class="w"> </span>cmd<span class="w">                      </span><span class="c1"># инверсия кода</span>
+</code></pre></div>
+
+<hr />
+<h2 id="подстановка-команд-и-процессов">🧰 Подстановка команд и процессов<a class="headerlink" href="#подстановка-команд-и-процессов" title="Ссылка">#</a></h2>
+<div class="highlight"><pre><span></span><code><span class="nv">today</span><span class="o">=</span><span class="k">$(</span>date<span class="w"> </span>+%Y-%m-%d<span class="k">)</span><span class="w">        </span><span class="c1"># подстановка вывода</span>
+<span class="nv">files</span><span class="o">=</span><span class="k">$(</span>ls<span class="w"> </span>*.txt<span class="k">)</span>
+<span class="nv">count</span><span class="o">=</span><span class="k">$(</span>ls<span class="w"> </span><span class="p">|</span><span class="w"> </span>wc<span class="w"> </span>-l<span class="k">)</span>
+
+<span class="c1"># Глоббинг (раскрытие имён файлов)</span>
+ls<span class="w"> </span>*.txt<span class="w">          </span><span class="c1"># все .txt</span>
+ls<span class="w"> </span>*.<span class="o">{</span>txt,md<span class="o">}</span><span class="w">     </span><span class="c1"># txt и md</span>
+ls<span class="w"> </span>file?.txt<span class="w">      </span><span class="c1"># один любой символ</span>
+ls<span class="w"> </span>file<span class="o">[</span><span class="m">0</span>-9<span class="o">]</span>.txt<span class="w">  </span><span class="c1"># цифра</span>
+ls<span class="w"> </span>file<span class="o">[</span>!a-c<span class="o">]</span>.txt<span class="w"> </span><span class="c1"># НЕ a,b,c</span>
+
+<span class="c1"># Включить расширенный глоббинг</span>
+<span class="nb">shopt</span><span class="w"> </span>-s<span class="w"> </span>extglob
+ls<span class="w"> </span>!<span class="o">(</span><span class="nb">test</span><span class="o">)</span>.txt<span class="w">    </span><span class="c1"># всё, кроме test.txt</span>
+ls<span class="w"> </span>@<span class="o">(</span>foo<span class="p">|</span>bar<span class="o">)</span>*<span class="w">    </span><span class="c1"># foo или bar в начале</span>
+</code></pre></div>
+
+<hr />
+<h2 id="trap-обработка-сигналов-и-завершения">🛠️ trap — обработка сигналов и завершения<a class="headerlink" href="#trap-обработка-сигналов-и-завершения" title="Ссылка">#</a></h2>
+<div class="highlight"><pre><span></span><code>cleanup<span class="o">()</span><span class="w"> </span><span class="o">{</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Удаляю временные файлы...&quot;</span>
+<span class="w">    </span>rm<span class="w"> </span>-f<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$TMPFILE</span><span class="s2">&quot;</span>
+<span class="o">}</span>
+<span class="nb">trap</span><span class="w"> </span>cleanup<span class="w"> </span>EXIT<span class="w"> </span>INT<span class="w"> </span>TERM<span class="w">   </span><span class="c1"># вызов при выходе/Ctrl-C/kill</span>
+
+<span class="nv">TMPFILE</span><span class="o">=</span><span class="k">$(</span>mktemp<span class="k">)</span>
+<span class="c1"># ...работа...</span>
+<span class="c1"># cleanup вызовется автоматически</span>
+</code></pre></div>
+
+<p>Полезные сигналы:
+| Сигнал | Событие |
+|&mdash;|&mdash;|
+| <code>EXIT</code> | Завершение скрипта (любое) |
+| <code>INT</code> | Ctrl-C |
+| <code>TERM</code> | <code>kill</code> (по умолчанию) |
+| <code>HUP</code> | Закрытие терминала |
+| <code>ERR</code> | Ошибка команды (с <code>set -e</code>) |</p>
+<hr />
+<h2 id="переменные-окружения">🌍 Переменные окружения<a class="headerlink" href="#переменные-окружения" title="Ссылка">#</a></h2>
+<div class="highlight"><pre><span></span><code><span class="nb">export</span><span class="w"> </span><span class="nv">VAR</span><span class="o">=</span><span class="s2">&quot;value&quot;</span><span class="w">        </span><span class="c1"># сделать переменную env-переменной</span>
+env<span class="w">                       </span><span class="c1"># показать все env-переменные</span>
+printenv<span class="w"> </span>PATH<span class="w">             </span><span class="c1"># конкретная переменная</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$PATH</span><span class="s2">&quot;</span><span class="w">              </span><span class="c1"># текущий PATH</span>
+<span class="nv">PATH</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$PATH</span><span class="s2">:/new/dir&quot;</span><span class="w">     </span><span class="c1"># добавить в PATH</span>
+
+<span class="c1"># Дочерний процесс наследует env-переменные (export-нутые),</span>
+<span class="c1"># но не обычные локальные переменные.</span>
+<span class="nv">NAME</span><span class="o">=</span>Alice<span class="w"> </span>bash<span class="w"> </span>-c<span class="w"> </span><span class="s1">&#39;echo $NAME&#39;</span><span class="w">   </span><span class="c1"># одноразовая env для команды</span>
+</code></pre></div>
+
+<h3 id="специальные-переменные">Специальные переменные<a class="headerlink" href="#специальные-переменные" title="Ссылка">#</a></h3>
+<table>
+<thead>
+<tr>
+<th>Переменная</th>
+<th>Что</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>$?</code></td>
+<td>Код возврата последней команды</td>
+</tr>
+<tr>
+<td><code>$!</code></td>
+<td>PID последнего фонового процесса</td>
+</tr>
+<tr>
+<td><code>$$</code></td>
+<td>PID текущего shell</td>
+</tr>
+<tr>
+<td><code>$0</code></td>
+<td>Имя скрипта/shell</td>
+</tr>
+<tr>
+<td><code>$-</code></td>
+<td>Текущие опции (как у <code>set</code>)</td>
+</tr>
+<tr>
+<td><code>$_</code></td>
+<td>Последний аргумент предыдущей команды</td>
+</tr>
+<tr>
+<td><code>$RANDOM</code></td>
+<td>Случайное число 0..32767</td>
+</tr>
+<tr>
+<td><code>$LINENO</code></td>
+<td>Номер строки в скрипте</td>
+</tr>
+<tr>
+<td><code>$BASH_SOURCE</code></td>
+<td>Путь к скрипту</td>
+</tr>
+<tr>
+<td><code>$SECONDS</code></td>
+<td>Секунд с запуска shell</td>
+</tr>
+<tr>
+<td><code>$UID</code></td>
+<td>Текущий UID</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="дебаг">🐛 Дебаг<a class="headerlink" href="#дебаг" title="Ссылка">#</a></h2>
+<div class="highlight"><pre><span></span><code>bash<span class="w"> </span>-x<span class="w"> </span>script.sh<span class="w">          </span><span class="c1"># трассировка выполнения (+ каждая команда)</span>
+bash<span class="w"> </span>-v<span class="w"> </span>script.sh<span class="w">          </span><span class="c1"># вывод строк перед выполнением</span>
+bash<span class="w"> </span>-n<span class="w"> </span>script.sh<span class="w">          </span><span class="c1"># только проверка синтаксиса</span>
+
+<span class="c1"># В скрипте точечно:</span>
+<span class="nb">set</span><span class="w"> </span>-x<span class="w">                     </span><span class="c1"># включить трассировку</span>
+<span class="c1"># ...код для дебага...</span>
+<span class="nb">set</span><span class="w"> </span>+x<span class="w">                     </span><span class="c1"># выключить</span>
+
+<span class="c1"># Вывод в stderr с префиксом</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;DEBUG: var=</span><span class="nv">$var</span><span class="s2">&quot;</span><span class="w"> </span>&gt;<span class="p">&amp;</span><span class="m">2</span>
+
+<span class="nv">PS4</span><span class="o">=</span><span class="s1">&#39;+ ${BASH_SOURCE}:${LINENO}: &#39;</span><span class="w">   </span><span class="c1"># улучшить вид трассировки</span>
+<span class="nb">set</span><span class="w"> </span>-x
+</code></pre></div>
+
+<h3 id="проверка-синтаксиса-онлайн-офлайн">Проверка синтаксиса онлайн/офлайн<a class="headerlink" href="#проверка-синтаксиса-онлайн-офлайн" title="Ссылка">#</a></h3>
+<ul>
+<li><code>shellcheck script.sh</code> — лучший линтер для shell (ставится через pacman)</li>
+<li>https://www.shellcheck.net</li>
+</ul>
+<hr />
+<h2 id="практические-примеры">📝 Практические примеры<a class="headerlink" href="#практические-примеры" title="Ссылка">#</a></h2>
+<h3 id="1-безопасный-backup-с-проверкой">1. Безопасный backup с проверкой<a class="headerlink" href="#1-безопасный-backup-с-проверкой" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="ch">#!/usr/bin/env bash</span>
+<span class="nb">set</span><span class="w"> </span>-euo<span class="w"> </span>pipefail
+
+<span class="nv">SRC</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">1</span><span class="p">:?Укажите источник</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="nv">DST</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">2</span><span class="p">:?Укажите назначение</span><span class="si">}</span><span class="s2">&quot;</span>
+
+<span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span>!<span class="w"> </span>-d<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$SRC</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Ошибка: </span><span class="nv">$SRC</span><span class="s2"> не существует&quot;</span><span class="w"> </span>&gt;<span class="p">&amp;</span><span class="m">2</span>
+<span class="w">    </span><span class="nb">exit</span><span class="w"> </span><span class="m">1</span>
+<span class="k">fi</span>
+
+<span class="nv">backup_name</span><span class="o">=</span><span class="s2">&quot;</span><span class="k">$(</span>basename<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$SRC</span><span class="s2">&quot;</span><span class="k">)</span><span class="s2">_</span><span class="k">$(</span>date<span class="w"> </span>+%Y%m%d_%H%M%S<span class="k">)</span><span class="s2">.tar.gz&quot;</span>
+tar<span class="w"> </span>-czf<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$DST</span><span class="s2">/</span><span class="nv">$backup_name</span><span class="s2">&quot;</span><span class="w"> </span>-C<span class="w"> </span><span class="s2">&quot;</span><span class="k">$(</span>dirname<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$SRC</span><span class="s2">&quot;</span><span class="k">)</span><span class="s2">&quot;</span><span class="w"> </span><span class="s2">&quot;</span><span class="k">$(</span>basename<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$SRC</span><span class="s2">&quot;</span><span class="k">)</span><span class="s2">&quot;</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Готово: </span><span class="nv">$DST</span><span class="s2">/</span><span class="nv">$backup_name</span><span class="s2"> (</span><span class="k">$(</span>du<span class="w"> </span>-h<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$DST</span><span class="s2">/</span><span class="nv">$backup_name</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>cut<span class="w"> </span>-f1<span class="k">)</span><span class="s2">)&quot;</span>
+</code></pre></div>
+
+<h3 id="2-пакетная-обработка-файлов">2. Пакетная обработка файлов<a class="headerlink" href="#2-пакетная-обработка-файлов" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">for</span><span class="w"> </span>f<span class="w"> </span><span class="k">in</span><span class="w"> </span>*.jpg<span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<span class="w">    </span><span class="o">[[</span><span class="w"> </span>-f<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$f</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]]</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="k">continue</span><span class="w">       </span><span class="c1"># защита, если нет файлов</span>
+<span class="w">    </span>convert<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$f</span><span class="s2">&quot;</span><span class="w"> </span><span class="s2">&quot;thumb_</span><span class="si">${</span><span class="nv">f</span><span class="p">%.jpg</span><span class="si">}</span><span class="s2">_small.jpg&quot;</span>
+<span class="k">done</span>
+</code></pre></div>
+
+<h3 id="3-меню-выбора">3. Меню выбора<a class="headerlink" href="#3-меню-выбора" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="nv">PS3</span><span class="o">=</span><span class="s2">&quot;Выберите действие: &quot;</span>
+<span class="k">select</span><span class="w"> </span>opt<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="s2">&quot;Создать&quot;</span><span class="w"> </span><span class="s2">&quot;Удалить&quot;</span><span class="w"> </span><span class="s2">&quot;Выйти&quot;</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="nv">$opt</span><span class="w"> </span><span class="k">in</span>
+<span class="w">        </span><span class="s2">&quot;Создать&quot;</span><span class="o">)</span><span class="w">  </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Создание...&quot;</span><span class="p">;</span><span class="w"> </span><span class="k">break</span><span class="w"> </span><span class="p">;;</span>
+<span class="w">        </span><span class="s2">&quot;Удалить&quot;</span><span class="o">)</span><span class="w">  </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Удаление...&quot;</span><span class="p">;</span><span class="w"> </span><span class="k">break</span><span class="w"> </span><span class="p">;;</span>
+<span class="w">        </span><span class="s2">&quot;Выйти&quot;</span><span class="o">)</span><span class="w">    </span><span class="nb">exit</span><span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="p">;;</span>
+<span class="w">        </span>*<span class="o">)</span><span class="w">          </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Неверный выбор&quot;</span><span class="w"> </span><span class="p">;;</span>
+<span class="w">    </span><span class="k">esac</span>
+<span class="k">done</span>
+</code></pre></div>
+
+<h3 id="4-параллельный-запуск-с-xargs">4. Параллельный запуск с xargs<a class="headerlink" href="#4-параллельный-запуск-с-xargs" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="nb">echo</span><span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;file1\nfile2\nfile3&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>xargs<span class="w"> </span>-P<span class="w"> </span><span class="m">4</span><span class="w"> </span>-I<span class="w"> </span><span class="o">{}</span><span class="w"> </span>process_file<span class="w"> </span><span class="o">{}</span>
+<span class="c1"># -P 4  — 4 параллельных процесса</span>
+<span class="c1"># -I {} — placeholder для аргумента</span>
+</code></pre></div>
+
+<h3 id="5-подтверждение-действия">5. Подтверждение действия<a class="headerlink" href="#5-подтверждение-действия" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="nb">read</span><span class="w"> </span>-p<span class="w"> </span><span class="s2">&quot;Удалить </span><span class="nv">$FILE</span><span class="s2">? [y/N] &quot;</span><span class="w"> </span>ans
+<span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$ans</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">=</span>~<span class="w"> </span>^<span class="o">[</span>Yy<span class="o">]</span>$<span class="w"> </span><span class="o">]]</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Отменено&quot;</span><span class="p">;</span><span class="w"> </span><span class="nb">exit</span><span class="w"> </span><span class="m">0</span><span class="p">;</span><span class="w"> </span><span class="o">}</span>
+rm<span class="w"> </span>-rf<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$FILE</span><span class="s2">&quot;</span>
+</code></pre></div>
+
+<h3 id="6-запрос-с-таймаутом">6. Запрос с таймаутом<a class="headerlink" href="#6-запрос-с-таймаутом" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">if</span><span class="w"> </span><span class="nb">read</span><span class="w"> </span>-t<span class="w"> </span><span class="m">5</span><span class="w"> </span>-p<span class="w"> </span><span class="s2">&quot;Имя (5с на ответ): &quot;</span><span class="w"> </span>name<span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Привет, </span><span class="nv">$name</span><span class="s2">&quot;</span>
+<span class="k">else</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Время вышло&quot;</span>
+<span class="k">fi</span>
+</code></pre></div>
+
+<hr />
+<h2 id="цветной-вывод">🎨 Цветной вывод<a class="headerlink" href="#цветной-вывод" title="Ссылка">#</a></h2>
+<div class="highlight"><pre><span></span><code><span class="c1"># ANSI-коды</span>
+<span class="nv">RED</span><span class="o">=</span><span class="s1">&#39;\033[0;31m&#39;</span><span class="p">;</span><span class="w"> </span><span class="nv">GREEN</span><span class="o">=</span><span class="s1">&#39;\033[0;32m&#39;</span><span class="p">;</span><span class="w"> </span><span class="nv">YELLOW</span><span class="o">=</span><span class="s1">&#39;\033[1;33m&#39;</span>
+<span class="nv">BLUE</span><span class="o">=</span><span class="s1">&#39;\033[0;34m&#39;</span><span class="p">;</span><span class="w"> </span><span class="nv">NC</span><span class="o">=</span><span class="s1">&#39;\033[0m&#39;</span><span class="w">        </span><span class="c1"># No Color</span>
+
+<span class="nb">echo</span><span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">RED</span><span class="si">}</span><span class="s2">Ошибка</span><span class="si">${</span><span class="nv">NC</span><span class="si">}</span><span class="s2">: что-то не так&quot;</span>
+<span class="nb">echo</span><span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">GREEN</span><span class="si">}</span><span class="s2">Успех</span><span class="si">${</span><span class="nv">NC</span><span class="si">}</span><span class="s2">: всё хорошо&quot;</span>
+
+<span class="c1"># Логирование</span>
+log<span class="o">()</span><span class="w">  </span><span class="o">{</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">BLUE</span><span class="si">}</span><span class="s2">[</span><span class="k">$(</span>date<span class="w"> </span>+%H:%M:%S<span class="k">)</span><span class="s2">]</span><span class="si">${</span><span class="nv">NC</span><span class="si">}</span><span class="s2"> </span><span class="nv">$*</span><span class="s2">&quot;</span><span class="p">;</span><span class="w"> </span><span class="o">}</span>
+err<span class="o">()</span><span class="w">  </span><span class="o">{</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">RED</span><span class="si">}</span><span class="s2">[ERROR]</span><span class="si">${</span><span class="nv">NC</span><span class="si">}</span><span class="s2"> </span><span class="nv">$*</span><span class="s2">&quot;</span><span class="w"> </span>&gt;<span class="p">&amp;</span><span class="m">2</span><span class="p">;</span><span class="w"> </span><span class="o">}</span>
+ok<span class="o">()</span><span class="w">   </span><span class="o">{</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">GREEN</span><span class="si">}</span><span class="s2">[OK]</span><span class="si">${</span><span class="nv">NC</span><span class="si">}</span><span class="s2"> </span><span class="nv">$*</span><span class="s2">&quot;</span><span class="p">;</span><span class="w"> </span><span class="o">}</span>
+
+log<span class="w"> </span><span class="s2">&quot;Старт&quot;</span><span class="p">;</span><span class="w"> </span>ok<span class="w"> </span><span class="s2">&quot;Готово&quot;</span><span class="p">;</span><span class="w"> </span>err<span class="w"> </span><span class="s2">&quot;Что-то сломалось&quot;</span>
+</code></pre></div>
+
+<hr />
+<h2 id="конфиг-bashrc-полезные-настройки">📚 Конфиг <code>~/.bashrc</code> — полезные настройки<a class="headerlink" href="#конфиг-bashrc-полезные-настройки" title="Ссылка">#</a></h2>
+<div class="highlight"><pre><span></span><code><span class="c1"># История</span>
+<span class="nv">HISTSIZE</span><span class="o">=</span><span class="m">10000</span>
+<span class="nv">HISTFILESIZE</span><span class="o">=</span><span class="m">20000</span>
+<span class="nv">HISTCONTROL</span><span class="o">=</span>ignoreboth:erasedups<span class="w">   </span><span class="c1"># без дублей и пробелов</span>
+<span class="nb">shopt</span><span class="w"> </span>-s<span class="w"> </span>histappend<span class="w">                </span><span class="c1"># дополнять, а не перезаписывать</span>
+
+<span class="c1"># Алиасы</span>
+<span class="nb">alias</span><span class="w"> </span><span class="nv">ll</span><span class="o">=</span><span class="s1">&#39;ls -lah&#39;</span>
+<span class="nb">alias</span><span class="w"> </span><span class="nv">la</span><span class="o">=</span><span class="s1">&#39;ls -A&#39;</span>
+<span class="nb">alias</span><span class="w"> </span>..<span class="o">=</span><span class="s1">&#39;cd ..&#39;</span>
+<span class="nb">alias</span><span class="w"> </span>...<span class="o">=</span><span class="s1">&#39;cd ../..&#39;</span>
+<span class="nb">alias</span><span class="w"> </span><span class="nv">grep</span><span class="o">=</span><span class="s1">&#39;grep --color=auto&#39;</span>
+<span class="nb">alias</span><span class="w"> </span><span class="nv">diff</span><span class="o">=</span><span class="s1">&#39;diff --color=auto&#39;</span>
+<span class="nb">alias</span><span class="w"> </span><span class="nv">rm</span><span class="o">=</span><span class="s1">&#39;rm -i&#39;</span><span class="w">                   </span><span class="c1"># подтверждение удаления</span>
+<span class="nb">alias</span><span class="w"> </span><span class="nv">cp</span><span class="o">=</span><span class="s1">&#39;cp -i&#39;</span>
+<span class="nb">alias</span><span class="w"> </span><span class="nv">mv</span><span class="o">=</span><span class="s1">&#39;mv -i&#39;</span>
+
+<span class="c1"># Функции</span>
+mkcd<span class="o">()</span><span class="w"> </span><span class="o">{</span><span class="w"> </span>mkdir<span class="w"> </span>-p<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">cd</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="p">;</span><span class="w"> </span><span class="o">}</span>
+extract<span class="o">()</span><span class="w"> </span><span class="o">{</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span><span class="k">in</span>
+<span class="w">        </span>*.tar.gz<span class="p">|</span>*.tgz<span class="o">)</span><span class="w"> </span>tar<span class="w"> </span>xzf<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">;;</span>
+<span class="w">        </span>*.tar.bz2<span class="o">)</span><span class="w">      </span>tar<span class="w"> </span>xjf<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">;;</span>
+<span class="w">        </span>*.zip<span class="o">)</span><span class="w">          </span>unzip<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">;;</span>
+<span class="w">        </span>*.rar<span class="o">)</span><span class="w">          </span>unrar<span class="w"> </span>x<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">;;</span>
+<span class="w">        </span>*<span class="o">)</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Не знаю формат </span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">;;</span>
+<span class="w">    </span><span class="k">esac</span>
+<span class="o">}</span>
+
+<span class="c1"># Промпт (PS1)</span>
+<span class="nv">PS1</span><span class="o">=</span><span class="s1">&#39;\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ &#39;</span>
+</code></pre></div>
+
+<hr />
+<h2 id="readline-горячие-клавиши-bash">⌨️ Readline: горячие клавиши bash<a class="headerlink" href="#readline-горячие-клавиши-bash" title="Ссылка">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Клавиша</th>
+<th>Действие</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Ctrl-a</code> / <code>Ctrl-e</code></td>
+<td>В начало / конец строки</td>
+</tr>
+<tr>
+<td><code>Ctrl-b</code> / <code>Ctrl-f</code></td>
+<td>Влево / вправо</td>
+</tr>
+<tr>
+<td><code>Alt-b</code> / <code>Alt-f</code></td>
+<td>На слово назад / вперёд</td>
+</tr>
+<tr>
+<td><code>Ctrl-w</code></td>
+<td>Удалить слово слева</td>
+</tr>
+<tr>
+<td><code>Ctrl-u</code></td>
+<td>Удалить до начала</td>
+</tr>
+<tr>
+<td><code>Ctrl-k</code></td>
+<td>Удалить до конца</td>
+</tr>
+<tr>
+<td><code>Ctrl-y</code></td>
+<td>Вставить (yank)</td>
+</tr>
+<tr>
+<td><code>Ctrl-_</code></td>
+<td>Undo</td>
+</tr>
+<tr>
+<td><code>Ctrl-r</code></td>
+<td>Обратный поиск по истории</td>
+</tr>
+<tr>
+<td><code>Ctrl-s</code></td>
+<td>Прямой поиск</td>
+</tr>
+<tr>
+<td><code>Ctrl-l</code></td>
+<td>Очистить экран</td>
+</tr>
+<tr>
+<td><code>Ctrl-c</code></td>
+<td>Прервать</td>
+</tr>
+<tr>
+<td><code>Ctrl-d</code></td>
+<td>EOF / выход</td>
+</tr>
+<tr>
+<td><code>Ctrl-z</code></td>
+<td>Приостановить</td>
+</tr>
+<tr>
+<td><code>Tab</code></td>
+<td>Автодополнение</td>
+</tr>
+<tr>
+<td><code>Alt-.</code></td>
+<td>Вставить последний аргумент</td>
+</tr>
+<tr>
+<td><code>!!</code></td>
+<td>Повторить последнюю команду</td>
+</tr>
+<tr>
+<td><code>!$</code></td>
+<td>Последний аргумент</td>
+</tr>
+<tr>
+<td><code>!*</code></td>
+<td>Все аргументы последней</td>
+</tr>
+<tr>
+<td><code>!n</code></td>
+<td>Команду №n из истории</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="частые-ошибки-и-грабли">🪤 Частые ошибки и грабли<a class="headerlink" href="#частые-ошибки-и-грабли" title="Ссылка">#</a></h2>
+<ol>
+<li><strong>Пробелы вокруг <code>=</code></strong> — <code>x = 5</code> ошибка, надо <code>x=5</code>.</li>
+<li><strong>Без кавычек</strong> — <code>[[ $x == "a b" ]]</code> ломается; используйте <code>"$x"</code>.</li>
+<li><strong><code>[ ]</code> без пробелов</strong> — <code>[ 1==2 ]</code> ошибка, надо <code>[ 1 == 2 ]</code> или <code>(( ))</code>.</li>
+<li><strong><code>$(cmd)</code> vs <code>`cmd`</code></strong> — <code>$()</code> вкладывается, <code>` `</code> нет.</li>
+<li><strong>Подстановка в heredoc</strong> — <code>&lt;&lt; 'EOF'</code> не подставляет, <code>&lt;&lt; EOF</code> подставляет.</li>
+<li><strong><code>local var=$(cmd)</code></strong> — маскирует код возврата <code>cmd</code>. Проверяйте отдельно.</li>
+<li><strong>Подshell в пайпе</strong> — <code>cmd | while read</code> меняет переменные в subshell&rsquo;е.</li>
+<li><strong><code>rm $files</code></strong> — если в имени пробел, удалит не то. Кавычки!</li>
+<li><strong><code>set -e</code> и функции</strong> — <code>func || true</code> нужен, чтобы не падать.</li>
+<li><strong>Имена файлов с <code>-</code></strong> — <code>rm -file</code> будет воспринято как флаг; <code>rm -- -file</code>.</li>
+<li><strong><code>eval</code></strong> — почти всегда зло, опасен инъекциями.</li>
+<li><strong><code>bash -c</code> с одинарными кавычками</strong> — переменные не подставляются.</li>
+</ol>
+<hr />
+<h2 id="ссылки">🔗 Ссылки<a class="headerlink" href="#ссылки" title="Ссылка">#</a></h2>
+<ul>
+<li><code>man bash</code> (полный, очень подробный)</li>
+<li>ShellCheck: https://www.shellcheck.net</li>
+<li>Shell Style Guide (Google): https://google.github.io/styleguide/shellguide.html</li>
+<li>Pure Bash Bible: https://github.com/dylanaraps/pure-bash-bible</li>
+<li>Bash Hackers Wiki: https://wiki.bash-hackers.org</li>
+<li>Learn Bash: https://learnbash.org / https://linuxcommand.org</li>
+<li>Сайт с примерами: https://shellsnippets.com</li>
+</ul>
+<hr />
+<h2 id="полезные-советы">💡 Полезные советы<a class="headerlink" href="#полезные-советы" title="Ссылка">#</a></h2>
+<ol>
+<li><strong>Всегда</strong> <code>set -euo pipefail</code> в начале нетривиальных скриптов.</li>
+<li><strong>Всегда</strong> кавычки: <code>"$var"</code> почти всегда безопаснее, чем <code>$var</code>.</li>
+<li><strong>Используйте <code>[[ ]]</code></strong> вместо <code>[ ]</code> — мощнее и безопаснее.</li>
+<li><strong>ShellCheck</strong> — прогоняйте каждый скрипт, ловит 90% багов.</li>
+<li><strong><code>local</code></strong> в функциях — иначе глобальная переменная!</li>
+<li><strong><code>printf</code></strong> вместо <code>echo</code> для сложного/портативного вывода.</li>
+<li><strong><code>read -r</code></strong> — всегда с <code>-r</code>, чтобы <code>\</code> не интерпретировался.</li>
+<li><strong><code>trap</code></strong> для очистки временных файлов при выходе/ошибке.</li>
+<li><strong><code>mktemp</code></strong> для временных файлов, не придумывайте имена сами.</li>
+<li><strong>Если задача сложная</strong> — возможно, лучше Python/Go; bash хорош для
+    склеивания команд, не для сложной логики.</li>
+</ol>
+<hr />
+<p><em>Сгенерировано как шпаргалка. Подробности — <code>man bash</code>,
+он огромный, но очень полезный.</em></p>
+    </article>
+    <nav class="pagination">
+      <a class="pager prev" href="tmux.html">← Tmux</a>
+      <a class="pager next" href="git.html">Git →</a>
+    </nav>
+  </main>
+
+  <aside class="toc">
+    <details open>
+      <summary>📑 Оглавление</summary>
+      <div class="toc-list">
+<div class="toc">
+<ul>
+<li><a href="#bash-шпаргалка-по-скриптингу-и-использованию">🐚 Bash — шпаргалка по скриптингу и использованию</a><ul>
+<li><a href="#базовый-синтаксис">🚀 Базовый синтаксис</a><ul>
+<li><a href="#shebang">Shebang</a></li>
+<li><a href="#строгий-режим-рекомендуется-всегда">Строгий режим (рекомендуется всегда)</a></li>
+<li><a href="#запуск-скрипта">Запуск скрипта</a></li>
+</ul>
+</li>
+<li><a href="#комментарии-и-вывод">💬 Комментарии и вывод</a></li>
+<li><a href="#переменные">🔤 Переменные</a><ul>
+<li><a href="#важно-про-кавычки">⚠️ Важно про кавычки</a></li>
+</ul>
+</li>
+<li><a href="#чтение-ввода">📥 Чтение ввода</a></li>
+<li><a href="#параметры-и-аргументы">🎯 Параметры и аргументы</a><ul>
+<li><a href="#разбор-аргументов-getopts">Разбор аргументов (getopts)</a></li>
+</ul>
+</li>
+<li><a href="#арифметика">🔢 Арифметика</a><ul>
+<li><a href="#дробные-числа-нужен-bc-awk">Дробные числа — нужен bc/awk</a></li>
+</ul>
+</li>
+<li><a href="#строки">📊 Строки</a><ul>
+<li><a href="#мнемоника-для-и">Мнемоника для # и %</a></li>
+</ul>
+</li>
+<li><a href="#массивы">📋 Массивы</a></li>
+<li><a href="#условия">🔀 Условия</a><ul>
+<li><a href="#if-elif-else">if / elif / else</a></li>
+<li><a href="#vs-vs-test">[[ ]] vs [ ] vs test</a></li>
+<li><a href="#файловые-проверки">Файловые проверки</a></li>
+<li><a href="#числовые-сравнения-в">Числовые сравнения (в [ ])</a></li>
+<li><a href="#case-switch">case (switch)</a></li>
+<li><a href="#тернарный-оператор">Тернарный оператор</a></li>
+</ul>
+</li>
+<li><a href="#циклы">🔁 Циклы</a><ul>
+<li><a href="#for">for</a></li>
+<li><a href="#while-until">while / until</a></li>
+<li><a href="#break-continue">break / continue</a></li>
+</ul>
+</li>
+<li><a href="#функции">🧮 Функции</a></li>
+<li><a href="#ввод-вывод-и-перенаправления">📤 Ввод/вывод и перенаправления</a><ul>
+<li><a href="#дескрипторы">Дескрипторы</a></li>
+</ul>
+</li>
+<li><a href="#коды-возврата-и-проверка-команд">🚦 Коды возврата и проверка команд</a></li>
+<li><a href="#подстановка-команд-и-процессов">🧰 Подстановка команд и процессов</a></li>
+<li><a href="#trap-обработка-сигналов-и-завершения">🛠️ trap — обработка сигналов и завершения</a></li>
+<li><a href="#переменные-окружения">🌍 Переменные окружения</a><ul>
+<li><a href="#специальные-переменные">Специальные переменные</a></li>
+</ul>
+</li>
+<li><a href="#дебаг">🐛 Дебаг</a><ul>
+<li><a href="#проверка-синтаксиса-онлайн-офлайн">Проверка синтаксиса онлайн/офлайн</a></li>
+</ul>
+</li>
+<li><a href="#практические-примеры">📝 Практические примеры</a><ul>
+<li><a href="#1-безопасный-backup-с-проверкой">1. Безопасный backup с проверкой</a></li>
+<li><a href="#2-пакетная-обработка-файлов">2. Пакетная обработка файлов</a></li>
+<li><a href="#3-меню-выбора">3. Меню выбора</a></li>
+<li><a href="#4-параллельный-запуск-с-xargs">4. Параллельный запуск с xargs</a></li>
+<li><a href="#5-подтверждение-действия">5. Подтверждение действия</a></li>
+<li><a href="#6-запрос-с-таймаутом">6. Запрос с таймаутом</a></li>
+</ul>
+</li>
+<li><a href="#цветной-вывод">🎨 Цветной вывод</a></li>
+<li><a href="#конфиг-bashrc-полезные-настройки">📚 Конфиг ~/.bashrc — полезные настройки</a></li>
+<li><a href="#readline-горячие-клавиши-bash">⌨️ Readline: горячие клавиши bash</a></li>
+<li><a href="#частые-ошибки-и-грабли">🪤 Частые ошибки и грабли</a></li>
+<li><a href="#ссылки">🔗 Ссылки</a></li>
+<li><a href="#полезные-советы">💡 Полезные советы</a></li>
+</ul>
+</li>
+</ul>
+</div>
+
+      </div>
+    </details>
+  </aside>
+</div>
+
+<button class="back-top" id="backTop" aria-label="Наверх">↑</button>
+
+<script src="assets/search.js"></script>
+<script src="assets/page.js"></script>
+</body>
+</html>

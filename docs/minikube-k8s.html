@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Minikube / Kubernetes — Шпаргалки</title>
+<link rel="stylesheet" href="assets/style.css">
+<link rel="stylesheet" href="assets/pygments.css">
+</head>
+<body>
+<div class="layout">
+  <aside class="sidebar">
+    <a href="index.html" class="brand">📌 Шпаргалки</a>
+    <nav class="nav">
+<a href="yazi.html" class="nav-item"><span class="nav-ico">📦</span>Yazi</a>
+<a href="neovim.html" class="nav-item"><span class="nav-ico">📘</span>Neovim (LazyVim)</a>
+<a href="niri.html" class="nav-item"><span class="nav-ico">🪟</span>Niri</a>
+<a href="tmux.html" class="nav-item"><span class="nav-ico">🪟</span>Tmux</a>
+<a href="bash.html" class="nav-item"><span class="nav-ico">🐚</span>Bash</a>
+<a href="git.html" class="nav-item"><span class="nav-ico">🔀</span>Git</a>
+<a href="terminal.html" class="nav-item"><span class="nav-ico">🖥️</span>Терминал Linux</a>
+<a href="powershell.html" class="nav-item"><span class="nav-ico">💻</span>PowerShell</a>
+<a href="cmd.html" class="nav-item"><span class="nav-ico">🪟</span>CMD (cmd.exe)</a>
+<a href="python.html" class="nav-item"><span class="nav-ico">🐍</span>Python</a>
+<a href="systemd.html" class="nav-item"><span class="nav-ico">⚙️</span>systemd</a>
+<a href="ssh.html" class="nav-item"><span class="nav-ico">🔐</span>SSH</a>
+<a href="make-cmake.html" class="nav-item"><span class="nav-ico">🔨</span>Make / CMake</a>
+<a href="docker.html" class="nav-item"><span class="nav-ico">🐳</span>Docker</a>
+<a href="pacman.html" class="nav-item"><span class="nav-ico">📦</span>pacman / yay / paru</a>
+<a href="spark.html" class="nav-item"><span class="nav-ico">⚡</span>Apache Spark / PySpark</a>
+<a href="markdown.html" class="nav-item"><span class="nav-ico">📝</span>Markdown</a>
+<a href="regex.html" class="nav-item"><span class="nav-ico">🔍</span>Регулярные выражения</a>
+<a href="jq-json.html" class="nav-item"><span class="nav-ico">🔧</span>jq + JSON</a>
+<a href="awk-sed.html" class="nav-item"><span class="nav-ico">✂️</span>awk / sed</a>
+<a href="airflow.html" class="nav-item"><span class="nav-ico">🌪️</span>Apache Airflow</a>
+<a href="http-curl.html" class="nav-item"><span class="nav-ico">🌐</span>HTTP / curl</a>
+<a href="yaml.html" class="nav-item"><span class="nav-ico">📄</span>YAML</a>
+<a href="vscode.html" class="nav-item"><span class="nav-ico">💻</span>VS Code</a>
+<a href="cron.html" class="nav-item"><span class="nav-ico">⏰</span>cron</a>
+<a href="fzf-zoxide.html" class="nav-item"><span class="nav-ico">🔎</span>fzf + zoxide</a>
+<a href="minikube-k8s.html" class="nav-item active"><span class="nav-ico">☸️</span>Minikube / Kubernetes</a>
+<a href="cicd.html" class="nav-item"><span class="nav-ico">🦊</span>GitLab CI / GitHub Actions</a>
+<a href="nginx.html" class="nav-item"><span class="nav-ico">🌐</span>nginx</a>
+<a href="dbt.html" class="nav-item"><span class="nav-ico">🔧</span>dbt</a>
+<a href="kafka.html" class="nav-item"><span class="nav-ico">🐘</span>Apache Kafka</a>
+<a href="prometheus-grafana.html" class="nav-item"><span class="nav-ico">📊</span>Prometheus / Grafana</a>
+<a href="iceberg-nessie.html" class="nav-item"><span class="nav-ico">🧊</span>Iceberg / Nessie</a>
+<a href="impala.html" class="nav-item"><span class="nav-ico">🐬</span>Apache Impala</a>
+<a href="terraform.html" class="nav-item"><span class="nav-ico">🏗️</span>Terraform</a>
+<a href="linux-internals.html" class="nav-item"><span class="nav-ico">🐧</span>Linux Internals</a>
+<a href="miscellaneous.html" class="nav-item"><span class="nav-ico">🧰</span>Miscellaneous</a>
+<a href="python-automation-libs.html" class="nav-item"><span class="nav-ico">🐍</span>Python: авт-ция (10 libs)</a>
+<a href="eza.html" class="nav-item"><span class="nav-ico">🌈</span>eza</a>
+<a href="dbeaver.html" class="nav-item"><span class="nav-ico">🗄️</span>DBeaver</a>
+<a href="zcode.html" class="nav-item"><span class="nav-ico">🤖</span>ZCode</a>
+<a href="warp.html" class="nav-item"><span class="nav-ico">🚀</span>Warp</a>
+<a href="agentic-ai-dev.html" class="nav-item"><span class="nav-ico">🤝</span>Агентная разработка с ИИ</a>
+    </nav>
+  </aside>
+
+  <main class="content">
+    <article>
+<h1 id="minikube-kubernetes-kubectl-шпаргалка">☸️ Minikube / Kubernetes (kubectl) — шпаргалка<a class="headerlink" href="#minikube-kubernetes-kubectl-шпаргалка" title="Ссылка">#</a></h1>
+<blockquote>
+<p><strong>Kubernetes (K8s)</strong> — оркестратор контейнеров.
+<strong>Minikube</strong> — локальный кластер K8s для разработки/обучения.
+<strong>kubectl</strong> — CLI-клиент для управления K8s.
+Документация: https://kubernetes.io/docs · https://minikube.sigs.k8s.io</p>
+</blockquote>
+<hr />
+<h2 id="главные-понятия-k8s">🔑 Главные понятия K8s<a class="headerlink" href="#главные-понятия-k8s" title="Ссылка">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Термин</th>
+<th>Что значит</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Cluster</strong></td>
+<td>Кластер (набор узлов)</td>
+</tr>
+<tr>
+<td><strong>Node</strong></td>
+<td>Узел (машина) — Master/Worker</td>
+</tr>
+<tr>
+<td><strong>Pod</strong></td>
+<td>Минимальная единица, 1+ контейнеров</td>
+</tr>
+<tr>
+<td><strong>Deployment</strong></td>
+<td>Управляет репликами Pod&rsquo;ов</td>
+</tr>
+<tr>
+<td><strong>Service</strong></td>
+<td>Сетевой доступ к Pod&rsquo;ам</td>
+</tr>
+<tr>
+<td><strong>Ingress</strong></td>
+<td>HTTP/HTTPS-маршрутизация</td>
+</tr>
+<tr>
+<td><strong>ConfigMap</strong></td>
+<td>Конфигурация (не секреты)</td>
+</tr>
+<tr>
+<td><strong>Secret</strong></td>
+<td>Секреты (base64)</td>
+</tr>
+<tr>
+<td><strong>Volume</strong></td>
+<td>Хранилище данных</td>
+</tr>
+<tr>
+<td><strong>PV / PVC</strong></td>
+<td>PersistentVolume / Claim</td>
+</tr>
+<tr>
+<td><strong>Namespace</strong></td>
+<td>Логическое разделение кластера</td>
+</tr>
+<tr>
+<td><strong>Label / Selector</strong></td>
+<td>Теги и выбор по ним</td>
+</tr>
+<tr>
+<td><strong>ReplicaSet</strong></td>
+<td>Гарантирует N реплик</td>
+</tr>
+<tr>
+<td><strong>StatefulSet</strong></td>
+<td>Для stateful приложений (БД)</td>
+</tr>
+<tr>
+<td><strong>DaemonSet</strong></td>
+<td>Pod на каждом узле</td>
+</tr>
+<tr>
+<td><strong>Job / CronJob</strong></td>
+<td>Разовые / по расписанию задачи</td>
+</tr>
+<tr>
+<td><strong>Helm</strong></td>
+<td>Пакетный менеджер для K8s</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="minikube-локальный-кластер">🚀 Minikube — локальный кластер<a class="headerlink" href="#minikube-локальный-кластер" title="Ссылка">#</a></h2>
+<h3 id="установка">Установка<a class="headerlink" href="#установка" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Arch / CachyOS</span>
+sudo<span class="w"> </span>pacman<span class="w"> </span>-S<span class="w"> </span>minikube<span class="w"> </span>kubectl
+
+<span class="c1"># Debian/Ubuntu</span>
+curl<span class="w"> </span>-LO<span class="w"> </span>https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
+sudo<span class="w"> </span>install<span class="w"> </span>minikube-linux-amd64<span class="w"> </span>/usr/local/bin/minikube
+
+<span class="c1"># macOS</span>
+brew<span class="w"> </span>install<span class="w"> </span>minikube<span class="w"> </span>kubectl
+</code></pre></div>
+
+<h3 id="базовые-команды">Базовые команды<a class="headerlink" href="#базовые-команды" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>minikube<span class="w"> </span>start<span class="w">                      </span><span class="c1"># запустить (с дефолтным драйвером)</span>
+minikube<span class="w"> </span>start<span class="w"> </span>--driver<span class="o">=</span>docker<span class="w">      </span><span class="c1"># через Docker</span>
+minikube<span class="w"> </span>start<span class="w"> </span>--driver<span class="o">=</span>kvm2<span class="w">        </span><span class="c1"># через KVM (Linux, рекомендуется)</span>
+minikube<span class="w"> </span>start<span class="w"> </span>--driver<span class="o">=</span>virtualbox<span class="w">  </span><span class="c1"># VirtualBox</span>
+minikube<span class="w"> </span>start<span class="w"> </span>--cpus<span class="o">=</span><span class="m">4</span><span class="w"> </span>--memory<span class="o">=</span>8g<span class="w"> </span><span class="c1"># с ресурсами</span>
+minikube<span class="w"> </span>start<span class="w"> </span>--kubernetes-version<span class="o">=</span>v1.29.0
+
+minikube<span class="w"> </span>status<span class="w">                     </span><span class="c1"># статус</span>
+minikube<span class="w"> </span>stop<span class="w">                       </span><span class="c1"># остановить</span>
+minikube<span class="w"> </span>delete<span class="w">                     </span><span class="c1"># удалить кластер</span>
+minikube<span class="w"> </span>pause<span class="w">                      </span><span class="c1"># пауза (без удаления)</span>
+minikube<span class="w"> </span>unpause
+
+minikube<span class="w"> </span>dashboard<span class="w">                  </span><span class="c1"># открыть Web UI в браузере</span>
+minikube<span class="w"> </span>ip<span class="w">                         </span><span class="c1"># IP-адрес кластера</span>
+minikube<span class="w"> </span>ssh<span class="w">                        </span><span class="c1"># SSH в ноду</span>
+minikube<span class="w"> </span>logs<span class="w">                       </span><span class="c1"># логи</span>
+minikube<span class="w"> </span>version
+
+minikube<span class="w"> </span>node<span class="w"> </span>list<span class="w">                  </span><span class="c1"># список нод</span>
+minikube<span class="w"> </span>node<span class="w"> </span>add<span class="w">                   </span><span class="c1"># добавить ноду</span>
+</code></pre></div>
+
+<h3 id="addons">Addons<a class="headerlink" href="#addons" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>minikube<span class="w"> </span>addons<span class="w"> </span>list<span class="w">                </span><span class="c1"># доступные аддоны</span>
+minikube<span class="w"> </span>addons<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>ingress<span class="w">      </span><span class="c1"># включить Ingress controller</span>
+minikube<span class="w"> </span>addons<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>metrics-server
+minikube<span class="w"> </span>addons<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>dashboard
+minikube<span class="w"> </span>addons<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>registry
+minikube<span class="w"> </span>addons<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>metallb<span class="w">      </span><span class="c1"># LoadBalancer для локалки</span>
+minikube<span class="w"> </span>addons<span class="w"> </span>disable<span class="w"> </span>ingress<span class="w">     </span><span class="c1"># отключить</span>
+</code></pre></div>
+
+<h3 id="профили-несколько-кластеров">Профили (несколько кластеров)<a class="headerlink" href="#профили-несколько-кластеров" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>minikube<span class="w"> </span>profile<span class="w"> </span>list
+minikube<span class="w"> </span>profile<span class="w"> </span>mycluster
+minikube<span class="w"> </span>start<span class="w"> </span>-p<span class="w"> </span>mycluster
+</code></pre></div>
+
+<h3 id="образы-и-реестр">Образы и реестр<a class="headerlink" href="#образы-и-реестр" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>minikube<span class="w"> </span>image<span class="w"> </span>load<span class="w"> </span>myapp:latest<span class="w">    </span><span class="c1"># загрузить локальный образ в minikube</span>
+minikube<span class="w"> </span>image<span class="w"> </span>ls<span class="w">                   </span><span class="c1"># список образов</span>
+minikube<span class="w"> </span>image<span class="w"> </span>rm<span class="w"> </span>myapp:latest
+
+<span class="c1"># Использовать локальный реестр</span>
+<span class="nb">eval</span><span class="w"> </span><span class="k">$(</span>minikube<span class="w"> </span>docker-env<span class="k">)</span><span class="w">         </span><span class="c1"># использовать Docker minikube</span>
+docker<span class="w"> </span>build<span class="w"> </span>-t<span class="w"> </span>myapp<span class="w"> </span>.<span class="w">             </span><span class="c1"># теперь образ доступен в кластере</span>
+<span class="c1"># В deployment: imagePullPolicy: Never</span>
+</code></pre></div>
+
+<hr />
+<h2 id="kubectl-основные-команды">🎯 kubectl — основные команды<a class="headerlink" href="#kubectl-основные-команды" title="Ссылка">#</a></h2>
+<h3 id="контекст-и-конфигурация">Контекст и конфигурация<a class="headerlink" href="#контекст-и-конфигурация" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>kubectl<span class="w"> </span>config<span class="w"> </span>view<span class="w">                 </span><span class="c1"># текущий конфиг (~/.kube/config)</span>
+kubectl<span class="w"> </span>config<span class="w"> </span>current-context<span class="w">      </span><span class="c1"># текущий контекст</span>
+kubectl<span class="w"> </span>config<span class="w"> </span>get-contexts<span class="w">         </span><span class="c1"># список контекстов</span>
+kubectl<span class="w"> </span>config<span class="w"> </span>use-context<span class="w"> </span>minikube<span class="w"> </span><span class="c1"># переключиться</span>
+kubectl<span class="w"> </span>config<span class="w"> </span>set-context<span class="w"> </span>--current<span class="w"> </span>--namespace<span class="o">=</span>dev
+
+kubectl<span class="w"> </span>version<span class="w">                     </span><span class="c1"># версия kubectl и кластера</span>
+kubectl<span class="w"> </span>version<span class="w"> </span>--client<span class="w">            </span><span class="c1"># только клиент</span>
+kubectl<span class="w"> </span>cluster-info<span class="w">                </span><span class="c1"># инфо о кластере</span>
+kubectl<span class="w"> </span>api-resources<span class="w">               </span><span class="c1"># типы ресурсов</span>
+kubectl<span class="w"> </span>api-versions<span class="w">                </span><span class="c1"># версии API</span>
+</code></pre></div>
+
+<h3 id="просмотр-ресурсов">Просмотр ресурсов<a class="headerlink" href="#просмотр-ресурсов" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>kubectl<span class="w"> </span>get<span class="w"> </span>pods<span class="w">                    </span><span class="c1"># все поды в текущем namespace</span>
+kubectl<span class="w"> </span>get<span class="w"> </span>pods<span class="w"> </span>-A<span class="w">                 </span><span class="c1"># во ВСЕХ namespaces</span>
+kubectl<span class="w"> </span>get<span class="w"> </span>pods<span class="w"> </span>-o<span class="w"> </span>wide<span class="w">            </span><span class="c1"># подробно (с IP, нодой)</span>
+kubectl<span class="w"> </span>get<span class="w"> </span>pods<span class="w"> </span>-w<span class="w">                 </span><span class="c1"># watch (реальное время)</span>
+kubectl<span class="w"> </span>get<span class="w"> </span>pod<span class="w"> </span>NAME<span class="w"> </span>-o<span class="w"> </span>yaml<span class="w">        </span><span class="c1"># в YAML</span>
+kubectl<span class="w"> </span>get<span class="w"> </span>pod<span class="w"> </span>NAME<span class="w"> </span>-o<span class="w"> </span>json<span class="w">        </span><span class="c1"># в JSON</span>
+kubectl<span class="w"> </span>get<span class="w"> </span>pod<span class="w"> </span>NAME<span class="w"> </span>-o<span class="w"> </span><span class="nv">jsonpath</span><span class="o">=</span><span class="s1">&#39;{.status.phase}&#39;</span><span class="w">   </span><span class="c1"># конкретное поле</span>
+
+kubectl<span class="w"> </span>get<span class="w"> </span>deploy<span class="w">                  </span><span class="c1"># deployments</span>
+kubectl<span class="w"> </span>get<span class="w"> </span>svc<span class="w">                     </span><span class="c1"># services</span>
+kubectl<span class="w"> </span>get<span class="w"> </span>ingress
+kubectl<span class="w"> </span>get<span class="w"> </span>configmap
+kubectl<span class="w"> </span>get<span class="w"> </span>secret
+kubectl<span class="w"> </span>get<span class="w"> </span>pv,pvc<span class="w">                  </span><span class="c1"># volumes</span>
+kubectl<span class="w"> </span>get<span class="w"> </span>nodes<span class="w">                   </span><span class="c1"># узлы кластера</span>
+kubectl<span class="w"> </span>get<span class="w"> </span>ns<span class="w">                      </span><span class="c1"># namespaces</span>
+kubectl<span class="w"> </span>get<span class="w"> </span>all<span class="w">                     </span><span class="c1"># все ресурсы</span>
+kubectl<span class="w"> </span>get<span class="w"> </span>all<span class="w"> </span>-A<span class="w">                  </span><span class="c1"># во всех namespaces</span>
+</code></pre></div>
+
+<h3 id="информация-и-описание">Информация и описание<a class="headerlink" href="#информация-и-описание" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>kubectl<span class="w"> </span>describe<span class="w"> </span>pod<span class="w"> </span>NAME<span class="w">           </span><span class="c1"># подробная информация</span>
+kubectl<span class="w"> </span>describe<span class="w"> </span>deploy<span class="w"> </span>NAME
+kubectl<span class="w"> </span>describe<span class="w"> </span>svc<span class="w"> </span>NAME
+kubectl<span class="w"> </span>logs<span class="w"> </span>POD_NAME<span class="w">               </span><span class="c1"># логи контейнера</span>
+kubectl<span class="w"> </span>logs<span class="w"> </span>POD_NAME<span class="w"> </span>-c<span class="w"> </span>CONTAINER<span class="w">  </span><span class="c1"># конкретный контейнер</span>
+kubectl<span class="w"> </span>logs<span class="w"> </span>-f<span class="w"> </span>POD_NAME<span class="w">            </span><span class="c1"># следить (tail -f)</span>
+kubectl<span class="w"> </span>logs<span class="w"> </span>--previous<span class="w"> </span>POD_NAME<span class="w">    </span><span class="c1"># логи предыдущего контейнера</span>
+kubectl<span class="w"> </span>logs<span class="w"> </span>-l<span class="w"> </span><span class="nv">app</span><span class="o">=</span>myapp<span class="w">           </span><span class="c1"># по лейблу</span>
+kubectl<span class="w"> </span>top<span class="w"> </span>pod<span class="w">                     </span><span class="c1"># CPU/RAM (нужен metrics-server)</span>
+kubectl<span class="w"> </span>top<span class="w"> </span>node
+</code></pre></div>
+
+<h3 id="выполнение-команд">Выполнение команд<a class="headerlink" href="#выполнение-команд" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>kubectl<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>POD_NAME<span class="w"> </span>--<span class="w"> </span>bash<span class="w">           </span><span class="c1"># войти в под</span>
+kubectl<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>POD_NAME<span class="w"> </span>--<span class="w"> </span>ls<span class="w"> </span>/app<span class="w">            </span><span class="c1"># выполнить команду</span>
+kubectl<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>POD_NAME<span class="w"> </span>--<span class="w"> </span>env<span class="w">                </span><span class="c1"># переменные окружения</span>
+kubectl<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>POD_NAME<span class="w"> </span>-c<span class="w"> </span>CONTAINER<span class="w"> </span>--<span class="w"> </span>sh<span class="w">    </span><span class="c1"># конкретный контейнер</span>
+</code></pre></div>
+
+<h3 id="port-forwarding-для-локальной-разработки">Port forwarding (для локальной разработки)<a class="headerlink" href="#port-forwarding-для-локальной-разработки" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>kubectl<span class="w"> </span>port-forward<span class="w"> </span>svc/myservice<span class="w"> </span><span class="m">8080</span>:80<span class="w">  </span><span class="c1"># localhost:8080 → service:80</span>
+kubectl<span class="w"> </span>port-forward<span class="w"> </span>pod/mypod<span class="w"> </span><span class="m">8080</span>:80
+kubectl<span class="w"> </span>port-forward<span class="w"> </span>deploy/myapp<span class="w"> </span><span class="m">8080</span>:80
+</code></pre></div>
+
+<h3 id="доступ-к-сервису-minikube">Доступ к сервису (minikube)<a class="headerlink" href="#доступ-к-сервису-minikube" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>minikube<span class="w"> </span>service<span class="w"> </span>SERVICENAME<span class="w">               </span><span class="c1"># открыть в браузере</span>
+minikube<span class="w"> </span>service<span class="w"> </span>SERVICENAME<span class="w"> </span>--url<span class="w">         </span><span class="c1"># только URL</span>
+minikube<span class="w"> </span>service<span class="w"> </span>list<span class="w">                      </span><span class="c1"># список сервисов</span>
+</code></pre></div>
+
+<hr />
+<h2 id="создание-ресурсов">📝 Создание ресурсов<a class="headerlink" href="#создание-ресурсов" title="Ссылка">#</a></h2>
+<h3 id="из-yaml-файла">Из YAML-файла<a class="headerlink" href="#из-yaml-файла" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>kubectl<span class="w"> </span>apply<span class="w"> </span>-f<span class="w"> </span>deployment.yaml<span class="w">    </span><span class="c1"># создать/обновить</span>
+kubectl<span class="w"> </span>apply<span class="w"> </span>-f<span class="w"> </span>./manifests/<span class="w">       </span><span class="c1"># все файлы в каталоге</span>
+kubectl<span class="w"> </span>apply<span class="w"> </span>-f<span class="w"> </span>https://raw.githubusercontent.com/.../file.yaml
+kubectl<span class="w"> </span>apply<span class="w"> </span>-k<span class="w"> </span>./overlays/dev<span class="w">     </span><span class="c1"># Kustomize</span>
+kubectl<span class="w"> </span>create<span class="w"> </span>-f<span class="w"> </span>file.yaml<span class="w">         </span><span class="c1"># только создать (ошибка если есть)</span>
+</code></pre></div>
+
+<h3 id="императивное-создание">Императивное создание<a class="headerlink" href="#императивное-создание" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>kubectl<span class="w"> </span>create<span class="w"> </span>deployment<span class="w"> </span>nginx<span class="w"> </span>--image<span class="o">=</span>nginx<span class="w"> </span>--replicas<span class="o">=</span><span class="m">3</span>
+kubectl<span class="w"> </span>create<span class="w"> </span>service<span class="w"> </span>clusterip<span class="w"> </span>my-svc<span class="w"> </span>--tcp<span class="o">=</span><span class="m">80</span>:80
+kubectl<span class="w"> </span>create<span class="w"> </span>configmap<span class="w"> </span>my-cm<span class="w"> </span>--from-literal<span class="o">=</span><span class="nv">key</span><span class="o">=</span>value
+kubectl<span class="w"> </span>create<span class="w"> </span>secret<span class="w"> </span>generic<span class="w"> </span>my-sec<span class="w"> </span>--from-literal<span class="o">=</span><span class="nv">password</span><span class="o">=</span>secret
+kubectl<span class="w"> </span>expose<span class="w"> </span>deployment<span class="w"> </span>nginx<span class="w"> </span>--port<span class="o">=</span><span class="m">80</span><span class="w"> </span>--type<span class="o">=</span>LoadBalancer
+kubectl<span class="w"> </span>run<span class="w"> </span>tmp-pod<span class="w"> </span>--image<span class="o">=</span>alpine<span class="w"> </span>--rm<span class="w"> </span>-it<span class="w"> </span>--<span class="w"> </span>sh<span class="w">   </span><span class="c1"># одноразовый под</span>
+</code></pre></div>
+
+<h3 id="масштабирование">Масштабирование<a class="headerlink" href="#масштабирование" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>kubectl<span class="w"> </span>scale<span class="w"> </span>deployment<span class="w"> </span>nginx<span class="w"> </span>--replicas<span class="o">=</span><span class="m">5</span>
+kubectl<span class="w"> </span>autoscale<span class="w"> </span>deployment<span class="w"> </span>nginx<span class="w"> </span>--min<span class="o">=</span><span class="m">2</span><span class="w"> </span>--max<span class="o">=</span><span class="m">10</span><span class="w"> </span>--cpu-percent<span class="o">=</span><span class="m">80</span>
+</code></pre></div>
+
+<h3 id="обновление">Обновление<a class="headerlink" href="#обновление" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>kubectl<span class="w"> </span><span class="nb">set</span><span class="w"> </span>image<span class="w"> </span>deployment/nginx<span class="w"> </span><span class="nv">nginx</span><span class="o">=</span>nginx:1.25
+kubectl<span class="w"> </span>rollout<span class="w"> </span>status<span class="w"> </span>deployment/nginx
+kubectl<span class="w"> </span>rollout<span class="w"> </span><span class="nb">history</span><span class="w"> </span>deployment/nginx
+kubectl<span class="w"> </span>rollout<span class="w"> </span>undo<span class="w"> </span>deployment/nginx
+kubectl<span class="w"> </span>rollout<span class="w"> </span>undo<span class="w"> </span>deployment/nginx<span class="w"> </span>--to-revision<span class="o">=</span><span class="m">2</span>
+kubectl<span class="w"> </span>restart<span class="w"> </span>deployment/nginx
+</code></pre></div>
+
+<h3 id="удаление">Удаление<a class="headerlink" href="#удаление" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>kubectl<span class="w"> </span>delete<span class="w"> </span>-f<span class="w"> </span>deployment.yaml
+kubectl<span class="w"> </span>delete<span class="w"> </span>pod<span class="w"> </span>NAME
+kubectl<span class="w"> </span>delete<span class="w"> </span>pod<span class="w"> </span>NAME<span class="w"> </span>--grace-period<span class="o">=</span><span class="m">0</span><span class="w"> </span>--force<span class="w">  </span><span class="c1"># принудительно</span>
+kubectl<span class="w"> </span>delete<span class="w"> </span>deployment<span class="w"> </span>nginx
+kubectl<span class="w"> </span>delete<span class="w"> </span>svc,deploy<span class="w"> </span>-l<span class="w"> </span><span class="nv">app</span><span class="o">=</span>myapp<span class="w">            </span><span class="c1"># по лейблу</span>
+kubectl<span class="w"> </span>delete<span class="w"> </span>namespace<span class="w"> </span>dev<span class="w">                       </span><span class="c1"># удалить namespace (и всё в нём)</span>
+</code></pre></div>
+
+<hr />
+<h2 id="пример-манифестов">🎨 Пример манифестов<a class="headerlink" href="#пример-манифестов" title="Ссылка">#</a></h2>
+<h3 id="deployment-service">Deployment + Service<a class="headerlink" href="#deployment-service" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">apps/v1</span>
+<span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Deployment</span>
+<span class="nt">metadata</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">myapp</span>
+<span class="w">  </span><span class="nt">labels</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">myapp</span>
+<span class="nt">spec</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">replicas</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3</span>
+<span class="w">  </span><span class="nt">selector</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">matchLabels</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">myapp</span>
+<span class="w">  </span><span class="nt">template</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">metadata</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">labels</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">myapp</span>
+<span class="w">    </span><span class="nt">spec</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">containers</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">myapp</span>
+<span class="w">        </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">myapp:1.0</span>
+<span class="w">        </span><span class="nt">ports</span><span class="p">:</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">containerPort</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">8080</span>
+<span class="w">        </span><span class="nt">env</span><span class="p">:</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DATABASE_URL</span>
+<span class="w">          </span><span class="nt">valueFrom</span><span class="p">:</span>
+<span class="w">            </span><span class="nt">secretKeyRef</span><span class="p">:</span>
+<span class="w">              </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">db-secret</span>
+<span class="w">              </span><span class="nt">key</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">url</span>
+<span class="w">        </span><span class="nt">resources</span><span class="p">:</span>
+<span class="w">          </span><span class="nt">requests</span><span class="p">:</span>
+<span class="w">            </span><span class="nt">cpu</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">100m</span>
+<span class="w">            </span><span class="nt">memory</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">128Mi</span>
+<span class="w">          </span><span class="nt">limits</span><span class="p">:</span>
+<span class="w">            </span><span class="nt">cpu</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">500m</span>
+<span class="w">            </span><span class="nt">memory</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">512Mi</span>
+<span class="w">        </span><span class="nt">livenessProbe</span><span class="p">:</span>
+<span class="w">          </span><span class="nt">httpGet</span><span class="p">:</span>
+<span class="w">            </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/health</span>
+<span class="w">            </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">8080</span>
+<span class="w">          </span><span class="nt">initialDelaySeconds</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">30</span>
+<span class="w">        </span><span class="nt">readinessProbe</span><span class="p">:</span>
+<span class="w">          </span><span class="nt">httpGet</span><span class="p">:</span>
+<span class="w">            </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/ready</span>
+<span class="w">            </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">8080</span>
+<span class="nn">---</span>
+<span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v1</span>
+<span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Service</span>
+<span class="nt">metadata</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">myapp-svc</span>
+<span class="nt">spec</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ClusterIP</span><span class="w">          </span><span class="c1"># ClusterIP / NodePort / LoadBalancer</span>
+<span class="w">  </span><span class="nt">selector</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">myapp</span>
+<span class="w">  </span><span class="nt">ports</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">80</span>
+<span class="w">    </span><span class="nt">targetPort</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">8080</span>
+</code></pre></div>
+
+<h3 id="configmap-и-secret">ConfigMap и Secret<a class="headerlink" href="#configmap-и-secret" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v1</span>
+<span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ConfigMap</span>
+<span class="nt">metadata</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">app-config</span>
+<span class="nt">data</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">config.yaml</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
+<span class="w">    </span><span class="no">debug: true</span>
+<span class="w">    </span><span class="no">port: 8080</span>
+<span class="w">  </span><span class="nt">LOG_LEVEL</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">info</span>
+<span class="nn">---</span>
+<span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v1</span>
+<span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Secret</span>
+<span class="nt">metadata</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">db-secret</span>
+<span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Opaque</span>
+<span class="nt">data</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">url</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">cG9zdGdyZXM6Ly91c2VyOnBhc3NAZGI6NTQzMi9teWRi</span><span class="w">   </span><span class="c1"># base64</span>
+<span class="c1"># Создание из строки:</span>
+<span class="c1"># echo -n &#39;postgres://user:pass@db:5432/mydb&#39; | base64</span>
+</code></pre></div>
+
+<h3 id="ingress">Ingress<a class="headerlink" href="#ingress" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">networking.k8s.io/v1</span>
+<span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Ingress</span>
+<span class="nt">metadata</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">myapp-ingress</span>
+<span class="w">  </span><span class="nt">annotations</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">nginx.ingress.kubernetes.io/rewrite-target</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/</span>
+<span class="nt">spec</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">rules</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">host</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">myapp.local</span>
+<span class="w">    </span><span class="nt">http</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">paths</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/</span>
+<span class="w">        </span><span class="nt">pathType</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Prefix</span>
+<span class="w">        </span><span class="nt">backend</span><span class="p">:</span>
+<span class="w">          </span><span class="nt">service</span><span class="p">:</span>
+<span class="w">            </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">myapp-svc</span>
+<span class="w">            </span><span class="nt">port</span><span class="p">:</span>
+<span class="w">              </span><span class="nt">number</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">80</span>
+</code></pre></div>
+
+<h3 id="persistentvolumeclaim">PersistentVolumeClaim<a class="headerlink" href="#persistentvolumeclaim" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v1</span>
+<span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">PersistentVolumeClaim</span>
+<span class="nt">metadata</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">data-pvc</span>
+<span class="nt">spec</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">accessModes</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">ReadWriteOnce</span><span class="p p-Indicator">]</span>
+<span class="w">  </span><span class="nt">resources</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">requests</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">storage</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10Gi</span>
+<span class="w">  </span><span class="nt">storageClassName</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">standard</span>
+</code></pre></div>
+
+<hr />
+<h2 id="labels-и-selectors">🏷️ Labels и Selectors<a class="headerlink" href="#labels-и-selectors" title="Ссылка">#</a></h2>
+<div class="highlight"><pre><span></span><code>kubectl<span class="w"> </span>get<span class="w"> </span>pods<span class="w"> </span>--show-labels
+kubectl<span class="w"> </span>get<span class="w"> </span>pods<span class="w"> </span>-l<span class="w"> </span><span class="nv">app</span><span class="o">=</span>myapp<span class="w">           </span><span class="c1"># фильтр по лейблу</span>
+kubectl<span class="w"> </span>get<span class="w"> </span>pods<span class="w"> </span>-l<span class="w"> </span><span class="s1">&#39;app in (myapp,web)&#39;</span>
+kubectl<span class="w"> </span>get<span class="w"> </span>pods<span class="w"> </span>-l<span class="w"> </span><span class="nv">environment</span><span class="o">=</span>prod,tier<span class="o">=</span>frontend
+kubectl<span class="w"> </span>label<span class="w"> </span>pod<span class="w"> </span>NAME<span class="w"> </span><span class="nv">env</span><span class="o">=</span>prod<span class="w">         </span><span class="c1"># добавить</span>
+kubectl<span class="w"> </span>label<span class="w"> </span>pod<span class="w"> </span>NAME<span class="w"> </span>env-<span class="w">             </span><span class="c1"># удалить</span>
+kubectl<span class="w"> </span>annotate<span class="w"> </span>pod<span class="w"> </span>NAME<span class="w"> </span><span class="nv">description</span><span class="o">=</span><span class="s2">&quot;...&quot;</span>
+</code></pre></div>
+
+<hr />
+<h2 id="namespaces">🌍 Namespaces<a class="headerlink" href="#namespaces" title="Ссылка">#</a></h2>
+<div class="highlight"><pre><span></span><code>kubectl<span class="w"> </span>get<span class="w"> </span>namespaces
+kubectl<span class="w"> </span>create<span class="w"> </span>namespace<span class="w"> </span>dev
+kubectl<span class="w"> </span>delete<span class="w"> </span>namespace<span class="w"> </span>dev
+kubectl<span class="w"> </span>config<span class="w"> </span>set-context<span class="w"> </span>--current<span class="w"> </span>--namespace<span class="o">=</span>dev
+kubectl<span class="w"> </span>get<span class="w"> </span>pods<span class="w"> </span>-n<span class="w"> </span>kube-system<span class="w">        </span><span class="c1"># конкретный namespace</span>
+kubectl<span class="w"> </span>get<span class="w"> </span>pods<span class="w"> </span>-A<span class="w">                    </span><span class="c1"># все namespaces</span>
+</code></pre></div>
+
+<hr />
+<h2 id="kustomize">🛠️ Kustomize<a class="headerlink" href="#kustomize" title="Ссылка">#</a></h2>
+<p>Без шаблонизатора (встроено в kubectl):</p>
+<div class="highlight"><pre><span></span><code>project/
+├── base/
+│   ├── deployment.yaml
+│   ├── service.yaml
+│   └── kustomization.yaml
+└── overlays/
+    ├── dev/
+    │   ├── kustomization.yaml
+    │   └── replicas-patch.yaml
+    └── prod/
+        ├── kustomization.yaml
+        └── replicas-patch.yaml
+</code></pre></div>
+
+<div class="highlight"><pre><span></span><code><span class="c1"># kustomization.yaml</span>
+<span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">kustomize.config.k8s.io/v1beta1</span>
+<span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Kustomization</span>
+<span class="nt">resources</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">deployment.yaml</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">service.yaml</span>
+<span class="nt">commonLabels</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">myapp</span>
+<span class="nt">namespace</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">myapp-dev</span>
+<span class="nt">images</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">myapp</span>
+<span class="w">    </span><span class="nt">newTag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.0.0</span>
+</code></pre></div>
+
+<div class="highlight"><pre><span></span><code>kubectl<span class="w"> </span>apply<span class="w"> </span>-k<span class="w"> </span>./overlays/dev
+kubectl<span class="w"> </span>kustomize<span class="w"> </span>./overlays/dev<span class="w">      </span><span class="c1"># показать итоговый YAML</span>
+</code></pre></div>
+
+<hr />
+<h2 id="helm-пакетный-менеджер">📦 Helm — пакетный менеджер<a class="headerlink" href="#helm-пакетный-менеджер" title="Ссылка">#</a></h2>
+<div class="highlight"><pre><span></span><code>helm<span class="w"> </span>install<span class="w"> </span>my-release<span class="w"> </span>bitnami/wordpress
+helm<span class="w"> </span>upgrade<span class="w"> </span>--install<span class="w"> </span>my-release<span class="w"> </span>bitnami/wordpress<span class="w"> </span>-f<span class="w"> </span>values.yaml
+helm<span class="w"> </span>uninstall<span class="w"> </span>my-release
+helm<span class="w"> </span>list
+helm<span class="w"> </span>search<span class="w"> </span>hub<span class="w"> </span>wordpress
+helm<span class="w"> </span>repo<span class="w"> </span>add<span class="w"> </span>bitnami<span class="w"> </span>https://charts.bitnami.com/bitnami
+helm<span class="w"> </span>repo<span class="w"> </span>update
+helm<span class="w"> </span>pull<span class="w"> </span>bitnami/wordpress<span class="w"> </span>--untar<span class="w">      </span><span class="c1"># скачать chart</span>
+helm<span class="w"> </span>template<span class="w"> </span>my-release<span class="w"> </span>./wordpress<span class="w">     </span><span class="c1"># показать итоговые манифесты</span>
+</code></pre></div>
+
+<h3 id="свой-chart">Свой chart<a class="headerlink" href="#свой-chart" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>helm<span class="w"> </span>create<span class="w"> </span>mychart
+<span class="c1"># values.yaml → что переопределить</span>
+helm<span class="w"> </span>install<span class="w"> </span>my-release<span class="w"> </span>./mychart<span class="w"> </span>-f<span class="w"> </span>values.yaml
+</code></pre></div>
+
+<hr />
+<h2 id="дебаг-и-траблшутинг">🐛 Дебаг и траблшутинг<a class="headerlink" href="#дебаг-и-траблшутинг" title="Ссылка">#</a></h2>
+<h3 id="под-не-запускается">Под не запускается<a class="headerlink" href="#под-не-запускается" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>kubectl<span class="w"> </span>describe<span class="w"> </span>pod<span class="w"> </span>NAME<span class="w">              </span><span class="c1"># события внизу</span>
+kubectl<span class="w"> </span>get<span class="w"> </span>events<span class="w"> </span>--sort-by<span class="o">=</span>.metadata.creationTimestamp
+kubectl<span class="w"> </span>logs<span class="w"> </span>NAME<span class="w"> </span>--previous<span class="w">           </span><span class="c1"># почему упал</span>
+</code></pre></div>
+
+<p>Частые причины:
+- <code>ImagePullBackOff</code> — образ не существует / нет прав / нет <code>imagePullPolicy: Never</code> для локальных.
+- <code>CrashLoopBackOff</code> — приложение падает. Смотрите логи.
+- <code>Pending</code> — нет ресурсов / нет ноды / PVC не создан.
+- <code>OOMKilled</code> — превышен memory limit.</p>
+<h3 id="не-работает-сеть">Не работает сеть<a class="headerlink" href="#не-работает-сеть" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>kubectl<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>POD<span class="w"> </span>--<span class="w"> </span>curl<span class="w"> </span>backend-service:80<span class="w">   </span><span class="c1"># изнутри</span>
+kubectl<span class="w"> </span>get<span class="w"> </span>svc<span class="w">                                    </span><span class="c1"># существует ли?</span>
+kubectl<span class="w"> </span>get<span class="w"> </span>endpoints<span class="w"> </span>SVC<span class="w">                          </span><span class="c1"># есть ли поды за сервисом?</span>
+</code></pre></div>
+
+<h3 id="дебаг-с-ephemeral-контейнером">Дебаг с ephemeral-контейнером<a class="headerlink" href="#дебаг-с-ephemeral-контейнером" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>kubectl<span class="w"> </span>debug<span class="w"> </span>-it<span class="w"> </span>POD<span class="w"> </span>--image<span class="o">=</span>busybox<span class="w"> </span>--target<span class="o">=</span>CONTAINER
+</code></pre></div>
+
+<h3 id="логи-нескольких-подов">Логи нескольких подов<a class="headerlink" href="#логи-нескольких-подов" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>kubectl<span class="w"> </span>logs<span class="w"> </span>-l<span class="w"> </span><span class="nv">app</span><span class="o">=</span>myapp<span class="w"> </span>--tail<span class="o">=</span><span class="m">20</span>
+stern<span class="w"> </span>myapp.*<span class="w">           </span><span class="c1"># через утилиту stern (tail -f для всех подов)</span>
+kubectl<span class="w"> </span>logs<span class="w"> </span>-f<span class="w"> </span>-l<span class="w"> </span><span class="nv">app</span><span class="o">=</span>myapp<span class="w"> </span>--max-log-requests<span class="o">=</span><span class="m">10</span>
+</code></pre></div>
+
+<h3 id="полезные-команды-диагностики">Полезные команды диагностики<a class="headerlink" href="#полезные-команды-диагностики" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>kubectl<span class="w"> </span>get<span class="w"> </span>componentstatuses
+kubectl<span class="w"> </span>get<span class="w"> </span>events<span class="w"> </span>--sort-by<span class="o">=</span><span class="s1">&#39;.lastTimestamp&#39;</span>
+kubectl<span class="w"> </span>describe<span class="w"> </span>node<span class="w"> </span>NODE_NAME
+kubectl<span class="w"> </span>get<span class="w"> </span>pods<span class="w"> </span>-A<span class="w"> </span>-o<span class="w"> </span>wide<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-v<span class="w"> </span>Running
+</code></pre></div>
+
+<hr />
+<h2 id="частые-ошибки">🪤 Частые ошибки<a class="headerlink" href="#частые-ошибки" title="Ссылка">#</a></h2>
+<ol>
+<li><strong><code>imagePullPolicy: Always</code> для локального образа</strong> — K8s не найдёт.
+   Для minikube: <code>imagePullPolicy: Never</code> + <code>minikube image load</code>.</li>
+<li><strong>Забыли <code>selector</code></strong> — Service не найдёт Pod&rsquo;ы.</li>
+<li><strong>Labels не совпадают</strong> — Service/Deployment не подключится.</li>
+<li><strong>Resource limits</strong> — <code>requests</code> нужен для планирования.</li>
+<li><strong><code>latest</code> tag</strong> — K8s не обновит без явного перезапуска.</li>
+<li><strong>Secret в открытом виде</strong> — base64 ≠ шифрование.</li>
+<li><strong>Namespace по умолчанию</strong> — забываете <code>-n</code>, всё в default.</li>
+<li><strong><code>kubectl apply</code> после <code>kubectl create</code></strong> — конфликт аннотаций.</li>
+<li><strong><code>replicas: 0</code></strong> — случайно масштабировали до нуля.</li>
+<li><strong>PV не удаляется</strong> — <code>reclaimPolicy: Retain</code> держит диск.</li>
+</ol>
+<hr />
+<h2 id="полезные-ссылки">🔗 Полезные ссылки<a class="headerlink" href="#полезные-ссылки" title="Ссылка">#</a></h2>
+<ul>
+<li>K8s документация: https://kubernetes.io/docs/home</li>
+<li>Minikube: https://minikube.sigs.k8s.io/docs</li>
+<li>kubectl Cheat Sheet: https://kubernetes.io/docs/reference/kubectl/cheatsheet</li>
+<li>K8s Patterns: https://www.redhat.com/en/resources/oreilly-kubernetes-patterns-cloud-native-apps</li>
+<li>Awesome Kubernetes: https://github.com/ramitsurana/awesome-kubernetes</li>
+<li>Helm: https://helm.sh</li>
+<li>Lens (GUI): https://k8slens.dev</li>
+<li>k9s (TUI): https://github.com/derailed/k9s</li>
+</ul>
+<hr />
+<h2 id="полезные-советы">💡 Полезные советы<a class="headerlink" href="#полезные-советы" title="Ссылка">#</a></h2>
+<ol>
+<li><strong><code>kubectl get all</code></strong> — обзор ресурсов в namespace.</li>
+<li><strong><code>-o wide</code></strong> — больше информации (IP, нода).</li>
+<li><strong><code>-w</code> (watch)</strong> — следить в реальном времени.</li>
+<li><strong><code>kubectl describe</code></strong> — лучший способ дебага (события внизу).</li>
+<li><strong><code>kubectl apply -f</code></strong> — declarative (лучше, чем <code>create</code>).</li>
+<li><strong><code>kubectl exec -it</code></strong> — войти в под (как <code>docker exec</code>).</li>
+<li><strong><code>kubectl port-forward</code></strong> — доступ к сервису локально.</li>
+<li><strong>Minikube <code>image load</code></strong> — для локальных образов (без registry).</li>
+<li><strong>Helm</strong> — для сложных приложений (база данных, сертификаты).</li>
+<li><strong><code>k9s</code></strong> — TUI для управления (как htop для K8s).</li>
+<li><strong><code>stern</code></strong> — tail логов нескольких подов сразу.</li>
+<li><strong>Kustomize</strong> — для разных сред (dev/prod) без templating.</li>
+<li><strong><code>kubectl explain pod.spec.containers</code></strong> — справка по полям.</li>
+<li><strong>Resource quotas</strong> — лимиты на namespace.</li>
+<li><strong>Labels everywhere</strong> — основа для связей и выборок.</li>
+</ol>
+<hr />
+<p><em>Сгенерировано как шпаргалка. Kubernetes огромен —
+углубляйтесь через https://kubernetes.io/docs/ и kubectl cheat sheet</em></p>
+    </article>
+    <nav class="pagination">
+      <a class="pager prev" href="fzf-zoxide.html">← fzf + zoxide</a>
+      <a class="pager next" href="cicd.html">GitLab CI / GitHub Actions →</a>
+    </nav>
+  </main>
+
+  <aside class="toc">
+    <details open>
+      <summary>📑 Оглавление</summary>
+      <div class="toc-list">
+<div class="toc">
+<ul>
+<li><a href="#minikube-kubernetes-kubectl-шпаргалка">☸️ Minikube / Kubernetes (kubectl) — шпаргалка</a><ul>
+<li><a href="#главные-понятия-k8s">🔑 Главные понятия K8s</a></li>
+<li><a href="#minikube-локальный-кластер">🚀 Minikube — локальный кластер</a><ul>
+<li><a href="#установка">Установка</a></li>
+<li><a href="#базовые-команды">Базовые команды</a></li>
+<li><a href="#addons">Addons</a></li>
+<li><a href="#профили-несколько-кластеров">Профили (несколько кластеров)</a></li>
+<li><a href="#образы-и-реестр">Образы и реестр</a></li>
+</ul>
+</li>
+<li><a href="#kubectl-основные-команды">🎯 kubectl — основные команды</a><ul>
+<li><a href="#контекст-и-конфигурация">Контекст и конфигурация</a></li>
+<li><a href="#просмотр-ресурсов">Просмотр ресурсов</a></li>
+<li><a href="#информация-и-описание">Информация и описание</a></li>
+<li><a href="#выполнение-команд">Выполнение команд</a></li>
+<li><a href="#port-forwarding-для-локальной-разработки">Port forwarding (для локальной разработки)</a></li>
+<li><a href="#доступ-к-сервису-minikube">Доступ к сервису (minikube)</a></li>
+</ul>
+</li>
+<li><a href="#создание-ресурсов">📝 Создание ресурсов</a><ul>
+<li><a href="#из-yaml-файла">Из YAML-файла</a></li>
+<li><a href="#императивное-создание">Императивное создание</a></li>
+<li><a href="#масштабирование">Масштабирование</a></li>
+<li><a href="#обновление">Обновление</a></li>
+<li><a href="#удаление">Удаление</a></li>
+</ul>
+</li>
+<li><a href="#пример-манифестов">🎨 Пример манифестов</a><ul>
+<li><a href="#deployment-service">Deployment + Service</a></li>
+<li><a href="#configmap-и-secret">ConfigMap и Secret</a></li>
+<li><a href="#ingress">Ingress</a></li>
+<li><a href="#persistentvolumeclaim">PersistentVolumeClaim</a></li>
+</ul>
+</li>
+<li><a href="#labels-и-selectors">🏷️ Labels и Selectors</a></li>
+<li><a href="#namespaces">🌍 Namespaces</a></li>
+<li><a href="#kustomize">🛠️ Kustomize</a></li>
+<li><a href="#helm-пакетный-менеджер">📦 Helm — пакетный менеджер</a><ul>
+<li><a href="#свой-chart">Свой chart</a></li>
+</ul>
+</li>
+<li><a href="#дебаг-и-траблшутинг">🐛 Дебаг и траблшутинг</a><ul>
+<li><a href="#под-не-запускается">Под не запускается</a></li>
+<li><a href="#не-работает-сеть">Не работает сеть</a></li>
+<li><a href="#дебаг-с-ephemeral-контейнером">Дебаг с ephemeral-контейнером</a></li>
+<li><a href="#логи-нескольких-подов">Логи нескольких подов</a></li>
+<li><a href="#полезные-команды-диагностики">Полезные команды диагностики</a></li>
+</ul>
+</li>
+<li><a href="#частые-ошибки">🪤 Частые ошибки</a></li>
+<li><a href="#полезные-ссылки">🔗 Полезные ссылки</a></li>
+<li><a href="#полезные-советы">💡 Полезные советы</a></li>
+</ul>
+</li>
+</ul>
+</div>
+
+      </div>
+    </details>
+  </aside>
+</div>
+
+<button class="back-top" id="backTop" aria-label="Наверх">↑</button>
+
+<script src="assets/search.js"></script>
+<script src="assets/page.js"></script>
+</body>
+</html>

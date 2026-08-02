@@ -1,0 +1,864 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>nginx — Шпаргалки</title>
+<link rel="stylesheet" href="assets/style.css">
+<link rel="stylesheet" href="assets/pygments.css">
+</head>
+<body>
+<div class="layout">
+  <aside class="sidebar">
+    <a href="index.html" class="brand">📌 Шпаргалки</a>
+    <nav class="nav">
+<a href="yazi.html" class="nav-item"><span class="nav-ico">📦</span>Yazi</a>
+<a href="neovim.html" class="nav-item"><span class="nav-ico">📘</span>Neovim (LazyVim)</a>
+<a href="niri.html" class="nav-item"><span class="nav-ico">🪟</span>Niri</a>
+<a href="tmux.html" class="nav-item"><span class="nav-ico">🪟</span>Tmux</a>
+<a href="bash.html" class="nav-item"><span class="nav-ico">🐚</span>Bash</a>
+<a href="git.html" class="nav-item"><span class="nav-ico">🔀</span>Git</a>
+<a href="terminal.html" class="nav-item"><span class="nav-ico">🖥️</span>Терминал Linux</a>
+<a href="powershell.html" class="nav-item"><span class="nav-ico">💻</span>PowerShell</a>
+<a href="cmd.html" class="nav-item"><span class="nav-ico">🪟</span>CMD (cmd.exe)</a>
+<a href="python.html" class="nav-item"><span class="nav-ico">🐍</span>Python</a>
+<a href="systemd.html" class="nav-item"><span class="nav-ico">⚙️</span>systemd</a>
+<a href="ssh.html" class="nav-item"><span class="nav-ico">🔐</span>SSH</a>
+<a href="make-cmake.html" class="nav-item"><span class="nav-ico">🔨</span>Make / CMake</a>
+<a href="docker.html" class="nav-item"><span class="nav-ico">🐳</span>Docker</a>
+<a href="pacman.html" class="nav-item"><span class="nav-ico">📦</span>pacman / yay / paru</a>
+<a href="spark.html" class="nav-item"><span class="nav-ico">⚡</span>Apache Spark / PySpark</a>
+<a href="markdown.html" class="nav-item"><span class="nav-ico">📝</span>Markdown</a>
+<a href="regex.html" class="nav-item"><span class="nav-ico">🔍</span>Регулярные выражения</a>
+<a href="jq-json.html" class="nav-item"><span class="nav-ico">🔧</span>jq + JSON</a>
+<a href="awk-sed.html" class="nav-item"><span class="nav-ico">✂️</span>awk / sed</a>
+<a href="airflow.html" class="nav-item"><span class="nav-ico">🌪️</span>Apache Airflow</a>
+<a href="http-curl.html" class="nav-item"><span class="nav-ico">🌐</span>HTTP / curl</a>
+<a href="yaml.html" class="nav-item"><span class="nav-ico">📄</span>YAML</a>
+<a href="vscode.html" class="nav-item"><span class="nav-ico">💻</span>VS Code</a>
+<a href="cron.html" class="nav-item"><span class="nav-ico">⏰</span>cron</a>
+<a href="fzf-zoxide.html" class="nav-item"><span class="nav-ico">🔎</span>fzf + zoxide</a>
+<a href="minikube-k8s.html" class="nav-item"><span class="nav-ico">☸️</span>Minikube / Kubernetes</a>
+<a href="cicd.html" class="nav-item"><span class="nav-ico">🦊</span>GitLab CI / GitHub Actions</a>
+<a href="nginx.html" class="nav-item active"><span class="nav-ico">🌐</span>nginx</a>
+<a href="dbt.html" class="nav-item"><span class="nav-ico">🔧</span>dbt</a>
+<a href="kafka.html" class="nav-item"><span class="nav-ico">🐘</span>Apache Kafka</a>
+<a href="prometheus-grafana.html" class="nav-item"><span class="nav-ico">📊</span>Prometheus / Grafana</a>
+<a href="iceberg-nessie.html" class="nav-item"><span class="nav-ico">🧊</span>Iceberg / Nessie</a>
+<a href="impala.html" class="nav-item"><span class="nav-ico">🐬</span>Apache Impala</a>
+<a href="terraform.html" class="nav-item"><span class="nav-ico">🏗️</span>Terraform</a>
+<a href="linux-internals.html" class="nav-item"><span class="nav-ico">🐧</span>Linux Internals</a>
+<a href="miscellaneous.html" class="nav-item"><span class="nav-ico">🧰</span>Miscellaneous</a>
+<a href="python-automation-libs.html" class="nav-item"><span class="nav-ico">🐍</span>Python: авт-ция (10 libs)</a>
+<a href="eza.html" class="nav-item"><span class="nav-ico">🌈</span>eza</a>
+<a href="dbeaver.html" class="nav-item"><span class="nav-ico">🗄️</span>DBeaver</a>
+<a href="zcode.html" class="nav-item"><span class="nav-ico">🤖</span>ZCode</a>
+<a href="warp.html" class="nav-item"><span class="nav-ico">🚀</span>Warp</a>
+<a href="agentic-ai-dev.html" class="nav-item"><span class="nav-ico">🤝</span>Агентная разработка с ИИ</a>
+    </nav>
+  </aside>
+
+  <main class="content">
+    <article>
+<h1 id="nginx-шпаргалка-по-веб-серверу-и-reverse-proxy">🌐 nginx — шпаргалка по веб-серверу и reverse-proxy<a class="headerlink" href="#nginx-шпаргалка-по-веб-серверу-и-reverse-proxy" title="Ссылка">#</a></h1>
+<blockquote>
+<p><strong>nginx</strong> (engine-x) — высокопроизводительный HTTP-сервер и reverse-proxy.
+Также: load balancer, mail proxy, TLS terminator, CDN.
+Документация: https://nginx.org/en/docs</p>
+</blockquote>
+<hr />
+<h2 id="главные-понятия">🔑 Главные понятия<a class="headerlink" href="#главные-понятия" title="Ссылка">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Термин</th>
+<th>Что значит</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Directive</strong></td>
+<td>Директива (настройка)</td>
+</tr>
+<tr>
+<td><strong>Block (context)</strong></td>
+<td>Блок настроек (<code>http {}</code>, <code>server {}</code>)</td>
+</tr>
+<tr>
+<td><strong>Server</strong></td>
+<td>Виртуальный хост (как <code>&lt;VirtualHost&gt;</code> в Apache)</td>
+</tr>
+<tr>
+<td><strong>Location</strong></td>
+<td>Правило для URL-пути</td>
+</tr>
+<tr>
+<td><strong>Upstream</strong></td>
+<td>Группа бэкенд-серверов</td>
+</tr>
+<tr>
+<td><strong>Worker</strong></td>
+<td>Процесс, обрабатывающий соединения</td>
+</tr>
+<tr>
+<td><strong>Master</strong></td>
+<td>Главный процесс, управляет worker&rsquo;ами</td>
+</tr>
+<tr>
+<td><strong>Module</strong></td>
+<td>Расширение функциональности</td>
+</tr>
+</tbody>
+</table>
+<h3 id="иерархия-контекстов">Иерархия контекстов<a class="headerlink" href="#иерархия-контекстов" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>main (глобальный)
+└── events
+└── http
+    ├── server (виртуальный хост)
+    │   └── location (URL-правила)
+    └── upstream (группа серверов)
+└── stream (TCP/UDP)
+</code></pre></div>
+
+<hr />
+<h2 id="установка-и-управление">🚀 Установка и управление<a class="headerlink" href="#установка-и-управление" title="Ссылка">#</a></h2>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>pacman<span class="w"> </span>-S<span class="w"> </span>nginx<span class="w">             </span><span class="c1"># Arch / CachyOS</span>
+sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>nginx<span class="w">           </span><span class="c1"># Debian/Ubuntu</span>
+
+<span class="c1"># Управление (systemd)</span>
+sudo<span class="w"> </span>systemctl<span class="w"> </span>start<span class="w"> </span>nginx
+sudo<span class="w"> </span>systemctl<span class="w"> </span>stop<span class="w"> </span>nginx
+sudo<span class="w"> </span>systemctl<span class="w"> </span>restart<span class="w"> </span>nginx
+sudo<span class="w"> </span>systemctl<span class="w"> </span>reload<span class="w"> </span>nginx<span class="w">      </span><span class="c1"># мягко перечитать конфиг</span>
+sudo<span class="w"> </span>systemctl<span class="w"> </span>status<span class="w"> </span>nginx
+sudo<span class="w"> </span>systemctl<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>nginx
+
+<span class="c1"># Прямые команды</span>
+nginx<span class="w"> </span>-t<span class="w">                          </span><span class="c1"># проверить конфигурацию (ОБЯЗАТЕЛЬНО!)</span>
+nginx<span class="w"> </span>-T<span class="w">                          </span><span class="c1"># показать итоговый конфиг</span>
+nginx<span class="w"> </span>-s<span class="w"> </span>reload<span class="w">                   </span><span class="c1"># перезагрузить</span>
+nginx<span class="w"> </span>-s<span class="w"> </span>stop<span class="w">                     </span><span class="c1"># остановить</span>
+nginx<span class="w"> </span>-s<span class="w"> </span>quit<span class="w">                     </span><span class="c1"># мягко остановить</span>
+nginx<span class="w"> </span>-V<span class="w">                          </span><span class="c1"># версия и опции сборки</span>
+nginx<span class="w"> </span>-c<span class="w"> </span>/path/to/nginx.conf<span class="w">      </span><span class="c1"># свой конфиг</span>
+nginx<span class="w"> </span>-g<span class="w"> </span><span class="s2">&quot;daemon off;&quot;</span><span class="w">            </span><span class="c1"># foreground (для Docker)</span>
+</code></pre></div>
+
+<h3 id="структура-файлов">Структура файлов<a class="headerlink" href="#структура-файлов" title="Ссылка">#</a></h3>
+<table>
+<thead>
+<tr>
+<th>Путь</th>
+<th>Назначение</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>/etc/nginx/nginx.conf</code></td>
+<td>Главный конфиг</td>
+</tr>
+<tr>
+<td><code>/etc/nginx/conf.d/*.conf</code></td>
+<td>Конфиги серверов (рекомендуется)</td>
+</tr>
+<tr>
+<td><code>/etc/nginx/sites-available/</code></td>
+<td>Debian: доступные сайты</td>
+</tr>
+<tr>
+<td><code>/etc/nginx/sites-enabled/</code></td>
+<td>Debian: включённые (symlinks)</td>
+</tr>
+<tr>
+<td><code>/etc/nginx/snippets/</code></td>
+<td>Переиспользуемые блоки</td>
+</tr>
+<tr>
+<td><code>/var/log/nginx/access.log</code></td>
+<td>Логи доступа</td>
+</tr>
+<tr>
+<td><code>/var/log/nginx/error.log</code></td>
+<td>Логи ошибок</td>
+</tr>
+<tr>
+<td><code>/usr/share/nginx/html/</code></td>
+<td>Корень по умолчанию</td>
+</tr>
+<tr>
+<td><code>/etc/nginx/mime.types</code></td>
+<td>MIME-типы</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="базовая-конфигурация">📝 Базовая конфигурация<a class="headerlink" href="#базовая-конфигурация" title="Ссылка">#</a></h2>
+<h3 id="etc-nginx-nginx-conf-главный"><code>/etc/nginx/nginx.conf</code> (главный)<a class="headerlink" href="#etc-nginx-nginx-conf-главный" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">user</span><span class="w"> </span><span class="s">nginx</span><span class="p">;</span>
+<span class="k">worker_processes</span><span class="w"> </span><span class="s">auto</span><span class="p">;</span><span class="w">            </span><span class="c1"># по числу ядер</span>
+<span class="k">error_log</span><span class="w"> </span><span class="s">/var/log/nginx/error.log</span><span class="w"> </span><span class="s">warn</span><span class="p">;</span>
+<span class="k">pid</span><span class="w"> </span><span class="s">/var/run/nginx.pid</span><span class="p">;</span>
+
+<span class="k">events</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kn">worker_connections</span><span class="w"> </span><span class="mi">1024</span><span class="p">;</span><span class="w">      </span><span class="c1"># соединений на worker</span>
+<span class="w">    </span><span class="c1"># use epoll;                  # Linux: epoll (по умолчанию)</span>
+<span class="w">    </span><span class="kn">multi_accept</span><span class="w"> </span><span class="no">on</span><span class="p">;</span><span class="w">              </span><span class="c1"># принимать много за раз</span>
+<span class="p">}</span>
+
+<span class="k">http</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kn">include</span><span class="w"> </span><span class="s">/etc/nginx/mime.types</span><span class="p">;</span>
+<span class="w">    </span><span class="kn">default_type</span><span class="w"> </span><span class="s">application/octet-stream</span><span class="p">;</span>
+
+<span class="w">    </span><span class="kn">log_format</span><span class="w"> </span><span class="s">main</span><span class="w"> </span><span class="s">&#39;</span><span class="nv">$remote_addr</span><span class="w"> </span><span class="s">-</span><span class="w"> </span><span class="nv">$remote_user</span><span class="w"> </span><span class="s">[</span><span class="nv">$time_local]</span><span class="w"> </span><span class="s">&#39;</span>
+<span class="w">                    </span><span class="s">&#39;&quot;</span><span class="nv">$request&quot;</span><span class="w"> </span><span class="nv">$status</span><span class="w"> </span><span class="nv">$body_bytes_sent</span><span class="w"> </span><span class="s">&#39;</span>
+<span class="w">                    </span><span class="s">&#39;&quot;</span><span class="nv">$http_referer&quot;</span><span class="w"> </span><span class="s">&quot;</span><span class="nv">$http_user_agent&quot;&#39;</span><span class="p">;</span>
+<span class="w">    </span><span class="kn">access_log</span><span class="w"> </span><span class="s">/var/log/nginx/access.log</span><span class="w"> </span><span class="s">main</span><span class="p">;</span>
+
+<span class="w">    </span><span class="kn">sendfile</span><span class="w"> </span><span class="no">on</span><span class="p">;</span>
+<span class="w">    </span><span class="kn">tcp_nopush</span><span class="w"> </span><span class="no">on</span><span class="p">;</span>
+<span class="w">    </span><span class="kn">tcp_nodelay</span><span class="w"> </span><span class="no">on</span><span class="p">;</span>
+<span class="w">    </span><span class="kn">keepalive_timeout</span><span class="w"> </span><span class="mi">65</span><span class="p">;</span>
+<span class="w">    </span><span class="kn">types_hash_max_size</span><span class="w"> </span><span class="mi">2048</span><span class="p">;</span>
+<span class="w">    </span><span class="kn">server_tokens</span><span class="w"> </span><span class="no">off</span><span class="p">;</span><span class="w">            </span><span class="c1"># скрыть версию nginx</span>
+
+<span class="w">    </span><span class="kn">gzip</span><span class="w"> </span><span class="no">on</span><span class="p">;</span>
+<span class="w">    </span><span class="kn">gzip_types</span><span class="w"> </span><span class="s">text/plain</span><span class="w"> </span><span class="s">text/css</span><span class="w"> </span><span class="s">application/json</span><span class="w"> </span><span class="s">application/javascript</span><span class="p">;</span>
+
+<span class="w">    </span><span class="kn">include</span><span class="w"> </span><span class="s">/etc/nginx/conf.d/*.conf</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<h3 id="статический-сайт">Статический сайт<a class="headerlink" href="#статический-сайт" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># /etc/nginx/conf.d/mysite.conf</span>
+<span class="k">server</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kn">listen</span><span class="w"> </span><span class="mi">80</span><span class="p">;</span>
+<span class="w">    </span><span class="kn">server_name</span><span class="w"> </span><span class="s">example.com</span><span class="w"> </span><span class="s">www.example.com</span><span class="p">;</span>
+<span class="w">    </span><span class="kn">root</span><span class="w"> </span><span class="s">/var/www/mysite</span><span class="p">;</span>
+<span class="w">    </span><span class="kn">index</span><span class="w"> </span><span class="s">index.html</span><span class="p">;</span>
+
+<span class="w">    </span><span class="kn">location</span><span class="w"> </span><span class="s">/</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kn">try_files</span><span class="w"> </span><span class="nv">$uri</span><span class="w"> </span><span class="nv">$uri/</span><span class="w"> </span><span class="p">=</span><span class="mi">404</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kn">location</span><span class="w"> </span><span class="p">~</span><span class="sr">*</span><span class="w"> </span><span class="s">\.(jpg|jpeg|png|gif|ico|css|js)</span>$<span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kn">expires</span><span class="w"> </span><span class="s">1y</span><span class="p">;</span>
+<span class="w">        </span><span class="kn">add_header</span><span class="w"> </span><span class="s">Cache-Control</span><span class="w"> </span><span class="s">&quot;public,</span><span class="w"> </span><span class="s">immutable&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kn">error_page</span><span class="w"> </span><span class="mi">404</span><span class="w"> </span><span class="s">/404.html</span><span class="p">;</span>
+<span class="w">    </span><span class="kn">error_page</span><span class="w"> </span><span class="mi">500</span><span class="w"> </span><span class="mi">502</span><span class="w"> </span><span class="mi">503</span><span class="w"> </span><span class="mi">504</span><span class="w"> </span><span class="s">/50x.html</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<hr />
+<h2 id="reverse-proxy">🔄 Reverse Proxy<a class="headerlink" href="#reverse-proxy" title="Ссылка">#</a></h2>
+<h3 id="проксирование-на-бэкенд">Проксирование на бэкенд<a class="headerlink" href="#проксирование-на-бэкенд" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">server</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kn">listen</span><span class="w"> </span><span class="mi">80</span><span class="p">;</span>
+<span class="w">    </span><span class="kn">server_name</span><span class="w"> </span><span class="s">api.example.com</span><span class="p">;</span>
+
+<span class="w">    </span><span class="kn">location</span><span class="w"> </span><span class="s">/</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kn">proxy_pass</span><span class="w"> </span><span class="s">http://127.0.0.1:8000</span><span class="p">;</span>
+<span class="w">        </span><span class="kn">proxy_set_header</span><span class="w"> </span><span class="s">Host</span><span class="w"> </span><span class="nv">$host</span><span class="p">;</span>
+<span class="w">        </span><span class="kn">proxy_set_header</span><span class="w"> </span><span class="s">X-Real-IP</span><span class="w"> </span><span class="nv">$remote_addr</span><span class="p">;</span>
+<span class="w">        </span><span class="kn">proxy_set_header</span><span class="w"> </span><span class="s">X-Forwarded-For</span><span class="w"> </span><span class="nv">$proxy_add_x_forwarded_for</span><span class="p">;</span>
+<span class="w">        </span><span class="kn">proxy_set_header</span><span class="w"> </span><span class="s">X-Forwarded-Proto</span><span class="w"> </span><span class="nv">$scheme</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1"># WebSocket</span>
+<span class="w">    </span><span class="kn">location</span><span class="w"> </span><span class="s">/ws/</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kn">proxy_pass</span><span class="w"> </span><span class="s">http://127.0.0.1:8000</span><span class="p">;</span>
+<span class="w">        </span><span class="kn">proxy_http_version</span><span class="w"> </span><span class="mi">1</span><span class="s">.1</span><span class="p">;</span>
+<span class="w">        </span><span class="kn">proxy_set_header</span><span class="w"> </span><span class="s">Upgrade</span><span class="w"> </span><span class="nv">$http_upgrade</span><span class="p">;</span>
+<span class="w">        </span><span class="kn">proxy_set_header</span><span class="w"> </span><span class="s">Connection</span><span class="w"> </span><span class="s">&quot;upgrade&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<h3 id="несколько-location-ов">Несколько location&rsquo;ов<a class="headerlink" href="#несколько-location-ов" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">server</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kn">listen</span><span class="w"> </span><span class="mi">80</span><span class="p">;</span>
+<span class="w">    </span><span class="kn">server_name</span><span class="w"> </span><span class="s">example.com</span><span class="p">;</span>
+
+<span class="w">    </span><span class="kn">location</span><span class="w"> </span><span class="s">/</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kn">proxy_pass</span><span class="w"> </span><span class="s">http://127.0.0.1:3000</span><span class="p">;</span><span class="w">     </span><span class="c1"># фронтенд</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kn">location</span><span class="w"> </span><span class="s">/api/</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kn">proxy_pass</span><span class="w"> </span><span class="s">http://127.0.0.1:8000</span><span class="p">;</span><span class="w">     </span><span class="c1"># API</span>
+<span class="w">        </span><span class="kn">rewrite</span><span class="w"> </span><span class="s">^/api/(.*)</span>$<span class="w"> </span><span class="s">/</span><span class="nv">$1</span><span class="w"> </span><span class="s">break</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kn">location</span><span class="w"> </span><span class="s">/static/</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kn">alias</span><span class="w"> </span><span class="s">/var/www/static/</span><span class="p">;</span><span class="w">               </span><span class="c1"># файлы</span>
+<span class="w">        </span><span class="kn">expires</span><span class="w"> </span><span class="s">30d</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kn">location</span><span class="w"> </span><span class="s">/grafana/</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kn">proxy_pass</span><span class="w"> </span><span class="s">http://127.0.0.1:3000/</span><span class="p">;</span><span class="w">    </span><span class="c1"># Grafana</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<hr />
+<h2 id="load-balancing">⚖️ Load Balancing<a class="headerlink" href="#load-balancing" title="Ссылка">#</a></h2>
+<div class="highlight"><pre><span></span><code><span class="k">http</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kn">upstream</span><span class="w"> </span><span class="s">backend</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1"># Методы балансировки:</span>
+<span class="w">        </span><span class="c1"># round-robin (по умолчанию)</span>
+<span class="w">        </span><span class="c1"># least_conn;            — меньше соединений</span>
+<span class="w">        </span><span class="c1"># ip_hash;               — по IP клиента (sticky)</span>
+<span class="w">        </span><span class="c1"># hash $request_uri;     — по URL</span>
+
+<span class="w">        </span><span class="kn">server</span><span class="w"> </span><span class="s">backend1.example.com</span><span class="w"> </span><span class="s">weight=3</span><span class="p">;</span>
+<span class="w">        </span><span class="kn">server</span><span class="w"> </span><span class="s">backend2.example.com</span><span class="p">;</span>
+<span class="w">        </span><span class="kn">server</span><span class="w"> </span><span class="s">backend3.example.com</span><span class="w"> </span><span class="s">backup</span><span class="p">;</span><span class="w">     </span><span class="c1"># запасной</span>
+<span class="w">        </span><span class="kn">server</span><span class="w"> </span><span class="s">backend4.example.com</span><span class="w"> </span><span class="s">down</span><span class="p">;</span><span class="w">       </span><span class="c1"># выключен</span>
+
+<span class="w">        </span><span class="kn">keepalive</span><span class="w"> </span><span class="mi">32</span><span class="p">;</span><span class="w">                           </span><span class="c1"># keep-alive к бэкендам</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kn">server</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kn">listen</span><span class="w"> </span><span class="mi">80</span><span class="p">;</span>
+<span class="w">        </span><span class="kn">location</span><span class="w"> </span><span class="s">/</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="kn">proxy_pass</span><span class="w"> </span><span class="s">http://backend</span><span class="p">;</span>
+<span class="w">            </span><span class="kn">proxy_http_version</span><span class="w"> </span><span class="mi">1</span><span class="s">.1</span><span class="p">;</span>
+<span class="w">            </span><span class="kn">proxy_set_header</span><span class="w"> </span><span class="s">Connection</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<h3 id="health-checks">Health checks<a class="headerlink" href="#health-checks" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">location</span><span class="w"> </span><span class="s">/health</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kn">proxy_pass</span><span class="w"> </span><span class="s">http://backend/health</span><span class="p">;</span>
+<span class="w">    </span><span class="kn">proxy_next_upstream</span><span class="w"> </span><span class="s">error</span><span class="w"> </span><span class="s">timeout</span><span class="w"> </span><span class="s">http_500</span><span class="w"> </span><span class="s">http_502</span><span class="w"> </span><span class="s">http_503</span><span class="w"> </span><span class="s">http_504</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<hr />
+<h2 id="https-ssl">🔒 HTTPS / SSL<a class="headerlink" href="#https-ssl" title="Ссылка">#</a></h2>
+<h3 id="получение-сертификата-let-s-encrypt">Получение сертификата Let&rsquo;s Encrypt<a class="headerlink" href="#получение-сертификата-let-s-encrypt" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>pacman<span class="w"> </span>-S<span class="w"> </span>certbot<span class="w"> </span>certbot-nginx
+sudo<span class="w"> </span>certbot<span class="w"> </span>--nginx<span class="w"> </span>-d<span class="w"> </span>example.com<span class="w"> </span>-d<span class="w"> </span>www.example.com
+<span class="c1"># Автоматически изменит nginx.conf</span>
+
+<span class="c1"># Автообновление</span>
+sudo<span class="w"> </span>systemctl<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>--now<span class="w"> </span>certbot.timer
+</code></pre></div>
+
+<h3 id="ручная-настройка-https">Ручная настройка HTTPS<a class="headerlink" href="#ручная-настройка-https" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">server</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kn">listen</span><span class="w"> </span><span class="mi">443</span><span class="w"> </span><span class="s">ssl</span><span class="w"> </span><span class="s">http2</span><span class="p">;</span>
+<span class="w">    </span><span class="kn">server_name</span><span class="w"> </span><span class="s">example.com</span><span class="p">;</span>
+
+<span class="w">    </span><span class="kn">ssl_certificate</span><span class="w"> </span><span class="s">/etc/letsencrypt/live/example.com/fullchain.pem</span><span class="p">;</span>
+<span class="w">    </span><span class="kn">ssl_certificate_key</span><span class="w"> </span><span class="s">/etc/letsencrypt/live/example.com/privkey.pem</span><span class="p">;</span>
+<span class="w">    </span><span class="kn">ssl_protocols</span><span class="w"> </span><span class="s">TLSv1.2</span><span class="w"> </span><span class="s">TLSv1.3</span><span class="p">;</span>
+<span class="w">    </span><span class="kn">ssl_ciphers</span><span class="w"> </span><span class="s">HIGH:!aNULL:!MD5</span><span class="p">;</span>
+<span class="w">    </span><span class="kn">ssl_prefer_server_ciphers</span><span class="w"> </span><span class="no">on</span><span class="p">;</span>
+<span class="w">    </span><span class="kn">ssl_session_cache</span><span class="w"> </span><span class="s">shared:SSL:10m</span><span class="p">;</span>
+<span class="w">    </span><span class="kn">ssl_session_timeout</span><span class="w"> </span><span class="mi">10m</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1"># HSTS</span>
+<span class="w">    </span><span class="kn">add_header</span><span class="w"> </span><span class="s">Strict-Transport-Security</span><span class="w"> </span><span class="s">&quot;max-age=31536000</span><span class="p">;</span><span class="w"> </span><span class="kn">includeSubDomains&quot;</span><span class="w"> </span><span class="s">always</span><span class="p">;</span>
+
+<span class="w">    </span><span class="kn">location</span><span class="w"> </span><span class="s">/</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kn">proxy_pass</span><span class="w"> </span><span class="s">http://127.0.0.1:8000</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1"># Редирект с HTTP на HTTPS</span>
+<span class="k">server</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kn">listen</span><span class="w"> </span><span class="mi">80</span><span class="p">;</span>
+<span class="w">    </span><span class="kn">server_name</span><span class="w"> </span><span class="s">example.com</span><span class="p">;</span>
+<span class="w">    </span><span class="kn">return</span><span class="w"> </span><span class="mi">301</span><span class="w"> </span><span class="s">https://</span><span class="nv">$host$request_uri</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<hr />
+<h2 id="location-и-приоритеты">🎨 Location и приоритеты<a class="headerlink" href="#location-и-приоритеты" title="Ссылка">#</a></h2>
+<p>Порядок проверки location&rsquo;ов (от высшего к низшему):
+1. <code>=</code> точное совпадение (<code>location = /exact</code>)
+2. <code>^~</code> префикс без regex (<code>location ^~ /static/</code>)
+3. <code>~</code> / <code>~*</code> regex (с учётом/без регистра)
+4. префикс (<code>location /api</code>)</p>
+<div class="highlight"><pre><span></span><code><span class="k">location</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">/exact</span><span class="w"> </span><span class="p">{</span><span class="w">              </span><span class="c1"># точное совпадение (приоритет 1)</span>
+<span class="w">    </span><span class="kn">return</span><span class="w"> </span><span class="mi">200</span><span class="w"> </span><span class="s">&quot;exact</span><span class="w"> </span><span class="s">match&quot;</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">location</span><span class="w"> </span><span class="s">^~</span><span class="w"> </span><span class="s">/static/</span><span class="w"> </span><span class="p">{</span><span class="w">           </span><span class="c1"># префикс, не проверять regex</span>
+<span class="w">    </span><span class="kn">alias</span><span class="w"> </span><span class="s">/var/www/static/</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">location</span><span class="w"> </span><span class="p">~</span><span class="sr">*</span><span class="w"> </span><span class="s">\.php</span>$<span class="w"> </span><span class="p">{</span><span class="w">             </span><span class="c1"># regex (без регистра)</span>
+<span class="w">    </span><span class="kn">fastcgi_pass</span><span class="w"> </span><span class="s">unix:/run/php/php-fpm.sock</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">location</span><span class="w"> </span><span class="p">~</span><span class="w"> </span><span class="sr">\.jpg$</span><span class="w"> </span><span class="p">{</span><span class="w">              </span><span class="c1"># regex (с учётом регистра)</span>
+<span class="w">    </span><span class="kn">root</span><span class="w"> </span><span class="s">/images</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">location</span><span class="w"> </span><span class="s">/api</span><span class="w"> </span><span class="p">{</span><span class="w">                  </span><span class="c1"># префикс (последний приоритет)</span>
+<span class="w">    </span><span class="kn">proxy_pass</span><span class="w"> </span><span class="s">http://backend</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">location</span><span class="w"> </span><span class="s">/</span><span class="w"> </span><span class="p">{</span><span class="w">                     </span><span class="c1"># дефолт</span>
+<span class="w">    </span><span class="kn">try_files</span><span class="w"> </span><span class="nv">$uri</span><span class="w"> </span><span class="nv">$uri/</span><span class="w"> </span><span class="p">=</span><span class="mi">404</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<hr />
+<h2 id="rewrites-и-redirects">🔄 Rewrites и Redirects<a class="headerlink" href="#rewrites-и-redirects" title="Ссылка">#</a></h2>
+<div class="highlight"><pre><span></span><code><span class="c1"># Permanent redirect (301)</span>
+<span class="k">server</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kn">listen</span><span class="w"> </span><span class="mi">80</span><span class="p">;</span>
+<span class="w">    </span><span class="kn">server_name</span><span class="w"> </span><span class="s">old.com</span><span class="p">;</span>
+<span class="w">    </span><span class="kn">return</span><span class="w"> </span><span class="mi">301</span><span class="w"> </span><span class="s">https://new.com</span><span class="nv">$request_uri</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1"># Rewrite URL</span>
+<span class="k">location</span><span class="w"> </span><span class="s">/old/</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kn">rewrite</span><span class="w"> </span><span class="s">^/old/(.*)</span>$<span class="w"> </span><span class="s">/new/</span><span class="nv">$1</span><span class="w"> </span><span class="s">permanent</span><span class="p">;</span><span class="w">     </span><span class="c1"># 301</span>
+<span class="w">    </span><span class="c1"># rewrite ^/old/(.*)$ /new/$1 redirect;    # 302</span>
+<span class="w">    </span><span class="c1"># rewrite ^/old/(.*)$ /new/$1 last;        # внутренний, ищет location заново</span>
+<span class="w">    </span><span class="c1"># rewrite ^/old/(.*)$ /new/$1 break;       # внутренний, остаётся</span>
+<span class="p">}</span>
+
+<span class="c1"># Убрать .html из URL</span>
+<span class="k">location</span><span class="w"> </span><span class="s">/</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kn">rewrite</span><span class="w"> </span><span class="s">^(/.*)\.html</span>$<span class="w"> </span><span class="nv">$1</span><span class="w"> </span><span class="s">permanent</span><span class="p">;</span>
+<span class="w">    </span><span class="kn">try_files</span><span class="w"> </span><span class="nv">$uri</span><span class="w"> </span><span class="nv">$uri.html</span><span class="w"> </span><span class="nv">$uri/</span><span class="w"> </span><span class="p">=</span><span class="mi">404</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1"># Стандартный rewrite для фреймворков (Laravel, Django)</span>
+<span class="k">location</span><span class="w"> </span><span class="s">/</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kn">try_files</span><span class="w"> </span><span class="nv">$uri</span><span class="w"> </span><span class="nv">$uri/</span><span class="w"> </span><span class="s">/index.php?</span><span class="nv">$query_string</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<hr />
+<h2 id="переменные-nginx">🛠️ Переменные nginx<a class="headerlink" href="#переменные-nginx" title="Ссылка">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Переменная</th>
+<th>Что</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>$host</code></td>
+<td>Имя хоста из запроса</td>
+</tr>
+<tr>
+<td><code>$remote_addr</code></td>
+<td>IP клиента</td>
+</tr>
+<tr>
+<td><code>$request_uri</code></td>
+<td>Полный URI</td>
+</tr>
+<tr>
+<td><code>$uri</code></td>
+<td>URI без query string</td>
+</tr>
+<tr>
+<td><code>$args</code> / <code>$query_string</code></td>
+<td>Query string</td>
+</tr>
+<tr>
+<td><code>$scheme</code></td>
+<td>http/https</td>
+</tr>
+<tr>
+<td><code>$request_method</code></td>
+<td>GET/POST/&hellip;</td>
+</tr>
+<tr>
+<td><code>$http_user_agent</code></td>
+<td>User-Agent</td>
+</tr>
+<tr>
+<td><code>$http_referer</code></td>
+<td>Referer</td>
+</tr>
+<tr>
+<td><code>$server_name</code></td>
+<td>Имя server&rsquo;а</td>
+</tr>
+<tr>
+<td><code>$server_port</code></td>
+<td>Порт</td>
+</tr>
+<tr>
+<td><code>$document_root</code></td>
+<td>Корень</td>
+</tr>
+<tr>
+<td><code>$time_iso8601</code></td>
+<td>Время ISO</td>
+</tr>
+<tr>
+<td><code>$request_time</code></td>
+<td>Время обработки</td>
+</tr>
+<tr>
+<td><code>$body_bytes_sent</code></td>
+<td>Байт отправлено</td>
+</tr>
+</tbody>
+</table>
+<h3 id="кастомные-переменные">Кастомные переменные<a class="headerlink" href="#кастомные-переменные" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">location</span><span class="w"> </span><span class="s">/</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kn">set</span><span class="w"> </span><span class="nv">$upstream</span><span class="w"> </span><span class="s">&quot;http://backend&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="kn">proxy_pass</span><span class="w"> </span><span class="nv">$upstream</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1"># Map (преобразование)</span>
+<span class="k">map</span><span class="w"> </span><span class="nv">$http_host</span><span class="w"> </span><span class="nv">$backend</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kn">default</span><span class="w"> </span><span class="s">&quot;http://default&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="kn">&quot;api.com&quot;</span><span class="w"> </span><span class="s">&quot;http://api&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="kn">&quot;web.com&quot;</span><span class="w"> </span><span class="s">&quot;http://web&quot;</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<hr />
+<h2 id="производительность">⚡ Производительность<a class="headerlink" href="#производительность" title="Ссылка">#</a></h2>
+<div class="highlight"><pre><span></span><code><span class="k">http</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1"># Sendfile (быстрая отдача файлов)</span>
+<span class="w">    </span><span class="kn">sendfile</span><span class="w"> </span><span class="no">on</span><span class="p">;</span>
+<span class="w">    </span><span class="kn">tcp_nopush</span><span class="w"> </span><span class="no">on</span><span class="p">;</span><span class="w">          </span><span class="c1"># отправлять заголовки одним пакетом</span>
+<span class="w">    </span><span class="kn">tcp_nodelay</span><span class="w"> </span><span class="no">on</span><span class="p">;</span><span class="w">         </span><span class="c1"># не ждать (Nagle)</span>
+
+<span class="w">    </span><span class="c1"># Keep-alive</span>
+<span class="w">    </span><span class="kn">keepalive_timeout</span><span class="w"> </span><span class="mi">65</span><span class="p">;</span>
+<span class="w">    </span><span class="kn">keepalive_requests</span><span class="w"> </span><span class="mi">1000</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1"># Буферы</span>
+<span class="w">    </span><span class="kn">client_body_buffer_size</span><span class="w"> </span><span class="s">16K</span><span class="p">;</span>
+<span class="w">    </span><span class="kn">client_max_body_size</span><span class="w"> </span><span class="s">50M</span><span class="p">;</span><span class="w">       </span><span class="c1"># max upload</span>
+<span class="w">    </span><span class="kn">client_body_timeout</span><span class="w"> </span><span class="mi">30</span><span class="p">;</span>
+<span class="w">    </span><span class="kn">client_header_timeout</span><span class="w"> </span><span class="mi">30</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1"># Gzip</span>
+<span class="w">    </span><span class="kn">gzip</span><span class="w"> </span><span class="no">on</span><span class="p">;</span>
+<span class="w">    </span><span class="kn">gzip_comp_level</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span>
+<span class="w">    </span><span class="kn">gzip_min_length</span><span class="w"> </span><span class="mi">256</span><span class="p">;</span>
+<span class="w">    </span><span class="kn">gzip_proxied</span><span class="w"> </span><span class="s">any</span><span class="p">;</span>
+<span class="w">    </span><span class="kn">gzip_types</span>
+<span class="w">        </span><span class="s">application/javascript</span>
+<span class="w">        </span><span class="s">application/json</span>
+<span class="w">        </span><span class="s">application/xml</span>
+<span class="w">        </span><span class="s">text/css</span>
+<span class="w">        </span><span class="s">text/plain</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1"># Кэширование статических файлов</span>
+<span class="k">location</span><span class="w"> </span><span class="p">~</span><span class="sr">*</span><span class="w"> </span><span class="s">\.(jpg|jpeg|png|gif|ico|css|js|svg|woff2?)</span>$<span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kn">expires</span><span class="w"> </span><span class="s">1y</span><span class="p">;</span>
+<span class="w">    </span><span class="kn">add_header</span><span class="w"> </span><span class="s">Cache-Control</span><span class="w"> </span><span class="s">&quot;public,</span><span class="w"> </span><span class="s">immutable&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="kn">access_log</span><span class="w"> </span><span class="no">off</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<h3 id="настройка-workerprocesses">Настройка worker_processes<a class="headerlink" href="#настройка-workerprocesses" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">worker_processes</span><span class="w"> </span><span class="s">auto</span><span class="p">;</span><span class="w">        </span><span class="c1"># = число CPU ядер</span>
+<span class="c1"># worker_processes 8;</span>
+
+<span class="k">worker_rlimit_nofile</span><span class="w"> </span><span class="mi">65535</span><span class="p">;</span><span class="w">   </span><span class="c1"># лимит файловых дескрипторов</span>
+
+<span class="k">events</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kn">worker_connections</span><span class="w"> </span><span class="mi">4096</span><span class="p">;</span><span class="w">  </span><span class="c1"># соединений на worker</span>
+<span class="w">    </span><span class="kn">multi_accept</span><span class="w"> </span><span class="no">on</span><span class="p">;</span>
+<span class="w">    </span><span class="kn">use</span><span class="w"> </span><span class="s">epoll</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="c1"># max clients = worker_processes * worker_connections</span>
+</code></pre></div>
+
+<hr />
+<h2 id="безопасность">🔐 Безопасность<a class="headerlink" href="#безопасность" title="Ссылка">#</a></h2>
+<div class="highlight"><pre><span></span><code><span class="c1"># Скрыть версию nginx</span>
+<span class="k">server_tokens</span><span class="w"> </span><span class="no">off</span><span class="p">;</span>
+
+<span class="c1"># Защита от clickjacking</span>
+<span class="k">add_header</span><span class="w"> </span><span class="s">X-Frame-Options</span><span class="w"> </span><span class="s">&quot;SAMEORIGIN&quot;</span><span class="p">;</span>
+
+<span class="c1"># XSS защита</span>
+<span class="k">add_header</span><span class="w"> </span><span class="s">X-XSS-Protection</span><span class="w"> </span><span class="s">&quot;1</span><span class="p">;</span><span class="w"> </span><span class="k">mode=block&quot;</span><span class="p">;</span>
+
+<span class="c1"># Content-Type sniffing</span>
+<span class="k">add_header</span><span class="w"> </span><span class="s">X-Content-Type-Options</span><span class="w"> </span><span class="s">&quot;nosniff&quot;</span><span class="p">;</span>
+
+<span class="c1"># CSP</span>
+<span class="k">add_header</span><span class="w"> </span><span class="s">Content-Security-Policy</span><span class="w"> </span><span class="s">&quot;default-src</span><span class="w"> </span><span class="s">&#39;self&#39;&quot;</span><span class="p">;</span>
+
+<span class="c1"># Запретить доступ к скрытым файлам</span>
+<span class="k">location</span><span class="w"> </span><span class="p">~</span><span class="w"> </span><span class="sr">/\.</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kn">deny</span><span class="w"> </span><span class="s">all</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1"># Запретить выполнение PHP в uploads</span>
+<span class="k">location</span><span class="w"> </span><span class="p">~</span><span class="sr">*</span><span class="w"> </span><span class="s">/uploads/.*\.php</span>$<span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kn">deny</span><span class="w"> </span><span class="s">all</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1"># Basic Auth</span>
+<span class="k">location</span><span class="w"> </span><span class="s">/admin</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kn">auth_basic</span><span class="w"> </span><span class="s">&quot;Restricted&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="kn">auth_basic_user_file</span><span class="w"> </span><span class="s">/etc/nginx/.htpasswd</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1"># Limit requests (rate limit)</span>
+<span class="k">limit_req_zone</span><span class="w"> </span><span class="nv">$binary_remote_addr</span><span class="w"> </span><span class="s">zone=api:10m</span><span class="w"> </span><span class="s">rate=10r/s</span><span class="p">;</span>
+<span class="k">location</span><span class="w"> </span><span class="s">/api</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kn">limit_req</span><span class="w"> </span><span class="s">zone=api</span><span class="w"> </span><span class="s">burst=20</span><span class="w"> </span><span class="s">nodelay</span><span class="p">;</span>
+<span class="w">    </span><span class="kn">proxy_pass</span><span class="w"> </span><span class="s">http://backend</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1"># Limit connections</span>
+<span class="k">limit_conn_zone</span><span class="w"> </span><span class="nv">$binary_remote_addr</span><span class="w"> </span><span class="s">zone=conn_per_ip:10m</span><span class="p">;</span>
+<span class="k">limit_conn</span><span class="w"> </span><span class="s">conn_per_ip</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span>
+</code></pre></div>
+
+<h3 id="basic-auth-генерация-пароля">Basic Auth — генерация пароля<a class="headerlink" href="#basic-auth-генерация-пароля" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>htpasswd<span class="w"> </span>-c<span class="w"> </span>/etc/nginx/.htpasswd<span class="w"> </span>user1
+sudo<span class="w"> </span>htpasswd<span class="w"> </span>/etc/nginx/.htpasswd<span class="w"> </span>user2<span class="w">     </span><span class="c1"># без -c (добавить)</span>
+</code></pre></div>
+
+<hr />
+<h2 id="логи">📊 Логи<a class="headerlink" href="#логи" title="Ссылка">#</a></h2>
+<div class="highlight"><pre><span></span><code><span class="c1"># Формат лога</span>
+<span class="k">log_format</span><span class="w"> </span><span class="s">main</span><span class="w"> </span><span class="s">&#39;</span><span class="nv">$remote_addr</span><span class="w"> </span><span class="s">-</span><span class="w"> </span><span class="nv">$remote_user</span><span class="w"> </span><span class="s">[</span><span class="nv">$time_local]</span><span class="w"> </span><span class="s">&#39;</span>
+<span class="w">                </span><span class="s">&#39;&quot;</span><span class="nv">$request&quot;</span><span class="w"> </span><span class="nv">$status</span><span class="w"> </span><span class="nv">$body_bytes_sent</span><span class="w"> </span><span class="s">&#39;</span>
+<span class="w">                </span><span class="s">&#39;&quot;</span><span class="nv">$http_referer&quot;</span><span class="w"> </span><span class="s">&quot;</span><span class="nv">$http_user_agent&quot;</span><span class="w"> </span><span class="s">&#39;</span>
+<span class="w">                </span><span class="s">&#39;rt=</span><span class="nv">$request_time</span><span class="w"> </span><span class="s">uct=&quot;</span><span class="nv">$upstream_connect_time&quot;</span><span class="w"> </span><span class="s">&#39;</span>
+<span class="w">                </span><span class="s">&#39;urt=&quot;</span><span class="nv">$upstream_response_time&quot;&#39;</span><span class="p">;</span>
+
+<span class="k">access_log</span><span class="w"> </span><span class="s">/var/log/nginx/access.log</span><span class="w"> </span><span class="s">main</span><span class="p">;</span>
+<span class="k">error_log</span><span class="w"> </span><span class="s">/var/log/nginx/error.log</span><span class="w"> </span><span class="s">warn</span><span class="p">;</span>
+
+<span class="c1"># Условное логирование</span>
+<span class="k">location</span><span class="w"> </span><span class="s">/health</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kn">access_log</span><span class="w"> </span><span class="no">off</span><span class="p">;</span><span class="w">            </span><span class="c1"># не логировать health checks</span>
+<span class="w">    </span><span class="kn">return</span><span class="w"> </span><span class="mi">200</span><span class="w"> </span><span class="s">&quot;ok&quot;</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1"># Буферизация логов</span>
+<span class="k">access_log</span><span class="w"> </span><span class="s">/var/log/nginx/access.log</span><span class="w"> </span><span class="s">main</span><span class="w"> </span><span class="s">buffer=32k</span><span class="w"> </span><span class="s">flush=5s</span><span class="p">;</span>
+</code></pre></div>
+
+<h3 id="анализ-логов">Анализ логов<a class="headerlink" href="#анализ-логов" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Топ IP</span>
+awk<span class="w"> </span><span class="s1">&#39;{print $1}&#39;</span><span class="w"> </span>/var/log/nginx/access.log<span class="w"> </span><span class="p">|</span><span class="w"> </span>sort<span class="w"> </span><span class="p">|</span><span class="w"> </span>uniq<span class="w"> </span>-c<span class="w"> </span><span class="p">|</span><span class="w"> </span>sort<span class="w"> </span>-rn<span class="w"> </span><span class="p">|</span><span class="w"> </span>head
+
+<span class="c1"># Топ URL</span>
+awk<span class="w"> </span><span class="s1">&#39;{print $7}&#39;</span><span class="w"> </span>access.log<span class="w"> </span><span class="p">|</span><span class="w"> </span>sort<span class="w"> </span><span class="p">|</span><span class="w"> </span>uniq<span class="w"> </span>-c<span class="w"> </span><span class="p">|</span><span class="w"> </span>sort<span class="w"> </span>-rn<span class="w"> </span><span class="p">|</span><span class="w"> </span>head
+
+<span class="c1"># Коды ответов</span>
+awk<span class="w"> </span><span class="s1">&#39;{print $9}&#39;</span><span class="w"> </span>access.log<span class="w"> </span><span class="p">|</span><span class="w"> </span>sort<span class="w"> </span><span class="p">|</span><span class="w"> </span>uniq<span class="w"> </span>-c<span class="w"> </span><span class="p">|</span><span class="w"> </span>sort<span class="w"> </span>-rn
+
+<span class="c1"># Ошибки 5xx</span>
+grep<span class="w"> </span><span class="s1">&#39; 5[0-9][0-9] &#39;</span><span class="w"> </span>access.log
+</code></pre></div>
+
+<hr />
+<h2 id="php-python-node-бэкенды">🐍 PHP / Python / Node бэкенды<a class="headerlink" href="#php-python-node-бэкенды" title="Ссылка">#</a></h2>
+<h3 id="php-fpm">PHP-FPM<a class="headerlink" href="#php-fpm" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">location</span><span class="w"> </span><span class="p">~</span><span class="w"> </span><span class="sr">\.php$</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kn">fastcgi_pass</span><span class="w"> </span><span class="s">unix:/run/php/php8.2-fpm.sock</span><span class="p">;</span>
+<span class="w">    </span><span class="kn">fastcgi_index</span><span class="w"> </span><span class="s">index.php</span><span class="p">;</span>
+<span class="w">    </span><span class="kn">include</span><span class="w"> </span><span class="s">fastcgi_params</span><span class="p">;</span>
+<span class="w">    </span><span class="kn">fastcgi_param</span><span class="w"> </span><span class="s">SCRIPT_FILENAME</span><span class="w"> </span><span class="nv">$document_root$fastcgi_script_name</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1"># или TCP</span>
+<span class="k">fastcgi_pass</span><span class="w"> </span><span class="n">127.0.0.1</span><span class="p">:</span><span class="mi">9000</span><span class="p">;</span>
+</code></pre></div>
+
+<h3 id="python-uwsgi-gunicorn">Python (uWSGI / Gunicorn)<a class="headerlink" href="#python-uwsgi-gunicorn" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># uWSGI</span>
+<span class="k">location</span><span class="w"> </span><span class="s">/</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kn">include</span><span class="w"> </span><span class="s">uwsgi_params</span><span class="p">;</span>
+<span class="w">    </span><span class="kn">uwsgi_pass</span><span class="w"> </span><span class="n">127.0.0.1</span><span class="p">:</span><span class="mi">3031</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1"># Gunicorn (через proxy_pass)</span>
+<span class="k">location</span><span class="w"> </span><span class="s">/</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kn">proxy_pass</span><span class="w"> </span><span class="s">http://127.0.0.1:8000</span><span class="p">;</span>
+<span class="w">    </span><span class="kn">proxy_set_header</span><span class="w"> </span><span class="s">Host</span><span class="w"> </span><span class="nv">$host</span><span class="p">;</span>
+<span class="w">    </span><span class="kn">proxy_set_header</span><span class="w"> </span><span class="s">X-Forwarded-For</span><span class="w"> </span><span class="nv">$proxy_add_x_forwarded_for</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<h3 id="node-js">Node.js<a class="headerlink" href="#node-js" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">location</span><span class="w"> </span><span class="s">/</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kn">proxy_pass</span><span class="w"> </span><span class="s">http://127.0.0.1:3000</span><span class="p">;</span>
+<span class="w">    </span><span class="kn">proxy_http_version</span><span class="w"> </span><span class="mi">1</span><span class="s">.1</span><span class="p">;</span>
+<span class="w">    </span><span class="kn">proxy_set_header</span><span class="w"> </span><span class="s">Upgrade</span><span class="w"> </span><span class="nv">$http_upgrade</span><span class="p">;</span>
+<span class="w">    </span><span class="kn">proxy_set_header</span><span class="w"> </span><span class="s">Connection</span><span class="w"> </span><span class="s">&quot;upgrade&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="kn">proxy_set_header</span><span class="w"> </span><span class="s">Host</span><span class="w"> </span><span class="nv">$host</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<hr />
+<h2 id="nginx-в-docker">🐳 nginx в Docker<a class="headerlink" href="#nginx-в-docker" title="Ссылка">#</a></h2>
+<div class="highlight"><pre><span></span><code><span class="k">FROM</span><span class="w"> </span><span class="s">nginx:alpine</span>
+<span class="k">COPY</span><span class="w"> </span>nginx.conf<span class="w"> </span>/etc/nginx/nginx.conf
+<span class="k">COPY</span><span class="w"> </span>site.conf<span class="w"> </span>/etc/nginx/conf.d/default.conf
+<span class="k">COPY</span><span class="w"> </span>dist/<span class="w"> </span>/usr/share/nginx/html/
+</code></pre></div>
+
+<div class="highlight"><pre><span></span><code><span class="c1"># docker-compose.yml</span>
+<span class="nt">services</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">web</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nginx:alpine</span>
+<span class="w">    </span><span class="nt">ports</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;80:80&quot;</span>
+<span class="w">    </span><span class="nt">volumes</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./nginx.conf:/etc/nginx/nginx.conf:ro</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./html:/usr/share/nginx/html:ro</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./certs:/etc/nginx/certs:ro</span>
+<span class="w">    </span><span class="nt">depends_on</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">app</span>
+
+<span class="w">  </span><span class="nt">app</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">myapp:latest</span>
+</code></pre></div>
+
+<hr />
+<h2 id="частые-ошибки">🪤 Частые ошибки<a class="headerlink" href="#частые-ошибки" title="Ссылка">#</a></h2>
+<ol>
+<li><strong>Не проверили <code>nginx -t</code></strong> — config синтаксис после правки.</li>
+<li><strong><code>reload</code> вместо <code>restart</code></strong> — reload мягче, не разрывает соединения.</li>
+<li><strong><code>alias</code> vs <code>root</code></strong>:
+   - <code>root /var/www; location /img/ {}</code> → <code>/var/www/img/...</code>
+   - <code>alias /var/www/images/; location /img/ {}</code> → <code>/var/www/images/...</code></li>
+<li><strong>Trailing slash в <code>proxy_pass</code></strong>:
+   - <code>proxy_pass http://backend;</code> → сохраняет URI
+   - <code>proxy_pass http://backend/;</code> → заменяет location-часть</li>
+<li><strong>CSS/JS не работают</strong> — часто MIME-типы или пути.</li>
+<li><strong><code>client_max_body_size</code></strong> — по умолчанию 1MB, uploads ломаются.</li>
+<li><strong>Переменные в <code>proxy_pass</code></strong> — нужны <code>resolver</code> и <code>resolver_timeout</code>.</li>
+<li><strong>Regex <code>~</code> case-sensitive</strong> — нужно <code>~*</code> для без учёта регистра.</li>
+<li><strong><code>server_name</code> не совпадает</strong> — попадёт в default server.</li>
+<li><strong>Let&rsquo;s Encrypt rate limit</strong> — 5 сертификатов в неделю на домен.</li>
+</ol>
+<hr />
+<h2 id="полезные-ссылки">🔗 Полезные ссылки<a class="headerlink" href="#полезные-ссылки" title="Ссылка">#</a></h2>
+<ul>
+<li>Документация: https://nginx.org/en/docs</li>
+<li>Beginner&rsquo;s Guide: https://nginx.org/en/docs/beginners_guide.html</li>
+<li>Full example: https://www.nginx.com/resources/wiki/start/topics/examples/full/</li>
+<li>Mozilla SSL Config: https://ssl-config.mozilla.org</li>
+<li>ngx_conf playground: https://www.digitalocean.com/community/tools/nginx</li>
+<li>Nginx config generator: https://www.nginxconfig.io</li>
+<li>Awesome Nginx: https://github.com/agile6v/awesome-nginx</li>
+</ul>
+<hr />
+<h2 id="полезные-советы">💡 Полезные советы<a class="headerlink" href="#полезные-советы" title="Ссылка">#</a></h2>
+<ol>
+<li><strong><code>nginx -t</code></strong> — ВСЕГДА после правки конфига.</li>
+<li><strong><code>reload</code></strong> — мягче, чем <code>restart</code> (без обрыва соединений).</li>
+<li><strong><code>include conf.d/*.conf</code></strong> — разделяйте конфиги по файлам.</li>
+<li><strong>Reverse proxy</strong> — главное назначение nginx в микросервисах.</li>
+<li><strong><code>upstream</code> + load balancing</strong> — для нескольких бэкендов.</li>
+<li><strong>Let&rsquo;s Encrypt + certbot</strong> — бесплатные SSL-сертификаты.</li>
+<li><strong><code>gzip on</code></strong> — ускоряет отдачу текста.</li>
+<li><strong><code>expires 1y</code></strong> — для статики (браузерное кэширование).</li>
+<li><strong><code>limit_req</code></strong> — защита от DDoS / брутфорса.</li>
+<li><strong><code>access_log off</code></strong> — для health checks (не засорять логи).</li>
+<li><strong><code>server_tokens off</code></strong> — скрыть версию nginx.</li>
+<li><strong>HTTP/2</strong> — <code>listen 443 ssl http2;</code> (или <code>http2 on;</code> в новых версиях).</li>
+<li><strong>Docker + nginx</strong> — отличный reverse-proxy для контейнеров.</li>
+<li><strong><code>try_files $uri $uri/ /index.php?$query_string</code></strong> — стандарт для PHP-фреймворков.</li>
+<li><strong><code>return 301</code></strong> — для редиректов (быстрее, чем <code>rewrite</code>).</li>
+</ol>
+<hr />
+<p><em>Сгенерировано как шпаргалка. nginx мощный и капризный —
+углубляйтесь через https://nginx.org/en/docs и <code>nginx -t</code></em></p>
+    </article>
+    <nav class="pagination">
+      <a class="pager prev" href="cicd.html">← GitLab CI / GitHub Actions</a>
+      <a class="pager next" href="dbt.html">dbt →</a>
+    </nav>
+  </main>
+
+  <aside class="toc">
+    <details open>
+      <summary>📑 Оглавление</summary>
+      <div class="toc-list">
+<div class="toc">
+<ul>
+<li><a href="#nginx-шпаргалка-по-веб-серверу-и-reverse-proxy">🌐 nginx — шпаргалка по веб-серверу и reverse-proxy</a><ul>
+<li><a href="#главные-понятия">🔑 Главные понятия</a><ul>
+<li><a href="#иерархия-контекстов">Иерархия контекстов</a></li>
+</ul>
+</li>
+<li><a href="#установка-и-управление">🚀 Установка и управление</a><ul>
+<li><a href="#структура-файлов">Структура файлов</a></li>
+</ul>
+</li>
+<li><a href="#базовая-конфигурация">📝 Базовая конфигурация</a><ul>
+<li><a href="#etc-nginx-nginx-conf-главный">/etc/nginx/nginx.conf (главный)</a></li>
+<li><a href="#статический-сайт">Статический сайт</a></li>
+</ul>
+</li>
+<li><a href="#reverse-proxy">🔄 Reverse Proxy</a><ul>
+<li><a href="#проксирование-на-бэкенд">Проксирование на бэкенд</a></li>
+<li><a href="#несколько-location-ов">Несколько location&rsquo;ов</a></li>
+</ul>
+</li>
+<li><a href="#load-balancing">⚖️ Load Balancing</a><ul>
+<li><a href="#health-checks">Health checks</a></li>
+</ul>
+</li>
+<li><a href="#https-ssl">🔒 HTTPS / SSL</a><ul>
+<li><a href="#получение-сертификата-let-s-encrypt">Получение сертификата Let&rsquo;s Encrypt</a></li>
+<li><a href="#ручная-настройка-https">Ручная настройка HTTPS</a></li>
+</ul>
+</li>
+<li><a href="#location-и-приоритеты">🎨 Location и приоритеты</a></li>
+<li><a href="#rewrites-и-redirects">🔄 Rewrites и Redirects</a></li>
+<li><a href="#переменные-nginx">🛠️ Переменные nginx</a><ul>
+<li><a href="#кастомные-переменные">Кастомные переменные</a></li>
+</ul>
+</li>
+<li><a href="#производительность">⚡ Производительность</a><ul>
+<li><a href="#настройка-workerprocesses">Настройка worker_processes</a></li>
+</ul>
+</li>
+<li><a href="#безопасность">🔐 Безопасность</a><ul>
+<li><a href="#basic-auth-генерация-пароля">Basic Auth — генерация пароля</a></li>
+</ul>
+</li>
+<li><a href="#логи">📊 Логи</a><ul>
+<li><a href="#анализ-логов">Анализ логов</a></li>
+</ul>
+</li>
+<li><a href="#php-python-node-бэкенды">🐍 PHP / Python / Node бэкенды</a><ul>
+<li><a href="#php-fpm">PHP-FPM</a></li>
+<li><a href="#python-uwsgi-gunicorn">Python (uWSGI / Gunicorn)</a></li>
+<li><a href="#node-js">Node.js</a></li>
+</ul>
+</li>
+<li><a href="#nginx-в-docker">🐳 nginx в Docker</a></li>
+<li><a href="#частые-ошибки">🪤 Частые ошибки</a></li>
+<li><a href="#полезные-ссылки">🔗 Полезные ссылки</a></li>
+<li><a href="#полезные-советы">💡 Полезные советы</a></li>
+</ul>
+</li>
+</ul>
+</div>
+
+      </div>
+    </details>
+  </aside>
+</div>
+
+<button class="back-top" id="backTop" aria-label="Наверх">↑</button>
+
+<script src="assets/search.js"></script>
+<script src="assets/page.js"></script>
+</body>
+</html>

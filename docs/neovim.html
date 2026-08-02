@@ -1,0 +1,970 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Neovim (LazyVim) — Шпаргалки</title>
+<link rel="stylesheet" href="assets/style.css">
+<link rel="stylesheet" href="assets/pygments.css">
+</head>
+<body>
+<div class="layout">
+  <aside class="sidebar">
+    <a href="index.html" class="brand">📌 Шпаргалки</a>
+    <nav class="nav">
+<a href="yazi.html" class="nav-item"><span class="nav-ico">📦</span>Yazi</a>
+<a href="neovim.html" class="nav-item active"><span class="nav-ico">📘</span>Neovim (LazyVim)</a>
+<a href="niri.html" class="nav-item"><span class="nav-ico">🪟</span>Niri</a>
+<a href="tmux.html" class="nav-item"><span class="nav-ico">🪟</span>Tmux</a>
+<a href="bash.html" class="nav-item"><span class="nav-ico">🐚</span>Bash</a>
+<a href="git.html" class="nav-item"><span class="nav-ico">🔀</span>Git</a>
+<a href="terminal.html" class="nav-item"><span class="nav-ico">🖥️</span>Терминал Linux</a>
+<a href="powershell.html" class="nav-item"><span class="nav-ico">💻</span>PowerShell</a>
+<a href="cmd.html" class="nav-item"><span class="nav-ico">🪟</span>CMD (cmd.exe)</a>
+<a href="python.html" class="nav-item"><span class="nav-ico">🐍</span>Python</a>
+<a href="systemd.html" class="nav-item"><span class="nav-ico">⚙️</span>systemd</a>
+<a href="ssh.html" class="nav-item"><span class="nav-ico">🔐</span>SSH</a>
+<a href="make-cmake.html" class="nav-item"><span class="nav-ico">🔨</span>Make / CMake</a>
+<a href="docker.html" class="nav-item"><span class="nav-ico">🐳</span>Docker</a>
+<a href="pacman.html" class="nav-item"><span class="nav-ico">📦</span>pacman / yay / paru</a>
+<a href="spark.html" class="nav-item"><span class="nav-ico">⚡</span>Apache Spark / PySpark</a>
+<a href="markdown.html" class="nav-item"><span class="nav-ico">📝</span>Markdown</a>
+<a href="regex.html" class="nav-item"><span class="nav-ico">🔍</span>Регулярные выражения</a>
+<a href="jq-json.html" class="nav-item"><span class="nav-ico">🔧</span>jq + JSON</a>
+<a href="awk-sed.html" class="nav-item"><span class="nav-ico">✂️</span>awk / sed</a>
+<a href="airflow.html" class="nav-item"><span class="nav-ico">🌪️</span>Apache Airflow</a>
+<a href="http-curl.html" class="nav-item"><span class="nav-ico">🌐</span>HTTP / curl</a>
+<a href="yaml.html" class="nav-item"><span class="nav-ico">📄</span>YAML</a>
+<a href="vscode.html" class="nav-item"><span class="nav-ico">💻</span>VS Code</a>
+<a href="cron.html" class="nav-item"><span class="nav-ico">⏰</span>cron</a>
+<a href="fzf-zoxide.html" class="nav-item"><span class="nav-ico">🔎</span>fzf + zoxide</a>
+<a href="minikube-k8s.html" class="nav-item"><span class="nav-ico">☸️</span>Minikube / Kubernetes</a>
+<a href="cicd.html" class="nav-item"><span class="nav-ico">🦊</span>GitLab CI / GitHub Actions</a>
+<a href="nginx.html" class="nav-item"><span class="nav-ico">🌐</span>nginx</a>
+<a href="dbt.html" class="nav-item"><span class="nav-ico">🔧</span>dbt</a>
+<a href="kafka.html" class="nav-item"><span class="nav-ico">🐘</span>Apache Kafka</a>
+<a href="prometheus-grafana.html" class="nav-item"><span class="nav-ico">📊</span>Prometheus / Grafana</a>
+<a href="iceberg-nessie.html" class="nav-item"><span class="nav-ico">🧊</span>Iceberg / Nessie</a>
+<a href="impala.html" class="nav-item"><span class="nav-ico">🐬</span>Apache Impala</a>
+<a href="terraform.html" class="nav-item"><span class="nav-ico">🏗️</span>Terraform</a>
+<a href="linux-internals.html" class="nav-item"><span class="nav-ico">🐧</span>Linux Internals</a>
+<a href="miscellaneous.html" class="nav-item"><span class="nav-ico">🧰</span>Miscellaneous</a>
+<a href="python-automation-libs.html" class="nav-item"><span class="nav-ico">🐍</span>Python: авт-ция (10 libs)</a>
+<a href="eza.html" class="nav-item"><span class="nav-ico">🌈</span>eza</a>
+<a href="dbeaver.html" class="nav-item"><span class="nav-ico">🗄️</span>DBeaver</a>
+<a href="zcode.html" class="nav-item"><span class="nav-ico">🤖</span>ZCode</a>
+<a href="warp.html" class="nav-item"><span class="nav-ico">🚀</span>Warp</a>
+<a href="agentic-ai-dev.html" class="nav-item"><span class="nav-ico">🤝</span>Агентная разработка с ИИ</a>
+    </nav>
+  </aside>
+
+  <main class="content">
+    <article>
+<h1 id="neovim-lazyvim-шпаргалка-по-горячим-клавишам">📘 Neovim (LazyVim) — шпаргалка по горячим клавишам<a class="headerlink" href="#neovim-lazyvim-шпаргалка-по-горячим-клавишам" title="Ссылка">#</a></h1>
+<blockquote>
+<p><strong>LazyVim</strong> — готовый дистрибутив Neovim на базе менеджера <code>lazy.nvim</code>.
+Дом: https://lazyvim.github.io · Репо: https://github.com/LazyVim/LazyVim</p>
+<p>Лидер <code>&lt;leader&gt;</code> по умолчанию = <strong>Пробел</strong> (<code>Space</code>)
+Локальный лидер <code>\</code> (редко используется)</p>
+</blockquote>
+<hr />
+<h2 id="первый-запуск-и-базовые-команды">🚀 Первый запуск и базовые команды<a class="headerlink" href="#первый-запуск-и-базовые-команды" title="Ссылка">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Команда</th>
+<th>Действие</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>nvim</code></td>
+<td>Открыть Neovim</td>
+</tr>
+<tr>
+<td><code>nvim файл</code></td>
+<td>Открыть файл</td>
+</tr>
+<tr>
+<td><code>:Lazy</code></td>
+<td>Открыть менеджер плагинов (установка, обновление)</td>
+</tr>
+<tr>
+<td><code>:LazyHealth</code></td>
+<td>Проверка здоровья LazyVim</td>
+</tr>
+<tr>
+<td><code>:checkhealth</code></td>
+<td>Диагностика Neovim и плагинов</td>
+</tr>
+<tr>
+<td><code>:Mason</code></td>
+<td>Менеджер LSP/форматеров/линтеров (установка инструментов)</td>
+</tr>
+<tr>
+<td><code>:LazyExtras</code></td>
+<td>Дополнительные модули LazyVim (языки, инструменты)</td>
+</tr>
+<tr>
+<td><code>:q</code> / <code>:q!</code></td>
+<td>Выйти / выйти без сохранения</td>
+</tr>
+<tr>
+<td><code>:w</code> / <code>:wq</code> / <code>:x</code></td>
+<td>Сохранить / сохранить+выйти / сохранить (только если есть изменения)</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="режимы-вставка-обычный-визуальный">✨ Режимы (вставка, обычный, визуальный)<a class="headerlink" href="#режимы-вставка-обычный-визуальный" title="Ссылка">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Клавиша</th>
+<th>Действие</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>i</code></td>
+<td>Вставка перед курсором</td>
+</tr>
+<tr>
+<td><code>I</code></td>
+<td>Вставка в начале строки</td>
+</tr>
+<tr>
+<td><code>a</code></td>
+<td>Вставка после курсора</td>
+</tr>
+<tr>
+<td><code>A</code></td>
+<td>Вставка в конце строки</td>
+</tr>
+<tr>
+<td><code>o</code></td>
+<td>Новая строка снизу + режим вставки</td>
+</tr>
+<tr>
+<td><code>O</code></td>
+<td>Новая строка сверху + режим вставки</td>
+</tr>
+<tr>
+<td><code>Esc</code> / <code>jk</code> / <code>kj</code></td>
+<td>Выйти из вставки (LazyVim по умолчанию remap <code>jk</code>/<code>kj</code>)</td>
+</tr>
+<tr>
+<td><code>v</code></td>
+<td>Визуальный режим (побуквенно)</td>
+</tr>
+<tr>
+<td><code>V</code></td>
+<td>Визуальный режим (по строкам)</td>
+</tr>
+<tr>
+<td><code>Ctrl-v</code></td>
+<td>Визуальный блочный режим</td>
+</tr>
+<tr>
+<td><code>R</code></td>
+<td>Замена (replace mode)</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="навигация-по-курсору">🧭 Навигация по курсору<a class="headerlink" href="#навигация-по-курсору" title="Ссылка">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Клавиша</th>
+<th>Действие</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>h j k l</code></td>
+<td>Влево / вниз / вверх / вправо</td>
+</tr>
+<tr>
+<td><code>w</code> / <code>b</code></td>
+<td>Вперёд / назад по словам</td>
+</tr>
+<tr>
+<td><code>e</code> / <code>ge</code></td>
+<td>Конец слова вперёд / назад</td>
+</tr>
+<tr>
+<td><code>0</code></td>
+<td>В начало строки</td>
+</tr>
+<tr>
+<td><code>^</code></td>
+<td>К первому непустому символу</td>
+</tr>
+<tr>
+<td><code>$</code></td>
+<td>В конец строки</td>
+</tr>
+<tr>
+<td><code>gg</code></td>
+<td>В начало файла</td>
+</tr>
+<tr>
+<td><code>G</code></td>
+<td>В конец файла</td>
+</tr>
+<tr>
+<td><code>{</code> / <code>}</code></td>
+<td>Между абзацами</td>
+</tr>
+<tr>
+<td><code>%</code></td>
+<td>К парной скобке</td>
+</tr>
+<tr>
+<td><code>*</code> / <code>#</code></td>
+<td>Следующее / предыдущее совпадение слова под курсором</td>
+</tr>
+<tr>
+<td><code>Ctrl-o</code> / <code>Ctrl-i</code></td>
+<td>Назад / вперёд по jump-list</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="прокрутка-и-окна">📜 Прокрутка и окна<a class="headerlink" href="#прокрутка-и-окна" title="Ссылка">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Клавиша</th>
+<th>Действие</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Ctrl-d</code> / <code>Ctrl-u</code></td>
+<td>Пол-страницы вниз / вверх</td>
+</tr>
+<tr>
+<td><code>Ctrl-f</code> / <code>Ctrl-b</code></td>
+<td>Страница вниз / вверх</td>
+</tr>
+<tr>
+<td><code>Ctrl-e</code> / <code>Ctrl-y</code></td>
+<td>Прокрутка на строку без движения курсора</td>
+</tr>
+<tr>
+<td><code>zz</code> / <code>zt</code> / <code>zb</code></td>
+<td>Центр / верх / низ экрана (курсор)</td>
+</tr>
+<tr>
+<td><code>H</code> / <code>M</code> / <code>L</code></td>
+<td>Верх / середина / низ экрана</td>
+</tr>
+</tbody>
+</table>
+<h3 id="разделение-окон">Разделение окон<a class="headerlink" href="#разделение-окон" title="Ссылка">#</a></h3>
+<table>
+<thead>
+<tr>
+<th>Клавиша</th>
+<th>Действие</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>&lt;leader&gt;-</code> (<code>Space -</code>)</td>
+<td>Горизонтальный сплит</td>
+</tr>
+<tr>
+<td><code>&lt;leader&gt;\|</code> (<code>Space \|</code>)</td>
+<td>Вертикальный сплит</td>
+</tr>
+<tr>
+<td><code>Ctrl-h/j/k/l</code></td>
+<td>Перейти в окно влево/вниз/вверх/вправо</td>
+</tr>
+<tr>
+<td><code>Ctrl-↑/↓/←/→</code></td>
+<td>Изменить размер окна (LazyVim)</td>
+</tr>
+<tr>
+<td><code>&lt;leader&gt;=</code></td>
+<td>Сделать окна равными</td>
+</tr>
+<tr>
+<td><code>&lt;leader&gt;wd</code> (<code>Space w d</code>)</td>
+<td>Закрыть окно</td>
+</tr>
+<tr>
+<td><code>&lt;leader&gt;wo</code></td>
+<td>Закрыть все кроме текущего (only)</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="буферы-lazy-nvim-bufferline-nvim">🗂️ Буферы (lazy.nvim / bufferline.nvim)<a class="headerlink" href="#буферы-lazy-nvim-bufferline-nvim" title="Ссылка">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Клавиша</th>
+<th>Действие</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>&lt;leader&gt;bb</code> (<code>Space b b</code>)</td>
+<td>Список буферов (Bufferline/Telescope)</td>
+</tr>
+<tr>
+<td><code>&lt;S-h&gt;</code> / <code>&lt;S-l&gt;</code> (<code>Shift-h/l</code>)</td>
+<td>Предыдущий / следующий буфер</td>
+</tr>
+<tr>
+<td><code>[b</code> / <code>]b</code></td>
+<td>Предыдущий / следующий буфер</td>
+</tr>
+<tr>
+<td><code>&lt;leader&gt;bd</code></td>
+<td>Закрыть буфер</td>
+</tr>
+<tr>
+<td><code>&lt;leader&gt;bo</code></td>
+<td>Закрыть все кроме текущего</td>
+</tr>
+<tr>
+<td><code>&lt;leader&gt;bl</code></td>
+<td>Перейти к последнему буферу</td>
+</tr>
+<tr>
+<td><code>&lt;leader&gt;</code> + <code>1..9</code></td>
+<td>Перейти к вкладке bufferline №1..9</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="telescope-поиск-и-fuzzy-finder-leader-f">🔭 Telescope (поиск и fuzzy-finder) — <code>&lt;leader&gt;f</code><a class="headerlink" href="#telescope-поиск-и-fuzzy-finder-leader-f" title="Ссылка">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Клавиша</th>
+<th>Действие</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>&lt;leader&gt;&lt;Space&gt;</code> (<code>Space Space</code>)</td>
+<td>Найти файлы (Find Files)</td>
+</tr>
+<tr>
+<td><code>&lt;leader&gt;ff</code></td>
+<td>Найти файлы</td>
+</tr>
+<tr>
+<td><code>&lt;leader&gt;fr</code></td>
+<td>Недавние файлы (Recent)</td>
+</tr>
+<tr>
+<td><code>&lt;leader&gt;fg</code></td>
+<td>Поиск по содержимому файлов (live grep, ripgrep)</td>
+</tr>
+<tr>
+<td><code>&lt;leader&gt;fw</code></td>
+<td>Поиск слова под курсором</td>
+</tr>
+<tr>
+<td><code>&lt;leader&gt;fb</code></td>
+<td>Буферы</td>
+</tr>
+<tr>
+<td><code>&lt;leader&gt;fc</code></td>
+<td>Найти в конфиге Neovim</td>
+</tr>
+<tr>
+<td><code>&lt;leader&gt;fh</code></td>
+<td>Справка Neovim (<code>:help</code>)</td>
+</tr>
+<tr>
+<td><code>&lt;leader&gt;fk</code></td>
+<td>Поиск по keymap&rsquo;ам</td>
+</tr>
+<tr>
+<td><code>&lt;leader&gt;fo</code></td>
+<td>Опции</td>
+</tr>
+<tr>
+<td><code>&lt;leader&gt;ft</code></td>
+<td>Темы оформления</td>
+</tr>
+<tr>
+<td><code>&lt;leader&gt;fd</code></td>
+<td>Диагностики (document)</td>
+</tr>
+<tr>
+<td><code>&lt;leader&gt;s</code> …</td>
+<td>Группа поисков (s = search, например <code>&lt;leader&gt;ss</code> — символы)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Внутри Telescope:</strong>
+| Клавиша | Действие |
+|&mdash;|&mdash;|
+| <code>Ctrl-j</code> / <code>Ctrl-k</code> | Вниз / вверх |
+| <code>Enter</code> | Выбрать |
+| <code>Ctrl-v</code> / <code>Ctrl-x</code> / <code>Ctrl-t</code> | Открыть в вертикальном/горизонтальном сплите/вкладке |
+| <code>Ctrl-q</code> | Отправить в quickfix |
+| <code>Esc</code> | Закрыть |</p>
+<hr />
+<h2 id="neotree-файловое-дерево-leader-e">🧭 NeoTree (файловое дерево) — <code>&lt;leader&gt;e</code><a class="headerlink" href="#neotree-файловое-дерево-leader-e" title="Ссылка">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Клавиша</th>
+<th>Действие</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>&lt;leader&gt;e</code> (<code>Space e</code>)</td>
+<td>Открыть / закрыть файловое дерево</td>
+</tr>
+<tr>
+<td>Внутри дерева:</td>
+<td></td>
+</tr>
+<tr>
+<td><code>?</code></td>
+<td>Подсказка по клавишам</td>
+</tr>
+<tr>
+<td><code>Enter</code> / <code>o</code></td>
+<td>Открыть файл / каталог</td>
+</tr>
+<tr>
+<td><code>a</code></td>
+<td>Создать файл/каталог</td>
+</tr>
+<tr>
+<td><code>d</code></td>
+<td>Удалить</td>
+</tr>
+<tr>
+<td><code>r</code></td>
+<td>Переименовать</td>
+</tr>
+<tr>
+<td><code>c</code> / <code>p</code></td>
+<td>Копировать / вставить</td>
+</tr>
+<tr>
+<td><code>m</code></td>
+<td>Переместить</td>
+</tr>
+<tr>
+<td><code>y</code></td>
+<td>Скопировать путь</td>
+</tr>
+<tr>
+<td><code>H</code></td>
+<td>Показать/скрыть скрытые файлы</td>
+</tr>
+<tr>
+<td><code>R</code></td>
+<td>Обновить (refresh)</td>
+</tr>
+<tr>
+<td><code>&lt;</code> / <code>&gt;</code></td>
+<td>Сменить источник (files / buffers / git)</td>
+</tr>
+<tr>
+<td><code>g?</code></td>
+<td>Полная справка NeoTree</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="терминал-toggleterm-встроенный">💻 Терминал (toggleterm / встроенный)<a class="headerlink" href="#терминал-toggleterm-встроенный" title="Ссылка">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Клавиша</th>
+<th>Действие</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>&lt;C-/&gt;</code> / <code>&lt;C-_&gt;</code></td>
+<td>Открыть/закрыть плавающий терминал (LazyVim default)</td>
+</tr>
+<tr>
+<td><code>&lt;leader&gt;ft</code> (<code>Space f t</code>)</td>
+<td>Открыть терминал</td>
+</tr>
+<tr>
+<td><code>&lt;Esc&gt;&lt;Esc&gt;</code> (двойной)</td>
+<td>Выйти из режима терминала в Normal</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="lsp-языковой-сервер-gr-и-k">🧠 LSP (языковой сервер) — <code>gr</code> и <code>K</code><a class="headerlink" href="#lsp-языковой-сервер-gr-и-k" title="Ссылка">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Клавиша</th>
+<th>Действие</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>K</code></td>
+<td>Hover (документация под курсором)</td>
+</tr>
+<tr>
+<td><code>gd</code></td>
+<td>Перейти к определению (Go to Definition)</td>
+</tr>
+<tr>
+<td><code>gD</code></td>
+<td>Перейти к объявлению (Declaration)</td>
+</tr>
+<tr>
+<td><code>gi</code></td>
+<td>Перейти к реализации (Implementation)</td>
+</tr>
+<tr>
+<td><code>gr</code></td>
+<td>References (ссылки) — через Telescope</td>
+</tr>
+<tr>
+<td><code>gI</code></td>
+<td>Go to Implementation</td>
+</tr>
+<tr>
+<td><code>gy</code></td>
+<td>Go to Type Definition</td>
+</tr>
+<tr>
+<td><code>&lt;leader&gt;ca</code></td>
+<td>Code Action (предложения/quickfix)</td>
+</tr>
+<tr>
+<td><code>&lt;leader&gt;cr</code></td>
+<td>Rename (переименовать символ)</td>
+</tr>
+<tr>
+<td><code>&lt;leader&gt;cf</code></td>
+<td>Format (форматировать буфер/диапазон)</td>
+</tr>
+<tr>
+<td><code>&lt;leader&gt;cd</code></td>
+<td>Показать диагностику в строке</td>
+</tr>
+<tr>
+<td><code>]d</code> / <code>[d</code></td>
+<td>Следующая / предыдущая диагностика</td>
+</tr>
+<tr>
+<td><code>]e</code> / <code>[e</code></td>
+<td>Следующая / предыдущая ошибка</td>
+</tr>
+<tr>
+<td><code>&lt;leader&gt;ll</code></td>
+<td>Открыть Trouble (список диагностик)</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="git">🔁 Git<a class="headerlink" href="#git" title="Ссылка">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Клавиша</th>
+<th>Действие</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>&lt;leader&gt;gg</code> (<code>Space g g</code>)</td>
+<td>LazyGit (TUI-клиент git) — рекомендуемый способ</td>
+</tr>
+<tr>
+<td><code>&lt;leader&gt;gf</code></td>
+<td>LazyGit для текущего файла</td>
+</tr>
+<tr>
+<td><code>]h</code> / <code>[h</code></td>
+<td>Следующий / предыдущий hunk (gitsigns)</td>
+</tr>
+<tr>
+<td><code>&lt;leader&gt;ghs</code></td>
+<td>Stage hunk</td>
+</tr>
+<tr>
+<td><code>&lt;leader&gt;ghu</code></td>
+<td>Undo stage hunk</td>
+</tr>
+<tr>
+<td><code>&lt;leader&gt;ghr</code></td>
+<td>Reset hunk</td>
+</tr>
+<tr>
+<td><code>&lt;leader&gt;ghp</code></td>
+<td>Preview hunk</td>
+</tr>
+<tr>
+<td><code>&lt;leader&gt;ghb</code></td>
+<td>Blame line</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="редактирование-текста">✂️ Редактирование текста<a class="headerlink" href="#редактирование-текста" title="Ссылка">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Клавиша</th>
+<th>Действие</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>dd</code></td>
+<td>Удалить строку (и в буфер)</td>
+</tr>
+<tr>
+<td><code>cc</code></td>
+<td>Изменить строку</td>
+</tr>
+<tr>
+<td><code>dw</code> / <code>cw</code></td>
+<td>Удалить / изменить слово</td>
+</tr>
+<tr>
+<td><code>D</code></td>
+<td>Удалить до конца строки</td>
+</tr>
+<tr>
+<td><code>C</code></td>
+<td>Изменить до конца строки</td>
+</tr>
+<tr>
+<td><code>x</code></td>
+<td>Удалить символ</td>
+</tr>
+<tr>
+<td><code>u</code></td>
+<td>Отменить (undo)</td>
+</tr>
+<tr>
+<td><code>Ctrl-r</code></td>
+<td>Вернуть (redo)</td>
+</tr>
+<tr>
+<td><code>.</code></td>
+<td>Повторить последнее действие</td>
+</tr>
+<tr>
+<td><code>y</code> / <code>yy</code></td>
+<td>Скопировать (yank) / строку</td>
+</tr>
+<tr>
+<td><code>p</code> / <code>P</code></td>
+<td>Вставить после / перед курсором</td>
+</tr>
+<tr>
+<td><code>&gt;&gt;</code> / <code>&lt;&lt;</code></td>
+<td>Сдвинуть строку вправо / влево</td>
+</tr>
+<tr>
+<td><code>gv</code></td>
+<td>Восстановить последнее выделение</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="lazyvim-extras-мини-команды">✂️ LazyVim extras: мини-команды<a class="headerlink" href="#lazyvim-extras-мини-команды" title="Ссылка">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Клавиша</th>
+<th>Действие</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>&lt;leader&gt;xl</code> (<code>Space x l</code>)</td>
+<td>Открыть Location List (Trouble)</td>
+</tr>
+<tr>
+<td><code>&lt;leader&gt;xx</code></td>
+<td>Список диагностик (Trouble)</td>
+</tr>
+<tr>
+<td><code>&lt;leader&gt;xX</code></td>
+<td>Диагностики только буфера</td>
+</tr>
+<tr>
+<td><code>&lt;leader&gt;cs</code></td>
+<td>Toggle Outline (символы файла)</td>
+</tr>
+<tr>
+<td><code>&lt;leader&gt;co</code></td>
+<td>Other (переключить источник/окно)</td>
+</tr>
+<tr>
+<td><code>&lt;leader&gt;;</code></td>
+<td>Открыть командную историю</td>
+</tr>
+<tr>
+<td><code>&lt;leader&gt;/</code></td>
+<td>Поиск в текущем буфере (buffer grep)</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="плагины-управление">🧩 Плагины (управление)<a class="headerlink" href="#плагины-управление" title="Ссылка">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Команда</th>
+<th>Действие</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>:Lazy</code></td>
+<td>Главная панель плагинов</td>
+</tr>
+<tr>
+<td><code>:Lazy install</code></td>
+<td>Установить плагины</td>
+</tr>
+<tr>
+<td><code>:Lazy update</code></td>
+<td>Обновить все плагины</td>
+</tr>
+<tr>
+<td><code>:Lazy sync</code></td>
+<td>Синхронизировать (install + update + clean)</td>
+</tr>
+<tr>
+<td><code>:Lazy clean</code></td>
+<td>Удалить неиспользуемые плагины</td>
+</tr>
+<tr>
+<td><code>:Lazy profile</code></td>
+<td>Профилирование загрузки</td>
+</tr>
+<tr>
+<td><code>:Lazy log</code></td>
+<td>Логи изменений</td>
+</tr>
+<tr>
+<td><code>:Lazy load &lt;name&gt;</code></td>
+<td>Загрузить плагин вручную</td>
+</tr>
+<tr>
+<td><code>:Mason</code></td>
+<td>Менеджер инструментов (LSP, format, lint)</td>
+</tr>
+<tr>
+<td><code>:MasonInstall &lt;tool&gt;</code></td>
+<td>Установить инструмент</td>
+</tr>
+<tr>
+<td><code>:MasonUpdate</code></td>
+<td>Обновить реестр/инструменты</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="настройка-lazyvim">⚙️ Настройка LazyVim<a class="headerlink" href="#настройка-lazyvim" title="Ссылка">#</a></h2>
+<p>Расположение: <code>~/.config/nvim/</code></p>
+<table>
+<thead>
+<tr>
+<th>Файл</th>
+<th>Назначение</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>init.lua</code></td>
+<td>Точка входа (bootstrap lazy.nvim)</td>
+</tr>
+<tr>
+<td><code>lua/config/options.lua</code></td>
+<td>Опции Neovim</td>
+</tr>
+<tr>
+<td><code>lua/config/keymaps.lua</code></td>
+<td>Глобальные keymap&rsquo;ы</td>
+</tr>
+<tr>
+<td><code>lua/config/autocmds.lua</code></td>
+<td>Автокоманды</td>
+</tr>
+<tr>
+<td><code>lua/plugins/</code></td>
+<td>Свои плагины (один файл на плагин/группу)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="пример-своего-плагина-lua-plugins-example-lua">Пример своего плагина (<code>lua/plugins/example.lua</code>)<a class="headerlink" href="#пример-своего-плагина-lua-plugins-example-lua" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="kr">return</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="c1">-- добавить плагин</span>
+<span class="w">  </span><span class="p">{</span><span class="w"> </span><span class="s2">&quot;f-person/gitblame.nvim&quot;</span><span class="p">,</span><span class="w"> </span><span class="nv">event</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;BufRead&quot;</span><span class="w"> </span><span class="p">},</span>
+
+<span class="w">  </span><span class="c1">-- переопределить существующий (Comment.nvim)</span>
+<span class="w">  </span><span class="p">{</span>
+<span class="w">    </span><span class="s2">&quot;numToStr/Comment.nvim&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nv">opts</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kr">function</span><span class="p">(</span><span class="nv">_</span><span class="p">,</span><span class="w"> </span><span class="nv">opts</span><span class="p">)</span>
+<span class="w">      </span><span class="nv">opts</span><span class="p">.</span><span class="py">toggler</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nv">line</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;&lt;leader&gt;cc&quot;</span><span class="p">,</span><span class="w"> </span><span class="nv">block</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;&lt;leader&gt;bc&quot;</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="kr">end</span><span class="p">,</span>
+<span class="w">  </span><span class="p">},</span>
+
+<span class="w">  </span><span class="c1">-- отключить плагин из LazyVim</span>
+<span class="w">  </span><span class="p">{</span><span class="w"> </span><span class="s2">&quot;folke/noice.nvim&quot;</span><span class="p">,</span><span class="w"> </span><span class="nv">enabled</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="w"> </span><span class="p">},</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<h3 id="пример-своего-keymap-а-lua-config-keymaps-lua">Пример своего keymap&rsquo;а (<code>lua/config/keymaps.lua</code>)<a class="headerlink" href="#пример-своего-keymap-а-lua-config-keymaps-lua" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1">-- быстрое сохранение</span>
+<span class="nv">vim</span><span class="p">.</span><span class="py">keymap</span><span class="p">.</span><span class="nf">set</span><span class="p">(</span><span class="s2">&quot;n&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;&lt;leader&gt;w&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;&lt;cmd&gt;w&lt;cr&gt;&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nv">desc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;Save file&quot;</span><span class="w"> </span><span class="p">})</span>
+<span class="c1">-- выйти без сохранения</span>
+<span class="nv">vim</span><span class="p">.</span><span class="py">keymap</span><span class="p">.</span><span class="nf">set</span><span class="p">(</span><span class="s2">&quot;n&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;&lt;leader&gt;qq&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;&lt;cmd&gt;qa!&lt;cr&gt;&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nv">desc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;Quit all&quot;</span><span class="w"> </span><span class="p">})</span>
+</code></pre></div>
+
+<h3 id="опции-lua-config-options-lua">Опции (<code>lua/config/options.lua</code>)<a class="headerlink" href="#опции-lua-config-options-lua" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1">-- размер таба</span>
+<span class="nv">vim</span><span class="p">.</span><span class="py">opt</span><span class="p">.</span><span class="py">shiftwidth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">4</span>
+<span class="nv">vim</span><span class="p">.</span><span class="py">opt</span><span class="p">.</span><span class="py">tabstop</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">4</span>
+<span class="c1">-- относительные номера строк</span>
+<span class="nv">vim</span><span class="p">.</span><span class="py">opt</span><span class="p">.</span><span class="py">relativenumber</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span>
+<span class="c1">-- системный буфер</span>
+<span class="nv">vim</span><span class="p">.</span><span class="py">opt</span><span class="p">.</span><span class="py">clipboard</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;unnamedplus&quot;</span>
+</code></pre></div>
+
+<hr />
+<h2 id="темы-и-красота">🎨 Темы и красота<a class="headerlink" href="#темы-и-красота" title="Ссылка">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Клавиша / Команда</th>
+<th>Действие</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>&lt;leader&gt;ft</code> (<code>Space f t</code>)</td>
+<td>Превью и выбор темы</td>
+</tr>
+<tr>
+<td><code>:Telescope colorscheme</code></td>
+<td>То же через Telescope</td>
+</tr>
+<tr>
+<td>Варианты в LazyVim по умолчанию:</td>
+<td><code>tokyonight</code>, <code>catppuccin</code>, <code>habamax</code></td>
+</tr>
+</tbody>
+</table>
+<p>Поставить тему навсегда в <code>lua/plugins/theme.lua</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="kr">return</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="p">{</span><span class="w"> </span><span class="s2">&quot;catppuccin/nvim&quot;</span><span class="p">,</span><span class="w"> </span><span class="nv">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;catppuccin&quot;</span><span class="p">,</span><span class="w"> </span><span class="nv">priority</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1000</span><span class="w"> </span><span class="p">},</span>
+<span class="w">  </span><span class="p">{</span><span class="w"> </span><span class="s2">&quot;LazyVim/LazyVim&quot;</span><span class="p">,</span><span class="w"> </span><span class="nv">opts</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nv">colorscheme</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;catppuccin&quot;</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">},</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<hr />
+<h2 id="полезные-советы">💡 Полезные советы<a class="headerlink" href="#полезные-советы" title="Ссылка">#</a></h2>
+<ol>
+<li><strong><code>:LazyExtras</code></strong> — включите модули под ваши языки (<code>lang.python</code>,
+   <code>lang.rust</code>, <code>lang.go</code>, <code>lang.typescript</code> и т.д.).</li>
+<li><strong><code>:checkhealth</code></strong> после установки — проверит, что все LSP/инструменты
+   работают.</li>
+<li>**<code>:Mason** — поставьте</code>lua-language-server<code>,</code>stylua<code>,</code>prettierd<code>,</code>eslint_d<code>,</code>ruff<code>,</code>pyright` под ваши задачи.</li>
+<li><strong>Какой LSP активен?</strong> — <code>:LspInfo</code> (или <code>:checkhealth lsp</code>).</li>
+<li><strong>Откаты</strong> — LazyVim использует <code>lazy.nvim</code> с лок-файлом, обновления
+   безопасны; откатить плагин можно в <code>:Lazy log</code>.</li>
+<li><strong>Быстрый поиск файла</strong> — <code>&lt;leader&gt;&lt;leader&gt;</code> (Find Files) и <strong>live grep</strong>
+   — <code>&lt;leader&gt;fg</code> (нужен установленный <code>ripgrep</code>).</li>
+<li><strong>Диагностики в одном списке</strong> — <code>&lt;leader&gt;xx</code> (плагин <code>trouble.nvim</code>).</li>
+<li><strong>Форматирование при сохранении</strong> — LazyVim включает форматconform.nvim
+   автоматически; проверить: <code>:ConformInfo</code>.</li>
+<li><strong>Про замену <code>Ctrl-h/j/k/l</code></strong> на навигацию по окнам — это builtin LazyVim,
+   но <code>Ctrl-l</code> в терминале конфликтует, имейте в виду.</li>
+<li><strong>Docs:</strong> https://lazyvim.github.io/keymaps — официальный и всегда
+    актуальный список.</li>
+</ol>
+<hr />
+<h2 id="ссылки">🔗 Ссылки<a class="headerlink" href="#ссылки" title="Ссылка">#</a></h2>
+<ul>
+<li>LazyVim: https://lazyvim.github.io</li>
+<li>lazy.nvim: https://github.com/folke/lazy.nvim</li>
+<li>Telescope: https://github.com/nvim-telescope/telescope.nvim</li>
+<li>Mason: https://github.com/Williamboman/mason.nvim</li>
+<li>NeoTree: https://github.com/nvim-neo-tree/neo-tree.nvim</li>
+<li>Trouble: https://github.com/folke/trouble.nvim</li>
+<li>LazyGit: https://github.com/jesseduffield/lazygit</li>
+</ul>
+<hr />
+<p><em>Сгенерировано как шпаргалка. LazyVim постоянно развивается —
+актуальный список биндингов смотрите на https://lazyvim.github.io/keymaps
+или через <code>:Telescope keymaps</code> (<code>&lt;leader&gt;fk</code>).</em></p>
+    </article>
+    <nav class="pagination">
+      <a class="pager prev" href="yazi.html">← Yazi</a>
+      <a class="pager next" href="niri.html">Niri →</a>
+    </nav>
+  </main>
+
+  <aside class="toc">
+    <details open>
+      <summary>📑 Оглавление</summary>
+      <div class="toc-list">
+<div class="toc">
+<ul>
+<li><a href="#neovim-lazyvim-шпаргалка-по-горячим-клавишам">📘 Neovim (LazyVim) — шпаргалка по горячим клавишам</a><ul>
+<li><a href="#первый-запуск-и-базовые-команды">🚀 Первый запуск и базовые команды</a></li>
+<li><a href="#режимы-вставка-обычный-визуальный">✨ Режимы (вставка, обычный, визуальный)</a></li>
+<li><a href="#навигация-по-курсору">🧭 Навигация по курсору</a></li>
+<li><a href="#прокрутка-и-окна">📜 Прокрутка и окна</a><ul>
+<li><a href="#разделение-окон">Разделение окон</a></li>
+</ul>
+</li>
+<li><a href="#буферы-lazy-nvim-bufferline-nvim">🗂️ Буферы (lazy.nvim / bufferline.nvim)</a></li>
+<li><a href="#telescope-поиск-и-fuzzy-finder-leader-f">🔭 Telescope (поиск и fuzzy-finder) — &lt;leader&gt;f</a></li>
+<li><a href="#neotree-файловое-дерево-leader-e">🧭 NeoTree (файловое дерево) — &lt;leader&gt;e</a></li>
+<li><a href="#терминал-toggleterm-встроенный">💻 Терминал (toggleterm / встроенный)</a></li>
+<li><a href="#lsp-языковой-сервер-gr-и-k">🧠 LSP (языковой сервер) — gr и K</a></li>
+<li><a href="#git">🔁 Git</a></li>
+<li><a href="#редактирование-текста">✂️ Редактирование текста</a></li>
+<li><a href="#lazyvim-extras-мини-команды">✂️ LazyVim extras: мини-команды</a></li>
+<li><a href="#плагины-управление">🧩 Плагины (управление)</a></li>
+<li><a href="#настройка-lazyvim">⚙️ Настройка LazyVim</a><ul>
+<li><a href="#пример-своего-плагина-lua-plugins-example-lua">Пример своего плагина (lua/plugins/example.lua)</a></li>
+<li><a href="#пример-своего-keymap-а-lua-config-keymaps-lua">Пример своего keymap&rsquo;а (lua/config/keymaps.lua)</a></li>
+<li><a href="#опции-lua-config-options-lua">Опции (lua/config/options.lua)</a></li>
+</ul>
+</li>
+<li><a href="#темы-и-красота">🎨 Темы и красота</a></li>
+<li><a href="#полезные-советы">💡 Полезные советы</a></li>
+<li><a href="#ссылки">🔗 Ссылки</a></li>
+</ul>
+</li>
+</ul>
+</div>
+
+      </div>
+    </details>
+  </aside>
+</div>
+
+<button class="back-top" id="backTop" aria-label="Наверх">↑</button>
+
+<script src="assets/search.js"></script>
+<script src="assets/page.js"></script>
+</body>
+</html>

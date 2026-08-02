@@ -1,0 +1,840 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Apache Kafka — Шпаргалки</title>
+<link rel="stylesheet" href="assets/style.css">
+<link rel="stylesheet" href="assets/pygments.css">
+</head>
+<body>
+<div class="layout">
+  <aside class="sidebar">
+    <a href="index.html" class="brand">📌 Шпаргалки</a>
+    <nav class="nav">
+<a href="yazi.html" class="nav-item"><span class="nav-ico">📦</span>Yazi</a>
+<a href="neovim.html" class="nav-item"><span class="nav-ico">📘</span>Neovim (LazyVim)</a>
+<a href="niri.html" class="nav-item"><span class="nav-ico">🪟</span>Niri</a>
+<a href="tmux.html" class="nav-item"><span class="nav-ico">🪟</span>Tmux</a>
+<a href="bash.html" class="nav-item"><span class="nav-ico">🐚</span>Bash</a>
+<a href="git.html" class="nav-item"><span class="nav-ico">🔀</span>Git</a>
+<a href="terminal.html" class="nav-item"><span class="nav-ico">🖥️</span>Терминал Linux</a>
+<a href="powershell.html" class="nav-item"><span class="nav-ico">💻</span>PowerShell</a>
+<a href="cmd.html" class="nav-item"><span class="nav-ico">🪟</span>CMD (cmd.exe)</a>
+<a href="python.html" class="nav-item"><span class="nav-ico">🐍</span>Python</a>
+<a href="systemd.html" class="nav-item"><span class="nav-ico">⚙️</span>systemd</a>
+<a href="ssh.html" class="nav-item"><span class="nav-ico">🔐</span>SSH</a>
+<a href="make-cmake.html" class="nav-item"><span class="nav-ico">🔨</span>Make / CMake</a>
+<a href="docker.html" class="nav-item"><span class="nav-ico">🐳</span>Docker</a>
+<a href="pacman.html" class="nav-item"><span class="nav-ico">📦</span>pacman / yay / paru</a>
+<a href="spark.html" class="nav-item"><span class="nav-ico">⚡</span>Apache Spark / PySpark</a>
+<a href="markdown.html" class="nav-item"><span class="nav-ico">📝</span>Markdown</a>
+<a href="regex.html" class="nav-item"><span class="nav-ico">🔍</span>Регулярные выражения</a>
+<a href="jq-json.html" class="nav-item"><span class="nav-ico">🔧</span>jq + JSON</a>
+<a href="awk-sed.html" class="nav-item"><span class="nav-ico">✂️</span>awk / sed</a>
+<a href="airflow.html" class="nav-item"><span class="nav-ico">🌪️</span>Apache Airflow</a>
+<a href="http-curl.html" class="nav-item"><span class="nav-ico">🌐</span>HTTP / curl</a>
+<a href="yaml.html" class="nav-item"><span class="nav-ico">📄</span>YAML</a>
+<a href="vscode.html" class="nav-item"><span class="nav-ico">💻</span>VS Code</a>
+<a href="cron.html" class="nav-item"><span class="nav-ico">⏰</span>cron</a>
+<a href="fzf-zoxide.html" class="nav-item"><span class="nav-ico">🔎</span>fzf + zoxide</a>
+<a href="minikube-k8s.html" class="nav-item"><span class="nav-ico">☸️</span>Minikube / Kubernetes</a>
+<a href="cicd.html" class="nav-item"><span class="nav-ico">🦊</span>GitLab CI / GitHub Actions</a>
+<a href="nginx.html" class="nav-item"><span class="nav-ico">🌐</span>nginx</a>
+<a href="dbt.html" class="nav-item"><span class="nav-ico">🔧</span>dbt</a>
+<a href="kafka.html" class="nav-item active"><span class="nav-ico">🐘</span>Apache Kafka</a>
+<a href="prometheus-grafana.html" class="nav-item"><span class="nav-ico">📊</span>Prometheus / Grafana</a>
+<a href="iceberg-nessie.html" class="nav-item"><span class="nav-ico">🧊</span>Iceberg / Nessie</a>
+<a href="impala.html" class="nav-item"><span class="nav-ico">🐬</span>Apache Impala</a>
+<a href="terraform.html" class="nav-item"><span class="nav-ico">🏗️</span>Terraform</a>
+<a href="linux-internals.html" class="nav-item"><span class="nav-ico">🐧</span>Linux Internals</a>
+<a href="miscellaneous.html" class="nav-item"><span class="nav-ico">🧰</span>Miscellaneous</a>
+<a href="python-automation-libs.html" class="nav-item"><span class="nav-ico">🐍</span>Python: авт-ция (10 libs)</a>
+<a href="eza.html" class="nav-item"><span class="nav-ico">🌈</span>eza</a>
+<a href="dbeaver.html" class="nav-item"><span class="nav-ico">🗄️</span>DBeaver</a>
+<a href="zcode.html" class="nav-item"><span class="nav-ico">🤖</span>ZCode</a>
+<a href="warp.html" class="nav-item"><span class="nav-ico">🚀</span>Warp</a>
+<a href="agentic-ai-dev.html" class="nav-item"><span class="nav-ico">🤝</span>Агентная разработка с ИИ</a>
+    </nav>
+  </aside>
+
+  <main class="content">
+    <article>
+<h1 id="apache-kafka-шпаргалка">🐘 Apache Kafka — шпаргалка<a class="headerlink" href="#apache-kafka-шпаргалка" title="Ссылка">#</a></h1>
+<blockquote>
+<p><strong>Apache Kafka</strong> — распределённая платформа потоковой обработки.
+Pub/Sub-очереди, персистентное хранение, replay, потоковая аналитика.
+Документация: https://kafka.apache.org/documentation</p>
+</blockquote>
+<hr />
+<h2 id="главные-понятия">🔑 Главные понятия<a class="headerlink" href="#главные-понятия" title="Ссылка">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Термин</th>
+<th>Что значит</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Broker</strong></td>
+<td>Узел Kafka (сервер)</td>
+</tr>
+<tr>
+<td><strong>Cluster</strong></td>
+<td>Кластер брокеров</td>
+</tr>
+<tr>
+<td><strong>Topic</strong></td>
+<td>Канал/тема (куда пишут и читают)</td>
+</tr>
+<tr>
+<td><strong>Partition</strong></td>
+<td>Партиция внутри topic (для параллелизма)</td>
+</tr>
+<tr>
+<td><strong>Offset</strong></td>
+<td>Позиция сообщения в партиции</td>
+</tr>
+<tr>
+<td><strong>Producer</strong></td>
+<td>Тот, кто пишет в topic</td>
+</tr>
+<tr>
+<td><strong>Consumer</strong></td>
+<td>Тот, кто читает из topic</td>
+</tr>
+<tr>
+<td><strong>Consumer Group</strong></td>
+<td>Группа потребителей (делит partitions)</td>
+</tr>
+<tr>
+<td><strong>Replication</strong></td>
+<td>Репликация partition&rsquo;ов для отказоустойчивости</td>
+</tr>
+<tr>
+<td><strong>Leader / Follower</strong></td>
+<td>Главный/запасной брокер для partition</td>
+</tr>
+<tr>
+<td><strong>ZooKeeper / KRaft</strong></td>
+<td>Координатор кластера (KRaft — новый, без ZK)</td>
+</tr>
+<tr>
+<td><strong>Retention</strong></td>
+<td>Сколько хранить сообщения</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="установка-и-запуск">🚀 Установка и запуск<a class="headerlink" href="#установка-и-запуск" title="Ссылка">#</a></h2>
+<h3 id="через-docker-быстрее-всего">Через Docker (быстрее всего)<a class="headerlink" href="#через-docker-быстрее-всего" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># С Compose</span>
+cat<span class="w"> </span>&gt;<span class="w"> </span>docker-compose.yml<span class="w"> </span><span class="s">&lt;&lt; &#39;EOF&#39;</span>
+<span class="s">version: &#39;3&#39;</span>
+<span class="s">services:</span>
+<span class="s">  kafka:</span>
+<span class="s">    image: confluentinc/cp-kafka:7.6.0</span>
+<span class="s">    environment:</span>
+<span class="s">      KAFKA_NODE_ID: 1</span>
+<span class="s">      KAFKA_PROCESS_ROLES: &#39;broker,controller&#39;</span>
+<span class="s">      KAFKA_LISTENERS: &#39;PLAINTEXT://0.0.0.0:9092,CONTROLLER://0.0.0.0:9093&#39;</span>
+<span class="s">      KAFKA_ADVERTISED_LISTENERS: &#39;PLAINTEXT://localhost:9092&#39;</span>
+<span class="s">      KAFKA_CONTROLLER_LISTENER_NAMES: &#39;CONTROLLER&#39;</span>
+<span class="s">      KAFKA_CONTROLLER_QUORUM_VOTERS: &#39;1@kafka:9093&#39;</span>
+<span class="s">      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: &#39;CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT&#39;</span>
+<span class="s">      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1</span>
+<span class="s">      KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS: 0</span>
+<span class="s">      CLUSTER_ID: &#39;MkU3OEVBNTcwNTJENDM2Qk&#39;</span>
+<span class="s">    ports:</span>
+<span class="s">      - &quot;127.0.0.1:9092:9092&quot;</span>
+<span class="s">EOF</span>
+docker<span class="w"> </span>compose<span class="w"> </span>up<span class="w"> </span>-d
+</code></pre></div>
+
+<h3 id="локально-тяжелее">Локально (тяжелее)<a class="headerlink" href="#локально-тяжелее" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Скачать с https://kafka.apache.org/downloads</span>
+tar<span class="w"> </span>-xzf<span class="w"> </span>kafka_2.13-3.7.0.tgz
+<span class="nb">cd</span><span class="w"> </span>kafka_2.13-3.7.0
+
+<span class="c1"># KRaft (без ZooKeeper, современный способ)</span>
+bin/kafka-storage.sh<span class="w"> </span>format<span class="w"> </span>--config<span class="w"> </span>config/kraft/server.properties<span class="w"> </span>--cluster-id<span class="w"> </span><span class="k">$(</span>bin/kafka-storage.sh<span class="w"> </span>random-uuid<span class="k">)</span>
+bin/kafka-server-start.sh<span class="w"> </span>config/kraft/server.properties
+</code></pre></div>
+
+<hr />
+<h2 id="cli-утилиты-kafka-tools">🛠️ CLI-утилиты (kafka-tools)<a class="headerlink" href="#cli-утилиты-kafka-tools" title="Ссылка">#</a></h2>
+<h3 id="топики">Топики<a class="headerlink" href="#топики" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Создать</span>
+bin/kafka-topics.sh<span class="w"> </span>--create<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--bootstrap-server<span class="w"> </span>localhost:9092<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--topic<span class="w"> </span>my-topic<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--partitions<span class="w"> </span><span class="m">3</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--replication-factor<span class="w"> </span><span class="m">1</span>
+
+<span class="c1"># Без указания partitions (по умолчанию)</span>
+bin/kafka-topics.sh<span class="w"> </span>--create<span class="w"> </span>--bootstrap-server<span class="w"> </span>localhost:9092<span class="w"> </span>--topic<span class="w"> </span>my-topic
+
+<span class="c1"># С конфигом</span>
+bin/kafka-topics.sh<span class="w"> </span>--create<span class="w"> </span>--bootstrap-server<span class="w"> </span>localhost:9092<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--topic<span class="w"> </span>logs<span class="w"> </span>--partitions<span class="w"> </span><span class="m">6</span><span class="w"> </span>--replication-factor<span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--config<span class="w"> </span>retention.ms<span class="o">=</span><span class="m">604800000</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--config<span class="w"> </span>cleanup.policy<span class="o">=</span>delete
+
+<span class="c1"># Список</span>
+bin/kafka-topics.sh<span class="w"> </span>--list<span class="w"> </span>--bootstrap-server<span class="w"> </span>localhost:9092
+
+<span class="c1"># Описание</span>
+bin/kafka-topics.sh<span class="w"> </span>--describe<span class="w"> </span>--bootstrap-server<span class="w"> </span>localhost:9092<span class="w"> </span>--topic<span class="w"> </span>my-topic
+
+<span class="c1"># Удалить</span>
+bin/kafka-topics.sh<span class="w"> </span>--delete<span class="w"> </span>--bootstrap-server<span class="w"> </span>localhost:9092<span class="w"> </span>--topic<span class="w"> </span>my-topic
+
+<span class="c1"># Увеличить partitions (нельзя уменьшить!)</span>
+bin/kafka-topics.sh<span class="w"> </span>--alter<span class="w"> </span>--bootstrap-server<span class="w"> </span>localhost:9092<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--topic<span class="w"> </span>my-topic<span class="w"> </span>--partitions<span class="w"> </span><span class="m">6</span>
+</code></pre></div>
+
+<h3 id="producer-cli">Producer (CLI)<a class="headerlink" href="#producer-cli" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Интерактивный ввод с клавиатуры</span>
+bin/kafka-console-producer.sh<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--bootstrap-server<span class="w"> </span>localhost:9092<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--topic<span class="w"> </span>my-topic
+
+<span class="c1"># С key</span>
+bin/kafka-console-producer.sh<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--bootstrap-server<span class="w"> </span>localhost:9092<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--topic<span class="w"> </span>my-topic<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--property<span class="w"> </span><span class="s2">&quot;parse.key=true&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--property<span class="w"> </span><span class="s2">&quot;key.separator=:&quot;</span>
+
+<span class="c1"># Ввести: key1:value1</span>
+
+<span class="c1"># Из файла</span>
+bin/kafka-console-producer.sh<span class="w"> </span>--bootstrap-server<span class="w"> </span>localhost:9092<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--topic<span class="w"> </span>my-topic<span class="w"> </span>&lt;<span class="w"> </span>messages.txt
+
+<span class="c1"># С acks (гарантия записи)</span>
+--producer-property<span class="w"> </span><span class="nv">acks</span><span class="o">=</span>all
+</code></pre></div>
+
+<h3 id="consumer-cli">Consumer (CLI)<a class="headerlink" href="#consumer-cli" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Чтение</span>
+bin/kafka-console-consumer.sh<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--bootstrap-server<span class="w"> </span>localhost:9092<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--topic<span class="w"> </span>my-topic<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--from-beginning
+
+<span class="c1"># С key</span>
+bin/kafka-console-consumer.sh<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--bootstrap-server<span class="w"> </span>localhost:9092<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--topic<span class="w"> </span>my-topic<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--property<span class="w"> </span>print.key<span class="o">=</span><span class="nb">true</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--property<span class="w"> </span>key.separator<span class="o">=</span><span class="s2">&quot; - &quot;</span>
+
+<span class="c1"># В группе</span>
+bin/kafka-console-consumer.sh<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--bootstrap-server<span class="w"> </span>localhost:9092<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--topic<span class="w"> </span>my-topic<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--group<span class="w"> </span>my-group
+</code></pre></div>
+
+<h3 id="consumer-groups">Consumer Groups<a class="headerlink" href="#consumer-groups" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>bin/kafka-consumer-groups.sh<span class="w"> </span>--bootstrap-server<span class="w"> </span>localhost:9092<span class="w"> </span>--list
+bin/kafka-consumer-groups.sh<span class="w"> </span>--bootstrap-server<span class="w"> </span>localhost:9092<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--describe<span class="w"> </span>--group<span class="w"> </span>my-group
+
+<span class="c1"># Сбросить offset</span>
+bin/kafka-consumer-groups.sh<span class="w"> </span>--bootstrap-server<span class="w"> </span>localhost:9092<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--group<span class="w"> </span>my-group<span class="w"> </span>--reset-offsets<span class="w"> </span>--to-earliest<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--topic<span class="w"> </span>my-topic<span class="w"> </span>--execute
+
+<span class="c1"># На конкретный offset</span>
+--reset-offsets<span class="w"> </span>--to-offset<span class="w"> </span><span class="m">42</span>
+--reset-offsets<span class="w"> </span>--to-datetime<span class="w"> </span><span class="m">2024</span>-01-01T00:00:00.000
+--reset-offsets<span class="w"> </span>--shift-by<span class="w"> </span>-10
+</code></pre></div>
+
+<h3 id="группы-и-конфиги">Группы и конфиги<a class="headerlink" href="#группы-и-конфиги" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>bin/kafka-configs.sh<span class="w"> </span>--bootstrap-server<span class="w"> </span>localhost:9092<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--alter<span class="w"> </span>--entity-type<span class="w"> </span>topics<span class="w"> </span>--entity-name<span class="w"> </span>my-topic<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--add-config<span class="w"> </span>retention.ms<span class="o">=</span><span class="m">86400000</span>
+
+bin/kafka-acls.sh<span class="w"> </span>...<span class="w">        </span><span class="c1"># управление доступом</span>
+bin/kafka-log-dirs.sh<span class="w"> </span>...<span class="w">    </span><span class="c1"># размеры partition&#39;ов</span>
+</code></pre></div>
+
+<hr />
+<h2 id="python-клиенты">🐍 Python-клиенты<a class="headerlink" href="#python-клиенты" title="Ссылка">#</a></h2>
+<h3 id="kafka-python-простой">kafka-python (простой)<a class="headerlink" href="#kafka-python-простой" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">kafka</span><span class="w"> </span><span class="kn">import</span> <span class="n">KafkaProducer</span><span class="p">,</span> <span class="n">KafkaConsumer</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+
+<span class="c1"># Producer</span>
+<span class="n">producer</span> <span class="o">=</span> <span class="n">KafkaProducer</span><span class="p">(</span>
+    <span class="n">bootstrap_servers</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;localhost:9092&#39;</span><span class="p">],</span>
+    <span class="n">value_serializer</span><span class="o">=</span><span class="k">lambda</span> <span class="n">v</span><span class="p">:</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">v</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">),</span>
+    <span class="n">key_serializer</span><span class="o">=</span><span class="k">lambda</span> <span class="n">k</span><span class="p">:</span> <span class="n">k</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span> <span class="k">if</span> <span class="n">k</span> <span class="k">else</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">acks</span><span class="o">=</span><span class="s1">&#39;all&#39;</span><span class="p">,</span>
+    <span class="n">retries</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">producer</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="s1">&#39;my-topic&#39;</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="s1">&#39;user1&#39;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;Alice&#39;</span><span class="p">,</span> <span class="s1">&#39;age&#39;</span><span class="p">:</span> <span class="mi">30</span><span class="p">})</span>
+<span class="n">producer</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="s1">&#39;my-topic&#39;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;event&#39;</span><span class="p">:</span> <span class="s1">&#39;login&#39;</span><span class="p">})</span>
+
+<span class="c1"># Дождаться доставки</span>
+<span class="n">producer</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
+<span class="n">producer</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+<span class="c1"># Consumer</span>
+<span class="n">consumer</span> <span class="o">=</span> <span class="n">KafkaConsumer</span><span class="p">(</span>
+    <span class="s1">&#39;my-topic&#39;</span><span class="p">,</span>
+    <span class="n">bootstrap_servers</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;localhost:9092&#39;</span><span class="p">],</span>
+    <span class="n">group_id</span><span class="o">=</span><span class="s1">&#39;my-group&#39;</span><span class="p">,</span>
+    <span class="n">auto_offset_reset</span><span class="o">=</span><span class="s1">&#39;earliest&#39;</span><span class="p">,</span>     <span class="c1"># earliest/latest/none</span>
+    <span class="n">enable_auto_commit</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">value_deserializer</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)),</span>
+<span class="p">)</span>
+
+<span class="k">for</span> <span class="n">message</span> <span class="ow">in</span> <span class="n">consumer</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">message</span><span class="o">.</span><span class="n">topic</span><span class="si">}</span><span class="s2">:</span><span class="si">{</span><span class="n">message</span><span class="o">.</span><span class="n">partition</span><span class="si">}</span><span class="s2">:</span><span class="si">{</span><span class="n">message</span><span class="o">.</span><span class="n">offset</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">message</span><span class="o">.</span><span class="n">value</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+<h3 id="aiokafka-асинхронный">aiokafka (асинхронный)<a class="headerlink" href="#aiokafka-асинхронный" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">aiokafka</span><span class="w"> </span><span class="kn">import</span> <span class="n">AIOKafkaProducer</span><span class="p">,</span> <span class="n">AIOKafkaConsumer</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">asyncio</span>
+
+<span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">produce</span><span class="p">():</span>
+    <span class="n">producer</span> <span class="o">=</span> <span class="n">AIOKafkaProducer</span><span class="p">(</span><span class="n">bootstrap_servers</span><span class="o">=</span><span class="s1">&#39;localhost:9092&#39;</span><span class="p">)</span>
+    <span class="k">await</span> <span class="n">producer</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">await</span> <span class="n">producer</span><span class="o">.</span><span class="n">send_and_wait</span><span class="p">(</span><span class="s1">&#39;my-topic&#39;</span><span class="p">,</span> <span class="sa">b</span><span class="s1">&#39;hello&#39;</span><span class="p">)</span>
+    <span class="k">finally</span><span class="p">:</span>
+        <span class="k">await</span> <span class="n">producer</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+
+<span class="n">asyncio</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">produce</span><span class="p">())</span>
+</code></pre></div>
+
+<h3 id="confluent-kafka-быстрый-c-биндинг">confluent-kafka (быстрый, C-биндинг)<a class="headerlink" href="#confluent-kafka-быстрый-c-биндинг" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">confluent_kafka</span><span class="w"> </span><span class="kn">import</span> <span class="n">Producer</span><span class="p">,</span> <span class="n">Consumer</span>
+
+<span class="n">producer</span> <span class="o">=</span> <span class="n">Producer</span><span class="p">({</span><span class="s1">&#39;bootstrap.servers&#39;</span><span class="p">:</span> <span class="s1">&#39;localhost:9092&#39;</span><span class="p">})</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">delivery_report</span><span class="p">(</span><span class="n">err</span><span class="p">,</span> <span class="n">msg</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">err</span><span class="p">:</span> <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error: </span><span class="si">{</span><span class="n">err</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span> <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Sent to </span><span class="si">{</span><span class="n">msg</span><span class="o">.</span><span class="n">topic</span><span class="p">()</span><span class="si">}</span><span class="s2"> [</span><span class="si">{</span><span class="n">msg</span><span class="o">.</span><span class="n">partition</span><span class="p">()</span><span class="si">}</span><span class="s2">]&quot;</span><span class="p">)</span>
+
+<span class="n">producer</span><span class="o">.</span><span class="n">produce</span><span class="p">(</span><span class="s1">&#39;my-topic&#39;</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="s1">&#39;key&#39;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="s1">&#39;value&#39;</span><span class="p">,</span> <span class="n">callback</span><span class="o">=</span><span class="n">delivery_report</span><span class="p">)</span>
+<span class="n">producer</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
+</code></pre></div>
+
+<h3 id="faust-потоковая-обработка-как-spark-streaming">Faust (потоковая обработка, как Spark Streaming)<a class="headerlink" href="#faust-потоковая-обработка-как-spark-streaming" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">faust</span>
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">faust</span><span class="o">.</span><span class="n">App</span><span class="p">(</span><span class="s1">&#39;my-app&#39;</span><span class="p">,</span> <span class="n">broker</span><span class="o">=</span><span class="s1">&#39;kafka://localhost:9092&#39;</span><span class="p">)</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">Order</span><span class="p">(</span><span class="n">faust</span><span class="o">.</span><span class="n">Record</span><span class="p">):</span>
+    <span class="nb">id</span><span class="p">:</span> <span class="nb">int</span>
+    <span class="n">amount</span><span class="p">:</span> <span class="nb">float</span>
+
+<span class="n">orders_topic</span> <span class="o">=</span> <span class="n">app</span><span class="o">.</span><span class="n">topic</span><span class="p">(</span><span class="s1">&#39;orders&#39;</span><span class="p">,</span> <span class="n">value_type</span><span class="o">=</span><span class="n">Order</span><span class="p">)</span>
+
+<span class="nd">@app</span><span class="o">.</span><span class="n">agent</span><span class="p">(</span><span class="n">orders_topic</span><span class="p">)</span>
+<span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">process_order</span><span class="p">(</span><span class="n">orders</span><span class="p">):</span>
+    <span class="k">async</span> <span class="k">for</span> <span class="n">order</span> <span class="ow">in</span> <span class="n">orders</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Processing order </span><span class="si">{</span><span class="n">order</span><span class="o">.</span><span class="n">id</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">order</span><span class="o">.</span><span class="n">amount</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="nd">@app</span><span class="o">.</span><span class="n">timer</span><span class="p">(</span><span class="n">interval</span><span class="o">=</span><span class="mf">10.0</span><span class="p">)</span>
+<span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">produce_test</span><span class="p">():</span>
+    <span class="k">await</span> <span class="n">orders_topic</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="n">Order</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">amount</span><span class="o">=</span><span class="mf">99.99</span><span class="p">))</span>
+</code></pre></div>
+
+<hr />
+<h2 id="архитектура-и-паттерны">🎓 Архитектура и паттерны<a class="headerlink" href="#архитектура-и-паттерны" title="Ссылка">#</a></h2>
+<h3 id="топологии">Топологии<a class="headerlink" href="#топологии" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>Producer → Topic → Consumer
+
+         ┌─ Partition 0 ─ [msg1, msg2, msg3]
+Topic ───┼─ Partition 1 ─ [msg4, msg5]
+         └─ Partition 2 ─ [msg6, msg7, msg8]
+</code></pre></div>
+
+<h3 id="consumer-group">Consumer Group<a class="headerlink" href="#consumer-group" title="Ссылка">#</a></h3>
+<ul>
+<li>Группа разделяет partition&rsquo;ы между своими consumer&rsquo;ами.</li>
+<li>В группе N consumers → до N partition&rsquo;ов (по 1 на consumer).</li>
+<li>Если consumers &gt; partition&rsquo;ов → лишние простаивают.</li>
+</ul>
+<div class="highlight"><pre><span></span><code>Topic с 3 partitions, 2 consumers в группе:
+  Consumer A → partition 0, 1
+  Consumer B → partition 2
+</code></pre></div>
+
+<h3 id="partitioning-по-ключу">Partitioning по ключу<a class="headerlink" href="#partitioning-по-ключу" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Сообщения с одним key идут в одну партицию (порядок гарантирован)</span>
+<span class="n">producer</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="s1">&#39;orders&#39;</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="s1">&#39;user_123&#39;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="n">order</span><span class="p">)</span>
+</code></pre></div>
+
+<h3 id="репликация">Репликация<a class="headerlink" href="#репликация" title="Ссылка">#</a></h3>
+<ul>
+<li>Каждый partition имеет N реплик.</li>
+<li><strong>Leader</strong> обрабатывает все записи/чтения.</li>
+<li><strong>Followers</strong> синхронизируются (ISR — In-Sync Replicas).</li>
+<li><code>replication.factor=3</code> для продакшена.</li>
+<li><code>min.insync.replicas=2</code> + <code>acks=all</code> — гарантия durable.</li>
+</ul>
+<h3 id="semantics">Semantics<a class="headerlink" href="#semantics" title="Ссылка">#</a></h3>
+<table>
+<thead>
+<tr>
+<th>Semantics</th>
+<th>Что</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>At-most-once</td>
+<td>Может потеряться (acks=0)</td>
+</tr>
+<tr>
+<td>At-least-once</td>
+<td>Может дублироваться (по умолчанию)</td>
+</tr>
+<tr>
+<td>Exactly-once</td>
+<td>Идемпотентность (транзакции)</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="важные-параметры">⚙️ Важные параметры<a class="headerlink" href="#важные-параметры" title="Ссылка">#</a></h2>
+<h3 id="producer">Producer<a class="headerlink" href="#producer" title="Ссылка">#</a></h3>
+<table>
+<thead>
+<tr>
+<th>Параметр</th>
+<th>Что</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>acks</code></td>
+<td>0/1/all — гарантия записи</td>
+</tr>
+<tr>
+<td><code>retries</code></td>
+<td>Кол-во повторов</td>
+</tr>
+<tr>
+<td><code>batch.size</code></td>
+<td>Размер батча (байт)</td>
+</tr>
+<tr>
+<td><code>linger.ms</code></td>
+<td>Ждать N мс для батча</td>
+</tr>
+<tr>
+<td><code>compression.type</code></td>
+<td>none/gzip/snappy/lz4/zstd</td>
+</tr>
+<tr>
+<td><code>max.in.flight.requests.per.connection</code></td>
+<td>для ordered delivery = 1</td>
+</tr>
+<tr>
+<td><code>enable.idempotence</code></td>
+<td>Идемпотентность (dedup)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="consumer">Consumer<a class="headerlink" href="#consumer" title="Ссылка">#</a></h3>
+<table>
+<thead>
+<tr>
+<th>Параметр</th>
+<th>Что</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>group.id</code></td>
+<td>ID группы</td>
+</tr>
+<tr>
+<td><code>auto.offset.reset</code></td>
+<td>earliest/latest/none (новая группа)</td>
+</tr>
+<tr>
+<td><code>enable.auto.commit</code></td>
+<td>Авто-коммит offset&rsquo;ов</td>
+</tr>
+<tr>
+<td><code>auto.commit.interval.ms</code></td>
+<td>Частота авто-коммита</td>
+</tr>
+<tr>
+<td><code>max.poll.records</code></td>
+<td>Сколько за раз</td>
+</tr>
+<tr>
+<td><code>session.timeout.ms</code></td>
+<td>Считать мёртвым через N мс</td>
+</tr>
+<tr>
+<td><code>heartbeat.interval.ms</code></td>
+<td>Частота heartbeat&rsquo;а</td>
+</tr>
+<tr>
+<td><code>fetch.min.bytes</code></td>
+<td>Минимум данных для возврата</td>
+</tr>
+</tbody>
+</table>
+<h3 id="topic-broker">Topic/Broker<a class="headerlink" href="#topic-broker" title="Ссылка">#</a></h3>
+<table>
+<thead>
+<tr>
+<th>Параметр</th>
+<th>Что</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>retention.ms</code></td>
+<td>Сколько хранить сообщения</td>
+</tr>
+<tr>
+<td><code>retention.bytes</code></td>
+<td>Лимит по размеру</td>
+</tr>
+<tr>
+<td><code>cleanup.policy</code></td>
+<td>delete/compact</td>
+</tr>
+<tr>
+<td><code>compression.type</code></td>
+<td>Сжатие на уровне topic&rsquo;а</td>
+</tr>
+<tr>
+<td><code>min.insync.replicas</code></td>
+<td>Минимум ISR для записи</td>
+</tr>
+<tr>
+<td><code>unclean.leader.election.enable</code></td>
+<td>Избрать не-ISR лидером (опасно)</td>
+</tr>
+<tr>
+<td><code>num.partitions</code></td>
+<td>Кол-во partition&rsquo;ов по умолчанию</td>
+</tr>
+</tbody>
+</table>
+<h3 id="log-compaction">Log Compaction<a class="headerlink" href="#log-compaction" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Хранить только последнее значение по key</span>
+cleanup.policy<span class="o">=</span>compact
+
+<span class="c1"># Гуд для состояний (state): user_id → settings</span>
+</code></pre></div>
+
+<hr />
+<h2 id="экосистема">🌍 Экосистема<a class="headerlink" href="#экосистема" title="Ссылка">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Компонент</th>
+<th>Назначение</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Kafka Connect</strong></td>
+<td>Коннекторы (источники/стоки) — без кода</td>
+</tr>
+<tr>
+<td><strong>Kafka Streams</strong></td>
+<td>Потоковая обработка (Java/Scala)</td>
+</tr>
+<tr>
+<td><strong>Schema Registry</strong></td>
+<td>Avro/Protobuf/JSON-схемы</td>
+</tr>
+<tr>
+<td><strong>ksqlDB</strong></td>
+<td>SQL поверх Kafka</td>
+</tr>
+<tr>
+<td><strong>REST Proxy</strong></td>
+<td>REST API для Kafka</td>
+</tr>
+<tr>
+<td><strong>MirrorMaker 2</strong></td>
+<td>Репликация между кластерами</td>
+</tr>
+</tbody>
+</table>
+<h3 id="kafka-connect">Kafka Connect<a class="headerlink" href="#kafka-connect" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Пример: источник из БД → Kafka</span>
+curl<span class="w"> </span>-X<span class="w"> </span>PUT<span class="w"> </span>http://localhost:8083/connectors/postgres-source/config<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-H<span class="w"> </span><span class="s2">&quot;Content-Type: application/json&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-d<span class="w"> </span><span class="s1">&#39;{</span>
+<span class="s1">        &quot;connector.class&quot;: &quot;io.confluent.connect.jdbc.JdbcSourceConnector&quot;,</span>
+<span class="s1">        &quot;connection.url&quot;: &quot;jdbc:postgresql://localhost:5432/db&quot;,</span>
+<span class="s1">        &quot;connection.user&quot;: &quot;user&quot;,</span>
+<span class="s1">        &quot;connection.password&quot;: &quot;pass&quot;,</span>
+<span class="s1">        &quot;table.whitelist&quot;: &quot;users&quot;,</span>
+<span class="s1">        &quot;mode&quot;: &quot;incrementing&quot;,</span>
+<span class="s1">        &quot;incrementing.column.name&quot;: &quot;id&quot;,</span>
+<span class="s1">        &quot;topic.prefix&quot;: &quot;postgres_&quot;</span>
+<span class="s1">    }&#39;</span>
+</code></pre></div>
+
+<h3 id="ksqldb">ksqlDB<a class="headerlink" href="#ksqldb" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="n">STREAM</span><span class="w"> </span><span class="n">clicks</span><span class="w"> </span><span class="p">(</span><span class="n">user_id</span><span class="w"> </span><span class="nb">BIGINT</span><span class="p">,</span><span class="w"> </span><span class="n">url</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">)</span>
+<span class="w">    </span><span class="k">WITH</span><span class="w"> </span><span class="p">(</span><span class="n">KAFKA_TOPIC</span><span class="o">=</span><span class="s1">&#39;clicks&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">VALUE_FORMAT</span><span class="o">=</span><span class="s1">&#39;JSON&#39;</span><span class="p">);</span>
+
+<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">user_clicks</span><span class="w"> </span><span class="k">AS</span>
+<span class="w">    </span><span class="k">SELECT</span><span class="w"> </span><span class="n">user_id</span><span class="p">,</span><span class="w"> </span><span class="k">COUNT</span><span class="p">(</span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">clicks</span>
+<span class="w">    </span><span class="k">FROM</span><span class="w"> </span><span class="n">clicks</span><span class="w"> </span><span class="n">WINDOW</span><span class="w"> </span><span class="n">TUMBLING</span><span class="w"> </span><span class="p">(</span><span class="k">SIZE</span><span class="w"> </span><span class="mi">5</span><span class="w"> </span><span class="n">MINUTES</span><span class="p">)</span>
+<span class="w">    </span><span class="k">GROUP</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">user_id</span><span class="p">;</span>
+</code></pre></div>
+
+<hr />
+<h2 id="дебаг-и-мониторинг">🐛 Дебаг и мониторинг<a class="headerlink" href="#дебаг-и-мониторинг" title="Ссылка">#</a></h2>
+<div class="highlight"><pre><span></span><code><span class="c1"># Утилита для просмотра сообщений с фильтром</span>
+bin/kafka-console-consumer.sh<span class="w"> </span>--bootstrap-server<span class="w"> </span>localhost:9092<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--topic<span class="w"> </span>my-topic<span class="w"> </span>--from-beginning<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="s2">&quot;error&quot;</span>
+
+<span class="c1"># Получить последний offset</span>
+bin/kafka-run-class.sh<span class="w"> </span>kafka.tools.GetOffsetShell<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--broker-list<span class="w"> </span>localhost:9092<span class="w"> </span>--topic<span class="w"> </span>my-topic
+
+<span class="c1"># Лаг consumer group</span>
+bin/kafka-consumer-groups.sh<span class="w"> </span>--bootstrap-server<span class="w"> </span>localhost:9092<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--describe<span class="w"> </span>--group<span class="w"> </span>my-group
+
+<span class="c1"># Dump segment</span>
+bin/kafka-dump-log.sh<span class="w"> </span>--files<span class="w"> </span>/var/lib/kafka/data/my-topic-0/00000000000000000000.log<span class="w"> </span>--print-data-log
+</code></pre></div>
+
+<h3 id="метрики">Метрики<a class="headerlink" href="#метрики" title="Ссылка">#</a></h3>
+<ul>
+<li><strong>JMX</strong> через Prometheus JMX Exporter.</li>
+<li><strong>Burrow</strong> — мониторинг consumer lag.</li>
+<li><strong>Kafka UI</strong> (AKHQ, Kafka Drop, Conduktor) — веб-интерфейсы.</li>
+<li><strong>CMAK</strong> (Cluster Manager for Kafka).</li>
+</ul>
+<h3 id="полезные-вопросы-для-дебага">Полезные вопросы для дебага<a class="headerlink" href="#полезные-вопросы-для-дебага" title="Ссылка">#</a></h3>
+<ol>
+<li><strong>Consumer lag растёт</strong> — consumer не успевает, добавьте partition&rsquo;ы / consumers.</li>
+<li><strong>Сообщения пропадают</strong> — <code>retention.ms</code> истёк или <code>cleanup.policy</code>.</li>
+<li><strong>Дубли</strong> — at-least-once, используйте идемпотентность.</li>
+<li><strong>Порядок нарушен</strong> — разные partition&rsquo;ы (порядок только в одном).</li>
+<li><strong>Producer не пишет</strong> — проверьте <code>acks</code> и <code>bootstrap.servers</code>.</li>
+</ol>
+<hr />
+<h2 id="kafka-spark-streaming">🌟 Kafka + Spark Streaming<a class="headerlink" href="#kafka-spark-streaming" title="Ссылка">#</a></h2>
+<div class="highlight"><pre><span></span><code><span class="c1"># PySpark Structured Streaming из Kafka</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">spark</span> \
+    <span class="o">.</span><span class="n">readStream</span> \
+    <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s2">&quot;kafka&quot;</span><span class="p">)</span> \
+    <span class="o">.</span><span class="n">option</span><span class="p">(</span><span class="s2">&quot;kafka.bootstrap.servers&quot;</span><span class="p">,</span> <span class="s2">&quot;localhost:9092&quot;</span><span class="p">)</span> \
+    <span class="o">.</span><span class="n">option</span><span class="p">(</span><span class="s2">&quot;subscribe&quot;</span><span class="p">,</span> <span class="s2">&quot;events&quot;</span><span class="p">)</span> \
+    <span class="o">.</span><span class="n">load</span><span class="p">()</span>
+
+<span class="c1"># Парсинг</span>
+<span class="n">parsed</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">selectExpr</span><span class="p">(</span><span class="s2">&quot;CAST(value AS STRING)&quot;</span><span class="p">)</span>
+
+<span class="n">query</span> <span class="o">=</span> <span class="n">parsed</span> \
+    <span class="o">.</span><span class="n">writeStream</span> \
+    <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s2">&quot;console&quot;</span><span class="p">)</span> \
+    <span class="o">.</span><span class="n">start</span><span class="p">()</span>
+
+<span class="n">query</span><span class="o">.</span><span class="n">awaitTermination</span><span class="p">()</span>
+</code></pre></div>
+
+<hr />
+<h2 id="kafka-vs-rabbitmq-vs-redis-streams">🆚 Kafka vs RabbitMQ vs Redis Streams<a class="headerlink" href="#kafka-vs-rabbitmq-vs-redis-streams" title="Ссылка">#</a></h2>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Kafka</th>
+<th>RabbitMQ</th>
+<th>Redis Streams</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Модель</td>
+<td>Лог (offset)</td>
+<td>Очередь (delete after read)</td>
+<td>Лог</td>
+</tr>
+<tr>
+<td>Хранение</td>
+<td>Диск, долго</td>
+<td>До подтверждения</td>
+<td>RAM/диск</td>
+</tr>
+<tr>
+<td>Replay</td>
+<td>✅</td>
+<td>❌</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>Партиции</td>
+<td>✅</td>
+<td>exchanges/queues</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>Пропускная</td>
+<td>Миллионы/сек</td>
+<td>Тысячи/сек</td>
+<td>Высокая</td>
+</tr>
+<tr>
+<td>Сложность</td>
+<td>Высокая</td>
+<td>Средняя</td>
+<td>Низкая</td>
+</tr>
+<tr>
+<td>Use case</td>
+<td>Event streaming, log</td>
+<td>Task queue, RPC</td>
+<td>Простые стримы</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="частые-ошибки">🪤 Частые ошибки<a class="headerlink" href="#частые-ошибки" title="Ссылка">#</a></h2>
+<ol>
+<li><strong>1 partition, много consumers</strong> — лишние простаивают.</li>
+<li><strong>Нет ключа</strong> — round-robin, порядок не гарантирован.</li>
+<li><strong><code>acks=0</code></strong> — данные могут потеряться.</li>
+<li><strong><code>auto.offset.reset=latest</code></strong> — новая группа пропустит старые.</li>
+<li><strong><code>enable.auto.commit=true</code></strong> — at-least-once может дублировать.</li>
+<li><strong>Слишком много partition&rsquo;ов</strong> — overhead на broker.</li>
+<li><strong>Слишком мало partition&rsquo;ов</strong> — узкое место для параллелизма.</li>
+<li><strong><code>replication.factor=1</code></strong> — нет отказоустойчивости.</li>
+<li><strong>Long-running consumer</strong> — <code>session.timeout.ms</code> прервёт.</li>
+<li><strong>Schema Registry игнор</strong> — нет совместимости схем.</li>
+</ol>
+<hr />
+<h2 id="полезные-ссылки">🔗 Полезные ссылки<a class="headerlink" href="#полезные-ссылки" title="Ссылка">#</a></h2>
+<ul>
+<li>Документация: https://kafka.apache.org/documentation</li>
+<li>Quickstart: https://kafka.apache.org/quickstart</li>
+<li>kafka-python: https://kafka-python.readthedocs.io</li>
+<li>confluent-kafka-python: https://github.com/confluentinc/confluent-kafka-python</li>
+<li>aiokafka: https://aiokafka.readthedocs.io</li>
+<li>Faust: https://faust.readthedocs.io</li>
+<li>Kafka UI (AKHQ): https://github.com/tchiotludo/akhq</li>
+<li>awesome-kafka: https://github.com/infoslack/awesome-kafka</li>
+<li>Kafka: The Definitive Guide (книга, O&rsquo;Reilly)</li>
+</ul>
+<hr />
+<h2 id="полезные-советы">💡 Полезные советы<a class="headerlink" href="#полезные-советы" title="Ссылка">#</a></h2>
+<ol>
+<li><strong>Partitioning по ключу</strong> — для упорядоченности и локальности.</li>
+<li><strong><code>acks=all</code> + <code>min.insync.replicas=2</code></strong> — гарантия durable.</li>
+<li><strong>Compression (lz4/zstd)</strong> — экономит место и сеть.</li>
+<li><strong>Batching</strong> — <code>linger.ms=10</code> для пропускной способности.</li>
+<li><strong>Consumer Group</strong> — для параллельного чтения.</li>
+<li><strong>Schema Registry</strong> — для эволюционирующих схем.</li>
+<li><strong>Idempotent producer</strong> — <code>enable.idempotence=true</code>.</li>
+<li><strong>Транзакции</strong> — exactly-once (Kafka Streams).</li>
+<li><strong>Kafka Connect</strong> — без кода для интеграций.</li>
+<li><strong>ksqlDB</strong> — SQL для стриминга.</li>
+<li><strong>MirrorMaker 2</strong> — DR между кластерами.</li>
+<li><strong>Burrow</strong> — мониторинг consumer lag.</li>
+<li><strong>AKHQ</strong> — лучший UI (плюс admin/consume/produce).</li>
+<li><strong>Логи хранятся долго</strong> — <code>retention.ms</code>, не думайте как об очереди.</li>
+<li><strong>Тесты</strong> — через <code>kafka-console-consumer</code> с <code>--from-beginning</code>.</li>
+</ol>
+<hr />
+<p><em>Сгенерировано как шпаргалка. Kafka сложна —
+углубляйтесь через https://kafka.apache.org/documentation и &ldquo;Kafka: The Definitive Guide&rdquo;</em></p>
+    </article>
+    <nav class="pagination">
+      <a class="pager prev" href="dbt.html">← dbt</a>
+      <a class="pager next" href="prometheus-grafana.html">Prometheus / Grafana →</a>
+    </nav>
+  </main>
+
+  <aside class="toc">
+    <details open>
+      <summary>📑 Оглавление</summary>
+      <div class="toc-list">
+<div class="toc">
+<ul>
+<li><a href="#apache-kafka-шпаргалка">🐘 Apache Kafka — шпаргалка</a><ul>
+<li><a href="#главные-понятия">🔑 Главные понятия</a></li>
+<li><a href="#установка-и-запуск">🚀 Установка и запуск</a><ul>
+<li><a href="#через-docker-быстрее-всего">Через Docker (быстрее всего)</a></li>
+<li><a href="#локально-тяжелее">Локально (тяжелее)</a></li>
+</ul>
+</li>
+<li><a href="#cli-утилиты-kafka-tools">🛠️ CLI-утилиты (kafka-tools)</a><ul>
+<li><a href="#топики">Топики</a></li>
+<li><a href="#producer-cli">Producer (CLI)</a></li>
+<li><a href="#consumer-cli">Consumer (CLI)</a></li>
+<li><a href="#consumer-groups">Consumer Groups</a></li>
+<li><a href="#группы-и-конфиги">Группы и конфиги</a></li>
+</ul>
+</li>
+<li><a href="#python-клиенты">🐍 Python-клиенты</a><ul>
+<li><a href="#kafka-python-простой">kafka-python (простой)</a></li>
+<li><a href="#aiokafka-асинхронный">aiokafka (асинхронный)</a></li>
+<li><a href="#confluent-kafka-быстрый-c-биндинг">confluent-kafka (быстрый, C-биндинг)</a></li>
+<li><a href="#faust-потоковая-обработка-как-spark-streaming">Faust (потоковая обработка, как Spark Streaming)</a></li>
+</ul>
+</li>
+<li><a href="#архитектура-и-паттерны">🎓 Архитектура и паттерны</a><ul>
+<li><a href="#топологии">Топологии</a></li>
+<li><a href="#consumer-group">Consumer Group</a></li>
+<li><a href="#partitioning-по-ключу">Partitioning по ключу</a></li>
+<li><a href="#репликация">Репликация</a></li>
+<li><a href="#semantics">Semantics</a></li>
+</ul>
+</li>
+<li><a href="#важные-параметры">⚙️ Важные параметры</a><ul>
+<li><a href="#producer">Producer</a></li>
+<li><a href="#consumer">Consumer</a></li>
+<li><a href="#topic-broker">Topic/Broker</a></li>
+<li><a href="#log-compaction">Log Compaction</a></li>
+</ul>
+</li>
+<li><a href="#экосистема">🌍 Экосистема</a><ul>
+<li><a href="#kafka-connect">Kafka Connect</a></li>
+<li><a href="#ksqldb">ksqlDB</a></li>
+</ul>
+</li>
+<li><a href="#дебаг-и-мониторинг">🐛 Дебаг и мониторинг</a><ul>
+<li><a href="#метрики">Метрики</a></li>
+<li><a href="#полезные-вопросы-для-дебага">Полезные вопросы для дебага</a></li>
+</ul>
+</li>
+<li><a href="#kafka-spark-streaming">🌟 Kafka + Spark Streaming</a></li>
+<li><a href="#kafka-vs-rabbitmq-vs-redis-streams">🆚 Kafka vs RabbitMQ vs Redis Streams</a></li>
+<li><a href="#частые-ошибки">🪤 Частые ошибки</a></li>
+<li><a href="#полезные-ссылки">🔗 Полезные ссылки</a></li>
+<li><a href="#полезные-советы">💡 Полезные советы</a></li>
+</ul>
+</li>
+</ul>
+</div>
+
+      </div>
+    </details>
+  </aside>
+</div>
+
+<button class="back-top" id="backTop" aria-label="Наверх">↑</button>
+
+<script src="assets/search.js"></script>
+<script src="assets/page.js"></script>
+</body>
+</html>

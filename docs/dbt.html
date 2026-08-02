@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>dbt — Шпаргалки</title>
+<link rel="stylesheet" href="assets/style.css">
+<link rel="stylesheet" href="assets/pygments.css">
+</head>
+<body>
+<div class="layout">
+  <aside class="sidebar">
+    <a href="index.html" class="brand">📌 Шпаргалки</a>
+    <nav class="nav">
+<a href="yazi.html" class="nav-item"><span class="nav-ico">📦</span>Yazi</a>
+<a href="neovim.html" class="nav-item"><span class="nav-ico">📘</span>Neovim (LazyVim)</a>
+<a href="niri.html" class="nav-item"><span class="nav-ico">🪟</span>Niri</a>
+<a href="tmux.html" class="nav-item"><span class="nav-ico">🪟</span>Tmux</a>
+<a href="bash.html" class="nav-item"><span class="nav-ico">🐚</span>Bash</a>
+<a href="git.html" class="nav-item"><span class="nav-ico">🔀</span>Git</a>
+<a href="terminal.html" class="nav-item"><span class="nav-ico">🖥️</span>Терминал Linux</a>
+<a href="powershell.html" class="nav-item"><span class="nav-ico">💻</span>PowerShell</a>
+<a href="cmd.html" class="nav-item"><span class="nav-ico">🪟</span>CMD (cmd.exe)</a>
+<a href="python.html" class="nav-item"><span class="nav-ico">🐍</span>Python</a>
+<a href="systemd.html" class="nav-item"><span class="nav-ico">⚙️</span>systemd</a>
+<a href="ssh.html" class="nav-item"><span class="nav-ico">🔐</span>SSH</a>
+<a href="make-cmake.html" class="nav-item"><span class="nav-ico">🔨</span>Make / CMake</a>
+<a href="docker.html" class="nav-item"><span class="nav-ico">🐳</span>Docker</a>
+<a href="pacman.html" class="nav-item"><span class="nav-ico">📦</span>pacman / yay / paru</a>
+<a href="spark.html" class="nav-item"><span class="nav-ico">⚡</span>Apache Spark / PySpark</a>
+<a href="markdown.html" class="nav-item"><span class="nav-ico">📝</span>Markdown</a>
+<a href="regex.html" class="nav-item"><span class="nav-ico">🔍</span>Регулярные выражения</a>
+<a href="jq-json.html" class="nav-item"><span class="nav-ico">🔧</span>jq + JSON</a>
+<a href="awk-sed.html" class="nav-item"><span class="nav-ico">✂️</span>awk / sed</a>
+<a href="airflow.html" class="nav-item"><span class="nav-ico">🌪️</span>Apache Airflow</a>
+<a href="http-curl.html" class="nav-item"><span class="nav-ico">🌐</span>HTTP / curl</a>
+<a href="yaml.html" class="nav-item"><span class="nav-ico">📄</span>YAML</a>
+<a href="vscode.html" class="nav-item"><span class="nav-ico">💻</span>VS Code</a>
+<a href="cron.html" class="nav-item"><span class="nav-ico">⏰</span>cron</a>
+<a href="fzf-zoxide.html" class="nav-item"><span class="nav-ico">🔎</span>fzf + zoxide</a>
+<a href="minikube-k8s.html" class="nav-item"><span class="nav-ico">☸️</span>Minikube / Kubernetes</a>
+<a href="cicd.html" class="nav-item"><span class="nav-ico">🦊</span>GitLab CI / GitHub Actions</a>
+<a href="nginx.html" class="nav-item"><span class="nav-ico">🌐</span>nginx</a>
+<a href="dbt.html" class="nav-item active"><span class="nav-ico">🔧</span>dbt</a>
+<a href="kafka.html" class="nav-item"><span class="nav-ico">🐘</span>Apache Kafka</a>
+<a href="prometheus-grafana.html" class="nav-item"><span class="nav-ico">📊</span>Prometheus / Grafana</a>
+<a href="iceberg-nessie.html" class="nav-item"><span class="nav-ico">🧊</span>Iceberg / Nessie</a>
+<a href="impala.html" class="nav-item"><span class="nav-ico">🐬</span>Apache Impala</a>
+<a href="terraform.html" class="nav-item"><span class="nav-ico">🏗️</span>Terraform</a>
+<a href="linux-internals.html" class="nav-item"><span class="nav-ico">🐧</span>Linux Internals</a>
+<a href="miscellaneous.html" class="nav-item"><span class="nav-ico">🧰</span>Miscellaneous</a>
+<a href="python-automation-libs.html" class="nav-item"><span class="nav-ico">🐍</span>Python: авт-ция (10 libs)</a>
+<a href="eza.html" class="nav-item"><span class="nav-ico">🌈</span>eza</a>
+<a href="dbeaver.html" class="nav-item"><span class="nav-ico">🗄️</span>DBeaver</a>
+<a href="zcode.html" class="nav-item"><span class="nav-ico">🤖</span>ZCode</a>
+<a href="warp.html" class="nav-item"><span class="nav-ico">🚀</span>Warp</a>
+<a href="agentic-ai-dev.html" class="nav-item"><span class="nav-ico">🤝</span>Агентная разработка с ИИ</a>
+    </nav>
+  </aside>
+
+  <main class="content">
+    <article>
+<h1 id="dbt-data-build-tool-шпаргалка">🔧 dbt (data build tool) — шпаргалка<a class="headerlink" href="#dbt-data-build-tool-шпаргалка" title="Ссылка">#</a></h1>
+<blockquote>
+<p><strong>dbt</strong> — инструмент для трансформации данных в хранилище (ELT «T» часть).
+SQL + Jinja-шаблоны, версии, тесты, документация.
+Документация: https://docs.getdbt.com</p>
+</blockquote>
+<hr />
+<h2 id="главные-понятия">🔑 Главные понятия<a class="headerlink" href="#главные-понятия" title="Ссылка">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Термин</th>
+<th>Что значит</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Model</strong></td>
+<td>SQL-файл → таблица/view в DWH</td>
+</tr>
+<tr>
+<td><strong>Source</strong></td>
+<td>Исходные таблицы (внешние)</td>
+</tr>
+<tr>
+<td><strong>Seed</strong></td>
+<td>CSV-файлы, загружаемые в DWH</td>
+</tr>
+<tr>
+<td><strong>Snapshot</strong></td>
+<td>Type 2 SCD (история изменений)</td>
+</tr>
+<tr>
+<td><strong>Test</strong></td>
+<td>Проверка качества данных</td>
+</tr>
+<tr>
+<td><strong>Macro</strong></td>
+<td>Переиспользуемый Jinja-код</td>
+</tr>
+<tr>
+<td><strong>Materialization</strong></td>
+<td>Как сохраняется: view/table/incremental</td>
+</tr>
+<tr>
+<td><strong>Ref</strong></td>
+<td>Ссылка на другую модель</td>
+</tr>
+<tr>
+<td><strong>Staging / Intermediate / Mart</strong></td>
+<td>Слои трансформации</td>
+</tr>
+<tr>
+<td><strong>Schema.yml</strong></td>
+<td>Конфигурация моделей/тестов/источников</td>
+</tr>
+<tr>
+<td><strong>dbt Cloud / Core</strong></td>
+<td>Хостинг / CLI</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="установка-и-проект">🚀 Установка и проект<a class="headerlink" href="#установка-и-проект" title="Ссылка">#</a></h2>
+<h3 id="установка-dbt-core">Установка dbt Core<a class="headerlink" href="#установка-dbt-core" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Через pip (с адаптером)</span>
+pip<span class="w"> </span>install<span class="w"> </span>dbt-core<span class="w"> </span>dbt-postgres
+pip<span class="w"> </span>install<span class="w"> </span>dbt-core<span class="w"> </span>dbt-bigquery
+pip<span class="w"> </span>install<span class="w"> </span>dbt-core<span class="w"> </span>dbt-snowflake
+pip<span class="w"> </span>install<span class="w"> </span>dbt-core<span class="w"> </span>dbt-spark
+
+<span class="c1"># Через uv (быстрее)</span>
+uv<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>dbt-core<span class="w"> </span>dbt-postgres
+
+<span class="c1"># Через Homebrew</span>
+brew<span class="w"> </span>install<span class="w"> </span>dbt-postgres
+</code></pre></div>
+
+<h3 id="создание-проекта">Создание проекта<a class="headerlink" href="#создание-проекта" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>dbt<span class="w"> </span>init<span class="w"> </span>my_project
+<span class="c1"># Спросит: тип DWH, хост, порт, юзер, пароль, БД, схему, потоки</span>
+
+<span class="c1"># Структура проекта</span>
+my_project/
+├──<span class="w"> </span>dbt_project.yml<span class="w">        </span><span class="c1"># главный конфиг</span>
+├──<span class="w"> </span>profiles.yml<span class="w">           </span><span class="c1"># подключение к DWH (обычно в ~/.dbt/)</span>
+├──<span class="w"> </span>models/<span class="w">                </span><span class="c1"># SQL-модели</span>
+│<span class="w">   </span>├──<span class="w"> </span>staging/<span class="w">           </span><span class="c1"># stg_ — сырые → нормализованные</span>
+│<span class="w">   </span>├──<span class="w"> </span>intermediate/<span class="w">      </span><span class="c1"># int_ — промежуточные</span>
+│<span class="w">   </span>└──<span class="w"> </span>marts/<span class="w">             </span><span class="c1"># fct_/dim_ — финальные таблицы</span>
+├──<span class="w"> </span>seeds/<span class="w">                 </span><span class="c1"># CSV-файлы</span>
+├──<span class="w"> </span>snapshots/<span class="w">             </span><span class="c1"># SCD Type 2</span>
+├──<span class="w"> </span>macros/<span class="w">                </span><span class="c1"># Jinja-макросы</span>
+├──<span class="w"> </span>tests/<span class="w">                 </span><span class="c1"># кастомные тесты</span>
+├──<span class="w"> </span>analyses/<span class="w">              </span><span class="c1"># аналитические запросы (не материализуются)</span>
+├──<span class="w"> </span>docs/<span class="w">                  </span><span class="c1"># Markdown-документация</span>
+└──<span class="w"> </span>target/<span class="w">                </span><span class="c1"># (генерируется) compiled SQL, manifest</span>
+</code></pre></div>
+
+<h3 id="profiles-yml-dbt-profiles-yml">profiles.yml (<code>~/.dbt/profiles.yml</code>)<a class="headerlink" href="#profiles-yml-dbt-profiles-yml" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="nt">my_project</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">target</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">dev</span>
+<span class="w">  </span><span class="nt">outputs</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">dev</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">postgres</span>
+<span class="w">      </span><span class="nt">host</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">localhost</span>
+<span class="w">      </span><span class="nt">user</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">dbt_user</span>
+<span class="w">      </span><span class="nt">password</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;{{</span><span class="nv"> </span><span class="s">env_var(&#39;DBT_PASSWORD&#39;)</span><span class="nv"> </span><span class="s">}}&quot;</span>
+<span class="w">      </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5432</span>
+<span class="w">      </span><span class="nt">dbname</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">analytics</span>
+<span class="w">      </span><span class="nt">schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">dev</span>
+<span class="w">      </span><span class="nt">threads</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">4</span>
+<span class="w">    </span><span class="nt">prod</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">postgres</span>
+<span class="w">      </span><span class="nt">host</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">dwh.prod.example.com</span>
+<span class="w">      </span><span class="nt">user</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">dbt_prod</span>
+<span class="w">      </span><span class="nt">password</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;{{</span><span class="nv"> </span><span class="s">env_var(&#39;DBT_PASSWORD&#39;)</span><span class="nv"> </span><span class="s">}}&quot;</span>
+<span class="w">      </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5432</span>
+<span class="w">      </span><span class="nt">dbname</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">analytics</span>
+<span class="w">      </span><span class="nt">schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">analytics_prod</span>
+<span class="w">      </span><span class="nt">threads</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">8</span>
+</code></pre></div>
+
+<hr />
+<h2 id="команды-dbt">🎯 Команды dbt<a class="headerlink" href="#команды-dbt" title="Ссылка">#</a></h2>
+<div class="highlight"><pre><span></span><code>dbt<span class="w"> </span>--version<span class="w">                  </span><span class="c1"># версия</span>
+dbt<span class="w"> </span>debug<span class="w">                      </span><span class="c1"># проверить подключение</span>
+dbt<span class="w"> </span>run<span class="w">                        </span><span class="c1"># выполнить все модели</span>
+dbt<span class="w"> </span>run<span class="w"> </span>--select<span class="w"> </span>my_model<span class="w">      </span><span class="c1"># конкретная модель</span>
+dbt<span class="w"> </span>run<span class="w"> </span>--select<span class="w"> </span>my_model+<span class="w">     </span><span class="c1"># + downstream (зависимые)</span>
+dbt<span class="w"> </span>run<span class="w"> </span>--select<span class="w"> </span>+my_model<span class="w">     </span><span class="c1"># + upstream (зависимости)</span>
+dbt<span class="w"> </span>run<span class="w"> </span>--select<span class="w"> </span>tag:nightly<span class="w">   </span><span class="c1"># по тегу</span>
+dbt<span class="w"> </span>run<span class="w"> </span>--select<span class="w"> </span>path:models/staging/<span class="w">   </span><span class="c1"># по пути</span>
+dbb<span class="w"> </span>run<span class="w"> </span>--select<span class="w"> </span>my_model<span class="w"> </span>--full-refresh<span class="w">   </span><span class="c1"># incremental полностью</span>
+
+dbt<span class="w"> </span><span class="nb">test</span><span class="w">                       </span><span class="c1"># запустить все тесты</span>
+dbt<span class="w"> </span><span class="nb">test</span><span class="w"> </span>--select<span class="w"> </span>my_model
+dbt<span class="w"> </span><span class="nb">test</span><span class="w"> </span>--select<span class="w"> </span>test_type:singular
+
+dbt<span class="w"> </span>build<span class="w">                      </span><span class="c1"># run + test (всё сразу)</span>
+dbt<span class="w"> </span>build<span class="w"> </span>--select<span class="w"> </span>my_model+
+
+dbt<span class="w"> </span>seed<span class="w">                       </span><span class="c1"># загрузить CSV</span>
+dbt<span class="w"> </span>snapshot<span class="w">                   </span><span class="c1"># обновить snapshots</span>
+dbt<span class="w"> </span>compile<span class="w">                    </span><span class="c1"># только сгенерировать SQL (без выполнения)</span>
+dbt<span class="w"> </span>docs<span class="w"> </span>generate<span class="w">              </span><span class="c1"># сгенерировать документацию</span>
+dbt<span class="w"> </span>docs<span class="w"> </span>serve<span class="w"> </span>--port<span class="w"> </span><span class="m">8080</span><span class="w">     </span><span class="c1"># открыть в браузере</span>
+dbt<span class="w"> </span>run-operation<span class="w">              </span><span class="c1"># вызвать макрос</span>
+dbt<span class="w"> </span>clean<span class="w">                      </span><span class="c1"># удалить target/, dbt_packages/</span>
+dbt<span class="w"> </span>deps<span class="w">                       </span><span class="c1"># установить пакеты (dbt_packages.yml)</span>
+dbt<span class="w"> </span>list<span class="w">                       </span><span class="c1"># список ресурсов</span>
+dbt<span class="w"> </span>parse<span class="w">                      </span><span class="c1"># проверить синтаксис</span>
+dbt<span class="w"> </span><span class="nb">source</span><span class="w"> </span>freshness<span class="w">           </span><span class="c1"># проверить свежесть источников</span>
+</code></pre></div>
+
+<h3 id="селекторы-selection-syntax">Селекторы (selection syntax)<a class="headerlink" href="#селекторы-selection-syntax" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>dbt<span class="w"> </span>run<span class="w"> </span>--select<span class="w"> </span>my_model<span class="w">              </span><span class="c1"># одна модель</span>
+dbt<span class="w"> </span>run<span class="w"> </span>--select<span class="w"> </span>my_model+<span class="w">             </span><span class="c1"># + downstream</span>
+dbt<span class="w"> </span>run<span class="w"> </span>--select<span class="w"> </span>+my_model<span class="w">             </span><span class="c1"># + upstream</span>
+dbt<span class="w"> </span>run<span class="w"> </span>--select<span class="w"> </span>+my_model+<span class="w">            </span><span class="c1"># обе стороны</span>
+dbt<span class="w"> </span>run<span class="w"> </span>--select<span class="w"> </span><span class="m">2</span>+my_model<span class="w">            </span><span class="c1"># + 2 уровня upstream</span>
+dbt<span class="w"> </span>run<span class="w"> </span>--select<span class="w"> </span>my_model<span class="w"> </span>my_other<span class="w">     </span><span class="c1"># несколько</span>
+dbt<span class="w"> </span>run<span class="w"> </span>--select<span class="w"> </span>tag:nightly<span class="w">           </span><span class="c1"># по тегу</span>
+dbt<span class="w"> </span>run<span class="w"> </span>--select<span class="w"> </span>path:models/staging/<span class="w">  </span><span class="c1"># по пути</span>
+dbt<span class="w"> </span>run<span class="w"> </span>--select<span class="w"> </span>package:dbt_utils<span class="w">     </span><span class="c1"># из пакета</span>
+dbt<span class="w"> </span>run<span class="w"> </span>--select<span class="w"> </span>resource_type:model<span class="w">   </span><span class="c1"># только модели</span>
+dbt<span class="w"> </span>run<span class="w"> </span>--exclude<span class="w"> </span>my_old_model<span class="w">         </span><span class="c1"># исключить</span>
+dbt<span class="w"> </span>run<span class="w"> </span>--select<span class="w"> </span>my_model<span class="w"> </span>--selector<span class="w"> </span>prod<span class="w">   </span><span class="c1"># с YML-селектором</span>
+</code></pre></div>
+
+<hr />
+<h2 id="модель-model">📝 Модель (Model)<a class="headerlink" href="#модель-model" title="Ссылка">#</a></h2>
+<p><code>models/staging/stg_customers.sql</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="err">{{</span><span class="w"> </span><span class="n">config</span><span class="p">(</span>
+<span class="w">    </span><span class="n">materialized</span><span class="o">=</span><span class="s1">&#39;view&#39;</span><span class="p">,</span>
+<span class="w">    </span><span class="n">tags</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;staging&#39;</span><span class="p">]</span>
+<span class="p">)</span><span class="w"> </span><span class="err">}}</span>
+
+<span class="k">WITH</span><span class="w"> </span><span class="k">source</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="err">{{</span><span class="w"> </span><span class="k">source</span><span class="p">(</span><span class="s1">&#39;raw&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;customers&#39;</span><span class="p">)</span><span class="w"> </span><span class="err">}}</span>
+<span class="p">),</span>
+<span class="n">renamed</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="k">SELECT</span>
+<span class="w">        </span><span class="n">id</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">customer_id</span><span class="p">,</span>
+<span class="w">        </span><span class="n">first_name</span><span class="p">,</span>
+<span class="w">        </span><span class="n">last_name</span><span class="p">,</span>
+<span class="w">        </span><span class="n">email</span><span class="p">,</span>
+<span class="w">        </span><span class="n">created_at</span>
+<span class="w">    </span><span class="k">FROM</span><span class="w"> </span><span class="k">source</span>
+<span class="p">)</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">renamed</span>
+</code></pre></div>
+
+<h3 id="материализации">Материализации<a class="headerlink" href="#материализации" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="err">{{</span><span class="w"> </span><span class="n">config</span><span class="p">(</span><span class="n">materialized</span><span class="o">=</span><span class="s1">&#39;view&#39;</span><span class="p">)</span><span class="w"> </span><span class="err">}}</span><span class="w">          </span><span class="c1">-- VIEW (по умолчанию)</span>
+<span class="err">{{</span><span class="w"> </span><span class="n">config</span><span class="p">(</span><span class="n">materialized</span><span class="o">=</span><span class="s1">&#39;table&#39;</span><span class="p">)</span><span class="w"> </span><span class="err">}}</span><span class="w">         </span><span class="c1">-- TABLE (полная пересборка)</span>
+<span class="err">{{</span><span class="w"> </span><span class="n">config</span><span class="p">(</span><span class="n">materialized</span><span class="o">=</span><span class="s1">&#39;incremental&#39;</span><span class="p">)</span><span class="w"> </span><span class="err">}}</span><span class="w">   </span><span class="c1">-- добавлять новые</span>
+<span class="err">{{</span><span class="w"> </span><span class="n">config</span><span class="p">(</span><span class="n">materialized</span><span class="o">=</span><span class="s1">&#39;ephemeral&#39;</span><span class="p">)</span><span class="w"> </span><span class="err">}}</span><span class="w">     </span><span class="c1">-- CTE (не сохраняется)</span>
+</code></pre></div>
+
+<h3 id="incremental">Incremental<a class="headerlink" href="#incremental" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="err">{{</span><span class="w"> </span><span class="n">config</span><span class="p">(</span>
+<span class="w">    </span><span class="n">materialized</span><span class="o">=</span><span class="s1">&#39;incremental&#39;</span><span class="p">,</span>
+<span class="w">    </span><span class="n">unique_key</span><span class="o">=</span><span class="s1">&#39;id&#39;</span><span class="p">,</span>
+<span class="w">    </span><span class="n">incremental_strategy</span><span class="o">=</span><span class="s1">&#39;merge&#39;</span><span class="w">   </span><span class="c1">-- merge / append / delete+insert</span>
+<span class="p">)</span><span class="w"> </span><span class="err">}}</span>
+
+<span class="k">WITH</span><span class="w"> </span><span class="n">events</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="err">{{</span><span class="w"> </span><span class="k">ref</span><span class="p">(</span><span class="s1">&#39;stg_events&#39;</span><span class="p">)</span><span class="w"> </span><span class="err">}}</span>
+<span class="w">    </span><span class="err">{</span><span class="o">%</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">is_incremental</span><span class="p">()</span><span class="w"> </span><span class="o">%</span><span class="err">}</span>
+<span class="w">    </span><span class="k">WHERE</span><span class="w"> </span><span class="n">event_date</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="p">(</span><span class="k">SELECT</span><span class="w"> </span><span class="k">MAX</span><span class="p">(</span><span class="n">event_date</span><span class="p">)</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="err">{{</span><span class="w"> </span><span class="n">this</span><span class="w"> </span><span class="err">}}</span><span class="p">)</span>
+<span class="w">    </span><span class="err">{</span><span class="o">%</span><span class="w"> </span><span class="n">endif</span><span class="w"> </span><span class="o">%</span><span class="err">}</span>
+<span class="p">)</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">events</span>
+</code></pre></div>
+
+<h3 id="ref-ссылки-на-другие-модели">Ref (ссылки на другие модели)<a class="headerlink" href="#ref-ссылки-на-другие-модели" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span>
+<span class="w">    </span><span class="n">o</span><span class="p">.</span><span class="n">order_id</span><span class="p">,</span>
+<span class="w">    </span><span class="k">c</span><span class="p">.</span><span class="n">customer_name</span>
+<span class="k">FROM</span><span class="w"> </span><span class="err">{{</span><span class="w"> </span><span class="k">ref</span><span class="p">(</span><span class="s1">&#39;stg_orders&#39;</span><span class="p">)</span><span class="w"> </span><span class="err">}}</span><span class="w"> </span><span class="n">o</span>
+<span class="k">JOIN</span><span class="w"> </span><span class="err">{{</span><span class="w"> </span><span class="k">ref</span><span class="p">(</span><span class="s1">&#39;stg_customers&#39;</span><span class="p">)</span><span class="w"> </span><span class="err">}}</span><span class="w"> </span><span class="k">c</span>
+<span class="w">    </span><span class="k">ON</span><span class="w"> </span><span class="n">o</span><span class="p">.</span><span class="n">customer_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">c</span><span class="p">.</span><span class="n">customer_id</span>
+</code></pre></div>
+
+<h3 id="source-исходные-таблицы">Source (исходные таблицы)<a class="headerlink" href="#source-исходные-таблицы" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="err">{{</span><span class="w"> </span><span class="k">source</span><span class="p">(</span><span class="s1">&#39;raw&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;orders&#39;</span><span class="p">)</span><span class="w"> </span><span class="err">}}</span>
+</code></pre></div>
+
+<hr />
+<h2 id="schema-yml-конфигурация-и-тесты">📋 schema.yml — конфигурация и тесты<a class="headerlink" href="#schema-yml-конфигурация-и-тесты" title="Ссылка">#</a></h2>
+<div class="highlight"><pre><span></span><code><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2</span>
+
+<span class="nt">models</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">stg_customers</span>
+<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Customers</span><span class="nv"> </span><span class="s">with</span><span class="nv"> </span><span class="s">cleaned</span><span class="nv"> </span><span class="s">names&quot;</span>
+<span class="w">    </span><span class="nt">columns</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">customer_id</span>
+<span class="w">        </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Unique</span><span class="nv"> </span><span class="s">customer</span><span class="nv"> </span><span class="s">ID&quot;</span>
+<span class="w">        </span><span class="nt">tests</span><span class="p">:</span>
+<span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">unique</span>
+<span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">not_null</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">email</span>
+<span class="w">        </span><span class="nt">tests</span><span class="p">:</span>
+<span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">not_null</span>
+
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">dim_customers</span>
+<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Customer</span><span class="nv"> </span><span class="s">dimension</span><span class="nv"> </span><span class="s">with</span><span class="nv"> </span><span class="s">metrics&quot;</span>
+<span class="w">    </span><span class="nt">columns</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">customer_id</span>
+<span class="w">        </span><span class="nt">tests</span><span class="p">:</span>
+<span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">unique</span>
+<span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">not_null</span>
+<span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">relationships</span><span class="p">:</span>
+<span class="w">              </span><span class="nt">to</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ref(&#39;stg_customers&#39;)</span>
+<span class="w">              </span><span class="nt">field</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">customer_id</span>
+
+<span class="nt">sources</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">raw</span>
+<span class="w">    </span><span class="nt">database</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">analytics</span>
+<span class="w">    </span><span class="nt">schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">raw_data</span>
+<span class="w">    </span><span class="nt">tables</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">customers</span>
+<span class="w">        </span><span class="nt">columns</span><span class="p">:</span>
+<span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">id</span>
+<span class="w">            </span><span class="nt">tests</span><span class="p">:</span>
+<span class="w">              </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">not_null</span>
+<span class="w">        </span><span class="nt">loaded_at_field</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">created_at</span>
+<span class="w">        </span><span class="nt">freshness</span><span class="p">:</span>
+<span class="w">          </span><span class="nt">warn_after</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">count</span><span class="p">:</span><span class="w"> </span><span class="nv">12</span><span class="p p-Indicator">,</span><span class="nt"> period</span><span class="p">:</span><span class="w"> </span><span class="nv">hour</span><span class="p p-Indicator">}</span>
+<span class="w">          </span><span class="nt">error_after</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">count</span><span class="p">:</span><span class="w"> </span><span class="nv">24</span><span class="p p-Indicator">,</span><span class="nt"> period</span><span class="p">:</span><span class="w"> </span><span class="nv">hour</span><span class="p p-Indicator">}</span>
+</code></pre></div>
+
+<h3 id="встроенные-тесты">Встроенные тесты<a class="headerlink" href="#встроенные-тесты" title="Ссылка">#</a></h3>
+<table>
+<thead>
+<tr>
+<th>Тест</th>
+<th>Что проверяет</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>unique</code></td>
+<td>Уникальность значений</td>
+</tr>
+<tr>
+<td><code>not_null</code></td>
+<td>Нет NULL</td>
+</tr>
+<tr>
+<td><code>accepted_values</code></td>
+<td>Только из списка</td>
+</tr>
+<tr>
+<td><code>relationships</code></td>
+<td>Foreign-key целостность</td>
+</tr>
+</tbody>
+</table>
+<h3 id="свой-тест-singular">Свой тест (singular)<a class="headerlink" href="#свой-тест-singular" title="Ссылка">#</a></h3>
+<p><code>tests/assert_total_revenue_positive.sql</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span>
+<span class="k">FROM</span><span class="w"> </span><span class="err">{{</span><span class="w"> </span><span class="k">ref</span><span class="p">(</span><span class="s1">&#39;fct_orders&#39;</span><span class="p">)</span><span class="w"> </span><span class="err">}}</span>
+<span class="k">WHERE</span><span class="w"> </span><span class="n">total_revenue</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">0</span>
+</code></pre></div>
+
+<h3 id="generic-тест">Generic тест<a class="headerlink" href="#generic-тест" title="Ссылка">#</a></h3>
+<p><code>tests/generic/no_future_dates.sql</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="err">{</span><span class="o">%</span><span class="w"> </span><span class="n">test</span><span class="w"> </span><span class="n">no_future_dates</span><span class="p">(</span><span class="n">model</span><span class="p">,</span><span class="w"> </span><span class="k">column_name</span><span class="p">)</span><span class="w"> </span><span class="o">%</span><span class="err">}</span>
+<span class="w">    </span><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span>
+<span class="w">    </span><span class="k">FROM</span><span class="w"> </span><span class="err">{{</span><span class="w"> </span><span class="n">model</span><span class="w"> </span><span class="err">}}</span>
+<span class="w">    </span><span class="k">WHERE</span><span class="w"> </span><span class="err">{{</span><span class="w"> </span><span class="k">column_name</span><span class="w"> </span><span class="err">}}</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="k">CURRENT_DATE</span>
+<span class="err">{</span><span class="o">%</span><span class="w"> </span><span class="n">endtest</span><span class="w"> </span><span class="o">%</span><span class="err">}</span>
+</code></pre></div>
+
+<hr />
+<h2 id="macros-jinja">🔧 Macros (Jinja)<a class="headerlink" href="#macros-jinja" title="Ссылка">#</a></h2>
+<p><code>macros/cents_to_dollars.sql</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="err">{</span><span class="o">%</span><span class="w"> </span><span class="n">macro</span><span class="w"> </span><span class="n">cents_to_dollars</span><span class="p">(</span><span class="k">column_name</span><span class="p">)</span><span class="w"> </span><span class="o">%</span><span class="err">}</span>
+<span class="w">    </span><span class="p">(</span><span class="err">{{</span><span class="w"> </span><span class="k">column_name</span><span class="w"> </span><span class="err">}}</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">100</span><span class="p">.</span><span class="mi">0</span><span class="p">)</span>
+<span class="err">{</span><span class="o">%</span><span class="w"> </span><span class="n">endmacro</span><span class="w"> </span><span class="o">%</span><span class="err">}</span>
+</code></pre></div>
+
+<p>Использование:</p>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="err">{{</span><span class="w"> </span><span class="n">cents_to_dollars</span><span class="p">(</span><span class="s1">&#39;price_cents&#39;</span><span class="p">)</span><span class="w"> </span><span class="err">}}</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">price_dollars</span>
+<span class="k">FROM</span><span class="w"> </span><span class="err">{{</span><span class="w"> </span><span class="k">ref</span><span class="p">(</span><span class="s1">&#39;orders&#39;</span><span class="p">)</span><span class="w"> </span><span class="err">}}</span>
+</code></pre></div>
+
+<h3 id="полезные-макросы-dbt-utils">Полезные макросы dbt-utils<a class="headerlink" href="#полезные-макросы-dbt-utils" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="err">{{</span><span class="w"> </span><span class="n">dbt_utils</span><span class="p">.</span><span class="n">get_column_values</span><span class="p">(</span><span class="k">ref</span><span class="p">(</span><span class="s1">&#39;stg_customers&#39;</span><span class="p">),</span><span class="w"> </span><span class="s1">&#39;country&#39;</span><span class="p">)</span><span class="w"> </span><span class="err">}}</span>
+<span class="err">{{</span><span class="w"> </span><span class="n">dbt_utils</span><span class="p">.</span><span class="n">pivot</span><span class="p">(</span><span class="s1">&#39;category&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">dbt_utils</span><span class="p">.</span><span class="n">get_column_values</span><span class="p">(...))</span><span class="w"> </span><span class="err">}}</span>
+<span class="err">{{</span><span class="w"> </span><span class="n">dbt_utils</span><span class="p">.</span><span class="n">date_spine</span><span class="p">(</span><span class="ss">&quot;day&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;&#39;2024-01-01&#39;&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;&#39;2024-12-31&#39;&quot;</span><span class="p">)</span><span class="w"> </span><span class="err">}}</span>
+<span class="err">{{</span><span class="w"> </span><span class="n">dbt_utils</span><span class="p">.</span><span class="n">safe_add</span><span class="p">([</span><span class="n">col1</span><span class="p">,</span><span class="w"> </span><span class="n">col2</span><span class="p">])</span><span class="w"> </span><span class="err">}}</span>
+</code></pre></div>
+
+<hr />
+<h2 id="snapshots-история-изменений">📸 Snapshots (история изменений)<a class="headerlink" href="#snapshots-история-изменений" title="Ссылка">#</a></h2>
+<p><code>snapshots/orders_snapshot.sql</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="err">{</span><span class="o">%</span><span class="w"> </span><span class="n">snapshot</span><span class="w"> </span><span class="n">orders_snapshot</span><span class="w"> </span><span class="o">%</span><span class="err">}</span>
+<span class="err">{{</span>
+<span class="w">    </span><span class="n">config</span><span class="p">(</span>
+<span class="w">      </span><span class="n">target_schema</span><span class="o">=</span><span class="s1">&#39;snapshots&#39;</span><span class="p">,</span>
+<span class="w">      </span><span class="n">unique_key</span><span class="o">=</span><span class="s1">&#39;order_id&#39;</span><span class="p">,</span>
+<span class="w">      </span><span class="n">strategy</span><span class="o">=</span><span class="s1">&#39;timestamp&#39;</span><span class="p">,</span>
+<span class="w">      </span><span class="n">updated_at</span><span class="o">=</span><span class="s1">&#39;updated_at&#39;</span><span class="p">,</span>
+<span class="w">    </span><span class="p">)</span>
+<span class="err">}}</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="err">{{</span><span class="w"> </span><span class="k">source</span><span class="p">(</span><span class="s1">&#39;raw&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;orders&#39;</span><span class="p">)</span><span class="w"> </span><span class="err">}}</span>
+<span class="err">{</span><span class="o">%</span><span class="w"> </span><span class="n">endsnapshot</span><span class="w"> </span><span class="o">%</span><span class="err">}</span>
+</code></pre></div>
+
+<p>После: <code>dbt snapshot</code></p>
+<p>Результат — таблица с <code>dbt_valid_from</code>, <code>dbt_valid_to</code>, <code>dbt_scd_id</code>.</p>
+<hr />
+<h2 id="seeds-csv-таблицы">🌱 Seeds (CSV → таблицы)<a class="headerlink" href="#seeds-csv-таблицы" title="Ссылка">#</a></h2>
+<p><code>seeds/countries.csv</code>:</p>
+<div class="highlight"><pre><span></span><code>country_id,country_name,iso_code
+1,Russia,RU
+2,USA,US
+3,Germany,DE
+</code></pre></div>
+
+<div class="highlight"><pre><span></span><code>dbt<span class="w"> </span>seed<span class="w">                       </span><span class="c1"># загрузить все</span>
+dbt<span class="w"> </span>seed<span class="w"> </span>--select<span class="w"> </span>countries<span class="w">    </span><span class="c1"># один</span>
+</code></pre></div>
+
+<p>Использование:</p>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="err">{{</span><span class="w"> </span><span class="k">ref</span><span class="p">(</span><span class="s1">&#39;countries&#39;</span><span class="p">)</span><span class="w"> </span><span class="err">}}</span>
+</code></pre></div>
+
+<hr />
+<h2 id="packages-dbt-utils-и-др">🔌 packages (dbt-utils и др.)<a class="headerlink" href="#packages-dbt-utils-и-др" title="Ссылка">#</a></h2>
+<p><code>packages.yml</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="nt">packages</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">package</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">dbt-labs/dbt_utils</span>
+<span class="w">    </span><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.1.1</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">package</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">dbt-labs/codegen</span>
+<span class="w">    </span><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.12.1</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">git</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://github.com/dbt-labs/dbt-codegen.git</span>
+<span class="w">    </span><span class="nt">revision</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.0.0</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">local</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/path/to/local/package</span>
+</code></pre></div>
+
+<div class="highlight"><pre><span></span><code>dbt<span class="w"> </span>deps<span class="w">                       </span><span class="c1"># установить</span>
+dbt<span class="w"> </span>clean<span class="w">                      </span><span class="c1"># очистить</span>
+</code></pre></div>
+
+<hr />
+<h2 id="документация">📊 Документация<a class="headerlink" href="#документация" title="Ссылка">#</a></h2>
+<div class="highlight"><pre><span></span><code>dbt<span class="w"> </span>docs<span class="w"> </span>generate
+dbt<span class="w"> </span>docs<span class="w"> </span>serve<span class="w"> </span>--port<span class="w"> </span><span class="m">8080</span>
+</code></pre></div>
+
+<ul>
+<li>DAG-визуализация моделей</li>
+<li>Описания колонок</li>
+<li>Линии (lineage)</li>
+<li>SQL-код (compiled)</li>
+</ul>
+<p>В <code>.yml</code> файле:</p>
+<div class="highlight"><pre><span></span><code><span class="nt">models</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">stg_customers</span>
+<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Customers</span><span class="nv"> </span><span class="s">from</span><span class="nv"> </span><span class="s">raw</span><span class="nv"> </span><span class="s">layer&quot;</span>
+<span class="w">    </span><span class="nt">columns</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">customer_id</span>
+<span class="w">        </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;UUID</span><span class="nv"> </span><span class="s">of</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">customer&quot;</span>
+</code></pre></div>
+
+<p>В SQL — Markdown через <code>{{ doc(...) }}</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="err">{{</span><span class="w"> </span><span class="n">doc</span><span class="p">(</span><span class="ss">&quot;orders_table&quot;</span><span class="p">)</span><span class="w"> </span><span class="err">}}</span>
+</code></pre></div>
+
+<p><code>docs/orders_table.md</code>:</p>
+<div class="highlight"><pre><span></span><code>{% docs orders_table %}
+Заказы из CRM-системы.
+{% enddocs %}
+</code></pre></div>
+
+<hr />
+<h2 id="dbt-airflow-cosmos">🌍 dbt + Airflow (Cosmos)<a class="headerlink" href="#dbt-airflow-cosmos" title="Ссылка">#</a></h2>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">cosmos</span><span class="w"> </span><span class="kn">import</span> <span class="n">DbtTaskGroup</span><span class="p">,</span> <span class="n">ProjectConfig</span><span class="p">,</span> <span class="n">ProfileConfig</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">cosmos.constants</span><span class="w"> </span><span class="kn">import</span> <span class="n">LoadMode</span>
+
+<span class="n">dbt</span> <span class="o">=</span> <span class="n">DbtTaskGroup</span><span class="p">(</span>
+    <span class="n">project_config</span><span class="o">=</span><span class="n">ProjectConfig</span><span class="p">(</span><span class="s2">&quot;/path/to/dbt-project&quot;</span><span class="p">),</span>
+    <span class="n">profile_config</span><span class="o">=</span><span class="n">ProfileConfig</span><span class="p">(</span><span class="n">profile_name</span><span class="o">=</span><span class="s2">&quot;my_project&quot;</span><span class="p">,</span> <span class="n">target_name</span><span class="o">=</span><span class="s2">&quot;dev&quot;</span><span class="p">),</span>
+    <span class="n">render_config</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;load_method&quot;</span><span class="p">:</span> <span class="n">LoadMode</span><span class="o">.</span><span class="n">DBT_LS</span><span class="p">},</span>
+    <span class="n">default_args</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;retries&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">},</span>
+<span class="p">)</span>
+</code></pre></div>
+
+<hr />
+<h2 id="частые-ошибки">🪤 Частые ошибки<a class="headerlink" href="#частые-ошибки" title="Ссылка">#</a></h2>
+<ol>
+<li><strong><code>profiles.yml</code> не найден</strong> — проверьте <code>~/.dbt/profiles.yml</code> или <code>DBT_PROFILES_DIR</code>.</li>
+<li><strong>Schema в DWH</strong> — <code>dev</code> для разработки, не пишите в продакшен-схему.</li>
+<li><strong>Incremental без <code>unique_key</code></strong> — дубликаты.</li>
+<li><strong><code>ref()</code> вместо имён таблиц</strong> — иначе dbt не узнает зависимости.</li>
+<li><strong>Macro без Jinja</strong> — <code>{{ ... }}</code> обязательно.</li>
+<li><strong>Слишком большие test-выборки</strong> — тесты на всю таблицу медленные.</li>
+<li><strong><code>full-refresh</code></strong> в продакшене — дорого для больших incremental.</li>
+<li><strong><code>{{ this }}</code></strong> — текущая модель; использовать в WHERE incremental.</li>
+<li><strong>Cache miss</strong> — <code>threads: 4+</code> для параллелизма.</li>
+<li><strong>Не использовать <code>tags</code></strong> — трудно запускать подмножества.</li>
+</ol>
+<hr />
+<h2 id="полезные-ссылки">🔗 Полезные ссылки<a class="headerlink" href="#полезные-ссылки" title="Ссылка">#</a></h2>
+<ul>
+<li>Документация: https://docs.getdbt.com</li>
+<li>dbt Learn: https://courses.getdbt.com</li>
+<li>dbt Hub (packages): https://hub.getdbt.com</li>
+<li>Awesome dbt: https://github.com/dbt-labs/dbt-core</li>
+<li>dbt-utils: https://github.com/dbt-labs/dbt-utils</li>
+<li>dbt-codegen: https://github.com/dbt-labs/dbt-codegen</li>
+<li>TheAnalyticsEngineers (blog): https://www.getdbt.com/blog</li>
+</ul>
+<hr />
+<h2 id="полезные-советы">💡 Полезные советы<a class="headerlink" href="#полезные-советы" title="Ссылка">#</a></h2>
+<ol>
+<li><strong>Слои (модульность)</strong>: staging → intermediate → marts.</li>
+<li><strong>Именование</strong>: <code>stg_</code>, <code>int_</code>, <code>fct_</code>, <code>dim_</code>.</li>
+<li><strong>Тесты на ключах</strong> — <code>unique</code> + <code>not_null</code> обязательны.</li>
+<li><strong><code>schema.yml</code></strong> — для описаний и тестов.</li>
+<li><strong><code>ref()</code></strong> — всегда, не хардкодьте имена.</li>
+<li><strong>Macros</strong> — для DRY (повторяющихся вычислений).</li>
+<li><strong><code>dbt docs</code></strong> — отличная автодокументация.</li>
+<li><strong>Incremental</strong> — для больших таблиц (только новые записи).</li>
+<li><strong><code>source</code> с <code>freshness</code></strong> — мониторинг свежести источников.</li>
+<li><strong>dbt-utils</strong> — почти обязательный пакет.</li>
+<li><strong><code>dbt build</code></strong> — <code>run</code> + <code>test</code> одним заходом.</li>
+<li><strong>dev/prod targets</strong> — изолируйте dev-схемы.</li>
+<li><strong><code>{% if is_incremental() %}</code></strong> — для фильтра новых данных.</li>
+<li><strong>Кастомные тесты (singular)</strong> — для сложных бизнес-правил.</li>
+<li><strong>Cosmos / dbt-cloud-run</strong> — интеграция с Airflow.</li>
+</ol>
+<hr />
+<p><em>Сгенерировано как шпаргалка. dbt меняет подход к DWH —
+углубляйтесь через https://docs.getdbt.com и курс dbt fundamentals</em></p>
+    </article>
+    <nav class="pagination">
+      <a class="pager prev" href="nginx.html">← nginx</a>
+      <a class="pager next" href="kafka.html">Apache Kafka →</a>
+    </nav>
+  </main>
+
+  <aside class="toc">
+    <details open>
+      <summary>📑 Оглавление</summary>
+      <div class="toc-list">
+<div class="toc">
+<ul>
+<li><a href="#dbt-data-build-tool-шпаргалка">🔧 dbt (data build tool) — шпаргалка</a><ul>
+<li><a href="#главные-понятия">🔑 Главные понятия</a></li>
+<li><a href="#установка-и-проект">🚀 Установка и проект</a><ul>
+<li><a href="#установка-dbt-core">Установка dbt Core</a></li>
+<li><a href="#создание-проекта">Создание проекта</a></li>
+<li><a href="#profiles-yml-dbt-profiles-yml">profiles.yml (~/.dbt/profiles.yml)</a></li>
+</ul>
+</li>
+<li><a href="#команды-dbt">🎯 Команды dbt</a><ul>
+<li><a href="#селекторы-selection-syntax">Селекторы (selection syntax)</a></li>
+</ul>
+</li>
+<li><a href="#модель-model">📝 Модель (Model)</a><ul>
+<li><a href="#материализации">Материализации</a></li>
+<li><a href="#incremental">Incremental</a></li>
+<li><a href="#ref-ссылки-на-другие-модели">Ref (ссылки на другие модели)</a></li>
+<li><a href="#source-исходные-таблицы">Source (исходные таблицы)</a></li>
+</ul>
+</li>
+<li><a href="#schema-yml-конфигурация-и-тесты">📋 schema.yml — конфигурация и тесты</a><ul>
+<li><a href="#встроенные-тесты">Встроенные тесты</a></li>
+<li><a href="#свой-тест-singular">Свой тест (singular)</a></li>
+<li><a href="#generic-тест">Generic тест</a></li>
+</ul>
+</li>
+<li><a href="#macros-jinja">🔧 Macros (Jinja)</a><ul>
+<li><a href="#полезные-макросы-dbt-utils">Полезные макросы dbt-utils</a></li>
+</ul>
+</li>
+<li><a href="#snapshots-история-изменений">📸 Snapshots (история изменений)</a></li>
+<li><a href="#seeds-csv-таблицы">🌱 Seeds (CSV → таблицы)</a></li>
+<li><a href="#packages-dbt-utils-и-др">🔌 packages (dbt-utils и др.)</a></li>
+<li><a href="#документация">📊 Документация</a></li>
+<li><a href="#dbt-airflow-cosmos">🌍 dbt + Airflow (Cosmos)</a></li>
+<li><a href="#частые-ошибки">🪤 Частые ошибки</a></li>
+<li><a href="#полезные-ссылки">🔗 Полезные ссылки</a></li>
+<li><a href="#полезные-советы">💡 Полезные советы</a></li>
+</ul>
+</li>
+</ul>
+</div>
+
+      </div>
+    </details>
+  </aside>
+</div>
+
+<button class="back-top" id="backTop" aria-label="Наверх">↑</button>
+
+<script src="assets/search.js"></script>
+<script src="assets/page.js"></script>
+</body>
+</html>

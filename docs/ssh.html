@@ -1,0 +1,1297 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SSH — Шпаргалки</title>
+<link rel="stylesheet" href="assets/style.css">
+<link rel="stylesheet" href="assets/pygments.css">
+</head>
+<body>
+<div class="layout">
+  <aside class="sidebar">
+    <a href="index.html" class="brand">📌 Шпаргалки</a>
+    <nav class="nav">
+<a href="yazi.html" class="nav-item"><span class="nav-ico">📦</span>Yazi</a>
+<a href="neovim.html" class="nav-item"><span class="nav-ico">📘</span>Neovim (LazyVim)</a>
+<a href="niri.html" class="nav-item"><span class="nav-ico">🪟</span>Niri</a>
+<a href="tmux.html" class="nav-item"><span class="nav-ico">🪟</span>Tmux</a>
+<a href="bash.html" class="nav-item"><span class="nav-ico">🐚</span>Bash</a>
+<a href="git.html" class="nav-item"><span class="nav-ico">🔀</span>Git</a>
+<a href="terminal.html" class="nav-item"><span class="nav-ico">🖥️</span>Терминал Linux</a>
+<a href="powershell.html" class="nav-item"><span class="nav-ico">💻</span>PowerShell</a>
+<a href="cmd.html" class="nav-item"><span class="nav-ico">🪟</span>CMD (cmd.exe)</a>
+<a href="python.html" class="nav-item"><span class="nav-ico">🐍</span>Python</a>
+<a href="systemd.html" class="nav-item"><span class="nav-ico">⚙️</span>systemd</a>
+<a href="ssh.html" class="nav-item active"><span class="nav-ico">🔐</span>SSH</a>
+<a href="make-cmake.html" class="nav-item"><span class="nav-ico">🔨</span>Make / CMake</a>
+<a href="docker.html" class="nav-item"><span class="nav-ico">🐳</span>Docker</a>
+<a href="pacman.html" class="nav-item"><span class="nav-ico">📦</span>pacman / yay / paru</a>
+<a href="spark.html" class="nav-item"><span class="nav-ico">⚡</span>Apache Spark / PySpark</a>
+<a href="markdown.html" class="nav-item"><span class="nav-ico">📝</span>Markdown</a>
+<a href="regex.html" class="nav-item"><span class="nav-ico">🔍</span>Регулярные выражения</a>
+<a href="jq-json.html" class="nav-item"><span class="nav-ico">🔧</span>jq + JSON</a>
+<a href="awk-sed.html" class="nav-item"><span class="nav-ico">✂️</span>awk / sed</a>
+<a href="airflow.html" class="nav-item"><span class="nav-ico">🌪️</span>Apache Airflow</a>
+<a href="http-curl.html" class="nav-item"><span class="nav-ico">🌐</span>HTTP / curl</a>
+<a href="yaml.html" class="nav-item"><span class="nav-ico">📄</span>YAML</a>
+<a href="vscode.html" class="nav-item"><span class="nav-ico">💻</span>VS Code</a>
+<a href="cron.html" class="nav-item"><span class="nav-ico">⏰</span>cron</a>
+<a href="fzf-zoxide.html" class="nav-item"><span class="nav-ico">🔎</span>fzf + zoxide</a>
+<a href="minikube-k8s.html" class="nav-item"><span class="nav-ico">☸️</span>Minikube / Kubernetes</a>
+<a href="cicd.html" class="nav-item"><span class="nav-ico">🦊</span>GitLab CI / GitHub Actions</a>
+<a href="nginx.html" class="nav-item"><span class="nav-ico">🌐</span>nginx</a>
+<a href="dbt.html" class="nav-item"><span class="nav-ico">🔧</span>dbt</a>
+<a href="kafka.html" class="nav-item"><span class="nav-ico">🐘</span>Apache Kafka</a>
+<a href="prometheus-grafana.html" class="nav-item"><span class="nav-ico">📊</span>Prometheus / Grafana</a>
+<a href="iceberg-nessie.html" class="nav-item"><span class="nav-ico">🧊</span>Iceberg / Nessie</a>
+<a href="impala.html" class="nav-item"><span class="nav-ico">🐬</span>Apache Impala</a>
+<a href="terraform.html" class="nav-item"><span class="nav-ico">🏗️</span>Terraform</a>
+<a href="linux-internals.html" class="nav-item"><span class="nav-ico">🐧</span>Linux Internals</a>
+<a href="miscellaneous.html" class="nav-item"><span class="nav-ico">🧰</span>Miscellaneous</a>
+<a href="python-automation-libs.html" class="nav-item"><span class="nav-ico">🐍</span>Python: авт-ция (10 libs)</a>
+<a href="eza.html" class="nav-item"><span class="nav-ico">🌈</span>eza</a>
+<a href="dbeaver.html" class="nav-item"><span class="nav-ico">🗄️</span>DBeaver</a>
+<a href="zcode.html" class="nav-item"><span class="nav-ico">🤖</span>ZCode</a>
+<a href="warp.html" class="nav-item"><span class="nav-ico">🚀</span>Warp</a>
+<a href="agentic-ai-dev.html" class="nav-item"><span class="nav-ico">🤝</span>Агентная разработка с ИИ</a>
+    </nav>
+  </aside>
+
+  <main class="content">
+    <article>
+<h1 id="ssh-шпаргалка-по-командам-и-конфигурации">🔐 SSH — шпаргалка по командам и конфигурации<a class="headerlink" href="#ssh-шпаргалка-по-командам-и-конфигурации" title="Ссылка">#</a></h1>
+<blockquote>
+<p><strong>SSH (Secure Shell)</strong> — сетевой протокол для безопасного удалённого доступа,
+передачи файлов, проброса портов и туннелей.
+Документация: https://www.openssh.com · <code>man ssh</code> · <code>man ssh_config</code></p>
+</blockquote>
+<hr />
+<h2 id="главные-понятия">🔑 Главные понятия<a class="headerlink" href="#главные-понятия" title="Ссылка">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Термин</th>
+<th>Что значит</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>SSH client</strong></td>
+<td>Программа <code>ssh</code> на вашей машине</td>
+</tr>
+<tr>
+<td><strong>SSH server</strong></td>
+<td><code>sshd</code> (демон) на удалённой машине</td>
+</tr>
+<tr>
+<td><strong>keypair</strong></td>
+<td>Пара ключей: приватный (<code>id_ed25519</code>) + публичный (<code>id_ed25519.pub</code>)</td>
+</tr>
+<tr>
+<td><strong>known_hosts</strong></td>
+<td>Список известных серверов (с их отпечатками)</td>
+</tr>
+<tr>
+<td><strong>authorized_keys</strong></td>
+<td>Список публичных ключей, которым разрешён вход на сервер</td>
+</tr>
+<tr>
+<td><strong>config</strong></td>
+<td><code>~/.ssh/config</code> — настройки подключения</td>
+</tr>
+<tr>
+<td><strong>agent</strong></td>
+<td><code>ssh-agent</code> — держит расшифрованные ключи в памяти</td>
+</tr>
+<tr>
+<td><strong>ControlMaster</strong></td>
+<td>Мультиплексирование: одно соединение для нескольких сессий</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="базовое-подключение">🚀 Базовое подключение<a class="headerlink" href="#базовое-подключение" title="Ссылка">#</a></h2>
+<div class="highlight"><pre><span></span><code><span class="c1"># Простейшее</span>
+ssh<span class="w"> </span>user@host<span class="w">                    </span><span class="c1"># hostname или IP</span>
+ssh<span class="w"> </span>user@192.168.1.10
+ssh<span class="w"> </span>user@example.com
+
+<span class="c1"># Короткие формы</span>
+ssh<span class="w"> </span>example.com<span class="w">                  </span><span class="c1"># если в ~/.ssh/config задан user</span>
+ssh<span class="w"> </span>host<span class="w">                         </span><span class="c1"># alias из ~/.ssh/config</span>
+
+<span class="c1"># С явным пользователем/портом</span>
+ssh<span class="w"> </span>-l<span class="w"> </span>user<span class="w"> </span>host<span class="w">                 </span><span class="c1"># = ssh user@host</span>
+ssh<span class="w"> </span>-p<span class="w"> </span><span class="m">2222</span><span class="w"> </span>user@host<span class="w">            </span><span class="c1"># нестандартный порт</span>
+
+<span class="c1"># С конкретным ключом</span>
+ssh<span class="w"> </span>-i<span class="w"> </span>~/.ssh/id_ed25519<span class="w"> </span>user@host
+
+<span class="c1"># Запуск команды (без интерактивной оболочки)</span>
+ssh<span class="w"> </span>user@host<span class="w"> </span><span class="s2">&quot;uname -a&quot;</span>
+ssh<span class="w"> </span>user@host<span class="w"> </span><span class="s2">&quot;df -h&quot;</span>
+ssh<span class="w"> </span>user@host<span class="w"> </span>uptime
+
+<span class="c1"># Несколько команд</span>
+ssh<span class="w"> </span>user@host<span class="w"> </span><span class="s2">&quot;cd /tmp &amp;&amp; ls -la&quot;</span>
+
+<span class="c1"># Here-doc через SSH</span>
+ssh<span class="w"> </span>user@host<span class="w"> </span><span class="s">&lt;&lt; &#39;EOF&#39;</span>
+<span class="s">echo &quot;Hello&quot;</span>
+<span class="s">uname -a</span>
+<span class="s">EOF</span>
+
+<span class="c1"># Принять новый ключ сервера автоматически (НЕ для продакшена!)</span>
+ssh<span class="w"> </span>-o<span class="w"> </span><span class="nv">StrictHostKeyChecking</span><span class="o">=</span>accept-new<span class="w"> </span>user@host
+
+<span class="c1"># Подробный вывод (для отладки)</span>
+ssh<span class="w"> </span>-v<span class="w"> </span>user@host
+ssh<span class="w"> </span>-vv<span class="w"> </span>user@host<span class="w">                </span><span class="c1"># ещё подробнее</span>
+ssh<span class="w"> </span>-vvv<span class="w"> </span>user@host<span class="w">               </span><span class="c1"># максимальный дебаг</span>
+
+<span class="c1"># Форсировать выделение TTY (для интерактивных программ)</span>
+ssh<span class="w"> </span>-t<span class="w"> </span>user@host<span class="w"> </span><span class="s2">&quot;top&quot;</span>
+</code></pre></div>
+
+<h3 id="опции-командной-строки">Опции командной строки<a class="headerlink" href="#опции-командной-строки" title="Ссылка">#</a></h3>
+<table>
+<thead>
+<tr>
+<th>Опция</th>
+<th>Действие</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>-p PORT</code></td>
+<td>Порт сервера</td>
+</tr>
+<tr>
+<td><code>-i KEYFILE</code></td>
+<td>Файл приватного ключа</td>
+</tr>
+<tr>
+<td><code>-l USER</code></td>
+<td>Имя пользователя</td>
+</tr>
+<tr>
+<td><code>-v</code> / <code>-vv</code> / <code>-vvv</code></td>
+<td>Подробность логирования</td>
+</tr>
+<tr>
+<td><code>-C</code></td>
+<td>Сжатие (медленные сети)</td>
+</tr>
+<tr>
+<td><code>-4</code> / <code>-6</code></td>
+<td>Только IPv4 / IPv6</td>
+</tr>
+<tr>
+<td><code>-t</code></td>
+<td>Принудительный TTY</td>
+</tr>
+<tr>
+<td><code>-T</code></td>
+<td>Без TTY</td>
+</tr>
+<tr>
+<td><code>-N</code></td>
+<td>Без выполнения команды (для туннелей)</td>
+</tr>
+<tr>
+<td><code>-f</code></td>
+<td>Уйти в фон после аутентификации</td>
+</tr>
+<tr>
+<td><code>-F FILE</code></td>
+<td>Альтернативный конфиг</td>
+</tr>
+<tr>
+<td><code>-o OPTION=value</code></td>
+<td>Любая опция из ssh_config</td>
+</tr>
+<tr>
+<td><code>-J jumpuser@jumphost</code></td>
+<td>Jump host (бастион)</td>
+</tr>
+<tr>
+<td><code>-A</code></td>
+<td>Включить agent forwarding</td>
+</tr>
+<tr>
+<td><code>-a</code></td>
+<td>Отключить agent forwarding</td>
+</tr>
+<tr>
+<td><code>-X</code> / <code>-Y</code></td>
+<td>X11 forwarding (графика)</td>
+</tr>
+<tr>
+<td><code>-q</code></td>
+<td>Тихий режим</td>
+</tr>
+<tr>
+<td><code>-b IP</code></td>
+<td>С какого локального IP подключаться</td>
+</tr>
+<tr>
+<td><code>-L</code> / <code>-R</code> / <code>-D</code></td>
+<td>Проброс портов</td>
+</tr>
+<tr>
+<td><code>-w local:remote</code></td>
+<td>TUN/TAP устройство (VPN)</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="ключи-ssh">🔑 Ключи SSH<a class="headerlink" href="#ключи-ssh" title="Ссылка">#</a></h2>
+<h3 id="создание-пары-ключей">Создание пары ключей<a class="headerlink" href="#создание-пары-ключей" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Современный (РЕКОМЕНДУЕТСЯ) — Ed25519</span>
+ssh-keygen<span class="w"> </span>-t<span class="w"> </span>ed25519<span class="w"> </span>-C<span class="w"> </span><span class="s2">&quot;your_email@example.com&quot;</span>
+
+<span class="c1"># С большим размером (более старый стандарт, RSA 4096)</span>
+ssh-keygen<span class="w"> </span>-t<span class="w"> </span>rsa<span class="w"> </span>-b<span class="w"> </span><span class="m">4096</span><span class="w"> </span>-C<span class="w"> </span><span class="s2">&quot;your_email@example.com&quot;</span>
+
+<span class="c1"># ECDSA</span>
+ssh-keygen<span class="w"> </span>-t<span class="w"> </span>ecdsa<span class="w"> </span>-b<span class="w"> </span><span class="m">521</span><span class="w"> </span>-C<span class="w"> </span><span class="s2">&quot;email&quot;</span>
+
+<span class="c1"># С указанием файла и паролем (passphrase)</span>
+ssh-keygen<span class="w"> </span>-t<span class="w"> </span>ed25519<span class="w"> </span>-f<span class="w"> </span>~/.ssh/my_key<span class="w"> </span>-C<span class="w"> </span><span class="s2">&quot;work key&quot;</span><span class="w"> </span>-N<span class="w"> </span><span class="s2">&quot;secret passphrase&quot;</span>
+
+<span class="c1"># Без passphrase (для автоматизации, менее безопасно)</span>
+ssh-keygen<span class="w"> </span>-t<span class="w"> </span>ed25519<span class="w"> </span>-f<span class="w"> </span>~/.ssh/deploy_key<span class="w"> </span>-N<span class="w"> </span><span class="s2">&quot;&quot;</span>
+
+<span class="c1"># Список публичных ключей</span>
+ls<span class="w"> </span>~/.ssh/*.pub
+</code></pre></div>
+
+<blockquote>
+<p>⚠️ <strong>Ed25519</strong> предпочтительнее: короче, быстрее, безопаснее RSA.</p>
+</blockquote>
+<h3 id="смена-passphrase-без-смены-ключа">Смена passphrase (без смены ключа)<a class="headerlink" href="#смена-passphrase-без-смены-ключа" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>ssh-keygen<span class="w"> </span>-p<span class="w"> </span>-f<span class="w"> </span>~/.ssh/id_ed25519
+</code></pre></div>
+
+<h3 id="узнать-отпечаток-fingerprint">Узнать отпечаток (fingerprint)<a class="headerlink" href="#узнать-отпечаток-fingerprint" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>ssh-keygen<span class="w"> </span>-l<span class="w"> </span>-f<span class="w"> </span>~/.ssh/id_ed25519.pub
+<span class="c1"># 256 SHA256:abc123... your_email@example.com (ED25519)</span>
+ssh-keygen<span class="w"> </span>-l<span class="w"> </span>-E<span class="w"> </span>md5<span class="w"> </span>-f<span class="w"> </span>~/.ssh/id_ed25519.pub<span class="w">    </span><span class="c1"># в формате MD5</span>
+</code></pre></div>
+
+<h3 id="конвертация-форматов">Конвертация форматов<a class="headerlink" href="#конвертация-форматов" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># PEM (для некоторых старых клиентов)</span>
+ssh-keygen<span class="w"> </span>-p<span class="w"> </span>-m<span class="w"> </span>PEM<span class="w"> </span>-f<span class="w"> </span>~/.ssh/id_rsa
+
+<span class="c1"># В формат PuTTY (нужен puttygen)</span>
+puttygen<span class="w"> </span>~/.ssh/id_ed25519<span class="w"> </span>-o<span class="w"> </span>key.ppk
+<span class="c1"># Из PPK в OpenSSH</span>
+puttygen<span class="w"> </span>key.ppk<span class="w"> </span>-O<span class="w"> </span>private-openssh<span class="w"> </span>-o<span class="w"> </span>id_ed25519
+</code></pre></div>
+
+<hr />
+<h2 id="копирование-ключа-на-сервер">📤 Копирование ключа на сервер<a class="headerlink" href="#копирование-ключа-на-сервер" title="Ссылка">#</a></h2>
+<h3 id="ssh-copy-id-проще-всего">ssh-copy-id (проще всего)<a class="headerlink" href="#ssh-copy-id-проще-всего" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># По умолчанию копирует ~/.ssh/id_rsa.pub или id_ed25519.pub</span>
+ssh-copy-id<span class="w"> </span>user@host
+
+<span class="c1"># С конкретным ключом</span>
+ssh-copy-id<span class="w"> </span>-i<span class="w"> </span>~/.ssh/my_key.pub<span class="w"> </span>user@host
+
+<span class="c1"># На нестандартный порт</span>
+ssh-copy-id<span class="w"> </span>-p<span class="w"> </span><span class="m">2222</span><span class="w"> </span>user@host
+
+<span class="c1"># Если ещё несколько ключей</span>
+ssh-copy-id<span class="w"> </span>-i<span class="w"> </span>~/.ssh/work.pub<span class="w"> </span>-o<span class="w"> </span><span class="nv">IdentitiesOnly</span><span class="o">=</span>yes<span class="w"> </span>user@host
+</code></pre></div>
+
+<h3 id="вручную">Вручную<a class="headerlink" href="#вручную" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Без ssh-copy-id (например, в Windows)</span>
+cat<span class="w"> </span>~/.ssh/id_ed25519.pub<span class="w"> </span><span class="p">|</span><span class="w"> </span>ssh<span class="w"> </span>user@host<span class="w"> </span><span class="s2">&quot;mkdir -p ~/.ssh &amp;&amp; chmod 700 ~/.ssh &amp;&amp; cat &gt;&gt; ~/.ssh/authorized_keys &amp;&amp; chmod 600 ~/.ssh/authorized_keys&quot;</span>
+</code></pre></div>
+
+<hr />
+<h2 id="конфиг-ssh-config">⚙️ Конфиг <code>~/.ssh/config</code><a class="headerlink" href="#конфиг-ssh-config" title="Ссылка">#</a></h2>
+<p>Самый мощный инструмент — один раз настроил, потом <code>ssh myserver</code>.</p>
+<div class="highlight"><pre><span></span><code># ~/.ssh/config
+
+# ── Глобальные дефолты ─────────────────────────────
+Host *
+    AddKeysToAgent yes
+    IdentitiesOnly yes
+    ServerAliveInterval 60
+    ServerAliveCountMax 3
+    Compression yes
+    HashKnownHosts no
+    UserKnownHostsFile ~/.ssh/known_hosts
+
+# ── Конкретные хосты ───────────────────────────────
+
+Host myserver
+    HostName 192.168.1.100
+    User admin
+    Port 22
+    IdentityFile ~/.ssh/id_ed25519
+    ForwardAgent yes
+
+Host prod
+    HostName prod.example.com
+    User deploy
+    IdentityFile ~/.ssh/work_ed25519
+    # Jump через бастион
+    ProxyJump bastion
+
+Host bastion
+    HostName bastion.example.com
+    User ops
+
+# Группы (wildcards)
+Host *.internal
+    User worker
+    ProxyJump bastion
+    IdentityFile ~/.ssh/internal_key
+
+Host github.com
+    User git
+    IdentityFile ~/.ssh/github_ed25519
+
+Host gitlab.com
+    User git
+    IdentityFile ~/.ssh/gitlab_ed25519
+
+# Алиасы с разными ключами для одного хоста
+Host personal-github
+    HostName github.com
+    User git
+    IdentityFile ~/.ssh/personal_ed25519
+
+Host work-github
+    HostName github.com
+    User git
+    IdentityFile ~/.ssh/work_ed25519
+</code></pre></div>
+
+<p>После этого:</p>
+<div class="highlight"><pre><span></span><code>ssh<span class="w"> </span>myserver<span class="w">                  </span><span class="c1"># вместо ssh admin@192.168.1.100</span>
+ssh<span class="w"> </span>prod<span class="w">                      </span><span class="c1"># автоматически через bastion</span>
+ssh<span class="w"> </span>web01.internal<span class="w">            </span><span class="c1"># через bastion</span>
+</code></pre></div>
+
+<h3 id="директивы-config">Директивы config<a class="headerlink" href="#директивы-config" title="Ссылка">#</a></h3>
+<table>
+<thead>
+<tr>
+<th>Директива</th>
+<th>Что</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Host NAME</code></td>
+<td>Имя алиаса (можно с <code>*</code> и <code>?</code>)</td>
+</tr>
+<tr>
+<td><code>HostName</code></td>
+<td>Реальный адрес</td>
+</tr>
+<tr>
+<td><code>User</code></td>
+<td>Пользователь по умолчанию</td>
+</tr>
+<tr>
+<td><code>Port</code></td>
+<td>Порт</td>
+</tr>
+<tr>
+<td><code>IdentityFile</code></td>
+<td>Путь к приватному ключу</td>
+</tr>
+<tr>
+<td><code>IdentitiesOnly yes</code></td>
+<td>Использовать только указанный ключ (не все в агенте)</td>
+</tr>
+<tr>
+<td><code>ProxyJump HOST</code></td>
+<td>Jump host (бастион)</td>
+</tr>
+<tr>
+<td><code>ProxyCommand CMD</code></td>
+<td>Произвольная команда как прокси</td>
+</tr>
+<tr>
+<td><code>ForwardAgent yes</code></td>
+<td>Проброс ssh-agent</td>
+</tr>
+<tr>
+<td><code>LocalForward</code> / <code>RemoteForward</code></td>
+<td>Проброс портов</td>
+</tr>
+<tr>
+<td><code>ServerAliveInterval</code></td>
+<td>Keepalive (секунды)</td>
+</tr>
+<tr>
+<td><code>ServerAliveCountMax</code></td>
+<td>Сколько раз пробовать</td>
+</tr>
+<tr>
+<td><code>Compression yes</code></td>
+<td>Сжатие трафика</td>
+</tr>
+<tr>
+<td><code>RequestTTY</code></td>
+<td>Запрос TTY</td>
+</tr>
+<tr>
+<td><code>RemoteCommand CMD</code></td>
+<td>Выполнить команду при входе</td>
+</tr>
+<tr>
+<td><code>ControlMaster</code> / <code>ControlPath</code></td>
+<td>Мультиплексирование</td>
+</tr>
+</tbody>
+</table>
+<h3 id="мультиплексирование-ускорение">Мультиплексирование (ускорение)<a class="headerlink" href="#мультиплексирование-ускорение" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>Host *
+    ControlMaster auto
+    ControlPath ~/.ssh/cm-%r@%h:%p
+    ControlPersist 10m
+</code></pre></div>
+
+<p>Первое соединение устанавливается медленно, все последующие к тому же
+хосту — мгновенно (через существующий сокет).</p>
+<hr />
+<h2 id="ssh-agent-хранение-расшифрованных-ключей">🔐 ssh-agent — хранение расшифрованных ключей<a class="headerlink" href="#ssh-agent-хранение-расшифрованных-ключей" title="Ссылка">#</a></h2>
+<div class="highlight"><pre><span></span><code><span class="c1"># Запустить агента</span>
+<span class="nb">eval</span><span class="w"> </span><span class="s2">&quot;</span><span class="k">$(</span>ssh-agent<span class="w"> </span>-s<span class="k">)</span><span class="s2">&quot;</span>
+
+<span class="c1"># Добавить ключи</span>
+ssh-add<span class="w"> </span>~/.ssh/id_ed25519<span class="w">              </span><span class="c1"># спросит passphrase</span>
+ssh-add<span class="w">                                </span><span class="c1"># все ключи по умолчанию</span>
+ssh-add<span class="w"> </span>-l<span class="w">                             </span><span class="c1"># список загруженных (с отпечатками)</span>
+ssh-add<span class="w"> </span>-L<span class="w">                             </span><span class="c1"># список публичных частей</span>
+ssh-add<span class="w"> </span>-d<span class="w"> </span>~/.ssh/id_ed25519<span class="w">           </span><span class="c1"># удалить ключ</span>
+ssh-add<span class="w"> </span>-D<span class="w">                             </span><span class="c1"># удалить все ключи</span>
+ssh-add<span class="w"> </span>-t<span class="w"> </span><span class="m">3600</span><span class="w"> </span>~/.ssh/id_ed25519<span class="w">      </span><span class="c1"># на 1 час</span>
+
+<span class="c1"># macOS: добавить в связку ключей (Keychain)</span>
+ssh-add<span class="w"> </span>--apple-use-keychain<span class="w"> </span>~/.ssh/id_ed25519
+</code></pre></div>
+
+<h3 id="автозапуск-агента">Автозапуск агента<a class="headerlink" href="#автозапуск-агента" title="Ссылка">#</a></h3>
+<p>В <code>~/.bashrc</code> / <code>~/.zshrc</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="k">if</span><span class="w"> </span><span class="o">[</span><span class="w"> </span>-z<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$SSH_AUTH_SOCK</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">    </span><span class="nb">eval</span><span class="w"> </span><span class="s2">&quot;</span><span class="k">$(</span>ssh-agent<span class="w"> </span>-s<span class="k">)</span><span class="s2">&quot;</span><span class="w"> </span>&gt;/dev/null
+<span class="k">fi</span>
+</code></pre></div>
+
+<p>Или через systemd user-юнит:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># /etc/systemd/user/ssh-agent.service</span>
+systemctl<span class="w"> </span>--user<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>--now<span class="w"> </span>ssh-agent.service
+</code></pre></div>
+
+<h3 id="forwardagent-проброс-агента">ForwardAgent (проброс агента)<a class="headerlink" href="#forwardagent-проброс-агента" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>ssh<span class="w"> </span>-A<span class="w"> </span>user@host<span class="w">             </span><span class="c1"># ваш агент доступен на сервере</span>
+<span class="c1"># В config: ForwardAgent yes</span>
+</code></pre></div>
+
+<blockquote>
+<p>⚠️ <strong>Осторожно</strong>: на скомпрометированном сервере root может использовать
+ваш агент. Не включайте на ненадёжных хостах.</p>
+</blockquote>
+<hr />
+<h2 id="передача-файлов">📁 Передача файлов<a class="headerlink" href="#передача-файлов" title="Ссылка">#</a></h2>
+<h3 id="scp-простое-копирование">scp — простое копирование<a class="headerlink" href="#scp-простое-копирование" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># С компьютера на сервер</span>
+scp<span class="w"> </span>file.txt<span class="w"> </span>user@host:/path/to/destination/
+scp<span class="w"> </span>file.txt<span class="w"> </span>user@host:~/<span class="w">              </span><span class="c1"># в домашний каталог</span>
+
+<span class="c1"># С сервера на компьютер</span>
+scp<span class="w"> </span>user@host:/var/log/app.log<span class="w"> </span>./
+scp<span class="w"> </span>user@host:/etc/nginx/nginx.conf<span class="w"> </span>./
+
+<span class="c1"># С нестандартным портом (ЗАМЕТИТЬ позицию -P!)</span>
+scp<span class="w"> </span>-P<span class="w"> </span><span class="m">2222</span><span class="w"> </span>file.txt<span class="w"> </span>user@host:~/
+
+<span class="c1"># Каталог рекурсивно</span>
+scp<span class="w"> </span>-r<span class="w"> </span>mydir/<span class="w"> </span>user@host:~/
+
+<span class="c1"># Несколько файлов</span>
+scp<span class="w"> </span>file1.txt<span class="w"> </span>file2.txt<span class="w"> </span>user@host:~/
+
+<span class="c1"># Между двумя серверами (медленно — через ваш комп)</span>
+scp<span class="w"> </span>user1@host1:/file<span class="w"> </span>user2@host2:/dest/
+
+<span class="c1"># С конкретным ключом</span>
+scp<span class="w"> </span>-i<span class="w"> </span>~/.ssh/key<span class="w"> </span>file<span class="w"> </span>user@host:~/
+
+<span class="c1"># Сжатие</span>
+scp<span class="w"> </span>-C<span class="w"> </span>bigfile.bin<span class="w"> </span>user@host:~/
+</code></pre></div>
+
+<blockquote>
+<p>⚠️ scp объявлен deprecated в OpenSSH 9+. Используйте <strong>rsync</strong> или <strong>sftp</strong>.</p>
+</blockquote>
+<h3 id="rsync-синхронизация-рекомендуется">rsync — синхронизация (РЕКОМЕНДУЕТСЯ)<a class="headerlink" href="#rsync-синхронизация-рекомендуется" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Базовый синтаксис</span>
+rsync<span class="w"> </span><span class="o">[</span>опции<span class="o">]</span><span class="w"> </span>источник<span class="w"> </span>назначение
+
+<span class="c1"># Локально → удалённо</span>
+rsync<span class="w"> </span>-avz<span class="w"> </span>./localdir/<span class="w"> </span>user@host:/remote/path/
+
+<span class="c1"># Удалённо → локально</span>
+rsync<span class="w"> </span>-avz<span class="w"> </span>user@host:/remote/dir/<span class="w"> </span>./local/
+
+<span class="c1"># Ключ -a = archive (рекурсивно + права + владельцы + симлинки + ...)</span>
+<span class="c1"># Ключ -v = verbose</span>
+<span class="c1"># Ключ -z = сжатие</span>
+<span class="c1"># Ключ -P = --partial --progress (докачка + прогресс)</span>
+<span class="c1"># Ключ --delete = удалять в приёмнике то, чего нет в источнике</span>
+
+<span class="c1"># Полезные опции</span>
+rsync<span class="w"> </span>-avz<span class="w"> </span>--progress<span class="w"> </span>src/<span class="w"> </span>user@host:dst/
+rsync<span class="w"> </span>-avz<span class="w"> </span>--partial<span class="w"> </span>--progress<span class="w"> </span>src/<span class="w"> </span>user@host:dst/<span class="w">   </span><span class="c1"># докачка</span>
+rsync<span class="w"> </span>-avz<span class="w"> </span>--delete<span class="w"> </span>--exclude<span class="w"> </span><span class="s1">&#39;.git&#39;</span><span class="w"> </span>--exclude<span class="w"> </span><span class="s1">&#39;node_modules&#39;</span><span class="w"> </span>src/<span class="w"> </span>user@host:dst/
+rsync<span class="w"> </span>-avz<span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;ssh -p 2222&quot;</span><span class="w"> </span>src/<span class="w"> </span>user@host:dst/<span class="w">        </span><span class="c1"># порт</span>
+rsync<span class="w"> </span>-avz<span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;ssh -i ~/.ssh/key&quot;</span><span class="w"> </span>src/<span class="w"> </span>user@host:dst/<span class="w">  </span><span class="c1"># ключ</span>
+rsync<span class="w"> </span>-avz<span class="w"> </span>--dry-run<span class="w"> </span>src/<span class="w"> </span>user@host:dst/<span class="w">               </span><span class="c1"># только показать</span>
+rsync<span class="w"> </span>-avz<span class="w"> </span>--backup<span class="w"> </span>--backup-dir<span class="o">=</span>/backup<span class="w"> </span>src/<span class="w"> </span>dst/<span class="w">      </span><span class="c1"># с бэкапом</span>
+
+<span class="c1"># Копирование с информацией о диске (большими файлами)</span>
+rsync<span class="w"> </span>-avz<span class="w"> </span>--info<span class="o">=</span>progress2<span class="w"> </span>bigfile<span class="w"> </span>user@host:~/
+</code></pre></div>
+
+<blockquote>
+<p>⚠️ <strong>Слэш в конце пути важен!</strong>
+- <code>rsync a/ b/</code> — содержимое <code>a</code> в <code>b</code>
+- <code>rsync a b/</code> — каталог <code>a</code> внутри <code>b</code></p>
+</blockquote>
+<h3 id="sftp-интерактивный-ftp-поверх-ssh">sftp — интерактивный FTP поверх SSH<a class="headerlink" href="#sftp-интерактивный-ftp-поверх-ssh" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>sftp<span class="w"> </span>user@host
+sftp<span class="w"> </span>-P<span class="w"> </span><span class="m">2222</span><span class="w"> </span>user@host
+
+<span class="c1"># Команды внутри sftp:</span>
+sftp&gt;<span class="w"> </span>ls
+sftp&gt;<span class="w"> </span><span class="nb">cd</span><span class="w"> </span>remote/dir
+sftp&gt;<span class="w"> </span>lcd<span class="w"> </span>local/dir
+sftp&gt;<span class="w"> </span><span class="nb">pwd</span><span class="w">                    </span><span class="c1"># удалённый путь</span>
+sftp&gt;<span class="w"> </span>lpwd<span class="w">                   </span><span class="c1"># локальный путь</span>
+sftp&gt;<span class="w"> </span>get<span class="w"> </span>remote.txt<span class="w">         </span><span class="c1"># скачать</span>
+sftp&gt;<span class="w"> </span>get<span class="w"> </span>-r<span class="w"> </span>remotedir/<span class="w">      </span><span class="c1"># рекурсивно</span>
+sftp&gt;<span class="w"> </span>put<span class="w"> </span>local.txt<span class="w">          </span><span class="c1"># загрузить</span>
+sftp&gt;<span class="w"> </span>put<span class="w"> </span>-r<span class="w"> </span>localdir/
+sftp&gt;<span class="w"> </span>mget<span class="w"> </span>*.log<span class="w">             </span><span class="c1"># несколько</span>
+sftp&gt;<span class="w"> </span>mput<span class="w"> </span>*.py
+sftp&gt;<span class="w"> </span>mkdir<span class="w"> </span>/<span class="w"> </span>rm<span class="w"> </span>/<span class="w"> </span>rmdir
+sftp&gt;<span class="w"> </span>chmod<span class="w"> </span><span class="m">644</span><span class="w"> </span>file
+sftp&gt;<span class="w"> </span><span class="nb">exit</span>
+</code></pre></div>
+
+<h3 id="tar-ssh-для-больших-объёмов">tar + ssh — для больших объёмов<a class="headerlink" href="#tar-ssh-для-больших-объёмов" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Архив на лету через SSH (быстро для многих мелких файлов)</span>
+tar<span class="w"> </span>czf<span class="w"> </span>-<span class="w"> </span>./project<span class="w"> </span><span class="p">|</span><span class="w"> </span>ssh<span class="w"> </span>user@host<span class="w"> </span><span class="s2">&quot;tar xzf - -C ~/projects/&quot;</span>
+
+<span class="c1"># С pv для прогресса</span>
+tar<span class="w"> </span>cf<span class="w"> </span>-<span class="w"> </span>./bigdir<span class="w"> </span><span class="p">|</span><span class="w"> </span>pv<span class="w"> </span><span class="p">|</span><span class="w"> </span>ssh<span class="w"> </span>user@host<span class="w"> </span><span class="s2">&quot;tar xf - -C ~/&quot;</span>
+
+<span class="c1"># Обратное (скачать с сервера)</span>
+ssh<span class="w"> </span>user@host<span class="w"> </span><span class="s2">&quot;tar czf - /var/log/&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>tar<span class="w"> </span>xzf<span class="w"> </span>-<span class="w"> </span>-C<span class="w"> </span>./
+</code></pre></div>
+
+<hr />
+<h2 id="проброс-портов-tunnels">🌉 Проброс портов (tunnels)<a class="headerlink" href="#проброс-портов-tunnels" title="Ссылка">#</a></h2>
+<h3 id="локальный-проброс-l-самый-частый">Локальный проброс (<code>-L</code>) — самый частый<a class="headerlink" href="#локальный-проброс-l-самый-частый" title="Ссылка">#</a></h3>
+<p>Делает удалённый сервис доступным на вашей машине.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Локальный порт 8080 → удалённый localhost:80</span>
+ssh<span class="w"> </span>-L<span class="w"> </span><span class="m">8080</span>:localhost:80<span class="w"> </span>user@host
+<span class="c1"># Теперь на вашей машине: http://localhost:8080 → на сервере localhost:80</span>
+
+<span class="c1"># Доступ к БД на сервере</span>
+ssh<span class="w"> </span>-L<span class="w"> </span><span class="m">5432</span>:localhost:5432<span class="w"> </span>user@host
+<span class="c1"># psql -h localhost -p 5432 (но это на сервере!)</span>
+
+<span class="c1"># Цепочка: localhost:8080 → host → другой сервер</span>
+ssh<span class="w"> </span>-L<span class="w"> </span><span class="m">8080</span>:internal-server:80<span class="w"> </span>user@bastion
+<span class="c1"># http://localhost:8080 → bastion → internal-server:80</span>
+
+<span class="c1"># Бинд на все интерфейсы (доступ с других машин)</span>
+ssh<span class="w"> </span>-L<span class="w"> </span><span class="m">0</span>.0.0.0:8080:localhost:80<span class="w"> </span>user@host
+ssh<span class="w"> </span>-g<span class="w"> </span>-L<span class="w"> </span><span class="m">8080</span>:localhost:80<span class="w"> </span>user@host<span class="w">      </span><span class="c1"># -g = allow remote</span>
+
+<span class="c1"># Несколько пробросов сразу</span>
+ssh<span class="w"> </span>-L<span class="w"> </span><span class="m">8080</span>:localhost:80<span class="w"> </span>-L<span class="w"> </span><span class="m">5432</span>:localhost:5432<span class="w"> </span>user@host
+
+<span class="c1"># В фоне (без командной оболочки)</span>
+ssh<span class="w"> </span>-fNL<span class="w"> </span><span class="m">8080</span>:localhost:80<span class="w"> </span>user@host
+</code></pre></div>
+
+<h3 id="удалённый-проброс-r">Удалённый проброс (<code>-R</code>)<a class="headerlink" href="#удалённый-проброс-r" title="Ссылка">#</a></h3>
+<p>Делает ваш локальный сервис доступным с удалённой машины.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Удалённый порт 8080 → ваш localhost:80</span>
+ssh<span class="w"> </span>-R<span class="w"> </span><span class="m">8080</span>:localhost:80<span class="w"> </span>user@host
+<span class="c1"># На сервере: http://localhost:8080 → ваш локальный сервис</span>
+
+<span class="c1"># Пробросить сервис с сервера наружу (например, расшарить dev-сервер)</span>
+ssh<span class="w"> </span>-R<span class="w"> </span><span class="m">8080</span>:localhost:3000<span class="w"> </span>user@public-server
+<span class="c1"># Теперь public-server:8080 → ваш localhost:3000</span>
+
+<span class="c1"># Туннель в обратную сторону для доступа к домашнему ПК</span>
+<span class="c1"># (на домашнем ПК, с пробросом наружу):</span>
+ssh<span class="w"> </span>-R<span class="w"> </span><span class="m">2222</span>:localhost:22<span class="w"> </span>user@vps.example.com
+<span class="c1"># На VPS: ssh -p 2222 user@localhost → попадёт на домашний ПК</span>
+</code></pre></div>
+
+<blockquote>
+<p>На сервере в sshd_config нужно <code>GatewayPorts yes</code> для бинда на 0.0.0.0.</p>
+</blockquote>
+<h3 id="динамический-проброс-d-socks-прокси">Динамический проброс (<code>-D</code>) — SOCKS-прокси<a class="headerlink" href="#динамический-проброс-d-socks-прокси" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># SOCKS5-прокси на localhost:1080</span>
+ssh<span class="w"> </span>-D<span class="w"> </span><span class="m">1080</span><span class="w"> </span>user@host
+ssh<span class="w"> </span>-D<span class="w"> </span><span class="m">1080</span><span class="w"> </span>-fNC<span class="w"> </span>user@host<span class="w">            </span><span class="c1"># в фоне</span>
+
+<span class="c1"># Использовать как прокси в браузере:</span>
+<span class="c1"># Firefox → Settings → Network → SOCKS Host: localhost, Port: 1080, SOCKS v5</span>
+<span class="c1"># Или в curl:</span>
+curl<span class="w"> </span>--socks5-hostname<span class="w"> </span>localhost:1080<span class="w"> </span>https://ifconfig.me
+
+<span class="c1"># Сpecific DNS через прокси (не утекает)</span>
+curl<span class="w"> </span>--proxy<span class="w"> </span>socks5h://localhost:1080<span class="w"> </span>https://example.com
+</code></pre></div>
+
+<h3 id="reverse-туннель-постоянный-для-nat-traversal">Reverse-туннель (постоянный, для NAT traversal)<a class="headerlink" href="#reverse-туннель-постоянный-для-nat-traversal" title="Ссылка">#</a></h3>
+<p>Полезно, когда нужно подключаться к машине за NAT.</p>
+<p>На машине за NAT (например, домашний ПК):</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># autossh для поддержания соединения</span>
+autossh<span class="w"> </span>-M<span class="w"> </span><span class="m">0</span><span class="w"> </span>-fN<span class="w"> </span>-o<span class="w"> </span><span class="s2">&quot;ServerAliveInterval 30&quot;</span><span class="w"> </span>-o<span class="w"> </span><span class="s2">&quot;ServerAliveCountMax 3&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-R<span class="w"> </span><span class="m">2222</span>:localhost:22<span class="w"> </span>user@vps.example.com
+</code></pre></div>
+
+<p>На VPS:</p>
+<div class="highlight"><pre><span></span><code>ssh<span class="w"> </span>-p<span class="w"> </span><span class="m">2222</span><span class="w"> </span>user@localhost<span class="w">        </span><span class="c1"># попадёт на домашний ПК</span>
+</code></pre></div>
+
+<h3 id="jump-host-бастион">Jump host (бастион)<a class="headerlink" href="#jump-host-бастион" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Через один jump</span>
+ssh<span class="w"> </span>-J<span class="w"> </span>user@bastion<span class="w"> </span>user@internal-server
+
+<span class="c1"># Несколько jump&#39;ов</span>
+ssh<span class="w"> </span>-J<span class="w"> </span>user@bastion1,user@bastion2<span class="w"> </span>user@target
+
+<span class="c1"># В config:</span>
+Host<span class="w"> </span>internal
+<span class="w">    </span>HostName<span class="w"> </span><span class="m">10</span>.0.0.5
+<span class="w">    </span>ProxyJump<span class="w"> </span>bastion
+</code></pre></div>
+
+<hr />
+<h2 id="vpn-через-ssh-tun-tap">🌐 VPN через SSH (TUN/TAP)<a class="headerlink" href="#vpn-через-ssh-tun-tap" title="Ссылка">#</a></h2>
+<div class="highlight"><pre><span></span><code><span class="c1"># Создать TUN-туннель (нужны права root с обеих сторон)</span>
+ssh<span class="w"> </span>-w<span class="w"> </span><span class="m">0</span>:0<span class="w"> </span>user@host
+<span class="c1"># Локальный tun0 ↔ удалённый tun0</span>
+
+<span class="c1"># На клиенте:</span>
+sudo<span class="w"> </span>ip<span class="w"> </span>addr<span class="w"> </span>add<span class="w"> </span><span class="m">10</span>.0.0.1/24<span class="w"> </span>dev<span class="w"> </span>tun0
+sudo<span class="w"> </span>ip<span class="w"> </span>link<span class="w"> </span><span class="nb">set</span><span class="w"> </span>tun0<span class="w"> </span>up
+
+<span class="c1"># На сервере:</span>
+sudo<span class="w"> </span>ip<span class="w"> </span>addr<span class="w"> </span>add<span class="w"> </span><span class="m">10</span>.0.0.2/24<span class="w"> </span>dev<span class="w"> </span>tun1
+sudo<span class="w"> </span>ip<span class="w"> </span>link<span class="w"> </span><span class="nb">set</span><span class="w"> </span>tun1<span class="w"> </span>up
+</code></pre></div>
+
+<blockquote>
+<p>Простые случаи проброса портов обычно лучше, чем полноценный VPN через SSH.</p>
+</blockquote>
+<hr />
+<h2 id="настройка-sshd-сервер">🔐 Настройка sshd (сервер)<a class="headerlink" href="#настройка-sshd-сервер" title="Ссылка">#</a></h2>
+<p>Файл: <code>/etc/ssh/sshd_config</code></p>
+<div class="highlight"><pre><span></span><code># ── Базовое ──────────────────────────────
+Port 22                            # лучше сменить на нестандартный
+AddressFamily any                  # any / inet (IPv4) / inet6 (IPv6)
+ListenAddress 0.0.0.0              # на каком IP слушать
+
+# ── Аутентификация ──────────────────────
+PermitRootLogin no                 # prohibit-password / yes / no
+# ❗ Никогда не разрешайте root с паролем!
+PasswordAuthentication no          # только ключи
+PubkeyAuthentication yes
+PermitEmptyPasswords no
+ChallengeResponseAuthentication no
+UsePAM yes
+
+# ── Ключи хоста ─────────────────────────
+HostKey /etc/ssh/ssh_host_ed25519_key
+HostKey /etc/ssh/ssh_host_rsa_key
+
+# ── Лимиты и таймауты ───────────────────
+LoginGraceTime 30                  # секунд на вход
+MaxAuthTries 3                     # попыток
+MaxSessions 10
+ClientAliveInterval 300            # проверка активности каждые 5 мин
+ClientAliveCountMax 2              # сколько раз
+AllowUsers alice bob ops           # белый список
+AllowGroups ssh-users
+DenyUsers root guest
+
+# ── Проброс портов ──────────────────────
+AllowTcpForwarding yes             # local/remote/yes/no
+AllowAgentForwarding no
+X11Forwarding no
+PermitTunnel no
+GatewayPorts no                    # разрешить -R на 0.0.0.0
+
+# ── Безопасность ────────────────────────
+Protocol 2                         # только v2 (v1 устарел)
+Ciphers chacha20-poly1305@openssh.com,aes256-gcm@openssh.com
+MACs hmac-sha2-512-etm@openssh.com
+KexAlgorithms curve25519-sha256
+AllowStreamLocalForwarding no
+PermitUserEnvironment no
+Compression no                     # (последние версии - атака CRIME)
+
+# ── Логи ────────────────────────────────
+SyslogFacility AUTH
+LogLevel VERBOSE                   # QUIET/FATAL/ERROR/INFO/VERBOSE
+# VERBOSE логирует отпечатки ключей (полезно для аудита)
+
+# ── SFTP ────────────────────────────────
+Subsystem sftp /usr/lib/ssh/sftp-server
+# Для chroot:
+# Subsystem sftp internal-sftp
+# Match Group sftp-only
+#     ChrootDirectory /home/%u
+#     ForceCommand internal-sftp
+#     AllowTcpForwarding no
+#     X11Forwarding no
+
+# ── Banner (приветствие) ────────────────
+Banner /etc/ssh/banner
+</code></pre></div>
+
+<h3 id="условные-блоки-match">Условные блоки <code>Match</code><a class="headerlink" href="#условные-блоки-match" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code># Для конкретного пользователя
+Match User alice
+    PasswordAuthentication yes
+    ForceCommand internal-sftp
+
+# Для группы
+Match Group admins
+    PermitRootLogin yes
+    AllowTcpForwarding yes
+
+# Для адреса
+Match Address 192.168.1.0/24
+    PasswordAuthentication yes     # в локалке можно пароль
+Match Address *,!192.168.1.0/24
+    PasswordAuthentication no      # снаружи только ключи
+</code></pre></div>
+
+<h3 id="применение-изменений">Применение изменений<a class="headerlink" href="#применение-изменений" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Проверить синтаксис (ОЧЕНЬ важно перед перезапуском!)</span>
+sudo<span class="w"> </span>sshd<span class="w"> </span>-t<span class="w">                       </span><span class="c1"># если ничего не выводит — ОК</span>
+
+<span class="c1"># Перезапуск</span>
+sudo<span class="w"> </span>systemctl<span class="w"> </span>reload<span class="w"> </span>sshd<span class="w">         </span><span class="c1"># мягко (без разрыва соединений)</span>
+sudo<span class="w"> </span>systemctl<span class="w"> </span>restart<span class="w"> </span>sshd<span class="w">        </span><span class="c1"># жёстко</span>
+
+<span class="c1"># Debian/Ubuntu: ssh.service вместо sshd.service</span>
+sudo<span class="w"> </span>systemctl<span class="w"> </span>reload<span class="w"> </span>ssh
+</code></pre></div>
+
+<blockquote>
+<p>💡 <strong>Лайфхак</strong>: при настройке sshd держите активную SSH-сессию и
+проверяйте новую в отдельном окне. Так не заблокируете себя.</p>
+</blockquote>
+<h3 id="сгенерировать-host-ключи-новый-сервер">Сгенерировать host-ключи (новый сервер)<a class="headerlink" href="#сгенерировать-host-ключи-новый-сервер" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>rm<span class="w"> </span>/etc/ssh/ssh_host_*
+sudo<span class="w"> </span>ssh-keygen<span class="w"> </span>-A<span class="w">                 </span><span class="c1"># сгенерировать все нужные</span>
+sudo<span class="w"> </span>systemctl<span class="w"> </span>restart<span class="w"> </span>sshd
+</code></pre></div>
+
+<hr />
+<h2 id="authorizedkeys-на-сервере">🚪 authorized_keys на сервере<a class="headerlink" href="#authorizedkeys-на-сервере" title="Ссылка">#</a></h2>
+<div class="highlight"><pre><span></span><code><span class="c1"># Куда добавлять публичные ключи</span>
+~/.ssh/authorized_keys<span class="w">             </span><span class="c1"># построчно</span>
+
+<span class="c1"># Права — КРИТИЧНО!</span>
+chmod<span class="w"> </span><span class="m">700</span><span class="w"> </span>~/.ssh
+chmod<span class="w"> </span><span class="m">600</span><span class="w"> </span>~/.ssh/authorized_keys
+chown<span class="w"> </span>-R<span class="w"> </span><span class="nv">$USER</span>:<span class="nv">$USER</span><span class="w"> </span>~/.ssh
+</code></pre></div>
+
+<h3 id="ограничения-в-authorizedkeys">Ограничения в authorized_keys<a class="headerlink" href="#ограничения-в-authorizedkeys" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code># Запретить проброс портов, разрешить только с IP
+from=&quot;192.168.1.0/24&quot; ssh-ed25519 AAAA... user@host
+
+# Принудительная команда (только backup)
+command=&quot;/usr/local/bin/backup.sh&quot;,no-pty ssh-ed25519 AAAA... backup@host
+
+# Полные ограничения для автоматизации
+command=&quot;rsync-only&quot;,no-port-forwarding,no-X11-forwarding,no-agent-forwarding,no-pty ssh-ed25519 AAAA...
+</code></pre></div>
+
+<hr />
+<h2 id="безопасность">🔒 Безопасность<a class="headerlink" href="#безопасность" title="Ссылка">#</a></h2>
+<h3 id="харденинг-best-practices">Харденинг (best practices)<a class="headerlink" href="#харденинг-best-practices" title="Ссылка">#</a></h3>
+<ol>
+<li><strong>Запретить root</strong>: <code>PermitRootLogin no</code> (или <code>prohibit-password</code>).</li>
+<li><strong>Только ключи</strong>: <code>PasswordAuthentication no</code>.</li>
+<li><strong>Сменить порт</strong> (не спасёт от целенаправленной атаки, но уберёт 99% ботов).</li>
+<li><strong>Fail2ban</strong> или <strong>sshguard</strong> для блокировки brute-force.</li>
+<li><strong>Белый список</strong> пользователей: <code>AllowUsers</code>, <code>AllowGroups</code>.</li>
+<li><strong>Минимум cipher/MAC/kex</strong> (только современные).</li>
+<li><strong>Отдельные ключи</strong> для разных целей (не один на всё).</li>
+<li><strong>Passphrase</strong> на приватный ключ.</li>
+<li><strong>ssh-agent</strong> с таймаутом.</li>
+<li><strong>Не использовать ForwardAgent</strong> на ненадёжных серверах.</li>
+</ol>
+<h3 id="установка-fail2ban">Установка fail2ban<a class="headerlink" href="#установка-fail2ban" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>pacman<span class="w"> </span>-S<span class="w"> </span>fail2ban<span class="w">           </span><span class="c1"># Arch</span>
+sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>fail2ban<span class="w">         </span><span class="c1"># Debian/Ubuntu</span>
+
+<span class="c1"># /etc/fail2ban/jail.local</span>
+<span class="o">[</span>sshd<span class="o">]</span>
+<span class="nv">enabled</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">true</span>
+<span class="nv">port</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">22</span>
+<span class="nv">maxretry</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">3</span>
+<span class="nv">bantime</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>1h
+<span class="nv">findtime</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>10m
+
+sudo<span class="w"> </span>systemctl<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>--now<span class="w"> </span>fail2ban
+sudo<span class="w"> </span>fail2ban-client<span class="w"> </span>status<span class="w"> </span>sshd
+</code></pre></div>
+
+<h3 id="аудит">Аудит<a class="headerlink" href="#аудит" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Кто пытался войти (Debian)</span>
+sudo<span class="w"> </span>journalctl<span class="w"> </span>-u<span class="w"> </span>ssh<span class="w"> </span>-u<span class="w"> </span>sshd<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="s2">&quot;Failed&quot;</span>
+sudo<span class="w"> </span>grep<span class="w"> </span><span class="s2">&quot;Failed password&quot;</span><span class="w"> </span>/var/log/auth.log
+
+<span class="c1"># Успешные входы</span>
+last<span class="w">                              </span><span class="c1"># история входов</span>
+lastlog<span class="w">                           </span><span class="c1"># последний вход каждого пользователя</span>
+
+<span class="c1"># Активные сессии</span>
+who
+w
+</code></pre></div>
+
+<hr />
+<h2 id="хранение-паролей-секретов">🔄 Хранение паролей/секретов<a class="headerlink" href="#хранение-паролей-секретов" title="Ссылка">#</a></h2>
+<h3 id="менеджер-ключей-рекомендуется">Менеджер ключей (рекомендуется)<a class="headerlink" href="#менеджер-ключей-рекомендуется" title="Ссылка">#</a></h3>
+<ul>
+<li><strong>1Password</strong>, <strong>Bitwarden</strong> — имеют SSH-agent интеграцию.</li>
+<li><strong>KeePassXC</strong> — локальный, имеет SSH-agent.</li>
+</ul>
+<h3 id="для-автоматизации-ci-cd">Для автоматизации (CI/CD)<a class="headerlink" href="#для-автоматизации-ci-cd" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Ключи без passphrase, в секретах CI/CD</span>
+<span class="c1"># .gitlab-ci.yml / .github/workflows/:</span>
+-<span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$SSH_PRIVATE_KEY</span><span class="s2">&quot;</span><span class="w"> </span>&gt;<span class="w"> </span>~/.ssh/id_ed25519
+-<span class="w"> </span>chmod<span class="w"> </span><span class="m">600</span><span class="w"> </span>~/.ssh/id_ed25519
+-<span class="w"> </span>ssh<span class="w"> </span>-o<span class="w"> </span><span class="nv">StrictHostKeyChecking</span><span class="o">=</span>no<span class="w"> </span>user@host<span class="w"> </span><span class="s2">&quot;deploy.sh&quot;</span>
+</code></pre></div>
+
+<h3 id="ssh-ca-центр-сертификации">SSH CA (центр сертификации)<a class="headerlink" href="#ssh-ca-центр-сертификации" title="Ссылка">#</a></h3>
+<p>Вместо десятков ключей — один CA подписывает сертификаты:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># На сервере CA</span>
+ssh-keygen<span class="w"> </span>-t<span class="w"> </span>ed25519<span class="w"> </span>-f<span class="w"> </span>~/.ssh/ca<span class="w"> </span>-N<span class="w"> </span><span class="s2">&quot;&quot;</span>
+
+<span class="c1"># Подписать публичный ключ пользователя</span>
+ssh-keygen<span class="w"> </span>-s<span class="w"> </span>~/.ssh/ca<span class="w"> </span>-I<span class="w"> </span><span class="s2">&quot;alice-laptop&quot;</span><span class="w"> </span>-n<span class="w"> </span>alice<span class="w"> </span>-V<span class="w"> </span>+1d<span class="w"> </span>~/.ssh/alice.pub
+
+<span class="c1"># Сервер доверяет CA (в /etc/ssh/sshd_config):</span>
+TrustedUserCAKeys<span class="w"> </span>/etc/ssh/ca.pub
+
+<span class="c1"># Преимущества: срок действия, revocation, no authorized_keys</span>
+</code></pre></div>
+
+<hr />
+<h2 id="полезные-трюки">🛠️ Полезные трюки<a class="headerlink" href="#полезные-трюки" title="Ссылка">#</a></h2>
+<h3 id="запуск-приложения-через-ssh-nohup-аналог">Запуск приложения через SSH (nohup-аналог)<a class="headerlink" href="#запуск-приложения-через-ssh-nohup-аналог" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Запустить и сразу отключиться</span>
+ssh<span class="w"> </span>-f<span class="w"> </span>user@host<span class="w"> </span><span class="s2">&quot;nohup long-running-task.sh &amp;&quot;</span>
+<span class="c1"># или</span>
+ssh<span class="w"> </span>user@host<span class="w"> </span><span class="s2">&quot;nohup task.sh &gt; /dev/null 2&gt;&amp;1 &lt; /dev/null &amp;&quot;</span>
+
+<span class="c1"># В tmux/screen на сервере</span>
+ssh<span class="w"> </span>user@host<span class="w"> </span>-t<span class="w"> </span><span class="s2">&quot;tmux new -s work&quot;</span>
+ssh<span class="w"> </span>user@host<span class="w"> </span>-t<span class="w"> </span><span class="s2">&quot;tmux attach -t work&quot;</span>
+</code></pre></div>
+
+<h3 id="передать-файл-без-scp-когда-закрыт">Передать файл без scp (когда закрыт)<a class="headerlink" href="#передать-файл-без-scp-когда-закрыт" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Через SSH напрямую</span>
+cat<span class="w"> </span>local.txt<span class="w"> </span><span class="p">|</span><span class="w"> </span>ssh<span class="w"> </span>user@host<span class="w"> </span><span class="s2">&quot;cat &gt; remote.txt&quot;</span>
+ssh<span class="w"> </span>user@host<span class="w"> </span><span class="s2">&quot;cat remote.txt&quot;</span><span class="w"> </span>&gt;<span class="w"> </span>local.txt
+
+<span class="c1"># base64 (для бинарных)</span>
+base64<span class="w"> </span>image.png<span class="w"> </span><span class="p">|</span><span class="w"> </span>ssh<span class="w"> </span>user@host<span class="w"> </span><span class="s2">&quot;base64 -d &gt; image.png&quot;</span>
+</code></pre></div>
+
+<h3 id="проброс-агента-с-ограничением-proxyjump-ключ">Проброс агента с ограничением (ProxyJump + ключ)<a class="headerlink" href="#проброс-агента-с-ограничением-proxyjump-ключ" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>ssh<span class="w"> </span>-J<span class="w"> </span>bastion<span class="w"> </span>-A<span class="w"> </span>internal
+</code></pre></div>
+
+<h3 id="удалить-хост-из-knownhosts-сменился-ключ-сервера">Удалить хост из known_hosts (сменился ключ сервера)<a class="headerlink" href="#удалить-хост-из-knownhosts-сменился-ключ-сервера" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>ssh-keygen<span class="w"> </span>-R<span class="w"> </span>hostname<span class="w">                    </span><span class="c1"># удалить</span>
+ssh-keygen<span class="w"> </span>-R<span class="w"> </span><span class="m">192</span>.168.1.10
+ssh-keygen<span class="w"> </span>-R<span class="w"> </span><span class="s2">&quot;[host]:2222&quot;</span><span class="w">               </span><span class="c1"># нестандартный порт</span>
+
+<span class="c1"># Подключиться заново, принять новый ключ</span>
+ssh<span class="w"> </span>user@host
+</code></pre></div>
+
+<h3 id="узнать-публичный-ключ-сервера">Узнать публичный ключ сервера<a class="headerlink" href="#узнать-публичный-ключ-сервера" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code>ssh-keyscan<span class="w"> </span>hostname<span class="w">                      </span><span class="c1"># все ключи</span>
+ssh-keyscan<span class="w"> </span>-t<span class="w"> </span>ed25519<span class="w"> </span>hostname<span class="w">           </span><span class="c1"># конкретный тип</span>
+ssh-keygen<span class="w"> </span>-l<span class="w"> </span>-f<span class="w"> </span>&lt;<span class="o">(</span>ssh-keyscan<span class="w"> </span>-t<span class="w"> </span>ed25519<span class="w"> </span>hostname<span class="w"> </span><span class="m">2</span>&gt;/dev/null<span class="o">)</span><span class="w">  </span><span class="c1"># отпечаток</span>
+</code></pre></div>
+
+<h3 id="сравнить-отпечаток-с-реальным">Сравнить отпечаток с реальным<a class="headerlink" href="#сравнить-отпечаток-с-реальным" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># На сервере:</span>
+ssh-keygen<span class="w"> </span>-l<span class="w"> </span>-f<span class="w"> </span>/etc/ssh/ssh_host_ed25519_key.pub
+
+<span class="c1"># При первом подключении сверяйте с этим!</span>
+</code></pre></div>
+
+<h3 id="автоматизация-с-паролем-небезопасно-но-иногда-нужно">Автоматизация с паролем (НЕБЕЗОПАСНО, но иногда нужно)<a class="headerlink" href="#автоматизация-с-паролем-небезопасно-но-иногда-нужно" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Установить sshpass</span>
+sudo<span class="w"> </span>pacman<span class="w"> </span>-S<span class="w"> </span>sshpass
+
+<span class="c1"># Использовать (пароль в командной строке — небезопасно!)</span>
+sshpass<span class="w"> </span>-p<span class="w"> </span><span class="s2">&quot;password&quot;</span><span class="w"> </span>ssh<span class="w"> </span>user@host
+sshpass<span class="w"> </span>-p<span class="w"> </span><span class="s2">&quot;password&quot;</span><span class="w"> </span>scp<span class="w"> </span>file<span class="w"> </span>user@host:~/
+sshpass<span class="w"> </span>-f<span class="w"> </span>passwordfile<span class="w"> </span>ssh<span class="w"> </span>user@host<span class="w">       </span><span class="c1"># из файла (лучше)</span>
+sshpass<span class="w"> </span>-e<span class="w"> </span>ssh<span class="w"> </span>user@host<span class="w">                    </span><span class="c1"># из SSHPASS env var (лучше всего)</span>
+</code></pre></div>
+
+<blockquote>
+<p>❗ <strong>Лучше используйте ключи</strong>. sshpass оставляет пароль в истории.</p>
+</blockquote>
+<hr />
+<h2 id="ssh-на-windows">🖥️ SSH на Windows<a class="headerlink" href="#ssh-на-windows" title="Ссылка">#</a></h2>
+<h3 id="встроенный-openssh-windows-10-11">Встроенный OpenSSH (Windows 10/11)<a class="headerlink" href="#встроенный-openssh-windows-10-11" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c"># Установить через Optional Features (если нет)</span>
+<span class="nb">Get-WindowsCapability</span> <span class="n">-Online</span> <span class="p">|</span> <span class="nb">Where-Object</span> <span class="n">Name</span> <span class="o">-like</span> <span class="s1">&#39;OpenSSH.Client*&#39;</span>
+<span class="nb">Add-WindowsCapability</span> <span class="n">-Online</span> <span class="n">-Name</span> <span class="n">OpenSSH</span><span class="p">.</span><span class="n">Client</span><span class="p">~~~~</span><span class="n">0</span><span class="p">.</span><span class="n">0</span><span class="p">.</span><span class="n">1</span><span class="p">.</span><span class="n">0</span>
+
+<span class="c"># Использование как в Linux</span>
+<span class="n">ssh</span> <span class="n">user</span><span class="nv">@host</span>
+<span class="n">ssh-keygen</span> <span class="n">-t</span> <span class="n">ed25519</span>
+<span class="c"># Конфиг: C:\Users\you\.ssh\config</span>
+</code></pre></div>
+
+<h3 id="putty-классика">PuTTY (классика)<a class="headerlink" href="#putty-классика" title="Ссылка">#</a></h3>
+<ul>
+<li><code>putty.exe</code> — клиент</li>
+<li><code>puttygen.exe</code> — генератор ключей (свой формат .ppk)</li>
+<li><code>pageant.exe</code> — агент ключей</li>
+<li><code>pscp.exe</code>, <code>psftp.exe</code> — копирование файлов</li>
+</ul>
+<h3 id="wsl-windows-subsystem-for-linux">WSL (Windows Subsystem for Linux)<a class="headerlink" href="#wsl-windows-subsystem-for-linux" title="Ссылка">#</a></h3>
+<p>В WSL работает полноценный Linux-SSH — лучший вариант.</p>
+<hr />
+<h2 id="отладка">🐛 Отладка<a class="headerlink" href="#отладка" title="Ссылка">#</a></h2>
+<h3 id="подключение-не-работает">Подключение не работает<a class="headerlink" href="#подключение-не-работает" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># 1. Подробный вывод</span>
+ssh<span class="w"> </span>-vvv<span class="w"> </span>user@host
+
+<span class="c1"># 2. Проверить доступность</span>
+ping<span class="w"> </span>host
+nc<span class="w"> </span>-zv<span class="w"> </span>host<span class="w"> </span><span class="m">22</span><span class="w">                  </span><span class="c1"># порт открыт?</span>
+telnet<span class="w"> </span>host<span class="w"> </span><span class="m">22</span><span class="w">                  </span><span class="c1"># альтернатива</span>
+
+<span class="c1"># 3. Проверить ключ</span>
+ssh<span class="w"> </span>-i<span class="w"> </span>~/.ssh/key<span class="w"> </span>-v<span class="w"> </span>user@host
+ls<span class="w"> </span>-la<span class="w"> </span>~/.ssh/<span class="w">                  </span><span class="c1"># права 700 на каталог, 600 на ключи!</span>
+
+<span class="c1"># 4. На сервере посмотреть логи</span>
+sudo<span class="w"> </span>journalctl<span class="w"> </span>-u<span class="w"> </span>sshd<span class="w"> </span>-f<span class="w">      </span><span class="c1"># или ssh на Debian/Ubuntu</span>
+sudo<span class="w"> </span>tail<span class="w"> </span>-f<span class="w"> </span>/var/log/auth.log<span class="w">  </span><span class="c1"># Debian/Ubuntu</span>
+
+<span class="c1"># 5. Проверить конфиг сервера</span>
+sudo<span class="w"> </span>sshd<span class="w"> </span>-t<span class="w">                    </span><span class="c1"># синтаксис</span>
+sudo<span class="w"> </span>sshd<span class="w"> </span>-T<span class="w">                    </span><span class="c1"># действующие настройки</span>
+
+<span class="c1"># 6. Запустить sshd в debug-режиме (на другом порту)</span>
+sudo<span class="w"> </span>/usr/sbin/sshd<span class="w"> </span>-d<span class="w"> </span>-p<span class="w"> </span><span class="m">2222</span><span class="w">  </span><span class="c1"># затем подключаться к 2222</span>
+</code></pre></div>
+
+<h3 id="частые-причины">Частые причины<a class="headerlink" href="#частые-причины" title="Ссылка">#</a></h3>
+<ul>
+<li><strong>Неверные права на <code>~/.ssh</code></strong> — должны быть 700, файлы 600.</li>
+<li><strong><code>authorized_keys</code></strong> — должен быть 600, владелец — пользователь.</li>
+<li><strong><code>PasswordAuthentication no</code></strong> но ключ не добавлен.</li>
+<li><strong>Файрвол</strong> блокирует порт 22.</li>
+<li><strong><code>AllowUsers</code>/<code>AllowGroups</code></strong> не содержат пользователя.</li>
+<li><strong>Сервер использует ssh.service</strong> (Debian), а вы перезапускаете sshd.</li>
+</ul>
+<hr />
+<h2 id="полезные-однострочники">📊 Полезные однострочники<a class="headerlink" href="#полезные-однострочники" title="Ссылка">#</a></h2>
+<div class="highlight"><pre><span></span><code><span class="c1"># Конфиг для известного хоста</span>
+ssh<span class="w"> </span>-G<span class="w"> </span>myhost<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-E<span class="w"> </span><span class="s2">&quot;^(hostname|user|port|identityfile)&quot;</span>
+
+<span class="c1"># Список ваших публичных ключей</span>
+<span class="k">for</span><span class="w"> </span>f<span class="w"> </span><span class="k">in</span><span class="w"> </span>~/.ssh/*.pub<span class="p">;</span><span class="w"> </span><span class="k">do</span><span class="w"> </span>ssh-keygen<span class="w"> </span>-l<span class="w"> </span>-f<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$f</span><span class="s2">&quot;</span><span class="p">;</span><span class="w"> </span><span class="k">done</span>
+
+<span class="c1"># Закачать публичный ключ на новый сервер</span>
+ssh-copy-id<span class="w"> </span>-i<span class="w"> </span>~/.ssh/id_ed25519.pub<span class="w"> </span>user@newserver
+
+<span class="c1"># Мгновенный HTTP-сервер на порту 8080 (расшарить файлы)</span>
+ssh<span class="w"> </span>-R<span class="w"> </span><span class="m">8080</span>:localhost:8080<span class="w"> </span>user@vps
+python<span class="w"> </span>-m<span class="w"> </span>http.server<span class="w"> </span><span class="m">8080</span>
+
+<span class="c1"># Бэкап через SSH + tar</span>
+tar<span class="w"> </span>czf<span class="w"> </span>-<span class="w"> </span>/data<span class="w"> </span><span class="p">|</span><span class="w"> </span>ssh<span class="w"> </span>user@host<span class="w"> </span><span class="s2">&quot;cat &gt; backup-</span><span class="k">$(</span>date<span class="w"> </span>+%F<span class="k">)</span><span class="s2">.tar.gz&quot;</span>
+
+<span class="c1"># Восстановить</span>
+ssh<span class="w"> </span>user@host<span class="w"> </span><span class="s2">&quot;cat backup-2024-01-15.tar.gz&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>tar<span class="w"> </span>xzf<span class="w"> </span>-<span class="w"> </span>-C<span class="w"> </span>/
+
+<span class="c1"># Синхронизировать сайт в продакшн</span>
+rsync<span class="w"> </span>-avz<span class="w"> </span>--delete<span class="w"> </span>--exclude<span class="w"> </span><span class="s1">&#39;.git&#39;</span><span class="w"> </span>--exclude<span class="w"> </span><span class="s1">&#39;node_modules&#39;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>./dist/<span class="w"> </span>deploy@prod:/var/www/site/
+
+<span class="c1"># Запустить GUI-приложение с сервера (нужен X11 forwarding)</span>
+ssh<span class="w"> </span>-X<span class="w"> </span>user@host<span class="w"> </span><span class="s2">&quot;firefox&quot;</span>
+
+<span class="c1"># Пробросить локальный порт к БД (для DBeaver, например)</span>
+ssh<span class="w"> </span>-L<span class="w"> </span><span class="m">5432</span>:db.internal:5432<span class="w"> </span>user@bastion<span class="w"> </span>-fN
+psql<span class="w"> </span>-h<span class="w"> </span>localhost<span class="w"> </span>-p<span class="w"> </span><span class="m">5432</span>
+
+<span class="c1"># SOCKS-прокси через VPS</span>
+ssh<span class="w"> </span>-D<span class="w"> </span><span class="m">1080</span><span class="w"> </span>-fNC<span class="w"> </span>user@vps
+curl<span class="w"> </span>--socks5-hostname<span class="w"> </span>localhost:1080<span class="w"> </span>https://ifconfig.me
+</code></pre></div>
+
+<hr />
+<h2 id="сравнение-scp-rsync-sftp">🆚 Сравнение scp / rsync / sftp<a class="headerlink" href="#сравнение-scp-rsync-sftp" title="Ссылка">#</a></h2>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>scp</th>
+<th>rsync</th>
+<th>sftp</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Простота</td>
+<td>★★★★★</td>
+<td>★★★</td>
+<td>★★★</td>
+</tr>
+<tr>
+<td>Докачка</td>
+<td>❌</td>
+<td>✅</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>Синхронизация</td>
+<td>❌</td>
+<td>✅</td>
+<td>❌</td>
+</tr>
+<tr>
+<td>Удаление лишнего</td>
+<td>❌</td>
+<td>✅ (&ndash;delete)</td>
+<td>❌</td>
+</tr>
+<tr>
+<td>Скорость (мелкие файлы)</td>
+<td>медленно</td>
+<td>быстро</td>
+<td>средне</td>
+</tr>
+<tr>
+<td>Прогресс</td>
+<td>базовый</td>
+<td>детальный</td>
+<td>нет</td>
+</tr>
+<tr>
+<td>Интерактивно</td>
+<td>нет</td>
+<td>нет</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>Статус</td>
+<td><strong>deprecated</strong></td>
+<td>рекомендуется</td>
+<td>рекомендуется</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="частые-ошибки-и-грабли">🪤 Частые ошибки и грабли<a class="headerlink" href="#частые-ошибки-и-грабли" title="Ссылка">#</a></h2>
+<ol>
+<li><strong>Права на <code>~/.ssh</code></strong> — должны быть 700, иначе ssh откажется читать ключи.</li>
+<li><strong><code>authorized_keys</code> 644</strong> — должно быть 600, иначе сервер игнорирует.</li>
+<li><strong>Забыли <code>IdentitiesOnly yes</code></strong> — ssh пробует все ключи в агенте, попадает в лимит.</li>
+<li><strong>root с паролем</strong> — <code>PermitRootLogin yes</code> + <code>PasswordAuthentication yes</code> = катастрофа.</li>
+<li><strong><code>ssh-keygen -R</code></strong> после смены ключа сервера — иначе <code>Host key verification failed</code>.</li>
+<li><strong><code>-p</code> vs <code>-P</code></strong> — ssh: <code>-p</code>, scp: <code>-P</code>. rsync: <code>-e "ssh -p"</code>.</li>
+<li><strong>Слэш в rsync</strong> — <code>a/ b/</code> копирует <em>содержимое</em>, <code>a b/</code> копирует <em>каталог</em>.</li>
+<li><strong>ForwardAgent на чужом сервере</strong> — root может использовать ваш агент.</li>
+<li><strong><code>Port</code> в config</strong> — <code>ssh myhost</code> использует его, но <code>scp</code> тоже читает config.</li>
+<li><strong>Перезапуск sshd без проверки</strong> — <code>sshd -t</code> перед <code>systemctl restart</code>!</li>
+<li><strong>Host key changed</strong> — норма после переустановки сервера; проверьте отпечаток.</li>
+<li><strong><code>PermitRootLogin prohibit-password</code></strong> — root может только по ключу (это норма).</li>
+</ol>
+<hr />
+<h2 id="полезные-ссылки">🔗 Полезные ссылки<a class="headerlink" href="#полезные-ссылки" title="Ссылка">#</a></h2>
+<ul>
+<li>OpenSSH: https://www.openssh.com</li>
+<li>Документация: https://man.openbsd.org/ssh</li>
+<li>Arch Wiki SSH: https://wiki.archlinux.org/title/Secure_Shell</li>
+<li>ssh_config: https://man.openbsd.org/ssh_config</li>
+<li>sshd_config: https://man.openbsd.org/sshd_config</li>
+<li>Mozilla SSH guidelines: https://infosec.mozilla.org/guidelines/openssh</li>
+<li>SSH Security: https://sshaudit.com (аудит конфигурации сервера)</li>
+<li>Explained Visually: https://www.ssh.com/academy/ssh</li>
+</ul>
+<hr />
+<h2 id="полезные-советы">💡 Полезные советы<a class="headerlink" href="#полезные-советы" title="Ссылка">#</a></h2>
+<ol>
+<li><strong><code>~/.ssh/config</code></strong> — настройте алиасы один раз, жизнь станет проще.</li>
+<li><strong>Ed25519</strong> — современный стандарт ключей, используйте его.</li>
+<li><strong><code>ssh-copy-id</code></strong> — проще, чем ручное добавление в authorized_keys.</li>
+<li><strong>rsync вместо scp</strong> — мощнее, быстрее, с докачкой.</li>
+<li><strong>ControlMaster</strong> — мультиплексирование, мгновенные новые сессии.</li>
+<li><strong><code>-fNL</code></strong> — проброс порта в фоне без интерактива.</li>
+<li><strong><code>ProxyJump</code></strong> — современная замена ProxyCommand для бастионов.</li>
+<li><strong>Проверяйте <code>sshd -t</code></strong> перед перезапуском сервера.</li>
+<li><strong>Fail2ban</strong> — защита от brute-force (особенно если пароли включены).</li>
+<li><strong>Не используете пароли</strong> — только ключи, всё остальное уязвимо.</li>
+<li><strong>Passphrase на ключе</strong> + ssh-agent — баланс удобства и безопасности.</li>
+<li><strong><code>GatewayPorts</code></strong> в sshd_config — для доступа к reverse-tunnels снаружи.</li>
+<li><strong>autossh</strong> — для постоянных туннелей (пере подключается при обрыве).</li>
+<li><strong>Менеджер паролей с SSH-agent</strong> (1Password/Bitwarden) — удобно и безопасно.</li>
+<li><strong>Храните бэкап ключей</strong> в зашифрованном виде (не в открытом git!).</li>
+</ol>
+<hr />
+<p><em>Сгенерировано как шпаргалка. SSH мощен и опасен —
+углубляйтесь через <code>man ssh</code>, <code>man ssh_config</code>, <code>man sshd_config</code></em></p>
+    </article>
+    <nav class="pagination">
+      <a class="pager prev" href="systemd.html">← systemd</a>
+      <a class="pager next" href="make-cmake.html">Make / CMake →</a>
+    </nav>
+  </main>
+
+  <aside class="toc">
+    <details open>
+      <summary>📑 Оглавление</summary>
+      <div class="toc-list">
+<div class="toc">
+<ul>
+<li><a href="#ssh-шпаргалка-по-командам-и-конфигурации">🔐 SSH — шпаргалка по командам и конфигурации</a><ul>
+<li><a href="#главные-понятия">🔑 Главные понятия</a></li>
+<li><a href="#базовое-подключение">🚀 Базовое подключение</a><ul>
+<li><a href="#опции-командной-строки">Опции командной строки</a></li>
+</ul>
+</li>
+<li><a href="#ключи-ssh">🔑 Ключи SSH</a><ul>
+<li><a href="#создание-пары-ключей">Создание пары ключей</a></li>
+<li><a href="#смена-passphrase-без-смены-ключа">Смена passphrase (без смены ключа)</a></li>
+<li><a href="#узнать-отпечаток-fingerprint">Узнать отпечаток (fingerprint)</a></li>
+<li><a href="#конвертация-форматов">Конвертация форматов</a></li>
+</ul>
+</li>
+<li><a href="#копирование-ключа-на-сервер">📤 Копирование ключа на сервер</a><ul>
+<li><a href="#ssh-copy-id-проще-всего">ssh-copy-id (проще всего)</a></li>
+<li><a href="#вручную">Вручную</a></li>
+</ul>
+</li>
+<li><a href="#конфиг-ssh-config">⚙️ Конфиг ~/.ssh/config</a><ul>
+<li><a href="#директивы-config">Директивы config</a></li>
+<li><a href="#мультиплексирование-ускорение">Мультиплексирование (ускорение)</a></li>
+</ul>
+</li>
+<li><a href="#ssh-agent-хранение-расшифрованных-ключей">🔐 ssh-agent — хранение расшифрованных ключей</a><ul>
+<li><a href="#автозапуск-агента">Автозапуск агента</a></li>
+<li><a href="#forwardagent-проброс-агента">ForwardAgent (проброс агента)</a></li>
+</ul>
+</li>
+<li><a href="#передача-файлов">📁 Передача файлов</a><ul>
+<li><a href="#scp-простое-копирование">scp — простое копирование</a></li>
+<li><a href="#rsync-синхронизация-рекомендуется">rsync — синхронизация (РЕКОМЕНДУЕТСЯ)</a></li>
+<li><a href="#sftp-интерактивный-ftp-поверх-ssh">sftp — интерактивный FTP поверх SSH</a></li>
+<li><a href="#tar-ssh-для-больших-объёмов">tar + ssh — для больших объёмов</a></li>
+</ul>
+</li>
+<li><a href="#проброс-портов-tunnels">🌉 Проброс портов (tunnels)</a><ul>
+<li><a href="#локальный-проброс-l-самый-частый">Локальный проброс (-L) — самый частый</a></li>
+<li><a href="#удалённый-проброс-r">Удалённый проброс (-R)</a></li>
+<li><a href="#динамический-проброс-d-socks-прокси">Динамический проброс (-D) — SOCKS-прокси</a></li>
+<li><a href="#reverse-туннель-постоянный-для-nat-traversal">Reverse-туннель (постоянный, для NAT traversal)</a></li>
+<li><a href="#jump-host-бастион">Jump host (бастион)</a></li>
+</ul>
+</li>
+<li><a href="#vpn-через-ssh-tun-tap">🌐 VPN через SSH (TUN/TAP)</a></li>
+<li><a href="#настройка-sshd-сервер">🔐 Настройка sshd (сервер)</a><ul>
+<li><a href="#условные-блоки-match">Условные блоки Match</a></li>
+<li><a href="#применение-изменений">Применение изменений</a></li>
+<li><a href="#сгенерировать-host-ключи-новый-сервер">Сгенерировать host-ключи (новый сервер)</a></li>
+</ul>
+</li>
+<li><a href="#authorizedkeys-на-сервере">🚪 authorized_keys на сервере</a><ul>
+<li><a href="#ограничения-в-authorizedkeys">Ограничения в authorized_keys</a></li>
+</ul>
+</li>
+<li><a href="#безопасность">🔒 Безопасность</a><ul>
+<li><a href="#харденинг-best-practices">Харденинг (best practices)</a></li>
+<li><a href="#установка-fail2ban">Установка fail2ban</a></li>
+<li><a href="#аудит">Аудит</a></li>
+</ul>
+</li>
+<li><a href="#хранение-паролей-секретов">🔄 Хранение паролей/секретов</a><ul>
+<li><a href="#менеджер-ключей-рекомендуется">Менеджер ключей (рекомендуется)</a></li>
+<li><a href="#для-автоматизации-ci-cd">Для автоматизации (CI/CD)</a></li>
+<li><a href="#ssh-ca-центр-сертификации">SSH CA (центр сертификации)</a></li>
+</ul>
+</li>
+<li><a href="#полезные-трюки">🛠️ Полезные трюки</a><ul>
+<li><a href="#запуск-приложения-через-ssh-nohup-аналог">Запуск приложения через SSH (nohup-аналог)</a></li>
+<li><a href="#передать-файл-без-scp-когда-закрыт">Передать файл без scp (когда закрыт)</a></li>
+<li><a href="#проброс-агента-с-ограничением-proxyjump-ключ">Проброс агента с ограничением (ProxyJump + ключ)</a></li>
+<li><a href="#удалить-хост-из-knownhosts-сменился-ключ-сервера">Удалить хост из known_hosts (сменился ключ сервера)</a></li>
+<li><a href="#узнать-публичный-ключ-сервера">Узнать публичный ключ сервера</a></li>
+<li><a href="#сравнить-отпечаток-с-реальным">Сравнить отпечаток с реальным</a></li>
+<li><a href="#автоматизация-с-паролем-небезопасно-но-иногда-нужно">Автоматизация с паролем (НЕБЕЗОПАСНО, но иногда нужно)</a></li>
+</ul>
+</li>
+<li><a href="#ssh-на-windows">🖥️ SSH на Windows</a><ul>
+<li><a href="#встроенный-openssh-windows-10-11">Встроенный OpenSSH (Windows 10/11)</a></li>
+<li><a href="#putty-классика">PuTTY (классика)</a></li>
+<li><a href="#wsl-windows-subsystem-for-linux">WSL (Windows Subsystem for Linux)</a></li>
+</ul>
+</li>
+<li><a href="#отладка">🐛 Отладка</a><ul>
+<li><a href="#подключение-не-работает">Подключение не работает</a></li>
+<li><a href="#частые-причины">Частые причины</a></li>
+</ul>
+</li>
+<li><a href="#полезные-однострочники">📊 Полезные однострочники</a></li>
+<li><a href="#сравнение-scp-rsync-sftp">🆚 Сравнение scp / rsync / sftp</a></li>
+<li><a href="#частые-ошибки-и-грабли">🪤 Частые ошибки и грабли</a></li>
+<li><a href="#полезные-ссылки">🔗 Полезные ссылки</a></li>
+<li><a href="#полезные-советы">💡 Полезные советы</a></li>
+</ul>
+</li>
+</ul>
+</div>
+
+      </div>
+    </details>
+  </aside>
+</div>
+
+<button class="back-top" id="backTop" aria-label="Наверх">↑</button>
+
+<script src="assets/search.js"></script>
+<script src="assets/page.js"></script>
+</body>
+</html>

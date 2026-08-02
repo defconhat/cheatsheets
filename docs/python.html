@@ -1,0 +1,1568 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Python — Шпаргалки</title>
+<link rel="stylesheet" href="assets/style.css">
+<link rel="stylesheet" href="assets/pygments.css">
+</head>
+<body>
+<div class="layout">
+  <aside class="sidebar">
+    <a href="index.html" class="brand">📌 Шпаргалки</a>
+    <nav class="nav">
+<a href="yazi.html" class="nav-item"><span class="nav-ico">📦</span>Yazi</a>
+<a href="neovim.html" class="nav-item"><span class="nav-ico">📘</span>Neovim (LazyVim)</a>
+<a href="niri.html" class="nav-item"><span class="nav-ico">🪟</span>Niri</a>
+<a href="tmux.html" class="nav-item"><span class="nav-ico">🪟</span>Tmux</a>
+<a href="bash.html" class="nav-item"><span class="nav-ico">🐚</span>Bash</a>
+<a href="git.html" class="nav-item"><span class="nav-ico">🔀</span>Git</a>
+<a href="terminal.html" class="nav-item"><span class="nav-ico">🖥️</span>Терминал Linux</a>
+<a href="powershell.html" class="nav-item"><span class="nav-ico">💻</span>PowerShell</a>
+<a href="cmd.html" class="nav-item"><span class="nav-ico">🪟</span>CMD (cmd.exe)</a>
+<a href="python.html" class="nav-item active"><span class="nav-ico">🐍</span>Python</a>
+<a href="systemd.html" class="nav-item"><span class="nav-ico">⚙️</span>systemd</a>
+<a href="ssh.html" class="nav-item"><span class="nav-ico">🔐</span>SSH</a>
+<a href="make-cmake.html" class="nav-item"><span class="nav-ico">🔨</span>Make / CMake</a>
+<a href="docker.html" class="nav-item"><span class="nav-ico">🐳</span>Docker</a>
+<a href="pacman.html" class="nav-item"><span class="nav-ico">📦</span>pacman / yay / paru</a>
+<a href="spark.html" class="nav-item"><span class="nav-ico">⚡</span>Apache Spark / PySpark</a>
+<a href="markdown.html" class="nav-item"><span class="nav-ico">📝</span>Markdown</a>
+<a href="regex.html" class="nav-item"><span class="nav-ico">🔍</span>Регулярные выражения</a>
+<a href="jq-json.html" class="nav-item"><span class="nav-ico">🔧</span>jq + JSON</a>
+<a href="awk-sed.html" class="nav-item"><span class="nav-ico">✂️</span>awk / sed</a>
+<a href="airflow.html" class="nav-item"><span class="nav-ico">🌪️</span>Apache Airflow</a>
+<a href="http-curl.html" class="nav-item"><span class="nav-ico">🌐</span>HTTP / curl</a>
+<a href="yaml.html" class="nav-item"><span class="nav-ico">📄</span>YAML</a>
+<a href="vscode.html" class="nav-item"><span class="nav-ico">💻</span>VS Code</a>
+<a href="cron.html" class="nav-item"><span class="nav-ico">⏰</span>cron</a>
+<a href="fzf-zoxide.html" class="nav-item"><span class="nav-ico">🔎</span>fzf + zoxide</a>
+<a href="minikube-k8s.html" class="nav-item"><span class="nav-ico">☸️</span>Minikube / Kubernetes</a>
+<a href="cicd.html" class="nav-item"><span class="nav-ico">🦊</span>GitLab CI / GitHub Actions</a>
+<a href="nginx.html" class="nav-item"><span class="nav-ico">🌐</span>nginx</a>
+<a href="dbt.html" class="nav-item"><span class="nav-ico">🔧</span>dbt</a>
+<a href="kafka.html" class="nav-item"><span class="nav-ico">🐘</span>Apache Kafka</a>
+<a href="prometheus-grafana.html" class="nav-item"><span class="nav-ico">📊</span>Prometheus / Grafana</a>
+<a href="iceberg-nessie.html" class="nav-item"><span class="nav-ico">🧊</span>Iceberg / Nessie</a>
+<a href="impala.html" class="nav-item"><span class="nav-ico">🐬</span>Apache Impala</a>
+<a href="terraform.html" class="nav-item"><span class="nav-ico">🏗️</span>Terraform</a>
+<a href="linux-internals.html" class="nav-item"><span class="nav-ico">🐧</span>Linux Internals</a>
+<a href="miscellaneous.html" class="nav-item"><span class="nav-ico">🧰</span>Miscellaneous</a>
+<a href="python-automation-libs.html" class="nav-item"><span class="nav-ico">🐍</span>Python: авт-ция (10 libs)</a>
+<a href="eza.html" class="nav-item"><span class="nav-ico">🌈</span>eza</a>
+<a href="dbeaver.html" class="nav-item"><span class="nav-ico">🗄️</span>DBeaver</a>
+<a href="zcode.html" class="nav-item"><span class="nav-ico">🤖</span>ZCode</a>
+<a href="warp.html" class="nav-item"><span class="nav-ico">🚀</span>Warp</a>
+<a href="agentic-ai-dev.html" class="nav-item"><span class="nav-ico">🤝</span>Агентная разработка с ИИ</a>
+    </nav>
+  </aside>
+
+  <main class="content">
+    <article>
+<h1 id="python-шпаргалка-по-языку-и-стандартной-библиотеке">🐍 Python — шпаргалка по языку и стандартной библиотеке<a class="headerlink" href="#python-шпаргалка-по-языку-и-стандартной-библиотеке" title="Ссылка">#</a></h1>
+<blockquote>
+<p><strong>Python</strong> — высокоуровневый язык общего назначения.
+Документация: https://docs.python.org · Учебник: https://docs.python.org/3/tutorial</p>
+<p>Философия: <code>import this</code> (The Zen of Python). Код должен быть читаемым.</p>
+</blockquote>
+<hr />
+<h2 id="запуск-и-окружение">🚀 Запуск и окружение<a class="headerlink" href="#запуск-и-окружение" title="Ссылка">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Команда</th>
+<th>Действие</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>python file.py</code></td>
+<td>Запустить скрипт</td>
+</tr>
+<tr>
+<td><code>python -V</code> / <code>python --version</code></td>
+<td>Версия</td>
+</tr>
+<tr>
+<td><code>python -c "print(1+1)"</code></td>
+<td>Выполнить строку</td>
+</tr>
+<tr>
+<td><code>python -i</code></td>
+<td>Интерактивный REPL</td>
+</tr>
+<tr>
+<td><code>python -m http.server 8000</code></td>
+<td>Локальный HTTP-сервер</td>
+</tr>
+<tr>
+<td><code>python -m pdb file.py</code></td>
+<td>Запустить под отладчиком</td>
+</tr>
+<tr>
+<td><code>python -m venv .venv</code></td>
+<td>Создать виртуальное окружение</td>
+</tr>
+<tr>
+<td><code>python -m pip install pkg</code></td>
+<td>Установить пакет</td>
+</tr>
+<tr>
+<td><code>python -m json.tool file.json</code></td>
+<td>Красиво отформатировать JSON</td>
+</tr>
+<tr>
+<td><code>python -m http.server</code> / <code>smtpd</code> / <code>telnetlib</code></td>
+<td>Встроенные модули-серверы</td>
+</tr>
+</tbody>
+</table>
+<h3 id="виртуальные-окружения">Виртуальные окружения<a class="headerlink" href="#виртуальные-окружения" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Стандартное (venv)</span>
+python<span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </span>.venv
+<span class="nb">source</span><span class="w"> </span>.venv/bin/activate<span class="w">        </span><span class="c1"># Linux/macOS</span>
+.venv<span class="se">\S</span>cripts<span class="se">\a</span>ctivate<span class="w">           </span><span class="c1"># Windows</span>
+deactivate
+
+<span class="c1"># uv (современный, в 10-100× быстрее) — РЕКОМЕНДУЕТСЯ</span>
+uv<span class="w"> </span>venv
+uv<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>requests
+uv<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>requirements.txt
+uv<span class="w"> </span>pip<span class="w"> </span>freeze<span class="w"> </span>&gt;<span class="w"> </span>requirements.txt
+uv<span class="w"> </span>run<span class="w"> </span>script.py<span class="w">                 </span><span class="c1"># авто-создание окружения</span>
+</code></pre></div>
+
+<h3 id="менеджеры-пакетов-и-зависимости">Менеджеры пакетов и зависимости<a class="headerlink" href="#менеджеры-пакетов-и-зависимости" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># pip</span>
+pip<span class="w"> </span>install<span class="w"> </span><span class="nv">requests</span><span class="o">==</span><span class="m">2</span>.31.0
+pip<span class="w"> </span>install<span class="w"> </span><span class="s2">&quot;django&gt;=4.0,&lt;5.0&quot;</span>
+pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>requirements.txt
+pip<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </span>.<span class="w">                 </span><span class="c1"># установить локальный пакет (editable)</span>
+pip<span class="w"> </span>uninstall<span class="w"> </span>requests
+pip<span class="w"> </span>list
+pip<span class="w"> </span>show<span class="w"> </span>requests
+pip<span class="w"> </span>freeze<span class="w"> </span>&gt;<span class="w"> </span>requirements.txt
+pip<span class="w"> </span>check<span class="w">                        </span><span class="c1"># проверить зависимости</span>
+
+<span class="c1"># uv (быстрее)</span>
+uv<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>requests
+uv<span class="w"> </span>pip<span class="w"> </span>compile<span class="w"> </span>requirements.in<span class="w">   </span><span class="c1"># в requirements.txt с lock-файлами</span>
+uv<span class="w"> </span>pip<span class="w"> </span>sync<span class="w"> </span>requirements.txt<span class="w">     </span><span class="c1"># установить ровно как в файле</span>
+
+<span class="c1"># poetry (для проектов)</span>
+poetry<span class="w"> </span>init
+poetry<span class="w"> </span>add<span class="w"> </span>requests
+poetry<span class="w"> </span>install
+poetry<span class="w"> </span>run<span class="w"> </span>python<span class="w"> </span>script.py
+
+<span class="c1"># pipx (для CLI-утилит)</span>
+pipx<span class="w"> </span>install<span class="w"> </span>black
+pipx<span class="w"> </span>install<span class="w"> </span>ruff
+</code></pre></div>
+
+<h3 id="pyproject-toml-современный-стандарт">pyproject.toml (современный стандарт)<a class="headerlink" href="#pyproject-toml-современный-стандарт" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">[project]</span>
+<span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;mypackage&quot;</span>
+<span class="n">version</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;0.1.0&quot;</span>
+<span class="n">requires-python</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;&gt;=3.10&quot;</span>
+<span class="n">dependencies</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;requests&gt;=2.31&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;rich&gt;=13.0&quot;</span><span class="p">]</span>
+
+<span class="k">[project.optional-dependencies]</span>
+<span class="n">dev</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;pytest&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;ruff&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;mypy&quot;</span><span class="p">]</span>
+
+<span class="k">[tool.ruff]</span>
+<span class="n">line-length</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">100</span>
+<span class="n">target-version</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;py310&quot;</span>
+
+<span class="k">[tool.pytest.ini_options]</span>
+<span class="n">testpaths</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;tests&quot;</span><span class="p">]</span>
+</code></pre></div>
+
+<hr />
+<h2 id="типы-данных">🔤 Типы данных<a class="headerlink" href="#типы-данных" title="Ссылка">#</a></h2>
+<h3 id="неизменяемые-immutable">Неизменяемые (immutable)<a class="headerlink" href="#неизменяемые-immutable" title="Ссылка">#</a></h3>
+<table>
+<thead>
+<tr>
+<th>Тип</th>
+<th>Пример</th>
+<th>Описание</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>int</code></td>
+<td><code>42</code>, <code>0b1010</code>, <code>0xFF</code>, <code>1_000_000</code></td>
+<td>Целое (произвольной длины)</td>
+</tr>
+<tr>
+<td><code>float</code></td>
+<td><code>3.14</code>, <code>2e10</code>, <code>1.5e-3</code></td>
+<td>С плавающей точкой</td>
+</tr>
+<tr>
+<td><code>complex</code></td>
+<td><code>3+4j</code></td>
+<td>Комплексное</td>
+</tr>
+<tr>
+<td><code>bool</code></td>
+<td><code>True</code>, <code>False</code></td>
+<td>Логическое (подтип int)</td>
+</tr>
+<tr>
+<td><code>str</code></td>
+<td><code>"hello"</code>, <code>'hi'</code></td>
+<td>Строка (Unicode)</td>
+</tr>
+<tr>
+<td><code>tuple</code></td>
+<td><code>(1, 2, 3)</code></td>
+<td>Кортеж</td>
+</tr>
+<tr>
+<td><code>frozenset</code></td>
+<td><code>frozenset({1,2})</code></td>
+<td>Неизменяемое множество</td>
+</tr>
+<tr>
+<td><code>bytes</code></td>
+<td><code>b"data"</code></td>
+<td>Байты</td>
+</tr>
+<tr>
+<td><code>NoneType</code></td>
+<td><code>None</code></td>
+<td>Отсутствие значения</td>
+</tr>
+</tbody>
+</table>
+<h3 id="изменяемые-mutable">Изменяемые (mutable)<a class="headerlink" href="#изменяемые-mutable" title="Ссылка">#</a></h3>
+<table>
+<thead>
+<tr>
+<th>Тип</th>
+<th>Пример</th>
+<th>Описание</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>list</code></td>
+<td><code>[1, 2, 3]</code></td>
+<td>Список</td>
+</tr>
+<tr>
+<td><code>dict</code></td>
+<td><code>{"a": 1}</code></td>
+<td>Словарь</td>
+</tr>
+<tr>
+<td><code>set</code></td>
+<td><code>{1, 2, 3}</code></td>
+<td>Множество</td>
+</tr>
+<tr>
+<td><code>bytearray</code></td>
+<td><code>bytearray(b"x")</code></td>
+<td>Изменяемые байты</td>
+</tr>
+</tbody>
+</table>
+<h3 id="проверки-и-преобразования">Проверки и преобразования<a class="headerlink" href="#проверки-и-преобразования" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="nb">type</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>                <span class="c1"># &lt;class &#39;int&#39;&gt;</span>
+<span class="nb">isinstance</span><span class="p">(</span><span class="mi">42</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span>     <span class="c1"># True</span>
+<span class="nb">isinstance</span><span class="p">(</span><span class="mi">42</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">))</span>  <span class="c1"># несколько типов</span>
+
+<span class="nb">int</span><span class="p">(</span><span class="s2">&quot;42&quot;</span><span class="p">)</span>        <span class="c1"># 42</span>
+<span class="nb">int</span><span class="p">(</span><span class="s2">&quot;ff&quot;</span><span class="p">,</span> <span class="mi">16</span><span class="p">)</span>    <span class="c1"># 255</span>
+<span class="nb">float</span><span class="p">(</span><span class="s2">&quot;3.14&quot;</span><span class="p">)</span>    <span class="c1"># 3.14</span>
+<span class="nb">str</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>          <span class="c1"># &quot;42&quot;</span>
+<span class="nb">bool</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>          <span class="c1"># False (0, &quot;&quot;, [], {}, None — falsy)</span>
+<span class="nb">list</span><span class="p">(</span><span class="s2">&quot;abc&quot;</span><span class="p">)</span>      <span class="c1"># [&#39;a&#39;, &#39;b&#39;, &#39;c&#39;]</span>
+<span class="nb">tuple</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">])</span>     <span class="c1"># (1, 2)</span>
+<span class="nb">set</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">])</span>     <span class="c1"># {1, 2}</span>
+<span class="nb">dict</span><span class="p">([(</span><span class="s2">&quot;a&quot;</span><span class="p">,</span><span class="mi">1</span><span class="p">)])</span>  <span class="c1"># {&#39;a&#39;: 1}</span>
+</code></pre></div>
+
+<hr />
+<h2 id="числа">🔢 Числа<a class="headerlink" href="#числа" title="Ссылка">#</a></h2>
+<div class="highlight"><pre><span></span><code><span class="c1"># Арифметика</span>
+<span class="mi">2</span> <span class="o">+</span> <span class="mi">3</span>      <span class="c1"># 5</span>
+<span class="mi">7</span> <span class="o">-</span> <span class="mi">2</span>      <span class="c1"># 5</span>
+<span class="mi">3</span> <span class="o">*</span> <span class="mi">4</span>      <span class="c1"># 12</span>
+<span class="mi">7</span> <span class="o">/</span> <span class="mi">2</span>      <span class="c1"># 3.5   (всегда float!)</span>
+<span class="mi">7</span> <span class="o">//</span> <span class="mi">2</span>     <span class="c1"># 3     (целочисленное)</span>
+<span class="mi">7</span> <span class="o">%</span> <span class="mi">2</span>      <span class="c1"># 1     (остаток)</span>
+<span class="mi">2</span> <span class="o">**</span> <span class="mi">10</span>    <span class="c1"># 1024  (степень)</span>
+<span class="nb">divmod</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>  <span class="c1"># (3, 1) — (частное, остаток)</span>
+<span class="nb">abs</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">)</span>    <span class="c1"># 5</span>
+<span class="nb">round</span><span class="p">(</span><span class="mf">3.7</span><span class="p">)</span> <span class="c1"># 4</span>
+<span class="nb">round</span><span class="p">(</span><span class="mf">3.14159</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>  <span class="c1"># 3.14</span>
+<span class="nb">pow</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span> <span class="c1"># 1024</span>
+<span class="nb">pow</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>    <span class="c1"># 24   (2**10 % 100, эффективно)</span>
+
+<span class="c1"># Битовые операции</span>
+<span class="mi">5</span> <span class="o">&amp;</span> <span class="mi">3</span>      <span class="c1"># 1   (AND)</span>
+<span class="mi">5</span> <span class="o">|</span> <span class="mi">3</span>      <span class="c1"># 7   (OR)</span>
+<span class="mi">5</span> <span class="o">^</span> <span class="mi">3</span>      <span class="c1"># 6   (XOR)</span>
+<span class="o">~</span><span class="mi">5</span>         <span class="c1"># -6  (NOT)</span>
+<span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="mi">4</span>     <span class="c1"># 16  (сдвиг влево)</span>
+<span class="mi">256</span> <span class="o">&gt;&gt;</span> <span class="mi">2</span>   <span class="c1"># 64  (сдвиг вправо)</span>
+<span class="nb">bin</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>    <span class="c1"># &#39;0b1010&#39;</span>
+<span class="nb">hex</span><span class="p">(</span><span class="mi">255</span><span class="p">)</span>   <span class="c1"># &#39;0xff&#39;</span>
+<span class="nb">oct</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span>     <span class="c1"># &#39;0o10&#39;</span>
+<span class="nb">int</span><span class="p">(</span><span class="s1">&#39;0xff&#39;</span><span class="p">,</span> <span class="mi">16</span><span class="p">)</span>  <span class="c1"># 255</span>
+</code></pre></div>
+
+<h3 id="math-и-decimal">math и decimal<a class="headerlink" href="#math-и-decimal" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">math</span>
+<span class="n">math</span><span class="o">.</span><span class="n">pi</span>            <span class="c1"># 3.141592...</span>
+<span class="n">math</span><span class="o">.</span><span class="n">e</span>             <span class="c1"># 2.71828...</span>
+<span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">16</span><span class="p">)</span>      <span class="c1"># 4.0</span>
+<span class="n">math</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>  <span class="c1"># 2.0</span>
+<span class="n">math</span><span class="o">.</span><span class="n">log2</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span>       <span class="c1"># 3.0</span>
+<span class="n">math</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="mf">3.1</span><span class="p">)</span>     <span class="c1"># 4</span>
+<span class="n">math</span><span class="o">.</span><span class="n">floor</span><span class="p">(</span><span class="mf">3.9</span><span class="p">)</span>    <span class="c1"># 3</span>
+<span class="n">math</span><span class="o">.</span><span class="n">gcd</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">8</span><span class="p">)</span>    <span class="c1"># 4</span>
+<span class="n">math</span><span class="o">.</span><span class="n">lcm</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>     <span class="c1"># 12  (3.9+)</span>
+<span class="n">math</span><span class="o">.</span><span class="n">factorial</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>  <span class="c1"># 120</span>
+<span class="n">math</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span> <span class="n">math</span><span class="o">.</span><span class="n">nan</span> <span class="c1"># бесконечность, NaN</span>
+<span class="n">math</span><span class="o">.</span><span class="n">isfinite</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">math</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+<span class="c1"># Десятичные (для денег!)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">decimal</span><span class="w"> </span><span class="kn">import</span> <span class="n">Decimal</span><span class="p">,</span> <span class="n">getcontext</span>
+<span class="n">Decimal</span><span class="p">(</span><span class="s2">&quot;0.1&quot;</span><span class="p">)</span> <span class="o">+</span> <span class="n">Decimal</span><span class="p">(</span><span class="s2">&quot;0.2&quot;</span><span class="p">)</span>   <span class="c1"># Decimal(&#39;0.3&#39;) — точно!</span>
+<span class="n">getcontext</span><span class="p">()</span><span class="o">.</span><span class="n">prec</span> <span class="o">=</span> <span class="mi">28</span>
+
+<span class="c1"># Дроби</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">fractions</span><span class="w"> </span><span class="kn">import</span> <span class="n">Fraction</span>
+<span class="n">Fraction</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span> <span class="o">+</span> <span class="n">Fraction</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>   <span class="c1"># Fraction(&#39;1&#39;, &#39;2&#39;)</span>
+</code></pre></div>
+
+<hr />
+<h2 id="строки">📝 Строки<a class="headerlink" href="#строки" title="Ссылка">#</a></h2>
+<div class="highlight"><pre><span></span><code><span class="n">s</span> <span class="o">=</span> <span class="s2">&quot;Hello, World&quot;</span>
+
+<span class="c1"># Доступ и срезы</span>
+<span class="n">s</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>            <span class="c1"># &#39;H&#39;   (первый)</span>
+<span class="n">s</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>           <span class="c1"># &#39;d&#39;   (последний)</span>
+<span class="n">s</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">5</span><span class="p">]</span>          <span class="c1"># &#39;Hello&#39;   (срез 0..4)</span>
+<span class="n">s</span><span class="p">[</span><span class="mi">7</span><span class="p">:]</span>           <span class="c1"># &#39;World&#39;</span>
+<span class="n">s</span><span class="p">[:</span><span class="mi">5</span><span class="p">]</span>           <span class="c1"># &#39;Hello&#39;</span>
+<span class="n">s</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>         <span class="c1"># &#39;dlroW ,olleH&#39;  (реверс)</span>
+<span class="n">s</span><span class="p">[::</span><span class="mi">2</span><span class="p">]</span>          <span class="c1"># &#39;HloWrd&#39;   (каждый 2-й)</span>
+
+<span class="c1"># Длина и проверки</span>
+<span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>                       <span class="c1"># 13</span>
+<span class="s2">&quot;hello&quot;</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>              <span class="c1"># &#39;HELLO&#39;</span>
+<span class="s2">&quot;HELLO&quot;</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>              <span class="c1"># &#39;hello&#39;</span>
+<span class="s2">&quot;Hello&quot;</span><span class="o">.</span><span class="n">capitalize</span><span class="p">()</span>         <span class="c1"># &#39;Hello&#39;</span>
+<span class="s2">&quot;hello world&quot;</span><span class="o">.</span><span class="n">title</span><span class="p">()</span>        <span class="c1"># &#39;Hello World&#39;</span>
+<span class="s2">&quot;  hi  &quot;</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>             <span class="c1"># &#39;hi&#39;   (lstrip, rstrip)</span>
+<span class="s2">&quot;aaa&quot;</span><span class="o">.</span><span class="n">center</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="s1">&#39;-&#39;</span><span class="p">)</span>        <span class="c1"># &#39;---aaa----&#39;</span>
+<span class="s2">&quot;42&quot;</span><span class="o">.</span><span class="n">zfill</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>                <span class="c1"># &#39;00042&#39;</span>
+
+<span class="c1"># Поиск и замена</span>
+<span class="s2">&quot;hello&quot;</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">&quot;l&quot;</span><span class="p">)</span>            <span class="c1"># 2 (индекс или -1)</span>
+<span class="s2">&quot;hello&quot;</span><span class="o">.</span><span class="n">rfind</span><span class="p">(</span><span class="s2">&quot;l&quot;</span><span class="p">)</span>           <span class="c1"># 3</span>
+<span class="s2">&quot;hello&quot;</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s2">&quot;l&quot;</span><span class="p">)</span>           <span class="c1"># 2</span>
+<span class="s2">&quot;hello&quot;</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;l&quot;</span><span class="p">,</span> <span class="s2">&quot;L&quot;</span><span class="p">)</span>    <span class="c1"># &#39;heLLo&#39;</span>
+<span class="s2">&quot;hello&quot;</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;he&quot;</span><span class="p">)</span>     <span class="c1"># True</span>
+<span class="s2">&quot;hello&quot;</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;lo&quot;</span><span class="p">)</span>       <span class="c1"># True</span>
+<span class="s2">&quot;a,b,c&quot;</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;,&quot;</span><span class="p">)</span>           <span class="c1"># [&#39;a&#39;, &#39;b&#39;, &#39;c&#39;]</span>
+<span class="s2">&quot;a, b, c&quot;</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;, &quot;</span><span class="p">)</span>        <span class="c1"># [&#39;a&#39;, &#39;b&#39;, &#39;c&#39;]</span>
+<span class="s2">&quot;,&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s2">&quot;a&quot;</span><span class="p">,</span><span class="s2">&quot;b&quot;</span><span class="p">,</span><span class="s2">&quot;c&quot;</span><span class="p">])</span>      <span class="c1"># &#39;a,b,c&#39;</span>
+<span class="s2">&quot;hello world&quot;</span><span class="o">.</span><span class="n">partition</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">)</span> <span class="c1"># (&#39;hello&#39;, &#39; &#39;, &#39;world&#39;)</span>
+
+<span class="c1"># Проверка содержимого</span>
+<span class="s2">&quot;123&quot;</span><span class="o">.</span><span class="n">isdigit</span><span class="p">()</span>              <span class="c1"># True</span>
+<span class="s2">&quot;abc&quot;</span><span class="o">.</span><span class="n">isalpha</span><span class="p">()</span>              <span class="c1"># True</span>
+<span class="s2">&quot;abc123&quot;</span><span class="o">.</span><span class="n">isalnum</span><span class="p">()</span>           <span class="c1"># True</span>
+<span class="s2">&quot;ABC&quot;</span><span class="o">.</span><span class="n">isupper</span><span class="p">()</span>              <span class="c1"># True</span>
+<span class="s2">&quot;  &quot;</span><span class="o">.</span><span class="n">isspace</span><span class="p">()</span>              <span class="c1"># True</span>
+</code></pre></div>
+
+<h3 id="форматирование-строк">Форматирование строк<a class="headerlink" href="#форматирование-строк" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="n">name</span><span class="p">,</span> <span class="n">age</span> <span class="o">=</span> <span class="s2">&quot;Alice&quot;</span><span class="p">,</span> <span class="mi">30</span>
+
+<span class="c1"># f-strings (рекомендуется, 3.6+)</span>
+<span class="sa">f</span><span class="s2">&quot;Hello, </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">! You are </span><span class="si">{</span><span class="n">age</span><span class="si">}</span><span class="s2">.&quot;</span>
+<span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="mi">2</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="si">= }</span><span class="s2">&quot;</span>                  <span class="c1"># &#39;2 + 2 = 4&#39;   (3.8+)</span>
+<span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">name</span><span class="si">:</span><span class="s2">&gt;10</span><span class="si">}</span><span class="s2">&quot;</span>                  <span class="c1"># &#39;     Alice&#39;  (выравнивание вправо)</span>
+<span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">name</span><span class="si">:</span><span class="s2">&lt;10</span><span class="si">}</span><span class="s2">&quot;</span>                  <span class="c1"># &#39;Alice     &#39;  (влево)</span>
+<span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">name</span><span class="si">:</span><span class="s2">^10</span><span class="si">}</span><span class="s2">&quot;</span>                  <span class="c1"># &#39;  Alice   &#39;  (центр)</span>
+<span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="mf">3.14159</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span>               <span class="c1"># &#39;3.14&#39;</span>
+<span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="mi">255</span><span class="si">:</span><span class="s2">x</span><span class="si">}</span><span class="s2">&quot;</span>                     <span class="c1"># &#39;ff&#39;         (hex)</span>
+<span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="mi">255</span><span class="si">:</span><span class="s2">b</span><span class="si">}</span><span class="s2">&quot;</span>                     <span class="c1"># &#39;11111111&#39;   (bin)</span>
+<span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="mi">1000000</span><span class="si">:</span><span class="s2">,</span><span class="si">}</span><span class="s2">&quot;</span>                 <span class="c1"># &#39;1,000,000&#39;  (разделители)</span>
+<span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="mf">0.15</span><span class="si">:</span><span class="s2">.1%</span><span class="si">}</span><span class="s2">&quot;</span>                  <span class="c1"># &#39;15.0%&#39;      (проценты)</span>
+<span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="s1">&#39;&#39;</span><span class="si">:</span><span class="s2">-^20</span><span class="si">}</span><span class="s2">&quot;</span>                   <span class="c1"># &#39;--------------------&#39;</span>
+
+<span class="c1"># f-string с выражением (3.12+)</span>
+<span class="n">items</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+<span class="sa">f</span><span class="s2">&quot;sum = </span><span class="si">{</span><span class="nb">sum</span><span class="p">(</span><span class="n">items</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
+
+<span class="c1"># str.format() (старый способ)</span>
+<span class="s2">&quot;</span><span class="si">{}</span><span class="s2"> </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s2">&quot;Hello&quot;</span><span class="p">,</span> <span class="s2">&quot;World&quot;</span><span class="p">)</span>
+<span class="s2">&quot;</span><span class="si">{0}</span><span class="s2"> </span><span class="si">{1}</span><span class="s2"> </span><span class="si">{0}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">)</span>     <span class="c1"># &#39;a b a&#39;</span>
+<span class="s2">&quot;</span><span class="si">{name}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;Alice&quot;</span><span class="p">)</span>
+
+<span class="c1"># % форматирование (самый старый, избегать)</span>
+<span class="s2">&quot;</span><span class="si">%s</span><span class="s2"> </span><span class="si">%d</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="s2">&quot;Alice&quot;</span><span class="p">,</span> <span class="mi">30</span><span class="p">)</span>
+</code></pre></div>
+
+<h3 id="f-string-datetime">f-string datetime<a class="headerlink" href="#f-string-datetime" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">datetime</span>
+<span class="n">now</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
+<span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">now</span><span class="si">:</span><span class="s2">%Y-%m-%d %H:%M:%S</span><span class="si">}</span><span class="s2">&quot;</span>   <span class="c1"># &#39;2024-01-15 14:30:00&#39;</span>
+<span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">now</span><span class="si">:</span><span class="s2">%d.%m.%Y</span><span class="si">}</span><span class="s2">&quot;</span>            <span class="c1"># &#39;15.01.2024&#39;</span>
+</code></pre></div>
+
+<hr />
+<h2 id="списки-list">📋 Списки (list)<a class="headerlink" href="#списки-list" title="Ссылка">#</a></h2>
+<div class="highlight"><pre><span></span><code><span class="n">lst</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
+
+<span class="c1"># Доступ</span>
+<span class="n">lst</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>            <span class="c1"># 1</span>
+<span class="n">lst</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>           <span class="c1"># 5</span>
+<span class="n">lst</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">3</span><span class="p">]</span>          <span class="c1"># [2, 3]</span>
+<span class="n">lst</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>         <span class="c1"># [5, 4, 3, 2, 1]  (реверс)</span>
+
+<span class="c1"># Изменение</span>
+<span class="n">lst</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span>         <span class="c1"># [1, 2, 3, 4, 5, 6]</span>
+<span class="n">lst</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>      <span class="c1"># [0, 1, 2, 3, 4, 5, 6]</span>
+<span class="n">lst</span><span class="o">.</span><span class="n">extend</span><span class="p">([</span><span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">])</span>    <span class="c1"># добавить несколько</span>
+<span class="n">lst</span> <span class="o">+=</span> <span class="p">[</span><span class="mi">9</span><span class="p">,</span> <span class="mi">10</span><span class="p">]</span>        <span class="c1"># то же самое</span>
+<span class="n">lst</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>             <span class="c1"># 10 (удалить и вернуть последний)</span>
+<span class="n">lst</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>            <span class="c1"># 0 (удалить по индексу)</span>
+<span class="n">lst</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>         <span class="c1"># удалить первое вхождение значения</span>
+<span class="k">del</span> <span class="n">lst</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>            <span class="c1"># удалить по индексу</span>
+<span class="n">lst</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>           <span class="c1"># очистить</span>
+
+<span class="c1"># Поиск</span>
+<span class="n">lst</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>          <span class="c1"># индекс значения (или ValueError)</span>
+<span class="n">lst</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>          <span class="c1"># сколько раз встречается</span>
+<span class="mi">3</span> <span class="ow">in</span> <span class="n">lst</span>              <span class="c1"># True/False</span>
+
+<span class="c1"># Сортировка</span>
+<span class="n">lst</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>            <span class="c1"># на месте (in-place)</span>
+<span class="n">lst</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">lst</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="o">-</span><span class="n">x</span><span class="p">)</span>
+<span class="n">lst</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="nb">len</span><span class="p">)</span>     <span class="c1"># по длине (для строк)</span>
+<span class="nb">sorted</span><span class="p">(</span><span class="n">lst</span><span class="p">)</span>           <span class="c1"># вернуть новый отсортированный</span>
+<span class="nb">sorted</span><span class="p">(</span><span class="n">lst</span><span class="p">,</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Прочее</span>
+<span class="n">lst</span><span class="o">.</span><span class="n">reverse</span><span class="p">()</span>         <span class="c1"># на месте</span>
+<span class="nb">list</span><span class="p">(</span><span class="nb">reversed</span><span class="p">(</span><span class="n">lst</span><span class="p">))</span>   <span class="c1"># вернуть новый</span>
+<span class="nb">len</span><span class="p">(</span><span class="n">lst</span><span class="p">)</span>
+<span class="nb">min</span><span class="p">(</span><span class="n">lst</span><span class="p">),</span> <span class="nb">max</span><span class="p">(</span><span class="n">lst</span><span class="p">),</span> <span class="nb">sum</span><span class="p">(</span><span class="n">lst</span><span class="p">)</span>
+<span class="nb">any</span><span class="p">(</span><span class="n">lst</span><span class="p">),</span> <span class="nb">all</span><span class="p">(</span><span class="n">lst</span><span class="p">)</span>    <span class="c1"># True если хотя бы один / все True</span>
+</code></pre></div>
+
+<h3 id="list-comprehension">List comprehension<a class="headerlink" href="#list-comprehension" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Базовое</span>
+<span class="p">[</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">)]</span>
+<span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span> <span class="k">if</span> <span class="n">x</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">]</span>      <span class="c1"># с условием</span>
+<span class="p">[</span><span class="n">x</span> <span class="k">if</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="mi">0</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">numbers</span><span class="p">]</span>      <span class="c1"># тернарный</span>
+
+<span class="c1"># Вложенные</span>
+<span class="p">[(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">)]</span>
+<span class="p">[[</span><span class="mi">0</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">cols</span><span class="p">)]</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">rows</span><span class="p">)]</span>  <span class="c1"># матрица</span>
+
+<span class="c1"># С функцией</span>
+<span class="p">[</span><span class="n">word</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span> <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="s2">&quot;hello world&quot;</span><span class="o">.</span><span class="n">split</span><span class="p">()]</span>
+<span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">w</span><span class="p">)</span> <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">words</span><span class="p">]</span>
+
+<span class="c1"># С распаковкой (3.8+)</span>
+<span class="p">[(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">x</span><span class="o">*</span><span class="n">y</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">pairs</span><span class="p">]</span>
+
+<span class="c1"># Сложное</span>
+<span class="p">{</span><span class="n">x</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">words</span><span class="p">}</span>      <span class="c1"># dict comprehension</span>
+<span class="p">{</span><span class="n">c</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="s2">&quot;hello&quot;</span><span class="p">}</span>            <span class="c1"># set comprehension</span>
+</code></pre></div>
+
+<hr />
+<h2 id="кортежи-tuple">📚 Кортежи (tuple)<a class="headerlink" href="#кортежи-tuple" title="Ссылка">#</a></h2>
+<div class="highlight"><pre><span></span><code><span class="c1"># Неизменяемые последовательности</span>
+<span class="n">t</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="n">t</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span>        <span class="c1"># скобки опциональны</span>
+<span class="n">t</span> <span class="o">=</span> <span class="p">()</span>             <span class="c1"># пустой</span>
+<span class="n">t</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,)</span>           <span class="c1"># кортеж из одного элемента (запятая!)</span>
+
+<span class="c1"># Доступ как у списка</span>
+<span class="n">t</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">t</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">t</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">3</span><span class="p">]</span>
+
+<span class="c1"># Упаковка/распаковка</span>
+<span class="n">point</span> <span class="o">=</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
+<span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">point</span>           <span class="c1"># распаковка</span>
+<span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">y</span><span class="p">,</span> <span class="n">x</span>            <span class="c1"># обмен значениями</span>
+<span class="n">a</span><span class="p">,</span> <span class="o">*</span><span class="n">rest</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>   <span class="c1"># a=1, rest=[2,3,4]</span>
+<span class="n">first</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">last</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>  <span class="c1"># first=1, last=4</span>
+
+<span class="c1"># Named tuples (именованные кортежи)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">namedtuple</span>
+<span class="n">Point</span> <span class="o">=</span> <span class="n">namedtuple</span><span class="p">(</span><span class="s2">&quot;Point&quot;</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="s2">&quot;y&quot;</span><span class="p">])</span>
+<span class="n">p</span> <span class="o">=</span> <span class="n">Point</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
+<span class="n">p</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">p</span><span class="o">.</span><span class="n">y</span>               <span class="c1"># 10, 20</span>
+
+<span class="c1"># typing.NamedTuple (с типами)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">NamedTuple</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Point</span><span class="p">(</span><span class="n">NamedTuple</span><span class="p">):</span>
+    <span class="n">x</span><span class="p">:</span> <span class="nb">int</span>
+    <span class="n">y</span><span class="p">:</span> <span class="nb">int</span>
+    <span class="n">label</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;origin&quot;</span>
+</code></pre></div>
+
+<hr />
+<h2 id="словари-dict">📖 Словари (dict)<a class="headerlink" href="#словари-dict" title="Ссылка">#</a></h2>
+<div class="highlight"><pre><span></span><code><span class="n">d</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Alice&quot;</span><span class="p">,</span> <span class="s2">&quot;age&quot;</span><span class="p">:</span> <span class="mi">30</span><span class="p">}</span>
+
+<span class="c1"># Доступ</span>
+<span class="n">d</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span>              <span class="c1"># &#39;Alice&#39;</span>
+<span class="n">d</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;name&quot;</span><span class="p">)</span>          <span class="c1"># &#39;Alice&#39;</span>
+<span class="n">d</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;email&quot;</span><span class="p">)</span>         <span class="c1"># None (без KeyError)</span>
+<span class="n">d</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;email&quot;</span><span class="p">,</span> <span class="s2">&quot;n/a&quot;</span><span class="p">)</span>  <span class="c1"># &#39;n/a&#39; (значение по умолчанию)</span>
+<span class="n">d</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>               <span class="c1"># dict_keys([&#39;name&#39;, &#39;age&#39;])</span>
+<span class="n">d</span><span class="o">.</span><span class="n">values</span><span class="p">()</span>             <span class="c1"># dict_values([&#39;Alice&#39;, 30])</span>
+<span class="n">d</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>              <span class="c1"># dict_items([(&#39;name&#39;, &#39;Alice&#39;), ...])</span>
+
+<span class="c1"># Изменение</span>
+<span class="n">d</span><span class="p">[</span><span class="s2">&quot;email&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;a@x.com&quot;</span>      <span class="c1"># добавить/изменить</span>
+<span class="n">d</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s2">&quot;age&quot;</span><span class="p">:</span> <span class="mi">31</span><span class="p">,</span> <span class="s2">&quot;city&quot;</span><span class="p">:</span> <span class="s2">&quot;NYC&quot;</span><span class="p">})</span>
+<span class="n">d</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s2">&quot;phone&quot;</span><span class="p">,</span> <span class="s2">&quot;000&quot;</span><span class="p">)</span>  <span class="c1"># добавить если нет</span>
+<span class="k">del</span> <span class="n">d</span><span class="p">[</span><span class="s2">&quot;email&quot;</span><span class="p">]</span>               <span class="c1"># удалить</span>
+<span class="n">d</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;city&quot;</span><span class="p">)</span>                <span class="c1"># удалить и вернуть</span>
+<span class="n">d</span><span class="o">.</span><span class="n">popitem</span><span class="p">()</span>                  <span class="c1"># удалить и вернуть последнее (3.7+)</span>
+
+<span class="c1"># Проверка</span>
+<span class="s2">&quot;name&quot;</span> <span class="ow">in</span> <span class="n">d</span>                  <span class="c1"># True</span>
+
+<span class="c1"># Перебор</span>
+<span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">d</span><span class="p">:</span> <span class="o">...</span>            <span class="c1"># ключи</span>
+<span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">d</span><span class="o">.</span><span class="n">items</span><span class="p">():</span> <span class="o">...</span>   <span class="c1"># пары</span>
+
+<span class="c1"># Dict comprehension</span>
+<span class="p">{</span><span class="n">v</span><span class="p">:</span> <span class="n">k</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">d</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>        <span class="c1"># обратный словарь</span>
+<span class="p">{</span><span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">)}</span>        <span class="c1"># квадраты</span>
+<span class="p">{</span><span class="n">c</span><span class="p">:</span> <span class="n">s</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">set</span><span class="p">(</span><span class="n">s</span><span class="p">)}</span>     <span class="c1"># частоты символов</span>
+</code></pre></div>
+
+<h3 id="специальные-словари">Специальные словари<a class="headerlink" href="#специальные-словари" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">defaultdict</span><span class="p">,</span> <span class="n">OrderedDict</span><span class="p">,</span> <span class="n">Counter</span><span class="p">,</span> <span class="n">ChainMap</span>
+
+<span class="c1"># defaultdict — значение по умолчанию</span>
+<span class="n">words</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;c&quot;</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="s2">&quot;a&quot;</span><span class="p">]</span>
+<span class="n">counts</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">words</span><span class="p">:</span> <span class="n">counts</span><span class="p">[</span><span class="n">w</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>    <span class="c1"># нет KeyError</span>
+<span class="c1"># defaultdict(&lt;class &#39;int&#39;&gt;, {&#39;a&#39;: 3, &#39;b&#39;: 2, &#39;c&#39;: 1})</span>
+
+<span class="n">groups</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span>
+<span class="n">groups</span><span class="p">[</span><span class="s2">&quot;fruits&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;apple&quot;</span><span class="p">)</span>
+
+<span class="c1"># Counter — подсчёт</span>
+<span class="n">c</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">(</span><span class="s2">&quot;abracadabra&quot;</span><span class="p">)</span>
+<span class="n">c</span><span class="o">.</span><span class="n">most_common</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>         <span class="c1"># [(&#39;a&#39;, 5), (&#39;b&#39;, 2), (&#39;r&#39;, 2)]</span>
+<span class="n">c</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="s2">&quot;xxx&quot;</span><span class="p">)</span>          <span class="c1"># добавить</span>
+<span class="n">c</span><span class="o">.</span><span class="n">subtract</span><span class="p">({</span><span class="s2">&quot;a&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">})</span>     <span class="c1"># вычесть</span>
+<span class="n">c</span><span class="o">.</span><span class="n">most_common</span><span class="p">()</span>
+
+<span class="c1"># OrderedDict (с 3.7 обычный dict помнит порядок)</span>
+<span class="c1"># Но у OrderedDict есть move_to_end, popitem(last=False)</span>
+<span class="n">od</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">()</span>
+<span class="n">od</span><span class="o">.</span><span class="n">move_to_end</span><span class="p">(</span><span class="s2">&quot;key&quot;</span><span class="p">)</span>
+
+<span class="c1"># ChainMap — объединение словарей</span>
+<span class="n">defaults</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;color&quot;</span><span class="p">:</span> <span class="s2">&quot;red&quot;</span><span class="p">,</span> <span class="s2">&quot;size&quot;</span><span class="p">:</span> <span class="mi">10</span><span class="p">}</span>
+<span class="n">user</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;color&quot;</span><span class="p">:</span> <span class="s2">&quot;blue&quot;</span><span class="p">}</span>
+<span class="n">merged</span> <span class="o">=</span> <span class="n">ChainMap</span><span class="p">(</span><span class="n">user</span><span class="p">,</span> <span class="n">defaults</span><span class="p">)</span>
+<span class="n">merged</span><span class="p">[</span><span class="s2">&quot;color&quot;</span><span class="p">]</span>   <span class="c1"># &#39;blue&#39; (из user)</span>
+</code></pre></div>
+
+<hr />
+<h2 id="множества-set">🎯 Множества (set)<a class="headerlink" href="#множества-set" title="Ссылка">#</a></h2>
+<div class="highlight"><pre><span></span><code><span class="n">s</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">}</span>
+<span class="n">s</span> <span class="o">=</span> <span class="nb">set</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>   <span class="c1"># {1, 2, 3} (уникальные)</span>
+
+<span class="n">s</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<span class="n">s</span><span class="o">.</span><span class="n">update</span><span class="p">([</span><span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">])</span>
+<span class="n">s</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>         <span class="c1"># KeyError если нет</span>
+<span class="n">s</span><span class="o">.</span><span class="n">discard</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>        <span class="c1"># безопасно (без ошибки)</span>
+<span class="n">s</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>             <span class="c1"># случайный элемент</span>
+<span class="n">s</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+
+<span class="c1"># Операции (как в математике)</span>
+<span class="n">a</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">}</span>
+<span class="n">b</span> <span class="o">=</span> <span class="p">{</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">}</span>
+<span class="n">a</span> <span class="o">|</span> <span class="n">b</span>              <span class="c1"># {1, 2, 3, 4, 5}   объединение (union)</span>
+<span class="n">a</span> <span class="o">&amp;</span> <span class="n">b</span>              <span class="c1"># {3}                пересечение (intersection)</span>
+<span class="n">a</span> <span class="o">-</span> <span class="n">b</span>              <span class="c1"># {1, 2}             разность (difference)</span>
+<span class="n">a</span> <span class="o">^</span> <span class="n">b</span>              <span class="c1"># {1, 2, 4, 5}       симметрическая разность</span>
+<span class="n">a</span> <span class="o">&lt;=</span> <span class="n">b</span>             <span class="c1"># False              подмножество</span>
+<span class="n">a</span><span class="o">.</span><span class="n">issubset</span><span class="p">(</span><span class="n">b</span><span class="p">),</span> <span class="n">a</span><span class="o">.</span><span class="n">issuperset</span><span class="p">(</span><span class="n">b</span><span class="p">),</span> <span class="n">a</span><span class="o">.</span><span class="n">isdisjoint</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+
+<span class="c1"># Уникальные элементы списка</span>
+<span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">]))</span>   <span class="c1"># [1, 2, 3]  (порядок не сохраняется!)</span>
+
+<span class="c1"># frozenset — неизменяемое множество (хешируемое, можно ключом)</span>
+<span class="n">fs</span> <span class="o">=</span> <span class="nb">frozenset</span><span class="p">({</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">})</span>
+</code></pre></div>
+
+<hr />
+<h2 id="управляющие-конструкции">🔀 Управляющие конструкции<a class="headerlink" href="#управляющие-конструкции" title="Ссылка">#</a></h2>
+<h3 id="if-elif-else">if / elif / else<a class="headerlink" href="#if-elif-else" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">if</span> <span class="n">age</span> <span class="o">&lt;</span> <span class="mi">18</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;minor&quot;</span><span class="p">)</span>
+<span class="k">elif</span> <span class="n">age</span> <span class="o">==</span> <span class="mi">18</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;exactly 18&quot;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;adult&quot;</span><span class="p">)</span>
+
+<span class="c1"># Тернарный (условное выражение)</span>
+<span class="n">status</span> <span class="o">=</span> <span class="s2">&quot;adult&quot;</span> <span class="k">if</span> <span class="n">age</span> <span class="o">&gt;=</span> <span class="mi">18</span> <span class="k">else</span> <span class="s2">&quot;minor&quot;</span>
+
+<span class="c1"># walrus operator (3.8+) — присваивание в условии</span>
+<span class="k">if</span> <span class="p">(</span><span class="n">n</span> <span class="o">:=</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">))</span> <span class="o">&gt;</span> <span class="mi">10</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Long data: </span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+<h3 id="циклы">Циклы<a class="headerlink" href="#циклы" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># for</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span> <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>        <span class="c1"># 0 1 2 3 4</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">10</span><span class="p">):</span> <span class="o">...</span>          <span class="c1"># 2..9</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">2</span><span class="p">):</span> <span class="o">...</span>       <span class="c1"># 0 2 4 6 8</span>
+<span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="s2">&quot;hello&quot;</span><span class="p">:</span> <span class="nb">print</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">d</span><span class="o">.</span><span class="n">items</span><span class="p">():</span> <span class="o">...</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">lst</span><span class="p">):</span> <span class="o">...</span>     <span class="c1"># с индексом</span>
+<span class="k">for</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">lst1</span><span class="p">,</span> <span class="n">lst2</span><span class="p">):</span> <span class="o">...</span>    <span class="c1"># параллельно</span>
+
+<span class="c1"># while</span>
+<span class="k">while</span> <span class="n">condition</span><span class="p">:</span> <span class="o">...</span>
+<span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">done</span><span class="p">:</span> <span class="k">break</span>
+    <span class="k">if</span> <span class="n">skip</span><span class="p">:</span> <span class="k">continue</span>
+
+<span class="c1"># else выполняется, если цикл завершился без break</span>
+<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">100</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">n</span> <span class="o">%</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span> <span class="k">break</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2"> — простое&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+<h3 id="полезные-итераторы">Полезные итераторы<a class="headerlink" href="#полезные-итераторы" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># enumerate — индекс + значение</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">lst</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+
+<span class="c1"># zip — параллельный перебор</span>
+<span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">age</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">names</span><span class="p">,</span> <span class="n">ages</span><span class="p">):</span> <span class="o">...</span>
+<span class="nb">list</span><span class="p">(</span><span class="nb">zip</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="s2">&quot;a&quot;</span><span class="p">,</span><span class="s2">&quot;b&quot;</span><span class="p">,</span><span class="s2">&quot;c&quot;</span><span class="p">]))</span>    <span class="c1"># [(1,&#39;a&#39;), (2,&#39;b&#39;), (3,&#39;c&#39;)]</span>
+<span class="c1"># zip_longest — до самого длинного</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">itertools</span><span class="w"> </span><span class="kn">import</span> <span class="n">zip_longest</span>
+<span class="nb">list</span><span class="p">(</span><span class="n">zip_longest</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">],</span> <span class="n">fillvalue</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span>
+
+<span class="c1"># itertools — мощный модуль</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">itertools</span><span class="w"> </span><span class="kn">import</span> <span class="n">chain</span><span class="p">,</span> <span class="n">product</span><span class="p">,</span> <span class="n">combinations</span><span class="p">,</span> <span class="n">permutations</span><span class="p">,</span> <span class="n">groupby</span>
+<span class="nb">list</span><span class="p">(</span><span class="n">chain</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">]))</span>            <span class="c1"># [1,2,3,4]</span>
+<span class="nb">list</span><span class="p">(</span><span class="n">product</span><span class="p">(</span><span class="s2">&quot;AB&quot;</span><span class="p">,</span> <span class="s2">&quot;12&quot;</span><span class="p">))</span>            <span class="c1"># [(&#39;A&#39;,&#39;1&#39;),(&#39;A&#39;,&#39;2&#39;),(&#39;B&#39;,&#39;1&#39;),(&#39;B&#39;,&#39;2&#39;)]</span>
+<span class="nb">list</span><span class="p">(</span><span class="n">combinations</span><span class="p">(</span><span class="s2">&quot;ABC&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>         <span class="c1"># [(&#39;A&#39;,&#39;B&#39;),(&#39;A&#39;,&#39;C&#39;),(&#39;B&#39;,&#39;C&#39;)]</span>
+<span class="nb">list</span><span class="p">(</span><span class="n">permutations</span><span class="p">(</span><span class="s2">&quot;ABC&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>         <span class="c1"># все перестановки</span>
+<span class="nb">list</span><span class="p">(</span><span class="n">groupby</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">key</span><span class="o">=...</span><span class="p">),</span> <span class="n">key</span><span class="o">=...</span><span class="p">))</span>
+</code></pre></div>
+
+<hr />
+<h2 id="функции">🧮 Функции<a class="headerlink" href="#функции" title="Ссылка">#</a></h2>
+<div class="highlight"><pre><span></span><code><span class="c1"># Обычная</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">greet</span><span class="p">(</span><span class="n">name</span><span class="p">):</span>
+    <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Hello, </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span>
+
+<span class="c1"># Значения по умолчанию</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">greet</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">greeting</span><span class="o">=</span><span class="s2">&quot;Hello&quot;</span><span class="p">):</span>
+    <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">greeting</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span>
+
+<span class="c1"># Именованные аргументы</span>
+<span class="n">greet</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;Alice&quot;</span><span class="p">,</span> <span class="n">greeting</span><span class="o">=</span><span class="s2">&quot;Hi&quot;</span><span class="p">)</span>
+
+<span class="c1"># *args — произвольное число позиционных</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">sum_all</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">):</span>
+    <span class="k">return</span> <span class="nb">sum</span><span class="p">(</span><span class="n">args</span><span class="p">)</span>
+<span class="n">sum_all</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>       <span class="c1"># 6</span>
+
+<span class="c1"># **kwargs — произвольное число именованных</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">config</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s2"> = </span><span class="si">{</span><span class="n">v</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">config</span><span class="p">(</span><span class="n">debug</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="mi">8080</span><span class="p">)</span>
+
+<span class="c1"># Распаковка при вызове</span>
+<span class="n">args</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span>
+<span class="n">kwargs</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;a&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">}</span>
+<span class="n">func</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+<span class="c1"># Только позиционные / только ключевые (3.8+)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">f</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="o">/</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">e</span><span class="p">,</span> <span class="n">f</span><span class="p">):</span> <span class="o">...</span>   <span class="c1"># a,b — только позиционные; e,f — только ключевые</span>
+
+<span class="c1"># Аннотации типов</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">add</span><span class="p">(</span><span class="n">a</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+    <span class="k">return</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span>
+
+<span class="c1"># Возврат нескольких значений (через кортеж)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">minmax</span><span class="p">(</span><span class="n">lst</span><span class="p">):</span>
+    <span class="k">return</span> <span class="nb">min</span><span class="p">(</span><span class="n">lst</span><span class="p">),</span> <span class="nb">max</span><span class="p">(</span><span class="n">lst</span><span class="p">)</span>
+<span class="n">lo</span><span class="p">,</span> <span class="n">hi</span> <span class="o">=</span> <span class="n">minmax</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">])</span>
+
+<span class="c1"># Лямбды (анонимные)</span>
+<span class="n">square</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span>
+<span class="nb">sorted</span><span class="p">(</span><span class="n">lst</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+<span class="nb">sorted</span><span class="p">(</span><span class="n">lst</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">age</span><span class="p">,</span> <span class="n">x</span><span class="o">.</span><span class="n">name</span><span class="p">))</span>  <span class="c1"># по нескольким полям</span>
+</code></pre></div>
+
+<h3 id="замыкания-и-декораторы">Замыкания и декораторы<a class="headerlink" href="#замыкания-и-декораторы" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Замыкание</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">make_multiplier</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">multiply</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">x</span> <span class="o">*</span> <span class="n">n</span>
+    <span class="k">return</span> <span class="n">multiply</span>
+<span class="n">double</span> <span class="o">=</span> <span class="n">make_multiplier</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">double</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>   <span class="c1"># 10</span>
+
+<span class="c1"># Декоратор</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">log</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">wrapper</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Calling </span><span class="si">{</span><span class="n">func</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Done </span><span class="si">{</span><span class="n">func</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">result</span>
+    <span class="k">return</span> <span class="n">wrapper</span>
+
+<span class="nd">@log</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">greet</span><span class="p">(</span><span class="n">name</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Hello, </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># С аргументами</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">repeat</span><span class="p">(</span><span class="n">times</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">decorator</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
+        <span class="k">def</span><span class="w"> </span><span class="nf">wrapper</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">times</span><span class="p">):</span>
+                <span class="n">result</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">result</span>
+        <span class="k">return</span> <span class="n">wrapper</span>
+    <span class="k">return</span> <span class="n">decorator</span>
+
+<span class="nd">@repeat</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">say_hi</span><span class="p">():</span> <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;hi&quot;</span><span class="p">)</span>
+
+<span class="c1"># functools.wraps — сохранить метаданные</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">functools</span><span class="w"> </span><span class="kn">import</span> <span class="n">wraps</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">my_decorator</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
+    <span class="nd">@wraps</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">wrapper</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">wrapper</span>
+</code></pre></div>
+
+<hr />
+<h2 id="классы-и-ооп">📦 Классы и ООП<a class="headerlink" href="#классы-и-ооп" title="Ссылка">#</a></h2>
+<div class="highlight"><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">Animal</span><span class="p">:</span>
+    <span class="c1"># Атрибут класса (общий для всех)</span>
+    <span class="n">species</span> <span class="o">=</span> <span class="s2">&quot;Unknown&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">age</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>        <span class="c1"># атрибут экземпляра</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">age</span> <span class="o">=</span> <span class="n">age</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_private</span> <span class="o">=</span> <span class="s2">&quot;h&quot;</span>     <span class="c1"># конвенция: защищённое</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__secret</span> <span class="o">=</span> <span class="s2">&quot;x&quot;</span>     <span class="c1"># name mangling: _ClassName__secret</span>
+
+    <span class="c1"># Строковое представление</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">age</span><span class="si">}</span><span class="s2"> years&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Animal(name=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">!r}</span><span class="s2">, age=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">age</span><span class="si">}</span><span class="s2">)&quot;</span>
+
+    <span class="c1"># Метод экземпляра</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">speak</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s2">&quot;...&quot;</span>
+
+    <span class="c1"># Метод класса</span>
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">create_baby</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+
+    <span class="c1"># Статический метод</span>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">is_valid_age</span><span class="p">(</span><span class="n">age</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">age</span> <span class="o">&gt;=</span> <span class="mi">0</span>
+
+    <span class="c1"># property — геттер/сеттер</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">human_age</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">age</span> <span class="o">*</span> <span class="mi">7</span>
+
+    <span class="nd">@human_age</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">human_age</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">age</span> <span class="o">=</span> <span class="n">value</span> <span class="o">//</span> <span class="mi">7</span>
+
+
+<span class="c1"># Наследование</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Dog</span><span class="p">(</span><span class="n">Animal</span><span class="p">):</span>
+    <span class="n">species</span> <span class="o">=</span> <span class="s2">&quot;Canine&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">age</span><span class="p">,</span> <span class="n">breed</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">age</span><span class="p">)</span>   <span class="c1"># вызов родителя</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">breed</span> <span class="o">=</span> <span class="n">breed</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">speak</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>                  <span class="c1"># переопределение</span>
+        <span class="k">return</span> <span class="s2">&quot;Woof!&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">fetch</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>                  <span class="c1"># новый метод</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> fetches!&quot;</span>
+
+
+<span class="n">dog</span> <span class="o">=</span> <span class="n">Dog</span><span class="p">(</span><span class="s2">&quot;Rex&quot;</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="s2">&quot;Lab&quot;</span><span class="p">)</span>
+<span class="n">dog</span><span class="o">.</span><span class="n">speak</span><span class="p">()</span>           <span class="c1"># &#39;Woof!&#39;</span>
+<span class="n">dog</span><span class="o">.</span><span class="n">fetch</span><span class="p">()</span>           <span class="c1"># &#39;Rex fetches!&#39;</span>
+<span class="nb">isinstance</span><span class="p">(</span><span class="n">dog</span><span class="p">,</span> <span class="n">Animal</span><span class="p">)</span>   <span class="c1"># True</span>
+
+
+<span class="c1"># Dataclasses (3.7+) — автоматически генерирует __init__, __repr__, __eq__</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">dataclasses</span><span class="w"> </span><span class="kn">import</span> <span class="n">dataclass</span><span class="p">,</span> <span class="n">field</span>
+
+<span class="nd">@dataclass</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Point</span><span class="p">:</span>
+    <span class="n">x</span><span class="p">:</span> <span class="nb">float</span>
+    <span class="n">y</span><span class="p">:</span> <span class="nb">float</span>
+    <span class="n">label</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;point&quot;</span>
+    <span class="n">tags</span><span class="p">:</span> <span class="nb">list</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="nb">list</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">distance_to</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="o">-</span><span class="n">other</span><span class="o">.</span><span class="n">x</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="o">-</span><span class="n">other</span><span class="o">.</span><span class="n">y</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">**</span><span class="mf">0.5</span>
+
+<span class="n">p</span> <span class="o">=</span> <span class="n">Point</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">)</span>
+</code></pre></div>
+
+<h3 id="магические-методы-dunder">Магические методы (dunder)<a class="headerlink" href="#магические-методы-dunder" title="Ссылка">#</a></h3>
+<table>
+<thead>
+<tr>
+<th>Метод</th>
+<th>Назначение</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>__init__</code></td>
+<td>Конструктор</td>
+</tr>
+<tr>
+<td><code>__str__</code></td>
+<td><code>str(obj)</code>, <code>print(obj)</code></td>
+</tr>
+<tr>
+<td><code>__repr__</code></td>
+<td>_repr(obj)`, отладка</td>
+</tr>
+<tr>
+<td><code>__len__</code>, <code>__getitem__</code>, <code>__setitem__</code></td>
+<td><code>len()</code>, <code>obj[k]</code></td>
+</tr>
+<tr>
+<td><code>__iter__</code>, <code>__next__</code></td>
+<td>итерация</td>
+</tr>
+<tr>
+<td><code>__contains__</code></td>
+<td><code>x in obj</code></td>
+</tr>
+<tr>
+<td><code>__eq__</code>, <code>__lt__</code>, <code>__hash__</code></td>
+<td>сравнение, хеширование</td>
+</tr>
+<tr>
+<td><code>__add__</code>, <code>__mul__</code>, &hellip;</td>
+<td>арифметика</td>
+</tr>
+<tr>
+<td><code>__enter__</code>, <code>__exit__</code></td>
+<td>context manager (<code>with</code>)</td>
+</tr>
+<tr>
+<td><code>__call__</code></td>
+<td><code>obj()</code> — вызов как функции</td>
+</tr>
+<tr>
+<td><code>__getattr__</code>, <code>__setattr__</code></td>
+<td>доступ к атрибутам</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="исключения">📨 Исключения<a class="headerlink" href="#исключения" title="Ссылка">#</a></h2>
+<div class="highlight"><pre><span></span><code><span class="c1"># Базовая конструкция</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="mi">10</span> <span class="o">/</span> <span class="mi">0</span>
+<span class="k">except</span> <span class="ne">ZeroDivisionError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Ошибка: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="k">except</span> <span class="p">(</span><span class="ne">ValueError</span><span class="p">,</span> <span class="ne">TypeError</span><span class="p">)</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Другая: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>        <span class="c1"># ловушка всего</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Неизвестная: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Без ошибок&quot;</span><span class="p">)</span>       <span class="c1"># если не было исключения</span>
+<span class="k">finally</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Всегда&quot;</span><span class="p">)</span>           <span class="c1"># выполняется всегда</span>
+
+<span class="c1"># Возбуждение</span>
+<span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;invalid value&quot;</span><span class="p">)</span>
+<span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;msg&quot;</span><span class="p">)</span> <span class="kn">from</span><span class="w"> </span><span class="nn">original_exception</span>   <span class="c1"># цепочка</span>
+
+<span class="c1"># Свой класс исключения</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">MyError</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message</span><span class="p">,</span> <span class="n">code</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">code</span> <span class="o">=</span> <span class="n">code</span>
+
+<span class="c1"># Утверждения</span>
+<span class="k">assert</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;x must be positive&quot;</span>
+
+<span class="c1"># Общие исключения</span>
+<span class="c1"># ValueError, TypeError, KeyError, IndexError, AttributeError</span>
+<span class="c1"># FileNotFoundError, PermissionError, RuntimeError</span>
+<span class="c1"># StopIteration, NotImplementedError, ImportError</span>
+</code></pre></div>
+
+<hr />
+<h2 id="работа-с-файлами">📁 Работа с файлами<a class="headerlink" href="#работа-с-файлами" title="Ссылка">#</a></h2>
+<div class="highlight"><pre><span></span><code><span class="c1"># Чтение</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;file.txt&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>        <span class="c1"># &#39;r&#39; по умолчанию</span>
+    <span class="n">content</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>             <span class="c1"># весь файл строкой</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;file.txt&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">f</span><span class="p">:</span>                 <span class="c1"># построчно (память эффективно)</span>
+        <span class="n">process</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+
+<span class="n">lines</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span>              <span class="c1"># список строк</span>
+<span class="n">line</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>                <span class="c1"># одна строка</span>
+
+<span class="c1"># Запись</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;out.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>    <span class="c1"># &#39;w&#39; — перезапись</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;text</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">writelines</span><span class="p">([</span><span class="s2">&quot;a</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="s2">&quot;b</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">])</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;log.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;a&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>    <span class="c1"># &#39;a&#39; — дописать</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;new line</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># Кодировка (ВСЕГДА указывайте явно!)</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;file.txt&quot;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span> <span class="o">...</span>
+
+<span class="c1"># Бинарные файлы</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;image.png&quot;</span><span class="p">,</span> <span class="s2">&quot;rb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>    <span class="c1"># read binary</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;out.bin&quot;</span><span class="p">,</span> <span class="s2">&quot;wb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">b</span><span class="s2">&quot;</span><span class="se">\x00\x01</span><span class="s2">&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+<h3 id="pathlib-современная-работа-с-путями">pathlib — современная работа с путями<a class="headerlink" href="#pathlib-современная-работа-с-путями" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+
+<span class="n">p</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;/home/user/docs/file.txt&quot;</span><span class="p">)</span>
+<span class="n">p</span><span class="o">.</span><span class="n">name</span>          <span class="c1"># &#39;file.txt&#39;</span>
+<span class="n">p</span><span class="o">.</span><span class="n">stem</span>          <span class="c1"># &#39;file&#39;</span>
+<span class="n">p</span><span class="o">.</span><span class="n">suffix</span>        <span class="c1"># &#39;.txt&#39;</span>
+<span class="n">p</span><span class="o">.</span><span class="n">parent</span>        <span class="c1"># PosixPath(&#39;/home/user/docs&#39;)</span>
+<span class="n">p</span><span class="o">.</span><span class="n">parts</span>         <span class="c1"># (&#39;/&#39;, &#39;home&#39;, &#39;user&#39;, &#39;docs&#39;, &#39;file.txt&#39;)</span>
+
+<span class="n">p</span><span class="o">.</span><span class="n">exists</span><span class="p">()</span>      <span class="c1"># True/False</span>
+<span class="n">p</span><span class="o">.</span><span class="n">is_file</span><span class="p">(),</span> <span class="n">p</span><span class="o">.</span><span class="n">is_dir</span><span class="p">()</span>
+<span class="n">p</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">parents</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>   <span class="c1"># создать каталог</span>
+<span class="n">p</span><span class="o">.</span><span class="n">touch</span><span class="p">()</span>                              <span class="c1"># создать пустой файл</span>
+<span class="n">p</span><span class="o">.</span><span class="n">unlink</span><span class="p">()</span>                             <span class="c1"># удалить файл</span>
+<span class="n">p</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="s2">&quot;newname.txt&quot;</span><span class="p">)</span>
+<span class="n">p</span><span class="o">.</span><span class="n">resolve</span><span class="p">()</span>                            <span class="c1"># абсолютный путь</span>
+
+<span class="c1"># Glob</span>
+<span class="nb">list</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s2">&quot;*.py&quot;</span><span class="p">))</span>
+<span class="nb">list</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">rglob</span><span class="p">(</span><span class="s2">&quot;*.py&quot;</span><span class="p">))</span>          <span class="c1"># рекурсивно</span>
+<span class="nb">sorted</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;src&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s2">&quot;**/*.py&quot;</span><span class="p">))</span>
+
+<span class="c1"># Читать/писать через pathlib</span>
+<span class="n">text</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">read_text</span><span class="p">(</span><span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span>
+<span class="n">p</span><span class="o">.</span><span class="n">write_text</span><span class="p">(</span><span class="s2">&quot;hello&quot;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span>
+<span class="n">bytes_data</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">read_bytes</span><span class="p">()</span>
+</code></pre></div>
+
+<h3 id="json-csv-pickle">JSON, CSV, pickle<a class="headerlink" href="#json-csv-pickle" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+
+<span class="c1"># JSON</span>
+<span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Alice&quot;</span><span class="p">,</span> <span class="s2">&quot;age&quot;</span><span class="p">:</span> <span class="mi">30</span><span class="p">}</span>
+<span class="n">json_str</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">ensure_ascii</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">loaded</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">json_str</span><span class="p">)</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;data.json&quot;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">ensure_ascii</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;data.json&quot;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">csv</span>
+
+<span class="c1"># CSV</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;data.csv&quot;</span><span class="p">,</span> <span class="n">newline</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">reader</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">reader</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">reader</span><span class="p">:</span> <span class="nb">print</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
+    <span class="c1"># или</span>
+    <span class="n">reader</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">DictReader</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">reader</span><span class="p">:</span> <span class="nb">print</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">])</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;out.csv&quot;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">,</span> <span class="n">newline</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">writer</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">writer</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+    <span class="n">writer</span><span class="o">.</span><span class="n">writerow</span><span class="p">([</span><span class="s2">&quot;name&quot;</span><span class="p">,</span> <span class="s2">&quot;age&quot;</span><span class="p">])</span>
+    <span class="n">writer</span><span class="o">.</span><span class="n">writerows</span><span class="p">([[</span><span class="s2">&quot;Alice&quot;</span><span class="p">,</span> <span class="mi">30</span><span class="p">],</span> <span class="p">[</span><span class="s2">&quot;Bob&quot;</span><span class="p">,</span> <span class="mi">25</span><span class="p">]])</span>
+
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">pickle</span>
+<span class="c1"># pickle (только Python, опасно для чужих файлов!)</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;data.pkl&quot;</span><span class="p">,</span> <span class="s2">&quot;wb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">pickle</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;data.pkl&quot;</span><span class="p">,</span> <span class="s2">&quot;rb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">obj</span> <span class="o">=</span> <span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+</code></pre></div>
+
+<hr />
+<h2 id="стандартная-библиотека-must-know">📊 Стандартная библиотека (must-know)<a class="headerlink" href="#стандартная-библиотека-must-know" title="Ссылка">#</a></h2>
+<h3 id="os-sys">os, sys<a class="headerlink" href="#os-sys" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span>              <span class="c1"># текущий каталог</span>
+<span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="s2">&quot;/tmp&quot;</span><span class="p">)</span>         <span class="c1"># сменить</span>
+<span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)</span>          <span class="c1"># список файлов</span>
+<span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="s2">&quot;a/b/c&quot;</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s2">&quot;file&quot;</span><span class="p">)</span>
+<span class="n">os</span><span class="o">.</span><span class="n">rmdir</span><span class="p">(</span><span class="s2">&quot;dir&quot;</span><span class="p">)</span>          <span class="c1"># пустой</span>
+<span class="n">os</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="s2">&quot;old&quot;</span><span class="p">,</span> <span class="s2">&quot;new&quot;</span><span class="p">)</span>
+<span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span>
+<span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">)</span>   <span class="c1"># &#39;a/b&#39; (платформонезависимо)</span>
+<span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span>
+<span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">expanduser</span><span class="p">(</span><span class="s2">&quot;~&quot;</span><span class="p">)</span>  <span class="c1"># домашний каталог</span>
+<span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;HOME&quot;</span><span class="p">]</span>
+<span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;MY_VAR&quot;</span><span class="p">,</span> <span class="s2">&quot;default&quot;</span><span class="p">)</span>
+<span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="s2">&quot;ls&quot;</span><span class="p">)</span>          <span class="c1"># выполнить команду (просто)</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">argv</span>                 <span class="c1"># аргументы командной строки</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>              <span class="c1"># выйти с кодом</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">stdin</span><span class="p">,</span> <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="p">,</span> <span class="n">sys</span><span class="o">.</span><span class="n">stderr</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span>                 <span class="c1"># пути поиска модулей</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">platform</span>             <span class="c1"># &#39;linux&#39; / &#39;win32&#39; / &#39;darwin&#39;</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">version_info</span>         <span class="c1"># версия Python</span>
+</code></pre></div>
+
+<h3 id="subprocess-выполнение-команд">subprocess — выполнение команд<a class="headerlink" href="#subprocess-выполнение-команд" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">subprocess</span>
+
+<span class="c1"># Простой запуск</span>
+<span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">([</span><span class="s2">&quot;ls&quot;</span><span class="p">,</span> <span class="s2">&quot;-la&quot;</span><span class="p">])</span>
+<span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="s2">&quot;ls -la&quot;</span><span class="p">,</span> <span class="n">shell</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Захват вывода</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">([</span><span class="s2">&quot;echo&quot;</span><span class="p">,</span> <span class="s2">&quot;hi&quot;</span><span class="p">],</span> <span class="n">capture_output</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">result</span><span class="o">.</span><span class="n">stdout</span>      <span class="c1"># &#39;hi\n&#39;</span>
+<span class="n">result</span><span class="o">.</span><span class="n">returncode</span>  <span class="c1"># 0</span>
+<span class="n">result</span><span class="o">.</span><span class="n">stderr</span>
+
+<span class="c1"># С проверкой кода возврата</span>
+<span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">([</span><span class="s2">&quot;ls&quot;</span><span class="p">],</span> <span class="n">check</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>   <span class="c1"># raise если не 0</span>
+
+<span class="c1"># Pipe между командами</span>
+<span class="n">p1</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">Popen</span><span class="p">([</span><span class="s2">&quot;ls&quot;</span><span class="p">],</span> <span class="n">stdout</span><span class="o">=</span><span class="n">subprocess</span><span class="o">.</span><span class="n">PIPE</span><span class="p">)</span>
+<span class="n">p2</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">Popen</span><span class="p">([</span><span class="s2">&quot;grep&quot;</span><span class="p">,</span> <span class="s2">&quot;txt&quot;</span><span class="p">],</span> <span class="n">stdin</span><span class="o">=</span><span class="n">p1</span><span class="o">.</span><span class="n">stdout</span><span class="p">,</span> <span class="n">stdout</span><span class="o">=</span><span class="n">subprocess</span><span class="o">.</span><span class="n">PIPE</span><span class="p">)</span>
+<span class="n">p1</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+<span class="n">out</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">p2</span><span class="o">.</span><span class="n">communicate</span><span class="p">()</span>
+</code></pre></div>
+
+<h3 id="re-регулярные-выражения">re — регулярные выражения<a class="headerlink" href="#re-регулярные-выражения" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">re</span>
+
+<span class="c1"># Поиск</span>
+<span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\d+&quot;</span><span class="p">,</span> <span class="s2">&quot;abc123def&quot;</span><span class="p">)</span>     <span class="c1"># Match или None</span>
+<span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\d+&quot;</span><span class="p">,</span> <span class="s2">&quot;123abc&quot;</span><span class="p">)</span>         <span class="c1"># только с начала</span>
+<span class="n">re</span><span class="o">.</span><span class="n">fullmatch</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\d+&quot;</span><span class="p">,</span> <span class="s2">&quot;123&quot;</span><span class="p">)</span>        <span class="c1"># вся строка</span>
+<span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\d+&quot;</span><span class="p">,</span> <span class="s2">&quot;a1 b22 c333&quot;</span><span class="p">)</span>  <span class="c1"># [&#39;1&#39;, &#39;22&#39;, &#39;333&#39;]</span>
+<span class="n">re</span><span class="o">.</span><span class="n">finditer</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\d+&quot;</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>          <span class="c1"># итератор Match</span>
+
+<span class="c1"># Замена</span>
+<span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\d+&quot;</span><span class="p">,</span> <span class="s2">&quot;#&quot;</span><span class="p">,</span> <span class="s2">&quot;a1b2c3&quot;</span><span class="p">)</span>      <span class="c1"># &#39;a#b#c#&#39;</span>
+<span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;(\w+)@(\w+)&quot;</span><span class="p">,</span> <span class="sa">r</span><span class="s2">&quot;\2/\1&quot;</span><span class="p">,</span> <span class="n">s</span><span class="p">)</span>  <span class="c1"># с группами</span>
+
+<span class="c1"># Разделение</span>
+<span class="n">re</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;[,\s]+&quot;</span><span class="p">,</span> <span class="s2">&quot;a, b c,d&quot;</span><span class="p">)</span>    <span class="c1"># [&#39;a&#39;, &#39;b&#39;, &#39;c&#39;, &#39;d&#39;]</span>
+
+<span class="c1"># Группы</span>
+<span class="n">m</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;(\d</span><span class="si">{4}</span><span class="s2">)-(\d</span><span class="si">{2}</span><span class="s2">)-(\d</span><span class="si">{2}</span><span class="s2">)&quot;</span><span class="p">,</span> <span class="s2">&quot;2024-01-15&quot;</span><span class="p">)</span>
+<span class="n">m</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>    <span class="c1"># &#39;2024-01-15&#39; (всё)</span>
+<span class="n">m</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>    <span class="c1"># &#39;2024&#39;</span>
+<span class="n">m</span><span class="o">.</span><span class="n">groups</span><span class="p">()</span>    <span class="c1"># (&#39;2024&#39;, &#39;01&#39;, &#39;15&#39;)</span>
+
+<span class="c1"># Именованные группы</span>
+<span class="n">m</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;(?P&lt;year&gt;\d</span><span class="si">{4}</span><span class="s2">)-(?P&lt;month&gt;\d</span><span class="si">{2}</span><span class="s2">)&quot;</span><span class="p">,</span> <span class="n">s</span><span class="p">)</span>
+<span class="n">m</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="s2">&quot;year&quot;</span><span class="p">)</span>
+
+<span class="c1"># Флаги</span>
+<span class="n">re</span><span class="o">.</span><span class="n">IGNORECASE</span>   <span class="c1"># re.I — без учёта регистра</span>
+<span class="n">re</span><span class="o">.</span><span class="n">MULTILINE</span>    <span class="c1"># re.M — ^ и $ на каждой строке</span>
+<span class="n">re</span><span class="o">.</span><span class="n">DOTALL</span>       <span class="c1"># re.S — . включает \n</span>
+<span class="n">re</span><span class="o">.</span><span class="n">VERBOSE</span>      <span class="c1"># re.X — многострочные рег. с комментариями</span>
+
+<span class="c1"># Скомпилированное регулярное (быстрее в цикле)</span>
+<span class="n">pattern</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\d+&quot;</span><span class="p">)</span>
+<span class="n">pattern</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+</code></pre></div>
+
+<h3 id="datetime">datetime<a class="headerlink" href="#datetime" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">datetime</span><span class="p">,</span> <span class="n">date</span><span class="p">,</span> <span class="n">time</span><span class="p">,</span> <span class="n">timedelta</span><span class="p">,</span> <span class="n">timezone</span>
+
+<span class="n">now</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>                <span class="c1"># локальное время</span>
+<span class="n">utcnow</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">(</span><span class="n">timezone</span><span class="o">.</span><span class="n">utc</span><span class="p">)</span> <span class="c1"># с timezone</span>
+<span class="n">today</span> <span class="o">=</span> <span class="n">date</span><span class="o">.</span><span class="n">today</span><span class="p">()</span>
+
+<span class="c1"># Создание</span>
+<span class="n">dt</span> <span class="o">=</span> <span class="n">datetime</span><span class="p">(</span><span class="mi">2024</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">d</span> <span class="o">=</span> <span class="n">date</span><span class="p">(</span><span class="mi">2024</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">15</span><span class="p">)</span>
+
+<span class="c1"># Разбор строки</span>
+<span class="n">dt</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">strptime</span><span class="p">(</span><span class="s2">&quot;2024-01-15&quot;</span><span class="p">,</span> <span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">dt</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">fromisoformat</span><span class="p">(</span><span class="s2">&quot;2024-01-15T14:30:00&quot;</span><span class="p">)</span>   <span class="c1"># 3.7+</span>
+
+<span class="c1"># Форматирование</span>
+<span class="n">dt</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2"> %H:%M:%S&quot;</span><span class="p">)</span>
+<span class="n">dt</span><span class="o">.</span><span class="n">isoformat</span><span class="p">()</span>                      <span class="c1"># &#39;2024-01-15T14:30:00&#39;</span>
+
+<span class="c1"># Арифметика</span>
+<span class="n">tomorrow</span> <span class="o">=</span> <span class="n">today</span> <span class="o">+</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">diff</span> <span class="o">=</span> <span class="n">datetime</span><span class="p">(</span><span class="mi">2024</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span> <span class="o">-</span> <span class="n">datetime</span><span class="p">(</span><span class="mi">2024</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>   <span class="c1"># timedelta(days=31)</span>
+<span class="n">diff</span><span class="o">.</span><span class="n">days</span><span class="p">,</span> <span class="n">diff</span><span class="o">.</span><span class="n">seconds</span>
+
+<span class="c1"># Из timestamp</span>
+<span class="n">datetime</span><span class="o">.</span><span class="n">fromtimestamp</span><span class="p">(</span><span class="mi">1700000000</span><span class="p">)</span>
+<span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">timestamp</span><span class="p">()</span>
+
+<span class="c1"># Частые форматы strftime</span>
+<span class="c1"># %Y-%m-%d, %H:%M:%S, %d.%m.%Y, %B (месяц словом), %A (день недели)</span>
+</code></pre></div>
+
+<h3 id="collections">collections<a class="headerlink" href="#collections" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">Counter</span><span class="p">,</span> <span class="n">defaultdict</span><span class="p">,</span> <span class="n">deque</span><span class="p">,</span> <span class="n">OrderedDict</span><span class="p">,</span> <span class="n">namedtuple</span>
+
+<span class="c1"># deque — двусторонняя очередь (быстрее list для очереди)</span>
+<span class="n">dq</span> <span class="o">=</span> <span class="n">deque</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="n">maxlen</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">dq</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">4</span><span class="p">);</span> <span class="n">dq</span><span class="o">.</span><span class="n">appendleft</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">dq</span><span class="o">.</span><span class="n">pop</span><span class="p">();</span> <span class="n">dq</span><span class="o">.</span><span class="n">popleft</span><span class="p">()</span>
+<span class="n">dq</span><span class="o">.</span><span class="n">rotate</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>    <span class="c1"># повернуть</span>
+
+<span class="c1"># Counter — см. раздел dict</span>
+<span class="c1"># defaultdict — см. раздел dict</span>
+</code></pre></div>
+
+<h3 id="functools-itertools">functools, itertools<a class="headerlink" href="#functools-itertools" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">functools</span><span class="w"> </span><span class="kn">import</span> <span class="n">lru_cache</span><span class="p">,</span> <span class="n">reduce</span><span class="p">,</span> <span class="n">partial</span><span class="p">,</span> <span class="n">wraps</span>
+
+<span class="c1"># lru_cache — кэширование (мемоизация)</span>
+<span class="nd">@lru_cache</span><span class="p">(</span><span class="n">maxsize</span><span class="o">=</span><span class="mi">128</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">fib</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">n</span> <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">2</span> <span class="k">else</span> <span class="n">fib</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">fib</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="c1"># reduce — свёртка</span>
+<span class="n">reduce</span><span class="p">(</span><span class="k">lambda</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">])</span>  <span class="c1"># 10</span>
+
+<span class="c1"># partial — зафиксировать аргументы</span>
+<span class="n">add5</span> <span class="o">=</span> <span class="n">partial</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="n">add5</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>  <span class="c1"># 15</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">itertools</span><span class="w"> </span><span class="kn">import</span> <span class="n">chain</span><span class="p">,</span> <span class="n">groupby</span><span class="p">,</span> <span class="n">count</span><span class="p">,</span> <span class="n">cycle</span><span class="p">,</span> <span class="n">repeat</span><span class="p">,</span> <span class="n">islice</span><span class="p">,</span> <span class="n">starmap</span>
+<span class="nb">list</span><span class="p">(</span><span class="n">count</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span>       <span class="c1"># [10, 11, 12, ...] бесконечно</span>
+<span class="nb">list</span><span class="p">(</span><span class="n">islice</span><span class="p">(</span><span class="n">count</span><span class="p">(),</span> <span class="mi">5</span><span class="p">))</span>   <span class="c1"># [0, 1, 2, 3, 4]</span>
+</code></pre></div>
+
+<hr />
+<h2 id="http-и-сеть">🌐 HTTP и сеть<a class="headerlink" href="#http-и-сеть" title="Ссылка">#</a></h2>
+<div class="highlight"><pre><span></span><code><span class="c1"># urllib (встроенный)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">urllib.request</span><span class="w"> </span><span class="kn">import</span> <span class="n">urlopen</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">urllib.parse</span><span class="w"> </span><span class="kn">import</span> <span class="n">urlencode</span>
+
+<span class="n">response</span> <span class="o">=</span> <span class="n">urlopen</span><span class="p">(</span><span class="s2">&quot;https://api.github.com&quot;</span><span class="p">)</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">read</span><span class="p">()</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status</span><span class="p">)</span>
+
+<span class="c1"># requests (сторонний, намного удобнее)</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">requests</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;https://api.github.com&quot;</span><span class="p">)</span>
+<span class="n">r</span><span class="o">.</span><span class="n">status_code</span>
+<span class="n">r</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>             <span class="c1"># распарсить JSON</span>
+<span class="n">r</span><span class="o">.</span><span class="n">text</span>               <span class="c1"># как строка</span>
+<span class="n">r</span><span class="o">.</span><span class="n">headers</span><span class="p">[</span><span class="s2">&quot;Content-Type&quot;</span><span class="p">]</span>
+
+<span class="c1"># POST</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;key&quot;</span><span class="p">:</span> <span class="s2">&quot;value&quot;</span><span class="p">})</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;form&quot;</span><span class="p">:</span> <span class="s2">&quot;field&quot;</span><span class="p">})</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;q&quot;</span><span class="p">:</span> <span class="s2">&quot;python&quot;</span><span class="p">})</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;Authorization&quot;</span><span class="p">:</span> <span class="s2">&quot;Bearer xxx&quot;</span><span class="p">})</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+
+<span class="c1"># Сессии (cookie, соединения)</span>
+<span class="k">with</span> <span class="n">requests</span><span class="o">.</span><span class="n">Session</span><span class="p">()</span> <span class="k">as</span> <span class="n">s</span><span class="p">:</span>
+    <span class="n">s</span><span class="o">.</span><span class="n">auth</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;user&quot;</span><span class="p">,</span> <span class="s2">&quot;pass&quot;</span><span class="p">)</span>
+    <span class="n">r</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+</code></pre></div>
+
+<h3 id="asyncio-асинхронное-программирование">asyncio — асинхронное программирование<a class="headerlink" href="#asyncio-асинхронное-программирование" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">asyncio</span>
+
+<span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">fetch</span><span class="p">(</span><span class="n">url</span><span class="p">):</span>
+    <span class="k">await</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>   <span class="c1"># имитация запроса</span>
+    <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;data from </span><span class="si">{</span><span class="n">url</span><span class="si">}</span><span class="s2">&quot;</span>
+
+<span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">():</span>
+    <span class="c1"># Параллельно</span>
+    <span class="n">results</span> <span class="o">=</span> <span class="k">await</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">gather</span><span class="p">(</span>
+        <span class="n">fetch</span><span class="p">(</span><span class="s2">&quot;url1&quot;</span><span class="p">),</span>
+        <span class="n">fetch</span><span class="p">(</span><span class="s2">&quot;url2&quot;</span><span class="p">),</span>
+        <span class="n">fetch</span><span class="p">(</span><span class="s2">&quot;url3&quot;</span><span class="p">),</span>
+    <span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">results</span><span class="p">)</span>
+
+<span class="n">asyncio</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">main</span><span class="p">())</span>
+
+<span class="c1"># Создать задачу</span>
+<span class="n">task</span> <span class="o">=</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">create_task</span><span class="p">(</span><span class="n">fetch</span><span class="p">(</span><span class="s2">&quot;url&quot;</span><span class="p">))</span>
+<span class="n">result</span> <span class="o">=</span> <span class="k">await</span> <span class="n">task</span>
+</code></pre></div>
+
+<hr />
+<h2 id="многопоточность-и-процессы">🧵 Многопоточность и процессы<a class="headerlink" href="#многопоточность-и-процессы" title="Ссылка">#</a></h2>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">threading</span>
+
+<span class="c1"># Потоки (для I/O-bound задач)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">worker</span><span class="p">(</span><span class="n">name</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Worker </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">t</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">Thread</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">worker</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;A&quot;</span><span class="p">,))</span>
+<span class="n">t</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+<span class="n">t</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>             <span class="c1"># дождаться</span>
+
+<span class="c1"># concurrent.futures (высокоуровневый API)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">concurrent.futures</span><span class="w"> </span><span class="kn">import</span> <span class="n">ThreadPoolExecutor</span><span class="p">,</span> <span class="n">ProcessPoolExecutor</span>
+
+<span class="k">with</span> <span class="n">ThreadPoolExecutor</span><span class="p">(</span><span class="n">max_workers</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span> <span class="k">as</span> <span class="n">executor</span><span class="p">:</span>
+    <span class="n">futures</span> <span class="o">=</span> <span class="p">[</span><span class="n">executor</span><span class="o">.</span><span class="n">submit</span><span class="p">(</span><span class="n">worker</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">)]</span>
+    <span class="n">results</span> <span class="o">=</span> <span class="p">[</span><span class="n">f</span><span class="o">.</span><span class="n">result</span><span class="p">()</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">futures</span><span class="p">]</span>
+
+    <span class="c1"># или через map</span>
+    <span class="n">results</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">executor</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">worker</span><span class="p">,</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">)))</span>
+
+<span class="c1"># ProcessPoolExecutor — для CPU-bound (обходит GIL)</span>
+<span class="k">with</span> <span class="n">ProcessPoolExecutor</span><span class="p">()</span> <span class="k">as</span> <span class="n">executor</span><span class="p">:</span>
+    <span class="o">...</span>
+</code></pre></div>
+
+<hr />
+<h2 id="тестирование">🧪 Тестирование<a class="headerlink" href="#тестирование" title="Ссылка">#</a></h2>
+<div class="highlight"><pre><span></span><code><span class="c1"># unittest (встроенный)</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">unittest</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">TestStringMethods</span><span class="p">(</span><span class="n">unittest</span><span class="o">.</span><span class="n">TestCase</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_upper</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="s2">&quot;foo&quot;</span><span class="o">.</span><span class="n">upper</span><span class="p">(),</span> <span class="s2">&quot;FOO&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_split</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">assertRaises</span><span class="p">(</span><span class="ne">ValueError</span><span class="p">):</span>
+            <span class="s2">&quot;hello&quot;</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;,&quot;</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">unittest</span><span class="o">.</span><span class="n">main</span><span class="p">()</span>
+
+
+<span class="c1"># pytest (сторонний, проще и мощнее)</span>
+<span class="c1"># test_file.py:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">test_addition</span><span class="p">():</span>
+    <span class="k">assert</span> <span class="mi">1</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">==</span> <span class="mi">2</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">test_string</span><span class="p">():</span>
+    <span class="k">assert</span> <span class="s2">&quot;hello&quot;</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;HELLO&quot;</span>
+
+<span class="c1"># Фикстуры</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pytest</span>
+
+<span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">sample_data</span><span class="p">():</span>
+    <span class="k">return</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">test_sum</span><span class="p">(</span><span class="n">sample_data</span><span class="p">):</span>
+    <span class="k">assert</span> <span class="nb">sum</span><span class="p">(</span><span class="n">sample_data</span><span class="p">)</span> <span class="o">==</span> <span class="mi">6</span>
+
+<span class="c1"># Параметризация</span>
+<span class="nd">@pytest</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">parametrize</span><span class="p">(</span><span class="s2">&quot;input,expected&quot;</span><span class="p">,</span> <span class="p">[</span>
+    <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">9</span><span class="p">),</span>
+<span class="p">])</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">test_square</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="n">expected</span><span class="p">):</span>
+    <span class="k">assert</span> <span class="nb">input</span><span class="o">**</span><span class="mi">2</span> <span class="o">==</span> <span class="n">expected</span>
+</code></pre></div>
+
+<p>Запуск pytest:</p>
+<div class="highlight"><pre><span></span><code>pytest<span class="w">                          </span><span class="c1"># все тесты</span>
+pytest<span class="w"> </span>-v<span class="w">                       </span><span class="c1"># подробно</span>
+pytest<span class="w"> </span>-k<span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="w">              </span><span class="c1"># по имени</span>
+pytest<span class="w"> </span>--cov<span class="o">=</span>mypackage<span class="w">          </span><span class="c1"># с покрытием</span>
+pytest<span class="w"> </span>tests/test_file.py::test_func<span class="w">   </span><span class="c1"># конкретный</span>
+</code></pre></div>
+
+<hr />
+<h2 id="type-hints-аннотации-типов">📝 type hints (аннотации типов)<a class="headerlink" href="#type-hints-аннотации-типов" title="Ссылка">#</a></h2>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Union</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Callable</span>
+
+<span class="c1"># Базовые (3.9+ можно использовать встроенные)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">process</span><span class="p">(</span><span class="n">items</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="n">config</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span> <span class="o">...</span>
+
+<span class="n">names</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">config</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+
+<span class="c1"># Optional — может быть None</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">find</span><span class="p">(</span><span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
+    <span class="k">return</span> <span class="kc">None</span>     <span class="c1"># или int</span>
+
+<span class="c1"># Union — один из типов</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">parse</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span> <span class="o">...</span>
+<span class="c1"># 3.10+: x: int | str</span>
+
+<span class="c1"># Tuple</span>
+<span class="n">point</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
+
+<span class="c1"># Callable</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">apply</span><span class="p">(</span><span class="n">func</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="nb">int</span><span class="p">],</span> <span class="nb">int</span><span class="p">],</span> <span class="n">x</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+    <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+<span class="c1"># TypeVar и Generic</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">TypeVar</span><span class="p">,</span> <span class="n">Generic</span>
+<span class="n">T</span> <span class="o">=</span> <span class="n">TypeVar</span><span class="p">(</span><span class="s2">&quot;T&quot;</span><span class="p">)</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Stack</span><span class="p">(</span><span class="n">Generic</span><span class="p">[</span><span class="n">T</span><span class="p">]):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">push</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">:</span> <span class="n">T</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span> <span class="o">...</span>
+
+<span class="c1"># TypedDict — типизированный словарь</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">TypedDict</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">User</span><span class="p">(</span><span class="n">TypedDict</span><span class="p">):</span>
+    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">age</span><span class="p">:</span> <span class="nb">int</span>
+
+<span class="c1"># Pydantic (сторонний) — валидация данных</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pydantic</span><span class="w"> </span><span class="kn">import</span> <span class="n">BaseModel</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">User</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">age</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">email</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
+
+<span class="n">user</span> <span class="o">=</span> <span class="n">User</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;Alice&quot;</span><span class="p">,</span> <span class="n">age</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
+<span class="n">user</span><span class="o">.</span><span class="n">name</span>       <span class="c1"># &#39;Alice&#39; (строка, валидирована)</span>
+</code></pre></div>
+
+<p>Проверка типов:</p>
+<div class="highlight"><pre><span></span><code>mypy<span class="w"> </span>file.py<span class="w">            </span><span class="c1"># проверка типов</span>
+mypy<span class="w"> </span>--strict<span class="w"> </span>.
+pyright<span class="w">                 </span><span class="c1"># от Microsoft (быстрее)</span>
+</code></pre></div>
+
+<hr />
+<h2 id="линтинг-и-форматирование">🛠️ Линтинг и форматирование<a class="headerlink" href="#линтинг-и-форматирование" title="Ссылка">#</a></h2>
+<div class="highlight"><pre><span></span><code><span class="c1"># ruff — современный линтер+форматер (заменяет flake8, isort, pylint)</span>
+uv<span class="w"> </span>tool<span class="w"> </span>install<span class="w"> </span>ruff
+ruff<span class="w"> </span>check<span class="w"> </span>.<span class="w">                </span><span class="c1"># проверить</span>
+ruff<span class="w"> </span>check<span class="w"> </span>--fix<span class="w"> </span>.<span class="w">          </span><span class="c1"># исправить</span>
+ruff<span class="w"> </span>format<span class="w"> </span>.<span class="w">               </span><span class="c1"># отформатировать (заменяет black)</span>
+
+<span class="c1"># black — форматер (классика)</span>
+black<span class="w"> </span>file.py
+black<span class="w"> </span>--line-length<span class="w"> </span><span class="m">100</span><span class="w"> </span>.
+
+<span class="c1"># isort — сортировка импортов</span>
+isort<span class="w"> </span>.
+
+<span class="c1"># mypy / pyright — проверка типов</span>
+mypy<span class="w"> </span>file.py
+
+<span class="c1"># pre-commit — хуки перед коммитом</span>
+pre-commit<span class="w"> </span>install
+</code></pre></div>
+
+<h3 id="pyproject-toml-для-ruff">pyproject.toml для ruff<a class="headerlink" href="#pyproject-toml-для-ruff" title="Ссылка">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">[tool.ruff]</span>
+<span class="n">line-length</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">100</span>
+<span class="n">target-version</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;py311&quot;</span>
+
+<span class="k">[tool.ruff.lint]</span>
+<span class="n">select</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;E&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;F&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;W&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;I&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;N&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;UP&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;B&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;C4&quot;</span><span class="p">]</span>
+<span class="n">ignore</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;E501&quot;</span><span class="p">]</span>
+
+<span class="k">[tool.ruff.format]</span>
+<span class="n">quote-style</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;double&quot;</span>
+</code></pre></div>
+
+<hr />
+<h2 id="частые-ошибки-и-грабли">🪤 Частые ошибки и грабли<a class="headerlink" href="#частые-ошибки-и-грабли" title="Ссылка">#</a></h2>
+<ol>
+<li><strong>Изменяемый аргумент по умолчанию</strong> — <code>def f(x=[])</code>: список создаётся
+   один раз, все вызовы делят его. Используйте <code>x=None</code> + <code>x = []</code> внутри.</li>
+<li><strong>Late binding в замыканиях</strong> — <code>lambda: i</code> в цикле возьмёт последнее <code>i</code>.
+   Используйте <code>lambda i=i: i</code>.</li>
+<li><strong><code>==</code> vs <code>is</code></strong> — <code>==</code> сравнивает значения, <code>is</code> — идентичность (тождество).
+   <code>a is None</code> — правильно, <code>a == None</code> — работает, но не идиоматично.</li>
+<li><strong>Копирование списков</strong> — <code>b = a</code> не копирует, а ссылается. Используйте
+   <code>b = a.copy()</code>, <code>b = a[:]</code>, <code>b = list(a)</code>. Для вложенных — <code>copy.deepcopy()</code>.</li>
+<li><strong><code>/</code> vs <code>//</code></strong> — <code>7/2 = 3.5</code>, <code>7//2 = 3</code>.</li>
+<li><strong>Конкатенация строк в цикле</strong> — медленно. Используйте <code>"".join(list)</code>.</li>
+<li><strong><code>__name__ == "__main__"</code></strong> — проверяйте, чтобы код не выполнялся при импорте.</li>
+<li><strong>global/nonlocal</strong> — изменяйте внешние переменные осторожно.</li>
+<li><strong>f-string с кавычками</strong> — <code>f"{d['key']}"</code> работает в 3.12+, иначе разные кавычки.</li>
+<li><strong><code>Exception</code> ловит всё</strong> — включая <code>KeyboardInterrupt</code>. Ловите конкретные.</li>
+<li><strong><code>== True</code></strong> — избыточно. Пишите <code>if flag:</code> вместо <code>if flag == True:</code>.</li>
+<li><strong>Импорты</strong> — <code>from module import *</code> засоряет пространство имён.</li>
+</ol>
+<hr />
+<h2 id="полезные-ссылки">🔗 Полезные ссылки<a class="headerlink" href="#полезные-ссылки" title="Ссылка">#</a></h2>
+<ul>
+<li>Официальная документация: https://docs.python.org/3/</li>
+<li>Учебник: https://docs.python.org/3/tutorial/</li>
+<li>Python Awesome: https://github.com/vinta/awesome-python</li>
+<li>Real Python: https://realpython.com</li>
+<li>Python Tutor (визуализация): https://pythontutor.com</li>
+<li>PEP 8 (стиль): https://peps.python.org/pep-0008/</li>
+<li>uv: https://github.com/astral-sh/uv</li>
+<li>Pydantic: https://docs.pydantic.dev</li>
+</ul>
+<hr />
+<h2 id="полезные-советы">💡 Полезные советы<a class="headerlink" href="#полезные-советы" title="Ссылка">#</a></h2>
+<ol>
+<li><strong>Используйте <code>uv</code></strong> вместо pip/venv — в 10-100 раз быстрее.</li>
+<li><strong><code>pyproject.toml</code></strong> — современный стандарт конфигурации проекта.</li>
+<li><strong>ruff</strong> заменяет flake8 + isort + black — один быстрый инструмент.</li>
+<li><strong>type hints + mypy</strong> — ловит баги до запуска.</li>
+<li><strong>pathlib</strong> вместо <code>os.path</code> — удобнее и читаемее.</li>
+<li><strong>f-strings</strong> — самый читаемый способ форматирования.</li>
+<li><strong>list/dict comprehensions</strong> — питонично и быстро.</li>
+<li><strong><code>with</code> (context manager)</strong> — для файлов и ресурсов (закроет автоматически).</li>
+<li><strong>enumerate/zip</strong> — вместо ручного индексирования.</li>
+<li><strong><code>if __name__ == "__main__":</code></strong> — в скриптах для запускаемых функций.</li>
+<li><strong>dataclasses</strong> — для классов-данных (вместо рутины <code>__init__</code>).</li>
+<li><strong>pytest</strong> вместо unittest — проще и мощнее.</li>
+<li><strong><code>__repr__</code></strong> — делайте информативным, поможет в отладке.</li>
+<li><strong>asyncio</strong> — для I/O-bound (сети), не для CPU-bound.</li>
+<li><strong>Не изобретайте велосипед</strong> — сначала проверьте stdlib и PyPI.</li>
+</ol>
+<hr />
+<p><em>Сгенерировано как шпаргалка. Python огромен —
+углубляйтесь через https://docs.python.org/3/ и https://peps.python.org/</em></p>
+    </article>
+    <nav class="pagination">
+      <a class="pager prev" href="cmd.html">← CMD (cmd.exe)</a>
+      <a class="pager next" href="systemd.html">systemd →</a>
+    </nav>
+  </main>
+
+  <aside class="toc">
+    <details open>
+      <summary>📑 Оглавление</summary>
+      <div class="toc-list">
+<div class="toc">
+<ul>
+<li><a href="#python-шпаргалка-по-языку-и-стандартной-библиотеке">🐍 Python — шпаргалка по языку и стандартной библиотеке</a><ul>
+<li><a href="#запуск-и-окружение">🚀 Запуск и окружение</a><ul>
+<li><a href="#виртуальные-окружения">Виртуальные окружения</a></li>
+<li><a href="#менеджеры-пакетов-и-зависимости">Менеджеры пакетов и зависимости</a></li>
+<li><a href="#pyproject-toml-современный-стандарт">pyproject.toml (современный стандарт)</a></li>
+</ul>
+</li>
+<li><a href="#типы-данных">🔤 Типы данных</a><ul>
+<li><a href="#неизменяемые-immutable">Неизменяемые (immutable)</a></li>
+<li><a href="#изменяемые-mutable">Изменяемые (mutable)</a></li>
+<li><a href="#проверки-и-преобразования">Проверки и преобразования</a></li>
+</ul>
+</li>
+<li><a href="#числа">🔢 Числа</a><ul>
+<li><a href="#math-и-decimal">math и decimal</a></li>
+</ul>
+</li>
+<li><a href="#строки">📝 Строки</a><ul>
+<li><a href="#форматирование-строк">Форматирование строк</a></li>
+<li><a href="#f-string-datetime">f-string datetime</a></li>
+</ul>
+</li>
+<li><a href="#списки-list">📋 Списки (list)</a><ul>
+<li><a href="#list-comprehension">List comprehension</a></li>
+</ul>
+</li>
+<li><a href="#кортежи-tuple">📚 Кортежи (tuple)</a></li>
+<li><a href="#словари-dict">📖 Словари (dict)</a><ul>
+<li><a href="#специальные-словари">Специальные словари</a></li>
+</ul>
+</li>
+<li><a href="#множества-set">🎯 Множества (set)</a></li>
+<li><a href="#управляющие-конструкции">🔀 Управляющие конструкции</a><ul>
+<li><a href="#if-elif-else">if / elif / else</a></li>
+<li><a href="#циклы">Циклы</a></li>
+<li><a href="#полезные-итераторы">Полезные итераторы</a></li>
+</ul>
+</li>
+<li><a href="#функции">🧮 Функции</a><ul>
+<li><a href="#замыкания-и-декораторы">Замыкания и декораторы</a></li>
+</ul>
+</li>
+<li><a href="#классы-и-ооп">📦 Классы и ООП</a><ul>
+<li><a href="#магические-методы-dunder">Магические методы (dunder)</a></li>
+</ul>
+</li>
+<li><a href="#исключения">📨 Исключения</a></li>
+<li><a href="#работа-с-файлами">📁 Работа с файлами</a><ul>
+<li><a href="#pathlib-современная-работа-с-путями">pathlib — современная работа с путями</a></li>
+<li><a href="#json-csv-pickle">JSON, CSV, pickle</a></li>
+</ul>
+</li>
+<li><a href="#стандартная-библиотека-must-know">📊 Стандартная библиотека (must-know)</a><ul>
+<li><a href="#os-sys">os, sys</a></li>
+<li><a href="#subprocess-выполнение-команд">subprocess — выполнение команд</a></li>
+<li><a href="#re-регулярные-выражения">re — регулярные выражения</a></li>
+<li><a href="#datetime">datetime</a></li>
+<li><a href="#collections">collections</a></li>
+<li><a href="#functools-itertools">functools, itertools</a></li>
+</ul>
+</li>
+<li><a href="#http-и-сеть">🌐 HTTP и сеть</a><ul>
+<li><a href="#asyncio-асинхронное-программирование">asyncio — асинхронное программирование</a></li>
+</ul>
+</li>
+<li><a href="#многопоточность-и-процессы">🧵 Многопоточность и процессы</a></li>
+<li><a href="#тестирование">🧪 Тестирование</a></li>
+<li><a href="#type-hints-аннотации-типов">📝 type hints (аннотации типов)</a></li>
+<li><a href="#линтинг-и-форматирование">🛠️ Линтинг и форматирование</a><ul>
+<li><a href="#pyproject-toml-для-ruff">pyproject.toml для ruff</a></li>
+</ul>
+</li>
+<li><a href="#частые-ошибки-и-грабли">🪤 Частые ошибки и грабли</a></li>
+<li><a href="#полезные-ссылки">🔗 Полезные ссылки</a></li>
+<li><a href="#полезные-советы">💡 Полезные советы</a></li>
+</ul>
+</li>
+</ul>
+</div>
+
+      </div>
+    </details>
+  </aside>
+</div>
+
+<button class="back-top" id="backTop" aria-label="Наверх">↑</button>
+
+<script src="assets/search.js"></script>
+<script src="assets/page.js"></script>
+</body>
+</html>
