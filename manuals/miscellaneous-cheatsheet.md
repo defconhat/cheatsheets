@@ -494,12 +494,6 @@ delta.days, delta.seconds
   https://habr.com/ru/articles/869164/
 - **Пикабу** и другие открытые источники — заметки и личный опыт.
 
-### Корпоративные / рабочие ресурсы
-- Omnissa Horizon Client (Windows, VDI):
-  `cdncl.goinvest.ru/files/app/Omnissa-Horizon-Client-2506-8.16.0-16560451995.exe`
-- Kapusta (подписка/биллинг):
-  https://kapusta-p.ru/sub/?id=MjI0NjU1NTQ2fGtwc3QyMDI1eA
-
 ### Скрытые настройки браузера (Firefox/Gecko)
 - `ui.key.menuAccessKeyFocuses` — поведение клавиш доступа меню.
 
