@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Python: 14 фич — Шпаргалки</title>
+<link rel="stylesheet" href="assets/style.css">
+<link rel="stylesheet" href="assets/pygments.css">
+</head>
+<body>
+<div class="layout">
+  <aside class="sidebar">
+    <a href="index.html" class="brand">📌 Шпаргалки</a>
+    <nav class="nav">
+<a href="yazi.html" class="nav-item"><span class="nav-ico">📦</span>Yazi</a>
+<a href="neovim.html" class="nav-item"><span class="nav-ico">📘</span>Neovim (LazyVim)</a>
+<a href="niri.html" class="nav-item"><span class="nav-ico">🪟</span>Niri</a>
+<a href="tmux.html" class="nav-item"><span class="nav-ico">🪟</span>Tmux</a>
+<a href="bash.html" class="nav-item"><span class="nav-ico">🐚</span>Bash</a>
+<a href="git.html" class="nav-item"><span class="nav-ico">🔀</span>Git</a>
+<a href="terminal.html" class="nav-item"><span class="nav-ico">🖥️</span>Терминал Linux</a>
+<a href="powershell.html" class="nav-item"><span class="nav-ico">💻</span>PowerShell</a>
+<a href="cmd.html" class="nav-item"><span class="nav-ico">🪟</span>CMD (cmd.exe)</a>
+<a href="python.html" class="nav-item"><span class="nav-ico">🐍</span>Python</a>
+<a href="systemd.html" class="nav-item"><span class="nav-ico">⚙️</span>systemd</a>
+<a href="ssh.html" class="nav-item"><span class="nav-ico">🔐</span>SSH</a>
+<a href="make-cmake.html" class="nav-item"><span class="nav-ico">🔨</span>Make / CMake</a>
+<a href="docker.html" class="nav-item"><span class="nav-ico">🐳</span>Docker</a>
+<a href="pacman.html" class="nav-item"><span class="nav-ico">📦</span>pacman / yay / paru</a>
+<a href="spark.html" class="nav-item"><span class="nav-ico">⚡</span>Apache Spark / PySpark</a>
+<a href="markdown.html" class="nav-item"><span class="nav-ico">📝</span>Markdown</a>
+<a href="regex.html" class="nav-item"><span class="nav-ico">🔍</span>Регулярные выражения</a>
+<a href="jq-json.html" class="nav-item"><span class="nav-ico">🔧</span>jq + JSON</a>
+<a href="awk-sed.html" class="nav-item"><span class="nav-ico">✂️</span>awk / sed</a>
+<a href="airflow.html" class="nav-item"><span class="nav-ico">🌪️</span>Apache Airflow</a>
+<a href="http-curl.html" class="nav-item"><span class="nav-ico">🌐</span>HTTP / curl</a>
+<a href="yaml.html" class="nav-item"><span class="nav-ico">📄</span>YAML</a>
+<a href="vscode.html" class="nav-item"><span class="nav-ico">💻</span>VS Code</a>
+<a href="cron.html" class="nav-item"><span class="nav-ico">⏰</span>cron</a>
+<a href="fzf-zoxide.html" class="nav-item"><span class="nav-ico">🔎</span>fzf + zoxide</a>
+<a href="minikube-k8s.html" class="nav-item"><span class="nav-ico">☸️</span>Minikube / Kubernetes</a>
+<a href="cicd.html" class="nav-item"><span class="nav-ico">🦊</span>GitLab CI / GitHub Actions</a>
+<a href="nginx.html" class="nav-item"><span class="nav-ico">🌐</span>nginx</a>
+<a href="dbt.html" class="nav-item"><span class="nav-ico">🔧</span>dbt</a>
+<a href="kafka.html" class="nav-item"><span class="nav-ico">🐘</span>Apache Kafka</a>
+<a href="prometheus-grafana.html" class="nav-item"><span class="nav-ico">📊</span>Prometheus / Grafana</a>
+<a href="iceberg-nessie.html" class="nav-item"><span class="nav-ico">🧊</span>Iceberg / Nessie</a>
+<a href="impala.html" class="nav-item"><span class="nav-ico">🐬</span>Apache Impala</a>
+<a href="terraform.html" class="nav-item"><span class="nav-ico">🏗️</span>Terraform</a>
+<a href="linux-internals.html" class="nav-item"><span class="nav-ico">🐧</span>Linux Internals</a>
+<a href="miscellaneous.html" class="nav-item"><span class="nav-ico">🧰</span>Miscellaneous</a>
+<a href="python-automation-libs.html" class="nav-item"><span class="nav-ico">🐍</span>Python: авт-ция (10 libs)</a>
+<a href="python-features.html" class="nav-item active"><span class="nav-ico">🐍</span>Python: 14 фич</a>
+<a href="eza.html" class="nav-item"><span class="nav-ico">🌈</span>eza</a>
+<a href="dbeaver.html" class="nav-item"><span class="nav-ico">🗄️</span>DBeaver</a>
+<a href="zcode.html" class="nav-item"><span class="nav-ico">🤖</span>ZCode</a>
+<a href="warp.html" class="nav-item"><span class="nav-ico">🚀</span>Warp</a>
+<a href="agentic-ai-dev.html" class="nav-item"><span class="nav-ico">🤝</span>Агентная разработка с ИИ</a>
+    </nav>
+  </aside>
+
+  <main class="content">
+    <article>
+<h1 id="python-14-интересных-фич">🐍 Python: 14 интересных фич<a class="headerlink" href="#python-14-интересных-фич" title="Ссылка">#</a></h1>
+<blockquote>
+<p>Возможности языка, которые делают код выразительнее: типизация, синтаксис, производительность и «глубокая магия». Часть фич — не совсем pythonic, но знать их полезно. Источник: <a href="https://habr.com/ru/companies/ruvds/articles/905832/">Хабр — ruvds</a>.</p>
+</blockquote>
+<p><strong>Идея:</strong> Python давно вышел за рамки простого скриптового языка. Современные версии (3.10–3.12) принесли нативные дженерики, сопоставление с образцом, протоколы и перегрузки. Ниже — 14 фич, которые стоит держать под рукой.</p>
+<hr />
+<h2 id="часть-1-типизация">Часть 1. Типизация<a class="headerlink" href="#часть-1-типизация" title="Ссылка">#</a></h2>
+<p>Аннотации типов делают код самодокументируемым и ловят ошибки до запуска.</p>
+<h3 id="1-перегрузка-типизации-overload">1. Перегрузка типизации (<code>@overload</code>)<a class="headerlink" href="#1-перегрузка-типизации-overload" title="Ссылка">#</a></h3>
+<p>Декоратор <code>@overload</code> из <code>typing</code> задаёт несколько сигнатур для одной функции — статический анализатор понимает, какой тип вернётся при разных аргументах.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">overload</span><span class="p">,</span> <span class="n">Literal</span>
+
+<span class="nd">@overload</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">process</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="s2">&quot;upper&quot;</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span> <span class="o">...</span>
+<span class="nd">@overload</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">process</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="s2">&quot;split&quot;</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span> <span class="o">...</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">process</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">mode</span> <span class="o">==</span> <span class="s2">&quot;upper&quot;</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">data</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>       <span class="c1"># list[str] в одной ветке, str в другой</span>
+    <span class="k">return</span> <span class="n">data</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+</code></pre></div>
+
+<p><code>Literal</code> работает как облегчённая версия <code>Enum</code> — разрешает только заданные строковые значения. А синтаксис <code>...</code> в теле <code>@overload</code> помечает параметр как опциональный, но требующий значения.</p>
+<hr />
+<h3 id="2-только-именованные-и-только-позиционные-аргументы">2. Только именованные и только позиционные аргументы<a class="headerlink" href="#2-только-именованные-и-только-позиционные-аргументы" title="Ссылка">#</a></h3>
+<p>Жёстко задать способ передачи аргументов — особенно полезно при проектировании API.</p>
+<ul>
+<li><code>*</code> — всё после него <strong>только по имени</strong> (keyword-only).</li>
+<li><code>/</code> — всё до него <strong>только по позиции</strong> (positional-only).</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">foo</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="o">/</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">e</span><span class="p">,</span> <span class="n">f</span><span class="p">):</span>
+    <span class="o">...</span>
+
+<span class="n">foo</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">d</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">e</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">f</span><span class="o">=</span><span class="mi">6</span><span class="p">)</span>   <span class="c1"># OK</span>
+<span class="n">foo</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">d</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">e</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">f</span><span class="o">=</span><span class="mi">6</span><span class="p">)</span> <span class="c1"># OK</span>
+<span class="c1"># foo(a=1, b=2, ...)           # ❌ a, b — только позиционные</span>
+<span class="c1"># foo(1, 2, 3, 4, 5, 6)        # ❌ e, f — только именованные</span>
+</code></pre></div>
+
+<p>Здесь <code>a</code>, <code>b</code> — позиционные, <code>e</code>, <code>f</code> — именованные, <code>c</code>, <code>d</code> — как угодно.</p>
+<hr />
+<h3 id="3-future-аннотации-from-future-import-annotations">3. Future-аннотации (<code>from __future__ import annotations</code>)<a class="headerlink" href="#3-future-аннотации-from-future-import-annotations" title="Ссылка">#</a></h3>
+<p>Откладывает вычисление типов: аннотации превращаются в строки и разбираются только статическим анализатором. Решает проблему прямых ссылок (класс ссылается на самого себя до определения).</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">Node</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">parent</span><span class="p">:</span> <span class="n">Node</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="c1">#                    ^^^^^^^^^^ без future это NameError</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="n">value</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">parent</span> <span class="o">=</span> <span class="n">parent</span>
+</code></pre></div>
+
+<blockquote>
+<p>⚠️ <strong>Минус:</strong> библиотеки, читающие типы в рантайме (ORM, валидаторы), получат строки вместо классов. С Python 3.14 (PEP 649) появится ленивое вычисление через дескрипторы, а с 3.11 для ссылки на свой класс можно использовать <code>Self</code>.</p>
+</blockquote>
+<hr />
+<h3 id="4-дженерики-pep-695-python-3-12">4. Дженерики (PEP 695, Python 3.12)<a class="headerlink" href="#4-дженерики-pep-695-python-3-12" title="Ссылка">#</a></h3>
+<p>Нативный синтаксис дженериков заменил громоздкий <code>TypeVar</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Раньше: T = TypeVar(&quot;T&quot;); class Box(Generic[T]): ...</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Box</span><span class="p">[</span><span class="n">T</span><span class="p">]:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">T</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="n">value</span>
+
+<span class="c1"># С ограничениями и variadic-параметрами</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Foo</span><span class="p">[</span><span class="n">UnBounded</span><span class="p">,</span> <span class="n">Bounded</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">Constrained</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="nb">float</span><span class="p">]:</span> <span class="o">...</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">Tuple</span><span class="p">[</span><span class="o">*</span><span class="n">Ts</span><span class="p">]:</span>        <span class="c1"># произвольное число типов</span>
+    <span class="o">...</span>
+
+<span class="c1"># Псевдоним типа одной строкой (вместо TypeAlias)</span>
+<span class="nb">type</span> <span class="n">Vector</span> <span class="o">=</span> <span class="nb">list</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span>
+</code></pre></div>
+
+<hr />
+<h3 id="5-протоколы-structural-subtyping">5. Протоколы (Structural Subtyping)<a class="headerlink" href="#5-протоколы-structural-subtyping" title="Ссылка">#</a></h3>
+<p>Типизация «утиной» типизации: протокол описывает <strong>поведение</strong>, а не наследование. Если у класса есть нужные методы — он подходит.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Protocol</span><span class="p">,</span> <span class="n">runtime_checkable</span>
+
+<span class="nd">@runtime_checkable</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Renderable</span><span class="p">(</span><span class="n">Protocol</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">render</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span> <span class="o">...</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">Button</span><span class="p">:</span>            <span class="c1"># ничего не наследует от Renderable</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">render</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">&quot;[OK]&quot;</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">Button</span><span class="p">(),</span> <span class="n">Renderable</span><span class="p">))</span>  <span class="c1"># True (благодаря @runtime_checkable)</span>
+</code></pre></div>
+
+<p>Протоколы отвечают на вопрос «что объект <strong>умеет делать</strong>», а не «чем он <strong>является</strong>».</p>
+<hr />
+<h2 id="часть-2-синтаксис-и-структуры">Часть 2. Синтаксис и структуры<a class="headerlink" href="#часть-2-синтаксис-и-структуры" title="Ссылка">#</a></h2>
+<h3 id="6-менеджеры-контекста-contextlib-contextmanager">6. Менеджеры контекста (<code>@contextlib.contextmanager</code>)<a class="headerlink" href="#6-менеджеры-контекста-contextlib-contextmanager" title="Ссылка">#</a></h3>
+<p>Вместо класса с <code>__enter__</code>/<code>__exit__</code> — генератор с <code>yield</code>: до <code>yield</code> подготовка, после — очистка.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">contextlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">contextmanager</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+
+<span class="nd">@contextmanager</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">timer</span><span class="p">(</span><span class="n">label</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+    <span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">yield</span>                       <span class="c1"># управление в блок with</span>
+    <span class="k">finally</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">label</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">time</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">start</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">s&quot;</span><span class="p">)</span>
+
+<span class="k">with</span> <span class="n">timer</span><span class="p">(</span><span class="s2">&quot;обработка&quot;</span><span class="p">):</span>
+    <span class="nb">sum</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1_000_000</span><span class="p">))</span>
+</code></pre></div>
+
+<hr />
+<h3 id="7-сопоставление-с-образцом-match-case-python-3-10">7. Сопоставление с образцом (<code>match-case</code>, Python 3.10)<a class="headerlink" href="#7-сопоставление-с-образцом-match-case-python-3-10" title="Ссылка">#</a></h3>
+<p>Продвинутый <code>switch</code>, сила которого — в <strong>деструктуризации</strong>. Оператор <code>|</code> объединяет паттерны, <code>if</code> добавляет условие, а <code>:=</code> (морж) захватывает значение прямо в шаблоне.</p>
+<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">describe</span><span class="p">(</span><span class="n">cmd</span><span class="p">):</span>
+    <span class="k">match</span> <span class="n">cmd</span><span class="p">:</span>
+        <span class="k">case</span> <span class="p">[</span><span class="s2">&quot;go&quot;</span><span class="p">,</span> <span class="n">direction</span><span class="p">]</span> <span class="k">if</span> <span class="n">direction</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;nord&quot;</span><span class="p">,</span> <span class="s2">&quot;south&quot;</span><span class="p">):</span>
+            <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Идём на </span><span class="si">{</span><span class="n">direction</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="k">case</span> <span class="p">[</span><span class="s2">&quot;take&quot;</span><span class="p">,</span> <span class="n">item</span><span class="p">]:</span>          <span class="c1"># распаковка списка</span>
+            <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Берём </span><span class="si">{</span><span class="n">item</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="k">case</span> <span class="p">[</span><span class="n">first</span><span class="p">,</span> <span class="o">*</span><span class="n">middle</span><span class="p">,</span> <span class="n">last</span><span class="p">]:</span>  <span class="c1"># первый, середина, последний</span>
+            <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">first</span><span class="si">}</span><span class="s2"> ... (</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">middle</span><span class="p">)</span><span class="si">}</span><span class="s2"> шт.) ... </span><span class="si">{</span><span class="n">last</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="k">case</span> <span class="p">{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;exit&quot;</span><span class="p">,</span> <span class="s2">&quot;code&quot;</span><span class="p">:</span> <span class="n">c</span><span class="p">}:</span>
+            <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Выход </span><span class="si">{</span><span class="n">c</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="k">case</span><span class="w"> </span><span class="k">_</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s2">&quot;Не понял&quot;</span>
+</code></pre></div>
+
+<hr />
+<h3 id="8-слоты-slots">8. Слоты (<code>__slots__</code>)<a class="headerlink" href="#8-слоты-slots" title="Ссылка">#</a></h3>
+<p>Фиксирует набор атрибутов класса. Вместо <code>__dict__</code> (хэш-таблица) используется массивоподобная структура — доступ за O(1) и серьёзная экономия памяти.</p>
+<div class="highlight"><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">Point</span><span class="p">:</span>
+    <span class="vm">__slots__</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="s2">&quot;y&quot;</span><span class="p">)</span>           <span class="c1"># только эти два атрибута</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="n">x</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="n">y</span>
+
+<span class="n">p</span> <span class="o">=</span> <span class="n">Point</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="c1"># p.z = 3   # ❌ AttributeError — динамически добавить нельзя</span>
+</code></pre></div>
+
+<blockquote>
+<p>Побочный эффект: пропадает возможность навешивать произвольные атрибуты и <code>__dict__</code>. Зато миллион таких объектов съест в разы меньше RAM.</p>
+</blockquote>
+<hr />
+<h3 id="9-синтаксические-мелочи">9. Синтаксические мелочи<a class="headerlink" href="#9-синтаксические-мелочи" title="Ссылка">#</a></h3>
+<p>Несколько коротких, но ценных приёмов:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># for-else: else сработает, только если цикл НЕ прерван break</span>
+<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">2</span><span class="p">]:</span>
+    <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">break</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Отрицательных не было&quot;</span><span class="p">)</span>
+
+<span class="c1"># Моржовый оператор := — присваивание внутри выражения</span>
+<span class="k">if</span> <span class="p">(</span><span class="n">text</span> <span class="o">:=</span> <span class="nb">input</span><span class="p">())</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;команда:&quot;</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
+
+<span class="c1"># Короткая схема or — первый истинный или значение по умолчанию</span>
+<span class="n">display_name</span> <span class="o">=</span> <span class="n">username</span> <span class="ow">or</span> <span class="n">full_name</span> <span class="ow">or</span> <span class="s2">&quot;Anonymous&quot;</span>
+
+<span class="c1"># Цепочки сравнений вместо 0 &lt; x and x &lt; 10</span>
+<span class="k">if</span> <span class="mi">0</span> <span class="o">&lt;</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">:</span>
+    <span class="o">...</span>
+</code></pre></div>
+
+<hr />
+<h2 id="часть-3-производительность-и-concurrency">Часть 3. Производительность и concurrency<a class="headerlink" href="#часть-3-производительность-и-concurrency" title="Ссылка">#</a></h2>
+<h3 id="10-расширенное-форматирование-f-строк">10. Расширенное форматирование f-строк<a class="headerlink" href="#10-расширенное-форматирование-f-строк" title="Ссылка">#</a></h3>
+<p>Помимо вставки переменных, f-строки поддерживают Format Mini-Language:</p>
+<div class="highlight"><pre><span></span><code><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;score&quot;</span>
+<span class="n">big_num</span> <span class="o">=</span> <span class="mi">1_234_567</span>
+<span class="n">progress</span> <span class="o">=</span> <span class="mf">0.876</span>
+<span class="n">val</span> <span class="o">=</span> <span class="mf">3.14159</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">name</span><span class="si">=}</span><span class="s2">&quot;</span><span class="p">)</span>            <span class="c1"># name=&#39;score&#39;   — имя и значение сразу</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">big_num</span><span class="si">:</span><span class="s2">,</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>        <span class="c1"># 1,234,567      — разделитель тысяч</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">progress</span><span class="si">:</span><span class="s2">.1%</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>     <span class="c1"># 87.6%          — проценты</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">val</span><span class="si">:</span><span class="s2">+.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>         <span class="c1"># +3.14          — флаг знака</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="s1">&#39;заголовок&#39;</span><span class="si">:</span><span class="s2">_^30</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span> <span class="c1"># ______заголовок______  выравнивание</span>
+</code></pre></div>
+
+<hr />
+<h3 id="11-cache-lrucache">11. <code>cache</code> / <code>lru_cache</code><a class="headerlink" href="#11-cache-lrucache" title="Ссылка">#</a></h3>
+<p>Мемоизация результатов функции одной строкой. <code>@cache</code> (Python 3.9+) — это <code>@lru_cache(maxsize=None)</code>.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">functools</span><span class="w"> </span><span class="kn">import</span> <span class="n">cache</span><span class="p">,</span> <span class="n">lru_cache</span>
+
+<span class="nd">@cache</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">fib</span><span class="p">(</span><span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+    <span class="k">return</span> <span class="n">n</span> <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">2</span> <span class="k">else</span> <span class="n">fib</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">fib</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">2</span><span class="p">)</span>
+
+<span class="nd">@lru_cache</span><span class="p">(</span><span class="n">maxsize</span><span class="o">=</span><span class="mi">128</span><span class="p">)</span>      <span class="c1"># ограниченный кэш</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">heavy</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+    <span class="o">...</span>
+
+<span class="n">fib</span><span class="p">(</span><span class="mi">200</span><span class="p">)</span>   <span class="c1"># мгновенно, хотя без кэша — экспоненциальный взрыв</span>
+</code></pre></div>
+
+<hr />
+<h3 id="12-python-futures">12. Python Futures<a class="headerlink" href="#12-python-futures" title="Ссылка">#</a></h3>
+<p>Объекты <code>Future</code> из <code>concurrent.futures</code> и <code>asyncio</code> — аналог <code>Promise</code> в JS: можно задать результат, навесить колбэк, дождаться с таймаутом.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">concurrent.futures</span><span class="w"> </span><span class="kn">import</span> <span class="n">ThreadPoolExecutor</span>
+
+<span class="k">with</span> <span class="n">ThreadPoolExecutor</span><span class="p">(</span><span class="n">max_workers</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span> <span class="k">as</span> <span class="n">pool</span><span class="p">:</span>
+    <span class="n">future</span> <span class="o">=</span> <span class="n">pool</span><span class="o">.</span><span class="n">submit</span><span class="p">(</span><span class="nb">sum</span><span class="p">,</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1_000_000</span><span class="p">))</span>  <span class="c1"># возвращает Future</span>
+    <span class="n">future</span><span class="o">.</span><span class="n">add_done_callback</span><span class="p">(</span><span class="k">lambda</span> <span class="n">f</span><span class="p">:</span> <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;готово&quot;</span><span class="p">))</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">future</span><span class="o">.</span><span class="n">result</span><span class="p">(</span><span class="n">timeout</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>            <span class="c1"># ждём с таймаутом</span>
+</code></pre></div>
+
+<p>В <code>asyncio</code> то же самое — <code>loop.create_future()</code>, <code>set_result()</code>, <code>set_exception()</code>.</p>
+<hr />
+<h2 id="часть-4-глубокая-магия">Часть 4. Глубокая магия<a class="headerlink" href="#часть-4-глубокая-магия" title="Ссылка">#</a></h2>
+<h3 id="13-прокси-свойства-descriptor-protocol">13. Прокси-свойства (Descriptor Protocol)<a class="headerlink" href="#13-прокси-свойства-descriptor-protocol" title="Ссылка">#</a></h3>
+<p>Через <code>__get__</code>/<code>__set__</code> можно сделать атрибут, который ведёт себя и как свойство (при <code>obj.value</code>), и как метод (при <code>obj.value(7)</code>).</p>
+<div class="highlight"><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">ProxyProperty</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">__set_name__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">owner</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_name</span> <span class="o">=</span> <span class="n">name</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__get__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">,</span> <span class="n">objtype</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">obj</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span>
+        <span class="k">return</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_name</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>       <span class="c1"># вызов как метода</span>
+        <span class="nb">setattr</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_name</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">Config</span><span class="p">:</span>
+    <span class="n">value</span> <span class="o">=</span> <span class="n">ProxyProperty</span><span class="p">()</span>
+
+<span class="n">c</span> <span class="o">=</span> <span class="n">Config</span><span class="p">()</span>
+<span class="c1"># c.value            → свойство (чтение)</span>
+<span class="c1"># c.value(c, 42)     → запись через вызов</span>
+</code></pre></div>
+
+<blockquote>
+<p>Это концептуальная реализация. Для продакшена лучше взять готовое — например, <code>ProxyProperty</code> из библиотеки Codegen.</p>
+</blockquote>
+<hr />
+<h3 id="14-метаклассы">14. Метаклассы<a class="headerlink" href="#14-метаклассы" title="Ссылка">#</a></h3>
+<p>Метакласс — это то, что <strong>создаёт классы</strong> (ведь классы сами по себе объекты). По умолчанию это <code>type</code>. Метакласс позволяет вмешаться в создание: модифицировать атрибуты, зарегистрировать класс.</p>
+<div class="highlight"><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">Doubler</span><span class="p">(</span><span class="nb">type</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__new__</span><span class="p">(</span><span class="n">mcs</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">bases</span><span class="p">,</span> <span class="n">namespace</span><span class="p">):</span>
+        <span class="c1"># удвоим все целочисленные значения-атрибуты</span>
+        <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="n">namespace</span><span class="o">.</span><span class="n">items</span><span class="p">()):</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">val</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">key</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;__&quot;</span><span class="p">):</span>
+                <span class="n">namespace</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">val</span> <span class="o">*</span> <span class="mi">2</span>
+        <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__new__</span><span class="p">(</span><span class="n">mcs</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">bases</span><span class="p">,</span> <span class="n">namespace</span><span class="p">)</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">Settings</span><span class="p">(</span><span class="n">metaclass</span><span class="o">=</span><span class="n">Doubler</span><span class="p">):</span>
+    <span class="n">width</span> <span class="o">=</span> <span class="mi">100</span>
+    <span class="n">height</span> <span class="o">=</span> <span class="mi">50</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">Settings</span><span class="o">.</span><span class="n">width</span><span class="p">)</span>    <span class="c1"># 200</span>
+</code></pre></div>
+
+<blockquote>
+<p>🧙 <strong>99% случаев метаклассы не нужны.</strong> Ту же задачу обычно решает обычный декоратор. Как говорил Тим Питерс: <em>«Метаклассы — это такая глубокая магия, что 99% пользователей не стоит о ней думать».</em></p>
+</blockquote>
+<hr />
+<h2 id="сводная-таблица">📊 Сводная таблица<a class="headerlink" href="#сводная-таблица" title="Ссылка">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Фича</th>
+<th>Версия</th>
+<th>Назначение</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><code>@overload</code></td>
+<td>3.5+</td>
+<td>Несколько сигнатур одной функции</td>
+</tr>
+<tr>
+<td>2</td>
+<td><code>/</code> и <code>*</code> в сигнатуре</td>
+<td>3.8+</td>
+<td>Позиционные / именованные аргументы</td>
+</tr>
+<tr>
+<td>3</td>
+<td><code>from __future__ import annotations</code></td>
+<td>3.7+</td>
+<td>Отложенные аннотации</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Дженерики <code>class Foo[T]</code></td>
+<td><strong>3.12</strong></td>
+<td>Нативный синтаксис PEP 695</td>
+</tr>
+<tr>
+<td>5</td>
+<td><code>Protocol</code></td>
+<td>3.8+</td>
+<td>Структурная типизация</td>
+</tr>
+<tr>
+<td>6</td>
+<td><code>@contextmanager</code></td>
+<td>stdlib</td>
+<td>Контекст-менеджер через генератор</td>
+</tr>
+<tr>
+<td>7</td>
+<td><code>match-case</code></td>
+<td><strong>3.10</strong></td>
+<td>Сопоставление с образцом</td>
+</tr>
+<tr>
+<td>8</td>
+<td><code>__slots__</code></td>
+<td>stdlib</td>
+<td>Экономия памяти, фиксация атрибутов</td>
+</tr>
+<tr>
+<td>9</td>
+<td><code>for-else</code>, <code>:=</code>, цепочки</td>
+<td>stdlib</td>
+<td>Синтаксические мелочи</td>
+</tr>
+<tr>
+<td>10</td>
+<td>f-string Mini-Language</td>
+<td>3.6+</td>
+<td>Тонкое форматирование</td>
+</tr>
+<tr>
+<td>11</td>
+<td><code>@cache</code></td>
+<td>3.9+</td>
+<td>Мемоизация</td>
+</tr>
+<tr>
+<td>12</td>
+<td><code>Future</code></td>
+<td>stdlib</td>
+<td>Асинхронные результаты</td>
+</tr>
+<tr>
+<td>13</td>
+<td>Descriptor Protocol</td>
+<td>stdlib</td>
+<td>Гибрид свойство+метод</td>
+</tr>
+<tr>
+<td>14</td>
+<td>Метаклассы</td>
+<td>stdlib</td>
+<td>Кастомизация создания классов</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="когда-что-применять">🎯 Когда что применять<a class="headerlink" href="#когда-что-применять" title="Ссылка">#</a></h2>
+<ul>
+<li><strong>Типизация:</strong> <code>@overload</code> + <code>Protocol</code> + PEP 695 дженерики — выразительные контракты.</li>
+<li><strong>API:</strong> <code>/</code> и <code>*</code> фиксируют способ вызова и не дают сломать код рефакторингом.</li>
+<li><strong>Чистый код:</strong> <code>@contextmanager</code> и <code>match-case</code> заменяют десятки строк boilerplate.</li>
+<li><strong>Память:</strong> <code>__slots__</code> для миллионов легковесных объектов.</li>
+<li><strong>Скорость:</strong> <code>@cache</code> на чистых функциях и тяжёлой рекурсии.</li>
+<li><strong>Глубокая магия:</strong> метаклассы и кастомные дескрипторы — только когда декоратор реально не справляется.</li>
+</ul>
+<blockquote>
+<p>Язык должен работать на тебя, а не ты на него. Эти фичи — инструменты, а не цель: бери то, что делает код проще.</p>
+</blockquote>
+<hr />
+<p><em>Источник: <a href="https://habr.com/ru/companies/ruvds/articles/905832/">Хабр — ruvds: 14 интересных фич Python</a></em></p>
+    </article>
+    <nav class="pagination">
+      <a class="pager prev" href="python-automation-libs.html">← Python: авт-ция (10 libs)</a>
+      <a class="pager next" href="eza.html">eza →</a>
+    </nav>
+  </main>
+
+  <aside class="toc">
+    <details open>
+      <summary>📑 Оглавление</summary>
+      <div class="toc-list">
+<div class="toc">
+<ul>
+<li><a href="#python-14-интересных-фич">🐍 Python: 14 интересных фич</a><ul>
+<li><a href="#часть-1-типизация">Часть 1. Типизация</a><ul>
+<li><a href="#1-перегрузка-типизации-overload">1. Перегрузка типизации (@overload)</a></li>
+<li><a href="#2-только-именованные-и-только-позиционные-аргументы">2. Только именованные и только позиционные аргументы</a></li>
+<li><a href="#3-future-аннотации-from-future-import-annotations">3. Future-аннотации (from __future__ import annotations)</a></li>
+<li><a href="#4-дженерики-pep-695-python-3-12">4. Дженерики (PEP 695, Python 3.12)</a></li>
+<li><a href="#5-протоколы-structural-subtyping">5. Протоколы (Structural Subtyping)</a></li>
+</ul>
+</li>
+<li><a href="#часть-2-синтаксис-и-структуры">Часть 2. Синтаксис и структуры</a><ul>
+<li><a href="#6-менеджеры-контекста-contextlib-contextmanager">6. Менеджеры контекста (@contextlib.contextmanager)</a></li>
+<li><a href="#7-сопоставление-с-образцом-match-case-python-3-10">7. Сопоставление с образцом (match-case, Python 3.10)</a></li>
+<li><a href="#8-слоты-slots">8. Слоты (__slots__)</a></li>
+<li><a href="#9-синтаксические-мелочи">9. Синтаксические мелочи</a></li>
+</ul>
+</li>
+<li><a href="#часть-3-производительность-и-concurrency">Часть 3. Производительность и concurrency</a><ul>
+<li><a href="#10-расширенное-форматирование-f-строк">10. Расширенное форматирование f-строк</a></li>
+<li><a href="#11-cache-lrucache">11. cache / lru_cache</a></li>
+<li><a href="#12-python-futures">12. Python Futures</a></li>
+</ul>
+</li>
+<li><a href="#часть-4-глубокая-магия">Часть 4. Глубокая магия</a><ul>
+<li><a href="#13-прокси-свойства-descriptor-protocol">13. Прокси-свойства (Descriptor Protocol)</a></li>
+<li><a href="#14-метаклассы">14. Метаклассы</a></li>
+</ul>
+</li>
+<li><a href="#сводная-таблица">📊 Сводная таблица</a></li>
+<li><a href="#когда-что-применять">🎯 Когда что применять</a></li>
+</ul>
+</li>
+</ul>
+</div>
+
+      </div>
+    </details>
+  </aside>
+</div>
+
+<button class="back-top" id="backTop" aria-label="Наверх">↑</button>
+
+<script src="assets/search.js"></script>
+<script src="assets/page.js"></script>
+</body>
+</html>

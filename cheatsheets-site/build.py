@@ -366,6 +366,15 @@ CHEATSHEETS = [
         "tags": ["python", "автоматизация", "библиотеки"],
     },
     {
+        "slug": "python-features",
+        "title": "Python: 14 фич",
+        "icon": "🐍",
+        "desc": "overload, дженерики, match-case, протоколы, метаклассы и др.",
+        "color": "#3b82f6",
+        "src": "python-features.md",
+        "tags": ["python", "typing", "синтаксис", "паттерны"],
+    },
+    {
         "slug": "eza",
         "title": "eza",
         "icon": "🌈",
